@@ -14,3 +14,4 @@ void main() {
       initialBinding: HomeBinding(),
       getPages: AppPages.pages));
 }
+//
