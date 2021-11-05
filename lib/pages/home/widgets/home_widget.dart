@@ -11,11 +11,11 @@ class HomeWidget extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return BodyWidget(
-        background: "assets/custom/svg/images/WhiteMark.svg",
+        background: "assets/custom/svg/images/black_vertical_rectangle.svg",
         children: [
           SizedBox(height: Get.height * 0.1),
           SvgPicture.asset(
-            "assets/custom/svg/images/LogoSlogan.svg",
+            "assets/custom/svg/images/HomeLogo.svg",
             width: MediaQuery.of(context).size.width * 0.5,
           ),
           SizedBox(height: Get.height * 0.1),
@@ -27,7 +27,7 @@ class HomeWidget extends GetView<HomeController> {
                   Get.toNamed("/Signin");
                 },
                 child: SvgPicture.asset(
-                  "assets/custom/svg/images/IngresarButton.svg",
+                  "assets/custom/svg/images/login_button.svg",
                   width: MediaQuery.of(context).size.width * 0.5,
                   // fit: BoxFit.fill,
                 ),
@@ -38,7 +38,7 @@ class HomeWidget extends GetView<HomeController> {
                   Get.toNamed("/Signup");
                 },
                 child: SvgPicture.asset(
-                  "assets/custom/svg/images/RegistrarseButton.svg",
+                  "assets/custom/svg/images/register_button.svg",
                   width: MediaQuery.of(context).size.width * 0.5,
                   // fit: BoxFit.fill,
                 ),

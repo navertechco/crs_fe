@@ -13,5 +13,4 @@ export './signin/index.dart';
 export './signup/index.dart'; 
 export './splash/index.dart'; 
 export './terms/index.dart'; 
-export './forgot/index.dart';  
-export './buycredits/index.dart'; 
+export './forgot/index.dart';   

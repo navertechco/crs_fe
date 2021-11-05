@@ -21,5 +21,3 @@ void main() {
       initialBinding: registry.binding,
       getPages: pages.toList()));
 }
-
- 

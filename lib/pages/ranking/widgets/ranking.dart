@@ -171,8 +171,8 @@ class RankingAvatarWidget extends StatelessWidget {
       child: SquareOptionWidget(
           borderRadius: 8.0,
           padding: 10,
-          child: Image.asset(
-            "assets/custom/png/avatar2.png",
+          child: SvgPicture.asset(
+            "assets/custom/svg/images/avatar2.png",
             fit: BoxFit.cover,
             height: Get.height * padding * 0.08,
           ),

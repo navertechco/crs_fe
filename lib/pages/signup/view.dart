@@ -10,11 +10,9 @@ class SignupPage extends GetView<SignupController> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-        onWillPop: () async => false,
-        child: Scaffold(
-          body: _buildSignupFormPage(context),
-        ));
+    return Scaffold(
+      body: _buildSignupFormPage(context),
+    );
   }
 }
 

@@ -73,12 +73,7 @@ List<dynamic> routes = [
       name: '/Forgot',
       page: () => const ForgotPage(),
       transition: Transition.native,
-      binding: ForgotBinding()),
-  PRegistry(
-      name: '/BuyCredits',
-      page: () => const BuyCreditsPage(),
-      transition: Transition.native,
-      binding: BuyCreditsBinding()),
+      binding: ForgotBinding()), 
   PRegistry(
       name: '/Terms',
       page: () => const TermsPage(),
