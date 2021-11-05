@@ -8,7 +8,7 @@ class HelloWidget extends GetView<ProfileController> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Obx(() => Text(controller.state.title)),
+      child: Obx(() => Text("")),
     );
   }
 }
