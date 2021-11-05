@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:naver_trivia/common/constants.dart';
+import 'package:naver_crs/common/constants.dart';
 import '../controller.dart';
 import 'index.dart';
 

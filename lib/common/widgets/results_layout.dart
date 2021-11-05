@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:naver_trivia/common/constants.dart';
+import 'package:naver_crs/common/constants.dart';
 
 class ResultsLayoutWidget extends StatefulWidget {
   const ResultsLayoutWidget({Key? key, this.child, this.text})

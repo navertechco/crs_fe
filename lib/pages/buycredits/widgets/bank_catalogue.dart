@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:naver_trivia/common/widgets/index.dart';
+import 'package:naver_crs/common/widgets/index.dart';
 
 // ignore: must_be_immutable
 class BankCatalogueWidget extends StatelessWidget {
-  BankCatalogueWidget({Key? key, required this.bank})
-      : super(key: key);
+  BankCatalogueWidget({Key? key, required this.bank}) : super(key: key);
 
   Object? bank;
 
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField(
-        validator: (value) =>
-            value == null ? 'El Banco es requerido' : null,
+        validator: (value) => value == null ? 'El Banco es requerido' : null,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         decoration: const InputDecoration(
           hintText: "Seleccione un Banco",
@@ -31,7 +29,6 @@ class BankCatalogueWidget extends StatelessWidget {
             value: "produbanco",
             child: Text("Produbanco"),
           ),
-          
         ]);
   }
 }

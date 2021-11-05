@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/current_remaining_time.dart';
 import 'package:get/get.dart';
-import 'package:naver_trivia/common/constants.dart';
+import 'package:naver_crs/common/constants.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
-import 'package:naver_trivia/common/index.dart';
+import 'package:naver_crs/common/index.dart';
 import 'package:sweetalert/sweetalert.dart';
 import 'question_header.dart';
 

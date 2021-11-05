@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:naver_trivia/common/constants.dart';
-import 'package:naver_trivia/common/index.dart';
+import 'package:naver_crs/common/constants.dart';
+import 'package:naver_crs/common/index.dart';
 import 'package:sweetalert/sweetalert.dart';
 
 import 'index.dart';
@@ -13,7 +13,9 @@ class BuyCreditsController extends GetxController {
   void onEnd(ctx, msg, success) {
     return SweetAlert.show(ctx,
         title: msg,
-        subtitle: success ? 'En breve le confirmamos el pago' : 'Error en la transaccion',
+        subtitle: success
+            ? 'En breve le confirmamos el pago'
+            : 'Error en la transaccion',
         style: success ? SweetAlertStyle.success : SweetAlertStyle.error,
         onPress: (bool isConfirm) {
       Get.toNamed("/Home");
@@ -27,8 +29,9 @@ class BuyCreditsController extends GetxController {
     var res = await fetchhandler(kDefaultSchema, kDefaultServer,
         kDefaultServerPort, kDefaultBuyCreditsPath, 'POST', {
       "data": {
-        "email":
-            session != null ? session['email'].toString() : "josecuevas70hotmail.com",
+        "email": session != null
+            ? session['email'].toString()
+            : "josecuevas70hotmail.com",
         "identification":
             session != null ? session['identification'].toString() : "8888",
         "description": state['reference'].toString(),

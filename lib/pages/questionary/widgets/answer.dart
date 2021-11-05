@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:naver_trivia/common/constants.dart';
+import 'package:naver_crs/common/constants.dart';
 
 // ignore: must_be_immutable
 class AnswerWidget extends StatefulWidget {

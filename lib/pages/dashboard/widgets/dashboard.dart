@@ -3,7 +3,7 @@ import 'package:flutter_gradient_colors/flutter_gradient_colors.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:naver_trivia/common/widgets/index.dart';
+import 'package:naver_crs/common/widgets/index.dart';
 
 import '../index.dart';
 
@@ -17,9 +17,9 @@ class DashboardWidget extends GetView<DashboardController> {
   Future<void> share() async {
     await FlutterShare.share(
         title: 'TRVIIA',
-        text: 'Entra y juega a TRIVIA',
-        linkUrl: 'https://www.trivia.net/',
-        chooserTitle: 'juega TRIVIA');
+        text: 'Entra y juega a crs',
+        linkUrl: 'https://www.crs.net/',
+        chooserTitle: 'juega crs');
   }
 
   @override

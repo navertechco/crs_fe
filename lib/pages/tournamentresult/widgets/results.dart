@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gradient_colors/flutter_gradient_colors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart'; 
-import 'package:naver_trivia/common/index.dart';
+import 'package:get/get.dart';
+import 'package:naver_crs/common/index.dart';
 
-import 'package:naver_trivia/common/widgets/index.dart';
+import 'package:naver_crs/common/widgets/index.dart';
 
 import '../index.dart';
 import 'index.dart';
@@ -18,7 +18,7 @@ class TournamentResultWidget extends GetView<TournamentResultController> {
 
   @override
   Widget build(BuildContext context) {
-    var answers = getContext('answers'); 
+    var answers = getContext('answers');
     var polls = getContext('polls');
     var index = 0;
     List<Widget> list = [];

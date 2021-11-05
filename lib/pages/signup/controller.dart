@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:naver_trivia/common/constants.dart';
-import 'package:naver_trivia/common/index.dart';
+import 'package:naver_crs/common/constants.dart';
+import 'package:naver_crs/common/index.dart';
 import 'package:sweetalert/sweetalert.dart';
 
 import 'index.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:naver_trivia/common/constants.dart';
-import 'package:naver_trivia/pages/buycredits/controller.dart';
-import 'package:naver_trivia/pages/buycredits/widgets/index.dart';
+import 'package:naver_crs/common/constants.dart';
+import 'package:naver_crs/pages/buycredits/controller.dart';
+import 'package:naver_crs/pages/buycredits/widgets/index.dart';
 
 class BuyCreditsFormPage extends GetView<StatelessWidget> {
   BuyCreditsFormPage({
@@ -17,7 +17,8 @@ class BuyCreditsFormPage extends GetView<StatelessWidget> {
       child: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
-          child: BuyCreditsFormWidget(formKey: _formKey, state: ctrl.state, ctrl:ctrl),
+          child: BuyCreditsFormWidget(
+              formKey: _formKey, state: ctrl.state, ctrl: ctrl),
         ),
       ),
     );

@@ -4,8 +4,8 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:get/get.dart';
-import 'package:naver_trivia/common/index.dart';
-import 'package:naver_trivia/pages/profile/controller.dart';
+import 'package:naver_crs/common/index.dart';
+import 'package:naver_crs/pages/profile/controller.dart';
 
 class CameraApp extends StatefulWidget {
   const CameraApp({Key? key, required this.cameras, required this.ctrl})

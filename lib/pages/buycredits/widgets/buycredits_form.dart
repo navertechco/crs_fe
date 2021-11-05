@@ -3,9 +3,9 @@
 // ignore: must_be_immutable
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:naver_trivia/common/constants.dart';
-import 'package:naver_trivia/pages/buycredits/state.dart';
-import 'package:naver_trivia/pages/buycredits/widgets/index.dart';
+import 'package:naver_crs/common/constants.dart';
+import 'package:naver_crs/pages/buycredits/state.dart';
+import 'package:naver_crs/pages/buycredits/widgets/index.dart';
 
 import '../controller.dart';
 

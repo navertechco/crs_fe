@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:naver_trivia/common/index.dart';
-import 'package:naver_trivia/common/widgets/index.dart';
+import 'package:naver_crs/common/index.dart';
+import 'package:naver_crs/common/widgets/index.dart';
 import '../index.dart';
 import 'index.dart';
 import 'widgets/index.dart';
@@ -20,7 +20,7 @@ class ProfilePage extends GetView<ProfileController> {
   @override
   Widget build(BuildContext context) {
     var session = getContext('session');
- 
+
     return WillPopScope(
         onWillPop: () async => false,
         child: Scaffold(

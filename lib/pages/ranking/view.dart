@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:naver_trivia/common/widgets/index.dart';
+import 'package:naver_crs/common/widgets/index.dart';
 import 'widgets/index.dart';
 
 import 'index.dart';
@@ -15,9 +15,9 @@ class RankingPage extends GetView<RankingController> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async => false,
-      child:Scaffold(
-      body: _buildView(context),
-    ));
+        onWillPop: () async => false,
+        child: Scaffold(
+          body: _buildView(context),
+        ));
   }
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:naver_trivia/common/constants.dart';
-
+import 'package:naver_crs/common/constants.dart';
 
 class TextFieldName extends StatelessWidget {
   const TextFieldName({

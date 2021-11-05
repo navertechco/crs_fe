@@ -4,8 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:get/get.dart';
-import 'package:naver_trivia/common/constants.dart';
-import 'package:naver_trivia/common/widgets/index.dart';
+import 'package:naver_crs/common/constants.dart';
+import 'package:naver_crs/common/widgets/index.dart';
 
 class SettingsWidget extends StatefulWidget {
   const SettingsWidget({

@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:naver_trivia/common/constants.dart';
-import 'package:naver_trivia/common/index.dart';
+import 'package:naver_crs/common/constants.dart';
+import 'package:naver_crs/common/index.dart';
 import 'package:sweetalert/sweetalert.dart';
 
 import 'index.dart';
@@ -9,7 +9,7 @@ class ForgotController extends GetxController {
   ForgotController();
 
   final state = ForgotState();
-void onEnd(ctx, msg, success) {
+  void onEnd(ctx, msg, success) {
     return SweetAlert.show(ctx,
         title: msg,
         subtitle: success
@@ -22,18 +22,12 @@ void onEnd(ctx, msg, success) {
     });
   }
 
-  Future<void> onForgot(
-      ctx, 
-      String email ) async { 
-    state.email = email; 
+  Future<void> onForgot(ctx, String email) async {
+    state.email = email;
 
     var res = await fetchhandler(kDefaultSchema, kDefaultServer,
         kDefaultServerPort, kDefaultConnectPath, 'POST', {
-      "data": {
- 
-        "email": state.email, 
-        "state": "forgot"
-      }
+      "data": {"email": state.email, "state": "forgot"}
     });
     print(res);
 
@@ -43,6 +37,7 @@ void onEnd(ctx, msg, success) {
       onEnd(ctx, res['message'], false);
     }
   }
+
   @override
   void onInit() {
     super.onInit();

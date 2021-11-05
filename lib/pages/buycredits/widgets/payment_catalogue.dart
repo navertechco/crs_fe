@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:naver_trivia/common/index.dart';
-import 'package:naver_trivia/common/widgets/index.dart';
+import 'package:naver_crs/common/index.dart';
+import 'package:naver_crs/common/widgets/index.dart';
 
 // ignore: must_be_immutable
 class PaymentCatalogueWidget extends StatelessWidget {

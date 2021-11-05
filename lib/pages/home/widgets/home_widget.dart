@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:naver_trivia/common/widgets/body.dart';
+import 'package:naver_crs/common/widgets/body.dart';
 import '../index.dart';
 
 /// Home

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:naver_trivia/common/widgets/index.dart';
+import 'package:naver_crs/common/widgets/index.dart';
 import 'widgets/index.dart';
 
 import 'index.dart';

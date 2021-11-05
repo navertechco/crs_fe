@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gradient_colors/flutter_gradient_colors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:naver_trivia/common/constants.dart';
-import 'package:naver_trivia/common/widgets/index.dart';
+import 'package:naver_crs/common/constants.dart';
+import 'package:naver_crs/common/widgets/index.dart';
 
 import '../index.dart';
 
@@ -35,32 +35,32 @@ class RankingWidget extends GetView<RankingController> {
         Positioned(
           top: Get.height * padding * 0.18,
           left: Get.width * 0.15,
-          child:
-              const RankingDetailWidget(ranking: 1, gamer: "jose cuevas", score: 100),
+          child: const RankingDetailWidget(
+              ranking: 1, gamer: "jose cuevas", score: 100),
         ),
         Positioned(
           top: Get.height * padding * 0.24,
           left: Get.width * 0.15,
-          child:
-              const RankingDetailWidget(ranking: 2, gamer: "jose cuevas", score: 100),
+          child: const RankingDetailWidget(
+              ranking: 2, gamer: "jose cuevas", score: 100),
         ),
         Positioned(
           top: Get.height * padding * 0.30,
           left: Get.width * 0.15,
-          child:
-              const RankingDetailWidget(ranking: 3, gamer: "jose cuevas", score: 100),
+          child: const RankingDetailWidget(
+              ranking: 3, gamer: "jose cuevas", score: 100),
         ),
         Positioned(
           top: Get.height * padding * 0.36,
           left: Get.width * 0.15,
-          child:
-              const RankingDetailWidget(ranking: 4, gamer: "jose cuevas", score: 100),
+          child: const RankingDetailWidget(
+              ranking: 4, gamer: "jose cuevas", score: 100),
         ),
         Positioned(
           top: Get.height * padding * 0.42,
           left: Get.width * 0.15,
-          child:
-              const RankingDetailWidget(ranking: 5, gamer: "jose cuevas", score: 100),
+          child: const RankingDetailWidget(
+              ranking: 5, gamer: "jose cuevas", score: 100),
         ),
       ],
     );

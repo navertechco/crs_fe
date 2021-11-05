@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-import 'package:naver_trivia/common/index.dart';
-import 'package:naver_trivia/pages/forgot/state.dart';
+import 'package:naver_crs/common/index.dart';
+import 'package:naver_crs/pages/forgot/state.dart';
 
 // ignore: must_be_immutable
 class ForgotForm extends StatelessWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:naver_trivia/common/constants.dart';
-import 'package:naver_trivia/pages/signup/widgets/index.dart';
+import 'package:naver_crs/common/constants.dart';
+import 'package:naver_crs/pages/signup/widgets/index.dart';
 
 import '../../index.dart';
 
@@ -41,7 +41,7 @@ class SignupFormPage extends GetView<StatelessWidget> {
                 ],
               ),
               const SizedBox(height: kDefaultPadding * 2),
-              SignUpForm(formKey: _formKey, state: ctrl!.state, profile:false),
+              SignUpForm(formKey: _formKey, state: ctrl!.state, profile: false),
               const SizedBox(height: kDefaultPadding * 1),
               SizedBox(
                 width: double.infinity,

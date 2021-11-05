@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:naver_trivia/common/widgets/index.dart';
-import 'package:naver_trivia/pages/manual/widgets/manual_widget.dart';
+import 'package:naver_crs/common/widgets/index.dart';
+import 'package:naver_crs/pages/manual/widgets/manual_widget.dart';
 
 import 'index.dart';
 
@@ -15,9 +15,9 @@ class ManualPage extends GetView<ManualController> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async => false,
-      child:Scaffold(
-      body: _buildView(context),
-    ));
+        onWillPop: () async => false,
+        child: Scaffold(
+          body: _buildView(context),
+        ));
   }
 }
