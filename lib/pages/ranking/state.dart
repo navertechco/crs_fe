@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 
 class RankingState {
   // title
-  final _title = "".obs;
-  set title(value) => this._title.value = value;
-  get title => this._title.value;
+  final _title = "Ranking".obs;
+  set title(value) => _title.value = value;
+  get title => _title.value;
 }

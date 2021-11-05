@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:naver_trivia/common/widgets/index.dart';
+import 'package:naver_trivia/pages/manual/widgets/manual_widget.dart';
 
 import 'index.dart';
-import 'widgets/widgets.dart';
 
 class ManualPage extends GetView<ManualController> {
-  // 内容页
-  Widget _buildView() {
-    return HelloWidget();
+  const ManualPage({Key? key}) : super(key: key);
+
+  Widget _buildView(BuildContext? _context) {
+    return const ContentLayoutWidget(child: ManualWidget(), text: "Manual");
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _buildView(),
-    );
+    return WillPopScope(
+      onWillPop: () async => false,
+      child:Scaffold(
+      body: _buildView(context),
+    ));
   }
 }

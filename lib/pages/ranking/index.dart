@@ -1,4 +1,5 @@
-library ranking;
+// ignore: library_names
+library Ranking;
 
 export './state.dart';
 export './controller.dart';

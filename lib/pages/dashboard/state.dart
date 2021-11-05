@@ -1,8 +1,6 @@
-import 'package:get/get.dart';
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:naver_trivia/common/index.dart';
 
 class DashboardState {
-  // title
-  final _title = "".obs;
-  set title(value) => this._title.value = value;
-  get title => this._title.value;
+  final title = getContext('session')['username'].toString().obs;
 }

@@ -2,7 +2,10 @@ import 'package:get/get.dart';
 
 class QuestionaryState {
   // title
-  final _title = "".obs;
-  set title(value) => this._title.value = value;
-  get title => this._title.value;
+  String identification = "";
+  String tournamentid = "";
+  List<dynamic> answers = [];
+  final _title = "Cuestionario".obs;
+  set title(value) => _title.value = value;
+  get title => _title.value;
 }

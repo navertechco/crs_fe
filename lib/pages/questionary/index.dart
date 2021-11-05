@@ -1,4 +1,5 @@
-library questionary;
+// ignore: library_names
+library Questionary;
 
 export './state.dart';
 export './controller.dart';

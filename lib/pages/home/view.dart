@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:naver_trivia/common/index.dart';
 
 import 'index.dart';
-import 'widgets/widgets.dart';
+import 'widgets/index.dart';
 
 class HomePage extends GetView<HomeController> {
+  const HomePage({Key? key}) : super(key: key);
+
   // 内容页
   Widget _buildView() {
-    return HelloWidget();
+    return const HomeWidget();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _buildView(),
-    );
+    setContext('size', MediaQuery.of(context).size);
+    return _buildView();
   }
 }

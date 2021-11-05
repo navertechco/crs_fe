@@ -1,19 +1,48 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:naver_trivia/common/index.dart';
+import 'package:naver_trivia/common/widgets/index.dart';
+import '../index.dart';
 import 'index.dart';
-import 'widgets/widgets.dart';
+import 'widgets/index.dart';
 
 class ProfilePage extends GetView<ProfileController> {
-  // 内容页
-  Widget _buildView() {
-    return HelloWidget();
+  ProfilePage({Key? key}) : super(key: key);
+
+  Widget _buildView(BuildContext? _context) {
+    return ContentLayoutWidget(child: ProfileWidget(), text: "Perfil");
   }
+
+  final GlobalKey<ScaffoldState> _key = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _buildView(),
-    );
+    var session = getContext('session');
+ 
+    return WillPopScope(
+        onWillPop: () async => false,
+        child: Scaffold(
+            key: _key,
+            endDrawer: MenuWidget(),
+            body: Stack(
+              children: [
+                _buildView(context),
+                Padding(
+                  padding: EdgeInsets.only(top: 45.0, left: Get.width * 0.85),
+                  child: IconButton(
+                    icon: CircleAvatar(
+                      radius: 50,
+                      backgroundImage:
+                          Image.memory(base64Decode(session['avatar'])).image,
+                    ),
+                    onPressed: () => _key.currentState!.openEndDrawer(),
+                    tooltip:
+                        MaterialLocalizations.of(context).openAppDrawerTooltip,
+                  ),
+                ),
+              ],
+            )));
   }
 }

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 770 1354">
+    <defs>
+        <linearGradient id="a" x1="385" y1="1361.91" x2="385" y2="19.93" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#662d91" />
+            <stop offset=".98" stop-color="#0ff" />
+        </linearGradient>
+    </defs>
+    <g data-name="Capa 2">
+        <path style="fill:url(#a)" d="M0 0h770v1354H0z" data-name="Capa 1" />
+    </g>
+</svg>

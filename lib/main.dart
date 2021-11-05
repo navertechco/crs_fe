@@ -1,18 +1,25 @@
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:naver_trivia/pages/home/bindings.dart'; 
-
 import 'common/router/app_pages.dart';
-import 'common/theme/theme_light.dart'; 
-
+import 'common/themes/index.dart';
+import 'package:flutter/services.dart';
 
 void main() {
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+
+  var pages = AppPages.pages;
+  PRegistry registry =
+      routes.toList().firstWhere((element) => element.name == "/Home");
+
   runApp(GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: Routes.kHome,
-      theme: appThemeData,
-      defaultTransition: Transition.fadeIn,
-      initialBinding: HomeBinding(),
-      getPages: AppPages.pages));
+      initialRoute: registry.name,
+      theme: lightTheme,
+      darkTheme: darkTheme,
+      defaultTransition: registry.transition,
+      initialBinding: registry.binding,
+      getPages: pages.toList()));
 }
 
+ 

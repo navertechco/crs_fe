@@ -1,19 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:naver_trivia/common/widgets/index.dart';
+import 'widgets/index.dart';
 
 import 'index.dart';
-import 'widgets/widgets.dart';
 
 class SigninPage extends GetView<SigninController> {
-  // 内容页
-  Widget _buildView() {
-    return HelloWidget();
-  }
+  const SigninPage({Key? key}) : super(key: key);
+  
+ 
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _buildView(),
-    );
+    return WillPopScope(
+      onWillPop: () async => false,
+      child:Scaffold(
+      body: _buildSigninFormPage(context),
+    ));
   }
+}
+
+GetBuilder<SigninController> _buildSigninFormPage(
+  BuildContext context,
+) {
+  return GetBuilder<SigninController>(
+    id: 'signin_form_page',
+    builder: (controller) => ContentLayoutWidget(child: SigninFormPage(ctrl:controller), text: "Ingresar"),
+  );
 }

@@ -4,7 +4,9 @@ import 'package:get/get.dart';
 import '../index.dart';
 
 /// hello
-class HelloWidget extends GetView<TermsController> {
+class TermsWidget extends GetView<TermsController> {
+  const TermsWidget({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Center(

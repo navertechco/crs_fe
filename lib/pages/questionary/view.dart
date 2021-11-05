@@ -1,19 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:naver_trivia/common/widgets/index.dart';
+import 'widgets/index.dart';
 
 import 'index.dart';
-import 'widgets/widgets.dart';
 
 class QuestionaryPage extends GetView<QuestionaryController> {
-  // 内容页
-  Widget _buildView() {
-    return HelloWidget();
-  }
+  const QuestionaryPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _buildView(),
-    );
+    return WillPopScope(
+      onWillPop: () async => false,
+      child:Scaffold(
+      body: _buildQuestionaryFormPage(context),
+    ));
   }
+}
+
+GetBuilder<QuestionaryController> _buildQuestionaryFormPage(
+  BuildContext context,
+) {
+  return GetBuilder<QuestionaryController>(
+    id: 'signup_form_page',
+    builder: (controller) => ContentLayoutWidget(
+        child: QuestionaryWidget(ctrl: controller), text: "Registrarse"),
+  );
 }
