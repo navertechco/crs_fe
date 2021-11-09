@@ -9,22 +9,23 @@ class ProfileLayoutWidget extends StatelessWidget {
   final String? text;
   @override
   Widget build(BuildContext context) {
-    return Stack(fit: StackFit.expand, children: [
-      Positioned(
-        top: 0,
-        left: -1,
+    return Stack(children: [
+      Expanded(
+        // top: 0,
+        // right: 0,
         child: SvgPicture.asset(
-            "assets/custom/svg/images/gold_black_rectangle.svg",
-            fit: BoxFit.cover,
-            height: MediaQuery.of(context).size.height * 0.2,
-            width: MediaQuery.of(context).size.width),
+          "assets/custom/svg/images/gold_black_rectangle.svg",
+          fit: BoxFit.cover,
+          height: Get.height * 0.2,
+          width: double.infinity,
+        ),
       ),
-      // Padding(
-      //   padding: const EdgeInsets.only(top: 100.0),
-      //   child: Positioned(
-      //     child: child,
-      //   ),
-      // ),
+      Padding(
+        padding: const EdgeInsets.only(top: 100.0),
+        child: Positioned(
+          child: child,
+        ),
+      ),
     ]);
   }
 }

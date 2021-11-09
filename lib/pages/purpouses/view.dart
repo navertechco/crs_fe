@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/common/widgets/index.dart';
-import 'index.dart';
 import 'widgets/index.dart';
 
-class SettingsPage extends GetView<SettingsController> {
-  const SettingsPage({Key? key}) : super(key: key);
+import 'index.dart';
+
+class PurpousesPage extends GetView<PurpousesController> {
+  const PurpousesPage({Key? key}) : super(key: key);
 
   Widget _buildView(BuildContext? _context) {
-    return ContentLayoutWidget(
-        child: SettingsFormWidget(), text: "Configuración");
+    return const ContentLayoutWidget(
+        child: PurpousesWidget(
+          title: 'Propositos',
+        ),
+        text: "Purpouses");
   }
 
   @override

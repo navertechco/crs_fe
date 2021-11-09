@@ -20,7 +20,6 @@ class DashboardPage extends GetView<DashboardController> {
   @override
   Widget build(BuildContext context) {
     var session = getContext('session');
-    Rx<Image> avatar = Rx(Image.memory(base64Decode(session['avatar'])));
     String name = session['surname'] + " " + session['lastname'];
     return WillPopScope(
         onWillPop: () async => false,
@@ -52,6 +51,7 @@ class DashboardPage extends GetView<DashboardController> {
                   ),
                 ),
               ],
-            )));
+            ),
+            bottomNavigationBar: const BottonNavWidget()));
   }
 }

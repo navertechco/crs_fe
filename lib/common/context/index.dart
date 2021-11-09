@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 class Context {
   static Map<String, dynamic> context = {
+    "index": 0,
     "session": {"avatar": "".obs}
   };
 

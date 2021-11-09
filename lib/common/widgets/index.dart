@@ -13,3 +13,4 @@ export '../../pages/questionary/widgets/question_header.dart';
 export '../../pages/questionary/widgets/answer.dart';
 export './dropdown.dart';
 export './textfieldname.dart';
+export './botomnav.dart';

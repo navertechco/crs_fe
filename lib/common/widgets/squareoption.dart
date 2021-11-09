@@ -10,7 +10,7 @@ class SquareOptionWidget extends StatelessWidget {
       required this.padding,
       required this.borderRadius})
       : super(key: key);
-  final dynamic child;
+  final Widget child;
   final String? url;
   final dynamic ontap;
   final double? padding;
@@ -27,11 +27,11 @@ class SquareOptionWidget extends StatelessWidget {
       child: DecoratedBox(
         decoration: BoxDecoration(
           shape: BoxShape.rectangle,
-          border: Border.all(width: 8.0, color: Colors.grey),
+          border: Border.all(width: 2.0, color: Colors.black),
           borderRadius: BorderRadius.circular(borderRadius!),
         ),
         child: Padding(
-          padding:   EdgeInsets.all(padding!),
+          padding: EdgeInsets.all(padding!),
           child: child,
         ),
       ),

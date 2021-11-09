@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_gradient_colors/flutter_gradient_colors.dart';
 import 'package:flutter_share/flutter_share.dart';
@@ -24,101 +26,157 @@ class DashboardWidget extends GetView<DashboardController> {
 
   @override
   Widget build(BuildContext context) {
+    RxInt purposecolor = 0xFF000000.obs;
+    int yellow = 0xFFC7C7C7;
     return Center(
       widthFactor: double.infinity,
       child: Stack(
         children: [
+          //HOME
           Positioned(
-            top: Get.height * 0.001,
-            left: Get.width * 0.3,
-            child: SvgPicture.asset(
-              "assets/custom/svg/images/LogoSlogan2.svg",
-              width: Get.width * 0.35,
-            ),
-          ),
-          Positioned(
-            top: Get.height * 0.30,
-            left: Get.width * 0.50,
+            top: Get.height * 0.08,
+            left: Get.width * 0.15,
             child: SquareOptionWidget(
-                borderRadius: 8.0,
-                padding: 50,
-                child: RadiantGradientMask(
-                  colors: GradientColors.farawayRiver,
-                  child: Icon(
-                    Icons.share,
-                    color: Colors.white,
-                    size: Get.width * 0.165,
-                  ),
+                borderRadius: 30.0,
+                padding: 20,
+                child: Column(
+                  children: [
+                    SvgPicture.asset('assets/custom/svg/images/checklist.svg',
+                        width: Get.width * 0.15),
+                    SizedBox(height: Get.height * 0.02),
+                    Text(
+                      "     Survey       ",
+                      style: TextStyle(
+                        fontSize: Get.height * 0.025,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
                 ),
-                ontap: () {
-                  share();
-                }),
+                url: "/Survey"),
           ),
+          //SHARE
           Positioned(
-            top: Get.height * 0.30,
-            left: Get.width * 0.08,
-            child: SquareOptionWidget(
-                key: const ObjectKey("h"),
-                borderRadius: 8.0,
-                padding: 50,
-                child: Icon(
-                  Icons.exit_to_app,
-                  color: Colors.green,
-                  size: Get.width * 0.165,
-                ),
-                url: "/Home"),
-          ),
-          //
-          Positioned(
-            top: Get.height * 0.55,
-            left: Get.width * 0.50,
-            child: SquareOptionWidget(
-                key: const ObjectKey("b"),
-                borderRadius: 8.0,
-                padding: 50,
-                child: Icon(
-                  Icons.monetization_on_outlined,
-                  color: Colors.green,
-                  size: Get.width * 0.165,
-                ),
-                url: "/BuyCredits"),
-          ),
-          Positioned(
-            top: Get.height * 0.55,
-            left: Get.width * 0.08,
-            child: SquareOptionWidget(
-                key: const ObjectKey("r"),
-                borderRadius: 8.0,
-                padding: 50,
-                child: Icon(
-                  Icons.score_outlined,
-                  color: Colors.green,
-                  size: Get.width * 0.165,
-                ),
-                url: "/TournamentResult"),
-          ),
-          Positioned(
-            top: Get.height * 0.45,
-            left: Get.width * 0.33,
-            child: RawMaterialButton(
-              key: const ObjectKey("q"),
-              onPressed: () {
-                controller.onJoinTournament(context);
-                // Get.toNamed("/Questionary");
+            top: Get.height * 0.08,
+            left: Get.width * 0.51,
+            child: InkWell(
+              onHover: (value) {
+                purposecolor.value = yellow;
               },
-              elevation: 1.0,
-              fillColor: Colors.white,
-              child: RadiantGradientMask(
-                colors: GradientColors.farawayRiver,
-                child: Icon(
-                  Icons.play_circle_sharp,
-                  color: Colors.white,
-                  size: Get.height * 0.15,
-                ),
-              ),
-              padding: const EdgeInsets.all(15.0),
-              shape: const CircleBorder(),
+              child: SquareOptionWidget(
+                  borderRadius: 30.0,
+                  padding: 20,
+                  child: Column(
+                    children: [
+                      SvgPicture.asset(
+                          'assets/custom/svg/images/dart_person.svg',
+                          color: Color(purposecolor.value),
+                          width: Get.width * 0.19),
+                      SizedBox(height: Get.height * 0.02),
+                      Text(
+                        "   Purpouses  ",
+                        style: TextStyle(
+                          fontSize: Get.height * 0.025,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                  url: "/Purpouses"),
             ),
+          ),
+          //HOME
+          Positioned(
+            top: Get.height * 0.31,
+            left: Get.width * 0.15,
+            child: SquareOptionWidget(
+                borderRadius: 30.0,
+                padding: 20,
+                child: Column(
+                  children: [
+                    SvgPicture.asset('assets/custom/svg/images/around.svg',
+                        width: Get.width * 0.15),
+                    SizedBox(height: Get.height * 0.02),
+                    Text(
+                      "Destinations  \n",
+                      style: TextStyle(
+                        fontSize: Get.height * 0.025,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+                url: "/Destinations"),
+          ),
+          //SHARE
+          Positioned(
+            top: Get.height * 0.31,
+            left: Get.width * 0.51,
+            child: SquareOptionWidget(
+                borderRadius: 30.0,
+                padding: 20,
+                child: Column(
+                  children: [
+                    SvgPicture.asset('assets/custom/svg/images/time.svg',
+                        width: Get.width * 0.15),
+                    SizedBox(height: Get.height * 0.02),
+                    Text(
+                      "     Activities  \n",
+                      style: TextStyle(
+                        fontSize: Get.height * 0.025,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+                url: "/Activities"),
+          ),
+
+          //RESULT
+          Positioned(
+            top: Get.height * 0.54,
+            left: Get.width * 0.15,
+            child: SquareOptionWidget(
+                borderRadius: 30.0,
+                padding: 20,
+                child: Column(
+                  children: [
+                    SvgPicture.asset('assets/custom/svg/images/opportunity.svg',
+                        width: Get.width * 0.15),
+                    SizedBox(height: Get.height * 0.02),
+                    Text(
+                      "Opportunities\n",
+                      style: TextStyle(
+                        fontSize: Get.height * 0.025,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+                url: "/Opportunities"),
+          ),
+          //BUY
+          Positioned(
+            top: Get.height * 0.54,
+            left: Get.width * 0.51,
+            child: SquareOptionWidget(
+                borderRadius: 30.0,
+                padding: 20,
+                child: Column(
+                  children: [
+                    SvgPicture.asset('assets/custom/svg/images/invoice.svg',
+                        width: Get.width * 0.15),
+                    SizedBox(height: Get.height * 0.02),
+                    Text(
+                      "      Quote       \n",
+                      style: TextStyle(
+                        fontSize: Get.height * 0.025,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+                url: "/Quote"),
           ),
         ],
       ),

@@ -1,18 +1,17 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/common/index.dart';
 import 'package:naver_crs/common/widgets/index.dart';
-import '../index.dart';
-import 'index.dart';
 import 'widgets/index.dart';
+import 'dart:convert';
+import 'dart:typed_data';
+import 'index.dart';
 
-class ProfilePage extends GetView<ProfileController> {
-  ProfilePage({Key? key}) : super(key: key);
+class SurveyPage extends GetView<SurveyController> {
+  SurveyPage({Key? key}) : super(key: key);
 
   Widget _buildView(BuildContext? _context) {
-    return ContentLayoutWidget(child: ProfileWidget(), text: "Perfil");
+    return const ProfileLayoutWidget(child: SurveyWidget(), text: "Survey");
   }
 
   final GlobalKey<ScaffoldState> _key = GlobalKey();
@@ -20,7 +19,8 @@ class ProfilePage extends GetView<ProfileController> {
   @override
   Widget build(BuildContext context) {
     var session = getContext('session');
-
+    Rx<Image> avatar = Rx(Image.memory(base64Decode(session['avatar'])));
+    String name = session['surname'] + " " + session['lastname'];
     return WillPopScope(
         onWillPop: () async => false,
         child: Scaffold(
@@ -30,12 +30,20 @@ class ProfilePage extends GetView<ProfileController> {
               children: [
                 _buildView(context),
                 Padding(
+                    padding: EdgeInsets.only(top: 55.0, left: Get.width * 0.1),
+                    child: Text(
+                      name,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: Get.width * 0.05,
+                          fontWeight: FontWeight.bold),
+                    )),
+                Padding(
                   padding: EdgeInsets.only(top: 45.0, left: Get.width * 0.85),
                   child: IconButton(
-                    icon: CircleAvatar(
-                      radius: 50,
-                      backgroundImage:
-                          Image.memory(base64Decode(session['avatar'])).image,
+                    icon: ClipRRect(
+                      child: Image.memory(base64Decode(session['avatar'])),
+                      borderRadius: BorderRadius.circular(50.0),
                     ),
                     onPressed: () => _key.currentState!.openEndDrawer(),
                     tooltip:
@@ -44,9 +52,6 @@ class ProfilePage extends GetView<ProfileController> {
                 ),
               ],
             ),
-            bottomNavigationBar: const BottonNavWidget()
-            
-            
-            ));
+            bottomNavigationBar: const BottonNavWidget()));
   }
 }

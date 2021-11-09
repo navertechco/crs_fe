@@ -73,10 +73,35 @@ List<dynamic> routes = [
       name: '/Forgot',
       page: () => const ForgotPage(),
       transition: Transition.native,
-      binding: ForgotBinding()), 
+      binding: ForgotBinding()),
   PRegistry(
       name: '/Terms',
       page: () => const TermsPage(),
       transition: Transition.native,
       binding: TermsBinding()),
+  PRegistry(
+      name: '/Survey',
+      page: () => SurveyPage(),
+      transition: Transition.native,
+      binding: SurveyBinding()),
+  PRegistry(
+      name: '/Purpouses',
+      page: () => const PurpousesPage(),
+      transition: Transition.native,
+      binding: PurpousesBinding()),
+  PRegistry(
+      name: '/Destinations',
+      page: () => const DestinationsPage(),
+      transition: Transition.native,
+      binding: DestinationsBinding()),
+  PRegistry(
+      name: '/Activities',
+      page: () => const ActivitiesPage(),
+      transition: Transition.native,
+      binding: ActivitiesBinding()),
+  PRegistry(
+      name: '/Opportunities',
+      page: () => const OpportunitiesPage(),
+      transition: Transition.native,
+      binding: OpportunitiesBinding()),
 ];
