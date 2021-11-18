@@ -160,23 +160,26 @@ class DashboardWidget extends GetView<DashboardController> {
             top: Get.height * 0.54,
             left: Get.width * 0.51,
             child: SquareOptionWidget(
-                borderRadius: 30.0,
-                padding: 20,
-                child: Column(
-                  children: [
-                    SvgPicture.asset('assets/custom/svg/images/invoice.svg',
-                        width: Get.width * 0.15),
-                    SizedBox(height: Get.height * 0.02),
-                    Text(
-                      "      Quote       \n",
-                      style: TextStyle(
-                        fontSize: Get.height * 0.025,
-                        fontWeight: FontWeight.bold,
-                      ),
+              borderRadius: 30.0,
+              padding: 20,
+              child: Column(
+                children: [
+                  SvgPicture.asset('assets/custom/svg/images/invoice.svg',
+                      width: Get.width * 0.15),
+                  SizedBox(height: Get.height * 0.02),
+                  Text(
+                    "      Quote       \n",
+                    style: TextStyle(
+                      fontSize: Get.height * 0.025,
+                      fontWeight: FontWeight.bold,
                     ),
-                  ],
-                ),
-                url: "/Quote"),
+                  ),
+                ],
+              ),
+              ontap: () {
+                controller.pdf();
+              },
+            ),
           ),
         ],
       ),

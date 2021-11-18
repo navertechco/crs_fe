@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../constants.dart';
+import '../index.dart';
 
 class ContentLayoutWidget extends StatelessWidget {
   const ContentLayoutWidget({Key? key, this.child, this.text})
@@ -11,6 +12,8 @@ class ContentLayoutWidget extends StatelessWidget {
   final String? text;
   @override
   Widget build(BuildContext context) {
+    var icons = getContext("icons");
+    String icon = icons[text] ?? "Default";
     return Stack(children: [
       Padding(
         padding: EdgeInsets.only(top: Get.height * 0.2),
@@ -38,9 +41,19 @@ class ContentLayoutWidget extends StatelessWidget {
                   child: Row(
                     children: [
                       TextButton(
-                        child: SvgPicture.asset(
-                          "assets/custom/svg/images/LeftArrow.svg",
-                          color: Colors.white,
+                        child: Row(
+                          children: [
+                            SvgPicture.asset(
+                              "assets/custom/svg/images/white_left_bumerang_arrow.svg",
+                              color: Colors.white,
+                            ),
+                            const SizedBox(width: kDefaultPadding / 2),
+                            SvgPicture.asset(
+                              icons[icon],
+                              width: Get.width * 0.03,
+                              color: Colors.white,
+                            ),
+                          ],
                         ),
                         onPressed: () {
                           Get.back();

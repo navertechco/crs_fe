@@ -2,7 +2,9 @@ import 'package:get/get.dart';
 import 'package:naver_crs/common/constants.dart';
 import 'package:naver_crs/common/index.dart';
 import 'package:sweetalert/sweetalert.dart';
+import 'dart:io';
 
+import 'package:pdf/widgets.dart' as pw;
 import 'index.dart';
 
 class DashboardController extends GetxController {
@@ -11,7 +13,23 @@ class DashboardController extends GetxController {
   final state = DashboardState();
   var session = getContext('session');
 
-  void onEnd(ctx, msg) {
+  Future<void> pdf() async {
+    final pdf = pw.Document();
+
+    pdf.addPage(
+      pw.Page(
+        build: (pw.Context context) => pw.Center(
+          child: pw.Text('Hello World!'),
+        ),
+      ),
+    );
+
+    final file = File('example.pdf');
+    // await file.writeAsBytes(await pdf.save());
+  }
+
+  void onEnd(ctx, msg) {       
+                                              
     return SweetAlert.show(ctx,
         title: msg,
         subtitle: 'Nos vemos en el siguiente torneo',
