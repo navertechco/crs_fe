@@ -23,15 +23,14 @@ class _ResultsLayoutWidgetState extends State<ResultsLayoutWidget> {
     return SafeArea(
       child: Stack(children: [
         Padding(
-          padding: const EdgeInsets.only(top: 0.0),
+          padding: EdgeInsets.only(top: 0.0),
           child: SvgPicture.asset(
             "assets/custom/svg/images/GradientPurpleBackground.svg",
             fit: BoxFit.cover,
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(
-              top: kDefaultPadding, left: kDefaultPadding),
+          padding: EdgeInsets.only(top: kDefaultPadding, left: kDefaultPadding),
           child: Row(
             children: [
               TextButton(
@@ -52,7 +51,7 @@ class _ResultsLayoutWidgetState extends State<ResultsLayoutWidget> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(
+          padding: EdgeInsets.only(
               bottom: kDefaultPadding * 36.5, left: kDefaultPadding * 17),
           child: SvgPicture.asset(
             "assets/custom/svg/images/HeaderLogo.svg",

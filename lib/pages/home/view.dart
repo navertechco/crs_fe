@@ -15,7 +15,7 @@ class HomePage extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    setContext('size', MediaQuery.of(context).size);
+    setContext('size', Get);
     return _buildView();
   }
 }

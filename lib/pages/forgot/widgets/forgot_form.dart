@@ -22,14 +22,13 @@ class ForgotForm extends StatelessWidget {
     return Form(
       key: formKey,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const TextFieldName(text: "Email"),
-          TextFormField(
-            keyboardType: TextInputType.emailAddress,
-            decoration: const InputDecoration(hintText: "test@email.com"),
-            validator: EmailValidator(errorText: "Use a valid email!"),
-            onSaved: (email) => state.email = email!,
+          SizedBox(
+            child: RoundedFormField(
+              onSaved: (value) => state.email = value!,
+              hintText: 'Email',
+            ),
           ),
         ],
       ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/common/constants.dart';
+import 'package:naver_crs/common/index.dart';
 import 'package:naver_crs/pages/signup/widgets/index.dart';
 
 import '../../index.dart';
@@ -17,36 +18,17 @@ class SignupFormPage extends GetView<StatelessWidget> {
     return Center(
       child: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+          padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
-                "Registrarse",
-                style: Theme.of(context)
-                    .textTheme
-                    .headline5!
-                    .copyWith(fontWeight: FontWeight.bold),
-              ),
-              Row(
-                children: [
-                  const Text("¿Tiene una cuenta creada?"),
-                  TextButton(
-                    onPressed: () => Get.toNamed("/Signin"),
-                    child: const Text(
-                      "¡Ingresar!",
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: kDefaultPadding * 2),
+              SizedBox(height: kDefaultPadding * 2),
               SignUpForm(formKey: _formKey, state: ctrl!.state, profile: false),
-              const SizedBox(height: kDefaultPadding * 1),
+              SizedBox(height: kDefaultPadding * 1),
               SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
+                child: RoundedFormButton(
+                  label: "Register",
+                  onTap: () {
                     if (_formKey.currentState!.validate()) {
                       // Sign up form is done
                       // It saved our inputs
@@ -63,7 +45,6 @@ class SignupFormPage extends GetView<StatelessWidget> {
                           ctrl!.state.password);
                     }
                   },
-                  child: const Text("Registrar"),
                 ),
               ),
             ],

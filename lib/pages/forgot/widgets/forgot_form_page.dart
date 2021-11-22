@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/common/constants.dart';
+import 'package:naver_crs/common/index.dart';
 
 import '../../index.dart';
 import 'index.dart';
@@ -17,32 +19,22 @@ class ForgotFormPage extends GetView<StatelessWidget> {
     return Center(
       child: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+          padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
-                "Olvidó su usuario o contraseña",
-                style: Theme.of(context)
-                    .textTheme
-                    .headline5!
-                    .copyWith(fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: kDefaultPadding * 20),
+              SizedBox(height: kDefaultPadding * 15),
               ForgotForm(formKey: _formKey, state: ctrl!.state),
-              const SizedBox(height: kDefaultPadding * 2),
+              SizedBox(height: kDefaultPadding * 1),
               SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
+                child: RoundedFormButton(
+                  label: "Send",
+                  onTap: () {
                     if (_formKey.currentState!.validate()) {
-                      // Sign up form is done
-                      // It saved our inputs
                       _formKey.currentState!.save();
                       ctrl!.onForgot(context, ctrl!.state.email);
                     }
                   },
-                  child: const Text("Enviar"),
                 ),
               ),
             ],

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-
+import 'package:get/get.dart';
 import 'context/index.dart';
 
 /*
@@ -9,14 +9,19 @@ import 'context/index.dart';
 
 const kDefaultSchema = "http";
 const kDefaultServer = "192.168.101.3";
-const kDefaultServerPort = 5000;
+const kDefaultServerPort = 5001;
 const kDefaultConnectPath = "/User/Connect";
 const kDefaultSendPollPath = "/Gamer/SendPoll";
 const kDefaultBuyCreditsPath = "/Gamer/BuyCredit";
 const kDefaultJoinTournmanetPath = "/Gamer/JoinTournament";
+
+//DIMENSIONES
+var kDefaultPadding = 20.0;
+const kDefaultRadius = BorderRadius.all(Radius.circular(8.0));
+const kFontSize = 72.0;
 var kSize = getContext('size');
 
-///
+///COLORES
 
 const kPrimaryColor = Color(0xFFFFFFFF);
 const kPrimaryLightColor = Color(0xFFF6F6F6);
@@ -39,8 +44,8 @@ const kShadowGradientColor = LinearGradient(
 );
 
 const kBackgroundColor = Color(0xFFF6F6F6);
-const kDefaultPadding = 16.0;
-const kDefaultRadius = BorderRadius.all(Radius.circular(8.0));
+
+//BORDES
 const kDefaultBorder = BorderRadius.all(Radius.circular(8.0));
 const kDefaultBorderLight = BorderRadius.all(Radius.circular(4.0));
 const kDefaultBorderDark = BorderRadius.all(Radius.circular(4.0));
@@ -79,8 +84,8 @@ const kDefaultBorderGradientLightLight = LinearGradient(
   end: Alignment.bottomRight,
   colors: [Color(0xFFB4B4B4), Color(0xFF707070)],
 );
-const double kFontSize = 72.0;
 
+//VALIDADORES
 final passwordValidator = MultiValidator(
   [
     RequiredValidator(errorText: 'password is required'),

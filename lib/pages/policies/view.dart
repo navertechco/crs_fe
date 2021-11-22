@@ -9,8 +9,10 @@ class PoliciesPage extends GetView<PoliciesController> {
   const PoliciesPage({Key? key}) : super(key: key);
 
   Widget _buildView(BuildContext? _context) {
-    return const ContentLayoutWidget(
-        child: PoliciesWidget(), text: "Políticas");
+    return ContentLayoutWidget(
+        background: "assets/custom/img/policy.png",
+        child: PoliciesWidget(),
+        text: "Políticas");
   }
 
   @override

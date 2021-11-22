@@ -12,11 +12,11 @@ class TextFieldName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: kDefaultPadding / 100),
+      padding: EdgeInsets.only(bottom: kDefaultPadding / 100),
       child: Text(
         text,
         style:
-            const TextStyle(fontWeight: FontWeight.w600, color: Colors.black54),
+            const TextStyle(fontWeight: FontWeight.w600, color: Colors.white),
       ),
     );
   }

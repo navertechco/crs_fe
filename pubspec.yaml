@@ -77,6 +77,7 @@ flutter:
   assets:
     - assets/
     - assets/custom/
+    - assets/custom/img/
     - assets/custom/png/
     - assets/custom/svg/icons/
     - assets/custom/svg/images/

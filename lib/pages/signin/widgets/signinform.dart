@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:form_field_validator/form_field_validator.dart';
-import 'package:get/get.dart';
+import 'package:flutter/material.dart'; 
 import 'package:naver_crs/common/constants.dart';
 import 'package:naver_crs/common/widgets/index.dart';
 import 'package:naver_crs/pages/signin/state.dart';
@@ -21,23 +19,20 @@ class SigninForm extends StatelessWidget {
     return Form(
       key: formKey,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const TextFieldName(text: "Username"),
-          TextFormField(
-            decoration: const InputDecoration(hintText: "Username"),
-            validator: RequiredValidator(errorText: "Username is required"),
-            // Let's save our username
-            onSaved: (username) => state.username = username!,
+          SizedBox(
+            child: RoundedFormField(
+              onSaved: (value) => state.username = value!,
+              hintText: 'Username',
+            ),
           ),
-          const SizedBox(height: kDefaultPadding),
-          const TextFieldName(text: "Password"),
-          TextFormField(
-            // We want to hide our password
-            obscureText: true,
-            decoration: const InputDecoration(hintText: "******"),
-            validator: passwordValidator,
-            onSaved: (password) => state.password = password!,
+          SizedBox(height: kDefaultPadding),
+          SizedBox(
+            child: RoundedFormField(
+                onSaved: (value) => state.password = value!,
+                hintText: 'Password',
+                password: true),
           ),
         ],
       ),

@@ -6,17 +6,27 @@ import '../constants.dart';
 import '../index.dart';
 
 class ContentLayoutWidget extends StatelessWidget {
-  const ContentLayoutWidget({Key? key, this.child, this.text})
+  ContentLayoutWidget({Key? key, this.child, this.text, this.background})
       : super(key: key);
   final dynamic child;
   final String? text;
+  String? background;
   @override
   Widget build(BuildContext context) {
     var icons = getContext("icons");
+    var multiplier = MediaQuery.of(context).orientation == Orientation.landscape
+        ? 0.1
+        : 0.09;
     String icon = icons[text] ?? "Default";
     return Stack(children: [
+      Image.asset(
+        background ?? "assets/custom/img/layout.png",
+        fit: BoxFit.fill,
+        height: double.infinity,
+        width: double.infinity,
+      ),
       Padding(
-        padding: EdgeInsets.only(top: Get.height * 0.2),
+        padding: EdgeInsets.only(top: Get.height * multiplier),
         child: Positioned(
           child: child,
         ),
@@ -26,17 +36,11 @@ class ContentLayoutWidget extends StatelessWidget {
         // right: 0,
         child: Stack(
           children: [
-            SvgPicture.asset(
-              "assets/custom/svg/images/gold_black_rectangle.svg",
-              fit: BoxFit.cover,
-              height: Get.height * 0.2,
-              width: double.infinity,
-            ),
             Column(
               children: [
-                SizedBox(height: Get.height * 0.04),
+                SizedBox(height: Get.height * multiplier),
                 Padding(
-                  padding: const EdgeInsets.only(
+                  padding: EdgeInsets.only(
                       top: kDefaultPadding, left: kDefaultPadding),
                   child: Row(
                     children: [
@@ -47,12 +51,12 @@ class ContentLayoutWidget extends StatelessWidget {
                               "assets/custom/svg/images/white_left_bumerang_arrow.svg",
                               color: Colors.white,
                             ),
-                            const SizedBox(width: kDefaultPadding / 2),
-                            SvgPicture.asset(
-                              icons[icon],
-                              width: Get.width * 0.03,
-                              color: Colors.white,
-                            ),
+                            SizedBox(height: Get.height * multiplier),
+                            // SvgPicture.asset(
+                            //   icons[icon],
+                            //   width: Get.width * 0.03,
+                            //   color: Colors.white,
+                            // ),
                           ],
                         ),
                         onPressed: () {

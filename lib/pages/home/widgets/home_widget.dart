@@ -10,41 +10,41 @@ class HomeWidget extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return BodyWidget(
-        background: "assets/custom/svg/images/black_vertical_rectangle.svg",
-        children: [
-          SizedBox(height: Get.height * 0.1),
-          SvgPicture.asset(
-            "assets/custom/svg/images/HomeLogo.svg",
-            width: MediaQuery.of(context).size.width * 0.5,
-          ),
-          SizedBox(height: Get.height * 0.1),
-          Column(
-            children: [
-              SizedBox(height: Get.height * 0.01),
-              GestureDetector(
-                onTap: () {
-                  Get.toNamed("/Signin");
-                },
-                child: SvgPicture.asset(
-                  "assets/custom/svg/images/login_button.svg",
-                  width: MediaQuery.of(context).size.width * 0.5,
-                  // fit: BoxFit.fill,
-                ),
+    var multiplier = MediaQuery.of(context).orientation == Orientation.landscape
+        ? 0.1
+        : 0.09;
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: BodyWidget(background: "assets/custom/img/home.png", children: [
+        SizedBox(height: Get.height * multiplier * 5),
+        Column(
+          children: [
+            SizedBox(height: Get.height * multiplier * 0.1),
+            GestureDetector(
+              onTap: () {
+                Get.toNamed("/Signin");
+              },
+              child: SvgPicture.asset(
+                "assets/custom/svg/images/login_button.svg",
+                width: Get.width * multiplier * 2,
+                // fit: BoxFit.fill,
               ),
-              SizedBox(height: Get.height * 0.01),
-              GestureDetector(
-                onTap: () {
-                  Get.toNamed("/Signup");
-                },
-                child: SvgPicture.asset(
-                  "assets/custom/svg/images/register_button.svg",
-                  width: MediaQuery.of(context).size.width * 0.5,
-                  // fit: BoxFit.fill,
-                ),
+            ),
+            SizedBox(height: Get.height * multiplier * 0.1),
+            GestureDetector(
+              onTap: () {
+                Get.toNamed("/Signup");
+              },
+              child: SvgPicture.asset(
+                "assets/custom/svg/images/register_button.svg",
+                width: Get.width * multiplier * 2,
+                // fit: BoxFit.fill,
               ),
-            ],
-          )
-        ]);
+            ),
+          ],
+        ),
+        SizedBox(height: Get.height * multiplier * 2),
+      ]),
+    );
   }
 }

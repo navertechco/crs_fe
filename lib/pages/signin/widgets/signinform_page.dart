@@ -1,6 +1,7 @@
 // ignore_for_file: unused_field
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/common/constants.dart';
 import '../controller.dart';
@@ -19,47 +20,40 @@ class SigninFormPage extends GetView<StatelessWidget> {
     return Center(
       child: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+          padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
           child: SafeArea(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
-                  "Ingreso",
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline5!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      const Text("¿Usted olvidó su usuario o contraseña ?"),
-                      TextButton(
-                        onPressed: () => Get.toNamed("/Forgot"),
-                        child: const Text(
-                          "!Lo olvidé!",
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: kDefaultPadding * 2),
+                SizedBox(height: kDefaultPadding * 2),
                 SigninForm(formKey: _formKey, state: ctrl!.state),
-                const SizedBox(height: kDefaultPadding * 2),
+                SizedBox(height: kDefaultPadding * 2),
                 SizedBox(
                   width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
+                  child: GestureDetector(
+                    onTap: () {
                       if (_formKey.currentState!.validate()) {
                         _formKey.currentState!.save();
                         ctrl!.onSignin(
                             ctrl!.state.username, ctrl!.state.password);
                       }
                     },
-                    child: const Text("Ingresar"),
+                    child: SvgPicture.asset(
+                      "assets/custom/svg/images/login_button.svg",
+                      width: Get.width * 0.2,
+                      // fit: BoxFit.fill,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: TextButton(
+                    onPressed: () => Get.toNamed("/Forgot"),
+                    child: const Text(
+                      "forgot password?",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.white),
+                    ),
                   ),
                 ),
               ],

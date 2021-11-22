@@ -9,11 +9,10 @@ class ActivitiesPage extends GetView<ActivitiesController> {
   const ActivitiesPage({Key? key}) : super(key: key);
 
   Widget _buildView(BuildContext? _context) {
-    return const ContentLayoutWidget(
-        child: ActivitiesWidget(
-          title: 'Propositos',
-        ),
-        text: "Activities");
+    return ContentLayoutWidget(
+        background: "assets/custom/img/activities.png",
+        child: ActivitiesWidget(),
+        text: "");
   }
 
   @override
@@ -21,7 +20,7 @@ class ActivitiesPage extends GetView<ActivitiesController> {
     return WillPopScope(
         onWillPop: () async => false,
         child: Scaffold(
-            body: _buildView(context),
-            bottomNavigationBar: const BottonNavWidget()));
+          body: _buildView(context),
+        ));
   }
 }

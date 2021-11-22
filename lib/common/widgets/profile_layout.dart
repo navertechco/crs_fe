@@ -9,19 +9,19 @@ class ProfileLayoutWidget extends StatelessWidget {
   final String? text;
   @override
   Widget build(BuildContext context) {
-    return Stack(children: [
+    return Stack(fit: StackFit.expand, children: [
       Expanded(
         // top: 0,
         // right: 0,
-        child: SvgPicture.asset(
-          "assets/custom/svg/images/gold_black_rectangle.svg",
-          fit: BoxFit.cover,
-          height: Get.height * 0.2,
+        child: Image.asset(
+          "assets/custom/img/layout.png",
+          fit: BoxFit.fill,
+          height: double.infinity,
           width: double.infinity,
         ),
       ),
       Padding(
-        padding: const EdgeInsets.only(top: 100.0),
+        padding: EdgeInsets.only(top: 100.0),
         child: Positioned(
           child: child,
         ),

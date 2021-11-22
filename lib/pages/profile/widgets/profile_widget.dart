@@ -54,7 +54,7 @@ class ProfileWidget extends GetView<ProfileController> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(
+            padding: EdgeInsets.only(
               top: kDefaultPadding * 15,
               left: kDefaultPadding * 2,
             ),
@@ -63,7 +63,7 @@ class ProfileWidget extends GetView<ProfileController> {
               children: [
                 SignUpForm(
                     formKey: _formKey, state: SignupState(), profile: true),
-                const SizedBox(height: kDefaultPadding * 2),
+                SizedBox(height: kDefaultPadding * 2),
                 const GradientButtonWidget(label: "Actualizar"),
               ],
             )),
@@ -104,11 +104,10 @@ class GradientButtonWidget extends StatelessWidget {
               width: kDefaultPadding * 10,
             ),
             Padding(
-                padding:
-                    const EdgeInsets.only(top: 8, left: kDefaultPadding * 2.5),
+                padding: EdgeInsets.only(top: 8, left: kDefaultPadding * 2.5),
                 child: Text(
                   label!,
-                  style: const TextStyle(
+                  style:  TextStyle(
                     fontSize: kDefaultPadding,
                     fontWeight: FontWeight.bold,
                   ),

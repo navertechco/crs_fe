@@ -9,7 +9,7 @@ class PurpousesPage extends GetView<PurpousesController> {
   const PurpousesPage({Key? key}) : super(key: key);
 
   Widget _buildView(BuildContext? _context) {
-    return const ContentLayoutWidget(
+    return ContentLayoutWidget(
         child: PurpousesWidget(
           title: 'Propositos',
         ),
