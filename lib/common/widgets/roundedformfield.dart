@@ -21,7 +21,7 @@ class RoundedFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: Get.width * width,
+      width: MediaQuery.of(context).size.width * width,
       padding: EdgeInsets.symmetric(
         horizontal: horizontal,
         vertical: vertical,

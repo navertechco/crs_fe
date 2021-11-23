@@ -40,7 +40,7 @@ class SigninFormPage extends GetView<StatelessWidget> {
                     },
                     child: SvgPicture.asset(
                       "assets/custom/svg/images/login_button.svg",
-                      width: Get.width * 0.2,
+                      width: MediaQuery.of(context).size.width * 0.2,
                       // fit: BoxFit.fill,
                     ),
                   ),

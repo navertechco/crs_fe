@@ -29,7 +29,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
           body: Lottie.asset(
             'assets/splash_lottie.json',
             controller: _controller,
-            height: Get.height * 1,
+            height: MediaQuery.of(context).size.height * 1,
             repeat: true,
             reverse: true,
             animate: true,

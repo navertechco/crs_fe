@@ -16,34 +16,36 @@ class HomeWidget extends GetView<HomeController> {
     return Align(
       alignment: Alignment.bottomCenter,
       child: BodyWidget(background: "assets/custom/img/home.png", children: [
-        SizedBox(height: Get.height * multiplier * 5),
+        SizedBox(height: MediaQuery.of(context).size.height * multiplier * 5),
         Column(
           children: [
-            SizedBox(height: Get.height * multiplier * 0.1),
+            SizedBox(
+                height: MediaQuery.of(context).size.height * multiplier * 0.1),
             GestureDetector(
               onTap: () {
                 Get.toNamed("/Signin");
               },
               child: SvgPicture.asset(
                 "assets/custom/svg/images/login_button.svg",
-                width: Get.width * multiplier * 2,
+                width: MediaQuery.of(context).size.width * multiplier * 2,
                 // fit: BoxFit.fill,
               ),
             ),
-            SizedBox(height: Get.height * multiplier * 0.1),
+            SizedBox(
+                height: MediaQuery.of(context).size.height * multiplier * 0.1),
             GestureDetector(
               onTap: () {
                 Get.toNamed("/Signup");
               },
               child: SvgPicture.asset(
                 "assets/custom/svg/images/register_button.svg",
-                width: Get.width * multiplier * 2,
+                width: MediaQuery.of(context).size.width * multiplier * 2,
                 // fit: BoxFit.fill,
               ),
             ),
           ],
         ),
-        SizedBox(height: Get.height * multiplier * 2),
+        SizedBox(height: MediaQuery.of(context).size.height * multiplier * 2),
       ]),
     );
   }

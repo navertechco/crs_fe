@@ -30,7 +30,8 @@ class _SignUpFormState extends State<SignUpForm> {
     return Form(
       key: widget.formKey,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: Get.width / 6),
+        padding: EdgeInsets.symmetric(
+            horizontal: MediaQuery.of(context).size.width / 6),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [

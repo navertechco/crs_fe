@@ -30,7 +30,9 @@ class ProfilePage extends GetView<ProfileController> {
               children: [
                 _buildView(context),
                 Padding(
-                  padding: EdgeInsets.only(top: 45.0, left: Get.width * 0.85),
+                  padding: EdgeInsets.only(
+                      top: 45.0,
+                      left: MediaQuery.of(context).size.width * 0.85),
                   child: IconButton(
                     icon: CircleAvatar(
                       radius: 50,
@@ -44,9 +46,6 @@ class ProfilePage extends GetView<ProfileController> {
                 ),
               ],
             ),
-            bottomNavigationBar: const BottonNavWidget()
-            
-            
-            ));
+            bottomNavigationBar: const BottonNavWidget()));
   }
 }

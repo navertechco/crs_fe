@@ -6,12 +6,13 @@ import 'widgets/index.dart';
 import 'index.dart';
 
 class DestinationPage extends GetView<DestinationController> {
-  const DestinationPage({Key? key}) : super(key: key);
+  final Object? args;
+  const DestinationPage({Key? key, this.args}) : super(key: key);
 
   Widget _buildView(BuildContext? _context) {
     return ContentLayoutWidget(
         background: "assets/custom/img/destination.png",
-        child: const DestinationWidget(),
+        child: DestinationWidget(args: args),
         text: "<   Destination");
   }
 

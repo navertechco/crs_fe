@@ -26,7 +26,8 @@ class ContentLayoutWidget extends StatelessWidget {
         width: double.infinity,
       ),
       Padding(
-        padding: EdgeInsets.only(top: Get.height * multiplier),
+        padding: EdgeInsets.only(
+            top: MediaQuery.of(context).size.height * multiplier),
         child: Positioned(
           child: child,
         ),
@@ -38,9 +39,11 @@ class ContentLayoutWidget extends StatelessWidget {
           children: [
             Column(
               children: [
-                SizedBox(height: Get.height * multiplier),
+                SizedBox(
+                    height: MediaQuery.of(context).size.height * multiplier),
                 Padding(
-                  padding: EdgeInsets.only(top: 0, left: Get.width * 0.08),
+                  padding: EdgeInsets.only(
+                      top: 0, left: MediaQuery.of(context).size.width * 0.08),
                   child: Row(
                     children: [
                       GestureDetector(

@@ -1,8 +1,5 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-
 
 class GalleryItem extends StatelessWidget {
   final String image;
@@ -16,8 +13,8 @@ class GalleryItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Image.asset(image, height: Get.height * 0.4),
-        SizedBox(width: Get.width * 0.05),
+        Image.asset(image, height: MediaQuery.of(context).size.height * 0.4),
+        SizedBox(width: MediaQuery.of(context).size.width * 0.05),
       ],
     );
   }

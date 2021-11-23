@@ -28,33 +28,33 @@ class BottonNavWidget extends StatelessWidget {
         BottomNavigationBarItem(
           icon: SvgPicture.asset(
               'assets/custom/svg/images/white_rounded_squares.svg',
-              width: Get.width * 0.05),
+              width: MediaQuery.of(context).size.width * 0.05),
           label: ('Dashboard'),
           backgroundColor: Colors.black,
         ),
         BottomNavigationBarItem(
           icon: SvgPicture.asset('assets/custom/svg/images/white_chart.svg',
-              width: Get.width * 0.05),
+              width: MediaQuery.of(context).size.width * 0.05),
           label: ('Reports'),
           backgroundColor: Colors.black,
         ),
         BottomNavigationBarItem(
           icon: SvgPicture.asset(
               'assets/custom/svg/images/white_talking_people.svg',
-              width: Get.width * 0.05),
+              width: MediaQuery.of(context).size.width * 0.05),
           label: ('Talking'),
           backgroundColor: Colors.black,
         ),
         BottomNavigationBarItem(
           icon: SvgPicture.asset(
               'assets/custom/svg/images/white_archive_persone.svg',
-              width: Get.width * 0.05),
+              width: MediaQuery.of(context).size.width * 0.05),
           label: ('History'),
           backgroundColor: Colors.black,
         ),
         BottomNavigationBarItem(
           icon: SvgPicture.asset('assets/custom/svg/images/white_video.svg',
-              width: Get.width * 0.05),
+              width: MediaQuery.of(context).size.width * 0.05),
           label: ('Video'),
           backgroundColor: Colors.black,
         ),

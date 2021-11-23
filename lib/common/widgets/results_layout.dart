@@ -55,15 +55,15 @@ class _ResultsLayoutWidgetState extends State<ResultsLayoutWidget> {
               bottom: kDefaultPadding * 36.5, left: kDefaultPadding * 17),
           child: SvgPicture.asset(
             "assets/custom/svg/images/HeaderLogo.svg",
-            height: Get.height,
+            height: MediaQuery.of(context).size.height,
           ),
         ),
         Positioned(
           top: kDefaultPadding * 4.5,
           left: kDefaultPadding * 1.4,
           child: Container(
-            height: Get.height * 0.8,
-            width: Get.width * 0.9,
+            height: MediaQuery.of(context).size.height * 0.8,
+            width: MediaQuery.of(context).size.width * 0.9,
             child: widget.child,
             decoration: BoxDecoration(
               color: const Color(0xFFF5F5F5),

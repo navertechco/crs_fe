@@ -7,13 +7,13 @@ class ButtonWidget extends GetView<StatelessWidget> {
   final String url;
   final String text;
 
- const ButtonWidget(this.url, this.text, {Key? key}) : super(key: key);
+  const ButtonWidget(this.url, this.text, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
         width: double.infinity,
-        height: Get.height * 0.088,
+        height: MediaQuery.of(context).size.height * 0.088,
         child: Stack(
           children: [
             Positioned(
@@ -23,15 +23,15 @@ class ButtonWidget extends GetView<StatelessWidget> {
                       .headline5!
                       .copyWith(fontWeight: FontWeight.bold)
                       .copyWith(color: Colors.white)),
-              left: Get.width * 0.33,
-              top: Get.height * 0.02,
+              left: MediaQuery.of(context).size.width * 0.33,
+              top: MediaQuery.of(context).size.height * 0.02,
             ),
             Positioned(
               child: IconButton(
                 icon: SvgPicture.asset(
                   "assets/custom/svg/images/ButtonBorder.svg",
                 ),
-                iconSize: Get.height * 0.5,
+                iconSize: MediaQuery.of(context).size.height * 0.5,
                 onPressed: () {
                   Get.toNamed(url);
                 },
