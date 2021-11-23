@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class RoundedFormButton extends StatelessWidget {
   const RoundedFormButton({
@@ -8,16 +7,16 @@ class RoundedFormButton extends StatelessWidget {
     required this.onTap,
     this.horizontal = 30,
     this.vertical = 30,
-    this.fontSize = 18,
-    this.width = 0.3,
-    this.height = 0.03,
+    this.fontSize,
+    this.width = 0.2,
+    this.height = 0.11,
   }) : super(key: key);
 
   final double horizontal;
   final double vertical;
   final double width;
   final double height;
-  final double fontSize;
+  final double? fontSize;
   final String label;
   final void Function()? onTap;
 
@@ -39,7 +38,7 @@ class RoundedFormButton extends StatelessWidget {
           label,
           style: TextStyle(
               color: Colors.white,
-              fontSize: fontSize,
+              fontSize: fontSize ?? MediaQuery.of(context).size.height * 0.025,
               fontWeight: FontWeight.bold),
           textAlign: TextAlign.center,
         ),
