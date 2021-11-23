@@ -1,25 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 class RoundedFormField extends StatelessWidget {
   RoundedFormField(
       {Key? key,
       required this.hintText,
+      this.horizontal = 30,
+      this.vertical = 30,
+      this.width = 0.3,
       required this.onSaved,
       this.password = false})
       : super(key: key);
 
+  final double horizontal;
+  final double vertical;
+  final double width;
   final String hintText;
   final void Function(String?)? onSaved;
   bool password;
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: Get.width * 0.3,
-      padding: const EdgeInsets.symmetric(
-        horizontal: 30,
-        vertical: 30,
+      width: Get.width * width,
+      padding: EdgeInsets.symmetric(
+        horizontal: horizontal,
+        vertical: vertical,
       ),
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(36)),

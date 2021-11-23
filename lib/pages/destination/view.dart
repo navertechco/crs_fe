@@ -12,7 +12,7 @@ class DestinationPage extends GetView<DestinationController> {
     return ContentLayoutWidget(
         background: "assets/custom/img/destination.png",
         child: const DestinationWidget(),
-        text: "");
+        text: "<   Destination");
   }
 
   @override

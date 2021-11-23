@@ -14,3 +14,4 @@ export './textfieldname.dart';
 export './botomnav.dart';
 export './roundedformfield.dart';
 export './roundedformbutton.dart';
+export './galleryitem.dart';

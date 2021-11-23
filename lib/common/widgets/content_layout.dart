@@ -40,35 +40,21 @@ class ContentLayoutWidget extends StatelessWidget {
               children: [
                 SizedBox(height: Get.height * multiplier),
                 Padding(
-                  padding: EdgeInsets.only(
-                      top: kDefaultPadding, left: kDefaultPadding),
+                  padding: EdgeInsets.only(top: 0, left: Get.width * 0.08),
                   child: Row(
                     children: [
-                      TextButton(
-                        child: Row(
-                          children: [
-                            SvgPicture.asset(
-                              "assets/custom/svg/images/white_left_bumerang_arrow.svg",
-                              color: Colors.white,
-                            ),
-                            SizedBox(height: Get.height * multiplier),
-                            // SvgPicture.asset(
-                            //   icons[icon],
-                            //   width: Get.width * 0.03,
-                            //   color: Colors.white,
-                            // ),
-                          ],
-                        ),
-                        onPressed: () {
+                      GestureDetector(
+                        onTap: () {
+                          print("AQUI");
                           Get.back();
                         },
+                        child: Text(text! + "                     ",
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline5!
+                                .copyWith(fontWeight: FontWeight.bold)
+                                .copyWith(color: Colors.white)),
                       ),
-                      Text(text!,
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline5!
-                              .copyWith(fontWeight: FontWeight.bold)
-                              .copyWith(color: Colors.white)),
                     ],
                   ),
                 ),

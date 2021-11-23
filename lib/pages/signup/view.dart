@@ -22,6 +22,6 @@ GetBuilder<SignupController> _buildSignupFormPage(
   return GetBuilder<SignupController>(
     id: 'signup_form_page',
     builder: (controller) => ContentLayoutWidget(
-        child: SignupFormPage(ctrl: controller), text: "Registrarse"),
+        child: SignupFormPage(ctrl: controller), text: "<  Registrarse"),
   );
 }

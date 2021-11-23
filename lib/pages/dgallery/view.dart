@@ -26,16 +26,21 @@ class DGalleryPage extends GetView<DGalleryController> {
           key: _key,
           endDrawer: MenuWidget(),
           body: Stack(
+            alignment: Alignment.center,
             children: [
               _buildView(context),
               Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
                 Padding(
-                  padding: const EdgeInsets.all(80.0),
+                  padding: EdgeInsets.only(
+                      top: Get.height * 0.1,
+                      left: Get.width * 0.05,
+                      bottom: 0,
+                      right: 0),
                   child: Text(
                     "OUR DESTINATION GALLERY",
                     style: TextStyle(
                         color: Colors.white,
-                        fontSize: Get.width * 0.05,
+                        fontSize: Get.width * 0.025,
                         fontWeight: FontWeight.bold),
                   ),
                 )

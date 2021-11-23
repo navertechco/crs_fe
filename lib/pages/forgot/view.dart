@@ -24,7 +24,8 @@ GetBuilder<ForgotController> _buildForgotFormPage(
   return GetBuilder<ForgotController>(
     id: 'forgot_form_page',
     builder: (controller) => ContentLayoutWidget(
-      background:"assets/custom/img/forgot.png",
-        child: ForgotFormPage(ctrl: controller), text: "Forgot"),
+        background: "assets/custom/img/forgot.png",
+        child: ForgotFormPage(ctrl: controller),
+        text: ""),
   );
 }

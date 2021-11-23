@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class RoundedFormButton extends StatelessWidget {
-  const RoundedFormButton({Key? key, required this.label, required this.onTap})
+  const RoundedFormButton({Key? key, required this.label, required this.onTap, this.horizontal=30, this.vertical=30, this.width=0.3})
       : super(key: key);
 
+  final double horizontal;
+  final double vertical;
+  final double width;
   final String label;
   final void Function()? onTap;
 
@@ -13,10 +16,10 @@ class RoundedFormButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: Get.width * 0.3,
-        padding: const EdgeInsets.symmetric(
-          horizontal: 30,
-          vertical: 30,
+        width: Get.width * width,
+        padding:  EdgeInsets.symmetric(
+          horizontal: horizontal,
+          vertical: vertical,
         ),
         decoration: BoxDecoration(
             color: Colors.grey.shade800,

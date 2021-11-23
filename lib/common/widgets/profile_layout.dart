@@ -20,12 +20,7 @@ class ProfileLayoutWidget extends StatelessWidget {
           width: double.infinity,
         ),
       ),
-      Padding(
-        padding: EdgeInsets.only(top: 100.0),
-        child: Positioned(
-          child: child,
-        ),
-      ),
+      child,
     ]);
   }
 }
