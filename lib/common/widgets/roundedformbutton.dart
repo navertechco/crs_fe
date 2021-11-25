@@ -2,17 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:naver_crs/common/constants.dart';
 
 class RoundedFormButton extends StatelessWidget {
-  const RoundedFormButton({
-    Key? key,
-    required this.label,
-    required this.onTap,
-    this.horizontal = 30,
-    this.vertical = 30,
-    this.fontSize,
-    this.width = 0.3,
-    this.height = 0.10,
-  }) : super(key: key);
-
   final double horizontal;
   final double vertical;
   final double width;
@@ -20,6 +9,17 @@ class RoundedFormButton extends StatelessWidget {
   final double? fontSize;
   final String label;
   final void Function()? onTap;
+
+  const RoundedFormButton({
+    Key? key,
+    required this.label,
+    this.horizontal = 10,
+    this.vertical = 15,
+    this.width = 0.3,
+    this.height = 0.10,
+    this.fontSize = 0.1,
+    required this.onTap,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,13 +40,20 @@ class RoundedFormButton extends StatelessWidget {
           alignment: Alignment.topCenter,
           child: Text(
             label,
+            strutStyle: StrutStyle(
+              fontSize: MediaQuery.of(context).size.width /
+                  MediaQuery.of(context).size.height *
+                  isMobile *
+                  16,
+            ),
             style: TextStyle(
                 overflow: TextOverflow.ellipsis,
                 color: Colors.white,
                 fontSize: MediaQuery.of(context).size.width /
                     MediaQuery.of(context).size.height *
                     isMobile *
-                    16,
+                    16 *
+                    0.8,
                 fontWeight: FontWeight.bold),
             textAlign: TextAlign.start,
             overflow: TextOverflow.ellipsis,

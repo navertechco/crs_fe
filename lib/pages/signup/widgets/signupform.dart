@@ -27,151 +27,124 @@ class _SignUpFormState extends State<SignUpForm> {
   @override
   Widget build(BuildContext context) {
     var session = getContext('session');
-    double width = 0.2;
+    var isMobile = isMobileDevice() ? 1 : 2.5;
+    double width = 0.4;
     double height = 0.08;
     return Form(
       key: widget.formKey,
-      child: Padding(
-        padding: EdgeInsets.symmetric(
-            horizontal: MediaQuery.of(context).size.width / 6),
-        child: Column(
-          children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.height / 4.5,
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Spacer(
-                  flex: 1,
+      child: Column(
+        children: [
+          SizedBox(
+            height: MediaQuery.of(context).size.height / 4.5,
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(width: MediaQuery.of(context).size.width * 0.02),
+              SizedBox(
+                child: RoundedFormField(
+                  height: height,
+                  width: width,
+                  onSaved: (value) => widget.state.identification = value!,
+                  hintText: 'Identification',
                 ),
-                SizedBox(
-                  child: RoundedFormField(
-                    height: height,
-                    width: width,
-                    onSaved: (value) => widget.state.identification = value!,
-                    hintText: 'Identification',
-                  ),
+              ),
+              SizedBox(width: MediaQuery.of(context).size.width * 0.02),
+              SizedBox(
+                child: RoundedFormField(
+                  height: height,
+                  width: width,
+                  onSaved: (value) => widget.state.phone = value!,
+                  hintText: 'Phone',
                 ),
-                const Spacer(
-                  flex: 1,
+              ),
+              SizedBox(width: MediaQuery.of(context).size.width * 0.02),
+            ],
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.01,
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(width: MediaQuery.of(context).size.width * 0.02),
+              SizedBox(
+                child: RoundedFormField(
+                  height: height,
+                  width: width,
+                  onSaved: (value) => widget.state.name = value!,
+                  hintText: 'Name',
                 ),
-                SizedBox(
-                  child: RoundedFormField(
-                    height: height,
-                    width: width,
-                    onSaved: (value) => widget.state.phone = value!,
-                    hintText: 'Phone',
-                  ),
+              ),
+              SizedBox(width: MediaQuery.of(context).size.width * 0.02),
+              SizedBox(
+                child: RoundedFormField(
+                  height: height,
+                  width: width,
+                  onSaved: (value) => widget.state.surname = value!,
+                  hintText: 'Surname',
                 ),
-                const Spacer(
-                  flex: 1,
+              ),
+              SizedBox(width: MediaQuery.of(context).size.width * 0.02),
+            ],
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.01,
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(width: MediaQuery.of(context).size.width * 0.02),
+              SizedBox(
+                child: RoundedFormField(
+                  height: height,
+                  width: width,
+                  onSaved: (value) => widget.state.username = value!,
+                  hintText: 'Username',
                 ),
-              ],
-            ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.01,
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Spacer(
-                  flex: 1,
+              ),
+              SizedBox(width: MediaQuery.of(context).size.width * 0.02),
+              SizedBox(
+                child: RoundedFormField(
+                  height: height,
+                  width: width,
+                  onSaved: (value) => widget.state.email = value!,
+                  hintText: 'e-Mail',
                 ),
-                SizedBox(
-                  child: RoundedFormField(
-                    height: height,
-                    width: width,
-                    onSaved: (value) => widget.state.name = value!,
-                    hintText: 'Name',
-                  ),
+              ),
+              SizedBox(width: MediaQuery.of(context).size.width * 0.02),
+            ],
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.01,
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(width: MediaQuery.of(context).size.width * 0.02),
+              SizedBox(
+                child: RoundedFormField(
+                  height: height,
+                  width: width,
+                  onSaved: (value) => widget.state.password = value!,
+                  hintText: 'Password',
+                  password: true,
                 ),
-                const Spacer(
-                  flex: 1,
+              ),
+              SizedBox(width: MediaQuery.of(context).size.width * 0.02),
+              SizedBox(
+                child: RoundedFormField(
+                  height: height,
+                  width: width,
+                  onSaved: (value) => widget.state.confirmation = value!,
+                  hintText: 'Confirmation',
+                  password: true,
                 ),
-                SizedBox(
-                  child: RoundedFormField(
-                    height: height,
-                    width: width,
-                    onSaved: (value) => widget.state.surname = value!,
-                    hintText: 'Surname',
-                  ),
-                ),
-                const Spacer(
-                  flex: 1,
-                ),
-              ],
-            ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.01,
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Spacer(
-                  flex: 1,
-                ),
-                SizedBox(
-                  child: RoundedFormField(
-                    height: height,
-                    width: width,
-                    onSaved: (value) => widget.state.username = value!,
-                    hintText: 'Username',
-                  ),
-                ),
-                const Spacer(
-                  flex: 1,
-                ),
-                SizedBox(
-                  child: RoundedFormField(
-                    height: height,
-                    width: width,
-                    onSaved: (value) => widget.state.email = value!,
-                    hintText: 'e-Mail',
-                  ),
-                ),
-                const Spacer(
-                  flex: 1,
-                ),
-              ],
-            ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.01,
-            ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Spacer(
-                  flex: 1,
-                ),
-                SizedBox(
-                  child: RoundedFormField(
-                    height: height,
-                    width: width,
-                    onSaved: (value) => widget.state.password = value!,
-                    hintText: 'Password',
-                    password: true,
-                  ),
-                ),
-                const Spacer(
-                  flex: 1,
-                ),
-                SizedBox(
-                  child: RoundedFormField(
-                    height: height,
-                    width: width,
-                    onSaved: (value) => widget.state.confirmation = value!,
-                    hintText: 'Confirmation',
-                    password: true,
-                  ),
-                ),
-                const Spacer(
-                  flex: 1,
-                ),
-              ],
-            ),
-          ],
-        ),
+              ),
+              SizedBox(width: MediaQuery.of(context).size.width * 0.02),
+            ],
+          ),
+        ],
       ),
     );
   }

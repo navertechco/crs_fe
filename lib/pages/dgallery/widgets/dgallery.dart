@@ -102,6 +102,7 @@ class GalleryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return Row(
       children: [
         Column(
@@ -122,11 +123,10 @@ class GalleryItem extends StatelessWidget {
               fontSize: 20,
               label: title + " - Read More",
               onTap: () {
-                Navigator.of(context).restorablePush(_modalBuilder,
-                    arguments: {
-                      "title": title,
-                      "image": image,
-                    });
+                Navigator.of(context).restorablePush(_modalBuilder, arguments: {
+                  "title": title,
+                  "image": image,
+                });
               },
             ),
           ],
@@ -140,7 +140,7 @@ class GalleryItem extends StatelessWidget {
 Route<void> _modalBuilder(BuildContext context, Object? arguments) {
   return CupertinoModalPopupRoute<void>(
     builder: (BuildContext context) {
-      return  DestinationPage(args:arguments);
+      return DestinationPage(args: arguments);
     },
   );
 }

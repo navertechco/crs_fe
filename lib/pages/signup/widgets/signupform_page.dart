@@ -23,11 +23,14 @@ class SignupFormPage extends GetView<StatelessWidget> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(height: MediaQuery.of(context).size.height * 0.05),
-              SignUpForm(formKey: _formKey, state: ctrl!.state, profile: false),
+              SizedBox(
+                  child: SignUpForm(
+                      formKey: _formKey, state: ctrl!.state, profile: false),
+                  width: MediaQuery.of(context).size.width * 0.865),
               SizedBox(height: MediaQuery.of(context).size.height * 0.01),
               SizedBox(
                 child: RoundedFormButton(
-                  width: 0.2,
+                  width: 0.4,
                   height: 0.08,
                   fontSize: MediaQuery.of(context).size.height * 0.01,
                   label: "Register",

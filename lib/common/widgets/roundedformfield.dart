@@ -7,22 +7,22 @@ class RoundedFormField extends StatelessWidget {
   final double vertical;
   final double width;
   final double height;
-  final double fontWeight;
+  final double fontSize;
   final String hintText;
+  final void Function(String?)? onSaved;
 
   RoundedFormField(
       {Key? key,
       required this.hintText,
-      this.horizontal = 30,
-      this.vertical = 30,
-      this.width = 1,
-      this.height = 0.1,
-      this.fontWeight = 0.020,
+      this.horizontal = 20,
+      this.vertical = 20,
+      this.width = 0.3,
+      this.height = 0.2,
+      this.fontSize = 0.1,
       required this.onSaved,
       this.password = false})
       : super(key: key);
 
-  final void Function(String?)? onSaved;
   bool password;
   @override
   Widget build(BuildContext context) {
@@ -37,6 +37,8 @@ class RoundedFormField extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(50)),
       child: TextFormField(
+        onSaved: onSaved,
+        obscureText: password,
         cursorColor: Colors.grey,
         style: TextStyle(
           color: Colors.grey,
@@ -46,6 +48,7 @@ class RoundedFormField extends StatelessWidget {
               16,
         ),
         decoration: InputDecoration.collapsed(
+          hintText: hintText,
           hintStyle: TextStyle(
             color: Colors.grey,
             fontSize: MediaQuery.of(context).size.width /
@@ -54,10 +57,9 @@ class RoundedFormField extends StatelessWidget {
                 16,
             decorationStyle: TextDecorationStyle.solid,
           ),
-          hintText: hintText,
+          
         ),
-        onSaved: onSaved,
-        obscureText: password,
+        
       ),
     );
   }
