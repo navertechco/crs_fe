@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:naver_crs/common/constants.dart';
 
 class RoundedFormButton extends StatelessWidget {
   const RoundedFormButton({
@@ -8,8 +9,8 @@ class RoundedFormButton extends StatelessWidget {
     this.horizontal = 30,
     this.vertical = 30,
     this.fontSize,
-    this.width = 0.2,
-    this.height = 0.11,
+    this.width = 0.3,
+    this.height = 0.10,
   }) : super(key: key);
 
   final double horizontal;
@@ -33,14 +34,21 @@ class RoundedFormButton extends StatelessWidget {
         ),
         decoration: BoxDecoration(
             color: Colors.grey.shade800,
-            borderRadius: BorderRadius.circular(36)),
-        child: Text(
-          label,
-          style: TextStyle(
-              color: Colors.white,
-              fontSize: fontSize ?? MediaQuery.of(context).size.height * 0.025,
-              fontWeight: FontWeight.bold),
-          textAlign: TextAlign.center,
+            borderRadius: BorderRadius.circular(50)),
+        child: Align(
+          alignment: Alignment.topCenter,
+          child: Text(
+            label,
+            style: TextStyle(
+                overflow: TextOverflow.ellipsis,
+                color: Colors.white,
+                fontSize: MediaQuery.of(context).size.width /
+                    MediaQuery.of(context).size.height *
+                    16,
+                fontWeight: FontWeight.bold),
+            textAlign: TextAlign.start,
+            overflow: TextOverflow.ellipsis,
+          ),
         ),
       ),
     );

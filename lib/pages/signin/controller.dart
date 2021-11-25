@@ -29,7 +29,7 @@ class SigninController extends GetxController {
 
     if (res['state'] == true) {
       setContext('session', res['data']);
-      Get.toNamed('/Dashboard');
+      Get.toNamed('/Loading');
     }
   }
 

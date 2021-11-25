@@ -20,6 +20,7 @@ var kDefaultPadding = 20.0;
 const kDefaultRadius = BorderRadius.all(Radius.circular(8.0));
 const kFontSize = 72.0;
 var kSize = getContext('size');
+var kWindowRate = Get.width / Get.height;
 
 ///COLORES
 

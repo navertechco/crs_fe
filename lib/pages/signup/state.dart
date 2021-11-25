@@ -5,11 +5,13 @@ class SignupState {
   String? error = "";
   String username = "";
   String identification = "";
+  String name = "";
   String surname = "";
   String lastname = "";
   String email = "";
   String phone = "";
   String password = "";
+  String confirmation = "";
 
   // title
   final _title = "SIGNUP".obs;

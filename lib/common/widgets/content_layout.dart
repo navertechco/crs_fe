@@ -56,6 +56,10 @@ class ContentLayoutWidget extends StatelessWidget {
                                 .textTheme
                                 .headline5!
                                 .copyWith(fontWeight: FontWeight.bold)
+                                .copyWith(
+                                    fontSize:
+                                        MediaQuery.of(context).size.height *
+                                            0.02)
                                 .copyWith(color: Colors.white)),
                       ),
                     ],
