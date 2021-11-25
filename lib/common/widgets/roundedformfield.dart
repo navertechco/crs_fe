@@ -26,6 +26,7 @@ class RoundedFormField extends StatelessWidget {
   bool password;
   @override
   Widget build(BuildContext context) {
+    var isMobile = isMobileDevice() ? 1.2 : 1;
     return Container(
       width: MediaQuery.of(context).size.width * width,
       height: MediaQuery.of(context).size.height * height,
@@ -41,6 +42,7 @@ class RoundedFormField extends StatelessWidget {
           color: Colors.grey,
           fontSize: MediaQuery.of(context).size.width /
               MediaQuery.of(context).size.height *
+              isMobile *
               16,
         ),
         decoration: InputDecoration.collapsed(
@@ -48,6 +50,7 @@ class RoundedFormField extends StatelessWidget {
             color: Colors.grey,
             fontSize: MediaQuery.of(context).size.width /
                 MediaQuery.of(context).size.height *
+                isMobile *
                 16,
             decorationStyle: TextDecorationStyle.solid,
           ),

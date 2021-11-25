@@ -23,6 +23,7 @@ class RoundedFormButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var isMobile = isMobileDevice() ? 2 : 1;
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -44,6 +45,7 @@ class RoundedFormButton extends StatelessWidget {
                 color: Colors.white,
                 fontSize: MediaQuery.of(context).size.width /
                     MediaQuery.of(context).size.height *
+                    isMobile *
                     16,
                 fontWeight: FontWeight.bold),
             textAlign: TextAlign.start,
