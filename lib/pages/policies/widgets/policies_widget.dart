@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,7 +5,6 @@ import 'package:flutter_signature_pad/flutter_signature_pad.dart';
 import 'package:naver_crs/common/index.dart';
 import '../index.dart';
 
-/// hello
 class PoliciesWidget extends GetView<PoliciesController> {
   const PoliciesWidget({Key? key}) : super(key: key);
 
