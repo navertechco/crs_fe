@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import '../index.dart';
 
 /// hello
-class HelloWidget extends GetView<HomeController> {
+class HelloWidget extends GetView<SigninController> {
   @override
   Widget build(BuildContext context) {
     return Center(

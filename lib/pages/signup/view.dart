@@ -29,9 +29,10 @@ GetBuilder<SignupController> _buildSignupFormPage(
               alignment: Alignment.center,
               child: Column(
                 children: [
-                  SizedBox(height: Get.height * 0.3),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.3),
                   Image.asset("assets/custom/img/pipe.png",
-                      width: Get.width * 0.3, height: Get.height * 0.4),
+                      width: MediaQuery.of(context).size.width * 0.3,
+                      height: MediaQuery.of(context).size.height * 0.4),
                 ],
               ),
             ),

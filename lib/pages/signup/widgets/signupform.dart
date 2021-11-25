@@ -150,6 +150,7 @@ class _SignUpFormState extends State<SignUpForm> {
                     width: width,
                     onSaved: (value) => widget.state.password = value!,
                     hintText: 'Password',
+                    password: true,
                   ),
                 ),
                 const Spacer(
@@ -161,6 +162,7 @@ class _SignUpFormState extends State<SignUpForm> {
                     width: width,
                     onSaved: (value) => widget.state.confirmation = value!,
                     hintText: 'Confirmation',
+                    password: true,
                   ),
                 ),
                 const Spacer(

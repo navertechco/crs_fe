@@ -26,8 +26,7 @@ class ContentLayoutWidget extends StatelessWidget {
         ),
       ),
       Padding(
-        padding: EdgeInsets.only(
-            top: MediaQuery.of(context).size.height * multiplier),
+        padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.1),
         child: Positioned(
           child: child,
         ),
@@ -39,8 +38,7 @@ class ContentLayoutWidget extends StatelessWidget {
           children: [
             Column(
               children: [
-                SizedBox(
-                    height: MediaQuery.of(context).size.height * multiplier),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.1),
                 Padding(
                   padding: EdgeInsets.only(
                       top: 0, left: MediaQuery.of(context).size.width * 0.08),

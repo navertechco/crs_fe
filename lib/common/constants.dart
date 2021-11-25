@@ -1,4 +1,7 @@
+import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/shims/dart_ui_real.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:get/get.dart';
 import 'context/index.dart';
@@ -20,7 +23,6 @@ var kDefaultPadding = 20.0;
 const kDefaultRadius = BorderRadius.all(Radius.circular(8.0));
 const kFontSize = 72.0;
 var kSize = getContext('size');
-var kWindowRate = Get.width / Get.height;
 
 ///COLORES
 
@@ -103,3 +105,13 @@ final idValidator = MultiValidator(
     PatternValidator(r'^[0-9]*$', errorText: 'id must have only numbers')
   ],
 );
+
+// ignore: prefer_function_declarations_over_variables
+final Function isMobileDevice = () {
+  if ((defaultTargetPlatform == TargetPlatform.iOS) ||
+      (defaultTargetPlatform == TargetPlatform.android)) {
+    // Some android/ios specific code
+    return true;
+  }
+  return false;
+};
