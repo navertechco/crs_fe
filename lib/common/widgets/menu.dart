@@ -11,7 +11,7 @@ class MenuWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var session = getContext('session');
-    String name = session['surname'] + " " + session['lastname'];
+    String name = session['firstname'] + " " + session['lastname'];
 
     return Drawer(
       elevation: 0.0,

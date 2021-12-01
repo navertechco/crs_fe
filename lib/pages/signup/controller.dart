@@ -26,7 +26,7 @@ class SignupController extends GetxController {
       ctx,
       String identification,
       String username,
-      String surname,
+      String firstname,
       String lastname,
       String email,
       String phone,
@@ -35,7 +35,7 @@ class SignupController extends GetxController {
     state.error = null;
     state.identification = identification;
     state.username = username;
-    state.surname = surname;
+    state.firstname = firstname;
     state.lastname = lastname;
     state.email = email;
     state.phone = phone;
@@ -46,7 +46,7 @@ class SignupController extends GetxController {
       "data": {
         "identification": state.identification,
         "username": state.username,
-        "surname": state.surname,
+        "firstname": state.firstname,
         "lastname": state.lastname,
         "email": state.email,
         "phone": state.phone,

@@ -44,7 +44,7 @@ class SignupFormPage extends GetView<StatelessWidget> {
                           context,
                           ctrl!.state.identification,
                           ctrl!.state.username,
-                          ctrl!.state.surname,
+                          ctrl!.state.firstname,
                           ctrl!.state.lastname,
                           ctrl!.state.email,
                           ctrl!.state.phone,

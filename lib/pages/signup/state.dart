@@ -6,7 +6,7 @@ class SignupState {
   String username = "";
   String identification = "";
   String name = "";
-  String surname = "";
+  String firstname = "";
   String lastname = "";
   String email = "";
   String phone = "";

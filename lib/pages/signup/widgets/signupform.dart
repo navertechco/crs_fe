@@ -81,8 +81,8 @@ class _SignUpFormState extends State<SignUpForm> {
                 child: RoundedFormField(
                   height: height,
                   width: width,
-                  onSaved: (value) => widget.state.surname = value!,
-                  hintText: 'Surname',
+                  onSaved: (value) => widget.state.firstname = value!,
+                  hintText: 'firstname',
                 ),
               ),
               SizedBox(width: MediaQuery.of(context).size.width * 0.02),

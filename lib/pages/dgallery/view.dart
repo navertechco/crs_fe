@@ -17,7 +17,7 @@ class DGalleryPage extends GetView<DGalleryController> {
   @override
   Widget build(BuildContext context) {
     // var session = getContext('session');
-    // String name = session['surname'] + " " + session['lastname'];
+    // String name = session['firstname'] + " " + session['lastname'];
     return WillPopScope(
         onWillPop: () async => false,
         child: Scaffold(
