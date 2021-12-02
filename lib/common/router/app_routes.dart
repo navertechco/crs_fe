@@ -44,12 +44,7 @@ List<dynamic> routes = [
       name: '/Forgot',
       page: () => const ForgotPage(),
       transition: Transition.native,
-      binding: ForgotBinding()),
-  PRegistry(
-      name: '/Purpouses',
-      page: () => const PurpousesPage(),
-      transition: Transition.native,
-      binding: PurpousesBinding()),
+      binding: ForgotBinding()), 
   PRegistry(
       name: '/Destination',
       page: () => const DestinationPage(),
@@ -67,27 +62,27 @@ List<dynamic> routes = [
       binding: DGalleryBinding()),
   PRegistry(
       name: '/Loading',
-      page: () => LoadingPage(),
+      page: () => const LoadingPage(),
       transition: Transition.native,
       binding: LoadingBinding()),
   PRegistry(
       name: '/Congrats',
-      page: () => CongratsPage(),
+      page: () => const CongratsPage(),
       transition: Transition.native,
       binding: CongratsBinding()),
   PRegistry(
       name: '/Resume',
-      page: () => ResumePage(),
+      page: () => const ResumePage(),
       transition: Transition.native,
       binding: ResumeBinding()),
   PRegistry(
       name: '/Arrival',
-      page: () => ArrivalPage(),
+      page: () => const ArrivalPage(),
       transition: Transition.native,
       binding: ArrivalBinding()),
   PRegistry(
       name: '/Customer',
-      page: () => CustomerPage(),
+      page: () => const CustomerPage(),
       transition: Transition.native,
       binding: CustomerBinding()),
 ];

@@ -6,7 +6,7 @@ final ThemeData appThemeData = ThemeData(
   primaryColor: Colors.blueAccent,
   // accentColor: Colors.blue,
   fontFamily: 'Georgia',
-  textTheme: TextTheme(
+  textTheme: const TextTheme(
     headline1: TextStyle(fontSize: kFontSize, fontWeight: FontWeight.bold),
   ),
 );

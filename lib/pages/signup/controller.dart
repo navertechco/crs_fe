@@ -62,24 +62,4 @@ class SignupController extends GetxController {
       onEnd(ctx, res['message'], false);
     }
   }
-
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
 }

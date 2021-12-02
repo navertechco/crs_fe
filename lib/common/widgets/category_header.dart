@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
+import 'package:flutter_svg/flutter_svg.dart'; 
 import 'package:naver_crs/common/constants.dart';
 
 class CategoryHeaderWidget extends StatefulWidget {
