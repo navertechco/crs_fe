@@ -13,10 +13,27 @@ class LoadingWidget extends GetView<LoadingController> {
     var multiplier = MediaQuery.of(context).orientation == Orientation.landscape
         ? 0.1
         : 0.09;
-    return const Align(
+    return Align(
       alignment: Alignment.bottomCenter,
-      child:
-          BodyWidget(background: "assets/custom/img/loading.png", children: []),
+      child: BodyWidget(
+          background: "assets/custom/img/loading.png",
+          child: Stack(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(
+                    left: MediaQuery.of(context).size.width * 0.45,
+                    top: MediaQuery.of(context).size.height * 0.7),
+                child: SizedBox(
+                  height: Get.height * multiplier,
+                  width: Get.width * multiplier,
+                  child: Image.asset(
+                    "assets/custom/img/layout.png",
+                    fit: BoxFit.contain,
+                  ),
+                ),
+              ),
+            ],
+          )),
     );
   }
 }

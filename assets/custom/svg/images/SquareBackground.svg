@@ -6,8 +6,8 @@
         </linearGradient>
     </defs>
     <g data-name="Capa 2">
-        <rect x="1" y="1" width="692.17" height="163.77" rx="60.17"
-            style="opacity:.9;fill:url(#a);stroke-miterlimit:10;stroke-width:2px;"
+        <rect x="1" y="50" width="692.17" height="163.77" rx="60.17"
+            style="fill:url(#a);stroke-miterlimit:10;stroke-width:2px;stroke:url(#a)"
             data-name="Capa 1" />
     </g>
 </svg>

@@ -81,9 +81,11 @@ flutter:
     - assets/
     - assets/custom/
     - assets/custom/img/
-    - assets/custom/png/
-    - assets/custom/svg/icons/
+    - assets/custom/svg/
     - assets/custom/svg/images/
+    - assets/custom/svg/icons/
+    - assets/custom/svg/screens/
+    
   generate: true
   uses-material-design: true
   # fonts:
@@ -101,7 +103,7 @@ flutter_intl:
 flutter_icons:
   android: true
   ios: false
-  image_path_ios: "assets/custom/png/icon.png"
-  image_path_android: "assets/custom/png/icon.png"
-  adaptive_icon_background: "assets/custom/png/icon.png"
-  adaptive_icon_foreground: "assets/custom/png/icon.png"
+  image_path_ios: "assets/custom/img/icon.png"
+  image_path_android: "assets/custom/img/icon.png"
+  adaptive_icon_background: "assets/custom/img/icon.png"
+  adaptive_icon_foreground: "assets/custom/img/icon.png"

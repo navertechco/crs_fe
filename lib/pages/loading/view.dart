@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/common/index.dart';
@@ -10,6 +12,13 @@ class LoadingPage extends GetView<LoadingController> {
 
   // 内容页
   Widget _buildView() {
+    var quote = true;
+    if (!quote) {
+      Timer(Duration(seconds: 3), () {
+        Get.toNamed('/Loading');
+      });
+    }
+
     return const LoadingWidget();
   }
 

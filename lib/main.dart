@@ -21,7 +21,7 @@ void main() {
 
   var pages = AppPages.pages;
   PRegistry registry =
-      routes.toList().firstWhere((element) => element.name == "/Splash");
+      routes.toList().firstWhere((element) => element.name == "/Loading");
 
   runApp(GetMaterialApp(
       scrollBehavior: MyCustomScrollBehavior(),

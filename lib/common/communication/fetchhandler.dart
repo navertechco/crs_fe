@@ -28,7 +28,7 @@ fetchhandler(scheme, host, port, path, metthod, body) async {
       response =
           await _fetch(Uri(scheme: scheme, host: host, port: port, path: path));
     }
-    print(response.body);
+     
     if (response.statusCode == 200) {
       Map<String, dynamic> jsonResponse = json.decode(response.body);
       return jsonResponse;

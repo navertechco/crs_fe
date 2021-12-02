@@ -5,10 +5,13 @@ import 'package:naver_crs/common/constants.dart';
 
 /// Body
 class BodyWidget extends GetView<StatelessWidget> {
-  const BodyWidget({Key? key, this.background, this.children})
+  const BodyWidget(
+      {Key? key, this.background, this.children, this.child, this.type = "png"})
       : super(key: key);
   final String? background;
   final List<Widget>? children;
+  final String type;
+  final Widget? child;
 
   @override
   Widget build(BuildContext context) {
@@ -21,13 +24,21 @@ class BodyWidget extends GetView<StatelessWidget> {
             Stack(
               fit: StackFit.expand,
               children: [
-                Image.asset(
-                  background!,
-                  fit: BoxFit.fill,
-                  height: size.height,
-                ),
+                if (type == "svg")
+                  SvgPicture.asset(
+                    background!,
+                    fit: BoxFit.fill,
+                    height: size.height,
+                  ),
+                if (type != "svg")
+                  Image.asset(
+                    background!,
+                    fit: BoxFit.fill,
+                    height: size.height,
+                  ),
                 SingleChildScrollView(
-                  child: Column(
+                  child: child ??
+                  Column(
                     children: children!,
                   ),
                 ),
