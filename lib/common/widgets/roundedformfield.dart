@@ -1,6 +1,6 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 import 'package:naver_crs/common/constants.dart';
 
 class RoundedFormField extends StatelessWidget {
@@ -17,8 +17,8 @@ class RoundedFormField extends StatelessWidget {
       required this.hintText,
       this.horizontal = 20,
       this.vertical = 20,
-      this.width = 0.3,
-      this.height = 0.2,
+      this.width = 0.2,
+      this.height = 0.05,
       this.fontSize = 0.1,
       required this.onSaved,
       this.password = false})
@@ -36,7 +36,7 @@ class RoundedFormField extends StatelessWidget {
         vertical: vertical,
       ),
       decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(50)),
+          color: Colors.grey, borderRadius: BorderRadius.circular(50)),
       child: TextFormField(
         onSaved: onSaved,
         obscureText: password,
@@ -58,9 +58,7 @@ class RoundedFormField extends StatelessWidget {
                 16,
             decorationStyle: TextDecorationStyle.solid,
           ),
-          
         ),
-        
       ),
     );
   }

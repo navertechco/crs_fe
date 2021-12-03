@@ -24,74 +24,58 @@ class TourParametersForm extends StatefulWidget {
 class _TourParametersFormState extends State<TourParametersForm> {
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.topCenter,
-      child: Row(
-        children: [
-          const Spacer(),
-          const SizedBox(
-            child: SingleChildScrollView(
-              child: Text("Scroll"),
-            ),
+    return Row(
+      children: [
+        const Spacer(),
+        const SizedBox(
+          child: SingleChildScrollView(
+            child: Text("Scroll"),
           ),
-          const Spacer(),
-          const Spacer(),
-          SizedBox(
-            child: Column(children: [
-              Row(
-                children: [
-                  const FormLabelWidget(
-                      label: "Tour information   ",
-                      fontWeight: FontWeight.bold),
-                  SizedBox(width: MediaQuery.of(context).size.width * 0.01)
-                ],
-              ),
-              Row(
-                children: [
-                  const FormLabelWidget(
-                      label: "Destination Country",
-                      fontWeight: FontWeight.normal),
-                  RoundedFormDropdown(
-                    data: [
-                      {"code": "1", "description": "hola"},
-                      {"code": "2", "description": "hola 2"},
-                    ],
-                    hintText: "",
-                    onSaved: (value) {},
-                  )
-                ],
-              ),
-              Row(
-                children: [
-                  const FormLabelWidget(
-                      label: "Trip Purpose                ",
-                      fontWeight: FontWeight.normal),
-                  RoundedFormDropdown(
-                    data: [
-                      {"code": "1", "description": "hola"},
-                      {"code": "2", "description": "hola 2"},
-                    ],
-                    hintText: "",
-                    onSaved: (value) {},
-                  )
-                ],
-              ),
-              Row(
-                children: [
-                  const FormLabelWidget(
-                      label: "Accomodation Type",
-                      fontWeight: FontWeight.normal),
-                  RoundedFormDropdown(
-                    data: [
-                      {"code": "1", "description": "hola"},
-                      {"code": "2", "description": "hola 2"},
-                    ],
-                    hintText: "",
-                    onSaved: (value) {},
-                  )
-                ],
-              ),
-              Row(
+        ),
+        const Spacer(),
+        const Spacer(),
+        const Spacer(),
+        const Spacer(),
+        SizedBox(
+          child: Column(children: [
+            Row(
+              children: [
+                const FormLabelWidget(
+                    label: "Tour information   ", fontWeight: FontWeight.bold),
+                SizedBox(width: MediaQuery.of(context).size.width * 0.01)
+              ],
+            ),
+            CustomFormDropDownField(
+              label: "Destination Country",
+              data: [
+                {"code": "1", "description": "hola"},
+                {"code": "2", "description": "hola 2"},
+              ],
+            ),
+            CustomFormDropDownField(
+              label: "Purpose                        ",
+              data: [
+                {"code": "1", "description": "hola"},
+                {"code": "2", "description": "hola 2"},
+              ],
+            ),
+            CustomFormDropDownField(
+              label: "Accomodation Type",
+              data: [
+                {"code": "1", "description": "hola"},
+                {"code": "2", "description": "hola 2"},
+              ],
+            ),
+            CustomFormDropDownField(
+              label: "Destination                  ",
+              data: [
+                {"code": "1", "description": "hola"},
+                {"code": "2", "description": "hola 2"},
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
                 children: [
                   const FormLabelWidget(
                       label: "Date                                  ",
@@ -99,49 +83,75 @@ class _TourParametersFormState extends State<TourParametersForm> {
                   SizedBox(width: MediaQuery.of(context).size.width * 0.01)
                 ],
               ),
-              Row(
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
                 children: [
                   const FormLabelWidget(
                       label: "Arrival Date                 ",
                       fontWeight: FontWeight.normal),
-                  RoundedFormDatepicker(
-                      onShowPicker: (context, value) async {
-                        return await DateTime.now();
-                      },
-                      format: DateFormat.yMEd()),
+                  SizedBox(width: MediaQuery.of(context).size.width * 0.01),
+                  RoundedFormDatepicker(format: DateFormat.yMEd()),
                 ],
               ),
-              Row(
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
                 children: [
                   const FormLabelWidget(
                       label: "Departure Date         ",
                       fontWeight: FontWeight.normal),
-                  RoundedFormDatepicker(
-                      onShowPicker: (context, value) async {
-                        return await DateTime.now();
-                      },
-                      format: DateFormat.yMEd()),
+                  SizedBox(width: MediaQuery.of(context).size.width * 0.01),
+                  RoundedFormDatepicker(format: DateFormat.yMEd()),
                 ],
               ),
-              Row(
-                children: [
-                  const FormLabelWidget(
-                      label: "Passengers Number",
-                      fontWeight: FontWeight.normal),
-                  SizedBox(width: MediaQuery.of(context).size.width * 0.0001)
-                ],
-              ),
-              Row(
-                children: [
-                  const FormLabelWidget(
-                      label: "Agent 1                           ",
-                      fontWeight: FontWeight.normal),
-                  SizedBox(width: MediaQuery.of(context).size.width * 0.0001)
-                ],
-              ),
-            ]),
-          ),
-          const Spacer(),
+            ),
+            CustomFormDropDownField(
+              label: "Passengers                 ",
+              data: [
+                {"code": "1", "description": "hola"},
+                {"code": "2", "description": "hola 2"},
+              ],
+            ),
+            Row(
+              children: [
+                const FormLabelWidget(
+                    label: "Agent 1                           ",
+                    fontWeight: FontWeight.normal),
+                SizedBox(width: MediaQuery.of(context).size.width * 0.0001)
+              ],
+            ),
+          ]),
+        ),
+        const Spacer(),
+      ],
+    );
+  }
+}
+
+class CustomFormDropDownField extends StatelessWidget {
+  const CustomFormDropDownField({
+    Key? key,
+    required this.label,
+    required this.data,
+  }) : super(key: key);
+  final String label;
+  final List<Map<String, dynamic>> data;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        children: [
+          FormLabelWidget(label: label, fontWeight: FontWeight.normal),
+          SizedBox(width: MediaQuery.of(context).size.width * 0.01),
+          RoundedFormDropdown(
+            data: data,
+            hintText: "",
+            onSaved: (value) {},
+          )
         ],
       ),
     );
@@ -162,10 +172,10 @@ class FormLabelWidget extends StatelessWidget {
       label,
       style: GoogleFonts.poppins(
           textStyle: TextStyle(
-              color: const Color.fromRGBO(0, 0, 1, 0.5),
-              fontSize: MediaQuery.of(context).size.width * 0.018,
-              fontWeight: fontWeight,
-              fontFamily: "ComicSans")),
+        color: const Color.fromRGBO(0, 0, 1, 0.5),
+        fontSize: MediaQuery.of(context).size.width * 0.015,
+        fontWeight: fontWeight,
+      )),
     );
   }
 }

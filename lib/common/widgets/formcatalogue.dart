@@ -19,16 +19,17 @@ class FormCatalogueWidget extends StatelessWidget {
         child: Text(item["description"]),
       ));
     });
-    return DropdownButtonFormField(
-      validator: (value) => value == null ? 'required' : null,
-      autovalidateMode: AutovalidateMode.onUserInteraction,
-      decoration: InputDecoration(
-        hintText: "Choose a Option",
-        label: TextFieldName(text: label),
+    return DropdownButtonHideUnderline(
+      child: DropdownButtonFormField(
+        alignment: Alignment.topCenter,
+        isExpanded: true,
+        validator: (value) => value == null ? 'required' : null,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        decoration: InputDecoration.collapsed(hintText: "Choose a Option"),
+        onSaved: (value) {},
+        onChanged: (value) {},
+        items: items,
       ),
-      onSaved: (value) {},
-      onChanged: (value) {},
-      items: items,
     );
   }
 }

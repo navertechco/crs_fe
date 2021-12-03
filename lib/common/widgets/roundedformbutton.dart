@@ -13,10 +13,10 @@ class RoundedFormButton extends StatelessWidget {
   const RoundedFormButton({
     Key? key,
     required this.label,
-    this.horizontal = 10,
-    this.vertical = 15,
-    this.width = 0.3,
-    this.height = 0.10,
+    this.horizontal = 20,
+    this.vertical = 20,
+    this.width = 0.2,
+    this.height = 0.05,
     this.fontSize = 0.1,
     required this.onTap,
   }) : super(key: key);

@@ -8,24 +8,18 @@ class RoundedFormDatepicker extends StatelessWidget {
   final double horizontal;
   final double vertical;
   final double width;
-  final double height;
-  final double fontSize;
-  final Future<DateTime?> Function(BuildContext, DateTime?) onShowPicker;
+  final double height; 
   final DateFormat format;
 
-  RoundedFormDatepicker(
-      {Key? key,
-      required this.onShowPicker,
-      required this.format,
-      this.horizontal = 20,
-      this.vertical = 20,
-      this.width = 0.3,
-      this.height = 0.2,
-      this.fontSize = 0.1,
-      this.password = false})
-      : super(key: key);
+  const RoundedFormDatepicker({
+    Key? key, 
+    required this.format,
+    this.horizontal = 20,
+    this.vertical = 20,
+    this.width = 0.2,
+    this.height = 0.05,
+  }) : super(key: key);
 
-  bool password;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -36,7 +30,7 @@ class RoundedFormDatepicker extends StatelessWidget {
         vertical: vertical,
       ),
       decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(50)),
+          color: Colors.grey, borderRadius: BorderRadius.circular(50)),
       child: DateTimeField(
         format: format,
         onShowPicker: (context, currentValue) async {
