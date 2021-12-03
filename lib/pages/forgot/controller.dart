@@ -1,3 +1,5 @@
+// ignore_for_file: import_of_legacy_library_into_null_safe
+
 import 'package:get/get.dart';
 import 'package:naver_crs/common/constants.dart';
 import 'package:naver_crs/common/index.dart';
@@ -29,7 +31,7 @@ class ForgotController extends GetxController {
         kDefaultServerPort, kDefaultConnectPath, 'POST', {
       "data": {"email": state.email, "state": "forgot"}
     });
-    print(res);
+    
 
     if (res['state'] == true) {
       onEnd(ctx, res['data'], true);

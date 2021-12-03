@@ -25,7 +25,7 @@ class ProfilePage extends GetView<ProfileController> {
         onWillPop: () async => false,
         child: Scaffold(
             key: _key,
-            endDrawer: MenuWidget(),
+            endDrawer: const MenuWidget(),
             body: Stack(
               children: [
                 _buildView(context),

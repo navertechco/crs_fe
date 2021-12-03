@@ -16,15 +16,8 @@ class ProfileWidget extends GetView<ProfileController> {
   final GlobalKey _formKey = GlobalKey();
 
   @override
-  Widget build(BuildContext context) {
-    var session = getContext('session');
-
-    Rx<Image> avatar = Rx(Image.memory(
-      base64Decode(session['avatar']),
-      width: kDefaultPadding * 10,
-      height: kDefaultPadding * 10,
-    ));
-
+  Widget build(BuildContext context) { 
+ 
     return Center(
       child: Stack(
         children: [

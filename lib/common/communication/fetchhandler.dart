@@ -40,13 +40,4 @@ fetchhandler(scheme, host, port, path, metthod, body) async {
   }
 }
 
-// main() async {
-//   var res = await fectchHandler(
-//       'https', 'reqbin.com', '/echo/post/json', 'POST', {
-//     'Id': '78912',
-//     'Customer': 'Jason Sweet',
-//     'Quantity': '1',
-//     'Price': '18.00'
-//   });
-//   print(res);
-// }
+ 

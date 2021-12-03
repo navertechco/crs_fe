@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
-import 'package:naver_crs/common/constants.dart';
+import 'package:get/get.dart'; 
 
 /// Body
 class BodyWidget extends GetView<StatelessWidget> {

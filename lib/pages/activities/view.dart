@@ -11,7 +11,7 @@ class ActivitiesPage extends GetView<ActivitiesController> {
   Widget _buildView(BuildContext? _context) {
     return ContentLayoutWidget(
         background: "assets/custom/img/activities.png",
-        child: ActivitiesWidget(),
+        child: const ActivitiesWidget(),
         text: "");
   }
 

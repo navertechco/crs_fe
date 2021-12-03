@@ -1,6 +1,6 @@
 // ignore_for_file: library_names
 
-library DGallery;
+library TourParameters;
 
 export './state.dart';
 export './controller.dart';

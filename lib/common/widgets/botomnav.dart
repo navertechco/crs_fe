@@ -10,6 +10,7 @@ class BottonNavWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: non_constant_identifier_names
     List Routes = [
       '/Dashboard',
       '/Profile',

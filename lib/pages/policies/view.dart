@@ -11,7 +11,7 @@ class PoliciesPage extends GetView<PoliciesController> {
   Widget _buildView(BuildContext? _context) {
     return ContentLayoutWidget(
         background: "assets/custom/img/policy.png",
-        child: PoliciesWidget(),
+        child: const PoliciesWidget(),
         text: "Políticas");
   }
 

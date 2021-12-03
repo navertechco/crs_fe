@@ -7,10 +7,10 @@ import 'package:sweetalert/sweetalert.dart';
 
 import 'index.dart';
 
-class SignupController extends GetxController {
-  SignupController();
+class TourParametersController extends GetxController {
+  TourParametersController();
 
-  final state = SignupState();
+  final state = TourParametersState();
   void onEnd(ctx, msg, success) {
     return SweetAlert.show(ctx,
         title: msg,
@@ -24,7 +24,7 @@ class SignupController extends GetxController {
     });
   }
 
-  Future<void> onSignup(
+  Future<void> onTourParameters(
       ctx,
       String identification,
       String username,
@@ -53,7 +53,7 @@ class SignupController extends GetxController {
         "email": state.email,
         "phone": state.phone,
         "password": state.password,
-        "state": "signup"
+        "state": "TourParameters"
       }
     });
     

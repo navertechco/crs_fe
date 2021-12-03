@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -5,7 +7,6 @@ import 'package:naver_crs/common/index.dart';
 import 'package:naver_crs/pages/index.dart';
 import '../index.dart';
 
-// ignore: non_constant_identifier_names, prefer_function_declarations_over_variables
 List<Map<String, dynamic>> galeryData = [
   {
     "image": "assets/custom/img/tucan.png",
@@ -64,13 +65,13 @@ class DGalleryWidget extends GetView<DGalleryController> {
   Widget build(BuildContext context) {
     List<Widget> Gallery = [];
 
-    galeryData.forEach((item) {
+    for (var item in galeryData) {
       Gallery.add(GalleryItem(
         key: Key(item["title"]),
         image: item["image"],
         title: item["title"],
       ));
-    });
+    }
 
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
@@ -110,7 +111,7 @@ class GalleryItem extends StatelessWidget {
             SizedBox(height: MediaQuery.of(context).size.height * 0.3),
             GestureDetector(
               onTap: () {
-                print(key);
+             
               },
               child: Image.asset(image,
                   height: MediaQuery.of(context).size.height * 0.4),

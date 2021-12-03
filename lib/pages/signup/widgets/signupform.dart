@@ -1,9 +1,6 @@
-// ignore_for_file: unused_field
+// ignore_for_file: unused_field, must_be_immutable
 
-import 'package:flutter/material.dart';
-import 'package:form_field_validator/form_field_validator.dart';
-import 'package:get/get.dart';
-import 'package:naver_crs/common/constants.dart';
+import 'package:flutter/material.dart';  
 import 'package:naver_crs/common/index.dart';
 import 'package:naver_crs/common/widgets/index.dart';
 import 'package:naver_crs/pages/signup/state.dart';
@@ -25,9 +22,7 @@ class SignUpForm extends StatefulWidget {
 
 class _SignUpFormState extends State<SignUpForm> {
   @override
-  Widget build(BuildContext context) {
-    var session = getContext('session');
-    var isMobile = isMobileDevice() ? 1 : 2.5;
+  Widget build(BuildContext context) { 
     double width = 0.4;
     double height = 0.08;
     return Form(

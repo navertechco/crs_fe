@@ -1,7 +1,6 @@
 // ignore_for_file: unused_field
 
-import 'package:flutter/material.dart';
-import 'package:form_field_validator/form_field_validator.dart';
+import 'package:flutter/material.dart'; 
 import 'package:naver_crs/common/index.dart';
 import 'package:naver_crs/pages/forgot/state.dart';
 

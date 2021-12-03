@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:flutter/material.dart'; 
 
 class GalleryLayoutWidget extends StatelessWidget {
   const GalleryLayoutWidget({Key? key, this.child, this.text})

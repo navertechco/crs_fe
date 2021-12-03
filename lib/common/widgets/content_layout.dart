@@ -1,6 +1,7 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import '../index.dart';
+import 'package:get/get.dart'; 
 
 class ContentLayoutWidget extends StatelessWidget {
   ContentLayoutWidget(
@@ -12,9 +13,7 @@ class ContentLayoutWidget extends StatelessWidget {
   String? background;
   @override
   Widget build(BuildContext context) {
-    var multiplier = MediaQuery.of(context).orientation == Orientation.landscape
-        ? 0.1
-        : 0.09;
+ 
     return Stack(children: [
       Expanded(
         flex: 1,
@@ -45,8 +44,7 @@ class ContentLayoutWidget extends StatelessWidget {
                   child: Row(
                     children: [
                       GestureDetector(
-                        onTap: () {
-                          print("AQUI");
+                        onTap: () { 
                           Get.back();
                         },
                         child: Text(text! + "                     ",

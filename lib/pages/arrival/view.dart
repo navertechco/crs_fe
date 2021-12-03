@@ -11,7 +11,7 @@ class ArrivalPage extends GetView<ArrivalController> {
   Widget _buildView(BuildContext? _context) {
     return ContentLayoutWidget(
         background: "assets/custom/img/arrival.png",
-        child: ArrivalWidget(),
+        child: const ArrivalWidget(),
         text: "");
   }
 

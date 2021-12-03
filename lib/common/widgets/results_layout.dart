@@ -23,7 +23,7 @@ class _ResultsLayoutWidgetState extends State<ResultsLayoutWidget> {
     return SafeArea(
       child: Stack(children: [
         Padding(
-          padding: EdgeInsets.only(top: 0.0),
+          padding: const EdgeInsets.only(top: 0.0),
           child: SvgPicture.asset(
             "assets/custom/svg/images/GradientPurpleBackground.svg",
             fit: BoxFit.cover,

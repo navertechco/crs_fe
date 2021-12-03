@@ -11,7 +11,7 @@ class CustomerPage extends GetView<CustomerController> {
   Widget _buildView(BuildContext? _context) {
     return ContentLayoutWidget(
         background: "assets/custom/img/customer.png",
-        child: CustomerWidget(),
+        child: const CustomerWidget(),
         text: "");
   }
 

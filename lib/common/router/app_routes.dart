@@ -29,7 +29,6 @@ List<dynamic> routes = [
       page: () => const SplashPage(),
       transition: Transition.native,
       binding: SplashBinding()),
-
   PRegistry(
       name: '/Policies',
       page: () => const PoliciesPage(),
@@ -44,7 +43,7 @@ List<dynamic> routes = [
       name: '/Forgot',
       page: () => const ForgotPage(),
       transition: Transition.native,
-      binding: ForgotBinding()), 
+      binding: ForgotBinding()),
   PRegistry(
       name: '/Destination',
       page: () => const DestinationPage(),
@@ -85,4 +84,9 @@ List<dynamic> routes = [
       page: () => const CustomerPage(),
       transition: Transition.native,
       binding: CustomerBinding()),
+  PRegistry(
+      name: '/TourParameters',
+      page: () => const TourParametersPage(),
+      transition: Transition.native,
+      binding: TourParametersBinding()),
 ];

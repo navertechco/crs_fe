@@ -22,7 +22,7 @@ class ResumePage extends GetView<ResumeController> {
       onWillPop: () async => false,
       child: Scaffold(
           body: SingleChildScrollView(
-        child: Container(
+        child: SizedBox(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height * 2,
             child: _buildView(context, height: 2)),

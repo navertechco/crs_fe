@@ -15,3 +15,4 @@ export './congrats/index.dart';
 export './resume/index.dart';
 export './arrival/index.dart';
 export './customer/index.dart';
+export './tourparameters/index.dart';

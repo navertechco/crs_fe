@@ -22,27 +22,12 @@ class DGalleryPage extends GetView<DGalleryController> {
         onWillPop: () async => false,
         child: Scaffold(
           key: _key,
-          endDrawer: MenuWidget(),
+          endDrawer: const MenuWidget(),
           body: Stack(
             alignment: Alignment.center,
             children: [
               _buildView(context),
-              // Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-              //   Padding(
-              //     padding: EdgeInsets.only(
-              //         top: MediaQuery.of(context).size.height * 0.1,
-              //         left: MediaQuery.of(context).size.width * 0.05,
-              //         bottom: 0,
-              //         right: 0),
-              //     child: Text(
-              //       "OUR DESTINATION GALLERY",
-              //       style: TextStyle(
-              //           color: Colors.white,
-              //           fontSize: MediaQuery.of(context).size.width * 0.025,
-              //           fontWeight: FontWeight.bold),
-              //     ),
-              //   ),
-              // ]),
+            
             ],
           ),
         ));

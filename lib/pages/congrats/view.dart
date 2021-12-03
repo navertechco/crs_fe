@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:naver_crs/common/widgets/index.dart';
-import 'widgets/index.dart';
-
+import 'package:naver_crs/common/widgets/index.dart'; 
 import 'index.dart';
 
 class CongratsPage extends GetView<CongratsController> {
@@ -11,7 +9,7 @@ class CongratsPage extends GetView<CongratsController> {
   Widget _buildView(BuildContext? _context) {
     return ContentLayoutWidget(
         background: "assets/custom/img/congrats.png",
-        child: Text(""),
+        child: const Text(""),
         text: "");
   }
 

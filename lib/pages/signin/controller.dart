@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+ 
 import 'package:get/get.dart';
 import 'package:naver_crs/common/constants.dart';
 import 'package:naver_crs/common/index.dart';
@@ -25,7 +25,7 @@ class SigninController extends GetxController {
         "state": "signin"
       }
     });
-    print(res);
+  
 
     if (res['state'] == true) {
       setContext('session', res['data']);

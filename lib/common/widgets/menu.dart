@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import '../index.dart';
 
 class MenuWidget extends StatelessWidget {
-  MenuWidget({Key? key}) : super(key: key);
+  const MenuWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

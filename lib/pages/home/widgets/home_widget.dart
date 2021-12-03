@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
-import 'package:naver_crs/common/constants.dart';
+import 'package:get/get.dart'; 
 import 'package:naver_crs/common/widgets/body.dart';
 import '../index.dart';
 
@@ -11,9 +10,7 @@ class HomeWidget extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    print("ES MOBIL: ");
-    print(isMobileDevice());
-
+     
     return Align(
       alignment: Alignment.bottomCenter,
       child: BodyWidget(background: "assets/custom/img/home.png", children: [

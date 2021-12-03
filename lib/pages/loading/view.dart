@@ -14,7 +14,7 @@ class LoadingPage extends GetView<LoadingController> {
   Widget _buildView() {
     var quote = true;
     if (!quote) {
-      Timer(Duration(seconds: 3), () {
+      Timer(const Duration(seconds: 3), () {
         Get.toNamed('/Loading');
       });
     }

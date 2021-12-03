@@ -1,10 +1,11 @@
+// ignore_for_file: import_of_legacy_library_into_null_safe
+
 import 'package:get/get.dart';
 import 'package:naver_crs/common/constants.dart';
-import 'package:naver_crs/common/index.dart';
-import 'package:sweetalert/sweetalert.dart';
-import 'dart:io';
+import 'package:naver_crs/common/index.dart'; 
 
 import 'package:pdf/widgets.dart' as pw;
+import 'package:sweetalert/sweetalert.dart';
 import 'index.dart';
 
 class DGalleryController extends GetxController {
@@ -24,7 +25,7 @@ class DGalleryController extends GetxController {
       ),
     );
 
-    final file = File('example.pdf');
+   
     // await file.writeAsBytes(await pdf.save());
   }
 
@@ -42,8 +43,7 @@ class DGalleryController extends GetxController {
     var res = await fetchhandler(kDefaultSchema, kDefaultServer,
         kDefaultServerPort, kDefaultJoinTournmanetPath, 'POST', {
       "data": {"identification": session['identification']}
-    });
-    print(res);
+    }); 
 
     if (res['state'] == true) {
       setContext('polls', res['data']);
