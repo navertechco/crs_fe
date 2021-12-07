@@ -51,6 +51,7 @@ dependencies:
   flutter_html: ^2.1.5
   flutter_signature_pad: ^3.0.0
   datetime_picker_formfield: ^2.0.0
+  carousel_slider: ^4.0.0
   # image_picker: ^0.8.4+4
   # image_picker_for_web: ^2.1.4
 

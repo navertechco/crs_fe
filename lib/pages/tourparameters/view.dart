@@ -23,15 +23,7 @@ GetBuilder<TourParametersController> _buildTourParametersFormPage(
     id: 'TourParameters_form_page',
     builder: (controller) => ContentLayoutWidget(
         background: "assets/custom/img/tourparameters.png",
-        child: Stack(
-          children: [
-            Positioned(
-              top: 0,
-              left: MediaQuery.of(context).size.width * 0.115,
-              child: TourParametersFormPage(ctrl: controller),
-            ),
-          ],
-        ),
+        child: TourParametersFormPage(ctrl: controller),
         text: "              "),
   );
 }
