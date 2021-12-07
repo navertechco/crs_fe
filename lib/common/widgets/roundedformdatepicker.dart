@@ -29,7 +29,7 @@ class RoundedFormDatepicker extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.grey, borderRadius: BorderRadius.circular(50)),
       child: DateTimeField(
-        decoration: InputDecoration.collapsed(hintText: "Choose a Option"),
+        decoration: const InputDecoration.collapsed(hintText: "Choose a Option"),
         format: format,
         onShowPicker: (context, currentValue) async {
           final date = await showDatePicker(

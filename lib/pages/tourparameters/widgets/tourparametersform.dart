@@ -26,11 +26,10 @@ class _TourParametersFormState extends State<TourParametersForm> {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      fit: StackFit.passthrough,
       children: [
         Padding(
           padding: EdgeInsets.only(
-              top: 5, right: MediaQuery.of(context).size.width * 0.325),
+              top: 5, right: MediaQuery.of(context).size.width * 0.3),
           child: CarouselSlider(
             options: CarouselOptions(height: double.infinity),
             items: [1, 2, 3, 4, 5].map((i) {
@@ -44,20 +43,20 @@ class _TourParametersFormState extends State<TourParametersForm> {
           ),
         ),
         Padding(
-          padding: EdgeInsets.only(top: 0, left: 0),
+          padding: const EdgeInsets.only(top: 0, left: 0),
           child: Image.asset(
             "assets/custom/img/lefttourinfo.png",
             height: double.infinity,
           ),
         ),
         Padding(
-          padding: EdgeInsets.only(
-              top: MediaQuery.of(context).size.height * 0.03,
-              left: MediaQuery.of(context).size.width * 0.41),
-          child: Image.asset("assets/custom/img/righttourinfo.png",
-              fit: BoxFit.fitHeight,
-              width: MediaQuery.of(context).size.width * 0.97),
-        ),
+            padding: EdgeInsets.only(
+                top: MediaQuery.of(context).size.height * 0.04,
+                left: MediaQuery.of(context).size.width * 0.44),
+            child: Image.asset(
+              "assets/custom/img/righttourinfo.png",
+              height: MediaQuery.of(context).size.height * 1.5,
+            )),
         const CustomFormInformationWidget(),
       ],
     );

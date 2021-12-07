@@ -21,9 +21,15 @@ GetBuilder<TourParametersController> _buildTourParametersFormPage(
 ) {
   return GetBuilder<TourParametersController>(
     id: 'TourParameters_form_page',
-    builder: (controller) => ContentLayoutWidget(
-        background: "assets/custom/img/tourparameters.png",
-        child: TourParametersFormPage(ctrl: controller),
-        text: "              "),
+    builder: (controller) => SafeArea(
+      child: Scaffold(
+        body: SafeArea(
+          child: ContentLayoutWidget(
+              background: "assets/custom/img/tourparameters.png",
+              child: TourParametersFormPage(ctrl: controller),
+              text: "              "),
+        ),
+      ),
+    ),
   );
 }
