@@ -5,17 +5,17 @@ import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:intl/intl.dart';
 
 class RoundedFormDatepicker extends StatelessWidget {
-  final double horizontal;
-  final double vertical;
+  final double left;
+  final double top;
   final double width;
-  final double height; 
+  final double height;
   final DateFormat format;
 
   const RoundedFormDatepicker({
-    Key? key, 
+    Key? key,
     required this.format,
-    this.horizontal = 20,
-    this.vertical = 20,
+    this.left = 65,
+    this.top = 10,
     this.width = 0.2,
     this.height = 0.05,
   }) : super(key: key);
@@ -25,13 +25,11 @@ class RoundedFormDatepicker extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.width * width,
       height: MediaQuery.of(context).size.height * height,
-      padding: EdgeInsets.symmetric(
-        horizontal: horizontal,
-        vertical: vertical,
-      ),
+      padding: EdgeInsets.only(left: left, top: top),
       decoration: BoxDecoration(
           color: Colors.grey, borderRadius: BorderRadius.circular(50)),
       child: DateTimeField(
+        decoration: InputDecoration.collapsed(hintText: "Choose a Option"),
         format: format,
         onShowPicker: (context, currentValue) async {
           final date = await showDatePicker(

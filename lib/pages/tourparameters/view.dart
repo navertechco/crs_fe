@@ -25,7 +25,11 @@ GetBuilder<TourParametersController> _buildTourParametersFormPage(
         background: "assets/custom/img/tourparameters.png",
         child: Stack(
           children: [
-            TourParametersFormPage(ctrl: controller),
+            Positioned(
+              top: 0,
+              left: MediaQuery.of(context).size.width * 0.115,
+              child: TourParametersFormPage(ctrl: controller),
+            ),
           ],
         ),
         text: "              "),

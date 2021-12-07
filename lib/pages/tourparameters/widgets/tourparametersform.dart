@@ -37,92 +37,65 @@ class _TourParametersFormState extends State<TourParametersForm> {
         const Spacer(),
         const Spacer(),
         SizedBox(
-          child: Column(children: [
-            Row(
-              children: [
-                const FormLabelWidget(
-                    label: "Tour information   ", fontWeight: FontWeight.bold),
-                SizedBox(width: MediaQuery.of(context).size.width * 0.01)
-              ],
+          child: Column(children: const [
+            CustomTitleWidget(
+              width: 0.3,
+              fontWeight: FontWeight.bold,
+              label: "Agent 1",
             ),
-            CustomFormDropDownField(
+            CustomTitleWidget(
+                width: 0.225,
+                fontWeight: FontWeight.bold,
+                label: "Tour information"),
+            CustomFormDropDownFieldWidget(
               label: "Destination Country",
               data: [
-                {"code": "1", "description": "hola"},
-                {"code": "2", "description": "hola 2"},
+                {"code": "1", "description": "Ecuador"},
+                // {"code": "2", "description": "hola 2"},
               ],
             ),
-            CustomFormDropDownField(
+            CustomFormDropDownFieldWidget(
               label: "Purpose                        ",
               data: [
-                {"code": "1", "description": "hola"},
-                {"code": "2", "description": "hola 2"},
+                {"code": "1", "description": "AVENTURE"},
+                {"code": "2", "description": "CULLINARY"},
               ],
             ),
-            CustomFormDropDownField(
+            CustomFormDropDownFieldWidget(
               label: "Accomodation Type",
               data: [
-                {"code": "1", "description": "hola"},
-                {"code": "2", "description": "hola 2"},
+                {"code": "1", "description": "5 STARS"},
+                {"code": "2", "description": "4 STARS"},
               ],
             ),
-            CustomFormDropDownField(
+            CustomFormDropDownFieldWidget(
               label: "Destination                  ",
               data: [
-                {"code": "1", "description": "hola"},
-                {"code": "2", "description": "hola 2"},
+                {"code": "1", "description": "NORTH HIGHLANDS"},
+                {"code": "2", "description": "SOUTH HIGHLANDS"},
+                {"code": "3", "description": "COAST"},
+                {"code": "4", "description": "GALAPAGOS"},
+                {"code": "5", "description": "AMAZON"},
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  const FormLabelWidget(
-                      label: "Date                                  ",
-                      fontWeight: FontWeight.bold),
-                  SizedBox(width: MediaQuery.of(context).size.width * 0.01)
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  const FormLabelWidget(
-                      label: "Arrival Date                 ",
-                      fontWeight: FontWeight.normal),
-                  SizedBox(width: MediaQuery.of(context).size.width * 0.01),
-                  RoundedFormDatepicker(format: DateFormat.yMEd()),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  const FormLabelWidget(
-                      label: "Departure Date         ",
-                      fontWeight: FontWeight.normal),
-                  SizedBox(width: MediaQuery.of(context).size.width * 0.01),
-                  RoundedFormDatepicker(format: DateFormat.yMEd()),
-                ],
-              ),
-            ),
-            CustomFormDropDownField(
+            CustomTitleWidget(
+                width: 0.235,
+                fontWeight: FontWeight.bold,
+                label: "Date                              "),
+            CustomFormDateFieldWidget(label: "Arrival Date                 "),
+            CustomFormDateFieldWidget(label: "Departure Date         "),
+            CustomFormDropDownFieldWidget(
               label: "Passengers                 ",
               data: [
-                {"code": "1", "description": "hola"},
-                {"code": "2", "description": "hola 2"},
+                {"code": "1", "description": "1"},
+                {"code": "2", "description": "2"},
+                {"code": "3", "description": "3-5"},
+                {"code": "4", "description": "6-10"},
+                {"code": "5", "description": "11-20"},
+                {"code": "6", "description": "21-30"},
               ],
             ),
-            Row(
-              children: [
-                const FormLabelWidget(
-                    label: "Agent 1                           ",
-                    fontWeight: FontWeight.normal),
-                SizedBox(width: MediaQuery.of(context).size.width * 0.0001)
-              ],
-            ),
+            CustomKeypadWidget(),
           ]),
         ),
         const Spacer(),
@@ -131,12 +104,89 @@ class _TourParametersFormState extends State<TourParametersForm> {
   }
 }
 
-class CustomFormDropDownField extends StatelessWidget {
-  const CustomFormDropDownField({
+class CustomKeypadWidget extends StatelessWidget {
+  const CustomKeypadWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      top: 0,
+      left: 0,
+      child: Column(
+        children: [
+          SizedBox(height: MediaQuery.of(context).size.height * 0.11),
+          Row(
+            children: [
+              GestureDetector(
+                onTap: () {},
+                child: const CustomFormLabelWidget(
+                    label: "Previous", fontWeight: FontWeight.normal),
+              ),
+              SizedBox(width: MediaQuery.of(context).size.width * 0.225),
+              GestureDetector(
+                onTap: () {},
+                child: const CustomFormLabelWidget(
+                    label: "Next", fontWeight: FontWeight.normal),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class CustomTitleWidget extends StatelessWidget {
+  const CustomTitleWidget({
+    Key? key,
+    required this.label,
+    this.fontWeight = FontWeight.normal,
+    this.width = 0.225,
+  }) : super(key: key);
+  final String label;
+  final FontWeight fontWeight;
+  final double width;
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        CustomFormLabelWidget(label: label, fontWeight: fontWeight),
+        SizedBox(width: MediaQuery.of(context).size.width * width)
+      ],
+    );
+  }
+}
+
+class CustomFormDateFieldWidget extends StatelessWidget {
+  const CustomFormDateFieldWidget({
+    Key? key,
+    required this.label,
+  }) : super(key: key);
+  final String label;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        children: [
+          CustomFormLabelWidget(label: label, fontWeight: FontWeight.normal),
+          SizedBox(width: MediaQuery.of(context).size.width * 0.01),
+          RoundedFormDatepicker(format: DateFormat.yMEd()),
+        ],
+      ),
+    );
+  }
+}
+
+class CustomFormDropDownFieldWidget extends StatelessWidget {
+  const CustomFormDropDownFieldWidget({
     Key? key,
     required this.label,
     required this.data,
   }) : super(key: key);
+
   final String label;
   final List<Map<String, dynamic>> data;
   @override
@@ -145,7 +195,7 @@ class CustomFormDropDownField extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Row(
         children: [
-          FormLabelWidget(label: label, fontWeight: FontWeight.normal),
+          CustomFormLabelWidget(label: label, fontWeight: FontWeight.normal),
           SizedBox(width: MediaQuery.of(context).size.width * 0.01),
           RoundedFormDropdown(
             data: data,
@@ -158,8 +208,8 @@ class CustomFormDropDownField extends StatelessWidget {
   }
 }
 
-class FormLabelWidget extends StatelessWidget {
-  const FormLabelWidget({
+class CustomFormLabelWidget extends StatelessWidget {
+  const CustomFormLabelWidget({
     Key? key,
     required this.label,
     required this.fontWeight,
