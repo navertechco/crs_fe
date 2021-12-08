@@ -10,10 +10,11 @@ class RoundedFormDatepicker extends StatelessWidget {
   final double width;
   final double height;
   final DateFormat format;
-
+  final String hintText;
   const RoundedFormDatepicker({
     Key? key,
     required this.format,
+    this.hintText = "",
     this.left = 65,
     this.top = 10,
     this.width = 0.2,
@@ -29,7 +30,7 @@ class RoundedFormDatepicker extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.grey, borderRadius: BorderRadius.circular(50)),
       child: DateTimeField(
-        decoration: const InputDecoration.collapsed(hintText: "Choose a Option"),
+        decoration: InputDecoration.collapsed(hintText: hintText),
         format: format,
         onShowPicker: (context, currentValue) async {
           final date = await showDatePicker(

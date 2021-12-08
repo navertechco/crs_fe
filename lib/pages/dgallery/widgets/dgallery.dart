@@ -103,16 +103,13 @@ class GalleryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return Row(
       children: [
         Column(
           children: [
             SizedBox(height: MediaQuery.of(context).size.height * 0.3),
             GestureDetector(
-              onTap: () {
-             
-              },
+              onTap: () {},
               child: Image.asset(image,
                   height: MediaQuery.of(context).size.height * 0.4),
             ),
@@ -141,7 +138,7 @@ class GalleryItem extends StatelessWidget {
 Route<void> _modalBuilder(BuildContext context, Object? arguments) {
   return CupertinoModalPopupRoute<void>(
     builder: (BuildContext context) {
-      return DestinationPage(args: arguments);
+      return const DestinationPage();
     },
   );
 }

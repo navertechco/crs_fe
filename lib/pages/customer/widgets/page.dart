@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart'; 
+import 'package:get/get.dart';
 
 import '../index.dart';
+import 'index.dart';
 
 /// hello
 class CustomerWidget extends GetView<CustomerController> {
@@ -11,7 +12,7 @@ class CustomerWidget extends GetView<CustomerController> {
   Widget build(BuildContext context) {
     return const Center(
       child: SingleChildScrollView(
-        child: null,
+        child: CustomCustomerDataForm(),
       ),
     );
   }

@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:naver_crs/common/constants.dart';
 
 class RoundedFormField extends StatelessWidget {
-  final double horizontal;
-  final double vertical;
+  final double left;
+  final double top;
   final double width;
   final double height;
   final double fontSize;
@@ -15,8 +15,8 @@ class RoundedFormField extends StatelessWidget {
   RoundedFormField(
       {Key? key,
       required this.hintText,
-      this.horizontal = 20,
-      this.vertical = 20,
+      this.left = 45,
+      this.top = 10,
       this.width = 0.2,
       this.height = 0.05,
       this.fontSize = 0.1,
@@ -31,10 +31,7 @@ class RoundedFormField extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.width * width,
       height: MediaQuery.of(context).size.height * height,
-      padding: EdgeInsets.symmetric(
-        horizontal: horizontal,
-        vertical: vertical,
-      ),
+      padding: EdgeInsets.only(left: left, top: top),
       decoration: BoxDecoration(
           color: Colors.grey, borderRadius: BorderRadius.circular(50)),
       child: TextFormField(
@@ -42,20 +39,20 @@ class RoundedFormField extends StatelessWidget {
         obscureText: password,
         cursorColor: Colors.grey,
         style: TextStyle(
-          color: Colors.grey,
+          color: Colors.black,
           fontSize: MediaQuery.of(context).size.width /
               MediaQuery.of(context).size.height *
               isMobile *
-              16,
+              10,
         ),
         decoration: InputDecoration.collapsed(
           hintText: hintText,
           hintStyle: TextStyle(
-            color: Colors.grey,
+            color: Colors.black54,
             fontSize: MediaQuery.of(context).size.width /
                 MediaQuery.of(context).size.height *
                 isMobile *
-                16,
+                10,
             decorationStyle: TextDecorationStyle.solid,
           ),
         ),
