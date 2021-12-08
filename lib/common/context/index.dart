@@ -5,11 +5,12 @@ import 'package:property_change_notifier/property_change_notifier.dart';
 
 // ignore: mixin_inherits_from_not_object
 class Context with PropertyChangeNotifier<String> {
-  Map<String, dynamic> context = {
-    "index": 0,
-    "icons": {},
+  RxBool value = true.obs;
+  RxList<dynamic> destinationlist = [].obs;
+  Rx<Map<String, dynamic>> context = Rx({
+    "index": 0.obs,
+    "icons": {}.obs,
     "session": {"avatar": "".obs},
-    "destinationlist": [].obs,
     "destinations": {
       "northern": [
         "assets/custom/img/1x/Recurso 318mdpi.png",
@@ -72,15 +73,15 @@ class Context with PropertyChangeNotifier<String> {
         "assets/custom/img/1x/Recurso 192mdpi.png"
       ],
     }
-  };
+  }.obs);
 
   void set_context(key, value) {
-    context[key] = value;
+    context.value[key] = value;
     notifyListeners(key);
   }
 
   dynamic get_context(key) {
-    return context[key];
+    return context.value[key];
   }
 }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:naver_crs/common/index.dart';
 import 'index.dart';
 
@@ -38,7 +39,12 @@ class CustomParentStarDestinationForm extends StatelessWidget {
                     child: Column(
                   children: [
                     Column(children: destinationlist),
-                    const CustomKeypadWidget(),
+                    Obx(() {
+                      if (globalctx.destinationlist.length > 0) {
+                        return const CustomKeypadWidget();
+                      }
+                      return Text("");
+                    }),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.1,
                     )

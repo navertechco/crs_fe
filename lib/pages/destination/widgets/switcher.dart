@@ -20,26 +20,22 @@ class SwitcherWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     RxBool _showFrontSide = true.obs;
     RxBool _flipXAxis = true.obs;
-    var destinationlist = getContext("destinationlist");
 
     void _changeRotationAxis() {
       _flipXAxis.value = !(_flipXAxis.value);
     }
 
     void _switchCard() {
-      var dest = destinationlist;
+      globalctx.value.value = !globalctx.value.value;
+      RxList dest = globalctx.destinationlist;
       if (_showFrontSide.value) {
-        !destinationlist.value.contains(destination)
-            ? dest.value.add(destination)
-            : null;
-        setContext("destinationlist", dest);
+        !dest.contains(destination) ? dest.add(destination) : null;
       } else {
-        dest.value.remove(destination);
-        setContext("destinationlist", dest);
+        dest.remove(destination);
       }
-      dest = getContext("destinationlist");
-      print(dest);
+      globalctx.destinationlist = dest;
 
+      print(dest);
       _showFrontSide.value = !_showFrontSide.value;
       _changeRotationAxis();
     }
