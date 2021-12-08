@@ -85,6 +85,9 @@ flutter:
     - assets/
     - assets/custom/
     - assets/custom/img/
+    - assets/custom/img/1x/
+    - assets/custom/img/1.5x/
+    - assets/custom/img/0.75x/    
     - assets/custom/svg/
     - assets/custom/svg/images/
     - assets/custom/svg/icons/
