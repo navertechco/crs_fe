@@ -28,11 +28,11 @@ class SwitcherWidget extends StatelessWidget {
     void _switchCard() {
       globalctx.value.value = !globalctx.value.value;
       RxList dest = globalctx.destinationlist;
-      if (_showFrontSide.value) {
-        !dest.contains(destination) ? dest.add(destination) : null;
-      } else {
-        dest.remove(destination);
-      }
+
+      !dest.contains(destination) && _showFrontSide.value
+          ? dest.add(destination)
+          : dest.remove(destination);
+
       globalctx.destinationlist = dest;
 
       print(dest);
