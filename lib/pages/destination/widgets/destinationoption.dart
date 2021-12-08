@@ -9,6 +9,7 @@ class DestinationOptionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GoldBorderWidget(
         child: SwitcherWidget(
+            destination: destination,
             firstchild: FrontOptionWidget(destination: destination),
             seccondchild: RearOptionWidget(destination: destination)));
   }

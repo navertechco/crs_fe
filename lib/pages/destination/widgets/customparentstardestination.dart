@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:naver_crs/common/index.dart';
 import 'index.dart';
 
-
-
 class CustomParentStarDestinationForm extends StatelessWidget {
   const CustomParentStarDestinationForm({
     Key? key,
@@ -11,6 +9,14 @@ class CustomParentStarDestinationForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Map<String, dynamic> destinations = getContext("destinations");
+    List<Widget> destinationlist = [];
+    destinations.keys.forEach((key) {
+      destinationlist.add(
+        CustomStarDestinationForm(destination: key),
+      );
+    });
+
     return Positioned(
       top: MediaQuery.of(context).size.height * 0.18,
       left: MediaQuery.of(context).size.width * 0.55,
@@ -29,17 +35,15 @@ class CustomParentStarDestinationForm extends StatelessWidget {
                       topRight: Radius.circular(60))),
               child: Scrollbar(
                 child: SingleChildScrollView(
-                    child: Column(children: [
-                  const CustomStarDestinationForm(),
-                  const CustomStarDestinationForm(),
-                  const CustomStarDestinationForm(),
-                  const CustomStarDestinationForm(),
-                  const CustomStarDestinationForm(),
-                  const CustomKeypadWidget(),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.1,
-                  )
-                ])),
+                    child: Column(
+                  children: [
+                    Column(children: destinationlist),
+                    const CustomKeypadWidget(),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.1,
+                    )
+                  ],
+                )),
               )),
         ],
       ),

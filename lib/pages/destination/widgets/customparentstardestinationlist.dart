@@ -1,5 +1,6 @@
 // ignore_file: file_names
 import 'package:flutter/material.dart';
+import 'package:naver_crs/common/index.dart';
 
 import 'index.dart';
 
@@ -10,19 +11,15 @@ class CustomParentStarDestinationListForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const DestinationListWidget(
-      children: [
-        DestinationOptionWidget(destination: "northern"),
-        DestinationOptionWidget(destination: "southern"),
-        DestinationOptionWidget(destination: "galapagos"),
-        DestinationOptionWidget(destination: "volcano"),
-        DestinationOptionWidget(destination: "amazon"),
-        DestinationOptionWidget(destination: "quito"),
-        DestinationOptionWidget(destination: "guayaquil"),
-        DestinationOptionWidget(destination: "cuenca"),
-        DestinationOptionWidget(destination: "otavalo"),
-        DestinationOptionWidget(destination: "coast"),
-      ],
+    Map<String, dynamic> destinations = getContext("destinations");
+    List<DestinationOptionWidget> destinationlist = [];
+    destinations.keys.forEach((key) {
+      destinationlist.add(
+        DestinationOptionWidget(destination: key),
+      );
+    });
+    return DestinationListWidget(
+      children: destinationlist,
     );
   }
 }

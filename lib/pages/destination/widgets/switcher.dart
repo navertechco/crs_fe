@@ -2,26 +2,44 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:naver_crs/common/index.dart';
 
 class SwitcherWidget extends StatelessWidget {
   const SwitcherWidget(
-      {Key? key, required this.firstchild, required this.seccondchild})
+      {Key? key,
+      required this.firstchild,
+      required this.seccondchild,
+      required this.destination})
       : super(key: key);
 
   final Widget firstchild;
   final Widget seccondchild;
+  final String destination;
 
   @override
   Widget build(BuildContext context) {
     RxBool _showFrontSide = true.obs;
     RxBool _flipXAxis = true.obs;
+    var destinationlist = getContext("destinationlist");
 
     void _changeRotationAxis() {
       _flipXAxis.value = !(_flipXAxis.value);
     }
 
     void _switchCard() {
-      print("AQUI");
+      var dest = destinationlist;
+      if (_showFrontSide.value) {
+        !destinationlist.value.contains(destination)
+            ? dest.value.add(destination)
+            : null;
+        setContext("destinationlist", dest);
+      } else {
+        dest.value.remove(destination);
+        setContext("destinationlist", dest);
+      }
+      dest = getContext("destinationlist");
+      print(dest);
+
       _showFrontSide.value = !_showFrontSide.value;
       _changeRotationAxis();
     }
