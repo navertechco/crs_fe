@@ -12,22 +12,16 @@ class CustomParentStarDestinationListForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return const DestinationListWidget(
       children: [
-        DestinationOptionWidget(
-            child: RearOptionWidget(destination: "northern")),
-        DestinationOptionWidget(
-            child: RearOptionWidget(destination: "southern")),
-        DestinationOptionWidget(
-            child: RearOptionWidget(destination: "galapagos")),
-        DestinationOptionWidget(
-            child: RearOptionWidget(destination: "volcano")),
-        DestinationOptionWidget(child: RearOptionWidget(destination: "amazon")),
-        DestinationOptionWidget(child: RearOptionWidget(destination: "quito")),
-        DestinationOptionWidget(
-            child: RearOptionWidget(destination: "guayaquil")),
-        DestinationOptionWidget(child: RearOptionWidget(destination: "cuenca")),
-        DestinationOptionWidget(
-            child: RearOptionWidget(destination: "otavalo")),
-        DestinationOptionWidget(child: RearOptionWidget(destination: "coast")),
+        DestinationOptionWidget(destination: "northern"),
+        DestinationOptionWidget(destination: "southern"),
+        DestinationOptionWidget(destination: "galapagos"),
+        DestinationOptionWidget(destination: "volcano"),
+        DestinationOptionWidget(destination: "amazon"),
+        DestinationOptionWidget(destination: "quito"),
+        DestinationOptionWidget(destination: "guayaquil"),
+        DestinationOptionWidget(destination: "cuenca"),
+        DestinationOptionWidget(destination: "otavalo"),
+        DestinationOptionWidget(destination: "coast"),
       ],
     );
   }

@@ -25,8 +25,8 @@ typesetting, Lorem Ipsum has been but also................."""})
         "Southern Highlands"
       ],
       "galapagos": ["assets/custom/img/1x/Recurso 318mdpi.png", "Galápagos"],
-      "volcano": ["assets/custom/img/1x/Recurso 318mdpi.png", "Volcano"],
-      "amazon": ["assets/custom/img/1x/Recurso 318mdpi.png", "Amazon"],
+      "volcano": ["assets/custom/img/1x/Recurso 318mdpi.png", "Volcano "],
+      "amazon": ["assets/custom/img/1x/Recurso 318mdpi.png", "Amazon "],
       "quito": ["assets/custom/img/1x/Recurso 318mdpi.png", "Quito"],
       "guayaquil": ["assets/custom/img/1x/Recurso 318mdpi.png", "Quayaquil"],
       "cuenca": ["assets/custom/img/1x/Recurso 318mdpi.png", "Cuenca"],
@@ -76,7 +76,7 @@ typesetting, Lorem Ipsum has been but also................."""})
       Padding(
         padding: EdgeInsets.only(
           top: MediaQuery.of(context).size.height * 0.04,
-          left: ((37 - title.length) *
+          left: ((36.6 - title.length) *
               (MediaQuery.of(context).size.width) *
               0.018 /
               4.8),
@@ -86,7 +86,7 @@ typesetting, Lorem Ipsum has been but also................."""})
               width: MediaQuery.of(context).size.width * 0.05),
           SizedBox(
             width: title.length * MediaQuery.of(context).size.width * 0.01 +
-                ((37 - title.length) *
+                ((36.6 - title.length) *
                     (MediaQuery.of(context).size.width) *
                     0.018 /
                     20),

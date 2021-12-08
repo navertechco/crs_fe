@@ -1,30 +1,28 @@
 import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class SwitcherWidget extends StatelessWidget {
   const SwitcherWidget(
-      {Key? key,
-      this.title = "",
-      required this.firstchild,
-      required this.seccondchild})
+      {Key? key, required this.firstchild, required this.seccondchild})
       : super(key: key);
 
-  final String title;
   final Widget firstchild;
   final Widget seccondchild;
 
   @override
   Widget build(BuildContext context) {
-    bool _showFrontSide = true;
-    bool _flipXAxis = true;
+    RxBool _showFrontSide = true.obs;
+    RxBool _flipXAxis = true.obs;
 
     void _changeRotationAxis() {
-      _flipXAxis = !_flipXAxis;
+      _flipXAxis.value = !(_flipXAxis.value);
     }
 
     void _switchCard() {
-      _showFrontSide = !_showFrontSide;
+      print("AQUI");
+      _showFrontSide.value = !_showFrontSide.value;
       _changeRotationAxis();
     }
 
@@ -39,13 +37,15 @@ class SwitcherWidget extends StatelessWidget {
           tilt *= isUnder ? -1.0 : 1.0;
           final value =
               isUnder ? min(rotateAnim.value, pi / 2) : rotateAnim.value;
-          return Transform(
-            transform: _flipXAxis
-                ? (Matrix4.rotationY(value)..setEntry(3, 0, tilt))
-                : (Matrix4.rotationX(value)..setEntry(3, 1, tilt)),
-            child: widget,
-            alignment: Alignment.center,
-          );
+          return Obx(() {
+            return Transform(
+              transform: _flipXAxis.value
+                  ? (Matrix4.rotationY(value)..setEntry(3, 0, tilt))
+                  : (Matrix4.rotationX(value)..setEntry(3, 1, tilt)),
+              child: widget,
+              alignment: Alignment.center,
+            );
+          });
         },
       );
     }
@@ -57,7 +57,9 @@ class SwitcherWidget extends StatelessWidget {
           duration: const Duration(milliseconds: 800),
           transitionBuilder: _transitionBuilder,
           layoutBuilder: (widget, list) => Stack(children: [widget!, ...list]),
-          child: _showFrontSide ? firstchild : seccondchild,
+          child: Obx(() {
+            return _showFrontSide.value ? firstchild : seccondchild;
+          }),
           switchInCurve: Curves.easeInBack,
           switchOutCurve: Curves.easeInBack.flipped,
         ),

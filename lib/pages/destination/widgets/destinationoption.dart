@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:naver_crs/common/index.dart';
 import 'index.dart';
 
 class DestinationOptionWidget extends StatelessWidget {
-  const DestinationOptionWidget({Key? key, required this.child})
+  const DestinationOptionWidget({Key? key, required this.destination})
       : super(key: key);
-  final Widget child;
+  final String destination;
   @override
   Widget build(BuildContext context) {
-    return GoldBorderWidget(child:child);
+    return GoldBorderWidget(
+        child: SwitcherWidget(
+            firstchild: FrontOptionWidget(destination: destination),
+            seccondchild: RearOptionWidget(destination: destination)));
   }
 }
-
-
