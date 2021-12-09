@@ -5,16 +5,17 @@ class GoldBorderWidget extends StatelessWidget {
   final Widget child;
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.0),
-      child: Stack(
-        children: [
-          Image.asset("assets/custom/img/1x/Recurso_373mdpi.png",
-              width: MediaQuery.of(context).size.width * 0.27,
-              height: MediaQuery.of(context).size.height * 0.3),
-          child
-        ],
-      ),
-    );
+    return Container(
+        width: MediaQuery.of(context).size.width * 0.4,
+        height: MediaQuery.of(context).size.height * 0.11,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: Image.asset(
+              "assets/custom/img/1x/Recurso_211mdpi.png",
+              fit: BoxFit.fill,
+            ).image,
+          ),
+        ),
+        child: Center(child: child));
   }
 }

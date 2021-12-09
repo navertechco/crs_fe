@@ -14,7 +14,7 @@ class Context with PropertyChangeNotifier<String> {
     "session": {"avatar": "".obs},
     "experiences": {
       "northern": [
-        "assets/custom/img/1x/Recurso_374mdpi.png",
+        "assets/custom/img/1x/Recurso_318mdpi.png",
         "Northern Highlands",
         "assets/custom/img/1x/Recurso_309mdpi.png",
         "assets/custom/img/1x/Recurso_308mdpi.png"
@@ -68,7 +68,7 @@ class Context with PropertyChangeNotifier<String> {
         "assets/custom/img/1x/Recurso_201mdpi.png"
       ],
       "coast": [
-        "assets/custom/img/1x/Recurso_373mdpi.png",
+        "assets/custom/img/1x/Recurso_191mdpi.png",
         "Coast",
         "assets/custom/img/1x/Recurso_374mdpi.png",
         "assets/custom/img/1x/Recurso_192mdpi.png"
