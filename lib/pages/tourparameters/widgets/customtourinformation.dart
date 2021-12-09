@@ -1,6 +1,3 @@
-
-
-
 import 'package:flutter/material.dart';
 import 'package:naver_crs/common/index.dart';
 
@@ -75,7 +72,7 @@ class CustomTourInformationForm extends StatelessWidget {
               {"code": "6", "description": "21-30"},
             ],
           ),
-          CustomKeypadWidget(),
+          CustomKeypadWidget(width: 0.2),
         ]),
       ),
     );

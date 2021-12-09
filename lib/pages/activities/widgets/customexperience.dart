@@ -5,14 +5,14 @@ import 'package:naver_crs/common/index.dart';
 class CustomExperienceForm extends StatelessWidget {
   const CustomExperienceForm({
     Key? key,
-    required this.destination,
+    required this.experience,
   }) : super(key: key);
-  final String destination;
+  final String experience;
   @override
   Widget build(BuildContext context) {
-    var destinations = getContext('destinations');
+    var experiences = getContext('experiences');
     return Obx(() {
-      if (globalctx.destinationlist.contains(destination)) {
+      if (globalctx.experiencelist.contains(experience)) {
         return SizedBox(
           child: Scrollbar(
               child: SingleChildScrollView(
@@ -20,7 +20,7 @@ class CustomExperienceForm extends StatelessWidget {
               CustomTitleWidget(
                 width: 0.2,
                 fontWeight: FontWeight.bold,
-                label: "${destinations[destination][1]}",
+                label: "${experiences[experience][1]}",
               ),
               const CustomFormMultiDropDownFieldWidget(
                 // label: "Exploration Days",

@@ -2,19 +2,15 @@ import 'package:flutter/material.dart';
 import './index.dart';
 
 class ExpereinceOptionWidget extends StatelessWidget {
-  const ExpereinceOptionWidget({Key? key, required this.destination})
+  const ExpereinceOptionWidget({Key? key, required this.experience})
       : super(key: key);
-  final String destination;
+  final String experience;
   @override
   Widget build(BuildContext context) {
     return GoldBorderWidget(
         child: SwitcherWidget(
-            destination: destination,
-            firstchild: FrontOptionWidget(destination: destination),
-            seccondchild: RearOptionWidget(destination: destination)
-            
-            
-            
-            ));
+            experience: experience,
+            firstchild: FrontOptionWidget(experience: experience),
+            seccondchild: RearOptionWidget(experience: experience)));
   }
 }

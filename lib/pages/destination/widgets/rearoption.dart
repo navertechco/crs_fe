@@ -17,21 +17,21 @@ typesetting, Lorem Ipsum has been but also................."""})
   Widget build(BuildContext context) {
     Map<String, dynamic> destinations = {
       "northern": [
-        "assets/custom/img/1x/Recurso 318mdpi.png",
+        "assets/custom/img/1x/Recurso_318mdpi.png",
         "Northern Highlands"
       ],
       "southern": [
-        "assets/custom/img/1x/Recurso 318mdpi.png",
+        "assets/custom/img/1x/Recurso_318mdpi.png",
         "Southern Highlands"
       ],
-      "galapagos": ["assets/custom/img/1x/Recurso 318mdpi.png", "Galápagos"],
-      "volcano": ["assets/custom/img/1x/Recurso 318mdpi.png", "Volcano "],
-      "amazon": ["assets/custom/img/1x/Recurso 318mdpi.png", "Amazon "],
-      "quito": ["assets/custom/img/1x/Recurso 318mdpi.png", "Quito"],
-      "guayaquil": ["assets/custom/img/1x/Recurso 318mdpi.png", "Quayaquil"],
-      "cuenca": ["assets/custom/img/1x/Recurso 318mdpi.png", "Cuenca"],
-      "otavalo": ["assets/custom/img/1x/Recurso 318mdpi.png", "Otavalo"],
-      "coast": ["assets/custom/img/1x/Recurso 318mdpi.png", "Coast"],
+      "galapagos": ["assets/custom/img/1x/Recurso_318mdpi.png", "Galápagos"],
+      "volcano": ["assets/custom/img/1x/Recurso_318mdpi.png", "Volcano "],
+      "amazon": ["assets/custom/img/1x/Recurso_318mdpi.png", "Amazon "],
+      "quito": ["assets/custom/img/1x/Recurso_318mdpi.png", "Quito"],
+      "guayaquil": ["assets/custom/img/1x/Recurso_318mdpi.png", "Quayaquil"],
+      "cuenca": ["assets/custom/img/1x/Recurso_318mdpi.png", "Cuenca"],
+      "otavalo": ["assets/custom/img/1x/Recurso_318mdpi.png", "Otavalo"],
+      "coast": ["assets/custom/img/1x/Recurso_318mdpi.png", "Coast"],
     };
     String title = destinations[destination][1];
     return Stack(children: [
@@ -82,7 +82,7 @@ typesetting, Lorem Ipsum has been but also................."""})
               4.8),
         ),
         child: Row(children: [
-          Image.asset("assets/custom/img/1x/Recurso 295mdpi.png",
+          Image.asset("assets/custom/img/1x/Recurso_295mdpi.png",
               width: MediaQuery.of(context).size.width * 0.05),
           SizedBox(
             width: title.length * MediaQuery.of(context).size.width * 0.01 +
@@ -91,7 +91,7 @@ typesetting, Lorem Ipsum has been but also................."""})
                     0.018 /
                     20),
           ),
-          Image.asset("assets/custom/img/1x/Recurso 294mdpi.png",
+          Image.asset("assets/custom/img/1x/Recurso_294mdpi.png",
               width: MediaQuery.of(context).size.width * 0.05),
         ]),
       ),

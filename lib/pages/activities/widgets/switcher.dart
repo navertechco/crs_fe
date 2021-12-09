@@ -9,12 +9,12 @@ class SwitcherWidget extends StatelessWidget {
       {Key? key,
       required this.firstchild,
       required this.seccondchild,
-      required this.destination})
+      required this.experience})
       : super(key: key);
 
   final Widget firstchild;
   final Widget seccondchild;
-  final String destination;
+  final String experience;
 
   @override
   Widget build(BuildContext context) {
@@ -27,13 +27,13 @@ class SwitcherWidget extends StatelessWidget {
 
     void _switchCard() {
       globalctx.value.value = !globalctx.value.value;
-      RxList dest = globalctx.destinationlist;
+      RxList dest = globalctx.experiencelist;
 
-      !dest.contains(destination) && _showFrontSide.value
-          ? dest.add(destination)
-          : dest.remove(destination);
+      !dest.contains(experience) && _showFrontSide.value
+          ? dest.add(experience)
+          : dest.remove(experience);
 
-      globalctx.destinationlist = dest;
+      globalctx.experiencelist = dest;
 
       // print(dest);
       _showFrontSide.value = !_showFrontSide.value;

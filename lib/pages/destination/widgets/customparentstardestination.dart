@@ -41,7 +41,7 @@ class CustomParentStarDestinationForm extends StatelessWidget {
                     Column(children: destinationlist),
                     Obx(() {
                       if (globalctx.destinationlist.isNotEmpty) {
-                        return const CustomKeypadWidget();
+                        return const CustomKeypadWidget(width:0.1);
                       }
                       return const Text("");
                     }),

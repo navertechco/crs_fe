@@ -6,5 +6,4 @@ export './frontoption.dart';
 export './rearoption.dart';
 export './switcher.dart';
 export './experienceoption.dart';
-export './customexperience.dart';
-export './customparentexperience.dart';
+export './customexperience.dart'; 

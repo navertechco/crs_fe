@@ -7,11 +7,11 @@ class GoldBorderWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Image.asset("assets/custom/img/1x/Recurso 291mdpi.png"),
+        Image.asset("assets/custom/img/1x/Recurso_291mdpi.png"),
         Padding(
           padding: const EdgeInsets.all(7),
           child: Image.asset(
-            "assets/custom/img/1x/Recurso 197mdpi.png",
+            "assets/custom/img/1x/Recurso_197mdpi.png",
             width: MediaQuery.of(context).size.width * 0.05,
           ),
         ),
@@ -20,7 +20,7 @@ class GoldBorderWidget extends StatelessWidget {
               left: MediaQuery.of(context).size.width * 0.3627,
               top: MediaQuery.of(context).size.height * 0.07),
           child: Image.asset(
-            "assets/custom/img/1x/Recurso 198mdpi.png",
+            "assets/custom/img/1x/Recurso_198mdpi.png",
             width: MediaQuery.of(context).size.width * 0.05,
           ),
         ),
