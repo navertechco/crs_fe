@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/common/index.dart';
-import 'index.dart';
+import './index.dart';
 
 class CustomParentStarDestinationForm extends StatelessWidget {
   const CustomParentStarDestinationForm({
@@ -14,7 +14,7 @@ class CustomParentStarDestinationForm extends StatelessWidget {
     List<Widget> destinationlist = [];
     for (var key in destinations.keys) {
       destinationlist.add(
-        CustomStarDestinationForm(destination: key),
+        CustomExperienceForm(destination: key),
       );
     }
 

@@ -14,7 +14,7 @@ class CustomParentStarDestinationForm extends StatelessWidget {
     List<Widget> destinationlist = [];
     for (var key in destinations.keys) {
       destinationlist.add(
-        CustomStarDestinationForm(destination: key),
+        CustomExperienceForm(destination: key),
       );
     }
 

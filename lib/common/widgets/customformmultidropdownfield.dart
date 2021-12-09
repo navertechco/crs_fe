@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../index.dart';
 
-class CustomFormDropDownFieldWidget extends StatelessWidget {
-  const CustomFormDropDownFieldWidget({
+class CustomFormMultiDropDownFieldWidget extends StatelessWidget {
+  const CustomFormMultiDropDownFieldWidget({
     Key? key,
     this.label = "",
     this.hintText,
@@ -21,7 +21,7 @@ class CustomFormDropDownFieldWidget extends StatelessWidget {
         children: [
           CustomFormLabelWidget(label: label, fontWeight: FontWeight.normal),
           SizedBox(width: MediaQuery.of(context).size.width * 0.01),
-          RoundedFormDropdown(
+          RoundedFormMultiDropdown(
             data: data,
             hintText: hintText,
             label: label,

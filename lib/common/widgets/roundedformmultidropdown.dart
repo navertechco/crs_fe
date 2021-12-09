@@ -1,8 +1,8 @@
 // ignore_for_file: must_be_immutable
 import 'package:flutter/material.dart';
-import '../index.dart';
+import 'package:multi_select_flutter/multi_select_flutter.dart';
 
-class RoundedFormDropdown extends StatelessWidget {
+class RoundedFormMultiDropdown extends StatelessWidget {
   final double left;
   final double top;
   final double width;
@@ -13,12 +13,12 @@ class RoundedFormDropdown extends StatelessWidget {
   final void Function(String?)? onSaved;
   final List<Map<String, dynamic>> data;
 
-  RoundedFormDropdown(
+  RoundedFormMultiDropdown(
       {Key? key,
       required this.data,
       this.hintText,
       this.label,
-      this.left = 65,
+      this.left = 0,
       this.top = 8,
       this.width = 0.2,
       this.height = 0.05,
@@ -32,11 +32,19 @@ class RoundedFormDropdown extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width * width,
-      height: MediaQuery.of(context).size.height * height,
       padding: EdgeInsets.only(left: left, top: top),
-      decoration: BoxDecoration(
-          color: Colors.grey, borderRadius: BorderRadius.circular(50)),
-      child: FormCatalogueWidget(data: data, hintText: hintText),
+      child: MultiSelectDialogField(
+        title: Text(hintText!),
+        // searchHint: hintText,
+        buttonText: Text(hintText!,
+            style:
+                TextStyle(fontSize: MediaQuery.of(context).size.height * 0.02)),
+        decoration: BoxDecoration(
+            color: Colors.grey, borderRadius: BorderRadius.circular(50)),
+        items: data.map((e) => MultiSelectItem(e, e["description"]!)).toList(),
+        listType: MultiSelectListType.CHIP,
+        onConfirm: (values) {},
+      ),
     );
   }
 }

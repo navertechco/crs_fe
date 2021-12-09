@@ -13,11 +13,11 @@ class CustomParentStarDestinationListForm extends StatelessWidget {
   Widget build(BuildContext context) {
     Map<String, dynamic> destinations = getContext("destinations");
     List<DestinationOptionWidget> destinationlist = [];
-    destinations.keys.forEach((key) {
+    for (var key in destinations.keys) {
       destinationlist.add(
         DestinationOptionWidget(destination: key),
       );
-    });
+    }
     return DestinationListWidget(
       children: destinationlist,
     );

@@ -1,6 +1,6 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 
 class ContentLayoutWidget extends StatelessWidget {
   ContentLayoutWidget(
@@ -12,7 +12,7 @@ class ContentLayoutWidget extends StatelessWidget {
   String? background;
   @override
   Widget build(BuildContext context) {
-    return Stack(children: [
+    return Stack(fit: StackFit.expand, children: [
       Expanded(
         child: Image.asset(background ?? "assets/custom/img/layout.png",
             fit: BoxFit.fill, height: double.infinity),

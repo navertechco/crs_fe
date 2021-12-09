@@ -10,7 +10,6 @@ class CustomStarDestinationForm extends StatelessWidget {
   final String destination;
   @override
   Widget build(BuildContext context) {
-   
     var destinations = getContext('destinations');
     return Column(
       children: [
@@ -34,7 +33,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                     label: destinations[destination][1],
                   ),
                   const CustomFormDropDownFieldWidget(
-                    label: "Exploration Days       ",
+                    label: "Exploration Days     ",
                     data: [
                       {"code": "1", "description": "1"},
                       {"code": "2", "description": "2"},
@@ -44,25 +43,40 @@ class CustomStarDestinationForm extends StatelessWidget {
                       // {"code": "2", "description": "hola 2"},
                     ],
                   ),
-                  const CustomTitleWidget(
-                      width: 0.225,
-                      fontWeight: FontWeight.bold,
-                      label: "  Exploration Mode"),
+                  SizedBox(
+                    child: (() {
+                      if (destination == "galapagos") {
+                        return const CustomFormDropDownFieldWidget(
+                          label: "Exploration Mode   ",
+                          data: [
+                            {"code": "1", "description": "Cruiser"},
+                            {"code": "2", "description": "Hop Island"},
+                            {"code": "3", "description": "Mixed"},
+                          ],
+                        );
+                      }
+                    })(),
+                  ),
                   const CustomFormDropDownFieldWidget(
-                    label: "    Purpose                    ",
+                    // label: "Exploration Days",
+                    label: "Destination Option",
                     data: [
-                      {"code": "1", "description": "AVENTURE"},
-                      {"code": "2", "description": "CULLINARY"},
+                      {"code": "1", "description": "All included"},
+                      {"code": "2", "description": "Leisure Time"},
+                      {"code": "3", "description": "Foods Included"},
+                      {"code": "4", "description": "Open Credit"},
                     ],
                   ),
-                  const CustomTitleWidget(
-                      width: 0.2,
-                      fontWeight: FontWeight.bold,
-                      label: "  Destination options           "),
-                  const CustomTitleWidget(
-                      width: 0.2,
-                      fontWeight: FontWeight.bold,
-                      label: "  Travel Rithm           "),
+                  const CustomFormDropDownFieldWidget(
+                    // label: "Exploration Days",
+                    label: "Travel Rithm             ",
+                    data: [
+                      {"code": "1", "description": "Soft"},
+                      {"code": "2", "description": "Medium"},
+                      {"code": "3", "description": "Hard"},
+                      // {"code": "2", "description": "hola 2"},
+                    ],
+                  ),
                   const Divider(color: Color.fromARGB(255, 0, 0, 0)),
                 ]),
               ),
@@ -75,6 +89,3 @@ class CustomStarDestinationForm extends StatelessWidget {
     );
   }
 }
-  
-  
-
