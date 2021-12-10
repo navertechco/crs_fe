@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:naver_crs/common/index.dart';
 
 import '../index.dart';
@@ -101,8 +102,72 @@ class ResumeWidget extends GetView<ResumeController> {
           "description": "Contact Agent",
           "value": "Jose Cuevas"
         },
+      ],
+      "arrival": {"port": "Quito", "date": "09-01-2022"},
+      "departure": {"port": "Guayaquil", "date": "14-01-2022"},
+      "destinations": [
+        {
+          "destination_name": "cuenca",
+          "destination_description": "Cuenca",
+          "days": [
+            {
+              "description": "lorem ipsum dolor sit amet, consectetur",
+              "date": "10-01-2022",
+              "experiences": [
+                {
+                  "code": "Visit to plaza",
+                  "description": "this visit is the most......",
+                },
+                {
+                  "code": "Visit to Restaruant",
+                  "description": "this visit is the most......",
+                },
+              ]
+            },
+            {
+              "description": "lorem ipsum dolor sit amet, consectetur",
+              "date": "11-01-2022",
+              "experiences": [
+                {
+                  "code": "Visit to Museum",
+                  "description": "lorem ipsum dolor sit amet, consectetur",
+                },
+              ]
+            },
+            {
+              "description": "lorem ipsum dolor sit amet, consectetur",
+              "date": "12-01-2022",
+              "experiences": [
+                {
+                  "code": "Visit to disco",
+                  "description": "lorem ipsum dolor sit amet, consectetur",
+                },
+                {
+                  "code": "Visit to Restaurant",
+                  "description": "lorem ipsum dolor sit amet, consectetur",
+                },
+              ]
+            },
+            {
+              "description": "lorem ipsum dolor sit amet, consectetur",
+              "date": "13-01-2022",
+              "experiences": [
+                {
+                  "code": "accomodation_type",
+                  "description": "Accomodation Type",
+                },
+              ]
+            }
+          ]
+        }
       ]
     };
+
+    List<CustomFormDayWidget> daylist = [];
+
+    for (int i = 0; i < data["destinations"][0].length; i++) {
+      daylist.add(CustomFormDayWidget(data: data, indexes: [0, i]));
+    }
 
     return Center(
       child: SingleChildScrollView(
@@ -112,24 +177,132 @@ class ResumeWidget extends GetView<ResumeController> {
           const CustomFormTitleWidget(level: 1, label: "Tour Information"),
           CustomFormHeaderWidget(data: chunkArray(data["tour"], 3)),
           const CustomFormTitleWidget(level: 2, label: "Itinerary"),
-          const CustomFormTitleWidget(
-              level: 3, label: "Arrival#####Date: 09-01-22"),
+          CustomFormTitleWidget(
+              level: 3,
+              label:
+                  "Arrival: ${data['arrival']['port'].toString()} #####Date: " +
+                      data['arrival']['port'].toString()),
           const CustomFormTitleWidget(
               level: 3,
               label:
-                  "Star Destination:#Cuenca#(Between: 10-01-22 and 13-01-22)"),
-          const CustomFormTitleWidget(
-              level: 4, label: "Day: 1#####Date: 10-01-22"),
-          const CustomFormTitleWidget(
-              level: 4, label: "Day: 2#####Date: 11-01-22"),
-          const CustomFormTitleWidget(
-              level: 4, label: "Day: 3#####Date: 12-01-22"),
-          const CustomFormTitleWidget(
-              level: 4, label: "Day: 4#####Date: 13-01-22"),
-          const CustomFormTitleWidget(
-              level: 3, label: "Departure####       Date: 14-01-22"),
+                  "Star Destination 1:#Cuenca#(Between: 10-01-22 and 13-01-22)"),
+          Column(
+            children: daylist,
+          ),
+          CustomFormTitleWidget(
+              level: 3,
+              label:
+                  "Departure: ${data['departure']['port'].toString()} ####Date:" +
+                      data['departure']['date'].toString()),
         ]),
       ),
+    );
+  }
+}
+
+class CustomFormDayWidget extends StatelessWidget {
+  const CustomFormDayWidget({
+    Key? key,
+    required this.data,
+    required this.indexes,
+  }) : super(key: key);
+
+  final Map<String, dynamic> data;
+  final List<int> indexes;
+  @override
+  Widget build(BuildContext context) {
+    var destinationindex = indexes[0];
+    var dayindex = indexes[1];
+    var destinations = data['destinations'];
+    var destination = destinations[destinationindex];
+    var day = destination['days'][dayindex];
+    var daydate = day['date'];
+    var daydescription = day['description'];
+    return Column(
+      children: [
+        CustomFormTitleWidget(
+            level: 4, label: "Day: ${dayindex + 1}#####Date: $daydate"),
+        Text(daydescription,
+            style: GoogleFonts.poppins(
+                textStyle: TextStyle(
+              color: const Color.fromARGB(255, 0, 0, 0),
+              fontSize: MediaQuery.of(context).size.width * 0.012,
+              fontWeight: FontWeight.normal,
+            ))),
+        CustomFormActivitiesDetailWidget(data: data, indexes: indexes),
+      ],
+    );
+  }
+}
+
+class CustomFormActivitiesDetailWidget extends StatelessWidget {
+  const CustomFormActivitiesDetailWidget({
+    Key? key,
+    required this.data,
+    required this.indexes,
+  }) : super(key: key);
+  final Map<String, dynamic> data;
+  final List<int> indexes;
+  @override
+  Widget build(BuildContext context) {
+    var destinationindex = indexes[0];
+    var dayindex = indexes[1];
+
+    List<CustomFormActivityRowWidget> list = [];
+
+    for (var i = 0;
+        i <
+            data["destinations"][destinationindex]["days"][dayindex]
+                    ['experiences']
+                .length;
+        i++) {
+      list.add(CustomFormActivityRowWidget(
+          data: data, indexes: [destinationindex, dayindex, i]));
+    }
+
+    return Padding(
+      padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.23),
+      child: Column(
+        children: list,
+      ),
+    );
+  }
+}
+
+class CustomFormActivityRowWidget extends StatelessWidget {
+  const CustomFormActivityRowWidget({
+    Key? key,
+    required this.data,
+    required this.indexes,
+  }) : super(key: key);
+  final Map<String, dynamic> data;
+  final List<int> indexes;
+  @override
+  Widget build(BuildContext context) {
+    var destinationindex = indexes[0];
+    var dayindex = indexes[1];
+    var experienceindex = indexes[2];
+    var day = data['destinations'][destinationindex]['days'][dayindex];
+    var experience = day['experiences'][experienceindex];
+    var code = experience['code'].toString();
+    var description = experience['description'].toString();
+    return Row(
+      children: [
+        Text("${experienceindex + 1}.-$code: ",
+            style: GoogleFonts.poppins(
+                textStyle: TextStyle(
+              color: const Color.fromARGB(255, 0, 0, 0),
+              fontSize: MediaQuery.of(context).size.width * 0.014,
+              fontWeight: FontWeight.bold,
+            ))),
+        Text(description,
+            style: GoogleFonts.poppins(
+                textStyle: TextStyle(
+              color: const Color.fromARGB(255, 0, 0, 0),
+              fontSize: MediaQuery.of(context).size.width * 0.012,
+              fontWeight: FontWeight.normal,
+            ))),
+      ],
     );
   }
 }
@@ -223,7 +396,7 @@ class CustomFormTitleWidget extends StatelessWidget {
       var titlearray = label.split("#");
       if (titlearray.length > 1) {
         for (var i = 0; i < titlearray.length; i++) {
-          title += titlearray[i] + ("\t" * 10);
+          title += titlearray[i] + ("\t" * 7);
         }
         return title;
       }
