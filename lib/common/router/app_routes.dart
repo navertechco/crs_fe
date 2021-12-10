@@ -71,7 +71,7 @@ List<dynamic> routes = [
       binding: CongratsBinding()),
   PRegistry(
       name: '/Resume',
-      page: () => const ResumePage(),
+      page: () => ResumePage(),
       transition: Transition.native,
       binding: ResumeBinding()),
   PRegistry(

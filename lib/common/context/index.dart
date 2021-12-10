@@ -12,6 +12,189 @@ class Context with PropertyChangeNotifier<String> {
     "index": 0.obs,
     "icons": {}.obs,
     "session": {"avatar": "".obs},
+    "data": {
+      "client": [
+        {
+          "code": "customer_type",
+          "description": "Customer Type",
+          "value": "Legal"
+        },
+        {
+          "code": "legal_name",
+          "description": "Legal Name",
+          "value": "British Bank"
+        },
+        {
+          "code": "contact_name",
+          "description": "Contact Name",
+          "value": "Mr. Frank Stevens"
+        },
+        {
+          "code": "id_number",
+          "description": "Identification Number",
+          "value": "15261548"
+        },
+        {
+          "code": "brith_date",
+          "description": "Birth Date",
+          "value": "10/10/1950"
+        },
+        {
+          "code": "email",
+          "description": "e-Mail",
+          "value": "frank.stevens@gmail.com"
+        },
+        {
+          "code": "passengers",
+          "description": "Passengers Number",
+          "value": "10"
+        }
+      ],
+      "tour": [
+        {
+          "code": "destination_country",
+          "description": "Destination Country",
+          "value": "Ecuador"
+        },
+        {
+          "code": "purpouse",
+          "description": "Trip Purpose",
+          "value": "ADVENTURE"
+        },
+        {
+          "code": "accomodation_type",
+          "description": "Accomodation Type",
+          "value": "5 STARS"
+        },
+        {
+          "code": "arrival_date",
+          "description": "Arrival Date",
+          "value": "09/10/2022"
+        },
+        {
+          "code": "departure_date",
+          "description": "Departure Date",
+          "value": "14/10/2022"
+        },
+        {
+          "code": "contact_agent",
+          "description": "Contact Agent",
+          "value": "Jose Cuevas"
+        },
+      ],
+      "arrival": {"port": "Quito", "date": "09-01-2022"},
+      "departure": {"port": "Guayaquil", "date": "14-01-2022"},
+      "destinations": [
+        {
+          "destination_name": "cuenca",
+          "destination_description": "Cuenca",
+          "days": [
+            {
+              "description": "lorem ipsum dolor sit amet, consectetur",
+              "date": "10-01-2022",
+              "experiences": [
+                {
+                  "code": "Visit to plaza",
+                  "description": "this visit is the most......",
+                },
+                {
+                  "code": "Visit to Restaruant",
+                  "description": "this visit is the most......",
+                },
+              ]
+            },
+            {
+              "description": "lorem ipsum dolor sit amet, consectetur",
+              "date": "11-01-2022",
+              "experiences": [
+                {
+                  "code": "Visit to Museum",
+                  "description": "lorem ipsum dolor sit amet, consectetur",
+                },
+              ]
+            },
+            {
+              "description": "lorem ipsum dolor sit amet, consectetur",
+              "date": "12-01-2022",
+              "experiences": [
+                {
+                  "code": "Visit to disco",
+                  "description": "lorem ipsum dolor sit amet, consectetur",
+                },
+                {
+                  "code": "Visit to Restaurant",
+                  "description": "lorem ipsum dolor sit amet, consectetur",
+                },
+              ]
+            },
+            {
+              "description": "lorem ipsum dolor sit amet, consectetur",
+              "date": "13-01-2022",
+              "experiences": [
+                {
+                  "code": "Ceremony",
+                  "description": "lorem ipsum dolor sit amet, consectetur",
+                },
+              ]
+            }
+          ]
+        },
+        {
+          "destination_name": "otavalo",
+          "destination_description": "Otavalo",
+          "days": [
+            {
+              "description": "lorem ipsum dolor sit amet, consectetur",
+              "date": "10-01-2022",
+              "experiences": [
+                {
+                  "code": "Visit to plaza",
+                  "description": "this visit is the most......",
+                },
+                {
+                  "code": "Visit to Restaruant",
+                  "description": "this visit is the most......",
+                },
+              ]
+            },
+            {
+              "description": "lorem ipsum dolor sit amet, consectetur",
+              "date": "11-01-2022",
+              "experiences": [
+                {
+                  "code": "Visit to Museum",
+                  "description": "lorem ipsum dolor sit amet, consectetur",
+                },
+              ]
+            },
+            {
+              "description": "lorem ipsum dolor sit amet, consectetur",
+              "date": "12-01-2022",
+              "experiences": [
+                {
+                  "code": "Visit to disco",
+                  "description": "lorem ipsum dolor sit amet, consectetur",
+                },
+                {
+                  "code": "Visit to Restaurant",
+                  "description": "lorem ipsum dolor sit amet, consectetur",
+                },
+              ]
+            },
+            {
+              "description": "lorem ipsum dolor sit amet, consectetur",
+              "date": "13-01-2022",
+              "experiences": [
+                {
+                  "code": "Ceremony",
+                  "description": "lorem ipsum dolor sit amet, consectetur",
+                },
+              ]
+            }
+          ]
+        }
+      ]
+    },
     "experiences": {
       "northern": [
         "assets/custom/img/1x/Recurso_318mdpi.png",

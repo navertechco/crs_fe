@@ -105,7 +105,7 @@ final idValidator = MultiValidator(
 );
 
 // ignore: prefer_function_declarations_over_variables
-final Function isMobileDevice = () {
+final isMobileDevice = () {
   if ((defaultTargetPlatform == TargetPlatform.iOS) ||
       (defaultTargetPlatform == TargetPlatform.android)) {
     // Some android/ios specific code
@@ -114,23 +114,23 @@ final Function isMobileDevice = () {
   return false;
 };
 
+// ignore: prefer_function_declarations_over_variables
+final chunkArray = (list, int portion) {
+  List<List<Map<String, dynamic>>> chunks = [];
+  int aprox = (list.length / portion).round() * portion;
+  int module = aprox > list.length
+      ? (list.length / portion).round()
+      : (list.length / portion).round() + 1;
 
- final Function chunkArray = (list, int portion) {
-      List<List<Map<String, dynamic>>> chunks = [];
-      int aprox = (list.length / portion).round() * portion;
-      int module = aprox > list.length
-          ? (list.length / portion).round()
-          : (list.length / portion).round() + 1;
-
-      for (var i = 0; i < module; i++) {
-        chunks.add([]);
-        for (var j = 0; j < portion; j++) {
-          var index = (i * portion) + j;
-          if (index > list.length - 1) {
-            break;
-          }
-          chunks[i].add(list[index]);
-        }
+  for (var i = 0; i < module; i++) {
+    chunks.add([]);
+    for (var j = 0; j < portion; j++) {
+      var index = (i * portion) + j;
+      if (index > list.length - 1) {
+        break;
       }
-      return chunks;
-    };
+      chunks[i].add(list[index]);
+    }
+  }
+  return chunks;
+};

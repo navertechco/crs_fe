@@ -13,189 +13,7 @@ class ResumeWidget extends GetView<ResumeController> {
 
   @override
   Widget build(BuildContext context) {
-    Map<String, dynamic> data = {
-      "client": [
-        {
-          "code": "customer_type",
-          "description": "Customer Type",
-          "value": "Legal"
-        },
-        {
-          "code": "legal_name",
-          "description": "Legal Name",
-          "value": "British Bank"
-        },
-        {
-          "code": "contact_name",
-          "description": "Contact Name",
-          "value": "Mr. Frank Stevens"
-        },
-        {
-          "code": "id_number",
-          "description": "Identification Number",
-          "value": "15261548"
-        },
-        {
-          "code": "brith_date",
-          "description": "Birth Date",
-          "value": "10/10/1950"
-        },
-        {
-          "code": "email",
-          "description": "e-Mail",
-          "value": "frank.stevens@gmail.com"
-        },
-        {
-          "code": "passengers",
-          "description": "Passengers Number",
-          "value": "10"
-        }
-      ],
-      "tour": [
-        {
-          "code": "destination_country",
-          "description": "Destination Country",
-          "value": "Ecuador"
-        },
-        {
-          "code": "purpouse",
-          "description": "Trip Purpose",
-          "value": "ADVENTURE"
-        },
-        {
-          "code": "accomodation_type",
-          "description": "Accomodation Type",
-          "value": "5 STARS"
-        },
-        {
-          "code": "arrival_date",
-          "description": "Arrival Date",
-          "value": "09/10/2022"
-        },
-        {
-          "code": "departure_date",
-          "description": "Departure Date",
-          "value": "14/10/2022"
-        },
-        {
-          "code": "contact_agent",
-          "description": "Contact Agent",
-          "value": "Jose Cuevas"
-        },
-      ],
-      "arrival": {"port": "Quito", "date": "09-01-2022"},
-      "departure": {"port": "Guayaquil", "date": "14-01-2022"},
-      "destinations": [
-        {
-          "destination_name": "cuenca",
-          "destination_description": "Cuenca",
-          "days": [
-            {
-              "description": "lorem ipsum dolor sit amet, consectetur",
-              "date": "10-01-2022",
-              "experiences": [
-                {
-                  "code": "Visit to plaza",
-                  "description": "this visit is the most......",
-                },
-                {
-                  "code": "Visit to Restaruant",
-                  "description": "this visit is the most......",
-                },
-              ]
-            },
-            {
-              "description": "lorem ipsum dolor sit amet, consectetur",
-              "date": "11-01-2022",
-              "experiences": [
-                {
-                  "code": "Visit to Museum",
-                  "description": "lorem ipsum dolor sit amet, consectetur",
-                },
-              ]
-            },
-            {
-              "description": "lorem ipsum dolor sit amet, consectetur",
-              "date": "12-01-2022",
-              "experiences": [
-                {
-                  "code": "Visit to disco",
-                  "description": "lorem ipsum dolor sit amet, consectetur",
-                },
-                {
-                  "code": "Visit to Restaurant",
-                  "description": "lorem ipsum dolor sit amet, consectetur",
-                },
-              ]
-            },
-            {
-              "description": "lorem ipsum dolor sit amet, consectetur",
-              "date": "13-01-2022",
-              "experiences": [
-                {
-                  "code": "accomodation_type",
-                  "description": "Accomodation Type",
-                },
-              ]
-            }
-          ]
-        },
-        {
-          "destination_name": "otavalo",
-          "destination_description": "Otavalo",
-          "days": [
-            {
-              "description": "lorem ipsum dolor sit amet, consectetur",
-              "date": "10-01-2022",
-              "experiences": [
-                {
-                  "code": "Visit to plaza",
-                  "description": "this visit is the most......",
-                },
-                {
-                  "code": "Visit to Restaruant",
-                  "description": "this visit is the most......",
-                },
-              ]
-            },
-            {
-              "description": "lorem ipsum dolor sit amet, consectetur",
-              "date": "11-01-2022",
-              "experiences": [
-                {
-                  "code": "Visit to Museum",
-                  "description": "lorem ipsum dolor sit amet, consectetur",
-                },
-              ]
-            },
-            {
-              "description": "lorem ipsum dolor sit amet, consectetur",
-              "date": "12-01-2022",
-              "experiences": [
-                {
-                  "code": "Visit to disco",
-                  "description": "lorem ipsum dolor sit amet, consectetur",
-                },
-                {
-                  "code": "Visit to Restaurant",
-                  "description": "lorem ipsum dolor sit amet, consectetur",
-                },
-              ]
-            },
-            {
-              "description": "lorem ipsum dolor sit amet, consectetur",
-              "date": "13-01-2022",
-              "experiences": [
-                {
-                  "code": "accomodation_type",
-                  "description": "Accomodation Type",
-                },
-              ]
-            }
-          ]
-        }
-      ]
-    };
+    Map<String, dynamic> data = getContext("data");
 
     return Itinerary(
       data: data,
@@ -204,20 +22,15 @@ class ResumeWidget extends GetView<ResumeController> {
 }
 
 class Itinerary extends StatelessWidget {
-  const Itinerary({
+  Itinerary({
     Key? key,
     required this.data,
   }) : super(key: key);
 
   final Map<String, dynamic> data;
-
+  final _controller = ScrollController();
   @override
   Widget build(BuildContext context) {
-    var arrivalport = data['arrival']['port'].toString();
-    var arrivaldate = data['arrival']['date'].toString();
-    var departureport = data['departure']['port'].toString();
-    var departuredate = data['departure']['date'].toString();
-
     List<CustomFormDestination> destinations = [];
 
     for (var i = 0; i < data["destinations"].length; i++) {
@@ -233,15 +46,13 @@ class Itinerary extends StatelessWidget {
         child: Center(
           child: Scrollbar(
             child: SingleChildScrollView(
+              controller: _controller,
               child: Column(children: [
                 Header(
-                    chunkArray: chunkArray,
-                    data: data,
-                    arrivalport: arrivalport,
-                    arrivaldate: arrivaldate),
+                  data: data,
+                ),
                 Destinations(destinations: destinations),
-                Departure(
-                    departureport: departureport, departuredate: departuredate),
+                Departure(data: data),
               ]),
             ),
           ),
@@ -254,15 +65,15 @@ class Itinerary extends StatelessWidget {
 class Departure extends StatelessWidget {
   const Departure({
     Key? key,
-    required this.departureport,
-    required this.departuredate,
+    required this.data,
   }) : super(key: key);
 
-  final String departureport;
-  final String departuredate;
+  final Map<String, dynamic> data;
 
   @override
   Widget build(BuildContext context) {
+    var departureport = data['departure']['port'].toString();
+    var departuredate = data['departure']['date'].toString();
     return CustomFormTitleWidget(
         level: 3, label: "Departure: $departureport ####Date:" + departuredate);
   }
@@ -287,19 +98,15 @@ class Destinations extends StatelessWidget {
 class Header extends StatelessWidget {
   const Header({
     Key? key,
-    required this.chunkArray,
     required this.data,
-    required this.arrivalport,
-    required this.arrivaldate,
   }) : super(key: key);
 
-  final Function chunkArray;
   final Map<String, dynamic> data;
-  final String arrivalport;
-  final String arrivaldate;
 
   @override
   Widget build(BuildContext context) {
+    var arrivalport = data['arrival']['port'].toString();
+    var arrivaldate = data['arrival']['date'].toString();
     return Column(
       children: [
         const CustomFormTitleWidget(level: 1, label: "Client Information"),
@@ -569,9 +376,9 @@ class CustomFormTitleWidget extends StatelessWidget {
             child: const Divider(color: Color.fromARGB(255, 0, 0, 0))),
         CustomPadingTitleWidget(
             customlabel: customlabel, fontWeight: FontWeight.bold),
-        SizedBox(
-            width: MediaQuery.of(context).size.width * 0.7,
-            child: const Divider(color: Color.fromARGB(255, 0, 0, 0))),
+        // SizedBox(
+        //     width: MediaQuery.of(context).size.width * 0.7,
+        //     child: const Divider(color: Color.fromARGB(255, 0, 0, 0))),
       ],
     );
   }
