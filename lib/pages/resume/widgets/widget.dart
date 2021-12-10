@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_function_declarations_over_variables
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/common/index.dart';
@@ -10,8 +12,28 @@ class ResumeWidget extends GetView<ResumeController> {
 
   @override
   Widget build(BuildContext context) {
-    List<List<Map<String, dynamic>>> clientdata = [
-      [
+    Function chunkArray = (list, int portion) {
+      List<List<Map<String, dynamic>>> chunks = [];
+      int aprox = (list.length / portion).round() * portion;
+      int module = aprox > list.length
+          ? (list.length / portion).round()
+          : (list.length / portion).round() + 1;
+
+      for (var i = 0; i < module; i++) {
+        chunks.add([]);
+        for (var j = 0; j < portion; j++) {
+          var index = (i * portion) + j;
+          if (index > list.length - 1) {
+            break;
+          }
+          chunks[i].add(list[index]);
+        }
+      }
+      return chunks;
+    };
+
+    Map<String, dynamic> data = {
+      "client": [
         {
           "code": "customer_type",
           "description": "Customer Type",
@@ -27,8 +49,6 @@ class ResumeWidget extends GetView<ResumeController> {
           "description": "Contact Name",
           "value": "Mr. Frank Stevens"
         },
-      ],
-      [
         {
           "code": "id_number",
           "description": "Identification Number",
@@ -44,17 +64,13 @@ class ResumeWidget extends GetView<ResumeController> {
           "description": "e-Mail",
           "value": "frank.stevens@gmail.com"
         },
-      ],
-      [
         {
           "code": "passengers",
           "description": "Passengers Number",
           "value": "10"
         }
-      ]
-    ];
-    List<List<Map<String, dynamic>>> tourdata = [
-      [
+      ],
+      "tour": [
         {
           "code": "destination_country",
           "description": "Destination Country",
@@ -70,8 +86,6 @@ class ResumeWidget extends GetView<ResumeController> {
           "description": "Accomodation Type",
           "value": "5 STARS"
         },
-      ],
-      [
         {
           "code": "arrival_date",
           "description": "Arrival Date",
@@ -88,14 +102,15 @@ class ResumeWidget extends GetView<ResumeController> {
           "value": "Jose Cuevas"
         },
       ]
-    ];
+    };
+
     return Center(
       child: SingleChildScrollView(
         child: Column(children: [
           const CustomFormTitleWidget(level: 1, label: "Client Information"),
-          CustomFormHeaderWidget(data: clientdata),
+          CustomFormHeaderWidget(data: chunkArray(data["client"], 3)),
           const CustomFormTitleWidget(level: 1, label: "Tour Information"),
-          CustomFormHeaderWidget(data: tourdata),
+          CustomFormHeaderWidget(data: chunkArray(data["tour"], 3)),
           const CustomFormTitleWidget(level: 2, label: "Itinerary"),
           const CustomFormTitleWidget(
               level: 3, label: "Arrival#####Date: 09-01-22"),
@@ -111,6 +126,8 @@ class ResumeWidget extends GetView<ResumeController> {
               level: 4, label: "Day: 3#####Date: 12-01-22"),
           const CustomFormTitleWidget(
               level: 4, label: "Day: 4#####Date: 13-01-22"),
+          const CustomFormTitleWidget(
+              level: 3, label: "Departure####       Date: 14-01-22"),
         ]),
       ),
     );
