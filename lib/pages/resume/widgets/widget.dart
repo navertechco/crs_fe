@@ -10,127 +10,92 @@ class ResumeWidget extends GetView<ResumeController> {
 
   @override
   Widget build(BuildContext context) {
+    List<List<Map<String, dynamic>>> clientdata = [
+      [
+        {
+          "code": "customer_type",
+          "description": "Customer Type",
+          "value": "Legal"
+        },
+        {
+          "code": "legal_name",
+          "description": "Legal Name",
+          "value": "British Bank"
+        },
+        {
+          "code": "contact_name",
+          "description": "Contact Name",
+          "value": "Mr. Frank Stevens"
+        },
+      ],
+      [
+        {
+          "code": "id_number",
+          "description": "Identification Number",
+          "value": "15261548"
+        },
+        {
+          "code": "brith_date",
+          "description": "Birth Date",
+          "value": "10/10/1950"
+        },
+        {
+          "code": "email",
+          "description": "e-Mail",
+          "value": "frank.stevens@gmail.com"
+        },
+      ],
+      [
+        {
+          "code": "passengers",
+          "description": "Passengers Number",
+          "value": "10"
+        }
+      ]
+    ];
+    List<List<Map<String, dynamic>>> tourdata = [
+      [
+        {
+          "code": "destination_country",
+          "description": "Destination Country",
+          "value": "Ecuador"
+        },
+        {
+          "code": "purpouse",
+          "description": "Trip Purpose",
+          "value": "ADVENTURE"
+        },
+        {
+          "code": "accomodation_type",
+          "description": "Accomodation Type",
+          "value": "5 STARS"
+        },
+      ],
+      [
+        {
+          "code": "arrival_date",
+          "description": "Arrival Date",
+          "value": "09/10/2022"
+        },
+        {
+          "code": "departure_date",
+          "description": "Departure Date",
+          "value": "14/10/2022"
+        },
+        {
+          "code": "contact_agent",
+          "description": "Contact Agent",
+          "value": "Jose Cuevas"
+        },
+      ]
+    ];
     return Center(
       child: SingleChildScrollView(
         child: Column(children: [
           const CustomFormTitleWidget(level: 1, label: "Client Information"),
-          Row(
-            children: const [
-              CustomPadingTitleWidget(
-                  customlabel: "Customer Type:", fontWeight: FontWeight.normal),
-              Text("Legal"),
-            ],
-          ),
-          Row(
-            children: const [
-              CustomPadingTitleWidget(
-                  customlabel: "Legal Name:", fontWeight: FontWeight.normal),
-              Text("British Bank"),
-            ],
-          ),
-          Row(
-            children: const [
-              CustomPadingTitleWidget(
-                  customlabel: "Contact Name:", fontWeight: FontWeight.normal),
-              Text("Mr. Frank Windsor"),
-            ],
-          ),
-          Row(
-            children: const [
-              CustomPadingTitleWidget(
-                  customlabel: "Id Number:", fontWeight: FontWeight.normal),
-              Text("    102525666"),
-            ],
-          ),
-          Row(
-            children: const [
-              CustomPadingTitleWidget(
-                  customlabel: "Birth date:", fontWeight: FontWeight.normal),
-              Text("10-10-1950"),
-            ],
-          ),
-          Row(
-            children: const [
-              CustomPadingTitleWidget(
-                  customlabel: "Address:", fontWeight: FontWeight.normal),
-              Text("400 Downie St and Inverness St, London, England"),
-            ],
-          ),
-          Row(
-            children: const [
-              CustomPadingTitleWidget(
-                  customlabel: "e-Mail:", fontWeight: FontWeight.normal),
-              Text("frank.winsor@britishbank.com"),
-            ],
-          ),
-          Row(
-            children: const [
-              CustomPadingTitleWidget(
-                  customlabel: "Travel code:", fontWeight: FontWeight.normal),
-              Text("15265112"),
-            ],
-          ),
+          CustomFormHeaderWidget(data: clientdata),
           const CustomFormTitleWidget(level: 1, label: "Tour Information"),
-          Row(
-            children: const [
-              CustomPadingTitleWidget(
-                  customlabel: "Destination Country:",
-                  fontWeight: FontWeight.normal),
-              Text("Ecuador"),
-            ],
-          ),
-          Row(
-            children: const [
-              CustomPadingTitleWidget(
-                  customlabel: "Trip Purpose:", fontWeight: FontWeight.normal),
-              Text("Adventure"),
-            ],
-          ),
-          Row(
-            children: const [
-              CustomPadingTitleWidget(
-                  customlabel: "Accomodation Type:",
-                  fontWeight: FontWeight.normal),
-              Text("5 Stars"),
-            ],
-          ),
-          Row(
-            children: const [
-              CustomPadingTitleWidget(
-                  customlabel: "Arrival Date:", fontWeight: FontWeight.normal),
-              Text("09-01-22"),
-            ],
-          ),
-          Row(
-            children: const [
-              CustomPadingTitleWidget(
-                  customlabel: "Departure Date:",
-                  fontWeight: FontWeight.normal),
-              Text("14-01-22"),
-            ],
-          ),
-          Row(
-            children: const [
-              CustomPadingTitleWidget(
-                  customlabel: "Contact Agent:", fontWeight: FontWeight.normal),
-              Text("Jose Cuevas"),
-            ],
-          ),
-          Row(
-            children: const [
-              CustomPadingTitleWidget(
-                  customlabel: "Arrival Port:", fontWeight: FontWeight.normal),
-              Text("Quito"),
-            ],
-          ),
-          Row(
-            children: const [
-              CustomPadingTitleWidget(
-                  customlabel: "Departure Port:",
-                  fontWeight: FontWeight.normal),
-              Text("Guayaquil"),
-            ],
-          ),
+          CustomFormHeaderWidget(data: tourdata),
           const CustomFormTitleWidget(level: 2, label: "Itinerary"),
           const CustomFormTitleWidget(
               level: 3, label: "Arrival#####Date: 09-01-22"),
@@ -148,6 +113,78 @@ class ResumeWidget extends GetView<ResumeController> {
               level: 4, label: "Day: 4#####Date: 13-01-22"),
         ]),
       ),
+    );
+  }
+}
+
+class CustomFormHeaderWidget extends StatelessWidget {
+  const CustomFormHeaderWidget({
+    Key? key,
+    required this.data,
+  }) : super(key: key);
+  final List<List<Map<String, dynamic>>> data;
+
+  @override
+  Widget build(BuildContext context) {
+    List<CustomFormHeaderIterWidget> list = [];
+
+    for (var i = 0; i < data.length; i++) {
+      list.add(CustomFormHeaderIterWidget(data: data, index: i));
+    }
+
+    return Column(
+      children: list,
+    );
+  }
+}
+
+class CustomFormHeaderIterWidget extends StatelessWidget {
+  const CustomFormHeaderIterWidget({
+    Key? key,
+    required this.data,
+    required this.index,
+  }) : super(key: key);
+
+  final List<List<Map<String, dynamic>>> data;
+  final int index;
+  @override
+  Widget build(BuildContext context) {
+    List<CustomFormHeaderRowWidget> list = [];
+    for (var i = 0; i < data[index].length; i++) {
+      list.add(CustomFormHeaderRowWidget(
+        customlabel: data[index][i]["description"] + ":",
+        value: data[index][i]["value"],
+      ));
+    }
+    return Row(
+      children: [
+        SizedBox(width: MediaQuery.of(context).size.width * 0.18),
+        Row(
+          children: list,
+        ),
+      ],
+    );
+  }
+}
+
+class CustomFormHeaderRowWidget extends StatelessWidget {
+  const CustomFormHeaderRowWidget({
+    Key? key,
+    required this.customlabel,
+    required this.value,
+  }) : super(key: key);
+  final String customlabel;
+  final String value;
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        CustomPadingTitleWidget(
+            width: 0.02,
+            customlabel: customlabel,
+            fontWeight: FontWeight.normal),
+        Text(value),
+      ],
     );
   }
 }
