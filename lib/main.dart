@@ -20,7 +20,7 @@ void main() {
 
   var pages = AppPages.pages;
   PRegistry registry =
-      routes.toList().firstWhere((element) => element.name == "/Activities");
+      routes.toList().firstWhere((element) => element.name == "/Resume");
 
   runApp(GetMaterialApp(
       scrollBehavior: MyCustomScrollBehavior(),

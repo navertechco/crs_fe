@@ -1,3 +1,3 @@
 library widgets;
 
-export 'policies_widget.dart';
+export 'widget.dart';

@@ -8,9 +8,8 @@ import 'index.dart';
 class ResumePage extends GetView<ResumeController> {
   const ResumePage({Key? key}) : super(key: key);
 
-  Widget _buildView(BuildContext? _context, {height}) {
+  Widget _buildView(BuildContext? _context) {
     return ContentLayoutWidget(
-        height: height,
         background: "assets/custom/img/resume.png",
         child: const ResumeWidget(),
         text: "");
@@ -25,7 +24,7 @@ class ResumePage extends GetView<ResumeController> {
         child: SizedBox(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height * 2,
-            child: _buildView(context, height: 2)),
+            child: _buildView(context)),
       )),
     );
   }
