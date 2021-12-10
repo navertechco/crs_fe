@@ -20,11 +20,13 @@ class ResumePage extends GetView<ResumeController> {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-          body: SingleChildScrollView(
-        child: SizedBox(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height * 2,
-            child: _buildView(context)),
+          body: Scrollbar(
+        child: SingleChildScrollView(
+          child: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height * 2,
+              child: _buildView(context)),
+        ),
       )),
     );
   }

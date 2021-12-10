@@ -13,26 +13,6 @@ class ResumeWidget extends GetView<ResumeController> {
 
   @override
   Widget build(BuildContext context) {
-    Function chunkArray = (list, int portion) {
-      List<List<Map<String, dynamic>>> chunks = [];
-      int aprox = (list.length / portion).round() * portion;
-      int module = aprox > list.length
-          ? (list.length / portion).round()
-          : (list.length / portion).round() + 1;
-
-      for (var i = 0; i < module; i++) {
-        chunks.add([]);
-        for (var j = 0; j < portion; j++) {
-          var index = (i * portion) + j;
-          if (index > list.length - 1) {
-            break;
-          }
-          chunks[i].add(list[index]);
-        }
-      }
-      return chunks;
-    };
-
     Map<String, dynamic> data = {
       "client": [
         {
@@ -159,43 +139,209 @@ class ResumeWidget extends GetView<ResumeController> {
               ]
             }
           ]
+        },
+        {
+          "destination_name": "otavalo",
+          "destination_description": "Otavalo",
+          "days": [
+            {
+              "description": "lorem ipsum dolor sit amet, consectetur",
+              "date": "10-01-2022",
+              "experiences": [
+                {
+                  "code": "Visit to plaza",
+                  "description": "this visit is the most......",
+                },
+                {
+                  "code": "Visit to Restaruant",
+                  "description": "this visit is the most......",
+                },
+              ]
+            },
+            {
+              "description": "lorem ipsum dolor sit amet, consectetur",
+              "date": "11-01-2022",
+              "experiences": [
+                {
+                  "code": "Visit to Museum",
+                  "description": "lorem ipsum dolor sit amet, consectetur",
+                },
+              ]
+            },
+            {
+              "description": "lorem ipsum dolor sit amet, consectetur",
+              "date": "12-01-2022",
+              "experiences": [
+                {
+                  "code": "Visit to disco",
+                  "description": "lorem ipsum dolor sit amet, consectetur",
+                },
+                {
+                  "code": "Visit to Restaurant",
+                  "description": "lorem ipsum dolor sit amet, consectetur",
+                },
+              ]
+            },
+            {
+              "description": "lorem ipsum dolor sit amet, consectetur",
+              "date": "13-01-2022",
+              "experiences": [
+                {
+                  "code": "accomodation_type",
+                  "description": "Accomodation Type",
+                },
+              ]
+            }
+          ]
         }
       ]
     };
 
-    List<CustomFormDayWidget> daylist = [];
+    return Itinerary(
+      data: data,
+    );
+  }
+}
 
-    for (int i = 0; i < data["destinations"][0].length; i++) {
-      daylist.add(CustomFormDayWidget(data: data, indexes: [0, i]));
+class Itinerary extends StatelessWidget {
+  const Itinerary({
+    Key? key,
+    required this.data,
+  }) : super(key: key);
+
+  final Map<String, dynamic> data;
+
+  @override
+  Widget build(BuildContext context) {
+    var arrivalport = data['arrival']['port'].toString();
+    var arrivaldate = data['arrival']['date'].toString();
+    var departureport = data['departure']['port'].toString();
+    var departuredate = data['departure']['date'].toString();
+
+    List<CustomFormDestination> destinations = [];
+
+    for (var i = 0; i < data["destinations"].length; i++) {
+      destinations.add(CustomFormDestination(data: data, index: i));
     }
-
-    return Center(
-      child: SingleChildScrollView(
-        child: Column(children: [
-          const CustomFormTitleWidget(level: 1, label: "Client Information"),
-          CustomFormHeaderWidget(data: chunkArray(data["client"], 3)),
-          const CustomFormTitleWidget(level: 1, label: "Tour Information"),
-          CustomFormHeaderWidget(data: chunkArray(data["tour"], 3)),
-          const CustomFormTitleWidget(level: 2, label: "Itinerary"),
-          CustomFormTitleWidget(
-              level: 3,
-              label:
-                  "Arrival: ${data['arrival']['port'].toString()} #####Date: " +
-                      data['arrival']['port'].toString()),
-          const CustomFormTitleWidget(
-              level: 3,
-              label:
-                  "Star Destination 1:#Cuenca#(Between: 10-01-22 and 13-01-22)"),
-          Column(
-            children: daylist,
+    return Padding(
+      padding: EdgeInsets.only(
+          top: MediaQuery.of(context).size.height * 0.4,
+          bottom: MediaQuery.of(context).size.height * 0.4),
+      child: SizedBox(
+        height: MediaQuery.of(context).size.height * 2,
+        width: MediaQuery.of(context).size.width * 0.5,
+        child: Center(
+          child: Scrollbar(
+            child: SingleChildScrollView(
+              child: Column(children: [
+                Header(
+                    chunkArray: chunkArray,
+                    data: data,
+                    arrivalport: arrivalport,
+                    arrivaldate: arrivaldate),
+                Destinations(destinations: destinations),
+                Departure(
+                    departureport: departureport, departuredate: departuredate),
+              ]),
+            ),
           ),
-          CustomFormTitleWidget(
-              level: 3,
-              label:
-                  "Departure: ${data['departure']['port'].toString()} ####Date:" +
-                      data['departure']['date'].toString()),
-        ]),
+        ),
       ),
+    );
+  }
+}
+
+class Departure extends StatelessWidget {
+  const Departure({
+    Key? key,
+    required this.departureport,
+    required this.departuredate,
+  }) : super(key: key);
+
+  final String departureport;
+  final String departuredate;
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomFormTitleWidget(
+        level: 3, label: "Departure: $departureport ####Date:" + departuredate);
+  }
+}
+
+class Destinations extends StatelessWidget {
+  const Destinations({
+    Key? key,
+    required this.destinations,
+  }) : super(key: key);
+
+  final List<CustomFormDestination> destinations;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: destinations,
+    );
+  }
+}
+
+class Header extends StatelessWidget {
+  const Header({
+    Key? key,
+    required this.chunkArray,
+    required this.data,
+    required this.arrivalport,
+    required this.arrivaldate,
+  }) : super(key: key);
+
+  final Function chunkArray;
+  final Map<String, dynamic> data;
+  final String arrivalport;
+  final String arrivaldate;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        const CustomFormTitleWidget(level: 1, label: "Client Information"),
+        CustomFormHeaderWidget(data: chunkArray(data["client"], 3)),
+        const CustomFormTitleWidget(level: 1, label: "Tour Information"),
+        CustomFormHeaderWidget(data: chunkArray(data["tour"], 3)),
+        const CustomFormTitleWidget(level: 2, label: "Itinerary"),
+        CustomFormTitleWidget(
+            level: 3, label: "Arrival: $arrivalport #####Date: " + arrivaldate),
+      ],
+    );
+  }
+}
+
+class CustomFormDestination extends StatelessWidget {
+  const CustomFormDestination({
+    Key? key,
+    required this.data,
+    required this.index,
+  }) : super(key: key);
+
+  final Map<String, dynamic> data;
+  final int index;
+  @override
+  Widget build(BuildContext context) {
+    List<CustomFormDayWidget> daylist = [];
+    var destinations = data["destinations"];
+    var destination = destinations[index];
+    var days = destination["days"];
+    for (int i = 0; i < days.length; i++) {
+      daylist.add(CustomFormDayWidget(data: data, indexes: [index, i]));
+    }
+    return Column(
+      children: [
+        CustomFormTitleWidget(
+            level: 3,
+            label:
+                "Star Destination ${index + 1}:#Cuenca#(Between: 10-01-22 and 13-01-22)"),
+        Column(
+          children: daylist,
+        ),
+      ],
     );
   }
 }
@@ -229,14 +375,14 @@ class CustomFormDayWidget extends StatelessWidget {
               fontSize: MediaQuery.of(context).size.width * 0.012,
               fontWeight: FontWeight.normal,
             ))),
-        CustomFormActivitiesDetailWidget(data: data, indexes: indexes),
+        CustomFormExpereincesDetailWidget(data: data, indexes: indexes),
       ],
     );
   }
 }
 
-class CustomFormActivitiesDetailWidget extends StatelessWidget {
-  const CustomFormActivitiesDetailWidget({
+class CustomFormExpereincesDetailWidget extends StatelessWidget {
+  const CustomFormExpereincesDetailWidget({
     Key? key,
     required this.data,
     required this.indexes,
@@ -248,7 +394,7 @@ class CustomFormActivitiesDetailWidget extends StatelessWidget {
     var destinationindex = indexes[0];
     var dayindex = indexes[1];
 
-    List<CustomFormActivityRowWidget> list = [];
+    List<CustomFormExperienceRowWidget> list = [];
 
     for (var i = 0;
         i <
@@ -256,7 +402,7 @@ class CustomFormActivitiesDetailWidget extends StatelessWidget {
                     ['experiences']
                 .length;
         i++) {
-      list.add(CustomFormActivityRowWidget(
+      list.add(CustomFormExperienceRowWidget(
           data: data, indexes: [destinationindex, dayindex, i]));
     }
 
@@ -269,8 +415,8 @@ class CustomFormActivitiesDetailWidget extends StatelessWidget {
   }
 }
 
-class CustomFormActivityRowWidget extends StatelessWidget {
-  const CustomFormActivityRowWidget({
+class CustomFormExperienceRowWidget extends StatelessWidget {
+  const CustomFormExperienceRowWidget({
     Key? key,
     required this.data,
     required this.indexes,

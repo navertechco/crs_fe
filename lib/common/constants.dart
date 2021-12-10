@@ -113,3 +113,24 @@ final Function isMobileDevice = () {
   }
   return false;
 };
+
+
+ final Function chunkArray = (list, int portion) {
+      List<List<Map<String, dynamic>>> chunks = [];
+      int aprox = (list.length / portion).round() * portion;
+      int module = aprox > list.length
+          ? (list.length / portion).round()
+          : (list.length / portion).round() + 1;
+
+      for (var i = 0; i < module; i++) {
+        chunks.add([]);
+        for (var j = 0; j < portion; j++) {
+          var index = (i * portion) + j;
+          if (index > list.length - 1) {
+            break;
+          }
+          chunks[i].add(list[index]);
+        }
+      }
+      return chunks;
+    };
