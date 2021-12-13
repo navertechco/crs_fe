@@ -1,5 +1,5 @@
 library widgets;
 
-export 'tourparametersform.dart';
-export 'tourparametersform_page.dart';
-export 'customtourinformation.dart';
+export 'parentform.dart';
+export 'page.dart';
+export 'childform.dart';

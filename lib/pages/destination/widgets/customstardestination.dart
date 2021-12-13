@@ -32,9 +32,10 @@ class CustomStarDestinationForm extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     label: destinations[destination][1],
                   ),
-                  const CustomFormDropDownFieldWidget(
+                  CustomFormDropDownFieldWidget(
+                    onSaved: (value) {},
                     label: "Exploration Days     ",
-                    data: [
+                    data: const [
                       {"code": "1", "description": "1"},
                       {"code": "2", "description": "2"},
                       {"code": "3", "description": "3"},
@@ -46,9 +47,10 @@ class CustomStarDestinationForm extends StatelessWidget {
                   SizedBox(
                     child: (() {
                       if (destination == "galapagos") {
-                        return const CustomFormDropDownFieldWidget(
+                        return CustomFormDropDownFieldWidget(
+                          onSaved: (value) {},
                           label: "Exploration Mode   ",
-                          data: [
+                          data: const [
                             {"code": "1", "description": "Cruiser"},
                             {"code": "2", "description": "Hop Island"},
                             {"code": "3", "description": "Mixed"},
@@ -57,8 +59,9 @@ class CustomStarDestinationForm extends StatelessWidget {
                       }
                     })(),
                   ),
-                  const CustomFormDropDownFieldWidget(
+                    CustomFormDropDownFieldWidget(
                     // label: "Exploration Days",
+                          onSaved: (value) {},
                     label: "Destination Option",
                     data: [
                       {"code": "1", "description": "All included"},
@@ -67,8 +70,9 @@ class CustomStarDestinationForm extends StatelessWidget {
                       {"code": "4", "description": "Open Credit"},
                     ],
                   ),
-                  const CustomFormDropDownFieldWidget(
+                    CustomFormDropDownFieldWidget(
                     // label: "Exploration Days",
+                          onSaved: (value) {},
                     label: "Travel Rithm             ",
                     data: [
                       {"code": "1", "description": "Soft"},

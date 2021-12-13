@@ -9,6 +9,7 @@ class CustomCustomerDataForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Rx<List<Map<String, dynamic>>> citylist = Rx([]);
     return Column(
       children: [
         Row(
@@ -24,9 +25,10 @@ class CustomCustomerDataForm extends StatelessWidget {
                       width: 0.225,
                       fontWeight: FontWeight.bold,
                       label: " Basic information"),
-                  const CustomFormDropDownFieldWidget(
+                  CustomFormDropDownFieldWidget(
                     label: "Customer Type          ",
-                    data: [
+                    onSaved: (value) {},
+                    data: const [
                       {"code": "1", "description": "Ecuador"},
                       // {"code": "2", "description": "hola 2"},
                     ],
@@ -59,8 +61,50 @@ class CustomCustomerDataForm extends StatelessWidget {
                 child: Column(children: [
                   const CustomTitleWidget(
                       width: 0.225, fontWeight: FontWeight.bold, label: "  "),
+                  Row(
+                    children: [
+                      CustomFormDropDownFieldWidget(
+                        width: 0.24,
+                        hintText: "Country",
+                        onSaved: (value) {
+                          setContext("country", value);
+                          var cities = getContext("cities")[value];
+                          var index = 1;
+                          citylist.value = [];
+                          for (var city in cities) {
+                            citylist.value.add({
+                              "description": city,
+                              "code": "$index",
+                            });
+                            index++;
+                          }
+                        },
+                        data: (() {
+                          List<Map<String, dynamic>> list = [];
+                          var index = 1;
+                          for (var country in getContext("countries").keys) {
+                            list.add({
+                              "description": country,
+                              "code": "$index",
+                            });
+                            index++;
+                          }
+                          return list;
+                        })(),
+                      ),
+                      if(true)
+                        Obx(() {
+                          return CustomFormDropDownFieldWidget(
+                            width: 0.10,
+                            hintText: "City",
+                            onSaved: (value) {},
+                            data: citylist.value,
+                          );
+                        }),
+                    ],
+                  ),
                   const CustomFormTextFieldWidget(
-                      hintText: "Address                          ",
+                      hintText: "Address Line                        ",
                       width: 0.36),
                   const CustomFormTextFieldWidget(
                       hintText: "e-Mail                          ",
@@ -74,9 +118,10 @@ class CustomCustomerDataForm extends StatelessWidget {
                           hintText: "Travel Code                ", width: 0.15),
                     ],
                   ),
-                  const CustomFormDropDownFieldWidget(
+                  CustomFormDropDownFieldWidget(
                     label: "Passengers Number",
-                    data: [
+                    onSaved: (value) {},
+                    data: const [
                       {"code": "1", "description": "1"},
                       {"code": "2", "description": "2"},
                       {"code": "3", "description": "3-5"},

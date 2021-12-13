@@ -10,6 +10,7 @@ class CustomFormTextFieldWidget extends StatelessWidget {
       this.width = 0.2,
       this.height = 0.05})
       : super(key: key);
+      
   final String label;
   final String hintText;
   final double width;

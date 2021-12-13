@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/common/widgets/index.dart';
 import 'widgets/index.dart';
@@ -19,17 +20,17 @@ class TourParametersPage extends GetView<TourParametersController> {
 GetBuilder<TourParametersController> _buildTourParametersFormPage(
   BuildContext context,
 ) {
+
   return GetBuilder<TourParametersController>(
     id: 'TourParameters_form_page',
-    builder: (controller) => SafeArea(
-      child: Scaffold(
-        body: SafeArea(
-          child: ContentLayoutWidget(
-              background: "assets/custom/img/tourparameters.png",
-              child: TourParametersFormPage(ctrl: controller),
-              text: "              "),
-        ),
-      ),
+    builder: (controller) => Stack(
+      children: [
+        
+        ContentLayoutWidget(
+            background: "assets/custom/img/tourparameters.png",
+            child: TourParametersFormPage(ctrl: controller),
+            text: "              "),
+      ],
     ),
   );
 }
