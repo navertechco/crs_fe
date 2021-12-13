@@ -64,13 +64,30 @@ class DGalleryWidget extends GetView<DGalleryController> {
   @override
   Widget build(BuildContext context) {
     List<Widget> Gallery = [];
-
+    var index = 0;
     for (var item in galeryData) {
+      var idx = index;
       Gallery.add(GalleryItem(
+        onTap: () {
+          showModalBottomSheet(
+              context: context,
+              builder: (context) {
+                return Container(
+                  width: 1000,
+                  child: GalleryLayoutWidget(
+                      child: Text("$idx",
+                          style: const TextStyle(
+                              color: Color.fromARGB(255, 255, 0, 255),
+                              fontSize: 40)),
+                      text: "DGallery"),
+                );
+              });
+        },
         key: Key(item["title"]),
         image: item["image"],
         title: item["title"],
       ));
+      index++;
     }
 
     return SingleChildScrollView(
@@ -94,11 +111,12 @@ class DGalleryWidget extends GetView<DGalleryController> {
 class GalleryItem extends StatelessWidget {
   final String image;
   final String title;
-
+  final void Function() onTap;
   const GalleryItem({
     Key? key,
     required this.image,
     required this.title,
+    required this.onTap,
   }) : super(key: key);
 
   @override
@@ -109,23 +127,9 @@ class GalleryItem extends StatelessWidget {
           children: [
             SizedBox(height: MediaQuery.of(context).size.height * 0.3),
             GestureDetector(
-              onTap: () {},
+              onTap: onTap,
               child: Image.asset(image,
                   height: MediaQuery.of(context).size.height * 0.4),
-            ),
-            RoundedFormButton(
-              horizontal: 20,
-              vertical: 20,
-              width: 0.12,
-              height: 0.04,
-              fontSize: 20,
-              label: title + " - Read More",
-              onTap: () {
-                Navigator.of(context).restorablePush(_modalBuilder, arguments: {
-                  "title": title,
-                  "image": image,
-                });
-              },
             ),
           ],
         ),

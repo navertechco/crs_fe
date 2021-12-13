@@ -16,3 +16,5 @@ export './resume/index.dart';
 export './arrival/index.dart';
 export './customer/index.dart';
 export './tourparameters/index.dart';
+export './destinationmodal/index.dart';
+export './destinationdetail/index.dart';

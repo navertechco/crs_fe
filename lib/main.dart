@@ -19,8 +19,9 @@ void main() {
   //     [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
   var pages = AppPages.pages;
-  PRegistry registry =
-      routes.toList().firstWhere((element) => element.name == "/Customer");
+  PRegistry registry = routes
+      .toList()
+      .firstWhere((element) => element.name == "/DGallery");
 
   runApp(GetMaterialApp(
       scrollBehavior: MyCustomScrollBehavior(),

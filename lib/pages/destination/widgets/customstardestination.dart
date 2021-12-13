@@ -59,22 +59,22 @@ class CustomStarDestinationForm extends StatelessWidget {
                       }
                     })(),
                   ),
-                    CustomFormDropDownFieldWidget(
+                  CustomFormDropDownFieldWidget(
                     // label: "Exploration Days",
-                          onSaved: (value) {},
+                    onSaved: (value) {},
                     label: "Destination Option",
-                    data: [
+                    data: const [
                       {"code": "1", "description": "All included"},
                       {"code": "2", "description": "Leisure Time"},
                       {"code": "3", "description": "Foods Included"},
                       {"code": "4", "description": "Open Credit"},
                     ],
                   ),
-                    CustomFormDropDownFieldWidget(
+                  CustomFormDropDownFieldWidget(
                     // label: "Exploration Days",
-                          onSaved: (value) {},
+                    onSaved: (value) {},
                     label: "Travel Rithm             ",
-                    data: [
+                    data: const [
                       {"code": "1", "description": "Soft"},
                       {"code": "2", "description": "Medium"},
                       {"code": "3", "description": "Hard"},
@@ -84,7 +84,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                   const CustomFormMultiDropDownFieldWidget(
                     // label: "Exploration Days",
                     hintText: " ",
-                    label: "Key Activities           ",
+                    label: "Key Activities         ",
                     data: [
                       {"code": "1", "description": "Adventure"},
                       {"code": "2", "description": "Culture"},

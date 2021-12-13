@@ -50,6 +50,16 @@ List<dynamic> routes = [
       transition: Transition.native,
       binding: DestinationBinding()),
   PRegistry(
+      name: '/DestinationModal',
+      page: () => const DestinationModalPage(),
+      transition: Transition.native,
+      binding: DestinationModalBinding()),
+  PRegistry(
+      name: '/DestinationDetail',
+      page: () => const DestinationDetailPage(),
+      transition: Transition.native,
+      binding: DestinationDetailBinding()),
+  PRegistry(
       name: '/Activities',
       page: () => const ActivitiesPage(),
       transition: Transition.native,
