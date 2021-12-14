@@ -91,6 +91,7 @@ flutter:
   #       - lib/assets
   assets:
     - assets/
+    - assets/data/
     - assets/custom/
     - assets/custom/img/
     - assets/custom/img/1x/
