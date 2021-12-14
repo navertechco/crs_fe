@@ -77,9 +77,35 @@
     "description": "FOR CNH TRAVELS WE CREATED THIS TAILOR MADE TOUR WITH A FOCUS ON TRANSFORMATIONAL AND SUSTAINABLE TRAVEL. THIS PACKAGE IS BASED ON RESPONSIBLE TOURISM PRACTICES AS IT TOUCHES MANY ARTISANS AND ENTREPRENUERS IN THEIR CRAFTS FOLLOWING GUIDELINS OF FAIR PRICING.",
     "previous": "Shall we begin….\n"
   },
-  "net_rates":[
-    {"room_type":"single", "quantity":16, "pax":16, "roh":3794},
-    {"room_type":"double", "quantity":1, "pax":2, "roh":2279}
+  "net_rates": [
+    {
+      "room_type": "single",
+      "quantity": 16,
+      "pax": 16,
+      "roh": 3794
+    },
+    {
+      "room_type": "double",
+      "quantity": 1,
+      "pax": 2,
+      "roh": 2279
+    }
+  ],
+  "inlcuded": [
+    "Meals described in the tour",
+    "Ticket UIO – CUE – UIO Economic Class",
+    "Guidance",
+    "Transportation",
+    "16 single rooms and 1 double room",
+    "Entrance Fees to churches and museums",
+    "Activities with local entrepreneurs"
+  ],
+  "not_included": [
+    "International Air tickets",
+    "Alcoholic beverages ",
+    "Gratuity/Tips",
+    "Personal expenses (late check-out, gifts, etc.) ",
+    "Meals not described in the program "
   ],
   "hotels": [
     {
@@ -106,7 +132,6 @@
       "check_in_description": "Hotel Cruz del Vado was always a building full of history, art and culture. Located in one of the first neighborhoods of the city and very close to the Cruz del Vado monument, the Hotel of the same name, was arduously intervened using a fusion of traditional and modern construction techniques, preserving the essence and history of this heritage building, while giving it our own identity.",
       "conector": "Have a good night sleep, you are going to need it."
     }
-     
   ],
   "arrival": {
     "port": "Quito",
@@ -119,17 +144,17 @@
   },
   "destinations": [
     {
-      "parent":0,
+      "parent": 0,
       "name": "otavalo",
       "title": "Otavalo",
-      "local_hotel":"Los Ponchos",
-      "local_airport":"",
+      "local_hotel": "Los Ponchos",
+      "local_airport": "",
       "description": "Otavalo, a beautiful ride in a pristine highway enjoying the beautiful landscapes of the Ecuadorian northern Andean mountain range. The city of Otavalo is located in the center of various indigenous communities, rich in culture and traditions, as well as some impressive and very important (for Ecuador’s ancestral cultures) volcanoes such as Imbabura, Cotacachi, Mojanda and Cusín",
-      "connector":"",
-      "next":"",
+      "connector": "",
+      "next": "",
       "days": [
         {
-          "parent": 0, 
+          "parent": 0,
           "description": "{arrival.description}",
           "date": "{arrival.date}",
           "meals": "D/O",
@@ -140,7 +165,7 @@
           ]
         },
         {
-          "parent": 1, 
+          "parent": 1,
           "description": "We start the day visiting the province in a unique form.  We will experience the secrets of Imbabura. Imbabura is the province in which the fabulous ancestral knowledge of indigenous cultures are located. We will meet the safe keepers of this traditions that have dedicated their lives to keep their cultures alive.",
           "date": "26/04/2022",
           "meals": "B/L/D/O",
@@ -152,7 +177,7 @@
               "videos": [],
               "description": "In the community of La Compañía, by San Pablo Lake, visit a family dedicated to weaving on traditional looms. With skill and creativity they make girdles that differentiate the meaning of indigenous clothing through color and design; preserving this ancestral activity in their family tradition.",
               "previous": "Let´s create some family bonds! This family has kept the traditions of the Taitas (fathers) through 4 generations.",
-              "next":""
+              "next": ""
             },
             {
               "title": "Kawsaymi – Ancestral Gastronomy",
@@ -160,8 +185,7 @@
               "videos": [],
               "description": "Husband and wife team Claudia and Patricio, of a Kichwa Otavalean family, are dedicated to presenting experiences in ancestral gastronomy. Located in the Panecillo community, in the Parish of Quichinche, Canton Otavalo ‘Kawsaymi’ is Kichwa for “our living culture.” The word summarizes the family’s focus on promoting the original cuisine of their ancestry, and also presenting their customs to visitors in order to create playful, exciting, and one-of-a-kind experiences. Without a doubt, the gastronomy workshop is an original and unforgettable activity. It combines a variety of native flavors with the richness of natural products and their various preparation methods. In this typical home built with mud and terracotta, diverse culinary products are offered via an ancestral kitchen composed of the tulpa (fire pit) and brick oven in addition to a modern kitchen - including cooking techniques for beginner and intermediate cooks to advanced chefs. Allow Claudia and her family to prepare their recipes, give demonstrative and interactive classes, and end the workshop by enjoying the dishes you’ve made together.",
               "previous": "We continue our tour with a Gastronomic experience!",
-              "next":""
-
+              "next": ""
             },
             {
               "title": "Nayia Art Workshop ",
@@ -169,8 +193,7 @@
               "videos": [],
               "description": "The origin of dream catchers is known to be North American, although the art form currently extends from North America to the south of Chile. However, in Ecuador, objects very similar to the original dream catcher have been found hung in ancient houses thus indicating prior cultural exchanges between the Eagle (North American natives) and the Condor (South American natives). Meander through an outdoor exhibition of dream catchers of various sizes and designs to an indoor showroom and workshop. Discover the implication of harnessing the positive energies of the Pacha Mama or Mother Earth through the natural materials used to construct each of these amulets.",
               "previous": "After such amazing lunch we will visit another major community, Peguche, very well known for its Waterfall, a sacred place of purification of the soul.",
-              "next":""
-
+              "next": ""
             },
             {
               "title": "Taita Gundo  ",
@@ -178,8 +201,7 @@
               "videos": [],
               "description": "Taita Gundo is a family project directed by the prestigious musician Ali Lema that was born from the need to rescue the construction, elaboration and interpretation of musical instruments of the Andes such as pingullos, dulzainas, quenas, quenachos, quenillas, rondadores, pallas, sikuris, as well as antaras and zampoñas which are especially representative of the Imbabura province. Located in Peguche, the community most famous for its art and manufacturing of instruments, all visitors are offered a wide sample of musical instruments and rhythms that identify the Kichwa peoples. As an expansion to the project, they maintain a permanent school of construction and interpretation of wind and string instruments that participates regularly at local and national events. Taita Gundo is presented to national and international tourists as a center of interpretation of musical art where the visitor can not only enter and enjoy the music, but reflect on the Andean cosmovision and what surrounds it.",
               "previous": "Next, be delighted with stories and legends told through Andean instruments! ",
-              "next":""
-
+              "next": ""
             },
             {
               "title": "Diner on Saranse Restaurant",
@@ -187,13 +209,12 @@
               "videos": [],
               "description": "",
               "previous": "Let’s head back and enjoy a three-course dinner at our Sarance restaurant.",
-              "next":""
-
+              "next": ""
             }
           ]
         },
         {
-          "parent": 2, 
+          "parent": 2,
           "description": "After a hearty breakfast we will take you trekking to a unique place between mountains and beautiful lagoons. Enjoy a delicious picnic with a breathtaking view in the middle of the Andes. After great day we will go back to the hotel and in the evening we will visit a traditional restaurant in the city and have a three course meal.",
           "date": "27/04/2022",
           "meals": "B/L/D/O",
@@ -205,8 +226,7 @@
               "videos": [],
               "description": "After a hearty breakfast, we will take you trekking to a unique place between mountains and beautiful lagoons. Enjoy a delicious picnic with a breathtaking view in the middle of the Andes. ",
               "previous": "Let’s head back and enjoy a three-course dinner at our Sarance restaurant.",
-              "next":""
-
+              "next": ""
             },
             {
               "title": "Lunch on Saranse Restaurant",
@@ -214,13 +234,12 @@
               "videos": [],
               "description": "",
               "previous": "After great day we will go back to the hotel and in the evening we will visit a traditional restaurant in the city and have a three course meal.",
-              "next":""
-
+              "next": ""
             }
           ]
         },
         {
-          "parent": 3, 
+          "parent": 3,
           "description": "After our breakfast the Hotel´s Concierge will invite us to discover Otavalo in a different way. ",
           "date": "28/04/2022",
           "meals": "B/L/D/O",
@@ -232,25 +251,24 @@
               "videos": [],
               "description": "During this tour, we will learn about Otavalo's history, beliefs, traditions and legends. Visiting the old places with a deep understanding into the culture of Otavalo seen through the eyes of locals. Our concierges themselves, have lived the stories you will hear, giving you a better insight of iconic places in the city, which by the way, are not very touristic.",
               "previous": "After our breakfast the Hotel´s Concierge will invite us to discover Otavalo in a different way",
-              "next":""
-
+              "next": ""
             }
           ]
         }
       ]
     },
     {
-      "parent":1,
+      "parent": 1,
       "name": "quito",
       "title": "Quito",
       "description": "",
-      "local_hotel":"Mama Cuchara",
-      "local_airport":"UIO airport",
+      "local_hotel": "Mama Cuchara",
+      "local_airport": "UIO airport",
       "previous": "After this tour we will continue our trip to Quito making a lunch stop in one traditional Hacienda between the province of Imbabura and Pichincha. ",
-      "next":"",
+      "next": "",
       "days": [
         {
-          "parent": 4, 
+          "parent": 4,
           "description": "After our breakfast the Hotel´s Concierge will invite us to discover Otavalo in a different way. ",
           "date": "28/04/2022",
           "meals": "B/L/D/O",
@@ -260,7 +278,7 @@
           ]
         },
         {
-          "parent": 4, 
+          "parent": 4,
           "description": "After our breakfast: we will start the day with our, {destinations[1].days[1].experiences[0]}",
           "date": "29/04/2022",
           "meals": "B/L/D/O",
@@ -295,102 +313,112 @@
       ]
     },
     {
-      "parent":2,
+      "parent": 2,
       "name": "cuenca",
       "title": "Cuenca",
       "description": "",
-      "local_hotel":"Cruz del Vado",
-      "local_airport":"Cuenca airport",
+      "local_hotel": "Cruz del Vado",
+      "local_airport": "Cuenca airport",
       "previous": "you will be going to {detinations[parent].local_airport} airport where you will connect into a local flight (if possible) to the beautiful city of Cuenca.  We will go to the emblematic Hotel {local_hotel}.",
-      "next":"",
+      "next": "",
       "days": [
         {
-          "parent": 5, 
+          "parent": 5,
           "description": "",
           "transfer": "",
           "date": "30/04/2022",
           "meals": "D/O",
           "observation": "Day 6: Dinner at Cupulas Azules restaurant of Hotel Cruz del Vado.",
-          "next":"After breakfast, ",
+          "next": "After breakfast, ",
           "experiences": [
             "{hotels[2]}"
           ]
-        },{
-          "parent": 6, 
+        },
+        {
+          "parent": 6,
           "description": "After breakfast we will be leaving to the Airport to take the flight to ",
           "transfer": "",
           "date": "1/05/2022",
-          "meals":"B/L/D/O",
+          "meals": "B/L/D/O",
           "observation": "Day 7: Dinner at a must restaurant in Cuenca",
-          "experiences": [ {
-            "title": "The Blacksmith",
-            "photos": [],
-            "videos": [],
-            "description": "The small traditional street that crosses “Las Herrerías” neighborhood, houses the workshop of Don Sergio Guerra, who, for more than 25 years, has been working in the traditional craft of the arts of fire. In his workshop, he shapes various pieces by hammer and anvil. The “Herrero” manufactures anything from antique style door locks to the coronation roosters of the traditional houses of Cuenca. Accompany him during his workday and he’ll even allow you to forge your own figure. Natural forms, padlocks, horseshoes and various handcrafted pieces take shape in his workshop, which is surely a place to be visited.",
-            "previous": "with a one-of-a-kind view, you are going to be surprised by our exclusive tour in the city. Starting or ending in the oldest neighborhood right outside of the Hotel, you will explore what we like to call The Culture of El Vado. Cuenca is also known as the Cultural Capital of Ecuador, and “cuencanos” take this seriously. Explore with us the meticulous work made by skillful artisans. ",
-            "next": "We will pause and eat in an emblematic traditional restaurant in the city to have energy for our next visit."
-          },{
-            "title": "The Woodworker",
-            "photos": [],
-            "videos": [],
-            "description": "At the entrance to this workshop, in the traditional neighborhood of Vado, you can find a unique aroma of wood. Here some of the most famous guitars in the country are manufactured. This craftsman tells us about his process, how he treats and works the wood to give it the shape of a guitar, charango or even a cuatro. The tuning is everything, some of their pieces take up to 6 months to complete, national and international artists commission the development of their instruments to this skillful instrument maker who embeds pieces of ivory and marble customized according to the taste of the artist who commissioned its development. Admiring this fine work and then listening to a melody from one of his creations is undoubtedly a sight worthy of applause.",
-            "previous": "with a one-of-a-kind view, you are going to be surprised by our exclusive tour in the city. Starting or ending in the oldest neighborhood right outside of the Hotel, you will explore what we like to call The Culture of El Vado. Cuenca is also known as the Cultural Capital of Ecuador, and “cuencanos” take this seriously. Explore with us the meticulous work made by skillful artisans. ",
-            "next": ""
-          },{
-            "title": "The Antique Gallery",
-            "photos": [],
-            "videos": [],
-            "description": "On La Condamine Street there is a private gallery, where you can recall history through the pieces on exhibit. The show is infinite: toys, cameras, saints and religious figures, instruments and many items that define eras and represent the way of life of the aristocracy of Cuenca in past times.",
-            "previous": "Now some down time, exploring antiques of all sorts.",
-            "next": ""
-          },{
-            "title": "The Potter",
-            "photos": [],
-            "videos": [],
-            "description": "For this family pottery is a way of life that has been passed down from generation to generation. Warmly opening the doors to their home-workshop, Don Juan tells you the story of how he has been practicing with clay since he was a child and that after more than 40 years he is just now perfecting his skills. In the workshop, located in La Convención district, unique pieces of clay are formed and then baked at thousands of degrees to obtain a unique black finish. The potter teaches you how to work the clay in his lathe to make all types of pots and the various pieces that are manufactured there.",
-            "previous": "With energy recharged, we want you to use your hands and imagination for the next stop.",
-            "next": ""
-          }
-        ]
-        },{
-          "parent": 7, 
+          "experiences": [
+            {
+              "title": "The Blacksmith",
+              "photos": [],
+              "videos": [],
+              "description": "The small traditional street that crosses “Las Herrerías” neighborhood, houses the workshop of Don Sergio Guerra, who, for more than 25 years, has been working in the traditional craft of the arts of fire. In his workshop, he shapes various pieces by hammer and anvil. The “Herrero” manufactures anything from antique style door locks to the coronation roosters of the traditional houses of Cuenca. Accompany him during his workday and he’ll even allow you to forge your own figure. Natural forms, padlocks, horseshoes and various handcrafted pieces take shape in his workshop, which is surely a place to be visited.",
+              "previous": "with a one-of-a-kind view, you are going to be surprised by our exclusive tour in the city. Starting or ending in the oldest neighborhood right outside of the Hotel, you will explore what we like to call The Culture of El Vado. Cuenca is also known as the Cultural Capital of Ecuador, and “cuencanos” take this seriously. Explore with us the meticulous work made by skillful artisans. ",
+              "next": "We will pause and eat in an emblematic traditional restaurant in the city to have energy for our next visit."
+            },
+            {
+              "title": "The Woodworker",
+              "photos": [],
+              "videos": [],
+              "description": "At the entrance to this workshop, in the traditional neighborhood of Vado, you can find a unique aroma of wood. Here some of the most famous guitars in the country are manufactured. This craftsman tells us about his process, how he treats and works the wood to give it the shape of a guitar, charango or even a cuatro. The tuning is everything, some of their pieces take up to 6 months to complete, national and international artists commission the development of their instruments to this skillful instrument maker who embeds pieces of ivory and marble customized according to the taste of the artist who commissioned its development. Admiring this fine work and then listening to a melody from one of his creations is undoubtedly a sight worthy of applause.",
+              "previous": "with a one-of-a-kind view, you are going to be surprised by our exclusive tour in the city. Starting or ending in the oldest neighborhood right outside of the Hotel, you will explore what we like to call The Culture of El Vado. Cuenca is also known as the Cultural Capital of Ecuador, and “cuencanos” take this seriously. Explore with us the meticulous work made by skillful artisans. ",
+              "next": ""
+            },
+            {
+              "title": "The Antique Gallery",
+              "photos": [],
+              "videos": [],
+              "description": "On La Condamine Street there is a private gallery, where you can recall history through the pieces on exhibit. The show is infinite: toys, cameras, saints and religious figures, instruments and many items that define eras and represent the way of life of the aristocracy of Cuenca in past times.",
+              "previous": "Now some down time, exploring antiques of all sorts.",
+              "next": ""
+            },
+            {
+              "title": "The Potter",
+              "photos": [],
+              "videos": [],
+              "description": "For this family pottery is a way of life that has been passed down from generation to generation. Warmly opening the doors to their home-workshop, Don Juan tells you the story of how he has been practicing with clay since he was a child and that after more than 40 years he is just now perfecting his skills. In the workshop, located in La Convención district, unique pieces of clay are formed and then baked at thousands of degrees to obtain a unique black finish. The potter teaches you how to work the clay in his lathe to make all types of pots and the various pieces that are manufactured there.",
+              "previous": "With energy recharged, we want you to use your hands and imagination for the next stop.",
+              "next": ""
+            }
+          ]
+        },
+        {
+          "parent": 7,
           "description": "After the breakfast we will be heading to the towns of Gualaceo and Chordeleg, known by their filigree shops, vibrant and colorful textiles and beautiful plazas. We will be having lunch at a traditional Restaurant while exploring the small towns.",
           "transfer": "",
           "date": "2/05/2022",
-          "meals":"B/L/D/O",
+          "meals": "B/L/D/O",
           "observation": "Day 7: Finally, our last dinner at your hotel, Hotel Cruz del Vado. A surprise will be provided.",
-          "experiences": [ {
-            "title": "Shawls of Ikat",
-            "photos": [],
-            "videos": [],
-            "description": "For centuries, an ancient technique of dyeing clothes called ikat has been practiced in Gualaceo. This technique consists of tying small strands of cabuya, a fiber of vegetable origin that comes from the fique plant (known locally as penco), in threads to draw patterns for what will later be a shawl. The more knots tied, the more complex and elaborate the process, which then, passes to the step of hand dying with leaves and fruits like walnut, to finally being woven by hand on a warp and becoming the famous shawl of Gualaceo. These shawls are of particular importance for being part of the traditional dress of the “Chola Cuencana”. There are shawls that take months to manufacture due to the complex process of elaboration. Learning from the hand of the artisans their techniques and processes is one of the most beautiful memories you can have in your visit to Cuenca.",
-            "previous": "",
-            "next": ""
-          } ,{
-            "title": "Filigree",
-            "photos": [],
-            "videos": [],
-            "description": "In a small and magical place south of Cuenca, some of the most elaborate pieces of jewelry in Ecuador are manufactured. Chordeleg, is recognized for being home to some of the best jewelers in the country. In this place, silver melts at thousands of degrees to form tiny braided threads that later give shape to chains, earrings, tiaras and crowns. The technique of these artisans is known as filigree and the jewelers of this small town have practiced it for generations. The impressive ability to weave small threads together into a jewel makes this an activity worthy of being admired, and the pieces produced here qualify as small pieces of art.",
-            "previous": "",
-            "next": ""
-          } 
-        ]
-        },{
-          "parent": 8, 
+          "experiences": [
+            {
+              "title": "Shawls of Ikat",
+              "photos": [],
+              "videos": [],
+              "description": "For centuries, an ancient technique of dyeing clothes called ikat has been practiced in Gualaceo. This technique consists of tying small strands of cabuya, a fiber of vegetable origin that comes from the fique plant (known locally as penco), in threads to draw patterns for what will later be a shawl. The more knots tied, the more complex and elaborate the process, which then, passes to the step of hand dying with leaves and fruits like walnut, to finally being woven by hand on a warp and becoming the famous shawl of Gualaceo. These shawls are of particular importance for being part of the traditional dress of the “Chola Cuencana”. There are shawls that take months to manufacture due to the complex process of elaboration. Learning from the hand of the artisans their techniques and processes is one of the most beautiful memories you can have in your visit to Cuenca.",
+              "previous": "",
+              "next": ""
+            },
+            {
+              "title": "Filigree",
+              "photos": [],
+              "videos": [],
+              "description": "In a small and magical place south of Cuenca, some of the most elaborate pieces of jewelry in Ecuador are manufactured. Chordeleg, is recognized for being home to some of the best jewelers in the country. In this place, silver melts at thousands of degrees to form tiny braided threads that later give shape to chains, earrings, tiaras and crowns. The technique of these artisans is known as filigree and the jewelers of this small town have practiced it for generations. The impressive ability to weave small threads together into a jewel makes this an activity worthy of being admired, and the pieces produced here qualify as small pieces of art.",
+              "previous": "",
+              "next": ""
+            }
+          ]
+        },
+        {
+          "parent": 8,
           "description": "",
           "transfer": "",
           "date": "3/05/2022",
-          "meals":"B/",
+          "meals": "B/",
           "observation": "Day 7: Flight to Quito and final connection with international flight.",
-          "experiences": [ {
-            "title": "Taking Pictures",
-            "photos": [],
-            "videos": [],
-            "description": "Take one last picture of Cuenca while having breakfast, because you are going home. ",
-            "previous": "",
-            "next": ""
-          }  
-        ]
+          "experiences": [
+            {
+              "title": "Taking Pictures",
+              "photos": [],
+              "videos": [],
+              "description": "Take one last picture of Cuenca while having breakfast, because you are going home. ",
+              "previous": "",
+              "next": ""
+            }
+          ]
         }
       ]
     }
