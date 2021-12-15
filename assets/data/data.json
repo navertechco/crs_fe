@@ -37,6 +37,7 @@
     }
   ],
   "tour": [
+   
     {
       "code": "country",
       "description": "Destination Country",
@@ -70,78 +71,47 @@
   ],
   "cover": {
     "title": "ENCHANTING ECUADOR",
-    "pearson_group": "18",
+    "passengers": "18",
     "days": "10",
     "nights": "9",
     "valid_until": "31/12/2022",
-    "description": "FOR CNH TRAVELS WE CREATED THIS TAILOR MADE TOUR WITH A FOCUS ON TRANSFORMATIONAL AND SUSTAINABLE TRAVEL. THIS PACKAGE IS BASED ON RESPONSIBLE TOURISM PRACTICES AS IT TOUCHES MANY ARTISANS AND ENTREPRENUERS IN THEIR CRAFTS FOLLOWING GUIDELINS OF FAIR PRICING.",
-    "previous": "Shall we begin….\n"
+    "description": "FOR CNH TRAVELS WE CREATED THIS TAILOR MADE TOUR WITH A FOCUS ON TRANSFORMATIONAL AND SUSTAINABLE TRAVEL. THIS PACKAGE IS BASED ON RESPONSIBLE TOURISM PRACTICES AS IT TOUCHES MANY ARTISANS AND ENTREPRENUERS IN THEIR CRAFTS FOLLOWING GUIDELINS OF FAIR PRICING."
+    
   },
-  "net_rates": [
-    {
-      "room_type": "single",
-      "quantity": 16,
-      "pax": 16,
-      "roh": 3794
-    },
-    {
-      "room_type": "double",
-      "quantity": 1,
-      "pax": 2,
-      "roh": 2279
-    }
-  ],
-  "inlcuded": [
-    "Meals described in the tour",
-    "Ticket UIO – CUE – UIO Economic Class",
-    "Guidance",
-    "Transportation",
-    "16 single rooms and 1 double room",
-    "Entrance Fees to churches and museums",
-    "Activities with local entrepreneurs"
-  ],
-  "not_included": [
-    "International Air tickets",
-    "Alcoholic beverages ",
-    "Gratuity/Tips",
-    "Personal expenses (late check-out, gifts, etc.) ",
-    "Meals not described in the program "
-  ],
-  "hotels": [
-    {
-      "title": "Hotel Los Ponchos",
-      "photos": [],
-      "videos": [],
-      "description": "Otavalo, best know for “Los Ponchos” market, is a must see destination in Ecuador since it hosts de largest Andean fair of artisan handicrafts ans textiles in all of South America. Hotal Otavalo is one of the oldest buildings whitin the city. Recently refurbished, the history of the city is showcased through the building materials used for its construction more than a century ago, the hotel creates the sentation of living in a castle whithin the city",
-      "check_in_description": "Check-in at Hotel Otavalo with our welcome cocktail. Dinner at our Sarance Restaurant. Sarance means “People who live upright” and it also is the ancient name of Otavalo.",
-      "conector": "Have a good night sleep, you are going to need it."
-    },
-    {
-      "title": "Hotel Mama Cuchara",
-      "photos": [],
-      "videos": [],
-      "description": "Following a meticulous renovations, this antique Spanish-colonial house was resurrected and modernized into what is now Hotel Mama Cuchara. The hotel offers guests all the charisma of a historic hotel, the deeply individual charm of a boutique hotel and the effortless comforts, services and contemporary elegance of 5 star accommodations ",
-      "check_in_description": "Hotel Mama Cuchara in Quito’s old town will be waiting for you. Set in the traditional and one of the last living neighborhoods, La Loma Grande (“The Big Hill”), many generations of neighbors still live there, withholding hidden yet enchanting places you will enjoy.",
-      "conector": "Have a good night sleep, you are going to need it."
-    },
-    {
-      "title": "Hotel Cruz del Vado",
-      "photos": [],
-      "videos": [],
-      "description": "Located in the Historical Downtown of the cultural capital of Ecuador, Cuenca. Hotel Cruz del Vado takes us into one of the most important colonial houses of this city. Its pink marble façade is an example of the luxurious lifestyle enjoyed in the republican era. Located near La Cruz del Vado, hence its name, the hotel is in the oldest neighborhood of beautiful Cuenca which also carries the Cultural Heritage of Humanity title by UNESCO.",
-      "check_in_description": "Hotel Cruz del Vado was always a building full of history, art and culture. Located in one of the first neighborhoods of the city and very close to the Cruz del Vado monument, the Hotel of the same name, was arduously intervened using a fusion of traditional and modern construction techniques, preserving the essence and history of this heritage building, while giving it our own identity.",
-      "conector": "Have a good night sleep, you are going to need it."
-    }
-  ],
-  "arrival": {
-    "port": "Quito",
-    "title": "arrive to your hotel, {hotels[0].name}",
-    "photos": [],
-    "videos": [],
-    "date": "25/04/2022",
-    "previous": "Your arrival, welcome to Ecuador",
-    "description": "Departure from {arrival.port} International Airport to {hotel.description}"
+  "end":{
+    "net_rates": [
+      {
+        "room_type": "single",
+        "quantity": "16",
+        "passengers": "16",
+        "roh": "3794"
+      },
+      {
+        "room_type": "double",
+        "quantity": "1",
+        "passengers": "2",
+        "roh": "2279"
+      }
+    ],
+    "included": [
+      "Meals described in the tour",
+      "Ticket UIO – CUE – UIO Economic Class",
+      "Guidance",
+      "Transportation",
+      "16 single rooms and 1 double room",
+      "Entrance Fees to churches and museums",
+      "Activities with local entrepreneurs"
+    ],
+    "not_included": [
+      "International Air tickets",
+      "Alcoholic beverages ",
+      "Gratuity/Tips",
+      "Personal expenses (late check-out, gifts, etc.) ",
+      "Meals not described in the program "
+    ]
   },
+  
+
   "destinations": [
     {
       "parent": 0,
@@ -150,63 +120,77 @@
       "local_hotel": "Los Ponchos",
       "local_airport": "",
       "description": "Otavalo, a beautiful ride in a pristine highway enjoying the beautiful landscapes of the Ecuadorian northern Andean mountain range. The city of Otavalo is located in the center of various indigenous communities, rich in culture and traditions, as well as some impressive and very important (for Ecuador’s ancestral cultures) volcanoes such as Imbabura, Cotacachi, Mojanda and Cusín",
-      "connector": "",
+      "previous": "",
       "next": "",
       "days": [
         {
           "parent": 0,
-          "description": "{arrival.description}",
-          "date": "{arrival.date}",
+          "day_description": "{arrival.description}",
+          "day_name":"Day 1",
+          "date": "MONDAY 25TH April 2022",
           "meals": "D/O",
           "observation": "Day 1: Overnight at Hotel Otavalo",
+          "day_previous": "",
+          "day_next": "",
           "experiences": [
-            "{arrival}",
-            "{hotels[0]}"
+           {
+            "title": "Your arrival, welcome to Ecuador", 
+            "photo":"photo",
+            "description": "Departure from Quito International Airport to Hotel Otavalo",
+            "previous": "" ,
+            "next": ""
+
+           },
+           {
+            "title": "arrive to your hotel, Hotel Otavalo",
+            "photo":"photo",
+            "description": "Check-in at Hotel Otavalo with our welcome cocktail. Dinner at our Sarance Restaurant. Sarance means “People who live upright” and it also is the ancient name of Otavalo.",
+            "previous": "" ,
+            "next": "Have a good night sleep, you are going to need it."
+          }
           ]
         },
         {
           "parent": 1,
-          "description": "We start the day visiting the province in a unique form.  We will experience the secrets of Imbabura. Imbabura is the province in which the fabulous ancestral knowledge of indigenous cultures are located. We will meet the safe keepers of this traditions that have dedicated their lives to keep their cultures alive.",
-          "date": "26/04/2022",
+          "day_description": "We start the day visiting the province in a unique form.  We will experience the secrets of Imbabura. Imbabura is the province in which the fabulous ancestral knowledge of indigenous cultures are located. We will meet the safe keepers of this traditions that have dedicated their lives to keep their cultures alive.",
+          "day_name":"Day 2",
+          "date": "TUESDAY 26TH April 2022",
           "meals": "B/L/D/O",
           "observation": "Day 2: Overnight at Hotel Otavalo",
+          "day_previous": "",
+          "day_next": "",
           "experiences": [
             {
               "title": "Equator Face Workshop",
-              "photos": [],
-              "videos": [],
+              "photo":"photo",
               "description": "In the community of La Compañía, by San Pablo Lake, visit a family dedicated to weaving on traditional looms. With skill and creativity they make girdles that differentiate the meaning of indigenous clothing through color and design; preserving this ancestral activity in their family tradition.",
               "previous": "Let´s create some family bonds! This family has kept the traditions of the Taitas (fathers) through 4 generations.",
               "next": ""
             },
             {
               "title": "Kawsaymi – Ancestral Gastronomy",
-              "photos": [],
-              "videos": [],
+              "photo":"photo",
               "description": "Husband and wife team Claudia and Patricio, of a Kichwa Otavalean family, are dedicated to presenting experiences in ancestral gastronomy. Located in the Panecillo community, in the Parish of Quichinche, Canton Otavalo ‘Kawsaymi’ is Kichwa for “our living culture.” The word summarizes the family’s focus on promoting the original cuisine of their ancestry, and also presenting their customs to visitors in order to create playful, exciting, and one-of-a-kind experiences. Without a doubt, the gastronomy workshop is an original and unforgettable activity. It combines a variety of native flavors with the richness of natural products and their various preparation methods. In this typical home built with mud and terracotta, diverse culinary products are offered via an ancestral kitchen composed of the tulpa (fire pit) and brick oven in addition to a modern kitchen - including cooking techniques for beginner and intermediate cooks to advanced chefs. Allow Claudia and her family to prepare their recipes, give demonstrative and interactive classes, and end the workshop by enjoying the dishes you’ve made together.",
               "previous": "We continue our tour with a Gastronomic experience!",
               "next": ""
             },
             {
               "title": "Nayia Art Workshop ",
-              "photos": [],
-              "videos": [],
+              "photo":"photo",
               "description": "The origin of dream catchers is known to be North American, although the art form currently extends from North America to the south of Chile. However, in Ecuador, objects very similar to the original dream catcher have been found hung in ancient houses thus indicating prior cultural exchanges between the Eagle (North American natives) and the Condor (South American natives). Meander through an outdoor exhibition of dream catchers of various sizes and designs to an indoor showroom and workshop. Discover the implication of harnessing the positive energies of the Pacha Mama or Mother Earth through the natural materials used to construct each of these amulets.",
               "previous": "After such amazing lunch we will visit another major community, Peguche, very well known for its Waterfall, a sacred place of purification of the soul.",
               "next": ""
             },
             {
               "title": "Taita Gundo  ",
-              "photos": [],
-              "videos": [],
+              "photo":"photo",
               "description": "Taita Gundo is a family project directed by the prestigious musician Ali Lema that was born from the need to rescue the construction, elaboration and interpretation of musical instruments of the Andes such as pingullos, dulzainas, quenas, quenachos, quenillas, rondadores, pallas, sikuris, as well as antaras and zampoñas which are especially representative of the Imbabura province. Located in Peguche, the community most famous for its art and manufacturing of instruments, all visitors are offered a wide sample of musical instruments and rhythms that identify the Kichwa peoples. As an expansion to the project, they maintain a permanent school of construction and interpretation of wind and string instruments that participates regularly at local and national events. Taita Gundo is presented to national and international tourists as a center of interpretation of musical art where the visitor can not only enter and enjoy the music, but reflect on the Andean cosmovision and what surrounds it.",
               "previous": "Next, be delighted with stories and legends told through Andean instruments! ",
               "next": ""
             },
             {
               "title": "Diner on Saranse Restaurant",
-              "photos": [],
-              "videos": [],
+              "photo":"photo",
               "description": "",
               "previous": "Let’s head back and enjoy a three-course dinner at our Sarance restaurant.",
               "next": ""
@@ -215,23 +199,24 @@
         },
         {
           "parent": 2,
-          "description": "After a hearty breakfast we will take you trekking to a unique place between mountains and beautiful lagoons. Enjoy a delicious picnic with a breathtaking view in the middle of the Andes. After great day we will go back to the hotel and in the evening we will visit a traditional restaurant in the city and have a three course meal.",
-          "date": "27/04/2022",
+          "day_description": "After a hearty breakfast we will take you trekking to a unique place between mountains and beautiful lagoons. Enjoy a delicious picnic with a breathtaking view in the middle of the Andes. After great day we will go back to the hotel and in the evening we will visit a traditional restaurant in the city and have a three course meal.",
+          "day_name":"Day 3",
+          "date": "WENESDAY 27TH April 2022",
           "meals": "B/L/D/O",
           "observation": "Day 3: Overnight at Hotel Otavalo",
+          "day_previous": "",
+          "day_next": "",
           "experiences": [
             {
               "title": "Picnic with a breathtaking view in the middle of the Andes",
-              "photos": [],
-              "videos": [],
+              "photo":"photo",
               "description": "After a hearty breakfast, we will take you trekking to a unique place between mountains and beautiful lagoons. Enjoy a delicious picnic with a breathtaking view in the middle of the Andes. ",
               "previous": "Let’s head back and enjoy a three-course dinner at our Sarance restaurant.",
               "next": ""
             },
             {
               "title": "Lunch on Saranse Restaurant",
-              "photos": [],
-              "videos": [],
+              "photo":"photo",
               "description": "",
               "previous": "After great day we will go back to the hotel and in the evening we will visit a traditional restaurant in the city and have a three course meal.",
               "next": ""
@@ -240,15 +225,17 @@
         },
         {
           "parent": 3,
-          "description": "After our breakfast the Hotel´s Concierge will invite us to discover Otavalo in a different way. ",
-          "date": "28/04/2022",
+          "day_description": "After our breakfast the Hotel´s Concierge will invite us to discover Otavalo in a different way. ",
+          "day_name":"Day 4",
+          "date": "THURSDAY 28TH April 2022",
           "meals": "B/L/D/O",
           "observation": "Day 4: Dinner at La Plaza Restaurant in the hotel.",
+          "day_previous": "",
+          "day_next": "",
           "experiences": [
             {
               "title": "Insiders Concierge Tour ",
-              "photos": [],
-              "videos": [],
+              "photo":"photo",
               "description": "During this tour, we will learn about Otavalo's history, beliefs, traditions and legends. Visiting the old places with a deep understanding into the culture of Otavalo seen through the eyes of locals. Our concierges themselves, have lived the stories you will hear, giving you a better insight of iconic places in the city, which by the way, are not very touristic.",
               "previous": "After our breakfast the Hotel´s Concierge will invite us to discover Otavalo in a different way",
               "next": ""
@@ -268,42 +255,51 @@
       "next": "",
       "days": [
         {
-          "parent": 4,
-          "description": "After our breakfast the Hotel´s Concierge will invite us to discover Otavalo in a different way. ",
-          "date": "28/04/2022",
+          "parent": 3,
+          "day_description": "After our breakfast the Hotel´s Concierge will invite us to discover Otavalo in a different way. ",
+          "day_name":"Day 4",
+          "date": "THURSDAY 28TH April 2022",
           "meals": "B/L/D/O",
           "observation": "Day 4: Dinner at La Plaza Restaurant in the hotel.",
+          "day_previous": "",
+          "day_next": "",
           "experiences": [
-            "{hotels[1]}"
+            {
+              "title": "Hotel Mama Cuchara",
+              "photo":"photo",
+              "description": "Hotel Mama Cuchara in Quito’s old town will be waiting for you. Set in the traditional and one of the last living neighborhoods, La Loma Grande (“The Big Hill”), many generations of neighbors still live there, withholding hidden yet enchanting places you will enjoy.",
+              "previous": "Have a good night sleep, you are going to need it." ,
+              "next": ""
+            }
           ]
         },
         {
           "parent": 4,
-          "description": "After our breakfast: we will start the day with our, {destinations[1].days[1].experiences[0]}",
-          "date": "29/04/2022",
+          "day_description": "After our breakfast: we will start the day with our, {destinations[1].days[1].experiences[0]}",
+          "day_name":"Day 5",
+          "date": "THURSDAY 29TH April 2022",
           "meals": "B/L/D/O",
           "observation": "Day 5: Dinner at our “El Santo que da Marido” Rooftop Bar in Hotel Mama Cuchara",
+          "day_previous": "",
+          "day_next": "",
           "experiences": [
             {
               "title": "The Domes of Santo Domingo Church and Chapel of the Rosary ",
-              "photos": [],
-              "videos": [],
+              "photo":"photo",
               "description": "Located between the streets of Guayaquil and Rocafuerte the 16th century Church of Santo Domingo is a site that you should not miss. It was initially built by Dominican Priests, with contributions by various notable artists from Quito such as, Bernardo Legarda, Miguel de Santiago and Fray Pedro Bedón. Due to this fusion, the church has a large amount of Baroque as well as Neoclassical details, and a variety of artwork including sculptures and paintings which leave visitors in awe. The late 17th century Chapel of La Virgen del Rosario is located on one side of the church's central nave. Thus creating the famous arch of the Church of Santo Domingo, which supports the Chapel over Rocafuerte Street. In the chapel you can see the sculpture of the Virgin of the Rosary that was a gift from King Charles V of Spain to Quito. The decoration of this chapel conserves the pure essence of Baroque Quito – golden paintings and carvings on a red backdrop earn its consideration as one of the architectural gems of the historic center of Quito. Visiting the domes of this church is a worthy memory to take from your visit to Quito and the neighborhood of La Loma Grande. Be sure to bring your camera as you explore one of the best views of the old town! ",
               "previous": "",
               "next": "Still in the church…."
             },
             {
               "title": "Library of Santo Domingo",
-              "photos": [],
-              "videos": [],
+              "photo":"photo",
               "description": "Located between the streets of Guayaquil and Rocafuerte the 16th century Church of Santo Domingo is a site that you should not miss. It was initially built by Dominican Priests, with contributions by various notable artists from Quito such as, Bernardo Legarda, Miguel de Santiago and Fray Pedro Bedón. Due to this fusion, the church has a large amount of Baroque as well as Neoclassical details, and a variety of artwork including sculptures and paintings which leave visitors in awe. The late 17th century Chapel of La Virgen del Rosario is located on one side of the church's central nave. Thus creating the famous arch of the Church of Santo Domingo, which supports the Chapel over Rocafuerte Street. In the chapel you can see the sculpture of the Virgin of the Rosary that was a gift from King Charles V of Spain to Quito. The decoration of this chapel conserves the pure essence of Baroque Quito – golden paintings and carvings on a red backdrop earn its consideration as one of the architectural gems of the historic center of Quito. Visiting the domes of this church is a worthy memory to take from your visit to Quito and the neighborhood of La Loma Grande. Be sure to bring your camera as you explore one of the best views of the old town! ",
               "previous": "Tour the Hill of Enchantments. Starting with some religious musts.",
               "next": "After seeing such an incredible place, "
             },
             {
               "title": "El Caretero",
-              "photos": [],
-              "videos": [],
+              "photo":"photo",
               "description": "In La Loma Grande neighborhood discover a place as magical as the people who live and work in it. For more than two decades, El Caretero has been making beautiful handmade paper and cardboard masks which are representations of Ecuadorian popular culture. They are made with the same techniques of yesteryear, in clay molds and paste, which are then painted completely by hand. In addition, El Caretero of la Loma Grande exhibits a demonstration of skill when creating unique pieces by hand and invites you to participate in its creation. Discover and learn how his process is and let yourself be charmed by its art and tradition. ",
               "previous": "we have to meet an incredible human being, his passion will enchant you.",
               "next": "We will pause our tour in a traditional restaurant. In the afternoon we will be visiting the main churches and plazas in the old town. Enjoy an eloquent description of each site and its history. "
@@ -319,57 +315,64 @@
       "description": "",
       "local_hotel": "Cruz del Vado",
       "local_airport": "Cuenca airport",
-      "previous": "you will be going to {detinations[parent].local_airport} airport where you will connect into a local flight (if possible) to the beautiful city of Cuenca.  We will go to the emblematic Hotel {local_hotel}.",
-      "next": "",
+      "destination_previous": "you will be going to {detinations[parent].local_airport} airport where you will connect into a local flight (if possible) to the beautiful city of Cuenca.  We will go to the emblematic Hotel {local_hotel}.",
+      "destination_next": "",
       "days": [
         {
           "parent": 5,
-          "description": "",
+          "day_description": "",
           "transfer": "",
-          "date": "30/04/2022",
+          "day_name":"Day 6",
+          "date": "FRIDAY 30TH April 2022",
           "meals": "D/O",
           "observation": "Day 6: Dinner at Cupulas Azules restaurant of Hotel Cruz del Vado.",
-          "next": "After breakfast, ",
+          "day_next": "After breakfast, ",
+          "day_previous": "",
           "experiences": [
-            "{hotels[2]}"
+            {
+              "title": "Hotel Cruz del Vado",
+              "photo":"photo",
+              "description": "Hotel Cruz del Vado was always a building full of history, art and culture. Located in one of the first neighborhoods of the city and very close to the Cruz del Vado monument, the Hotel of the same name, was arduously intervened using a fusion of traditional and modern construction techniques, preserving the essence and history of this heritage building, while giving it our own identity.",
+              "previous": "Have a good night sleep, you are going to need it.",
+              "next": ""
+            }
           ]
         },
         {
           "parent": 6,
-          "description": "After breakfast we will be leaving to the Airport to take the flight to ",
+          "day_description": "After breakfast we will be leaving to the Airport to take the flight to ",
           "transfer": "",
-          "date": "1/05/2022",
+          "day_name":"Day 7",
+          "date": "SATURDAY 1TH MAY 2022",
           "meals": "B/L/D/O",
           "observation": "Day 7: Dinner at a must restaurant in Cuenca",
+          "day_previous": "",
+          "day_next": "",
           "experiences": [
             {
               "title": "The Blacksmith",
-              "photos": [],
-              "videos": [],
+              "photo":"photo",
               "description": "The small traditional street that crosses “Las Herrerías” neighborhood, houses the workshop of Don Sergio Guerra, who, for more than 25 years, has been working in the traditional craft of the arts of fire. In his workshop, he shapes various pieces by hammer and anvil. The “Herrero” manufactures anything from antique style door locks to the coronation roosters of the traditional houses of Cuenca. Accompany him during his workday and he’ll even allow you to forge your own figure. Natural forms, padlocks, horseshoes and various handcrafted pieces take shape in his workshop, which is surely a place to be visited.",
               "previous": "with a one-of-a-kind view, you are going to be surprised by our exclusive tour in the city. Starting or ending in the oldest neighborhood right outside of the Hotel, you will explore what we like to call The Culture of El Vado. Cuenca is also known as the Cultural Capital of Ecuador, and “cuencanos” take this seriously. Explore with us the meticulous work made by skillful artisans. ",
               "next": "We will pause and eat in an emblematic traditional restaurant in the city to have energy for our next visit."
             },
             {
               "title": "The Woodworker",
-              "photos": [],
-              "videos": [],
+              "photo":"photo",
               "description": "At the entrance to this workshop, in the traditional neighborhood of Vado, you can find a unique aroma of wood. Here some of the most famous guitars in the country are manufactured. This craftsman tells us about his process, how he treats and works the wood to give it the shape of a guitar, charango or even a cuatro. The tuning is everything, some of their pieces take up to 6 months to complete, national and international artists commission the development of their instruments to this skillful instrument maker who embeds pieces of ivory and marble customized according to the taste of the artist who commissioned its development. Admiring this fine work and then listening to a melody from one of his creations is undoubtedly a sight worthy of applause.",
               "previous": "with a one-of-a-kind view, you are going to be surprised by our exclusive tour in the city. Starting or ending in the oldest neighborhood right outside of the Hotel, you will explore what we like to call The Culture of El Vado. Cuenca is also known as the Cultural Capital of Ecuador, and “cuencanos” take this seriously. Explore with us the meticulous work made by skillful artisans. ",
               "next": ""
             },
             {
               "title": "The Antique Gallery",
-              "photos": [],
-              "videos": [],
+              "photo":"photo",
               "description": "On La Condamine Street there is a private gallery, where you can recall history through the pieces on exhibit. The show is infinite: toys, cameras, saints and religious figures, instruments and many items that define eras and represent the way of life of the aristocracy of Cuenca in past times.",
               "previous": "Now some down time, exploring antiques of all sorts.",
               "next": ""
             },
             {
               "title": "The Potter",
-              "photos": [],
-              "videos": [],
+              "photo":"photo",
               "description": "For this family pottery is a way of life that has been passed down from generation to generation. Warmly opening the doors to their home-workshop, Don Juan tells you the story of how he has been practicing with clay since he was a child and that after more than 40 years he is just now perfecting his skills. In the workshop, located in La Convención district, unique pieces of clay are formed and then baked at thousands of degrees to obtain a unique black finish. The potter teaches you how to work the clay in his lathe to make all types of pots and the various pieces that are manufactured there.",
               "previous": "With energy recharged, we want you to use your hands and imagination for the next stop.",
               "next": ""
@@ -378,24 +381,23 @@
         },
         {
           "parent": 7,
-          "description": "After the breakfast we will be heading to the towns of Gualaceo and Chordeleg, known by their filigree shops, vibrant and colorful textiles and beautiful plazas. We will be having lunch at a traditional Restaurant while exploring the small towns.",
+          "day_description": "After the breakfast we will be heading to the towns of Gualaceo and Chordeleg, known by their filigree shops, vibrant and colorful textiles and beautiful plazas. We will be having lunch at a traditional Restaurant while exploring the small towns.",
           "transfer": "",
-          "date": "2/05/2022",
+          "day_name":"Day 8",
+          "date": "SUNDAY 2TH MAY 2022",
           "meals": "B/L/D/O",
-          "observation": "Day 7: Finally, our last dinner at your hotel, Hotel Cruz del Vado. A surprise will be provided.",
+          "observation": "Day 8: Finally, our last dinner at your hotel, Hotel Cruz del Vado. A surprise will be provided.",
           "experiences": [
             {
               "title": "Shawls of Ikat",
-              "photos": [],
-              "videos": [],
+              "photo":"photo",
               "description": "For centuries, an ancient technique of dyeing clothes called ikat has been practiced in Gualaceo. This technique consists of tying small strands of cabuya, a fiber of vegetable origin that comes from the fique plant (known locally as penco), in threads to draw patterns for what will later be a shawl. The more knots tied, the more complex and elaborate the process, which then, passes to the step of hand dying with leaves and fruits like walnut, to finally being woven by hand on a warp and becoming the famous shawl of Gualaceo. These shawls are of particular importance for being part of the traditional dress of the “Chola Cuencana”. There are shawls that take months to manufacture due to the complex process of elaboration. Learning from the hand of the artisans their techniques and processes is one of the most beautiful memories you can have in your visit to Cuenca.",
               "previous": "",
               "next": ""
             },
             {
               "title": "Filigree",
-              "photos": [],
-              "videos": [],
+              "photo":"photo",
               "description": "In a small and magical place south of Cuenca, some of the most elaborate pieces of jewelry in Ecuador are manufactured. Chordeleg, is recognized for being home to some of the best jewelers in the country. In this place, silver melts at thousands of degrees to form tiny braided threads that later give shape to chains, earrings, tiaras and crowns. The technique of these artisans is known as filigree and the jewelers of this small town have practiced it for generations. The impressive ability to weave small threads together into a jewel makes this an activity worthy of being admired, and the pieces produced here qualify as small pieces of art.",
               "previous": "",
               "next": ""
@@ -404,16 +406,16 @@
         },
         {
           "parent": 8,
-          "description": "",
+          "day_description": "",
           "transfer": "",
-          "date": "3/05/2022",
+          "day_name":"Day 9",
+          "date": "SATURDAY 3TH MAY 2022",
           "meals": "B/",
-          "observation": "Day 7: Flight to Quito and final connection with international flight.",
+          "observation": "Day 9: Flight to Quito and final connection with international flight.",
           "experiences": [
             {
               "title": "Taking Pictures",
-              "photos": [],
-              "videos": [],
+              "photo":"photo",
               "description": "Take one last picture of Cuenca while having breakfast, because you are going home. ",
               "previous": "",
               "next": ""
