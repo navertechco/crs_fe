@@ -6,18 +6,18 @@ class RoundedFormButton extends StatelessWidget {
   final double vertical;
   final double width;
   final double height;
-  final double? fontSize;
+  final double fontSize;
   final String label;
   final void Function()? onTap;
 
   const RoundedFormButton({
     Key? key,
     required this.label,
-    this.horizontal = 20,
-    this.vertical = 20,
+    this.horizontal = 0,
+    this.vertical = 0,
     this.width = 0.2,
     this.height = 0.05,
-    this.fontSize = 0.1,
+    this.fontSize = 10,
     required this.onTap,
   }) : super(key: key);
 
@@ -29,9 +29,9 @@ class RoundedFormButton extends StatelessWidget {
       child: Container(
         width: MediaQuery.of(context).size.width * width,
         height: MediaQuery.of(context).size.height * height,
-        padding: EdgeInsets.symmetric(
-          horizontal: horizontal,
-          vertical: vertical,
+        padding: EdgeInsets.only(
+          left: horizontal,
+          top: vertical,
         ),
         decoration: BoxDecoration(
             color: Colors.grey.shade800,
@@ -44,7 +44,7 @@ class RoundedFormButton extends StatelessWidget {
               fontSize: MediaQuery.of(context).size.width /
                   MediaQuery.of(context).size.height *
                   isMobile *
-                  16,
+                  fontSize,
             ),
             style: TextStyle(
                 overflow: TextOverflow.ellipsis,
@@ -52,7 +52,7 @@ class RoundedFormButton extends StatelessWidget {
                 fontSize: MediaQuery.of(context).size.width /
                     MediaQuery.of(context).size.height *
                     isMobile *
-                    16 *
+                    fontSize *
                     0.8,
                 fontWeight: FontWeight.bold),
             textAlign: TextAlign.start,

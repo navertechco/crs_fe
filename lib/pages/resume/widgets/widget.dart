@@ -9,57 +9,64 @@ import '../index.dart';
 
 /// hello
 class ResumeWidget extends GetView<ResumeController> {
-  const ResumeWidget({Key? key}) : super(key: key);
-
+  const ResumeWidget({Key? key, required this.pkey}) : super(key: key);
+  final pkey;
   @override
   Widget build(BuildContext context) {
     Map<String, dynamic> data = getContext("data");
 
     return Itinerary(
+      pkey: pkey,
       data: data,
     );
   }
 }
 
 class Itinerary extends StatelessWidget {
-  Itinerary({
-    Key? key,
-    required this.data,
-  }) : super(key: key);
+  Itinerary({Key? key, required this.data, required this.pkey})
+      : super(key: key);
 
   final Map<String, dynamic> data;
   final _controller = ScrollController();
+  final pkey;
   @override
   Widget build(BuildContext context) {
-    List<CustomFormDestination> destinations = [];
-    if (data != null && data["destinations"] != null) {
-      for (var i = 0; i < data["destinations"].length; i++) {
-        destinations.add(CustomFormDestination(data: data, index: i));
-      }
-    }
-
     return Padding(
       padding: EdgeInsets.only(
           top: MediaQuery.of(context).size.height * 0.4,
           bottom: MediaQuery.of(context).size.height * 0.4),
-      child: SizedBox(
-        height: MediaQuery.of(context).size.height * 2,
-        width: MediaQuery.of(context).size.width * 0.5,
-        child: Center(
-          child: Scrollbar(
-            child: SingleChildScrollView(
-              controller: _controller,
-              child: Column(children: [
-                Cover(data: data),
-                Header(
-                  data: data,
+      child: Stack(
+        children: [
+          Positioned(
+            left: 100,
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height * 1.2,
+              width: MediaQuery.of(context).size.width * 0.8,
+              child: Center(
+                child: Scrollbar(
+                  child: SingleChildScrollView(
+                    controller: _controller,
+                    child: Column(children: [
+                      RepaintBoundary(
+                          key: pkey["cover"], child: Cover(data: data)),
+                      RepaintBoundary(
+                        key: pkey["header"],
+                        child: Header(
+                          data: data,
+                        ),
+                      ),
+                      Destinations(data: data),
+                      RepaintBoundary(
+                        key: pkey["end"],
+                        child: EndServices(data: data),
+                      ),
+                    ]),
+                  ),
                 ),
-                Destinations(destinations: destinations),
-                EndServices(data: data),
-              ]),
+              ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }
@@ -251,9 +258,9 @@ class Cover extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var cover = data["cover"];
-    var client = data["client"];
-    var title = cover["title"];
+    var cover = data != null ? data["cover"] : [];
+    var client = data != null ? data["client"] : [];
+    var title = cover != null ? cover["title"] : [];
     var passengers = cover["passengers"];
     var days = cover["days"];
     var nights = cover["nights"];
@@ -303,13 +310,21 @@ class Cover extends StatelessWidget {
 class Destinations extends StatelessWidget {
   const Destinations({
     Key? key,
-    required this.destinations,
+    required this.data,
   }) : super(key: key);
 
-  final List<CustomFormDestination> destinations;
+  final data;
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> destinations = [];
+    if (data != null && data["destinations"] != null) {
+      for (var i = 0; i < data["destinations"].length; i++) {
+        var key = GlobalKey();
+        globalctx.keys["destination-$i"] = key;
+        destinations.add(CustomFormDestination(data: data, index: i));
+      }
+    }
     return Column(
       children: destinations,
     );
@@ -368,14 +383,18 @@ class CustomFormDestination extends StatelessWidget {
     var destination = destinations[index];
     var days = destination["days"];
     for (int i = 0; i < days.length; i++) {
+      var key = GlobalKey();
+      globalctx.keys["day-$index-$i"] = key;
       daylist.add(CustomFormDayWidget(data: data, indexes: [index, i]));
     }
     return Column(
       children: [
-        CustomFormTitleWidget(
-            level: 3,
-            label:
-                "Star Destination ${index + 1}:#Cuenca#(Between: 10-01-22 and 13-01-22)"),
+        RepaintBoundary(
+            key: globalctx.keys["destination-$index"],
+            child: CustomFormTitleWidget(
+                level: 3,
+                label:
+                    "Star Destination ${index + 1}:#Cuenca#(Between: 10-01-22 and 13-01-22)")),
         Column(
           children: daylist,
         ),
@@ -404,21 +423,23 @@ class CustomFormDayWidget extends StatelessWidget {
     var meals = day['meals'];
     var parent = day['parent'];
     var daydescription = day['day_description'];
-    return Column(
-      children: [
-        CustomFormTitleWidget(
-            level: 4, label: "Day: ${parent + 1}#####Date: $daydate"),
-        CustomDescriptionWidget(
-            text: daydescription, width: 0.55, fontSize: 0.016),
-        CustomFormExpereincesDetailWidget(data: data, indexes: indexes),
-        SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-        CustomDescriptionWidget(
-            text: meals,
-            width: 0.55,
-            fontSize: 0.012,
-            fontWeight: FontWeight.bold),
-      ],
-    );
+    return RepaintBoundary(
+        key: globalctx.keys["day-$destinationindex-$dayindex"],
+        child: Column(
+          children: [
+            CustomFormTitleWidget(
+                level: 4, label: "Day: ${parent + 1}#####Date: $daydate"),
+            CustomDescriptionWidget(
+                text: daydescription, width: 0.55, fontSize: 0.016),
+            CustomFormExpereincesDetailWidget(data: data, indexes: indexes),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+            CustomDescriptionWidget(
+                text: meals,
+                width: 0.55,
+                fontSize: 0.012,
+                fontWeight: FontWeight.bold),
+          ],
+        ));
   }
 }
 
@@ -586,7 +607,7 @@ class CustomFormHeaderIterWidget extends StatelessWidget {
     }
     return Row(
       children: [
-        SizedBox(width: MediaQuery.of(context).size.width * 0.18),
+        SizedBox(width: MediaQuery.of(context).size.width * 0.083),
         Row(
           children: list,
         ),
@@ -674,7 +695,7 @@ class CustomPadingTitleWidget extends StatelessWidget {
       {Key? key,
       required this.customlabel,
       this.fontWeight = FontWeight.bold,
-      this.width = 0.2})
+      this.width = 0.1})
       : super(key: key);
 
   final String customlabel;
