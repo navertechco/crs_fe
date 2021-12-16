@@ -11,14 +11,14 @@ class RoundedFormDropdown extends StatelessWidget {
   final String? hintText;
   final String? label;
   final void Function(String?)? onSaved;
-   List<Map<String, dynamic>> data;
+  List<Map<String, dynamic>> data;
 
   RoundedFormDropdown(
       {Key? key,
       required this.data,
       this.hintText,
       this.label,
-      this.left = 65,
+      this.left = 15,
       this.top = 8,
       this.width = 0.2,
       this.height = 0.05,

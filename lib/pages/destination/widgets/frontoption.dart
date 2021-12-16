@@ -21,11 +21,12 @@ class FrontOptionWidget extends StatelessWidget {
       Padding(
         padding: EdgeInsets.only(
           top: MediaQuery.of(context).size.height * 0.04,
-          left: MediaQuery.of(context).size.width * 0.005,
+          left: MediaQuery.of(context).size.width * 0.01,
         ),
         child: Align(
-          alignment: Alignment.bottomCenter,
-          child: Image.asset(destinations[destination][3]),
+          alignment: Alignment.centerLeft,
+          child: Image.asset(destinations[destination][3],
+              width: MediaQuery.of(context).size.width * 0.2),
         ),
       ),
     ]);

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/common/index.dart';
+import 'package:naver_crs/pages/destination/widgets/index.dart';
 import '../index.dart';
 import 'index.dart';
 
@@ -12,47 +13,65 @@ class ActivitiesWidget extends GetView<ActivitiesController> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(children: [
-      const CustomParentExperienceOptionsWidget(),
-      Padding(
-        padding: EdgeInsets.only(
-            top: MediaQuery.of(context).size.height * 0.3,
-            left: MediaQuery.of(context).size.width * 0.38),
-        child: Column(
-          children: [
-            CustomTitleWidget(
-              fontWeight: FontWeight.bold,
-              label: "Day 2",
-            ),
-            Divider(color: Color.fromARGB(255, 0, 0, 0)),
-            CustomTitleWidget(
-              fontWeight: FontWeight.bold,
-              label:
-                  "                                                                     Sugested Experiences",
-            ),
-            Divider(color: Color.fromARGB(255, 0, 0, 0)),
-            CustomParentDaysWidget(),
-            Divider(color: Color.fromARGB(255, 0, 0, 0)),
-            CustomTitleWidget(
-              fontWeight: FontWeight.bold,
-              label:
-                  "                                                                   Experience Options",
-            ),
-            Divider(color: Color.fromARGB(255, 0, 0, 0)),
-            CustomParentExpererienceWidget(),
-            Divider(color: Color.fromARGB(255, 0, 0, 0)),
-            CustomKeypadWidget(
-                onNext: () {
-                  Get.toNamed("/Resume");
-                },
-                onPrevious: () {
-                  Get.back();
-                },
-                width: 0.4),
-          ],
-        ),
-      ),
+    return Stack(children: const [
+      CustomLeftOptionsWidget(),
+      CustomRightDayWidget(),
     ]);
+  }
+}
+
+class CustomRightDayWidget extends StatelessWidget {
+  const CustomRightDayWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(
+          top: MediaQuery.of(context).size.height * 0.3,
+          left: MediaQuery.of(context).size.width * 0.38),
+      child: Column(
+        children: [
+          Row(
+            children: const [
+              CustomTitleWidget(
+                fontWeight: FontWeight.bold,
+                label: "Date: ",
+              ),
+              CustomTitleWidget(
+                fontWeight: FontWeight.bold,
+                label: "25TH April 2022",
+              ),
+            ],
+          ),
+          Divider(color: Color.fromARGB(255, 0, 0, 0)),
+          CustomTitleWidget(
+            fontWeight: FontWeight.bold,
+            label: "Destination: Cuenca",
+          ),
+          Divider(color: Color.fromARGB(255, 0, 0, 0)),
+          CustomTitleWidget(
+            fontWeight: FontWeight.bold,
+            label:
+                "                                                      Selected Experiences",
+          ),
+          Divider(color: Color.fromARGB(255, 0, 0, 0)),
+          CustomParentDaysWidget(),
+          Divider(color: Color.fromARGB(255, 0, 0, 0)),
+          CustomKeypadWidget(
+              nextlabel: "Next >",
+              prevlabel: "< Previous ",
+              onNext: () {
+                Get.toNamed("/Resume");
+              },
+              onPrevious: () {
+                Get.back();
+              },
+              width: 0.4),
+        ],
+      ),
+    );
   }
 }
 
@@ -64,15 +83,15 @@ class CustomParentDaysWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.2,
+      height: MediaQuery.of(context).size.height * 0.45,
       child: Scrollbar(
         child: SingleChildScrollView(
           child: Column(
             children: const [
-              ExpereinceOptionWidget(experience: "coast"),
-              ExpereinceOptionWidget(experience: "guayaquil"),
-              ExpereinceOptionWidget(experience: "cuenca"),
-              ExpereinceOptionWidget(experience: "volcano"),
+              DestinationOptionWidget(destination: "coast"),
+              DestinationOptionWidget(destination: "guayaquil"),
+              DestinationOptionWidget(destination: "cuenca"),
+              DestinationOptionWidget(destination: "volcano"),
             ],
           ),
         ),
@@ -81,8 +100,8 @@ class CustomParentDaysWidget extends StatelessWidget {
   }
 }
 
-class CustomParentExperienceOptionsWidget extends StatelessWidget {
-  const CustomParentExperienceOptionsWidget({
+class CustomLeftOptionsWidget extends StatelessWidget {
+  const CustomLeftOptionsWidget({
     Key? key,
   }) : super(key: key);
 
@@ -92,60 +111,66 @@ class CustomParentExperienceOptionsWidget extends StatelessWidget {
       padding: EdgeInsets.only(
           top: MediaQuery.of(context).size.height * 0.3,
           left: MediaQuery.of(context).size.width * 0.05),
-      child: SizedBox(
-        height: MediaQuery.of(context).size.height * 0.3,
-        child: Scrollbar(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                const CustomTitleWidget(
-                  fontWeight: FontWeight.bold,
-                  label: "       Options",
-                ),
-                CustomFormDropDownFieldWidget(
-                  // label: "Exploration Days",
-                  onSaved: (value) {},
-                  hintText: "Arrvial Port",
-                  data: const [
-                    {"code": "1", "description": "Quito"},
-                    {"code": "2", "description": "Guayaquil"},
-                  ],
-                ),
-                CustomFormDropDownFieldWidget(
-                  onSaved: (value) {},
-                  // label: "Exploration Days",
-                  hintText: "Departure Port",
-                  data: const [
-                    {"code": "1", "description": "Quito"},
-                    {"code": "2", "description": "Guayaquil"},
-                  ],
-                ),
-                const CustomFormMultiDropDownFieldWidget(
-                  // label: "Exploration Days",
+      child: Column(
+        children: [
+          CustomTitleWidget(
+            fontWeight: FontWeight.bold,
+            label: "Day 2: Options",
+          ),
+          Divider(color: Color.fromARGB(255, 0, 0, 0)),
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.3,
+            child: Scrollbar(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    const CustomFormMultiDropDownFieldWidget(
+                      // label: "Exploration Days",
 
-                  hintText: "         Travel options",
-                  data: [
-                    {"code": "1", "description": "Translator"},
-                    {"code": "2", "description": "Transport"},
-                    {"code": "3", "description": "Guide"},
-                    // {"code": "2", "description": "hola 2"},
+                      hintText: "                  Services",
+                      data: [
+                        {"code": "1", "description": "Translator"},
+                        {"code": "2", "description": "Transport"},
+                        {"code": "3", "description": "Guide"},
+                        // {"code": "2", "description": "hola 2"},
+                      ],
+                    ),
+                    CustomFormDropDownFieldWidget(
+                      // label: "Exploration Days",
+                      onSaved: (value) {},
+                      hintText: "Travel Options",
+                      data: const [
+                        {"code": "1", "description": "All included"},
+                        {"code": "2", "description": "Leisure Time"},
+                        {"code": "3", "description": "Foods Included"},
+                        {"code": "4", "description": "Open Credit"},
+                      ],
+                    ),
+                    CustomFormDropDownFieldWidget(
+                      // label: "Exploration Days",
+                      onSaved: (value) {},
+                      hintText: "Galapagos Tour Options",
+                      data: const [
+                        {"code": "1", "description": "Cruiser"},
+                        {"code": "2", "description": "Hotel"},
+                        {"code": "3", "description": "Mixed"},
+                      ],
+                    ),
+                    CustomFormDropDownFieldWidget(
+                      // label: "Exploration Days",
+                      onSaved: (value) {},
+                      hintText: "Galapagos Transport Options",
+                      data: const [
+                        {"code": "1", "description": "Island Hopping"},
+                        {"code": "2", "description": "Cruiser"},
+                      ],
+                    ),
                   ],
                 ),
-                CustomFormDropDownFieldWidget(
-                  // label: "Exploration Days",
-                  onSaved: (value) {},
-                  hintText: "experience Option",
-                  data: const [
-                    {"code": "1", "description": "All included"},
-                    {"code": "2", "description": "Leisure Time"},
-                    {"code": "3", "description": "Foods Included"},
-                    {"code": "4", "description": "Open Credit"},
-                  ],
-                ),
-              ],
+              ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }

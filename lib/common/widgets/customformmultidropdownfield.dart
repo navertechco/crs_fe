@@ -20,7 +20,7 @@ class CustomFormMultiDropDownFieldWidget extends StatelessWidget {
       child: Row(
         children: [
           CustomFormLabelWidget(label: label, fontWeight: FontWeight.normal),
-          SizedBox(width: MediaQuery.of(context).size.width * 0.01),
+          // SizedBox(width: MediaQuery.of(context).size.width * 0.003),
           RoundedFormMultiDropdown(
             data: data,
             hintText: hintText,

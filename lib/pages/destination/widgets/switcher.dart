@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/common/index.dart';
 
+import '../../index.dart';
+
 class SwitcherWidget extends StatelessWidget {
   const SwitcherWidget(
       {Key? key,
@@ -66,7 +68,13 @@ class SwitcherWidget extends StatelessWidget {
 
     Widget _buildFlipAnimation() {
       return GestureDetector(
-        onTap: _switchCard,
+        onTap: () {
+          showDialog(
+              context: context,
+              builder: (context) {
+                return DestinationDetailPage(destination:destination);
+              });
+        },
         child: AnimatedSwitcher(
           duration: const Duration(milliseconds: 800),
           transitionBuilder: _transitionBuilder,

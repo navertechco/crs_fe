@@ -11,8 +11,8 @@ class DestinationWidget extends GetView<DestinationController> {
     
     return Stack(
       children: const [
-        CustomParentStarDestinationListForm(),
-        CustomParentStarDestinationForm(),
+        CustomLeftStarDestinationForm(),
+        CustomRightStarDestinationForm(),
       ],
     );
   }

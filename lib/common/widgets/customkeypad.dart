@@ -8,8 +8,12 @@ class CustomKeypadWidget extends StatelessWidget {
     required this.width,
     this.onNext,
     this.onPrevious,
+    this.prevlabel = "Previous",
+    this.nextlabel = "Next",
   }) : super(key: key);
   final double width;
+  final String nextlabel;
+  final String prevlabel;
   final onNext;
   final onPrevious;
   @override
@@ -18,14 +22,14 @@ class CustomKeypadWidget extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: onPrevious,
-          child: const CustomFormLabelWidget(
-              label: "        Previous", fontWeight: FontWeight.normal),
+          child: CustomFormLabelWidget(
+              label: prevlabel, fontWeight: FontWeight.normal),
         ),
         SizedBox(width: MediaQuery.of(context).size.width * width),
         GestureDetector(
           onTap: onNext,
-          child: const CustomFormLabelWidget(
-              label: "Next", fontWeight: FontWeight.normal),
+          child: CustomFormLabelWidget(
+              label: nextlabel, fontWeight: FontWeight.normal),
         ),
       ],
     );

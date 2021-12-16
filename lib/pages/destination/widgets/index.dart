@@ -2,8 +2,8 @@ library widgets;
 
 export './page.dart';
 export './customstardestination.dart';
-export './customparentstardestination.dart';
-export './customparentstardestinationlist.dart';
+export 'customrightstardestination.dart';
+export 'customleftstardestination.dart';
 export './destinationoption.dart';
 export './goldborder.dart';
 export './frontoption.dart';

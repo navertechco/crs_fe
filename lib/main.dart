@@ -4,14 +4,10 @@ import 'package:get/get.dart';
 import 'common/router/app_pages.dart';
 import 'common/themes/index.dart';
 
-class MyCustomScrollBehavior extends MaterialScrollBehavior {
+class ScrollBehavior extends MaterialScrollBehavior {
   // Override behavior methods and getters like dragDevices
   @override
-  Set<PointerDeviceKind> get dragDevices => {
-        PointerDeviceKind.touch,
-        PointerDeviceKind.mouse,
-        // etc.
-      };
+  Set<PointerDeviceKind> get dragDevices;
 }
 
 void main() {
@@ -19,12 +15,11 @@ void main() {
   //     [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
   var pages = AppPages.pages;
-  PRegistry registry = routes
-      .toList()
-      .firstWhere((element) => element.name == "/Home");
+  PRegistry registry =
+      routes.toList().firstWhere((element) => element.name == "/Destination");
 
   runApp(GetMaterialApp(
-      scrollBehavior: MyCustomScrollBehavior(),
+      scrollBehavior: ScrollBehavior(),
       debugShowCheckedModeBanner: false,
       initialRoute: registry.name,
       theme: lightTheme,
