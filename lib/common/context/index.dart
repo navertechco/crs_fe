@@ -13,10 +13,11 @@ class Context with PropertyChangeNotifier<String> {
     "icons": {}.obs,
     "session": {"avatar": "".obs},
   }.obs);
-
+  Rx<List<Widget>> destinationDragData = Rx([]);
   RxBool value = true.obs;
   RxList<dynamic> destinationlist = [].obs;
   RxList<dynamic> experiencelist = [].obs;
+  RxList Keys = [].obs;
   Map<String, GlobalKey<State<StatefulWidget>>> keys = {};
   Context() {
     load("data");

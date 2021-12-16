@@ -14,8 +14,39 @@ class CustomRightStarDestinationForm extends StatelessWidget {
       children: [
         DestinationsOrderableListWidget(),
         // DestinationListScroll(),
+        const ResetPadWidget(),
+
         const KeyPadWidget(),
       ],
+    );
+  }
+}
+
+class ResetPadWidget extends StatelessWidget {
+  const ResetPadWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(
+        top: MediaQuery.of(context).size.height * 0.0,
+        left: MediaQuery.of(context).size.width * 0.7,
+      ),
+      child: Obx(() {
+        if (!globalctx.destinationlist.isNotEmpty) {
+          return CustomKeypadWidget(
+              prevlabel: "< Reset >",
+              nextlabel: "",
+              onPrevious: () {
+                globalctx.Keys.value = [];
+                globalctx.destinationDragData.value = [];
+              },
+              width: 0.01);
+        }
+        return const Text("");
+      }),
     );
   }
 }
@@ -29,8 +60,8 @@ class KeyPadWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-        top: MediaQuery.of(context).size.height * 0.01,
-        left: MediaQuery.of(context).size.width * 0.5,
+        top: MediaQuery.of(context).size.height * 0.0,
+        left: MediaQuery.of(context).size.width * 0.51,
       ),
       child: Obx(() {
         if (!globalctx.destinationlist.isNotEmpty) {
@@ -144,8 +175,6 @@ class _DestinationsOrderableListWidgetState
 
   @override
   Widget build(BuildContext context) {
-    Rx<List<Widget>> acceptedData = Rx([]);
-    List Keys = [];
     return Padding(
         padding: EdgeInsets.only(
           top: MediaQuery.of(context).size.height * 0.16,
@@ -167,17 +196,40 @@ class _DestinationsOrderableListWidgetState
                     alignment: Alignment.topCenter,
                     child: Obx(() {
                       return SingleChildScrollView(
-                        child: Column(children: acceptedData.value),
+                        child: Column(
+                            children: globalctx.destinationDragData.value),
                       );
                     }),
                   ),
                 );
               },
               onAccept: (String key) {
-                if (!Keys.contains(key)) {
-                  Keys.add(key);
-                  acceptedData.value
-                      .add(DestinationOptionWidget(destination: key));
+                if (!globalctx.Keys.contains(key)) {
+                  globalctx.Keys.add(key);
+                  globalctx.destinationDragData.value.add(Obx(() {
+                    return globalctx.Keys.contains(key)
+                        ? Row(
+                            children: [
+                              DestinationOptionWidget(destination: key),
+                              GestureDetector(
+                                onTap: () {
+                                  if (globalctx.Keys.contains(key)) {
+                                    var index = globalctx.Keys.indexWhere(
+                                        (element) => element == key);
+                                    globalctx.Keys.removeAt(index);
+                                    globalctx.destinationDragData.value
+                                        .removeAt(index);
+                                  }
+                                },
+                                child: Image.asset(
+                                    "assets/custom/img/redmark.png",
+                                    width: MediaQuery.of(context).size.width *
+                                        0.02),
+                              )
+                            ],
+                          )
+                        : Text("");
+                  }));
                 }
               },
             )));
