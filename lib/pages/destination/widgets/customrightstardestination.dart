@@ -40,6 +40,7 @@ class ResetPadWidget extends StatelessWidget {
               prevlabel: "< Reset >",
               nextlabel: "",
               onPrevious: () {
+                globalctx.Completed.value = [];
                 globalctx.Keys.value = [];
                 globalctx.destinationDragData.value = [];
               },
@@ -211,21 +212,42 @@ class _DestinationsOrderableListWidgetState
                         ? Row(
                             children: [
                               DestinationOptionWidget(destination: key),
-                              GestureDetector(
-                                onTap: () {
-                                  if (globalctx.Keys.contains(key)) {
-                                    var index = globalctx.Keys.indexWhere(
-                                        (element) => element == key);
-                                    globalctx.Keys.removeAt(index);
-                                    globalctx.destinationDragData.value
-                                        .removeAt(index);
-                                  }
-                                },
-                                child: Image.asset(
-                                    "assets/custom/img/redmark.png",
-                                    width: MediaQuery.of(context).size.width *
-                                        0.02),
-                              )
+                              !globalctx.Completed.contains(key)
+                                  ? GestureDetector(
+                                      onTap: () {
+                                        if (globalctx.Keys.contains(key)) {
+                                          var index = globalctx.Keys.indexWhere(
+                                              (element) => element == key);
+                                          globalctx.Keys.removeAt(index);
+                                          globalctx.destinationDragData.value
+                                              .removeAt(index);
+                                        }
+                                      },
+                                      child: Image.asset(
+                                          "assets/custom/img/redmark.png",
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.02),
+                                    )
+                                  : GestureDetector(
+                                      onTap: () {
+                                        if (globalctx.Keys.contains(key)) {
+                                          globalctx.Completed.remove(key);
+                                          var index = globalctx.Keys.indexWhere(
+                                              (element) => element == key);
+                                          globalctx.Keys.removeAt(index);
+                                          globalctx.destinationDragData.value
+                                              .removeAt(index);
+                                        }
+                                      },
+                                      child: Image.asset(
+                                          "assets/custom/img/greencheck.png",
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.02),
+                                    )
                             ],
                           )
                         : Text("");

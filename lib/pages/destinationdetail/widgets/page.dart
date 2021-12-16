@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:naver_crs/common/index.dart';
 import '../index.dart';
 
 class DestinationDetailWidget extends GetView<DestinationDetailController> {
@@ -11,7 +12,13 @@ class DestinationDetailWidget extends GetView<DestinationDetailController> {
     return Stack(
       children: [
         LeftWidget(destination: destination),
-        RightWidget(destination: destination),
+        GestureDetector(
+          onTap: () {
+            globalctx.Completed.add(destination);
+            Get.close(1);
+          },
+          child: RightWidget(destination: destination),
+        ),
       ],
     );
   }

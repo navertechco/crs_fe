@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:naver_crs/common/index.dart';
 
 import '../../index.dart';
+import 'index.dart';
 
 class SwitcherWidget extends StatelessWidget {
   const SwitcherWidget(
@@ -69,11 +70,58 @@ class SwitcherWidget extends StatelessWidget {
     Widget _buildFlipAnimation() {
       return GestureDetector(
         onTap: () {
-          showDialog(
-              context: context,
-              builder: (context) {
-                return DestinationDetailPage(destination:destination);
-              });
+          var key = destination;
+          if (globalctx.Keys.contains(destination)) {
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return DestinationDetailPage(destination: destination);
+                });
+          }
+          if (!globalctx.Keys.contains(key)) {
+            globalctx.Keys.add(key);
+            globalctx.destinationDragData.value.add(Obx(() {
+              return globalctx.Keys.contains(key)
+                  ? Row(
+                      children: [
+                        DestinationOptionWidget(destination: key),
+                        !globalctx.Completed.contains(key)
+                            ? GestureDetector(
+                                onTap: () {
+                                  if (globalctx.Keys.contains(key)) {
+                                    globalctx.Completed.remove(key);
+                                    var index = globalctx.Keys.indexWhere(
+                                        (element) => element == key);
+                                    globalctx.Keys.removeAt(index);
+                                    globalctx.destinationDragData.value
+                                        .removeAt(index);
+                                  }
+                                },
+                                child: Image.asset(
+                                    "assets/custom/img/redmark.png",
+                                    width: MediaQuery.of(context).size.width *
+                                        0.02),
+                              )
+                            : GestureDetector(
+                                onTap: () {
+                                  if (globalctx.Keys.contains(key)) {
+                                    var index = globalctx.Keys.indexWhere(
+                                        (element) => element == key);
+                                    globalctx.Keys.removeAt(index);
+                                    globalctx.destinationDragData.value
+                                        .removeAt(index);
+                                  }
+                                },
+                                child: Image.asset(
+                                    "assets/custom/img/greencheck.png",
+                                    width: MediaQuery.of(context).size.width *
+                                        0.02),
+                              )
+                      ],
+                    )
+                  : Text("");
+            }));
+          }
         },
         child: AnimatedSwitcher(
           duration: const Duration(milliseconds: 800),
