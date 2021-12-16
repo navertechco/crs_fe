@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:naver_crs/common/index.dart';
 
 class CustomTourInformationForm extends StatelessWidget {
@@ -52,12 +53,11 @@ class CustomTourInformationForm extends StatelessWidget {
               width: 0.2,
               fontWeight: FontWeight.bold,
               label: "  Date                              "),
-          const CustomFormDateFieldWidget(
-              label: "Arrival Date                 "),
-          const CustomFormDateFieldWidget(label: "Departure Date         "),
+          const CustomFormDateFieldWidget(label: "Arrival Date               "),
+          const CustomFormDateFieldWidget(label: "Departure Date       "),
           CustomFormDropDownFieldWidget(
             onSaved: (value) {},
-            label: "Passengers                 ",
+            label: "Passengers                  ",
             data: const [
               {"code": "1", "description": "1"},
               {"code": "2", "description": "2"},
@@ -67,7 +67,18 @@ class CustomTourInformationForm extends StatelessWidget {
               {"code": "6", "description": "21-30"},
             ],
           ),
-          const CustomKeypadWidget(width: 0.2),
+          Padding(
+            padding: EdgeInsets.only(
+                top: MediaQuery.of(context).size.height * 0.171),
+            child: CustomKeypadWidget(
+                width: 0.2,
+                onPrevious: () {
+                  Get.back();
+                },
+                onNext: () {
+                  Get.toNamed("/Customer");
+                }),
+          ),
         ]),
       ),
     );

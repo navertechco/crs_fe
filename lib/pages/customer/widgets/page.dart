@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:naver_crs/common/index.dart';
 
 import '../index.dart';
 import 'index.dart';
@@ -10,10 +11,8 @@ class CustomerWidget extends GetView<CustomerController> {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: SingleChildScrollView(
-        child: CustomCustomerDataForm(),
-      ),
+    return Center(
+      child: const CustomCustomerDataForm(),
     );
   }
 }

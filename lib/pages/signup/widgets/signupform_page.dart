@@ -26,7 +26,8 @@ class SignupFormPage extends GetView<StatelessWidget> {
               SizedBox(
                   child: SignUpForm(
                       formKey: _formKey, state: ctrl!.state, profile: false),
-                  width: MediaQuery.of(context).size.width * 0.865),
+                  width: MediaQuery.of(context).size.width * 0.865,
+                  height: MediaQuery.of(context).size.height * 0.6),
               SizedBox(height: MediaQuery.of(context).size.height * 0.01),
               SizedBox(
                 child: RoundedFormButton(

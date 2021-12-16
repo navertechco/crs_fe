@@ -1,6 +1,6 @@
 // ignore_for_file: unused_field, must_be_immutable
 
-import 'package:flutter/material.dart';  
+import 'package:flutter/material.dart';
 import 'package:naver_crs/common/index.dart';
 import 'package:naver_crs/common/widgets/index.dart';
 import 'package:naver_crs/pages/signup/state.dart';
@@ -22,15 +22,15 @@ class SignUpForm extends StatefulWidget {
 
 class _SignUpFormState extends State<SignUpForm> {
   @override
-  Widget build(BuildContext context) { 
+  Widget build(BuildContext context) {
     double width = 0.4;
-    double height = 0.08;
+    double height = 0.07;
     return Form(
       key: widget.formKey,
       child: Column(
         children: [
           SizedBox(
-            height: MediaQuery.of(context).size.height / 4.5,
+            height: MediaQuery.of(context).size.height / 3.5,
           ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -67,8 +67,8 @@ class _SignUpFormState extends State<SignUpForm> {
                 child: RoundedFormField(
                   height: height,
                   width: width,
-                  onSaved: (value) => widget.state.name = value!,
-                  hintText: 'Name',
+                  onSaved: (value) => widget.state.firstname = value!,
+                  hintText: 'Firstname',
                 ),
               ),
               SizedBox(width: MediaQuery.of(context).size.width * 0.02),
@@ -76,8 +76,8 @@ class _SignUpFormState extends State<SignUpForm> {
                 child: RoundedFormField(
                   height: height,
                   width: width,
-                  onSaved: (value) => widget.state.firstname = value!,
-                  hintText: 'firstname',
+                  onSaved: (value) => widget.state.lastname = value!,
+                  hintText: 'Lastname',
                 ),
               ),
               SizedBox(width: MediaQuery.of(context).size.width * 0.02),

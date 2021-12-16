@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:naver_crs/common/index.dart';
 import 'package:naver_crs/common/widgets/body.dart';
 import '../index.dart';
 
@@ -20,16 +21,13 @@ class LoadingWidget extends GetView<LoadingController> {
             children: [
               Padding(
                 padding: EdgeInsets.only(
-                    left: MediaQuery.of(context).size.width * 0.45,
+                    left: MediaQuery.of(context).size.width * 0.4,
                     top: MediaQuery.of(context).size.height * 0.7),
-                child: SizedBox(
-                  height: Get.height * multiplier,
-                  width: Get.width * multiplier,
-                  child: Image.asset(
-                    "assets/custom/img/layout.png",
-                    fit: BoxFit.contain,
-                  ),
-                ),
+                child: RoundedFormButton(
+                    label: "Quote",
+                    onTap: () {
+                      Get.toNamed("/TourParameters");
+                    }),
               ),
             ],
           )),

@@ -20,14 +20,15 @@ class SigninFormPage extends GetView<StatelessWidget> {
     return Center(
       child: SafeArea(
         child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
+          padding: EdgeInsets.symmetric(
+              horizontal: MediaQuery.of(context).size.width * 0.05),
           child: SafeArea(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(height: kDefaultPadding * 2),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.3),
                 SigninForm(formKey: _formKey, state: ctrl!.state),
-                SizedBox(height: kDefaultPadding * 2),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.05),
                 SizedBox(
                   width: double.infinity,
                   child: GestureDetector(
@@ -39,7 +40,7 @@ class SigninFormPage extends GetView<StatelessWidget> {
                       }
                     },
                     child: SvgPicture.asset(
-                      "assets/custom/svg/images/login_button.svg",
+                      "assets/custom/svg/images/IngresarButton.svg",
                       width: MediaQuery.of(context).size.width * 0.2,
                       // fit: BoxFit.fill,
                     ),

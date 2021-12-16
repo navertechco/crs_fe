@@ -68,27 +68,24 @@ class ResumePage extends GetView<ResumeController> {
   final _controller = ScrollController();
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async => false,
-      child: Scaffold(
-          floatingActionButton: Stack(
-            children: [
-              Positioned(
-                left: MediaQuery.of(context).size.width * 0.92,
-                top: MediaQuery.of(context).size.height * 0.5,
-                child: ScrollTopDownArrows(controller: _controller),
-              ),
-            ],
+    return Scaffold(
+      floatingActionButton: Stack(
+        children: [
+          Positioned(
+            left: MediaQuery.of(context).size.width * 0.92,
+            top: MediaQuery.of(context).size.height * 0.5,
+            child: ScrollTopDownArrows(controller: _controller),
           ),
-          body: Scrollbar(
-            child: SingleChildScrollView(
-              controller: _controller,
-              child: SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * 2,
-                  child: _buildView(context)),
-            ),
-          )),
+        ],
+      ),
+      body: Scrollbar(
+          child: SingleChildScrollView(
+        controller: _controller,
+        child: SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height * 2,
+            child: _buildView(context)),
+      )),
     );
   }
 }

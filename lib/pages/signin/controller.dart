@@ -1,4 +1,3 @@
- 
 import 'package:get/get.dart';
 import 'package:naver_crs/common/constants.dart';
 import 'package:naver_crs/common/index.dart';
@@ -12,6 +11,7 @@ class SigninController extends GetxController {
   var state = SigninState();
 
   Future<void> onSignin(String username, String password) async {
+    Get.toNamed('/Loading');
     state.isLoading = true;
     state.error = null;
     state.username = username;
@@ -25,7 +25,6 @@ class SigninController extends GetxController {
         "state": "signin"
       }
     });
-  
 
     if (res['state'] == true) {
       setContext('session', res['data']);

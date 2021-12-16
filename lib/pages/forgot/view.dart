@@ -10,11 +10,9 @@ class ForgotPage extends GetView<ForgotController> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-        onWillPop: () async => false,
-        child: Scaffold(
-          body: _buildForgotFormPage(context),
-        ));
+    return Scaffold(
+      body: _buildForgotFormPage(context),
+    );
   }
 }
 
@@ -24,7 +22,7 @@ GetBuilder<ForgotController> _buildForgotFormPage(
   return GetBuilder<ForgotController>(
     id: 'forgot_form_page',
     builder: (controller) => ContentLayoutWidget(
-        background: "assets/custom/img/forgot.png",
+        background: "assets/custom/img/home.png",
         child: ForgotFormPage(ctrl: controller),
         text: ""),
   );

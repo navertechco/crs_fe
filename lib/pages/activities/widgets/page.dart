@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/common/index.dart';
@@ -17,7 +19,7 @@ class ActivitiesWidget extends GetView<ActivitiesController> {
             top: MediaQuery.of(context).size.height * 0.3,
             left: MediaQuery.of(context).size.width * 0.38),
         child: Column(
-          children: const [
+          children: [
             CustomTitleWidget(
               fontWeight: FontWeight.bold,
               label: "Day 2",
@@ -39,7 +41,14 @@ class ActivitiesWidget extends GetView<ActivitiesController> {
             Divider(color: Color.fromARGB(255, 0, 0, 0)),
             CustomParentExpererienceWidget(),
             Divider(color: Color.fromARGB(255, 0, 0, 0)),
-            CustomKeypadWidget(width: 0.4),
+            CustomKeypadWidget(
+                onNext: () {
+                  Get.toNamed("/Resume");
+                },
+                onPrevious: () {
+                  Get.back();
+                },
+                width: 0.4),
           ],
         ),
       ),
@@ -113,9 +122,9 @@ class CustomParentExperienceOptionsWidget extends StatelessWidget {
                 ),
                 const CustomFormMultiDropDownFieldWidget(
                   // label: "Exploration Days",
-                  
+
                   hintText: "         Travel options",
-                  data:   [
+                  data: [
                     {"code": "1", "description": "Translator"},
                     {"code": "2", "description": "Transport"},
                     {"code": "3", "description": "Guide"},
@@ -124,7 +133,7 @@ class CustomParentExperienceOptionsWidget extends StatelessWidget {
                 ),
                 CustomFormDropDownFieldWidget(
                   // label: "Exploration Days",
-                        onSaved: (value) {},
+                  onSaved: (value) {},
                   hintText: "experience Option",
                   data: const [
                     {"code": "1", "description": "All included"},
