@@ -27,7 +27,7 @@ class CustomExperienceForm extends StatelessWidget {
                 onSaved: (value) {},
                 onChanged: (value) {},
                 // label: "Exploration Days",
-                hintText: "             Activities",
+                hintText: "             Experiences",
                 data: const [
                   {"code": "1", "description": "act 1"},
                   {"code": "2", "description": "act 2"},

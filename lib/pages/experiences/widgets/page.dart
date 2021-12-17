@@ -8,8 +8,8 @@ import '../index.dart';
 import 'index.dart';
 
 /// hello
-class ActivitiesWidget extends GetView<ActivitiesController> {
-  const ActivitiesWidget({Key? key}) : super(key: key);
+class ExperiencesWidget extends GetView<ExperiencesController> {
+  const ExperiencesWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -51,13 +51,39 @@ class CustomRightDayWidget extends StatelessWidget {
             label: "Destination: Cuenca",
           ),
           Divider(color: Color.fromARGB(255, 0, 0, 0)),
-          CustomTitleWidget(
-            fontWeight: FontWeight.bold,
-            label:
-                "                                                      Selected Experiences",
+          Container(
+            height: MediaQuery.of(context).size.height * 0.23,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  CustomTitleWidget(
+                    fontWeight: FontWeight.bold,
+                    label:
+                        "                                                      Selected Experiences",
+                  ),
+                  Divider(color: Color.fromARGB(255, 0, 0, 0)),
+                  CustomExperiencesListWidget(),
+                ],
+              ),
+            ),
           ),
           Divider(color: Color.fromARGB(255, 0, 0, 0)),
-          CustomParentDaysWidget(),
+          Container(
+            height: MediaQuery.of(context).size.height * 0.23,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  CustomTitleWidget(
+                    fontWeight: FontWeight.bold,
+                    label:
+                        "                                                      Sugested Experiences",
+                  ),
+                  Divider(color: Color.fromARGB(255, 0, 0, 0)),
+                  CustomExperiencesListWidget(),
+                ],
+              ),
+            ),
+          ),
           Divider(color: Color.fromARGB(255, 0, 0, 0)),
           CustomKeypadWidget(
               nextlabel: "Next >",
@@ -75,24 +101,26 @@ class CustomRightDayWidget extends StatelessWidget {
   }
 }
 
-class CustomParentDaysWidget extends StatelessWidget {
-  const CustomParentDaysWidget({
+class CustomExperiencesListWidget extends StatelessWidget {
+  const CustomExperiencesListWidget({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var list = <Widget>[];
+    var destinations = getContext("data")["destinations"];
+    for (var destination in destinations) {
+      list.add(
+        DestinationOptionWidget(destination: destination["name"]),
+      );
+    }
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.45,
       child: Scrollbar(
         child: SingleChildScrollView(
           child: Column(
-            children: const [
-              DestinationOptionWidget(destination: "coast"),
-              DestinationOptionWidget(destination: "guayaquil"),
-              DestinationOptionWidget(destination: "cuenca"),
-              DestinationOptionWidget(destination: "volcano"),
-            ],
+            children: list,
           ),
         ),
       ),

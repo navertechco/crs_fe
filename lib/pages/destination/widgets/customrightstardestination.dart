@@ -68,7 +68,7 @@ class KeyPadWidget extends StatelessWidget {
               prevlabel: "< Previous",
               nextlabel: "Next >",
               onNext: () {
-                Get.toNamed("/Activities");
+                Get.toNamed("/Experiences");
               },
               onPrevious: () {
                 Get.back();
@@ -122,7 +122,7 @@ class DestinationListScroll extends StatelessWidget {
                       if (globalctx.destinationlist.isNotEmpty) {
                         return CustomKeypadWidget(
                             onNext: () {
-                              Get.toNamed("/Activities");
+                              Get.toNamed("/Experiences");
                             },
                             onPrevious: () {
                               Get.back();
