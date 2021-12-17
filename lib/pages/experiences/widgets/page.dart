@@ -112,7 +112,13 @@ class CustomExperiencesListWidget extends StatelessWidget {
     var experiences = getContext("experiences");
     for (var experience in experiences.keys) {
       list.add(
-        ExperienceOptionWidget(experience: experience),
+        Row(
+          children: [
+            ExperienceOptionWidget(experience: experience),
+            Image.asset("assets/custom/img/greencheck.png",
+                width: MediaQuery.of(context).size.width * 0.02),
+          ],
+        ),
       );
     }
     return SizedBox(
