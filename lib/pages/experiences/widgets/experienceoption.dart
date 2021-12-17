@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import './index.dart';
 
-class ExpereinceOptionWidget extends StatelessWidget {
-  const ExpereinceOptionWidget({Key? key, required this.experience})
+class ExperienceOptionWidget extends StatelessWidget {
+  const ExperienceOptionWidget({Key? key, required this.experience})
       : super(key: key);
   final String experience;
   @override

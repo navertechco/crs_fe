@@ -158,13 +158,18 @@ class EndServices extends StatelessWidget {
             width: 0.5,
             fontSize: 0.014,
             fontWeight: FontWeight.bold),
-        const CustomDescriptionWidget(text: """
+        const CustomDescriptionWidget(
+            text:
+                """
             B = Breakfast
             L= Lunch
             LB= Lunch Box
             D = Dinner
             O = Overnight
-            """, width: 0.5, fontSize: 0.012, fontWeight: FontWeight.bold),
+            """,
+            width: 0.5,
+            fontSize: 0.012,
+            fontWeight: FontWeight.bold),
         const CustomDescriptionWidget(
             text: "Net Rate",
             width: 0.5,
@@ -431,7 +436,7 @@ class CustomFormDayWidget extends StatelessWidget {
                 level: 4, label: "Day: ${parent + 1}#####Date: $daydate"),
             CustomDescriptionWidget(
                 text: daydescription, width: 0.55, fontSize: 0.016),
-            CustomFormExpereincesDetailWidget(data: data, indexes: indexes),
+            CustomFormExperiencesDetailWidget(data: data, indexes: indexes),
             SizedBox(height: MediaQuery.of(context).size.height * 0.01),
             CustomDescriptionWidget(
                 text: meals,
@@ -477,8 +482,8 @@ class CustomDescriptionWidget extends StatelessWidget {
   }
 }
 
-class CustomFormExpereincesDetailWidget extends StatelessWidget {
-  const CustomFormExpereincesDetailWidget({
+class CustomFormExperiencesDetailWidget extends StatelessWidget {
+  const CustomFormExperiencesDetailWidget({
     Key? key,
     required this.data,
     required this.indexes,

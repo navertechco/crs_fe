@@ -55,7 +55,7 @@ class CustomRightDayWidget extends StatelessWidget {
             height: MediaQuery.of(context).size.height * 0.23,
             child: SingleChildScrollView(
               child: Column(
-                children: [
+                children: const [
                   CustomTitleWidget(
                     fontWeight: FontWeight.bold,
                     label:
@@ -72,7 +72,7 @@ class CustomRightDayWidget extends StatelessWidget {
             height: MediaQuery.of(context).size.height * 0.23,
             child: SingleChildScrollView(
               child: Column(
-                children: [
+                children: const [
                   CustomTitleWidget(
                     fontWeight: FontWeight.bold,
                     label:
@@ -109,10 +109,10 @@ class CustomExperiencesListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var list = <Widget>[];
-    var destinations = getContext("data")["destinations"];
-    for (var destination in destinations) {
+    var experiences = getContext("experiences");
+    for (var experience in experiences.keys) {
       list.add(
-        DestinationOptionWidget(destination: destination["name"]),
+        ExperienceOptionWidget(experience: experience),
       );
     }
     return SizedBox(
@@ -216,6 +216,13 @@ class CustomParentExpererienceWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var experiences = getContext("experiences");
+    var list = <Widget>[];
+
+    for (var experience in experiences.keys) {
+      list.add(CustomExperienceForm(experience: experience));
+    }
+
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.2,
       width: MediaQuery.of(context).size.width * 0.5,
@@ -224,12 +231,7 @@ class CustomParentExpererienceWidget extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           child: Expanded(
             child: Row(
-              children: const [
-                CustomExperienceForm(experience: "coast"),
-                CustomExperienceForm(experience: "guayaquil"),
-                CustomExperienceForm(experience: "cuenca"),
-                CustomExperienceForm(experience: "volcano"),
-              ],
+              children: list,
             ),
           ),
         ),
