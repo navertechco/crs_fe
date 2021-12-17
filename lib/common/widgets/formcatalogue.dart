@@ -32,10 +32,10 @@ class FormCatalogueWidget extends StatelessWidget {
     return Obx(() {
       return DropdownButtonHideUnderline(
         child: DropdownButtonFormField(
-          value: value!,
+          value: value,
           alignment: Alignment.centerLeft,
           isExpanded: true,
-          validator: (value) => value == null ? 'required' : null,
+          // validator: (value) => value == null ? 'required' : null,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           decoration: InputDecoration.collapsed(hintText: hintText),
           onSaved: onSaved,

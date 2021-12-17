@@ -29,7 +29,7 @@ class CustomCustomerDataForm extends StatelessWidget {
     };
     var countries = getContext("countries");
     Rx<List<Map<String, dynamic>>> countrydata = Rx((() {
-      print("Countries: $countries\n\n");
+      // print("Countries: $countries\n\n");
       countrylist = [];
       var index = 0;
       for (var country in countries.keys) {
@@ -39,7 +39,7 @@ class CustomCustomerDataForm extends StatelessWidget {
         });
         index++;
       }
-      print("CountryList: $countrylist");
+      // print("CountryList: $countrylist");
       return countrylist;
     })());
     return SingleChildScrollView(
@@ -67,11 +67,11 @@ class CustomCustomerDataForm extends StatelessWidget {
                             label: "Customer Type          ",
                             onChanged: (value) {
                               customerType.value = value!;
-                              print(value);
+                              // print(value);
                             },
                             onSaved: (value) {
                               customerType.value = value!;
-                              print(value);
+                              // print(value);
                             },
                             data: const [
                               {"code": "1", "description": "Legal"},
@@ -154,13 +154,13 @@ class CustomCustomerDataForm extends StatelessWidget {
                                 country.value = value!;
                                 cityData(countries[countrylist[int.parse(value)]
                                     ["description"]]);
-                                print("CHANGED: $value");
+                                // print("CHANGED: $value");
                               },
                               onSaved: (value) {
                                 country.value = value!;
                                 cityData(countries[countrylist[int.parse(value)]
                                     ["description"]]);
-                                print("SAVED: $value");
+                                // print("SAVED: $value");
                               },
                               data: countrydata.value,
                             );
@@ -172,11 +172,11 @@ class CustomCustomerDataForm extends StatelessWidget {
                                 hintText: "City          ",
                                 onChanged: (value) {
                                   city.value = value!;
-                                  print(value);
+                                  // print(value);
                                 },
                                 onSaved: (value) {
                                   city.value = value!;
-                                  print(value);
+                                  // print(value);
                                 },
                                 data: citylist.value,
                               );

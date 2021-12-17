@@ -22,10 +22,13 @@ class CustomExperienceForm extends StatelessWidget {
                 fontWeight: FontWeight.bold,
                 label: "${experiences[experience][1]}",
               ),
-              const CustomFormMultiDropDownFieldWidget(
+              CustomFormMultiDropDownFieldWidget(
+                value: const [],
+                onSaved: (value) {},
+                onChanged: (value) {},
                 // label: "Exploration Days",
                 hintText: "             Activities",
-                data: [
+                data: const [
                   {"code": "1", "description": "act 1"},
                   {"code": "2", "description": "act 2"},
                   {"code": "3", "description": "act 3"},
@@ -35,7 +38,7 @@ class CustomExperienceForm extends StatelessWidget {
               CustomFormDropDownFieldWidget(
                 // label: "Exploration Days",
                 onSaved: (value) {},
-                 onChanged: (value) {},
+                onChanged: (value) {},
                 hintText: "Travel Rithm",
                 data: [
                   {"code": "1", "description": "Soft"},

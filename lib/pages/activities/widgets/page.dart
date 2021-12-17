@@ -124,11 +124,13 @@ class CustomLeftOptionsWidget extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    const CustomFormMultiDropDownFieldWidget(
+                    CustomFormMultiDropDownFieldWidget(
                       // label: "Exploration Days",
-
+                      value: const [],
+                      onSaved: (value) {},
+                      onChanged: (value) {},
                       hintText: "                  Services",
-                      data: [
+                      data: const [
                         {"code": "1", "description": "Translator"},
                         {"code": "2", "description": "Transport"},
                         {"code": "3", "description": "Guide"},
@@ -138,7 +140,7 @@ class CustomLeftOptionsWidget extends StatelessWidget {
                     CustomFormDropDownFieldWidget(
                       // label: "Exploration Days",
                       onSaved: (value) {},
-                       onChanged: (value) {},
+                      onChanged: (value) {},
                       hintText: "Travel Options",
                       data: const [
                         {"code": "1", "description": "All included"},
@@ -150,7 +152,7 @@ class CustomLeftOptionsWidget extends StatelessWidget {
                     CustomFormDropDownFieldWidget(
                       // label: "Exploration Days",
                       onSaved: (value) {},
-                       onChanged: (value) {},
+                      onChanged: (value) {},
                       hintText: "Galapagos Tour Options",
                       data: const [
                         {"code": "1", "description": "Cruiser"},
@@ -161,7 +163,7 @@ class CustomLeftOptionsWidget extends StatelessWidget {
                     CustomFormDropDownFieldWidget(
                       // label: "Exploration Days",
                       onSaved: (value) {},
-                       onChanged: (value) {},
+                      onChanged: (value) {},
                       hintText: "Galapagos Transport Options",
                       data: const [
                         {"code": "1", "description": "Island Hopping"},

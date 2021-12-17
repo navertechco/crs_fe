@@ -12,6 +12,7 @@ class Context with PropertyChangeNotifier<String> {
     "index": 0.obs,
     "icons": {}.obs,
     "session": {"avatar": "".obs},
+    "destinationdata": {}.obs
   }.obs);
   Rx<List<Widget>> destinationDragData = Rx(<Widget>[]);
   RxBool value = true.obs;
@@ -46,9 +47,9 @@ class Context with PropertyChangeNotifier<String> {
 Context globalctx = Context();
 setContext(key, value) {
   globalctx.set_context(key, value);
+  // print(globalctx.context.value["destinationdata"].value);
 }
 
 getContext(key) {
-  // print(globalctx.context.value["countries"]);
   return globalctx.get_context(key);
 }

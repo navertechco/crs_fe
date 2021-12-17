@@ -10,8 +10,10 @@ class RoundedFormMultiDropdown extends StatelessWidget {
   final double fontSize;
   final String? hintText;
   final String? label;
-  final void Function(String?)? onSaved;
+  final void Function(List<Map<String, dynamic>>?) onSaved;
+  final void Function(List<Map<String, dynamic>>?) onChanged;
   final List<Map<String, dynamic>> data;
+  final List<Map<String, dynamic>>? value;
 
   RoundedFormMultiDropdown(
       {Key? key,
@@ -24,7 +26,9 @@ class RoundedFormMultiDropdown extends StatelessWidget {
       this.height = 0.05,
       this.fontSize = 0.1,
       required this.onSaved,
-      this.password = false})
+      this.password = false,
+      this.value = const [],
+      required this.onChanged})
       : super(key: key);
 
   bool password;
@@ -34,6 +38,7 @@ class RoundedFormMultiDropdown extends StatelessWidget {
       width: MediaQuery.of(context).size.width * width,
       padding: EdgeInsets.only(left: left, top: top),
       child: MultiSelectDialogField(
+        initialValue: value,
         title: Text(hintText!),
         // searchHint: hintText,
         buttonText: Text(hintText!,
@@ -43,7 +48,8 @@ class RoundedFormMultiDropdown extends StatelessWidget {
             color: Colors.grey, borderRadius: BorderRadius.circular(50)),
         items: data.map((e) => MultiSelectItem(e, e["description"]!)).toList(),
         listType: MultiSelectListType.CHIP,
-        onConfirm: (values) {},
+        onConfirm: onSaved,
+        onSelectionChanged: onChanged,
       ),
     );
   }

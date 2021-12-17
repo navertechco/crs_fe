@@ -8,8 +8,14 @@ class CustomFormMultiDropDownFieldWidget extends StatelessWidget {
     this.label = "",
     this.hintText,
     required this.data,
+    required this.value,
+    required this.onSaved,
+    required this.onChanged,
   }) : super(key: key);
 
+  final List<Map<String, dynamic>>? value;
+  final Function(List<Map<String, dynamic>>?) onSaved;
+  final Function(List<Map<String, dynamic>>?) onChanged;
   final String label;
   final String? hintText;
   final List<Map<String, dynamic>> data;
@@ -22,10 +28,12 @@ class CustomFormMultiDropDownFieldWidget extends StatelessWidget {
           CustomFormLabelWidget(label: label, fontWeight: FontWeight.normal),
           // SizedBox(width: MediaQuery.of(context).size.width * 0.003),
           RoundedFormMultiDropdown(
+            value:value,
             data: data,
             hintText: hintText,
             label: label,
-            onSaved: (value) {},
+            onSaved: onSaved,
+            onChanged: onChanged,
           )
         ],
       ),
