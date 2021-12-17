@@ -10,8 +10,9 @@ class RoundedFormDropdown extends StatelessWidget {
   final double fontSize;
   final String? hintText;
   final String? label;
-  final void Function(String?)? onSaved;
+  final onSaved;
   List<Map<String, dynamic>> data;
+  final onChanged;
 
   RoundedFormDropdown(
       {Key? key,
@@ -24,7 +25,8 @@ class RoundedFormDropdown extends StatelessWidget {
       this.height = 0.05,
       this.fontSize = 0.1,
       required this.onSaved,
-      this.password = false})
+      this.password = false,
+      this.onChanged})
       : super(key: key);
 
   bool password;
@@ -36,7 +38,11 @@ class RoundedFormDropdown extends StatelessWidget {
       padding: EdgeInsets.only(left: left, top: top),
       decoration: BoxDecoration(
           color: Colors.grey, borderRadius: BorderRadius.circular(50)),
-      child: FormCatalogueWidget(data: data, hintText: hintText),
+      child: FormCatalogueWidget(
+          onChanged: onChanged,
+          onSaved: onSaved,
+          data: data,
+          hintText: hintText),
     );
   }
 }

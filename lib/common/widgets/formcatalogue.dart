@@ -4,11 +4,17 @@ import 'package:get/get.dart';
 // ignore: must_be_immutable
 class FormCatalogueWidget extends StatelessWidget {
   FormCatalogueWidget(
-      {Key? key, required this.data, this.hintText = "Choose a Option"})
+      {Key? key,
+      required this.data,
+      this.hintText = "Choose a Option",
+      this.onChanged,
+      this.onSaved})
       : super(key: key);
 
   List<Map<String, dynamic>> data;
   final String? hintText;
+  final onSaved;
+  final onChanged;
   @override
   Widget build(BuildContext context) {
     Rx<List<DropdownMenuItem<String>>>? items = Rx([]);
@@ -26,8 +32,8 @@ class FormCatalogueWidget extends StatelessWidget {
           validator: (value) => value == null ? 'required' : null,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           decoration: InputDecoration.collapsed(hintText: hintText),
-          onSaved: (value) {},
-          onChanged: (value) {},
+          onSaved: onSaved,
+          onChanged: onChanged,
           items: items.value,
         ),
       );

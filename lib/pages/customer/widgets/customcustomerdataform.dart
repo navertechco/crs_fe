@@ -10,6 +10,8 @@ class CustomCustomerDataForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Rx<List<Map<String, dynamic>>> citylist = Rx([]);
+    RxString customerType = "".obs;
+
     return Column(
       children: [
         Row(
@@ -25,19 +27,46 @@ class CustomCustomerDataForm extends StatelessWidget {
                       width: 0.225,
                       fontWeight: FontWeight.bold,
                       label: " Basic information"),
-                  CustomFormDropDownFieldWidget(
-                    label: "Customer Type          ",
-                    onSaved: (value) {},
-                    data: const [
-                      {"code": "1", "description": "Ecuador"},
-                      // {"code": "2", "description": "hola 2"},
+                  Row(
+                    children: [
+                      CustomFormDropDownFieldWidget(
+                        width: 0.2,
+                        label: "Customer Type          ",
+                        onChanged: (value) {
+                          customerType.value = value!;
+                          print(value);
+                        },
+                        onSaved: (value) {
+                          customerType.value = value!;
+                          print(value);
+                        },
+                        data: const [
+                          {"code": "1", "description": "Legal"},
+                          {"code": "2", "description": "Natural"},
+                        ],
+                      ),
                     ],
                   ),
-                  const CustomFormTextFieldWidget(
-                      hintText: "Names                          ", width: 0.36),
-                  const CustomFormTextFieldWidget(
-                      hintText: "Surnames                          ",
-                      width: 0.36),
+                  Obx(() {
+                    if (customerType.value == "1") {
+                      return const CustomFormTextFieldWidget(
+                          label: "Tax Id                            ",
+                          width: 0.2);
+                    } else {
+                      return Text("");
+                    }
+                  }),
+
+                  Row(
+                    children: const [
+                      CustomFormTextFieldWidget(
+                          hintText: "Names                          ",
+                          width: 0.17),
+                      CustomFormTextFieldWidget(
+                          hintText: "Surnames                          ",
+                          width: 0.17),
+                    ],
+                  ),
                   const CustomFormTextFieldWidget(
                     label: "DNI/PASSPORT             ",
                   ),
@@ -92,7 +121,7 @@ class CustomCustomerDataForm extends StatelessWidget {
                           return list;
                         })(),
                       ),
-                      if(true)
+                      if (true)
                         Obx(() {
                           return CustomFormDropDownFieldWidget(
                             width: 0.10,

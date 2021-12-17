@@ -9,11 +9,7 @@ class PRegistry {
 }
 
 List<dynamic> routes = [
-  PRegistry(
-      name: '/Home',
-      page: () => const HomePage(),
-      transition: Transition.native,
-      binding: HomeBinding()),
+
   PRegistry(
       name: '/Signin',
       page: () => const SigninPage(),
@@ -41,11 +37,6 @@ List<dynamic> routes = [
       transition: Transition.native,
       binding: DestinationBinding()),
   PRegistry(
-      name: '/DestinationModal',
-      page: () => const DestinationModalPage(),
-      transition: Transition.native,
-      binding: DestinationModalBinding()),
-  PRegistry(
       name: '/DestinationDetail',
       page: () => const DestinationDetailPage(),
       transition: Transition.native,
@@ -64,12 +55,7 @@ List<dynamic> routes = [
       name: '/Loading',
       page: () => const LoadingPage(),
       transition: Transition.native,
-      binding: LoadingBinding()),
-  PRegistry(
-      name: '/Congrats',
-      page: () => const CongratsPage(),
-      transition: Transition.native,
-      binding: CongratsBinding()),
+      binding: LoadingBinding()), 
   PRegistry(
       name: '/Resume',
       page: () => ResumePage(),

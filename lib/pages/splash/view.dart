@@ -36,7 +36,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
             onLoaded: (composition) {
               _controller
                 ?..duration = composition.duration
-                ..forward().whenComplete(() => Get.toNamed("/Home"));
+                ..forward().whenComplete(() => Get.toNamed("/Signin"));
             },
           ),
         ));
