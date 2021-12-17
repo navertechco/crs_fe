@@ -25,6 +25,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                 label: destinations[destination][1],
               ),
               CustomFormDropDownFieldWidget(
+                value: "2",
                 onSaved: (value) {},
                 onChanged: (value) {},
                 label: "Exploration Days     ",
@@ -34,7 +35,6 @@ class CustomStarDestinationForm extends StatelessWidget {
                   {"code": "3", "description": "3"},
                   {"code": "4", "description": "4"},
                   {"code": "5", "description": "5"},
-                  // {"code": "2", "description": "hola 2"},
                 ],
               ),
               SizedBox(
@@ -42,7 +42,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                   if (destination == "galapagos") {
                     return CustomFormDropDownFieldWidget(
                       onSaved: (value) {},
-                       onChanged: (value) {},
+                      onChanged: (value) {},
                       label: "Exploration Mode   ",
                       data: const [
                         {"code": "1", "description": "Cruiser"},
@@ -56,7 +56,7 @@ class CustomStarDestinationForm extends StatelessWidget {
               CustomFormDropDownFieldWidget(
                 // label: "Exploration Days",
                 onSaved: (value) {},
-                 onChanged: (value) {},
+                onChanged: (value) {},
                 label: "Destination Option",
                 data: const [
                   {"code": "1", "description": "All included"},
@@ -68,7 +68,7 @@ class CustomStarDestinationForm extends StatelessWidget {
               CustomFormDropDownFieldWidget(
                 // label: "Exploration Days",
                 onSaved: (value) {},
-                 onChanged: (value) {},
+                onChanged: (value) {},
                 label: "Travel Rithm             ",
                 data: const [
                   {"code": "1", "description": "Soft"},

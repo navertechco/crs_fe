@@ -53,7 +53,7 @@ class LeftWidget extends StatelessWidget {
       child: Container(
           height: MediaQuery.of(context).size.height * 0.6,
           width: MediaQuery.of(context).size.width * 0.4,
-          color: Colors.blue[50],
+          // color: Colors.blue[50],
           child: DGalleryWidget(destination: destination)),
     );
   }
@@ -76,7 +76,7 @@ class RightWidget extends StatelessWidget {
       child: Container(
         height: MediaQuery.of(context).size.height * 0.6,
         width: MediaQuery.of(context).size.width * 0.45,
-        color: Colors.red[50],
+        // color: Colors.red[50],
         child: SingleChildScrollView(
           child: CustomStarDestinationForm(destination: destination),
         ),
