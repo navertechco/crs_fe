@@ -27,6 +27,7 @@ class CustomTourInformationForm extends StatelessWidget {
               label: "  Tour information"),
           CustomFormDropDownFieldWidget(
             onSaved: (value) {},
+            onChanged: (value) {},
             label: "Destination Country",
             data: const [
               {"code": "1", "description": "Ecuador"},
@@ -35,6 +36,7 @@ class CustomTourInformationForm extends StatelessWidget {
           ),
           CustomFormDropDownFieldWidget(
             onSaved: (value) {},
+            onChanged: (value) {},
             label: "Purpose                        ",
             data: const [
               {"code": "1", "description": "AVENTURE"},
@@ -43,6 +45,7 @@ class CustomTourInformationForm extends StatelessWidget {
           ),
           CustomFormDropDownFieldWidget(
             onSaved: (value) {},
+            onChanged: (value) {},
             label: "Accomodation Type",
             data: const [
               {"code": "1", "description": "5 STARS"},
@@ -55,23 +58,15 @@ class CustomTourInformationForm extends StatelessWidget {
               label: "  Date                              "),
           const CustomFormDateFieldWidget(label: "Arrival Date               "),
           const CustomFormDateFieldWidget(label: "Departure Date       "),
-          CustomFormDropDownFieldWidget(
-            onSaved: (value) {},
-            label: "Passengers                  ",
-            data: const [
-              {"code": "1", "description": "1"},
-              {"code": "2", "description": "2"},
-              {"code": "3", "description": "3-5"},
-              {"code": "4", "description": "6-10"},
-              {"code": "5", "description": "11-20"},
-              {"code": "6", "description": "21-30"},
-            ],
-          ),
+          CustomFormTextFieldWidget(
+              label: "Passengers                  ", width: 0.20),
           Padding(
             padding: EdgeInsets.only(
-                top: MediaQuery.of(context).size.height * 0.171),
+              top: MediaQuery.of(context).size.height * 0.175,
+              left: MediaQuery.of(context).size.width * 0.022,
+            ),
             child: CustomKeypadWidget(
-                width: 0.2,
+                width: 0.24,
                 onPrevious: () {
                   Get.back();
                 },

@@ -49,6 +49,6 @@ setContext(key, value) {
 }
 
 getContext(key) {
-  print(globalctx.context);
+  // print(globalctx.context.value["countries"]);
   return globalctx.get_context(key);
 }

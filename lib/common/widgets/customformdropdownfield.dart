@@ -11,7 +11,7 @@ class CustomFormDropDownFieldWidget extends StatelessWidget {
       this.width = 0.2,
       this.height = 0.05,
       required this.onSaved,
-      this.onChanged})
+      required this.onChanged})
       : super(key: key);
 
   final String label;
@@ -19,9 +19,8 @@ class CustomFormDropDownFieldWidget extends StatelessWidget {
   final double width;
   final double height;
   List<Map<String, dynamic>> data;
-  final onSaved;
-  final onChanged;
-
+  void Function(String?) onSaved;
+  void Function(String?) onChanged;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -32,6 +31,7 @@ class CustomFormDropDownFieldWidget extends StatelessWidget {
           RoundedFormDropdown(
             onChanged: onChanged,
             width: width,
+            height: height,
             data: data,
             hintText: hintText,
             label: label,

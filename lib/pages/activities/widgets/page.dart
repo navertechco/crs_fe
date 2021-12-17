@@ -138,6 +138,7 @@ class CustomLeftOptionsWidget extends StatelessWidget {
                     CustomFormDropDownFieldWidget(
                       // label: "Exploration Days",
                       onSaved: (value) {},
+                       onChanged: (value) {},
                       hintText: "Travel Options",
                       data: const [
                         {"code": "1", "description": "All included"},
@@ -149,6 +150,7 @@ class CustomLeftOptionsWidget extends StatelessWidget {
                     CustomFormDropDownFieldWidget(
                       // label: "Exploration Days",
                       onSaved: (value) {},
+                       onChanged: (value) {},
                       hintText: "Galapagos Tour Options",
                       data: const [
                         {"code": "1", "description": "Cruiser"},
@@ -159,6 +161,7 @@ class CustomLeftOptionsWidget extends StatelessWidget {
                     CustomFormDropDownFieldWidget(
                       // label: "Exploration Days",
                       onSaved: (value) {},
+                       onChanged: (value) {},
                       hintText: "Galapagos Transport Options",
                       data: const [
                         {"code": "1", "description": "Island Hopping"},

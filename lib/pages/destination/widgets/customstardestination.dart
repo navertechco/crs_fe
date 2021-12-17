@@ -26,6 +26,7 @@ class CustomStarDestinationForm extends StatelessWidget {
               ),
               CustomFormDropDownFieldWidget(
                 onSaved: (value) {},
+                onChanged: (value) {},
                 label: "Exploration Days     ",
                 data: const [
                   {"code": "1", "description": "1"},
@@ -41,6 +42,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                   if (destination == "galapagos") {
                     return CustomFormDropDownFieldWidget(
                       onSaved: (value) {},
+                       onChanged: (value) {},
                       label: "Exploration Mode   ",
                       data: const [
                         {"code": "1", "description": "Cruiser"},
@@ -54,6 +56,7 @@ class CustomStarDestinationForm extends StatelessWidget {
               CustomFormDropDownFieldWidget(
                 // label: "Exploration Days",
                 onSaved: (value) {},
+                 onChanged: (value) {},
                 label: "Destination Option",
                 data: const [
                   {"code": "1", "description": "All included"},
@@ -65,6 +68,7 @@ class CustomStarDestinationForm extends StatelessWidget {
               CustomFormDropDownFieldWidget(
                 // label: "Exploration Days",
                 onSaved: (value) {},
+                 onChanged: (value) {},
                 label: "Travel Rithm             ",
                 data: const [
                   {"code": "1", "description": "Soft"},

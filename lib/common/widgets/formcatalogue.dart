@@ -7,14 +7,14 @@ class FormCatalogueWidget extends StatelessWidget {
       {Key? key,
       required this.data,
       this.hintText = "Choose a Option",
-      this.onChanged,
-      this.onSaved})
+     required this.onChanged,
+      required this.onSaved})
       : super(key: key);
 
   List<Map<String, dynamic>> data;
   final String? hintText;
-  final onSaved;
-  final onChanged;
+  void Function(String?) onSaved;
+  void Function(String?) onChanged;
   @override
   Widget build(BuildContext context) {
     Rx<List<DropdownMenuItem<String>>>? items = Rx([]);
