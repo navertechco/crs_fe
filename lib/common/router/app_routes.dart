@@ -29,16 +29,7 @@ List<dynamic> routes = [
       page: () => const SplashPage(),
       transition: Transition.native,
       binding: SplashBinding()),
-  PRegistry(
-      name: '/Policies',
-      page: () => const PoliciesPage(),
-      transition: Transition.native,
-      binding: PoliciesBinding()),
-  PRegistry(
-      name: '/Profile',
-      page: () => ProfilePage(),
-      transition: Transition.native,
-      binding: ProfileBinding()),
+  
   PRegistry(
       name: '/Forgot',
       page: () => const ForgotPage(),

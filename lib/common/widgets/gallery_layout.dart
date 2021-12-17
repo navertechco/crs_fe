@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 
 class GalleryLayoutWidget extends StatelessWidget {
   const GalleryLayoutWidget({Key? key, this.child, this.text})
@@ -11,7 +11,7 @@ class GalleryLayoutWidget extends StatelessWidget {
       Positioned(
         left: 0,
         child: Image.asset(
-          "assets/custom/img/gallery.png",
+          "assets/custom/img/layout.png",
           fit: BoxFit.fill,
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,

@@ -1,9 +1,11 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'package:animations/animations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/common/index.dart';
+import 'package:naver_crs/common/widgets/youtube.dart';
 import 'package:naver_crs/pages/index.dart';
 import '../index.dart';
 
@@ -59,7 +61,7 @@ List<Map<String, dynamic>> galeryData = [
 ];
 
 class DGalleryWidget extends GetView<DGalleryController> {
-  const DGalleryWidget({Key? key}) : super(key: key);
+  const DGalleryWidget({Key? key, destination}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -69,17 +71,21 @@ class DGalleryWidget extends GetView<DGalleryController> {
       var idx = index;
       Gallery.add(GalleryItem(
         onTap: () {
-          showModalBottomSheet(
+          showModal(
               context: context,
               builder: (context) {
-                return Container(
-                  width: 1000,
-                  child: GalleryLayoutWidget(
-                      child: Text("$idx",
-                          style: const TextStyle(
-                              color: Color.fromARGB(255, 255, 0, 255),
-                              fontSize: 40)),
-                      text: "DGallery"),
+                return GestureDetector(
+                  onTap: () {
+                    Get.close(1);
+                  },
+                  child: Container(
+                    width: 100,
+                    child: ContentLayoutWidget(
+                        child: const YoutubeWidget(
+                          videoId: "r7XhWUDj-Ts",
+                        ),
+                        text: "DGallery"),
+                  ),
                 );
               });
         },
@@ -125,15 +131,16 @@ class GalleryItem extends StatelessWidget {
       children: [
         Column(
           children: [
-            SizedBox(height: MediaQuery.of(context).size.height * 0.3),
             GestureDetector(
               onTap: onTap,
-              child: Image.asset(image,
-                  height: MediaQuery.of(context).size.height * 0.4),
+              child: Image.asset(
+                image,
+                fit: BoxFit.cover,
+                height: MediaQuery.of(context).size.height * 0.6,
+              ),
             ),
           ],
         ),
-        SizedBox(width: MediaQuery.of(context).size.width * 0.05),
       ],
     );
   }

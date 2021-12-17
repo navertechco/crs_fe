@@ -13,9 +13,7 @@ class CustomRightStarDestinationForm extends StatelessWidget {
     return Column(
       children: [
         DestinationsOrderableListWidget(),
-        // DestinationListScroll(),
         const ResetPadWidget(),
-
         const KeyPadWidget(),
       ],
     );
