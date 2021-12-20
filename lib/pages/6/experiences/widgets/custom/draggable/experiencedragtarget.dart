@@ -1,0 +1,42 @@
+
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';  
+import '../../../../../index.dart'; 
+
+class ExperienceDragTargetWidget extends StatelessWidget {
+  const ExperienceDragTargetWidget({
+    Key? key,
+    required this.onAccept,
+  }) : super(key: key);
+
+  final Null Function(String key) onAccept;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+        width: MediaQuery.of(context).size.width * 0.46,
+        child: DragTarget<String>(
+          builder: (
+            BuildContext context,
+            List<dynamic> accepted,
+            List<dynamic> rejected,
+          ) {
+            return Container(
+              height: MediaQuery.of(context).size.height * 0.7,
+              width: MediaQuery.of(context).size.width * 0.35,
+              color: Colors.grey[50],
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: Obx(() {
+                  return SingleChildScrollView(
+                    child:
+                        Column(children: globalctx.experienceDragData.value),
+                  );
+                }),
+              ),
+            );
+          },
+          onAccept: onAccept,
+        ));
+  }
+}

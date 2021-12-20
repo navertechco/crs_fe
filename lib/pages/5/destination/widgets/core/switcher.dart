@@ -1,7 +1,8 @@
 import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart'; 
+import 'package:get/get.dart';
+import 'package:naver_crs/pages/5/destination/widgets/draggable/draggabletargetdestination.dart'; 
 import '../../../../index.dart'; 
 import '../index.dart'; 
 
@@ -49,7 +50,7 @@ class SwitcherWidget extends StatelessWidget {
     Widget _buildFlipAnimation() {
       return GestureDetector(
         onTap: () {
-          var key = destination;
+           
           if (globalctx.Keys.contains(destination)) {
             showDialog(
                 context: context,
@@ -57,49 +58,9 @@ class SwitcherWidget extends StatelessWidget {
                   return DestinationDetailPage(destination: destination);
                 });
           }
-          if (!globalctx.Keys.contains(key)) {
-            globalctx.Keys.add(key);
-            globalctx.destinationDragData.value.add(Obx(() {
-              return globalctx.Keys.contains(key)
-                  ? Row(
-                      children: [
-                        DestinationOptionWidget(destination: key),
-                        !globalctx.promoted.contains(key)
-                            ? GestureDetector(
-                                onTap: () {
-                                  if (globalctx.Keys.contains(key)) {
-                                    globalctx.promoted.remove(key);
-                                    var index = globalctx.Keys.indexWhere(
-                                        (element) => element == key);
-                                    globalctx.Keys.removeAt(index);
-                                    globalctx.destinationDragData.value
-                                        .removeAt(index);
-                                  }
-                                },
-                                child: Image.asset(
-                                    "assets/custom/img/redmark.png",
-                                    width: MediaQuery.of(context).size.width *
-                                        0.02),
-                              )
-                            : GestureDetector(
-                                onTap: () {
-                                  if (globalctx.Keys.contains(key)) {
-                                    var index = globalctx.Keys.indexWhere(
-                                        (element) => element == key);
-                                    globalctx.Keys.removeAt(index);
-                                    globalctx.destinationDragData.value
-                                        .removeAt(index);
-                                  }
-                                },
-                                child: Image.asset(
-                                    "assets/custom/img/greencheck.png",
-                                    width: MediaQuery.of(context).size.width *
-                                        0.02),
-                              )
-                      ],
-                    )
-                  : Text("");
-            }));
+          if (!globalctx.Keys.contains(destination)) {
+            globalctx.Keys.add(destination);
+            globalctx.destinationDragData.value.add(DraggableTargetDestinationWidget(destination: destination));
           }
         },
         child: AnimatedSwitcher(
@@ -118,3 +79,4 @@ class SwitcherWidget extends StatelessWidget {
     return _buildFlipAnimation();
   }
 }
+

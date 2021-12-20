@@ -15,6 +15,7 @@ class Context with PropertyChangeNotifier<String> {
     "destinationdata": {}.obs
   }.obs);
   Rx<List<Widget>> destinationDragData = Rx(<Widget>[]);
+  Rx<List<Widget>> experienceDragData = Rx(<Widget>[]);
   RxBool value = true.obs;
   RxList<dynamic> destinationlist = [].obs;
   RxList<dynamic> experiencelist = [].obs;
