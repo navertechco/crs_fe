@@ -21,7 +21,7 @@ class ExperienceDetailWidget extends GetView<ExperienceDetailController> {
               nextlabel: "Next >",
               prevlabel: " < Previous",
               onNext: () {
-                globalctx.Completed.add(experience);
+                globalctx.promoted.add(experience);
                 Get.close(1);
               },
               onPrevious: () {

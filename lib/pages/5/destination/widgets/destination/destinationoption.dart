@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'index.dart';
+import '../index.dart'; 
 
 class DestinationOptionWidget extends StatelessWidget {
   const DestinationOptionWidget({Key? key, required this.destination})

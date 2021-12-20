@@ -19,7 +19,9 @@ class Context with PropertyChangeNotifier<String> {
   RxList<dynamic> destinationlist = [].obs;
   RxList<dynamic> experiencelist = [].obs;
   RxList Keys = [].obs;
-  RxList Completed = [].obs;
+  RxList promoted = [].obs;
+  RxList selected = [].obs;
+  RxList suggested = [].obs;
   Map<String, GlobalKey<State<StatefulWidget>>> keys = {};
   Context() {
     load("data");

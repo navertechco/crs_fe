@@ -23,7 +23,7 @@ class DestinationDetailWidget extends GetView<DestinationDetailController> {
               nextlabel: "Next >",
               prevlabel: " < Previous",
               onNext: () {
-                globalctx.Completed.add(destination);
+                globalctx.promoted.add(destination);
                 Get.close(1);
               },
               onPrevious: () {

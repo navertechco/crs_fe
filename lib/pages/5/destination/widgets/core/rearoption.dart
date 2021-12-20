@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-
-import '../../../index.dart';
+import 'package:google_fonts/google_fonts.dart'; 
+import '../../../../index.dart'; 
 
 class RearOptionWidget extends StatelessWidget {
   const RearOptionWidget(

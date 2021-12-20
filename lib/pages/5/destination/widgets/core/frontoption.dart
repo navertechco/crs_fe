@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-
-import '../../../index.dart';
+import 'package:flutter/material.dart'; 
+import '../../../../index.dart'; 
 
 class FrontOptionWidget extends StatelessWidget {
   const FrontOptionWidget({Key? key, this.destination = "coast"})

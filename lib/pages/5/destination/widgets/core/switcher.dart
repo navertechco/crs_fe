@@ -1,10 +1,9 @@
 import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
-import '../../../index.dart';
-import 'index.dart';
+import 'package:get/get.dart'; 
+import '../../../../index.dart'; 
+import '../index.dart'; 
 
 class SwitcherWidget extends StatelessWidget {
   const SwitcherWidget(
@@ -65,11 +64,11 @@ class SwitcherWidget extends StatelessWidget {
                   ? Row(
                       children: [
                         DestinationOptionWidget(destination: key),
-                        !globalctx.Completed.contains(key)
+                        !globalctx.promoted.contains(key)
                             ? GestureDetector(
                                 onTap: () {
                                   if (globalctx.Keys.contains(key)) {
-                                    globalctx.Completed.remove(key);
+                                    globalctx.promoted.remove(key);
                                     var index = globalctx.Keys.indexWhere(
                                         (element) => element == key);
                                     globalctx.Keys.removeAt(index);
