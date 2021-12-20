@@ -2,7 +2,8 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:naver_crs/common/index.dart';
+
+import '../../../index.dart';
 
 class SwitcherWidget extends StatelessWidget {
   const SwitcherWidget(

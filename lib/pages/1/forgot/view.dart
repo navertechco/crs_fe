@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:naver_crs/common/widgets/index.dart';
 import 'widgets/index.dart';
-
 import 'index.dart';
-
+import '../../index.dart';
 class ForgotPage extends GetView<ForgotController> {
   const ForgotPage({Key? key}) : super(key: key);
 

@@ -4,7 +4,8 @@ import 'package:animations/animations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:naver_crs/common/index.dart';  
+
+import '../../../../../index.dart';
 import '../index.dart';
 
 List<Map<String, dynamic>> galeryData = [
@@ -64,8 +65,8 @@ class DGalleryWidget extends GetView<DGalleryController> {
   @override
   Widget build(BuildContext context) {
     List<Widget> Gallery = [];
-     
-    for (var item in galeryData) { 
+
+    for (var item in galeryData) {
       Gallery.add(GalleryItem(
         onTap: () {
           showModal(
@@ -90,7 +91,6 @@ class DGalleryWidget extends GetView<DGalleryController> {
         image: item["image"],
         title: item["title"],
       ));
-    
     }
 
     return SingleChildScrollView(
@@ -142,4 +142,3 @@ class GalleryItem extends StatelessWidget {
     );
   }
 }
- 

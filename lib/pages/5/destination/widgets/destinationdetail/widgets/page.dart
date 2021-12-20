@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart'; 
-import 'package:naver_crs/common/index.dart';
-import 'package:naver_crs/pages/5/destination/widgets/dgallery/widgets/index.dart'; 
+import 'package:get/get.dart';
+
+import 'package:naver_crs/pages/5/destination/widgets/dgallery/widgets/index.dart';
+import '../../../../../index.dart';
 import '../index.dart';
-import '../../index.dart'; 
+import '../../index.dart';
 
 class DestinationDetailWidget extends GetView<DestinationDetailController> {
   const DestinationDetailWidget({Key? key, this.destination}) : super(key: key);

@@ -1,7 +1,7 @@
 // ignore_file: file_names
 import 'package:flutter/material.dart';
-import 'package:naver_crs/common/index.dart';
 
+import '../../../index.dart';
 import 'index.dart';
 
 class CustomLeftStarDestinationForm extends StatelessWidget {

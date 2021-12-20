@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:naver_crs/common/index.dart';
-import 'package:naver_crs/common/widgets/index.dart';
+
 import 'package:pdf/pdf.dart';
+import '../../index.dart';
 import 'widgets/index.dart';
 import 'package:pdf/widgets.dart ' as pw;
 import 'index.dart';
@@ -26,10 +26,10 @@ class ResumePage extends GetView<ResumeController> {
         format: PdfPageFormat.a4,
         onLayout: (PdfPageFormat format) async {
           final doc = pw.Document(version: PdfVersion.pdf_1_5, compress: true);
-           
+
           for (var key in globalctx.keys.keys) {
             final image = await WidgetWraper.fromKey(key: globalctx.keys[key]!);
-             
+
             doc.addPage(pw.Page(
                 pageFormat: PdfPageFormat.a4,
                 build: (pw.Context context) {

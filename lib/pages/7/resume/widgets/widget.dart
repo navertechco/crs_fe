@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:naver_crs/common/index.dart';
 
+import '../../../index.dart';
 import '../index.dart';
 
 /// hello
@@ -562,7 +562,7 @@ class CustomFormExperienceRowWidget extends StatelessWidget {
         ? experiences[experienceindex + 1]
         : experience;
     var title = experience['title'].toString();
-    var description = experience['description'].toString(); 
+    var description = experience['description'].toString();
     var next = experience['next'].toString() != ""
         ? experience['next'].toString()
         : nextexperience['previous'].toString();

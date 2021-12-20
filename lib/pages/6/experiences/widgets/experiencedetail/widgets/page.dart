@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart'; 
-import 'package:naver_crs/common/index.dart';  
+import 'package:get/get.dart';
+
+import '../../../../../index.dart';
 import '../index.dart';
 
 class ExperienceDetailWidget extends GetView<ExperienceDetailController> {
@@ -51,7 +52,7 @@ class LeftWidget extends StatelessWidget {
           height: MediaQuery.of(context).size.height * 0.6,
           width: MediaQuery.of(context).size.width * 0.4,
           // color: Colors.blue[50],
-          child:Text("")),
+          child: Text("")),
     );
   }
 }

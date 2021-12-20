@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:naver_crs/common/index.dart';
+
+import '../../../index.dart';
 
 class FrontOptionWidget extends StatelessWidget {
   const FrontOptionWidget({Key? key, this.experience = "coast"})

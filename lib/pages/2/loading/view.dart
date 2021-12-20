@@ -1,10 +1,8 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:naver_crs/common/index.dart';
-
 import 'index.dart';
+import '../../index.dart';
 import 'widgets/index.dart';
 
 class LoadingPage extends GetView<LoadingController> {

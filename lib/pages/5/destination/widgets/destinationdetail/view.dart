@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:naver_crs/common/widgets/index.dart';
 
+import '../../../../index.dart';
 import 'index.dart';
 import 'widgets/index.dart';
 
@@ -11,7 +11,7 @@ class DestinationDetailPage extends GetView<DestinationDetailController> {
   Widget _buildView(BuildContext? _context) {
     return ContentLayoutWidget(
         background: "assets/custom/img/destination.png",
-        child:   DestinationDetailWidget(destination:destination),
+        child: DestinationDetailWidget(destination: destination),
         text: "<   DestinationDetail");
   }
 

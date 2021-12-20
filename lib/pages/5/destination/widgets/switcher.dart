@@ -2,7 +2,8 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:naver_crs/common/index.dart';
+
+import '../../../index.dart';
 import 'index.dart';
 
 class SwitcherWidget extends StatelessWidget {
@@ -22,8 +23,6 @@ class SwitcherWidget extends StatelessWidget {
     RxBool _showFrontSide = true.obs;
     RxBool _flipXAxis = true.obs;
 
-  
- 
     Widget _transitionBuilder(Widget widget, Animation<double> animation) {
       final rotateAnim = Tween(begin: pi, end: 0.0).animate(animation);
       return AnimatedBuilder(

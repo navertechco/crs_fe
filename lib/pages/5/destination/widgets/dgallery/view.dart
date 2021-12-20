@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:naver_crs/common/index.dart';
-import 'package:naver_crs/common/widgets/index.dart';
+
+import '../../../../index.dart';
 import 'widgets/index.dart';
 import 'index.dart';
 
@@ -27,7 +27,6 @@ class DGalleryPage extends GetView<DGalleryController> {
             alignment: Alignment.center,
             children: [
               _buildView(context),
-            
             ],
           ),
         ));

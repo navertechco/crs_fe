@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:naver_crs/common/index.dart';
-import 'package:naver_crs/common/widgets/layouts/index.dart';
 import '../index.dart';
+import '../../../index.dart';
 
 /// Loading
 class LoadingWidget extends GetView<LoadingController> {

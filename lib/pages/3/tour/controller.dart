@@ -1,11 +1,8 @@
 // ignore_for_file: import_of_legacy_library_into_null_safe
-
 import 'package:get/get.dart';
-import 'package:naver_crs/common/constants.dart';
-import 'package:naver_crs/common/index.dart';
 import 'package:sweetalert/sweetalert.dart';
-
 import 'index.dart';
+import '../../index.dart';
 
 class TourController extends GetxController {
   TourController();
