@@ -1,5 +1,5 @@
 library widgets;
 
-export 'parentform.dart';
+export 'right.dart';
 export 'page.dart';
-export 'childform.dart';
+export 'customtourinformation.dart';

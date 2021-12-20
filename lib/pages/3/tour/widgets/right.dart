@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import '../state.dart';
 import 'index.dart';
 
-class TourForm extends StatefulWidget {
-  TourForm({
+class RightWidget extends StatefulWidget {
+  RightWidget({
     Key? key,
     required this.formKey,
     required this.state,
@@ -16,17 +16,12 @@ class TourForm extends StatefulWidget {
   final bool profile;
   TourState state;
   @override
-  State<TourForm> createState() => _TourFormState();
+  State<RightWidget> createState() => _RightWidgetState();
 }
 
-class _TourFormState extends State<TourForm> {
+class _RightWidgetState extends State<RightWidget> {
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-       
-        const CustomTourInformationForm(),
-      ],
-    );
+    return CustomTourInformationForm();
   }
 }

@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../index.dart';
+
 // ignore: must_be_immutable
 class FormCatalogueWidget extends StatelessWidget {
   FormCatalogueWidget(
       {Key? key,
-      this.value = "9999",
+      required this.value,
       required this.data,
       this.hintText = "Choose a Option",
       required this.onChanged,
@@ -22,7 +24,7 @@ class FormCatalogueWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     Rx<List<DropdownMenuItem<String>>>? items = Rx([]);
     List<Map<String, dynamic>> data2 = [];
-    data2.add({"code": "9999", "description": ""});
+    data2.add({"code": "9999", "description": hintText});
     data2.addAll(data);
     data2.asMap().forEach((index, item) {
       items.value.add(DropdownMenuItem(
@@ -33,20 +35,17 @@ class FormCatalogueWidget extends StatelessWidget {
     return Obx(() {
       return DropdownButtonHideUnderline(
         child: DropdownButtonFormField(
-          style: GoogleFonts.poppins(
-              textStyle: TextStyle(
-            color: const Color.fromARGB(255, 0, 0, 0),
-            fontSize: MediaQuery.of(context).size.width /
-                MediaQuery.of(context).size.height *
-                10,
-            fontWeight: FontWeight.normal,
-          )),
-          value: value,
+          style: KTextSytle(context, 10),
           alignment: Alignment.centerLeft,
           isExpanded: true,
+          value: value,
           // validator: (value) => value == null ? 'required' : null,
           autovalidateMode: AutovalidateMode.onUserInteraction,
-          decoration: InputDecoration.collapsed(hintText: hintText),
+          decoration: InputDecoration.collapsed(
+            filled: false,
+            hintText: hintText,
+            hintStyle: KTextSytle(context, 10),
+          ),
           onSaved: onSaved,
           onChanged: onChanged,
           items: items.value,

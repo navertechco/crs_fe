@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 
+import '../../index.dart';
+
 class RoundedFormMultiDropdown extends StatelessWidget {
   final double left;
   final double top;
@@ -40,17 +42,19 @@ class RoundedFormMultiDropdown extends StatelessWidget {
       padding: EdgeInsets.only(left: left, top: top),
       child: MultiSelectDialogField(
         initialValue: value,
-        title: Text(hintText!),
+        itemsTextStyle: KTextSytle(context, fontSize),
+        selectedItemsTextStyle: KTextSytle(context, fontSize),
+        searchTextStyle: KTextSytle(context, fontSize),
+        searchHintStyle: KTextSytle(context, fontSize),
+        title: Text(
+          hintText!,
+          style: KTextSytle(context, fontSize),
+        ),
         // searchHint: hintText,
-        buttonText: Text(hintText!,
-            style: GoogleFonts.poppins(
-                textStyle: TextStyle(
-              color: const Color.fromARGB(255, 0, 0, 0),
-              fontSize: MediaQuery.of(context).size.width /
-                  MediaQuery.of(context).size.height *
-                  fontSize,
-              fontWeight: FontWeight.normal,
-            ))),
+        buttonText: Text(
+          hintText!,
+          style: KTextSytle(context, fontSize),
+        ),
         decoration: BoxDecoration(
             color: Colors.grey, borderRadius: BorderRadius.circular(50)),
         items: data.map((e) => MultiSelectItem(e, e["description"]!)).toList(),

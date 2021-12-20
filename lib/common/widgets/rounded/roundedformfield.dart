@@ -39,15 +39,7 @@ class RoundedFormField extends StatelessWidget {
         onSaved: onSaved,
         obscureText: password,
         cursorColor: Colors.grey,
-        style: GoogleFonts.poppins(
-            textStyle: TextStyle(
-          color: const Color.fromARGB(255, 255, 255, 255),
-          fontSize: MediaQuery.of(context).size.width /
-              MediaQuery.of(context).size.height *
-              isMobile *
-              fontSize,
-          fontWeight: FontWeight.normal,
-        )),
+        style: KTextSytle(context, fontSize),
         decoration: InputDecoration.collapsed(
           hintText: hintText,
           hintStyle: TextStyle(

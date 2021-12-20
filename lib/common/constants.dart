@@ -2,11 +2,23 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/shims/dart_ui_real.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'context/index.dart';
 
 /*
  * DATOS DE SERVIDOR
  */
+
+// ignore: constant_identifier_names, prefer_function_declarations_over_variables
+TextStyle Function(dynamic, dynamic) KTextSytle =
+    (context, fontSize) => GoogleFonts.poppins(
+            textStyle: TextStyle(
+          color: Color.fromARGB(255, 0, 0, 0),
+          fontSize: MediaQuery.of(context).size.width /
+              MediaQuery.of(context).size.height *
+              fontSize,
+          fontWeight: FontWeight.normal,
+        ));
 
 const kDefaultSchema = "http";
 const kDefaultServer = "192.168.101.3";
@@ -115,7 +127,7 @@ final isMobileDevice = () {
 };
 
 // ignore: prefer_function_declarations_over_variables
-final chunkArray = ( list, int portion) {
+final chunkArray = (list, int portion) {
   List<List<Map<String, dynamic>>> chunks = [];
   int aprox = (list.length / portion).round() * portion;
   int module = aprox > list.length

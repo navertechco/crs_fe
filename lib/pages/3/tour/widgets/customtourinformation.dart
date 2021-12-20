@@ -63,11 +63,11 @@ class CustomTourInformationForm extends StatelessWidget {
               label: "Passengers                  ", width: 0.20),
           Padding(
             padding: EdgeInsets.only(
-              top: MediaQuery.of(context).size.height * 0.175,
+              top: MediaQuery.of(context).size.height * 0.2,
               left: MediaQuery.of(context).size.width * 0.022,
             ),
             child: CustomKeypadWidget(
-                width: 0.24,
+                width: 0.265,
                 onPrevious: () {
                   Get.back();
                 },

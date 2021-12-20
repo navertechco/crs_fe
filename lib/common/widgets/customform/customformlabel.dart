@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../index.dart';
+
 class CustomFormLabelWidget extends StatelessWidget {
   const CustomFormLabelWidget({
     Key? key,
@@ -13,12 +15,7 @@ class CustomFormLabelWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       label,
-      style: GoogleFonts.poppins(
-          textStyle: TextStyle(
-        color: const Color.fromRGBO(0, 0, 1, 0.5),
-        fontSize: MediaQuery.of(context).size.width * 0.015,
-        fontWeight: fontWeight,
-      )),
+      style: KTextSytle(context, 10),
     );
   }
 }

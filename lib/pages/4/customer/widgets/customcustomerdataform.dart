@@ -217,7 +217,7 @@ class CustomCustomerDataForm extends StatelessWidget {
                 },
                 child: const CustomTitleWidget(
                     width: 0.1,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.normal,
                     label:
                         " \n                                                 Next >"),
               ),
