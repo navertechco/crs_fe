@@ -1,0 +1,36 @@
+// ignore_for_file: unused_field
+
+import 'package:flutter/material.dart'; 
+import 'package:naver_crs/common/index.dart';
+import '../state.dart';
+
+// ignore: must_be_immutable
+class ForgotForm extends StatelessWidget {
+  ForgotForm({
+    Key? key,
+    required this.formKey,
+    required this.state,
+  }) : super(key: key);
+
+  final GlobalKey formKey;
+  final ForgotState state;
+  late String _userName, _email, _password, _phoneNumber;
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: formKey,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(
+            child: RoundedFormField(
+              onSaved: (value) => state.email = value!,
+              hintText: 'Email',
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

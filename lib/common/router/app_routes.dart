@@ -10,63 +10,48 @@ class PRegistry {
 
 List<dynamic> routes = [
   PRegistry(
-      name: '/Signin',
-      page: () => const SigninPage(),
-      transition: Transition.native,
-      binding: SigninBinding()),
-  PRegistry(
-      name: '/Signup',
-      page: () => const SignupPage(),
-      transition: Transition.native,
-      binding: SignupBinding()),
-  PRegistry(
       name: '/Splash',
       page: () => const SplashPage(),
       transition: Transition.native,
       binding: SplashBinding()),
+  PRegistry(
+      name: '/Signin',
+      page: () => const SigninPage(),
+      transition: Transition.native,
+      binding: SigninBinding()),
   PRegistry(
       name: '/Forgot',
       page: () => const ForgotPage(),
       transition: Transition.native,
       binding: ForgotBinding()),
   PRegistry(
-      name: '/Destination',
-      page: () => const DestinationPage(),
-      transition: Transition.native,
-      binding: DestinationBinding()),
-  PRegistry(
-      name: '/DestinationDetail',
-      page: () => const DestinationDetailPage(),
-      transition: Transition.native,
-      binding: DestinationDetailBinding()),
-  PRegistry(
-      name: '/Experiences',
-      page: () => const ExperiencesPage(),
-      transition: Transition.native,
-      binding: ExperiencesBinding()),
-  PRegistry(
-      name: '/DGallery',
-      page: () => DGalleryPage(),
-      transition: Transition.native,
-      binding: DGalleryBinding()),
-  PRegistry(
       name: '/Loading',
       page: () => const LoadingPage(),
       transition: Transition.native,
       binding: LoadingBinding()),
   PRegistry(
-      name: '/Resume',
-      page: () => ResumePage(),
+      name: '/Tour',
+      page: () => const TourPage(),
       transition: Transition.native,
-      binding: ResumeBinding()), 
+      binding: TourBinding()),
   PRegistry(
       name: '/Customer',
       page: () => const CustomerPage(),
       transition: Transition.native,
       binding: CustomerBinding()),
   PRegistry(
-      name: '/TourParameters',
-      page: () => const TourParametersPage(),
+      name: '/Destination',
+      page: () => const DestinationPage(),
       transition: Transition.native,
-      binding: TourParametersBinding()),
+      binding: DestinationBinding()),
+  PRegistry(
+      name: '/Experiences',
+      page: () => const ExperiencesPage(),
+      transition: Transition.native,
+      binding: ExperiencesBinding()),
+  PRegistry(
+      name: '/Resume',
+      page: () => ResumePage(),
+      transition: Transition.native,
+      binding: ResumeBinding()),
 ];

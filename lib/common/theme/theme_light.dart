@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../constants.dart';
 
-final ThemeData appThemeData = ThemeData(
+final ThemeData lightTheme = ThemeData(
   primaryColor: Colors.blueAccent,
   // accentColor: Colors.blue,
   fontFamily: 'Georgia',

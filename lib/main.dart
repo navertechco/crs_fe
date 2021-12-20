@@ -2,7 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'common/router/app_pages.dart';
-import 'common/themes/index.dart';
+import 'common/theme/index.dart';
 
 class ScrollBehavior extends MaterialScrollBehavior {
   // Override behavior methods and getters like dragDevices
