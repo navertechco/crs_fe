@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart'; 
+import 'package:get/get.dart';
 
 /// Body
-class BodyWidget extends GetView<StatelessWidget> {
-  const BodyWidget(
+class BodyLayoutWidget extends GetView<StatelessWidget> {
+  const BodyLayoutWidget(
       {Key? key, this.background, this.children, this.child, this.type = "png"})
       : super(key: key);
   final String? background;
@@ -37,9 +37,9 @@ class BodyWidget extends GetView<StatelessWidget> {
                   ),
                 SingleChildScrollView(
                   child: child ??
-                  Column(
-                    children: children!,
-                  ),
+                      Column(
+                        children: children!,
+                      ),
                 ),
               ],
             ),

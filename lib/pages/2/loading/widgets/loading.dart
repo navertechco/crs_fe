@@ -15,7 +15,7 @@ class LoadingWidget extends GetView<LoadingController> {
         : 0.09;
     return Align(
       alignment: Alignment.bottomCenter,
-      child: BodyWidget(
+      child: BodyLayoutWidget(
           background: "assets/custom/img/loading.png",
           child: Stack(
             children: [
