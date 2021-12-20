@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './index.dart';
+import '../index.dart';
 
 class ExperienceOptionWidget extends StatelessWidget {
   const ExperienceOptionWidget(
