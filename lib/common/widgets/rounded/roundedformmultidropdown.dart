@@ -1,6 +1,5 @@
 // ignore_for_file: must_be_immutable
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter/material.dart'; 
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 
 import '../../index.dart';

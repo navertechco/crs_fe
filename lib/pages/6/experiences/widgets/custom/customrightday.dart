@@ -35,45 +35,41 @@ class CustomRightDayWidget extends StatelessWidget {
             label: "Destination: Cuenca",
           ),
           Divider(color: Color.fromARGB(255, 0, 0, 0)),
-          Container(
+          SizedBox(
             height: MediaQuery.of(context).size.height * 0.5,
             child: Row(
               children: [
-                Container(
-                  child: Column(
-                    children: [
-                      CustomTitleWidget(
-                        fontWeight: FontWeight.bold,
-                        label:
-                            "Sugested Experiences\n______________________________________",
+                Column(
+                  children: [
+                    CustomTitleWidget(
+                      fontWeight: FontWeight.bold,
+                      label:
+                          "Sugested Experiences\n______________________________________",
+                    ),
+                    Scrollbar(
+                      child: SingleChildScrollView(
+                        child: CustomExperiencesListWidget(suggested: true),
                       ),
-                      Scrollbar(
-                        child: SingleChildScrollView(
-                          child: CustomExperiencesListWidget(suggested: true),
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                Container(
-                  child: Column(
-                    children: [
-                      CustomTitleWidget(
-                        fontWeight: FontWeight.bold,
-                        label:
-                            "Selected Experiences\n______________________________________",
-                      ),
-                      Scrollbar(
-                        child: SingleChildScrollView(
-                          child: Column(
-                            children: const [
-                              CustomExperiencesListWidget(),
-                            ],
-                          ),
+                Column(
+                  children: [
+                    CustomTitleWidget(
+                      fontWeight: FontWeight.bold,
+                      label:
+                          "Selected Experiences\n______________________________________",
+                    ),
+                    Scrollbar(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: const [
+                            CustomExperiencesListWidget(),
+                          ],
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -88,8 +84,7 @@ class CustomRightDayWidget extends StatelessWidget {
               CustomKeypadWidget(
                   nextlabel: "< Expand >",
                   prevlabel: "",
-                  onNext: () {
-                    print("Expand");
+                  onNext: () { 
                   },
                   onPrevious: () {},
                   width: 0.002),

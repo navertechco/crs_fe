@@ -18,18 +18,18 @@ class CustomStarDestinationForm extends StatelessWidget {
     // ignore: prefer_function_declarations_over_variables
     var getData = (key) {
       // ignore: invalid_use_of_protected_member
-      return localdata.value[destination] != null
+      return localdata[destination] != null
           // ignore: invalid_use_of_protected_member
-          ? localdata.value[destination][key]
+          ? localdata[destination][key]
           : "9999";
     };
 
     // ignore: prefer_function_declarations_over_variables
     var getDataList = (key) {
       // ignore: invalid_use_of_protected_member
-      return localdata.value[destination] != null
+      return localdata[destination] != null
           // ignore: invalid_use_of_protected_member
-          ? localdata.value[destination][key]
+          ? localdata[destination][key]
           : <Map<String, dynamic>>[];
     };
 
@@ -44,11 +44,11 @@ class CustomStarDestinationForm extends StatelessWidget {
     // ignore: prefer_function_declarations_over_variables
     Function setData = (data, key, value) {
       // ignore: invalid_use_of_protected_member
-      // var data = localdata.value[destination];
+      // var data = localdata[destination];
       data ?? {};
       data[key] = value;
       // ignore: invalid_use_of_protected_member
-      localdata.value[destination] = data;
+      localdata[destination] = data;
       globalctx.context.value["destinationdata"] = localdata;
     };
 
@@ -70,11 +70,11 @@ class CustomStarDestinationForm extends StatelessWidget {
                   value: explorationDay.value,
                   onSaved: (value) {
                     setData(
-                        localdata.value[destination], "exploration_day", value);
+                        localdata[destination], "exploration_day", value);
                   },
                   onChanged: (value) {
                     setData(
-                        localdata.value[destination], "exploration_day", value);
+                        localdata[destination], "exploration_day", value);
                   },
                   label: "Exploration Days     ",
                   data: const [
@@ -93,11 +93,11 @@ class CustomStarDestinationForm extends StatelessWidget {
                       return CustomFormDropDownFieldWidget(
                         value: explorationMode.value,
                         onSaved: (value) {
-                          setData(localdata.value[destination],
+                          setData(localdata[destination],
                               "exploration_mode", value);
                         },
                         onChanged: (value) {
-                          setData(localdata.value[destination],
+                          setData(localdata[destination],
                               "exploration_mode", value);
                         },
                         label: "Exploration Mode   ",
@@ -115,11 +115,11 @@ class CustomStarDestinationForm extends StatelessWidget {
                 return CustomFormDropDownFieldWidget(
                   value: destinationOption.value,
                   onSaved: (value) {
-                    setData(localdata.value[destination], "destination_option",
+                    setData(localdata[destination], "destination_option",
                         value);
                   },
                   onChanged: (value) {
-                    setData(localdata.value[destination], "destination_option",
+                    setData(localdata[destination], "destination_option",
                         value);
                   },
                   label: "Destination Option",
@@ -136,11 +136,11 @@ class CustomStarDestinationForm extends StatelessWidget {
                   value: travelRithm.value,
                   onSaved: (value) {
                     setData(
-                        localdata.value[destination], "travel_rithm", value);
+                        localdata[destination], "travel_rithm", value);
                   },
                   onChanged: (value) {
                     setData(
-                        localdata.value[destination], "travel_rithm", value);
+                        localdata[destination], "travel_rithm", value);
                   },
                   label: "Travel Rithm             ",
                   data: const [
@@ -156,10 +156,10 @@ class CustomStarDestinationForm extends StatelessWidget {
                   value: keyActivities.value,
                   onSaved: (value) {
                     setData(
-                        localdata.value[destination], "key_activities", value);
+                        localdata[destination], "key_activities", value);
                   },
                   onChanged: (value) {
-                    // setData(localdata.value[destination],"key_activities", value);
+                    // setData(localdata[destination],"key_activities", value);
                   },
                   hintText: " ",
                   label: "Key Activities            ",

@@ -10,7 +10,7 @@ class ExperienceOptionWidget extends StatelessWidget {
   final double width;
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: width,
       height: height,
       child: GoldBorderWidget(

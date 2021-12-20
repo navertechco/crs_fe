@@ -9,7 +9,7 @@ import 'context/index.dart';
  * DATOS DE SERVIDOR
  */
 
-// ignore: constant_identifier_names, prefer_function_declarations_over_variables
+// ignore: constant_identifier_names, prefer_function_declarations_over_variables, non_constant_identifier_names
 TextStyle Function(dynamic, dynamic) KTextSytle =
     (context, fontSize) => GoogleFonts.poppins(
             textStyle: TextStyle(
