@@ -2,8 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
-import 'package:naver_crs/common/constants.dart';
+import 'package:get/get.dart'; 
 import '../controller.dart';
 import 'index.dart';
 

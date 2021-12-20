@@ -1,6 +1,5 @@
-// ignore_for_file: file_names
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/material.dart';
+// ignore_for_file: file_names, import_of_legacy_library_into_null_safe 
+import 'package:flutter/material.dart'; 
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:get/get.dart';
 import '../index.dart';

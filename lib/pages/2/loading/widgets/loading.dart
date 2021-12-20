@@ -10,9 +10,7 @@ class LoadingWidget extends GetView<LoadingController> {
 
   @override
   Widget build(BuildContext context) {
-    var multiplier = MediaQuery.of(context).orientation == Orientation.landscape
-        ? 0.1
-        : 0.09;
+
     return Align(
       alignment: Alignment.bottomCenter,
       child: BodyLayoutWidget(

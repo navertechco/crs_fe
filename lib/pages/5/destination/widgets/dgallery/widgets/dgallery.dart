@@ -4,9 +4,7 @@ import 'package:animations/animations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:naver_crs/common/index.dart'; 
-import 'package:naver_crs/pages/index.dart';
-import '../../../index.dart';
+import 'package:naver_crs/common/index.dart';  
 import '../index.dart';
 
 List<Map<String, dynamic>> galeryData = [
@@ -66,9 +64,8 @@ class DGalleryWidget extends GetView<DGalleryController> {
   @override
   Widget build(BuildContext context) {
     List<Widget> Gallery = [];
-    var index = 0;
-    for (var item in galeryData) {
-      var idx = index;
+     
+    for (var item in galeryData) { 
       Gallery.add(GalleryItem(
         onTap: () {
           showModal(
@@ -78,7 +75,7 @@ class DGalleryWidget extends GetView<DGalleryController> {
                   onTap: () {
                     Get.close(1);
                   },
-                  child: Container(
+                  child: SizedBox(
                     width: 100,
                     child: ContentLayoutWidget(
                         child: const YoutubeWidget(
@@ -93,7 +90,7 @@ class DGalleryWidget extends GetView<DGalleryController> {
         image: item["image"],
         title: item["title"],
       ));
-      index++;
+    
     }
 
     return SingleChildScrollView(
@@ -145,11 +142,4 @@ class GalleryItem extends StatelessWidget {
     );
   }
 }
-
-Route<void> _modalBuilder(BuildContext context, Object? arguments) {
-  return CupertinoModalPopupRoute<void>(
-    builder: (BuildContext context) {
-      return const DestinationPage();
-    },
-  );
-}
+ 

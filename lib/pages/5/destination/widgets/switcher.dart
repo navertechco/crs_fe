@@ -22,25 +22,8 @@ class SwitcherWidget extends StatelessWidget {
     RxBool _showFrontSide = true.obs;
     RxBool _flipXAxis = true.obs;
 
-    void _changeRotationAxis() {
-      _flipXAxis.value = !(_flipXAxis.value);
-    }
-
-    void _switchCard() {
-      globalctx.value.value = !globalctx.value.value;
-      RxList dest = globalctx.destinationlist;
-
-      !dest.contains(destination) && _showFrontSide.value
-          ? dest.add(destination)
-          : dest.remove(destination);
-
-      globalctx.destinationlist = dest;
-
-      // print(dest);
-      _showFrontSide.value = !_showFrontSide.value;
-      _changeRotationAxis();
-    }
-
+  
+ 
     Widget _transitionBuilder(Widget widget, Animation<double> animation) {
       final rotateAnim = Tween(begin: pi, end: 0.0).animate(animation);
       return AnimatedBuilder(

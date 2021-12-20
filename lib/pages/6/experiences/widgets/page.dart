@@ -50,7 +50,7 @@ class CustomRightDayWidget extends StatelessWidget {
             label: "Destination: Cuenca",
           ),
           Divider(color: Color.fromARGB(255, 0, 0, 0)),
-          Container(
+          SizedBox(
             height: MediaQuery.of(context).size.height * 0.23,
             child: SingleChildScrollView(
               child: Column(
@@ -67,7 +67,7 @@ class CustomRightDayWidget extends StatelessWidget {
             ),
           ),
           Divider(color: Color.fromARGB(255, 0, 0, 0)),
-          Container(
+          SizedBox(
             height: MediaQuery.of(context).size.height * 0.23,
             child: SingleChildScrollView(
               child: Column(

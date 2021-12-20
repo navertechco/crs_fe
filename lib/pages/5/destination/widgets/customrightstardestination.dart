@@ -143,12 +143,15 @@ class DestinationListScroll extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class DestinationsOrderableListWidget extends StatefulWidget {
   List<String> item = [
     "Clients",
     "Designer",
     "Developer",
   ];
+
+  DestinationsOrderableListWidget({Key? key}) : super(key: key);
   @override
   _DestinationsOrderableListWidgetState createState() =>
       _DestinationsOrderableListWidgetState();

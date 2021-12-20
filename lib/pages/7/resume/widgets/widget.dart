@@ -346,19 +346,31 @@ class Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var arrivalport = (() {
-      return data != null && data['arrival'] != null
-          ? data['arrival']['port'].toString()
-          : {};
-    })();
-    var arrivaldate = (() {
-      return data != null && data['arrival'] != null
-          ? data['arrival']['date'].toString()
-          : "";
-    })();
-    var client = data != null ? data['client'] : {};
+    // var arrivalport = (() {
+    //   return data != null && data['arrival'] != null
+    //       ? data['arrival']['port'].toString()
+    //       : {};
+    // })();
+    // var arrivaldate = (() {
+    //   if (data != null && data['arrival'] != null) {
+    //     return data['arrival']['date'].toString();
+    //   } else {
+    //     return "";
+    //   }
+    // })();
+    var client;
+    if (data != null) {
+      client = data['client'];
+    } else {
+      client = {};
+    }
 
-    var tour = data != null ? data['tour'] : {};
+    var tour;
+    if (data != null) {
+      tour = data['tour'];
+    } else {
+      tour = {};
+    }
 
     return Column(
       children: [
@@ -421,7 +433,13 @@ class CustomFormDayWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var destinationindex = indexes[0];
     var dayindex = indexes[1];
-    var destinations = data != null ? data['destinations'] : [];
+    var destinations;
+    // ignore: unnecessary_null_comparison
+    if (data != null) {
+      destinations = data['destinations'];
+    } else {
+      destinations = [];
+    }
     var destination = destinations[destinationindex];
     var day = destination['days'][dayindex];
     var daydate = day['date'];
@@ -544,9 +562,7 @@ class CustomFormExperienceRowWidget extends StatelessWidget {
         ? experiences[experienceindex + 1]
         : experience;
     var title = experience['title'].toString();
-    var description = experience['description'].toString();
-    var observation = day['observation'].toString();
-    var photo = experience['photo'].toString();
+    var description = experience['description'].toString(); 
     var next = experience['next'].toString() != ""
         ? experience['next'].toString()
         : nextexperience['previous'].toString();

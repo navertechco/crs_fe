@@ -44,11 +44,7 @@ class CustomStarDestinationForm extends StatelessWidget {
     Function setData = (data, key, value) {
       // ignore: invalid_use_of_protected_member
       // var data = localdata.value[destination];
-      if (data == null) {
-        // ignore: invalid_use_of_protected_member
-        // localdata.value[destination] = {};
-        data = {};
-      }
+      data ?? {};
       data[key] = value;
       // ignore: invalid_use_of_protected_member
       localdata.value[destination] = data;

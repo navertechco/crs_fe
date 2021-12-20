@@ -32,6 +32,7 @@ class YoutubeWidget extends StatelessWidget {
             top: MediaQuery.of(context).size.height * 0.1,
           ),
           child: Container(
+            
             color: Color.fromARGB(255, 0, 0, 255),
             width: MediaQuery.of(context).size.width * 0.8,
             height: MediaQuery.of(context).size.height * 0.8,

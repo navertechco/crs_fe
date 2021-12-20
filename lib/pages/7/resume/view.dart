@@ -26,10 +26,10 @@ class ResumePage extends GetView<ResumeController> {
         format: PdfPageFormat.a4,
         onLayout: (PdfPageFormat format) async {
           final doc = pw.Document(version: PdfVersion.pdf_1_5, compress: true);
-          var index = 0;
+           
           for (var key in globalctx.keys.keys) {
             final image = await WidgetWraper.fromKey(key: globalctx.keys[key]!);
-            index++;
+             
             doc.addPage(pw.Page(
                 pageFormat: PdfPageFormat.a4,
                 build: (pw.Context context) {

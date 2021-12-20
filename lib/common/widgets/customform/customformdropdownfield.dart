@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../index.dart';
 
+// ignore: must_be_immutable
 class CustomFormDropDownFieldWidget extends StatelessWidget {
   CustomFormDropDownFieldWidget(
       {Key? key,
