@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 
 class RoundedFormMultiDropdown extends StatelessWidget {
@@ -24,7 +25,7 @@ class RoundedFormMultiDropdown extends StatelessWidget {
       this.top = 8,
       this.width = 0.2,
       this.height = 0.05,
-      this.fontSize = 0.1,
+      this.fontSize = 10,
       required this.onSaved,
       this.password = false,
       this.value = const [],
@@ -42,8 +43,14 @@ class RoundedFormMultiDropdown extends StatelessWidget {
         title: Text(hintText!),
         // searchHint: hintText,
         buttonText: Text(hintText!,
-            style:
-                TextStyle(fontSize: MediaQuery.of(context).size.height * 0.02)),
+            style: GoogleFonts.poppins(
+                textStyle: TextStyle(
+              color: const Color.fromARGB(255, 0, 0, 0),
+              fontSize: MediaQuery.of(context).size.width /
+                  MediaQuery.of(context).size.height *
+                  fontSize,
+              fontWeight: FontWeight.normal,
+            ))),
         decoration: BoxDecoration(
             color: Colors.grey, borderRadius: BorderRadius.circular(50)),
         items: data.map((e) => MultiSelectItem(e, e["description"]!)).toList(),

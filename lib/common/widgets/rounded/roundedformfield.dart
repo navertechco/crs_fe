@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:naver_crs/common/constants.dart';
 
 class RoundedFormField extends StatelessWidget {
@@ -38,13 +39,15 @@ class RoundedFormField extends StatelessWidget {
         onSaved: onSaved,
         obscureText: password,
         cursorColor: Colors.grey,
-        style: TextStyle(
-          color: Colors.black,
+        style: GoogleFonts.poppins(
+            textStyle: TextStyle(
+          color: const Color.fromARGB(255, 255, 255, 255),
           fontSize: MediaQuery.of(context).size.width /
               MediaQuery.of(context).size.height *
               isMobile *
-              10,
-        ),
+              fontSize,
+          fontWeight: FontWeight.normal,
+        )),
         decoration: InputDecoration.collapsed(
           hintText: hintText,
           hintStyle: TextStyle(

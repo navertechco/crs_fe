@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:naver_crs/common/constants.dart';
 
 class RoundedFormButton extends StatelessWidget {
@@ -17,7 +18,7 @@ class RoundedFormButton extends StatelessWidget {
     this.vertical = 0,
     this.width = 0.2,
     this.height = 0.05,
-    this.fontSize = 10,
+    this.fontSize = 8,
     required this.onTap,
   }) : super(key: key);
 
@@ -46,15 +47,15 @@ class RoundedFormButton extends StatelessWidget {
                   isMobile *
                   fontSize,
             ),
-            style: TextStyle(
-                overflow: TextOverflow.ellipsis,
-                color: Colors.white,
-                fontSize: MediaQuery.of(context).size.width /
-                    MediaQuery.of(context).size.height *
-                    isMobile *
-                    fontSize *
-                    0.8,
-                fontWeight: FontWeight.bold),
+            style: GoogleFonts.poppins(
+                textStyle: TextStyle(
+              color: const Color.fromARGB(255, 255, 255, 255),
+              fontSize: MediaQuery.of(context).size.width /
+                  MediaQuery.of(context).size.height *
+                  isMobile *
+                  fontSize,
+              fontWeight: FontWeight.normal,
+            )),
             textAlign: TextAlign.start,
             overflow: TextOverflow.ellipsis,
           ),

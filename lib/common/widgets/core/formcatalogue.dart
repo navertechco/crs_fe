@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 // ignore: must_be_immutable
 class FormCatalogueWidget extends StatelessWidget {
@@ -32,6 +33,14 @@ class FormCatalogueWidget extends StatelessWidget {
     return Obx(() {
       return DropdownButtonHideUnderline(
         child: DropdownButtonFormField(
+          style: GoogleFonts.poppins(
+              textStyle: TextStyle(
+            color: const Color.fromARGB(255, 0, 0, 0),
+            fontSize: MediaQuery.of(context).size.width /
+                MediaQuery.of(context).size.height *
+                10,
+            fontWeight: FontWeight.normal,
+          )),
           value: value,
           alignment: Alignment.centerLeft,
           isExpanded: true,
