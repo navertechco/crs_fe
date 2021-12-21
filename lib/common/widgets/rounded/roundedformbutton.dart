@@ -46,7 +46,7 @@ class RoundedFormButton extends StatelessWidget {
                   isMobile *
                   fontSize,
             ),
-            style: KTextSytle(context, fontSize),
+            style: KTextSytle(context, fontSize, FontWeight.normal),
             textAlign: TextAlign.start,
             overflow: TextOverflow.ellipsis,
           ),

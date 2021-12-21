@@ -38,7 +38,7 @@ class RoundedFormField extends StatelessWidget {
         onSaved: onSaved,
         obscureText: password,
         cursorColor: Colors.grey,
-        style: KTextSytle(context, fontSize),
+        style: KTextSytle(context, fontSize, FontWeight.normal),
         decoration: InputDecoration.collapsed(
           hintText: hintText,
           hintStyle: TextStyle(

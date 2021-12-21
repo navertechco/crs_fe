@@ -10,11 +10,14 @@ class CustomKeypadWidget extends StatelessWidget {
     this.onPrevious,
     this.prevlabel = "Previous",
     this.nextlabel = "Next",
+    this.nextFontWeight = FontWeight.normal,
+    this.prevFontWeight = FontWeight.normal,
   }) : super(key: key);
   final double width;
   final String nextlabel;
   final String prevlabel;
- 
+  final FontWeight nextFontWeight;
+  final FontWeight prevFontWeight;
   final onNext;
   final onPrevious;
   @override
@@ -24,13 +27,13 @@ class CustomKeypadWidget extends StatelessWidget {
         GestureDetector(
           onTap: onPrevious,
           child: CustomFormLabelWidget(
-              label: prevlabel, fontWeight: FontWeight.normal),
+              label: prevlabel, fontWeight: prevFontWeight),
         ),
         SizedBox(width: MediaQuery.of(context).size.width * width),
         GestureDetector(
           onTap: onNext,
           child: CustomFormLabelWidget(
-              label: nextlabel, fontWeight: FontWeight.normal),
+              label: nextlabel, fontWeight: nextFontWeight),
         ),
       ],
     );

@@ -9,16 +9,29 @@ import 'context/index.dart';
  * DATOS DE SERVIDOR
  */
 
+// ignore: prefer_function_declarations_over_variables
+Function removeFromArray = (array, item) {
+  if (array.contains(item)) {
+    var index = array.indexWhere((element) => element == item);
+    array.removeAt(index);
+    globalctx.experienceDragData.value.removeAt(index);
+  }
+};
+// ignore: prefer_function_declarations_over_variables
+Function removeExperience = (experience) {
+  removeFromArray(globalctx.selected, experience);
+  removeFromArray(globalctx.promoted, experience);
+};
+
 // ignore: constant_identifier_names, prefer_function_declarations_over_variables, non_constant_identifier_names
-TextStyle Function(dynamic, dynamic) KTextSytle =
-    (context, fontSize) => GoogleFonts.poppins(
-            textStyle: TextStyle(
-          color: Color.fromARGB(255, 0, 0, 0),
-          fontSize: MediaQuery.of(context).size.width /
-              MediaQuery.of(context).size.height *
-              fontSize,
-          fontWeight: FontWeight.normal,
-        ));
+var KTextSytle = (context, fontSize, fontWeight) => GoogleFonts.poppins(
+        textStyle: TextStyle(
+      color: Color.fromARGB(255, 0, 0, 0),
+      fontSize: MediaQuery.of(context).size.width /
+          MediaQuery.of(context).size.height *
+          fontSize,
+      fontWeight: fontWeight ?? FontWeight.normal,
+    ));
 
 const kDefaultSchema = "http";
 const kDefaultServer = "192.168.101.3";

@@ -13,15 +13,17 @@ class CustomDragableExperience extends StatelessWidget {
   final bool suggested;
   @override
   Widget build(BuildContext context) {
+    var experienceOptionWidget = ExperienceOptionWidget(
+      experience: experience,
+      height: MediaQuery.of(context).size.height * 0.08,
+      width: MediaQuery.of(context).size.width * 0.2,
+    );
     return Draggable<String>(
       // Data is the value this Draggable stores.
       data: experience,
-      feedback: CustomExperienceOptionWidget(
-          experience: experience, suggested: suggested),
-      childWhenDragging: CustomExperienceOptionWidget(
-          experience: experience, suggested: suggested),
-      child: CustomExperienceOptionWidget(
-          experience: experience, suggested: suggested),
+      feedback: experienceOptionWidget,
+      childWhenDragging: experienceOptionWidget,
+      child: experienceOptionWidget,
     );
   }
 }

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../../index.dart';
@@ -10,8 +9,8 @@ class CustomContentWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.5,
+    return Align(
+      alignment: Alignment.centerLeft,
       child: Row(
         children: [
           CustomSugestedExperiencesWidget(),
@@ -21,4 +20,3 @@ class CustomContentWidget extends StatelessWidget {
     );
   }
 }
-

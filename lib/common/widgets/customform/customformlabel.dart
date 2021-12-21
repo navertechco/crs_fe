@@ -13,7 +13,7 @@ class CustomFormLabelWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       label,
-      style: KTextSytle(context, 10),
+      style: KTextSytle(context, 10, fontWeight),
     );
   }
 }

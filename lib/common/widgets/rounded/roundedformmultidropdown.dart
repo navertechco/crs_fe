@@ -41,18 +41,18 @@ class RoundedFormMultiDropdown extends StatelessWidget {
       padding: EdgeInsets.only(left: left, top: top),
       child: MultiSelectDialogField(
         initialValue: value,
-        itemsTextStyle: KTextSytle(context, fontSize),
-        selectedItemsTextStyle: KTextSytle(context, fontSize),
-        searchTextStyle: KTextSytle(context, fontSize),
-        searchHintStyle: KTextSytle(context, fontSize),
+        itemsTextStyle: KTextSytle(context, fontSize, FontWeight.normal),
+        selectedItemsTextStyle: KTextSytle(context, fontSize, FontWeight.normal),
+        searchTextStyle: KTextSytle(context, fontSize, FontWeight.normal),
+        searchHintStyle: KTextSytle(context, fontSize, FontWeight.normal),
         title: Text(
           hintText!,
-          style: KTextSytle(context, fontSize),
+          style: KTextSytle(context, fontSize, FontWeight.normal),
         ),
         // searchHint: hintText,
         buttonText: Text(
           hintText!,
-          style: KTextSytle(context, fontSize),
+          style: KTextSytle(context, fontSize, FontWeight.normal),
         ),
         decoration: BoxDecoration(
             color: Colors.grey, borderRadius: BorderRadius.circular(50)),

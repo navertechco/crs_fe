@@ -21,7 +21,7 @@ class CustomExperiencesListWidget extends StatelessWidget {
     }
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.44,
-      width: MediaQuery.of(context).size.width * 0.25,
+      width: MediaQuery.of(context).size.width * 0.2,
       child: Scrollbar(
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,

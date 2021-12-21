@@ -15,7 +15,7 @@ class CustomFooterWidget extends StatelessWidget {
         Row(
           children: [
             CustomTitleWidget(
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.normal,
               label:
                   "If you want not any these experience please click on \"Expand\" to amplify the options",
             ),
@@ -24,6 +24,7 @@ class CustomFooterWidget extends StatelessWidget {
                 prevlabel: "",
                 onNext: () {},
                 onPrevious: () {},
+                nextFontWeight: FontWeight.bold,
                 width: 0.002),
           ],
         ),
@@ -41,5 +42,3 @@ class CustomFooterWidget extends StatelessWidget {
     );
   }
 }
-
-

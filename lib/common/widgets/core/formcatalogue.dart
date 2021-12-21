@@ -33,7 +33,7 @@ class FormCatalogueWidget extends StatelessWidget {
     return Obx(() {
       return DropdownButtonHideUnderline(
         child: DropdownButtonFormField(
-          style: KTextSytle(context, 10),
+          style: KTextSytle(context, 10, FontWeight.normal),
           alignment: Alignment.centerLeft,
           isExpanded: true,
           value: value,
@@ -42,7 +42,7 @@ class FormCatalogueWidget extends StatelessWidget {
           decoration: InputDecoration.collapsed(
             filled: false,
             hintText: hintText,
-            hintStyle: KTextSytle(context, 10),
+            hintStyle: KTextSytle(context, 10, FontWeight.normal),
           ),
           onSaved: onSaved,
           onChanged: onChanged,
