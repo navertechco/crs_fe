@@ -22,8 +22,8 @@ class CustomExperienceOptionWidget extends StatelessWidget {
             children: [
               ExperienceOptionWidget(
                 experience: experience,
-                height: MediaQuery.of(context).size.height * 0.05,
-                width: MediaQuery.of(context).size.width * 0.25,
+                height: MediaQuery.of(context).size.height * 0.08,
+                width: MediaQuery.of(context).size.width * 0.2,
               ),
               if (globalctx.promoted.contains(experience) && !suggested)
                 Image.asset("assets/custom/img/greencheck.png",

@@ -11,7 +11,7 @@ class CustomRightDayWidget extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(
           top: MediaQuery.of(context).size.height * 0.3,
-          left: MediaQuery.of(context).size.width * 0.38),
+          left: MediaQuery.of(context).size.width * 0.375),
       child: Column(
         children: [
           CustomHeaderWidget(),

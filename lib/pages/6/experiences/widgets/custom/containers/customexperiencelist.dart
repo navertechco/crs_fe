@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 import '../../../../../index.dart';
-import '../../index.dart'; 
+import '../../index.dart';
 
 class CustomExperiencesListWidget extends StatelessWidget {
   const CustomExperiencesListWidget({
@@ -16,12 +16,12 @@ class CustomExperiencesListWidget extends StatelessWidget {
       if (suggested) {
         globalctx.suggested.add(experience);
       }
-      list.add(
-          CustomDragableExperience(experience: experience, suggested: suggested));
+      list.add(CustomDragableExperience(
+          experience: experience, suggested: suggested));
     }
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.4,
-      width: MediaQuery.of(context).size.width * 0.3,
+      height: MediaQuery.of(context).size.height * 0.44,
+      width: MediaQuery.of(context).size.width * 0.25,
       child: Scrollbar(
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
@@ -33,4 +33,3 @@ class CustomExperiencesListWidget extends StatelessWidget {
     );
   }
 }
-
