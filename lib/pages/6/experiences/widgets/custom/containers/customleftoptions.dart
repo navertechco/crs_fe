@@ -11,7 +11,7 @@ class CustomLeftOptionsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     RxMap<dynamic, dynamic> localdata =
-        globalctx.context.value["destinationdata"];
+        globalctx.context.value["experiencedata"];
 
     return Padding(
       padding: EdgeInsets.only(
@@ -61,7 +61,7 @@ class CustomLeftOptionsWidget extends StatelessWidget {
                       ],
                       onSaved: (value) {},
                       onChanged: (value) {
-                        // setData(localdata[destination],"key_activities", value);
+                        // setData(localdata[experience],"key_activities", value);
                       },
                       hintText: "Key Activities            ",
                       data: const [
