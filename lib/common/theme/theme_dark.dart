@@ -5,7 +5,7 @@ import '../constants.dart';
 final ThemeData darkTheme = ThemeData(
   primaryColor: Colors.blueAccent,
   // accentColor: Colors.blue,
-  fontFamily: 'Georgia',
+  fontFamily: 'Poppins',
   textTheme: const TextTheme(
     headline1: TextStyle(fontSize: kFontSize, fontWeight: FontWeight.bold),
   ),
