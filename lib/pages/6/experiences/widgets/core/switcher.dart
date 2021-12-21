@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:naver_crs/pages/6/experiences/widgets/experiencedetail/index.dart';
 
 import '../../../../index.dart';
 
@@ -10,12 +11,14 @@ class SwitcherWidget extends StatelessWidget {
       {Key? key,
       required this.firstchild,
       required this.seccondchild,
-      required this.experience})
+      required this.experience,
+      this.suggested = false})
       : super(key: key);
 
   final Widget firstchild;
   final Widget seccondchild;
   final String experience;
+  final bool suggested;
 
   @override
   Widget build(BuildContext context) {
@@ -36,9 +39,17 @@ class SwitcherWidget extends StatelessWidget {
 
       globalctx.experiencelist = dest;
 
-      // print(dest);
-      _showFrontSide.value = !_showFrontSide.value;
-      _changeRotationAxis();
+      if (suggested) {
+        // print(dest);
+        _showFrontSide.value = !_showFrontSide.value;
+        _changeRotationAxis();
+      } else {
+        showDialog(
+            context: context,
+            builder: (context) {
+              return ExperienceDetailPage();
+            });
+      }
     }
 
     Widget _transitionBuilder(Widget widget, Animation<double> animation) {
