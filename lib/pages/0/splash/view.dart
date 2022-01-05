@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
+import '../../index.dart';
+
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
 
@@ -13,7 +15,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   AnimationController? _controller;
 
   @override
-  void initState() {
+  void initState()   {
     super.initState();
     _controller = AnimationController(
       duration: const Duration(seconds: (1)),

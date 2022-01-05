@@ -26,7 +26,7 @@ class FormCatalogueWidget extends StatelessWidget {
     data2.addAll(data);
     data2.asMap().forEach((index, item) {
       items.value.add(DropdownMenuItem(
-        value: item["code"],
+        value: item["code"].toString(),
         child: Text(item["description"]),
       ));
     });

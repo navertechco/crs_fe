@@ -1,5 +1,5 @@
-// ignore_for_file: file_names, import_of_legacy_library_into_null_safe 
-import 'package:flutter/material.dart'; 
+// ignore_for_file: file_names, import_of_legacy_library_into_null_safe
+import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:get/get.dart';
 import '../index.dart';
@@ -14,7 +14,8 @@ class TourFormPage extends GetView<StatelessWidget> {
   final TourController? ctrl;
   @override
   Widget build(BuildContext context) {
-  
+    
+
     return Stack(
       children: [
         LeftWidget(),
@@ -26,13 +27,12 @@ class TourFormPage extends GetView<StatelessWidget> {
 
 class LeftWidget extends StatelessWidget {
   const LeftWidget({
-    Key? key, 
+    Key? key,
   }) : super(key: key);
- 
 
   @override
   Widget build(BuildContext context) {
-      var images = [
+    var images = [
       "assets/custom/img/monkey.png",
       "assets/custom/img/monkey.png",
       "assets/custom/img/monkey.png",
@@ -56,7 +56,6 @@ class LeftWidget extends StatelessWidget {
           autoplay: false,
           itemCount: images.length,
           scrollDirection: Axis.horizontal,
-        
         ),
       ),
     );

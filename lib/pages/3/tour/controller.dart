@@ -5,7 +5,7 @@ import 'index.dart';
 import '../../index.dart';
 
 class TourController extends GetxController {
-  TourController();
+
 
   final state = TourState();
   void onEnd(ctx, msg, success) {
@@ -20,6 +20,8 @@ class TourController extends GetxController {
       return false;
     });
   }
+
+  
 
   Future<void> onTour(
       ctx,

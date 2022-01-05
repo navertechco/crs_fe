@@ -4,12 +4,15 @@ import 'package:get/get.dart';
 import '../../../index.dart';
 
 class CustomTourInformationForm extends StatelessWidget {
-  const CustomTourInformationForm({
+  CustomTourInformationForm({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var destinationCountry = processCatalog("destination_country");
+    var purpose = processCatalog("purpose");
+    var accomodationType = processCatalog("budget");
     return Padding(
       padding: EdgeInsets.only(
         top: MediaQuery.of(context).size.height * 0.18,
@@ -30,28 +33,19 @@ class CustomTourInformationForm extends StatelessWidget {
             onSaved: (value) {},
             onChanged: (value) {},
             label: "Destination Country",
-            data: const [
-              {"code": "1", "description": "Ecuador"},
-              // {"code": "2", "description": "hola 2"},
-            ],
+            data: destinationCountry,
           ),
           CustomFormDropDownFieldWidget(
             onSaved: (value) {},
             onChanged: (value) {},
             label: "Purpose                        ",
-            data: const [
-              {"code": "1", "description": "AVENTURE"},
-              {"code": "2", "description": "CULLINARY"},
-            ],
+            data: purpose,
           ),
           CustomFormDropDownFieldWidget(
             onSaved: (value) {},
             onChanged: (value) {},
             label: "Accomodation Type",
-            data: const [
-              {"code": "1", "description": "5 STARS"},
-              {"code": "2", "description": "4 STARS"},
-            ],
+            data: accomodationType,
           ),
           const CustomTitleWidget(
               width: 0.2,

@@ -4,6 +4,7 @@ import 'package:flutter_html/shims/dart_ui_real.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'context/index.dart';
+import 'index.dart';
 
 /*
  * DATOS DE SERVIDOR
@@ -35,7 +36,8 @@ var KTextSytle = (context, fontSize, fontWeight) => GoogleFonts.poppins(
 
 const kDefaultSchema = "http";
 const kDefaultServer = "192.168.101.3";
-const kDefaultServerPort = 5001;
+const kDefaultServerPort = 9999;
+const kDefaultCatalogPath = "/System/FindCatalog";
 const kDefaultConnectPath = "/User/Connect";
 const kDefaultSendPollPath = "/Gamer/SendPoll";
 const kDefaultBuyCreditsPath = "/Gamer/BuyCredit";
@@ -159,3 +161,34 @@ final chunkArray = (list, int portion) {
   }
   return chunks;
 };
+
+Future<void> getCatalog(
+  List<String> catalogs,
+) async {
+
+  var res = await fetchhandler(kDefaultSchema, kDefaultServer,
+      kDefaultServerPort, kDefaultCatalogPath, 'POST', {
+    "data": {"catalogs": catalogs}
+  });
+  // ignore: avoid_print
+  print(res);
+  if (res['state'] == true) {
+    setContext("catalogs", res['data']);
+  }
+}
+
+  // ignore: prefer_function_declarations_over_variables
+  Function processCatalog = (name) {
+    var catalogs = getContext("catalogs")["catalogs"];
+    List<Map<String, dynamic>> catalog = [];
+    var items = catalogs[name];
+
+    for (var item in items) {
+      Map<String, dynamic> row = {};
+      row["code"] = item["code"];
+      row["description"] = item["description"];
+      catalog.add(row);
+    }
+
+    return catalog;
+  };

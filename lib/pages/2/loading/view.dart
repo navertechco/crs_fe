@@ -10,6 +10,9 @@ class LoadingPage extends GetView<LoadingController> {
 
   // 内容页
   Widget _buildView() {
+    (() async { await getCatalog(["ALL"]);})();
+  
+
     var quote = true;
     if (!quote) {
       Timer(const Duration(seconds: 3), () {
