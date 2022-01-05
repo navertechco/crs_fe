@@ -43,6 +43,9 @@ class CustomCustomerDataForm extends StatelessWidget {
       // print("CountryList: $countrylist");
       return countrylist;
     })());
+
+    var customerTypeCatalog = processCatalog("legal_client_type");
+ 
     return SingleChildScrollView(
       child: Expanded(
         child: Column(
@@ -74,10 +77,7 @@ class CustomCustomerDataForm extends StatelessWidget {
                               customerType.value = value!;
                               // print(value);
                             },
-                            data: const [
-                              {"code": "1", "description": "Legal"},
-                              {"code": "2", "description": "Natural"},
-                            ],
+                            data: customerTypeCatalog,
                           ),
                         ],
                       ),
