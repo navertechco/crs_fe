@@ -1,6 +1,6 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 import 'package:naver_crs/common/constants.dart';
 
 class RoundedFormField extends StatelessWidget {
@@ -37,8 +37,15 @@ class RoundedFormField extends StatelessWidget {
       child: TextFormField(
         onSaved: onSaved,
         obscureText: password,
-        cursorColor: Colors.grey,
-        style: KTextSytle(context, fontSize, FontWeight.normal),
+        cursorColor: Colors.black54,
+        style: TextStyle(
+          color: Colors.black54,
+          fontSize: MediaQuery.of(context).size.width /
+              MediaQuery.of(context).size.height *
+              isMobile *
+              10,
+          decorationStyle: TextDecorationStyle.solid,
+        ),
         decoration: InputDecoration.collapsed(
           hintText: hintText,
           hintStyle: TextStyle(

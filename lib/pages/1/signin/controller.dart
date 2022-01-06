@@ -9,7 +9,7 @@ class SigninController extends GetxController {
   var state = SigninState();
 
   Future<void> onSignin(String username, String password) async {
-    Get.toNamed('/Loading');
+    // Get.toNamed('/Loading');
     state.isLoading = true;
     state.error = null;
     state.username = username;
@@ -17,10 +17,11 @@ class SigninController extends GetxController {
 
     var res = await fetchhandler(kDefaultSchema, kDefaultServer,
         kDefaultServerPort, kDefaultConnectPath, 'POST', {
+      "state": "signin",
       "data": {
         "username": state.username,
-        "password": state.password,
-        "state": "signin"
+        "password": state.password
+        
       }
     });
 
