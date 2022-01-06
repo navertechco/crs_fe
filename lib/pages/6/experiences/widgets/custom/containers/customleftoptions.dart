@@ -12,7 +12,12 @@ class CustomLeftOptionsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     RxMap<dynamic, dynamic> localdata =
         globalctx.context.value["experiencedata"];
-
+    var travelOptions = processCatalog("destination_option");
+    var keyActivities = processCatalog("key_activity");
+    var travelRhythm = processCatalog("travel_rhythm");
+    var transportService = processCatalog("service_type");
+    var translateService = processCatalog("translate_service");
+    Rx<int> val = Rx(0);
     return Padding(
       padding: EdgeInsets.only(
           top: MediaQuery.of(context).size.height * 0.3,
@@ -32,28 +37,50 @@ class CustomLeftOptionsWidget extends StatelessWidget {
                   children: [
                     CustomFormMultiDropDownFieldWidget(
                       // label: "Exploration Days",
-                      value: const [],
+                      value: [],
                       onSaved: (value) {},
                       onChanged: (value) {},
                       hintText: "                  Services",
-                      data: const [
-                        {"code": "1", "description": "Translator"},
-                        {"code": "2", "description": "Transport"},
-                        {"code": "3", "description": "Guide"},
-                        // {"code": "2", "description": "hola 2"},
-                      ],
+                      data: transportService,
+                    ),
+                    CustomFormMultiDropDownFieldWidget(
+                      // label: "Exploration Days",
+                      value: [],
+                      onSaved: (value) {},
+                      onChanged: (value) {},
+                      hintText: "                  Translator",
+                      data: translateService,
+                    ),
+                    CustomFormCheckboxWidget(
+                      value: 1,
+                      groupValue: val,
+                      onChanged: (value) {
+                        if (val.value == value) {
+                          val.value = 0;
+                        } else {
+                          val.value = value;
+                        }
+                      },
+                      hintText: "Driver guide?",
+                    ),
+                     CustomFormCheckboxWidget(
+                      value: 2,
+                      groupValue: val,
+                      onChanged: (value) {
+                        if (val.value == value) {
+                          val.value = 0;
+                        } else {
+                          val.value = value;
+                        }
+                      },
+                      hintText: "Additional guide?",
                     ),
                     CustomFormDropDownFieldWidget(
                       // label: "Exploration Days",
                       onSaved: (value) {},
                       onChanged: (value) {},
                       hintText: "Travel Options",
-                      data: const [
-                        {"code": "1", "description": "All included"},
-                        {"code": "2", "description": "Leisure Time"},
-                        {"code": "3", "description": "Foods Included"},
-                        {"code": "4", "description": "Open Credit"},
-                      ],
+                      data: travelOptions,
                     ),
                     CustomFormMultiDropDownFieldWidget(
                       value: [
@@ -64,30 +91,14 @@ class CustomLeftOptionsWidget extends StatelessWidget {
                         // setData(localdata[experience],"key_activities", value);
                       },
                       hintText: "Key Activities            ",
-                      data: const [
-                        {"code": "1", "description": "Adventure"},
-                        {"code": "2", "description": "Culture"},
-                        {"code": "3", "description": "History"},
-                        {"code": "4", "description": "Education"},
-                        {"code": "5", "description": "Culinary"},
-                        {"code": "6", "description": "Nature"},
-                        {"code": "7", "description": "Wellness"},
-                        {"code": "8", "description": "Surprise"},
-                        {"code": "9", "description": "Romance"},
-                        // {"code": "2", "description": "hola 2"},
-                      ],
+                      data: keyActivities,
                     ),
                     CustomFormDropDownFieldWidget(
                       // label: "Exploration Days",
                       onSaved: (value) {},
                       onChanged: (value) {},
-                      hintText: "Travel Rithm",
-                      data: [
-                        {"code": "1", "description": "Soft"},
-                        {"code": "2", "description": "Medium"},
-                        {"code": "3", "description": "Hard"},
-                        // {"code": "2", "description": "hola 2"},
-                      ],
+                      hintText: "Travel Rhythm",
+                      data: travelRhythm,
                     ),
                   ],
                 ),

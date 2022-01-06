@@ -165,7 +165,6 @@ final chunkArray = (list, int portion) {
 Future<void> getCatalog(
   List<String> catalogs,
 ) async {
-
   var res = await fetchhandler(kDefaultSchema, kDefaultServer,
       kDefaultServerPort, kDefaultCatalogPath, 'POST', {
     "data": {"catalogs": catalogs}
@@ -177,18 +176,25 @@ Future<void> getCatalog(
   }
 }
 
-  // ignore: prefer_function_declarations_over_variables
-  Function processCatalog = (name) {
-    var catalogs = getContext("catalogs")["catalogs"];
+// ignore: prefer_function_declarations_over_variables
+Function processCatalog = (name) {
+  var ctx_catalogs = getContext("catalogs");
+
+  if (ctx_catalogs != null) {
+    var catalogs = ctx_catalogs["catalogs"];
     List<Map<String, dynamic>> catalog = [];
     var items = catalogs[name];
-
-    for (var item in items) {
-      Map<String, dynamic> row = {};
-      row["code"] = item["code"];
-      row["description"] = item["description"];
-      catalog.add(row);
+    if (items != null) {
+      for (var item in items) {
+        Map<String, dynamic> row = {};
+        row["code"] = item["code"];
+        row["description"] = item["description"];
+        catalog.add(row);
+      }
     }
 
     return catalog;
-  };
+  }
+
+  return <Map<String, dynamic>>[];
+};

@@ -12,13 +12,16 @@ class CustomExperiencesListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var list = <Widget>[];
     var experiences = getContext("experiences");
-    for (var experience in experiences.keys) {
-      if (suggested) {
-        globalctx.suggested.add(experience);
+    if (experiences != null) {
+      for (var experience in experiences.keys) {
+        if (suggested) {
+          globalctx.suggested.add(experience);
+        }
+        list.add(CustomDragableExperience(
+            experience: experience, suggested: suggested));
       }
-      list.add(CustomDragableExperience(
-          experience: experience, suggested: suggested));
     }
+
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.44,
       width: MediaQuery.of(context).size.width * 0.2,
