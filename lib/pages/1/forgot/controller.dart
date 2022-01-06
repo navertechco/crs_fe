@@ -27,7 +27,8 @@ class ForgotController extends GetxController {
 
     var res = await fetchhandler(kDefaultSchema, kDefaultServer,
         kDefaultServerPort, kDefaultConnectPath, 'POST', {
-      "data": {"email": state.email, "state": "forgot"}
+      "state": "forgot",
+      "data": {"email": state.email}
     });
 
     if (res['state'] == true) {
