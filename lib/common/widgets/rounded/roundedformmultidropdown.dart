@@ -57,7 +57,7 @@ class RoundedFormMultiDropdown extends StatelessWidget {
         decoration: BoxDecoration(
             color: Colors.grey, borderRadius: BorderRadius.circular(50)),
         items: data.map((e) => MultiSelectItem(e, e["description"]!)).toList(),
-        listType: MultiSelectListType.CHIP,
+        listType: MultiSelectListType.LIST,
         onConfirm: onSaved,
         onSelectionChanged: onChanged,
       ),

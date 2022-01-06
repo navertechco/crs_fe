@@ -33,19 +33,22 @@ class CustomCustomerDataForm extends StatelessWidget {
       // print("Countries: $countries\n\n");
       countrylist = [];
       var index = 0;
-      for (var country in countries.keys) {
-        countrylist.add({
-          "code": "$index",
-          "description": country,
-        });
-        index++;
+      if (countries != null) {
+        for (var country in countries.keys) {
+          countrylist.add({
+            "code": "$index",
+            "description": country,
+          });
+          index++;
+        }
       }
+
       // print("CountryList: $countrylist");
       return countrylist;
     })());
 
     var customerTypeCatalog = processCatalog("legal_client_type");
- 
+
     return SingleChildScrollView(
       child: Expanded(
         child: Column(

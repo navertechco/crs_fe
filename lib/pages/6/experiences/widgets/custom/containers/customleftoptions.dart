@@ -17,6 +17,7 @@ class CustomLeftOptionsWidget extends StatelessWidget {
     var travelRhythm = processCatalog("travel_rhythm");
     var transportService = processCatalog("service_type");
     var translateService = processCatalog("translate_service");
+    Rx<dynamic> services = Rx(null);
     Rx<int> val = Rx(0);
     return Padding(
       padding: EdgeInsets.only(
@@ -35,46 +36,78 @@ class CustomLeftOptionsWidget extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    CustomFormMultiDropDownFieldWidget(
-                      // label: "Exploration Days",
-                      value: [],
-                      onSaved: (value) {},
-                      onChanged: (value) {},
-                      hintText: "                  Services",
-                      data: transportService,
-                    ),
-                    CustomFormMultiDropDownFieldWidget(
-                      // label: "Exploration Days",
-                      value: [],
-                      onSaved: (value) {},
-                      onChanged: (value) {},
-                      hintText: "                  Translator",
-                      data: translateService,
-                    ),
-                    CustomFormCheckboxWidget(
-                      value: 1,
-                      groupValue: val,
-                      onChanged: (value) {
-                        if (val.value == value) {
-                          val.value = 0;
-                        } else {
-                          val.value = value;
+                    Obx(() {
+                      return CustomFormMultiDropDownFieldWidget(
+                        // label: "Exploration Days",
+                        value: services.value,
+                        onSaved: (value) {
+                          services.value = value;
+                          print("SAVING: " + services.toString());
+                        },
+                        onChanged: (value) {
+                          services.value = value;
+                          print("CHANGING: " + services.toString());
+                        },
+                        hintText: "                  Services",
+                        data: transportService,
+                      );
+                    }),
+                    Obx(() {
+                      var index;
+                      if (services.value != null) {
+                        index = services.value
+                            .indexWhere((element) => element["code"] == 2);
+                        if (index != -1) {
+                          return CustomFormMultiDropDownFieldWidget(
+                            // label: "Exploration Days",
+                            value: [],
+                            onSaved: (value) {},
+                            onChanged: (value) {},
+                            hintText: "                  Translator",
+                            data: translateService,
+                          );
                         }
-                      },
-                      hintText: "Driver guide?",
-                    ),
-                     CustomFormCheckboxWidget(
-                      value: 2,
-                      groupValue: val,
-                      onChanged: (value) {
-                        if (val.value == value) {
-                          val.value = 0;
-                        } else {
-                          val.value = value;
+                      }
+                      return Text("");
+                    }),
+                    Obx(() {
+                      var index;
+                      if (services.value != null) {
+                        index = services.value
+                            .indexWhere((element) => element["code"] == 1);
+                        if (index != -1) {
+                          return Column(
+                            children: [
+                              CustomFormCheckboxWidget(
+                                value: 1,
+                                groupValue: val,
+                                onChanged: (value) {
+                                  if (val.value == value) {
+                                    val.value = 0;
+                                  } else {
+                                    val.value = value;
+                                  }
+                                },
+                                hintText: "Driver guide?",
+                              ),
+                              CustomFormCheckboxWidget(
+                                value: 2,
+                                groupValue: val,
+                                onChanged: (value) {
+                                  if (val.value == value) {
+                                    val.value = 0;
+                                  } else {
+                                    val.value = value;
+                                  }
+                                },
+                                hintText: "Additional guide?",
+                              ),
+                            ],
+                          );
                         }
-                      },
-                      hintText: "Additional guide?",
-                    ),
+                      }
+                      return Text("");
+                    }),
                     CustomFormDropDownFieldWidget(
                       // label: "Exploration Days",
                       onSaved: (value) {},
