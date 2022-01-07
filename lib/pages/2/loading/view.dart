@@ -10,8 +10,9 @@ class LoadingPage extends GetView<LoadingController> {
 
   // 内容页
   Widget _buildView() {
-    (() async { await getCatalog(["ALL"]);})();
-  
+    (() async {
+      await getCatalog(["ALL"]);
+    })();
 
     var quote = true;
     if (!quote) {
@@ -19,8 +20,8 @@ class LoadingPage extends GetView<LoadingController> {
         Get.toNamed('/Loading');
       });
     }
-
-    return const LoadingWidget();
+   
+    return   LoadingWidget(state:controller.state, );
   }
 
   @override

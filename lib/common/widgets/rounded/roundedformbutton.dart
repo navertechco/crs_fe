@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 import 'package:naver_crs/common/constants.dart';
 
 class RoundedFormButton extends StatelessWidget {
@@ -8,6 +8,7 @@ class RoundedFormButton extends StatelessWidget {
   final double height;
   final double fontSize;
   final String label;
+  final Color color;
   final void Function()? onTap;
 
   const RoundedFormButton({
@@ -18,6 +19,7 @@ class RoundedFormButton extends StatelessWidget {
     this.width = 0.2,
     this.height = 0.05,
     this.fontSize = 8,
+    this.color = Colors.black54,
     required this.onTap,
   }) : super(key: key);
 
@@ -34,8 +36,7 @@ class RoundedFormButton extends StatelessWidget {
           top: vertical,
         ),
         decoration: BoxDecoration(
-            color: Colors.grey.shade800,
-            borderRadius: BorderRadius.circular(50)),
+            color: color, borderRadius: BorderRadius.circular(50)),
         child: Align(
           alignment: Alignment.topCenter,
           child: Text(

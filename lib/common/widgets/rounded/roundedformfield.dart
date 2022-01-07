@@ -11,7 +11,8 @@ class RoundedFormField extends StatelessWidget {
   final double fontSize;
   final String hintText;
   final void Function(String?)? onSaved;
-
+  final TextInputType? keyboardType;
+  String? Function(String?)? validator;
   RoundedFormField(
       {Key? key,
       required this.hintText,
@@ -20,7 +21,9 @@ class RoundedFormField extends StatelessWidget {
       this.width = 0.2,
       this.height = 0.05,
       this.fontSize = 0.1,
+      this.validator,
       required this.onSaved,
+      this.keyboardType = TextInputType.text,
       this.password = false})
       : super(key: key);
 
@@ -35,6 +38,8 @@ class RoundedFormField extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.grey, borderRadius: BorderRadius.circular(50)),
       child: TextFormField(
+        validator: validator,
+        keyboardType: keyboardType,
         onSaved: onSaved,
         obscureText: password,
         cursorColor: Colors.black54,

@@ -54,7 +54,9 @@ class CustomTourInformationForm extends StatelessWidget {
           const CustomFormDateFieldWidget(label: "Arrival Date               "),
           const CustomFormDateFieldWidget(label: "Departure Date       "),
           CustomFormTextFieldWidget(
-              label: "Passengers                  ", width: 0.20),
+              keyboardType: TextInputType.number,
+              label: "Passengers                  ",
+              width: 0.20),
           Padding(
             padding: EdgeInsets.only(
               top: MediaQuery.of(context).size.height * 0.2,

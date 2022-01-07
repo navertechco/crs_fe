@@ -88,7 +88,8 @@ class CustomCustomerDataForm extends StatelessWidget {
                         children: [
                           Obx(() {
                             if (customerType.value == "1") {
-                              return const CustomFormTextFieldWidget(
+                              return   CustomFormTextFieldWidget(
+                                  keyboardType: TextInputType.number,
                                   hintText:
                                       "Tax Id                            ",
                                   width: 0.1);
@@ -98,7 +99,8 @@ class CustomCustomerDataForm extends StatelessWidget {
                           }),
                           Obx(() {
                             if (customerType.value == "1") {
-                              return const CustomFormTextFieldWidget(
+                              return   CustomFormTextFieldWidget(
+                                  keyboardType: TextInputType.name,
                                   hintText: "Legal Contact  Name  ",
                                   width: 0.24);
                             } else {
@@ -107,8 +109,10 @@ class CustomCustomerDataForm extends StatelessWidget {
                           }),
                           Obx(() {
                             if (customerType.value != "1") {
-                              return const CustomFormTextFieldWidget(
-                                  label: "DNI/PASSPORT", width: 0.24);
+                              return   CustomFormTextFieldWidget(
+                                  keyboardType: TextInputType.number,
+                                  label: "DNI/PASSPORT         ",
+                                  width: 0.24);
                             } else {
                               return Text("");
                             }
@@ -116,11 +120,13 @@ class CustomCustomerDataForm extends StatelessWidget {
                         ],
                       ),
                       Row(
-                        children: const [
+                        children:   [
                           CustomFormTextFieldWidget(
+                              keyboardType: TextInputType.name,
                               hintText: "Names                          ",
                               width: 0.17),
                           CustomFormTextFieldWidget(
+                              keyboardType: TextInputType.name,
                               hintText: "Surnames                          ",
                               width: 0.17),
                         ],
@@ -128,8 +134,8 @@ class CustomCustomerDataForm extends StatelessWidget {
 
                       Row(
                         children: const [
-                          CustomFormTextFieldWidget(label: "Age", width: 0.1),
                           CustomFormDateFieldWidget(
+                              width: 0.35,
                               hintText: "Birth Day               "),
                         ],
                       ),
@@ -190,18 +196,22 @@ class CustomCustomerDataForm extends StatelessWidget {
                           }),
                         ],
                       ),
-                      const CustomFormTextFieldWidget(
+                        CustomFormTextFieldWidget(
+                          keyboardType: TextInputType.streetAddress,
                           hintText: "Address Line                        ",
                           width: 0.36),
-                      const CustomFormTextFieldWidget(
+                        CustomFormTextFieldWidget(
+                          keyboardType: TextInputType.emailAddress,
                           hintText: "e-Mail                          ",
                           width: 0.36),
                       Row(
-                        children: const [
+                        children:   [
                           CustomFormTextFieldWidget(
+                              keyboardType: TextInputType.name,
                               hintText: "Lead Passenger                  ",
                               width: 0.2),
                           CustomFormTextFieldWidget(
+                              keyboardType: TextInputType.number,
                               hintText: "Travel Code                ",
                               width: 0.15),
                         ],

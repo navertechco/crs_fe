@@ -131,6 +131,26 @@ final idValidator = MultiValidator(
   ],
 );
 
+class MaxIntValidator extends FieldValidator<int> {
+  String errorText;
+  int maxValue;
+  MaxIntValidator({required this.errorText, required this.maxValue}) : super(errorText);
+
+  @override
+  bool isValid(value) {
+    if (value > maxValue) return false;
+    return true;
+  }
+}
+
+final MaxValidator = MultiValidator(
+  [
+    RequiredValidator(errorText: 'id is required'),
+    MaxIntValidator(errorText: 'mayyor a 100', maxValue:100),
+    PatternValidator(r'^[0-9]*$', errorText: 'id must have only numbers')
+  ],
+);
+
 // ignore: prefer_function_declarations_over_variables
 final isMobileDevice = () {
   if ((defaultTargetPlatform == TargetPlatform.iOS) ||

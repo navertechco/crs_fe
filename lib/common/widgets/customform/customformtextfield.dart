@@ -3,18 +3,22 @@ import 'package:flutter/material.dart';
 import '../index.dart';
 
 class CustomFormTextFieldWidget extends StatelessWidget {
-  const CustomFormTextFieldWidget(
+    CustomFormTextFieldWidget(
       {Key? key,
       this.label = "",
       this.hintText = "",
+      this.keyboardType = TextInputType.text,
+      this.validator,
       this.width = 0.2,
-      this.height = 0.02})
+      this.height = 0.05})
       : super(key: key);
 
   final String label;
   final String hintText;
   final double width;
   final double height;
+  final TextInputType? keyboardType;
+   String? Function(String?)? validator;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -25,6 +29,8 @@ class CustomFormTextFieldWidget extends StatelessWidget {
           RoundedFormField(
               onSaved: (value) {},
               hintText: hintText,
+              keyboardType: keyboardType,
+              validator: validator,
               width: width,
               height: height),
         ],

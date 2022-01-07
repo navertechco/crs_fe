@@ -5,11 +5,15 @@ import '../../../index.dart';
 
 /// Loading
 class LoadingWidget extends GetView<LoadingController> {
-  const LoadingWidget({Key? key}) : super(key: key);
+  LoadingWidget({
+    Key? key,
+    required this.state,
+  }) : super(key: key);
+  final _formKey = GlobalKey<FormState>();
+  LoadingState state;
 
   @override
   Widget build(BuildContext context) {
-
     return Align(
       alignment: Alignment.bottomCenter,
       child: BodyLayoutWidget(
@@ -19,9 +23,20 @@ class LoadingWidget extends GetView<LoadingController> {
               Padding(
                 padding: EdgeInsets.only(
                     left: MediaQuery.of(context).size.width * 0.4,
+                    top: MediaQuery.of(context).size.height * 0.62),
+                child: RoundedFormField(
+                  onSaved: (value) => state.title = value!,
+                  hintText: 'Search Quote',
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(
+                    left: MediaQuery.of(context).size.width * 0.4,
                     top: MediaQuery.of(context).size.height * 0.7),
                 child: RoundedFormButton(
-                    label: "Quote",
+                    label: "Go",
+                    height: 0.07,
+                    fontSize: 12,
                     onTap: () {
                       Get.toNamed("/Tour");
                     }),

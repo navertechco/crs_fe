@@ -14,13 +14,13 @@ class TourFormPage extends GetView<StatelessWidget> {
   final TourController? ctrl;
   @override
   Widget build(BuildContext context) {
-    
-
-    return Stack(
-      children: [
-        LeftWidget(),
-        RightWidget(formKey: _formKey, state: ctrl!.state, profile: false),
-      ],
+    return SingleChildScrollView(
+      child: Stack(
+        children: [
+          LeftWidget(),
+          RightWidget(formKey: _formKey, state: ctrl!.state, profile: false),
+        ],
+      ),
     );
   }
 }
