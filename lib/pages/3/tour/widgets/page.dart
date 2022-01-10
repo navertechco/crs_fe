@@ -18,7 +18,7 @@ class TourFormPage extends GetView<StatelessWidget> {
       child: Stack(
         children: [
           LeftWidget(),
-          RightWidget(formKey: _formKey, state: ctrl!.state, profile: false),
+          RightWidget(formKey: _formKey, ctrl: ctrl, profile: false),
         ],
       ),
     );

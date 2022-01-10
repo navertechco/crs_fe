@@ -11,15 +11,21 @@ class RoundedFormDatepicker extends StatelessWidget {
   final double height;
   final DateFormat format;
   final String hintText;
-  const RoundedFormDatepicker({
-    Key? key,
-    required this.format,
-    this.hintText = "",
-    this.left = 65,
-    this.top = 10,
-    this.width = 0.2,
-    this.height = 0.05,
-  }) : super(key: key);
+  void Function(DateTime?)? onChanged;
+  void Function(DateTime?)? onSaved;
+  DateTime? initialValue;
+  RoundedFormDatepicker(
+      {Key? key,
+      required this.format,
+      this.hintText = "",
+      this.left = 65,
+      this.top = 10,
+      this.width = 0.2,
+      this.height = 0.05,
+      this.onChanged,
+      this.onSaved,
+      this.initialValue})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +38,9 @@ class RoundedFormDatepicker extends StatelessWidget {
       child: DateTimeField(
         decoration: InputDecoration.collapsed(hintText: hintText),
         format: format,
+        onChanged: onChanged,
+        onSaved: onSaved,
+        initialValue: initialValue,
         onShowPicker: (context, currentValue) async {
           final date = await showDatePicker(
             context: context,

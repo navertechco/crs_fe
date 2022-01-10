@@ -38,6 +38,7 @@ const kDefaultSchema = "http";
 const kDefaultServer = "192.168.101.3";
 const kDefaultServerPort = 9999;
 const kDefaultCatalogPath = "/System/FindCatalog";
+const kDefaultQueryPath = "/Agent/Query";
 const kDefaultConnectPath = "/User/Connect";
 const kDefaultSendPollPath = "/Gamer/SendPoll";
 const kDefaultBuyCreditsPath = "/Gamer/BuyCredit";
@@ -134,7 +135,8 @@ final idValidator = MultiValidator(
 class MaxIntValidator extends FieldValidator<int> {
   String errorText;
   int maxValue;
-  MaxIntValidator({required this.errorText, required this.maxValue}) : super(errorText);
+  MaxIntValidator({required this.errorText, required this.maxValue})
+      : super(errorText);
 
   @override
   bool isValid(value) {
@@ -146,7 +148,7 @@ class MaxIntValidator extends FieldValidator<int> {
 final MaxValidator = MultiValidator(
   [
     RequiredValidator(errorText: 'id is required'),
-    MaxIntValidator(errorText: 'mayyor a 100', maxValue:100),
+    MaxIntValidator(errorText: 'mayyor a 100', maxValue: 100),
     PatternValidator(r'^[0-9]*$', errorText: 'id must have only numbers')
   ],
 );
@@ -182,17 +184,23 @@ final chunkArray = (list, int portion) {
   return chunks;
 };
 
-Future<void> getCatalog(
+Future<bool> getCatalog(
   List<String> catalogs,
 ) async {
-  var res = await fetchhandler(kDefaultSchema, kDefaultServer,
-      kDefaultServerPort, kDefaultCatalogPath, 'POST', {
-    "data": {"catalogs": catalogs}
-  });
-  // ignore: avoid_print
-  print(res);
-  if (res['state'] == true) {
-    setContext("catalogs", res['data']);
+  try {
+    var res = await fetchhandler(kDefaultSchema, kDefaultServer,
+        kDefaultServerPort, kDefaultCatalogPath, 'POST', {
+      "data": {"catalogs": catalogs}
+    });
+    // ignore: avoid_print
+    print(res);
+    if (res['state'] == true) {
+      setContext("catalogs", res['data']);
+      return true;
+    }
+    return false;
+  } catch (e) {
+    return false;
   }
 }
 
@@ -217,4 +225,32 @@ Function processCatalog = (name) {
   }
 
   return <Map<String, dynamic>>[];
+};
+
+// ignore: prefer_function_declarations_over_variables
+Function getValue = ({data, key, def=null}) {
+  return data != null ? data[key] : def;
+};
+
+// ignore: prefer_function_declarations_over_variables
+Function validateData = (data) {
+  return data != null ? data.length > 0 : false;
+};
+
+// ignore: prefer_function_declarations_over_variables
+var getData = (data, sub, key) {
+  // ignore: invalid_use_of_protected_member
+  return data != null && data[sub] != null
+      // ignore: invalid_use_of_protected_member
+      ? data[sub][key]
+      : "9999";
+};
+
+// ignore: prefer_function_declarations_over_variables
+var getDataList = (data, sub, key) {
+  // ignore: invalid_use_of_protected_member
+  return data != null && data[sub] != null
+      // ignore: invalid_use_of_protected_member
+      ? data[sub][key]
+      : <Map<String, dynamic>>[];
 };

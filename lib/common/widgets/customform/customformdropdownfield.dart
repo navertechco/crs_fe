@@ -6,9 +6,10 @@ import '../index.dart';
 class CustomFormDropDownFieldWidget extends StatelessWidget {
   CustomFormDropDownFieldWidget(
       {Key? key,
+      this.disabled = false,
       required this.data,
       this.label = "",
-      this.hintText = "",
+      this.hintText,
       this.width = 0.2,
       this.height = 0.05,
       this.value = "9999",
@@ -17,13 +18,15 @@ class CustomFormDropDownFieldWidget extends StatelessWidget {
       : super(key: key);
 
   final String label;
-  final String hintText;
+  final String? hintText;
   final double width;
   final double height;
   List<Map<String, dynamic>> data;
   void Function(String?) onSaved;
   void Function(String?) onChanged;
   final String value;
+  final bool disabled;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -40,6 +43,7 @@ class CustomFormDropDownFieldWidget extends StatelessWidget {
             label: label,
             onSaved: onSaved,
             value: value,
+            disabled: disabled,
           )
         ],
       ),

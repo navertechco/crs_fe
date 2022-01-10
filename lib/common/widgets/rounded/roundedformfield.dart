@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:naver_crs/common/constants.dart';
 
 class RoundedFormField extends StatelessWidget {
+  final bool disabled;
   final double left;
   final double top;
   final double width;
@@ -13,6 +14,7 @@ class RoundedFormField extends StatelessWidget {
   final void Function(String?)? onSaved;
   final TextInputType? keyboardType;
   String? Function(String?)? validator;
+  final String? initialValue;
   RoundedFormField(
       {Key? key,
       required this.hintText,
@@ -23,8 +25,10 @@ class RoundedFormField extends StatelessWidget {
       this.fontSize = 0.1,
       this.validator,
       required this.onSaved,
+      this.initialValue,
       this.keyboardType = TextInputType.text,
-      this.password = false})
+      this.password = false,
+      this.disabled = false})
       : super(key: key);
 
   bool password;
@@ -38,6 +42,8 @@ class RoundedFormField extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.grey, borderRadius: BorderRadius.circular(50)),
       child: TextFormField(
+        readOnly: disabled,
+        initialValue: initialValue,
         validator: validator,
         keyboardType: keyboardType,
         onSaved: onSaved,

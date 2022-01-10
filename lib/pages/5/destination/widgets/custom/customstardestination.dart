@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
-import '../../../../index.dart'; 
+import 'package:get/get.dart'; 
+import '../../../../index.dart';
 
 class CustomStarDestinationForm extends StatelessWidget {
   const CustomStarDestinationForm({
@@ -11,45 +10,25 @@ class CustomStarDestinationForm extends StatelessWidget {
   final String destination;
   @override
   Widget build(BuildContext context) {
-    Map destinations = getContext('destinations');
-    RxMap<dynamic, dynamic> localdata =
-        globalctx.context.value["destinationdata"];
+    var destinations = getContext('destinations');
+    RxMap<dynamic, dynamic> localDestination =
+        getValue(destinations, destination);
 
-    // ignore: prefer_function_declarations_over_variables
-    var getData = (key) {
-      // ignore: invalid_use_of_protected_member
-      return localdata[destination] != null
-          // ignore: invalid_use_of_protected_member
-          ? localdata[destination][key]
-          : "9999";
-    };
+    Rx<String> explorationDay =
+        Rx(getValue(localDestination, "exploration_day", "9999"));
+    Rx<String> explorationMode =
+        Rx(getValue(localDestination, "exploration_mode", "9999"));
+    Rx<String> destinationOption =
+        Rx(getValue(localDestination, "destination_option", "9999"));
+    Rx<String> travelRithm =
+        Rx(getValue(localDestination, "travel_rithm", "9999"));
 
-    // ignore: prefer_function_declarations_over_variables
-    var getDataList = (key) {
-      // ignore: invalid_use_of_protected_member
-      return localdata[destination] != null
-          // ignore: invalid_use_of_protected_member
-          ? localdata[destination][key]
-          : <Map<String, dynamic>>[];
-    };
-
-    Rx<String> explorationDay = Rx(getData("exploration_day"));
-    Rx<String> explorationMode = Rx(getData("exploration_mode"));
-    Rx<String> destinationOption = Rx(getData("destination_option"));
-    Rx<String> travelRithm = Rx(getData("travel_rithm"));
-
-    Rx<List<Map<String, dynamic>>> keyActivities =
-        Rx(getDataList("key_Activities"));
+    Rx<List<Map<String, dynamic>>> keyActivities = Rx(
+        getValue(localDestination, "key_Activities", <Map<String, dynamic>>[]));
 
     // ignore: prefer_function_declarations_over_variables
     Function setData = (data, key, value) {
-      // ignore: invalid_use_of_protected_member
-      // var data = localdata[destination];
-      data ?? {};
       data[key] = value;
-      // ignore: invalid_use_of_protected_member
-      localdata[destination] = data;
-      globalctx.context.value["destinationdata"] = localdata;
     };
 
     return Column(
@@ -69,12 +48,10 @@ class CustomStarDestinationForm extends StatelessWidget {
                 return CustomFormDropDownFieldWidget(
                   value: explorationDay.value,
                   onSaved: (value) {
-                    setData(
-                        localdata[destination], "exploration_day", value);
+                    setData(localDestination, "exploration_day", value);
                   },
                   onChanged: (value) {
-                    setData(
-                        localdata[destination], "exploration_day", value);
+                    setData(localDestination, "exploration_day", value);
                   },
                   label: "Exploration Days     ",
                   data: const [
@@ -93,12 +70,10 @@ class CustomStarDestinationForm extends StatelessWidget {
                       return CustomFormDropDownFieldWidget(
                         value: explorationMode.value,
                         onSaved: (value) {
-                          setData(localdata[destination],
-                              "exploration_mode", value);
+                          setData(localDestination, "exploration_mode", value);
                         },
                         onChanged: (value) {
-                          setData(localdata[destination],
-                              "exploration_mode", value);
+                          setData(localDestination, "exploration_mode", value);
                         },
                         label: "Exploration Mode   ",
                         data: const [
@@ -115,12 +90,10 @@ class CustomStarDestinationForm extends StatelessWidget {
                 return CustomFormDropDownFieldWidget(
                   value: destinationOption.value,
                   onSaved: (value) {
-                    setData(localdata[destination], "destination_option",
-                        value);
+                    setData(localDestination, "destination_option", value);
                   },
                   onChanged: (value) {
-                    setData(localdata[destination], "destination_option",
-                        value);
+                    setData(localDestination, "destination_option", value);
                   },
                   label: "Destination Option",
                   data: const [
@@ -135,12 +108,10 @@ class CustomStarDestinationForm extends StatelessWidget {
                 return CustomFormDropDownFieldWidget(
                   value: travelRithm.value,
                   onSaved: (value) {
-                    setData(
-                        localdata[destination], "travel_rithm", value);
+                    setData(localDestination, "travel_rithm", value);
                   },
                   onChanged: (value) {
-                    setData(
-                        localdata[destination], "travel_rithm", value);
+                    setData(localDestination, "travel_rithm", value);
                   },
                   label: "Travel Rithm             ",
                   data: const [
@@ -155,11 +126,10 @@ class CustomStarDestinationForm extends StatelessWidget {
                 return CustomFormMultiDropDownFieldWidget(
                   value: keyActivities.value,
                   onSaved: (value) {
-                    setData(
-                        localdata[destination], "key_activities", value);
+                    setData(localDestination, "key_activities", value);
                   },
                   onChanged: (value) {
-                    // setData(localdata[destination],"key_activities", value);
+                    // setData(localDestination,"key_activities", value);
                   },
                   hintText: " ",
                   label: "Key Activities            ",

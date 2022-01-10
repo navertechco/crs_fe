@@ -1,27 +1,25 @@
 // ignore_for_file: unused_field, must_be_immutable, file_names
 
 import 'package:flutter/material.dart';
+import 'package:naver_crs/pages/3/tour/controller.dart';
 import '../state.dart';
 import 'index.dart';
 
-class RightWidget extends StatefulWidget {
+class RightWidget extends StatelessWidget {
   RightWidget({
     Key? key,
     required this.formKey,
-    required this.state,
+    required this.ctrl,
     required this.profile,
   }) : super(key: key);
 
   final GlobalKey formKey;
   final bool profile;
-  TourState state;
-  @override
-  State<RightWidget> createState() => _RightWidgetState();
-}
+  TourController? ctrl;
 
-class _RightWidgetState extends State<RightWidget> {
   @override
   Widget build(BuildContext context) {
-    return CustomTourInformationForm();
+    return CustomTourInformationForm(
+        ctrl: ctrl, formKey: formKey, profile: profile);
   }
 }

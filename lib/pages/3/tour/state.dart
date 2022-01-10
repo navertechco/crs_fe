@@ -1,20 +1,21 @@
-import 'package:get/get.dart';
+// ignore_for_file: unnecessary_this
 
 class TourState {
-  bool isLoading = false;
-  String? error = "";
-  String username = "";
-  String identification = "";
-  String name = "";
-  String firstname = "";
-  String lastname = "";
-  String email = "";
-  String phone = "";
-  String password = "";
-  String confirmation = "";
-
-  // title
-  final _title = "Tour".obs;
-  set title(value) => _title.value = value;
-  get title => _title.value;
+  TourState() {
+    // ignore: prefer_function_declarations_over_variables, unused_local_variable
+    toMap = () {
+      return {
+        "country": country,
+        "accomodation_type": accomodation_type,
+        "purpose": purpose,
+        "passengers": passengers
+      };
+    };
+  }
+  Function toMap = () {};
+  String country = "";
+  // ignore: non_constant_identifier_names
+  String accomodation_type = "";
+  String purpose = "";
+  String passengers = "";
 }

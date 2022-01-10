@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';  
+import 'package:get/get.dart';
 import '../../index.dart';
 
 // ignore: must_be_immutable
 class FormCatalogueWidget extends StatelessWidget {
   FormCatalogueWidget(
       {Key? key,
+      this.disabled = false,
       required this.value,
       required this.data,
       this.hintText = "Choose a Option",
@@ -18,11 +19,12 @@ class FormCatalogueWidget extends StatelessWidget {
   void Function(String?) onSaved;
   void Function(String?) onChanged;
   final String? value;
+  final bool disabled;
   @override
   Widget build(BuildContext context) {
     Rx<List<DropdownMenuItem<String>>>? items = Rx([]);
     List<Map<String, dynamic>> data2 = [];
-    data2.add({"code": "9999", "description": hintText});
+    data2.add({"code": "9999", "description": "Choose a Option"});
     data2.addAll(data);
     data2.asMap().forEach((index, item) {
       items.value.add(DropdownMenuItem(
@@ -37,7 +39,10 @@ class FormCatalogueWidget extends StatelessWidget {
           alignment: Alignment.centerLeft,
           isExpanded: true,
           value: value,
-          // validator: (value) => value == null ? 'required' : null,
+          disabledHint: Text(
+            "data",
+            style: KTextSytle(context, 20, FontWeight.normal),
+          ),
           autovalidateMode: AutovalidateMode.onUserInteraction,
           decoration: InputDecoration.collapsed(
             filled: false,
@@ -45,7 +50,7 @@ class FormCatalogueWidget extends StatelessWidget {
             hintStyle: KTextSytle(context, 10, FontWeight.normal),
           ),
           onSaved: onSaved,
-          onChanged: onChanged,
+          onChanged: disabled ? null : onChanged,
           items: items.value,
         ),
       );

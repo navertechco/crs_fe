@@ -4,12 +4,18 @@ import 'package:get/get.dart';
 import '../../../index.dart';
 
 class CustomTourInformationForm extends StatelessWidget {
-  CustomTourInformationForm({
-    Key? key,
-  }) : super(key: key);
+  const CustomTourInformationForm(
+      {Key? key, this.formKey, this.profile, this.ctrl})
+      : super(key: key);
+  final formKey;
+  final bool? profile;
+  final TourController? ctrl;
 
   @override
   Widget build(BuildContext context) {
+    var state = ctrl!.state;
+    var tour = getContext("tour");
+    var readonly = validateData(tour);
     var destinationCountry = processCatalog("destination_country");
     var purpose = processCatalog("purpose");
     var accomodationType = processCatalog("budget");
@@ -30,20 +36,38 @@ class CustomTourInformationForm extends StatelessWidget {
               fontWeight: FontWeight.bold,
               label: "  Tour information"),
           CustomFormDropDownFieldWidget(
-            onSaved: (value) {},
-            onChanged: (value) {},
+            value: getValue(tour, "country"),
+            disabled: readonly,
+            onSaved: (value) {
+              state.country = value!;
+            },
+            onChanged: (value) {
+              state.country = value!;
+            },
             label: "Destination Country",
             data: destinationCountry,
           ),
           CustomFormDropDownFieldWidget(
-            onSaved: (value) {},
-            onChanged: (value) {},
+            value: getValue(tour, "purpose"),
+            disabled: readonly,
+            onSaved: (value) {
+              state.purpose = value!;
+            },
+            onChanged: (value) {
+              state.purpose = value!;
+            },
             label: "Purpose                        ",
             data: purpose,
           ),
           CustomFormDropDownFieldWidget(
-            onSaved: (value) {},
-            onChanged: (value) {},
+            value: getValue(tour, "accomodation_type"),
+            disabled: readonly,
+            onSaved: (value) {
+              state.accomodation_type = value!;
+            },
+            onChanged: (value) {
+              state.accomodation_type = value!;
+            },
             label: "Accomodation Type",
             data: accomodationType,
           ),
@@ -51,9 +75,16 @@ class CustomTourInformationForm extends StatelessWidget {
               width: 0.2,
               fontWeight: FontWeight.bold,
               label: "  Date                              "),
-          const CustomFormDateFieldWidget(label: "Arrival Date               "),
-          const CustomFormDateFieldWidget(label: "Departure Date       "),
+          CustomFormDateFieldWidget(
+              initialValue: null, label: "Arrival Date               "),
+          CustomFormDateFieldWidget(
+              initialValue: null, label: "Departure Date       "),
           CustomFormTextFieldWidget(
+              disabled: validateData(tour),
+              value: getValue(tour, "passengers"),
+              onSaved: (value) {
+                state.passengers = value!;
+              },
               keyboardType: TextInputType.number,
               label: "Passengers                  ",
               width: 0.20),
@@ -68,7 +99,7 @@ class CustomTourInformationForm extends StatelessWidget {
                   Get.back();
                 },
                 onNext: () {
-                  Get.toNamed("/Customer");
+                  ctrl!.saveTour();
                 }),
           ),
         ]),

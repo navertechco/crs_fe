@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'index.dart';
@@ -10,18 +9,18 @@ class LoadingPage extends GetView<LoadingController> {
 
   // 内容页
   Widget _buildView() {
-    (() async {
-      await getCatalog(["ALL"]);
-    })();
+    RxBool catalogs = false.obs;
+    getCatalog(["ALL"]).then((value) => {catalogs.value = value});
 
-    var quote = true;
-    if (!quote) {
-      Timer(const Duration(seconds: 3), () {
-        Get.toNamed('/Loading');
-      });
-    }
-   
-    return   LoadingWidget(state:controller.state, );
+    return Obx(() {
+      if (!catalogs.value) {
+        return CustomProgressIndicatorWidget();
+      }
+      return LoadingWidget(
+        state: controller.state,
+      );
+      // return CustomProgressIndicatorWidget();
+    });
   }
 
   @override

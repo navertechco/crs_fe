@@ -38,7 +38,7 @@ class LoadingWidget extends GetView<LoadingController> {
                     height: 0.07,
                     fontSize: 12,
                     onTap: () {
-                      Get.toNamed("/Tour");
+                      controller.getTour();
                     }),
               ),
             ],
