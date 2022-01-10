@@ -48,7 +48,8 @@ class CustomCustomerDataForm extends StatelessWidget {
     })());
 
     var customerTypeCatalog = processCatalog("legal_client_type");
-    var tour = getContext("tour");
+    var tourdata = getContext("tour");
+    var client = getValue(tourdata, "client");
     return SingleChildScrollView(
       child: Expanded(
         child: Column(
@@ -70,7 +71,8 @@ class CustomCustomerDataForm extends StatelessWidget {
                       Row(
                         children: [
                           CustomFormDropDownFieldWidget(
-                            value: getValue(tour, "birthday"),
+                            value: getValue(client, "legal_client:type",
+                                def: "9999"),
                             width: 0.2,
                             label: "Customer Type          ",
                             onChanged: (value) {
@@ -90,7 +92,7 @@ class CustomCustomerDataForm extends StatelessWidget {
                           Obx(() {
                             if (customerType.value == "1") {
                               return CustomFormTextFieldWidget(
-                                  value: getValue(tour, "birthday"),
+                                  value: getValue(client, "tax_id", def: ""),
                                   onSaved: (value) {},
                                   keyboardType: TextInputType.number,
                                   hintText:
@@ -103,7 +105,8 @@ class CustomCustomerDataForm extends StatelessWidget {
                           Obx(() {
                             if (customerType.value == "1") {
                               return CustomFormTextFieldWidget(
-                                  value: getValue(tour, "birthday"),
+                                  value:
+                                      getValue(client, "contact_name", def: ""),
                                   onSaved: (value) {},
                                   keyboardType: TextInputType.name,
                                   hintText: "Legal Contact  Name  ",
@@ -115,7 +118,7 @@ class CustomCustomerDataForm extends StatelessWidget {
                           Obx(() {
                             if (customerType.value != "1") {
                               return CustomFormTextFieldWidget(
-                                  value: getValue(tour, "birthday"),
+                                  value: getValue(client, "dni", def: ""),
                                   onSaved: (value) {},
                                   keyboardType: TextInputType.number,
                                   label: "DNI/PASSPORT         ",
@@ -129,13 +132,13 @@ class CustomCustomerDataForm extends StatelessWidget {
                       Row(
                         children: [
                           CustomFormTextFieldWidget(
-                              value: getValue(tour, "birthday"),
+                              value: getValue(client, "names", def: ""),
                               onSaved: (value) {},
                               keyboardType: TextInputType.name,
                               hintText: "Names                          ",
                               width: 0.17),
                           CustomFormTextFieldWidget(
-                              value: getValue(tour, "birthday"),
+                              value: getValue(client, "last_names", def: ""),
                               onSaved: (value) {},
                               keyboardType: TextInputType.name,
                               hintText: "Surnames                          ",
@@ -146,7 +149,8 @@ class CustomCustomerDataForm extends StatelessWidget {
                       Row(
                         children: [
                           CustomFormDateFieldWidget(
-                              initialValue: getValue(tour, "birthday"),
+                              initialValue: getValue(client, "birthday",
+                                  def: DateTime.now()),
                               width: 0.35,
                               hintText: "Birth Day               "),
                         ],
@@ -170,7 +174,7 @@ class CustomCustomerDataForm extends StatelessWidget {
                         children: [
                           Obx(() {
                             return CustomFormDropDownFieldWidget(
-                              value: getValue(tour, "birthday"),
+                              value: getValue(client, "country", def: "9999"),
                               width: country.value == "" ? 0.2 : 0.1,
                               label: "Country          ",
                               onChanged: (value) {
@@ -191,7 +195,7 @@ class CustomCustomerDataForm extends StatelessWidget {
                           Obx(() {
                             if (country.value != "") {
                               return CustomFormDropDownFieldWidget(
-                                value: getValue(tour, "birthday"),
+                                value: getValue(client, "city", def: "9999"),
                                 width: 0.1,
                                 hintText: "City          ",
                                 onChanged: (value) {
@@ -211,13 +215,13 @@ class CustomCustomerDataForm extends StatelessWidget {
                         ],
                       ),
                       CustomFormTextFieldWidget(
-                          value: getValue(tour, "birthday"),
+                          value: getValue(client, "address_line", def: ""),
                           onSaved: (value) {},
                           keyboardType: TextInputType.streetAddress,
                           hintText: "Address Line                        ",
                           width: 0.36),
                       CustomFormTextFieldWidget(
-                          value: getValue(tour, "birthday"),
+                          value: getValue(client, "email", def: ""),
                           onSaved: (value) {},
                           keyboardType: TextInputType.emailAddress,
                           hintText: "e-Mail                          ",
@@ -225,13 +229,14 @@ class CustomCustomerDataForm extends StatelessWidget {
                       Row(
                         children: [
                           CustomFormTextFieldWidget(
-                              value: getValue(tour, "birthday"),
+                              value:
+                                  getValue(client, "lead_passenger", def: ""),
                               onSaved: (value) {},
                               keyboardType: TextInputType.name,
                               hintText: "Lead Passenger                  ",
                               width: 0.2),
                           CustomFormTextFieldWidget(
-                              value: getValue(tour, "birthday"),
+                              value: getValue(client, "travel_code", def: ""),
                               onSaved: (value) {},
                               keyboardType: TextInputType.number,
                               hintText: "Travel Code                ",
