@@ -80,7 +80,7 @@ class CustomTourInformationForm extends StatelessWidget {
               initialValue: getValue(tour, "arrival_date", def: DateTime.now()),
               label: "Arrival Date               "),
           CustomFormDateFieldWidget(
-              initialValue: getValue(tour, "arrival_date", def: DateTime.now()),
+              initialValue: getValue(tour, "departure_date", def: DateTime.now()),
               label: "Departure Date       "),
           CustomFormTextFieldWidget(
               disabled: validateData(tour),
