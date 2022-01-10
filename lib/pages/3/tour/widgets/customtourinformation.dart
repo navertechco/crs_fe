@@ -36,7 +36,7 @@ class CustomTourInformationForm extends StatelessWidget {
               fontWeight: FontWeight.bold,
               label: "  Tour information"),
           CustomFormDropDownFieldWidget(
-            value: getValue(tour, "country"),
+            value: getValue(tour, "country", def: "9999"),
             disabled: readonly,
             onSaved: (value) {
               state.country = value!;
@@ -48,7 +48,7 @@ class CustomTourInformationForm extends StatelessWidget {
             data: destinationCountry,
           ),
           CustomFormDropDownFieldWidget(
-            value: getValue(tour, "purpose"),
+            value: getValue(tour, "purpose", def: "9999"),
             disabled: readonly,
             onSaved: (value) {
               state.purpose = value!;
@@ -60,7 +60,7 @@ class CustomTourInformationForm extends StatelessWidget {
             data: purpose,
           ),
           CustomFormDropDownFieldWidget(
-            value: getValue(tour, "accomodation_type"),
+            value: getValue(tour, "accomodation_type", def: "9999"),
             disabled: readonly,
             onSaved: (value) {
               state.accomodation_type = value!;
@@ -76,12 +76,14 @@ class CustomTourInformationForm extends StatelessWidget {
               fontWeight: FontWeight.bold,
               label: "  Date                              "),
           CustomFormDateFieldWidget(
-              initialValue: null, label: "Arrival Date               "),
+              initialValue: getValue(tour, "arrival_date", def: DateTime.now()),
+              label: "Arrival Date               "),
           CustomFormDateFieldWidget(
-              initialValue: null, label: "Departure Date       "),
+              initialValue: getValue(tour, "arrival_date", def: DateTime.now()),
+              label: "Departure Date       "),
           CustomFormTextFieldWidget(
               disabled: validateData(tour),
-              value: getValue(tour, "passengers"),
+              value: getValue(tour, "passengers", def: "0"),
               onSaved: (value) {
                 state.passengers = value!;
               },

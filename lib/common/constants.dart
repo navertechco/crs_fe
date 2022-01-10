@@ -228,8 +228,11 @@ Function processCatalog = (name) {
 };
 
 // ignore: prefer_function_declarations_over_variables
-Function getValue = ({data, key, def=null}) {
-  return data != null ? data[key] : def;
+Function getValue = (data, key, {def}) {
+  if (data != null && data[key] != null) {
+    return data[key];
+  }
+  return def;
 };
 
 // ignore: prefer_function_declarations_over_variables
