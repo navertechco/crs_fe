@@ -79,7 +79,7 @@ class EndServices extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var end = data["end"];
+    var end = getValue(data, "end_services", def: []);
     var netrates = end["net_rates"];
     var included = end["included"];
     var notincluded = end["not_included"];
@@ -263,22 +263,15 @@ class Cover extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var cover = data != null ? data["cover"] : [];
-    var client = data != null ? data["client"] : [];
-    var title = cover != null ? cover["title"] : [];
-    var passengers = cover["passengers"];
-    var days = cover["days"];
-    var nights = cover["nights"];
-    var valid = cover["valid_until"];
-    var description = cover["description"];
-    List<Map<String, dynamic>> clientinfo = [];
-    for (var i = 0; i < client.length; i++) {
-      clientinfo.add({
-        "code": client[i]["code"],
-        "description": client[i]["description"],
-        "value": client[i]["value"],
-      });
-    }
+    var tour = getValue(data, "tour", def: []);
+    var client = getValue(data, "client", def: []);
+    var title = getValue(tour, "title", def: []);
+    var passengers = getValue(tour, "passengers", def: []);
+    var days = getValue(tour, "days", def: []);
+    var nights = getValue(tour, "nights", def: []);
+    var valid = getValue(tour, "valid_until", def: []);
+    var description = getValue(tour, "description", def: []);
+
     return Column(
       children: [
         CustomDescriptionWidget(
@@ -287,8 +280,7 @@ class Cover extends StatelessWidget {
             fontSize: 0.020,
             fontWeight: FontWeight.bold),
         CustomDescriptionWidget(
-            text:
-                "${clientinfo.firstWhere((element) => element["code"] == "legal_name")["value"]} x $passengers",
+            text: "${client["legal_name"]} x $passengers",
             width: 0.18,
             fontSize: 0.018,
             fontWeight: FontWeight.bold),
@@ -323,8 +315,9 @@ class Destinations extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> destinations = [];
-    if (data != null && data["destinations"] != null) {
-      for (var i = 0; i < data["destinations"].length; i++) {
+    var detsdata = getValue(data, "destinations", def: []);
+    if (data != null) {
+      for (var i = 0; i < detsdata.length; i++) {
         var key = GlobalKey();
         globalctx.keys["destination-$i"] = key;
         destinations.add(CustomFormDestination(data: data, index: i));
@@ -346,18 +339,6 @@ class Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // var arrivalport = (() {
-    //   return data != null && data['arrival'] != null
-    //       ? data['arrival']['port'].toString()
-    //       : {};
-    // })();
-    // var arrivaldate = (() {
-    //   if (data != null && data['arrival'] != null) {
-    //     return data['arrival']['date'].toString();
-    //   } else {
-    //     return "";
-    //   }
-    // })();
     var client;
     if (data != null) {
       client = data['client'];
@@ -372,12 +353,24 @@ class Header extends StatelessWidget {
       tour = {};
     }
 
+    List<Map<String, dynamic>> clientTemplate = [
+      {"code": "legal_name", "description": "Legal Name"},
+      {"code": "contact_name", "description": "Contact Name"},
+      {"code": "id_number", "description": "Dni"},
+    ];
+
+    List<Map<String, dynamic>> tourTemplate = [
+      {"code": "destination_country_id", "description": "Destination Country"},
+      {"code": "purpose_id", "description": "Purpose"},
+      {"code": "accomodation_type_id", "description": "Accomodation Type"},
+    ];
+
     return Column(
       children: [
         const CustomFormTitleWidget(level: 1, label: "Client Information"),
-        CustomFormHeaderWidget(data: chunkArray(client, 3)),
+        CustomFormHeaderWidget(data: chunkMap(client, 3, clientTemplate)),
         const CustomFormTitleWidget(level: 1, label: "Tour Information"),
-        CustomFormHeaderWidget(data: chunkArray(tour, 3)),
+        CustomFormHeaderWidget(data: chunkMap(tour, 3, tourTemplate)),
         const CustomFormTitleWidget(level: 2, label: "Itinerary"),
       ],
     );
@@ -457,7 +450,7 @@ class CustomFormDayWidget extends StatelessWidget {
                 text: daydescription, width: 0.55, fontSize: 0.016),
             CustomFormExperiencesDetailWidget(data: data, indexes: indexes),
             SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-            if (observation != "" || observation != null)
+            if (observation != null)
               CustomDescriptionWidget(
                 text: "Observation: $observation",
                 width: 0.55,
@@ -584,7 +577,7 @@ class CustomFormExperienceRowWidget extends StatelessWidget {
           fontSize: 0.016,
           fontWeight: FontWeight.normal,
         ),
-        if (next != "")
+        if (next != "null")
           CustomDescriptionWidget(
             text: "Next: $next",
             width: 0.6,
@@ -629,6 +622,7 @@ class CustomFormHeaderIterWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<CustomFormHeaderRowWidget> list = [];
+
     for (var i = 0; i < data[index].length; i++) {
       list.add(CustomFormHeaderRowWidget(
         customlabel: data[index][i]["description"] + ":",
@@ -653,7 +647,7 @@ class CustomFormHeaderRowWidget extends StatelessWidget {
     required this.value,
   }) : super(key: key);
   final String customlabel;
-  final String value;
+  final String? value;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -662,7 +656,7 @@ class CustomFormHeaderRowWidget extends StatelessWidget {
             width: 0.02,
             customlabel: customlabel,
             fontWeight: FontWeight.normal),
-        Text(value),
+        Text(value!),
       ],
     );
   }

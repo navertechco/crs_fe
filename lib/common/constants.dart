@@ -164,7 +164,8 @@ final isMobileDevice = () {
 };
 
 // ignore: prefer_function_declarations_over_variables
-final chunkArray = (list, int portion) {
+final chunkMap =
+    (Map<String, dynamic> data, int portion, List<Map<String, dynamic>> list) {
   List<List<Map<String, dynamic>>> chunks = [];
   int aprox = (list.length / portion).round() * portion;
   int module = aprox > list.length
@@ -178,7 +179,10 @@ final chunkArray = (list, int portion) {
       if (index > list.length - 1) {
         break;
       }
-      chunks[i].add(list[index]);
+      Map<String, dynamic> item = list[index];
+      String code = item["code"];
+      item["value"] = data[code];
+      chunks[i].add(item);
     }
   }
   return chunks;
