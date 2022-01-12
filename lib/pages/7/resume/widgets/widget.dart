@@ -160,18 +160,13 @@ class EndServices extends StatelessWidget {
             width: 0.5,
             fontSize: 0.014,
             fontWeight: FontWeight.bold),
-        const CustomDescriptionWidget(
-            text:
-                """
+        const CustomDescriptionWidget(text: """
             B = Breakfast
             L= Lunch
             LB= Lunch Box
             D = Dinner
             O = Overnight
-            """,
-            width: 0.5,
-            fontSize: 0.012,
-            fontWeight: FontWeight.bold),
+            """, width: 0.5, fontSize: 0.012, fontWeight: FontWeight.bold),
         const CustomDescriptionWidget(
             text: "Net Rate",
             width: 0.5,
@@ -471,7 +466,7 @@ class CustomFormDayWidget extends StatelessWidget {
     } else {
       destinations = [];
     }
-    var destination = destinations.values.toList()[0][destinationindex];
+    var destination = destinations.toList()[destinationindex];
     var day = destination['days'][dayindex];
     var daydate = day['date'];
     var meals = day['meals'];

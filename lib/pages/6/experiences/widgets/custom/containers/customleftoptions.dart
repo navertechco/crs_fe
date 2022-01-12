@@ -10,7 +10,7 @@ class CustomLeftOptionsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Rx<Map<String, dynamic>> localdata =
+    Rx<Map<dynamic, dynamic>> localdata =
         Rx(globalctx.context.value["experiencedata"]);
     Rx<dynamic> travelOptions =
         Rx(getValue(localdata.value, "destination_option"));
@@ -73,7 +73,7 @@ class CustomLeftOptionsWidget extends StatelessWidget {
                     }),
                     Obx(() {
                       var index;
-                      if (translateService != null) {
+                      if (translateService.value != null) {
                         index = translateService.value
                             .indexWhere((element) => element["code"] == 1);
                         if (index != -1) {
