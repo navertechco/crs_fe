@@ -9,14 +9,12 @@ import '../../../../../index.dart';
 import '../index.dart';
 
 class DGalleryWidget extends GetView<DGalleryController> {
-    final List<dynamic> galleryData;
-    DGalleryWidget({Key? key, required this.galleryData}) : super(key: key);
+  final List<dynamic> galleryData;
+  DGalleryWidget({Key? key, required this.galleryData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     List<Widget> Gallery = [];
- 
- 
 
     for (var item in galleryData) {
       Gallery.add(GalleryItem(
@@ -31,8 +29,8 @@ class DGalleryWidget extends GetView<DGalleryController> {
                   child: SizedBox(
                     width: 100,
                     child: ContentLayoutWidget(
-                        child: const YoutubeWidget(
-                          videoId: "r7XhWUDj-Ts",
+                        child: YoutubeWidget(
+                          videoId: item["video"],
                         ),
                         text: "DGallery"),
                   ),
