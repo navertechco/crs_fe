@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/pages/5/destination/widgets/dgallery/widgets/index.dart';
-
 import '../../../../../index.dart';
 
 class LeftWidget extends StatelessWidget {
@@ -16,7 +15,7 @@ class LeftWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var galleryData = [].obs;
 
-    getDestinationExperiences("quito").then((value) {
+    getDestinationExperiences(destination).then((value) {
       galleryData.value = value;
     });
 

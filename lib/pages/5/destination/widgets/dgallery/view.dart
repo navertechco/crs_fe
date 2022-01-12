@@ -6,12 +6,13 @@ import 'widgets/index.dart';
 import 'index.dart';
 
 class DGalleryPage extends GetView<DGalleryController> {
-  DGalleryPage({Key? key}) : super(key: key);
+  final destination;
+  DGalleryPage({Key? key, this.destination}) : super(key: key);
 
   Widget _buildView(BuildContext? _context) {
     var galleryData = [].obs;
 
-    getDestinationExperiences("quito").then((value) {
+    getDestinationExperiences(destination).then((value) {
       galleryData.value = value;
     });
     return GalleryLayoutWidget(

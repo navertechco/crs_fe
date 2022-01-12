@@ -19,7 +19,7 @@ class DGalleryWidget extends GetView<DGalleryController> {
     for (var item in galleryData) {
       Gallery.add(GalleryItem(
         onTap: () {
-          showModal(
+          showDialog(
               context: context,
               builder: (context) {
                 return GestureDetector(
