@@ -8,65 +8,17 @@ import 'package:get/get.dart';
 import '../../../../../index.dart';
 import '../index.dart';
 
-List<Map<String, dynamic>> galeryData = [
-  {
-    "image": "assets/custom/img/tucan.png",
-    "title": "Item 1",
-  },
-  {
-    "image": "assets/custom/img/tucan.png",
-    "title": "Item 2",
-  },
-  {
-    "image": "assets/custom/img/tucan.png",
-    "title": "Item 3",
-  },
-  {
-    "image": "assets/custom/img/tucan.png",
-    "title": "Item 4",
-  },
-  {
-    "image": "assets/custom/img/tucan.png",
-    "title": "Item 5",
-  },
-  {
-    "image": "assets/custom/img/tucan.png",
-    "title": "Item 6",
-  },
-  {
-    "image": "assets/custom/img/tucan.png",
-    "title": "Item 7",
-  },
-  {
-    "image": "assets/custom/img/tucan.png",
-    "title": "Item 8",
-  },
-  {
-    "image": "assets/custom/img/tucan.png",
-    "title": "Item 9",
-  },
-  {
-    "image": "assets/custom/img/tucan.png",
-    "title": "Item 10",
-  },
-  {
-    "image": "assets/custom/img/tucan.png",
-    "title": "Item 11",
-  },
-  {
-    "image": "assets/custom/img/tucan.png",
-    "title": "Item 12",
-  },
-];
-
 class DGalleryWidget extends GetView<DGalleryController> {
-  const DGalleryWidget({Key? key, destination}) : super(key: key);
+    final List<dynamic> galleryData;
+    DGalleryWidget({Key? key, required this.galleryData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     List<Widget> Gallery = [];
+ 
+ 
 
-    for (var item in galeryData) {
+    for (var item in galleryData) {
       Gallery.add(GalleryItem(
         onTap: () {
           showModal(

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:naver_crs/pages/5/destination/widgets/dgallery/widgets/index.dart'; 
+import 'package:get/get.dart';
+import 'package:naver_crs/pages/5/destination/widgets/dgallery/widgets/index.dart';
+
+import '../../../../../index.dart';
 
 class LeftWidget extends StatelessWidget {
   const LeftWidget({
@@ -11,6 +14,12 @@ class LeftWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var galleryData = [].obs;
+
+    getDestinationExperiences("quito").then((value) {
+      galleryData.value = value;
+    });
+
     return Padding(
       padding: EdgeInsets.only(
           left: MediaQuery.of(context).size.width * 0.05,
@@ -19,7 +28,9 @@ class LeftWidget extends StatelessWidget {
           height: MediaQuery.of(context).size.height * 0.6,
           width: MediaQuery.of(context).size.width * 0.4,
           // color: Colors.blue[50],
-          child: DGalleryWidget(destination: destination)),
+          child: Obx(() {
+            return DGalleryWidget(galleryData: galleryData.value);
+          })),
     );
   }
 }

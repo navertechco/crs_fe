@@ -16,19 +16,9 @@ class CustomCustomerDataForm extends StatelessWidget {
     RxString city = "".obs;
     List<Map<String, dynamic>> countrylist = [];
     // ignore: prefer_function_declarations_over_variables
-    Function cityData = (cities) {
-      var index = 0;
-      citylist.value = [];
 
-      for (var city in cities) {
-        citylist.value.add({
-          "code": "$index",
-          "description": city,
-        });
-        index++;
-      }
-    };
-    var countries = getContext("countries");
+    // var countryParam = getParam("COUNTRIES");
+    Map<dynamic, dynamic> countries = getContext("countries");
     Rx<List<Map<String, dynamic>>> countrydata = Rx((() {
       // print("Countries: $countries\n\n");
       countrylist = [];
@@ -179,14 +169,18 @@ class CustomCustomerDataForm extends StatelessWidget {
                               label: "Country          ",
                               onChanged: (value) {
                                 country.value = value!;
-                                cityData(countries[countrylist[int.parse(value)]
-                                    ["description"]]);
+                                cityData(
+                                    citylist,
+                                    countries[countrylist[int.parse(value)]
+                                        ["description"]]);
                                 // print("CHANGED: $value");
                               },
                               onSaved: (value) {
                                 country.value = value!;
-                                cityData(countries[countrylist[int.parse(value)]
-                                    ["description"]]);
+                                cityData(
+                                    citylist,
+                                    countries[countrylist[int.parse(value)]
+                                        ["description"]]);
                                 // print("SAVED: $value");
                               },
                               data: countrydata.value,

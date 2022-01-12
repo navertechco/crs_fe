@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/shims/dart_ui_real.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'context/index.dart';
 import 'index.dart';
@@ -39,6 +40,8 @@ const kDefaultServer = "192.168.101.3";
 const kDefaultServerPort = 9999;
 const kDefaultCatalogPath = "/System/FindCatalog";
 const kDefaultQueryPath = "/Agent/Query";
+const kDefaultDestinationPath = "/Agent/GetDestination";
+const kDefaultExperiencePath = "/Agent/GetExperience";
 const kDefaultConnectPath = "/User/Connect";
 const kDefaultSendPollPath = "/Gamer/SendPoll";
 const kDefaultBuyCreditsPath = "/Gamer/BuyCredit";
@@ -203,9 +206,12 @@ Future<bool> getCatalog(
     if (res['state'] == true) {
       setContext("catalogs", res['data']);
       return true;
+    } else {
+      Get.back();
     }
     return false;
   } catch (e) {
+    Get.back();
     return false;
   }
 }
@@ -275,3 +281,29 @@ Function getParam = (key) {
       params.toList().firstWhere((element) => element["description"] == key);
   return child;
 };
+
+// ignore: prefer_function_declarations_over_variables
+Function cityData = (citylist, cities) {
+  var index = 0;
+  citylist.value = [];
+
+  for (var city in cities) {
+    citylist.value.add({
+      "code": "$index",
+      "description": city,
+    });
+    index++;
+  }
+};
+
+Future<dynamic> getDestinationExperiences(String name) async {
+  var res = await fetchhandler(kDefaultSchema, kDefaultServer,
+      kDefaultServerPort, kDefaultExperiencePath, 'POST', {
+    "data": {"name": name}
+  });
+
+  if (res['state'] == true) {
+    return res['data'];
+  }
+  return [];
+}

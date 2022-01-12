@@ -9,7 +9,16 @@ class DGalleryPage extends GetView<DGalleryController> {
   DGalleryPage({Key? key}) : super(key: key);
 
   Widget _buildView(BuildContext? _context) {
-    return const GalleryLayoutWidget(child: DGalleryWidget(), text: "DGallery");
+    var galleryData = [].obs;
+
+    getDestinationExperiences("quito").then((value) {
+      galleryData.value = value;
+    });
+    return GalleryLayoutWidget(
+        child: Obx(() {
+          return DGalleryWidget(galleryData: galleryData.value);
+        }),
+        text: "DGallery");
   }
 
   final GlobalKey<ScaffoldState> _key = GlobalKey();

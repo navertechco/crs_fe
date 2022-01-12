@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:get/get.dart';
+import 'package:naver_crs/common/constants.dart';
 import '../index.dart';
 import './index.dart';
 
@@ -32,13 +33,14 @@ class LeftWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var images = [
-      "assets/custom/img/monkey.png",
-      "assets/custom/img/monkey.png",
-      "assets/custom/img/monkey.png",
-      "assets/custom/img/monkey.png",
-      "assets/custom/img/monkey.png"
-    ];
+    var destinationData = getParam("DESTINATION_DATA")["value"];
+    var images = [];
+
+    for (var destination in destinationData.keys) {
+      var image = destinationData[destination][4];
+      images.add(image);
+    }
+
     return Padding(
       padding: EdgeInsets.only(
           left: 50,
