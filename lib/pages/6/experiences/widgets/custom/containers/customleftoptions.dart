@@ -10,14 +10,17 @@ class CustomLeftOptionsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    RxMap<dynamic, dynamic> localdata =
-        globalctx.context.value["experiencedata"];
-    var travelOptions = processCatalog("destination_option");
-    var keyActivities = processCatalog("key_activity");
-    var travelRhythm = processCatalog("travel_rhythm");
-    var transportService = processCatalog("service_type");
-    var translateService = processCatalog("translate_service");
-    Rx<dynamic> services = Rx(null);
+    Rx<Map<String, dynamic>> localdata =
+        Rx(globalctx.context.value["experiencedata"]);
+    Rx<dynamic> travelOptions =
+        Rx(getValue(localdata.value, "destination_option"));
+    Rx<dynamic> keyActivities = Rx(getValue(localdata.value, "key_activity"));
+    Rx<dynamic> travelRhythm = Rx(getValue(localdata.value, "travel_rhythm"));
+    Rx<dynamic> transportService =
+        Rx(getValue(localdata.value, "service_type"));
+    Rx<dynamic> translateService =
+        Rx(getValue(localdata.value, "translate_service"));
+
     Rx<int> val = Rx(0);
     return Padding(
       padding: EdgeInsets.only(
@@ -39,23 +42,21 @@ class CustomLeftOptionsWidget extends StatelessWidget {
                     Obx(() {
                       return CustomFormMultiDropDownFieldWidget(
                         // label: "Exploration Days",
-                        value: services.value,
+                        value: transportService.value,
                         onSaved: (value) {
-                          services.value = value;
-                          print("SAVING: " + services.toString());
+                          transportService.value = value;
                         },
                         onChanged: (value) {
-                          services.value = value;
-                          print("CHANGING: " + services.toString());
+                          transportService.value = value;
                         },
                         hintText: "                  Services",
-                        data: transportService,
+                        data: processCatalog("service_type"),
                       );
                     }),
                     Obx(() {
                       var index;
-                      if (services.value != null) {
-                        index = services.value
+                      if (translateService.value != null) {
+                        index = translateService.value
                             .indexWhere((element) => element["code"] == 2);
                         if (index != -1) {
                           return CustomFormMultiDropDownFieldWidget(
@@ -64,7 +65,7 @@ class CustomLeftOptionsWidget extends StatelessWidget {
                             onSaved: (value) {},
                             onChanged: (value) {},
                             hintText: "                  Translator",
-                            data: translateService,
+                            data: processCatalog("translate_service"),
                           );
                         }
                       }
@@ -72,8 +73,8 @@ class CustomLeftOptionsWidget extends StatelessWidget {
                     }),
                     Obx(() {
                       var index;
-                      if (services.value != null) {
-                        index = services.value
+                      if (translateService != null) {
+                        index = translateService.value
                             .indexWhere((element) => element["code"] == 1);
                         if (index != -1) {
                           return Column(
@@ -110,28 +111,28 @@ class CustomLeftOptionsWidget extends StatelessWidget {
                     }),
                     CustomFormDropDownFieldWidget(
                       // label: "Exploration Days",
+                      value: travelOptions.value,
                       onSaved: (value) {},
                       onChanged: (value) {},
                       hintText: "Travel Options",
-                      data: travelOptions,
+                      data: processCatalog("destination_option"),
                     ),
                     CustomFormMultiDropDownFieldWidget(
-                      value: [
-                        {"code": "1", "description": "Adventure"}
-                      ],
+                      value: keyActivities.value,
                       onSaved: (value) {},
                       onChanged: (value) {
                         // setData(localdata[experience],"key_activities", value);
                       },
                       hintText: "Key Activities            ",
-                      data: keyActivities,
+                      data: processCatalog("key_activity"),
                     ),
                     CustomFormDropDownFieldWidget(
                       // label: "Exploration Days",
+                      value: travelRhythm.value,
                       onSaved: (value) {},
                       onChanged: (value) {},
                       hintText: "Travel Rhythm",
-                      data: travelRhythm,
+                      data: processCatalog("travel_rhythm"),
                     ),
                   ],
                 ),

@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart'; 
-import '../../../../index.dart'; 
+import 'package:flutter/material.dart';
+import '../../../../index.dart';
 
 class FrontOptionWidget extends StatelessWidget {
   const FrontOptionWidget({Key? key, this.destination = "coast"})
@@ -8,7 +8,8 @@ class FrontOptionWidget extends StatelessWidget {
   final String destination;
   @override
   Widget build(BuildContext context) {
-    Map<String, dynamic> destinations = getContext("destinations");
+    var destinationData = getParam("DESTINATION_DATA");
+    Map<dynamic, dynamic> destinations = getValue(destinationData, "value");
     return Stack(children: [
       Padding(
         padding: EdgeInsets.only(

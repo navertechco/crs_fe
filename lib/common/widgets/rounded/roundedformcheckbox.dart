@@ -34,8 +34,7 @@ class RoundedFormCheckbox extends StatelessWidget {
 
   bool password;
   @override
-  Widget build(BuildContext context) {
-    Rx<int> val = Rx(value!);
+  Widget build(BuildContext context) { 
     return Container(
         width: MediaQuery.of(context).size.width * width,
         height: MediaQuery.of(context).size.height * height,

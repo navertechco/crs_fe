@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart'; 
+import 'package:get/get.dart';
 import '../../../../index.dart';
 
 class CustomStarDestinationForm extends StatelessWidget {
@@ -10,23 +10,26 @@ class CustomStarDestinationForm extends StatelessWidget {
   final String destination;
   @override
   Widget build(BuildContext context) {
-    var destinations = getContext('destinations');
-    RxMap<dynamic, dynamic> localDestination =
-        getValue(destinations, destination);
+    var tour = getContext("tour");
+    var ctx = globalctx.context.value;
+    var destinationData = getParam("DESTINATION_DATA");
+    Map<dynamic, dynamic> destinations = getValue(destinationData, "value");
+    Rx<Map<dynamic, dynamic>> localDestination =
+        Rx(getContext('destinationdata'));
 
-    Rx<String> explorationDay =
-        Rx(getValue(localDestination, "exploration_day", "9999"));
-    Rx<String> explorationMode =
-        Rx(getValue(localDestination, "exploration_mode", "9999"));
+    Rx<dynamic> explorationDay =
+        Rx(getValue(localDestination.value, "exploration_days", def: "9999"));
+    Rx<dynamic> explorationMode =
+        Rx(getValue(localDestination.value, "exploration_mode", def: "9999"));
     Rx<String> destinationOption =
-        Rx(getValue(localDestination, "destination_option", "9999"));
-    Rx<String> travelRithm =
-        Rx(getValue(localDestination, "travel_rithm", "9999"));
+        Rx(getValue(localDestination.value, "destination_option", def: "9999"));
+    Rx<String> travelRhythm =
+        Rx(getValue(localDestination.value, "travel_rhythm", def: "9999"));
 
-    Rx<List<Map<String, dynamic>>> keyActivities = Rx(
-        getValue(localDestination, "key_Activities", <Map<String, dynamic>>[]));
+    Rx<List<Map<String, dynamic>>> keyActivities = Rx(getValue(
+        localDestination.value, "key_Activities",
+        def: <Map<String, dynamic>>[]));
 
-    // ignore: prefer_function_declarations_over_variables
     Function setData = (data, key, value) {
       data[key] = value;
     };
@@ -48,19 +51,13 @@ class CustomStarDestinationForm extends StatelessWidget {
                 return CustomFormDropDownFieldWidget(
                   value: explorationDay.value,
                   onSaved: (value) {
-                    setData(localDestination, "exploration_day", value);
+                    explorationDay.value = value;
                   },
                   onChanged: (value) {
-                    setData(localDestination, "exploration_day", value);
+                    explorationDay.value = value;
                   },
                   label: "Exploration Days     ",
-                  data: const [
-                    {"code": "1", "description": "1"},
-                    {"code": "2", "description": "2"},
-                    {"code": "3", "description": "3"},
-                    {"code": "4", "description": "4"},
-                    {"code": "5", "description": "5"},
-                  ],
+                  data: processCatalog("exploration_days"),
                 );
               }),
               SizedBox(
@@ -70,17 +67,13 @@ class CustomStarDestinationForm extends StatelessWidget {
                       return CustomFormDropDownFieldWidget(
                         value: explorationMode.value,
                         onSaved: (value) {
-                          setData(localDestination, "exploration_mode", value);
+                          explorationMode.value = value;
                         },
                         onChanged: (value) {
-                          setData(localDestination, "exploration_mode", value);
+                          explorationMode.value = value;
                         },
                         label: "Exploration Mode   ",
-                        data: const [
-                          {"code": "1", "description": "Cruiser"},
-                          {"code": "2", "description": "Hop Island"},
-                          {"code": "3", "description": "Mixed"},
-                        ],
+                        data: processCatalog("exploration_mode"),
                       );
                     });
                   }
@@ -90,61 +83,41 @@ class CustomStarDestinationForm extends StatelessWidget {
                 return CustomFormDropDownFieldWidget(
                   value: destinationOption.value,
                   onSaved: (value) {
-                    setData(localDestination, "destination_option", value);
+                    destinationOption.value = value!;
                   },
                   onChanged: (value) {
-                    setData(localDestination, "destination_option", value);
+                    destinationOption.value = value!;
                   },
                   label: "Destination Option",
-                  data: const [
-                    {"code": "1", "description": "All included"},
-                    {"code": "2", "description": "Leisure Time"},
-                    {"code": "3", "description": "Foods Included"},
-                    {"code": "4", "description": "Open Credit"},
-                  ],
+                  data: processCatalog("destination_option"),
                 );
               }),
               Obx(() {
                 return CustomFormDropDownFieldWidget(
-                  value: travelRithm.value,
+                  value: travelRhythm.value,
                   onSaved: (value) {
-                    setData(localDestination, "travel_rithm", value);
+                    travelRhythm.value = value!;
                   },
                   onChanged: (value) {
-                    setData(localDestination, "travel_rithm", value);
+                    travelRhythm.value = value!;
                   },
-                  label: "Travel Rithm             ",
-                  data: const [
-                    {"code": "1", "description": "Soft"},
-                    {"code": "2", "description": "Medium"},
-                    {"code": "3", "description": "Hard"},
-                    // {"code": "2", "description": "hola 2"},
-                  ],
+                  label: "Travel Rhythm             ",
+                  data: processCatalog("travel_rhythm"),
                 );
               }),
               Obx(() {
                 return CustomFormMultiDropDownFieldWidget(
                   value: keyActivities.value,
                   onSaved: (value) {
-                    setData(localDestination, "key_activities", value);
+                    print(value);
+                    keyActivities.value = value!;
                   },
                   onChanged: (value) {
-                    // setData(localDestination,"key_activities", value);
+                    keyActivities.value = value!;
                   },
                   hintText: " ",
                   label: "Key Activities            ",
-                  data: const [
-                    {"code": "1", "description": "Adventure"},
-                    {"code": "2", "description": "Culture"},
-                    {"code": "3", "description": "History"},
-                    {"code": "4", "description": "Education"},
-                    {"code": "5", "description": "Culinary"},
-                    {"code": "6", "description": "Nature"},
-                    {"code": "7", "description": "Wellness"},
-                    {"code": "8", "description": "Surprise"},
-                    {"code": "9", "description": "Romance"},
-                    // {"code": "2", "description": "hola 2"},
-                  ],
+                  data: processCatalog("key_activity"),
                 );
               }),
               const Divider(color: Color.fromARGB(255, 0, 0, 0)),

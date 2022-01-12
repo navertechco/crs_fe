@@ -1,6 +1,4 @@
-import 'package:get/get.dart';
-
-import '../../index.dart';
+import 'package:get/get.dart'; 
 
 class LoadingState {
   // title

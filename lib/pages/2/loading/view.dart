@@ -25,7 +25,6 @@ class LoadingPage extends GetView<LoadingController> {
 
   @override
   Widget build(BuildContext context) {
-    setContext('size', Get);
     return _buildView();
   }
 }

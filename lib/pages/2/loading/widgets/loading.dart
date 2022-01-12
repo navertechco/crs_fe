@@ -8,8 +8,7 @@ class LoadingWidget extends GetView<LoadingController> {
   LoadingWidget({
     Key? key,
     required this.state,
-  }) : super(key: key);
-  final _formKey = GlobalKey<FormState>();
+  }) : super(key: key); 
   LoadingState state;
 
   @override

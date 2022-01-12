@@ -56,10 +56,11 @@ class Itinerary extends StatelessWidget {
                         ),
                       ),
                       Destinations(data: data),
-                      RepaintBoundary(
-                        key: pkey["end"],
-                        child: EndServices(data: data),
-                      ),
+                      if (pkey["end"] != null)
+                        RepaintBoundary(
+                          key: pkey["end"],
+                          child: EndServices(data: data),
+                        ),
                     ]),
                   ),
                 ),
@@ -79,10 +80,11 @@ class EndServices extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var end = getValue(data, "end_services", def: []);
-    var netrates = end["net_rates"];
-    var included = end["included"];
-    var notincluded = end["not_included"];
+    var detail = getValue(data, "detail", def: []);
+    var end = getValue(detail, "end", def: []);
+    var netrates = getValue(end, "net_rates", def: []);
+    var included = getValue(end, "included", def: []);
+    var notincluded = getValue(end, "not_included", def: []);
 
     List<CustomDescriptionWidget> includedlist = [];
     List<CustomDescriptionWidget> notincludedlist = [];
@@ -263,8 +265,9 @@ class Cover extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var tour = getValue(data, "tour", def: []);
-    var client = getValue(data, "client", def: []);
+    var detail = getValue(data, "detail", def: []);
+    var tour = getValue(detail, "tour", def: []);
+    var client = getValue(detail, "client", def: []);
     var title = getValue(tour, "title", def: []);
     var passengers = getValue(tour, "passengers", def: []);
     var days = getValue(tour, "days", def: []);
@@ -315,7 +318,7 @@ class Destinations extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> destinations = [];
-    var detsdata = getValue(data, "destinations", def: []);
+    var detsdata = getValue(data["detail"], "destinations", def: []);
     if (data != null) {
       for (var i = 0; i < detsdata.length; i++) {
         var key = GlobalKey();
@@ -339,30 +342,64 @@ class Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var client;
-    if (data != null) {
-      client = data['client'];
-    } else {
-      client = {};
-    }
-
-    var tour;
-    if (data != null) {
-      tour = data['tour'];
-    } else {
-      tour = {};
-    }
+    var client = getValue(data["detail"], "client", def: {});
+    var tour = getValue(data["detail"], "tour", def: {});
 
     List<Map<String, dynamic>> clientTemplate = [
-      {"code": "legal_name", "description": "Legal Name"},
-      {"code": "contact_name", "description": "Contact Name"},
-      {"code": "id_number", "description": "Dni"},
+      {
+        "code": "brith_date",
+        "description": "Birth Date",
+        "value": "10/10/1950"
+      },
+      {"code": "client_id", "description": "Client code", "value": "1"},
+      {
+        "code": "contact_name",
+        "description": "Contact Name",
+        "value": "Mr. Frank Stevens"
+      },
+      {"code": "customer_type", "description": "Customer Type", "value": "1"},
+      {
+        "code": "email",
+        "description": "e-Mail",
+        "value": "frank.stevens@gmail.com"
+      },
+      {"code": "id_number", "description": "DNI", "value": "15261548"},
+      {
+        "code": "legal_name",
+        "description": "Lagal Name",
+        "value": "British Bank"
+      },
     ];
 
     List<Map<String, dynamic>> tourTemplate = [
-      {"code": "destination_country_id", "description": "Destination Country"},
-      {"code": "purpose_id", "description": "Purpose"},
-      {"code": "accomodation_type_id", "description": "Accomodation Type"},
+      {
+        "code": "accomodation_type_id",
+        "description": "Accomodation Type",
+        "value": "1"
+      },
+      {"code": "passengers", "description": "Passengers", "value": "18"},
+      {
+        "code": "arrival_date",
+        "description": "Arrival Date",
+        "value": "09/10/2022"
+      },
+      {
+        "code": "departure_date",
+        "description": "Departure Date",
+        "value": "14/10/2022"
+      },
+      {"code": "valid_until", "description": "TITLE", "value": "31/12/2022"},
+      {"code": "contact_agent", "description": "Contact Agent", "value": "1"},
+      {"code": "days", "description": "Days", "value": "10"},
+      {
+        "code": "destination_country_id",
+        "description": "Destination Country",
+        "value": "1"
+      },
+      {"code": "nights", "description": "Nigths", "value": "9"},
+      {"code": "partner", "description": "Partner", "value": "CNH Tours"},
+      {"code": "purpose_id", "description": "Purpose", "value": "1"},
+      {"code": "rooms", "description": "Rooms", "value": "1s;16d;1t"},
     ];
 
     return Column(
@@ -389,7 +426,8 @@ class CustomFormDestination extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<CustomFormDayWidget> daylist = [];
-    var destinations = data["destinations"];
+    var detail = getValue(data, "detail", def: []);
+    var destinations = detail["destinations"];
     var destination = destinations[index];
     var days = destination["days"];
     for (int i = 0; i < days.length; i++) {
@@ -433,7 +471,7 @@ class CustomFormDayWidget extends StatelessWidget {
     } else {
       destinations = [];
     }
-    var destination = destinations[destinationindex];
+    var destination = destinations.values.toList()[0][destinationindex];
     var day = destination['days'][dayindex];
     var daydate = day['date'];
     var meals = day['meals'];
@@ -518,7 +556,7 @@ class CustomFormExperiencesDetailWidget extends StatelessWidget {
 
     for (var i = 0;
         i <
-            data["destinations"][destinationindex]["days"][dayindex]
+            data["detail"]["destinations"][destinationindex]["days"][dayindex]
                     ['experiences']
                 .length;
         i++) {
@@ -548,7 +586,8 @@ class CustomFormExperienceRowWidget extends StatelessWidget {
     var destinationindex = indexes[0];
     var dayindex = indexes[1];
     var experienceindex = indexes[2];
-    var day = data['destinations'][destinationindex]['days'][dayindex];
+    var day =
+        data["detail"]['destinations'][destinationindex]['days'][dayindex];
     var experiences = day['experiences'];
     var experience = experiences[experienceindex];
     var nextexperience = experienceindex + 1 < experiences.length

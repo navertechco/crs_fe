@@ -1,8 +1,7 @@
 // ignore_for_file: unused_field, must_be_immutable, file_names
 
 import 'package:flutter/material.dart';
-import 'package:naver_crs/pages/3/tour/controller.dart';
-import '../state.dart';
+import 'package:naver_crs/pages/3/tour/controller.dart'; 
 import 'index.dart';
 
 class RightWidget extends StatelessWidget {

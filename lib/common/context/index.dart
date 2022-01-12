@@ -28,7 +28,6 @@ class Context with PropertyChangeNotifier<String> {
   Context() {
     load("data");
     load("experiences");
-    load("destinations");
     load("countries");
   }
 

@@ -1,6 +1,5 @@
 // ignore_for_file: import_of_legacy_library_into_null_safe
-import 'package:get/get.dart';
-import 'package:sweetalert/sweetalert.dart';
+import 'package:get/get.dart'; 
 import 'index.dart';
 import '../../index.dart';
 

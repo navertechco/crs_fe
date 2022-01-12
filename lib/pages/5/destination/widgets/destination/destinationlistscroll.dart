@@ -14,9 +14,9 @@ class DestinationListScroll extends StatelessWidget {
   Widget build(BuildContext context) {
     Map<String, dynamic> destinations = getContext("destinations");
     List<Widget> destinationlist = [];
-    for (var key in destinations.keys) {
+    for (var destination in destinations.keys) {
       destinationlist.add(
-        CustomStarDestinationForm(destination: key),
+        CustomStarDestinationForm(destination: destination),
       );
     }
     return Padding(

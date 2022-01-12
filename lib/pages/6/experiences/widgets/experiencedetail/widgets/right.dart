@@ -19,7 +19,7 @@ class RightWidget extends StatelessWidget {
         width: MediaQuery.of(context).size.width * 0.45,
         // color: Colors.red[50],
         child: SingleChildScrollView(
-          child: Text(""),
+          child: Text("AQUI"),
         ),
       ),
     );

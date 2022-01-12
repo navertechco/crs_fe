@@ -133,9 +133,8 @@ final idValidator = MultiValidator(
 );
 
 class MaxIntValidator extends FieldValidator<int> {
-  String errorText;
   int maxValue;
-  MaxIntValidator({required this.errorText, required this.maxValue})
+  MaxIntValidator({required String errorText, required this.maxValue})
       : super(errorText);
 
   @override
@@ -145,7 +144,7 @@ class MaxIntValidator extends FieldValidator<int> {
   }
 }
 
-final MaxValidator = MultiValidator(
+final maxValidator = MultiValidator(
   [
     RequiredValidator(errorText: 'id is required'),
     MaxIntValidator(errorText: 'mayyor a 100', maxValue: 100),
@@ -167,24 +166,27 @@ final isMobileDevice = () {
 final chunkMap =
     (Map<String, dynamic> data, int portion, List<Map<String, dynamic>> list) {
   List<List<Map<String, dynamic>>> chunks = [];
-  int aprox = (list.length / portion).round() * portion;
-  int module = aprox > list.length
-      ? (list.length / portion).round()
-      : (list.length / portion).round() + 1;
+  if (data != null) {
+    int aprox = (list.length / portion).round() * portion;
+    int module = aprox > list.length
+        ? (list.length / portion).round()
+        : (list.length / portion).round() + 1;
 
-  for (var i = 0; i < module; i++) {
-    chunks.add([]);
-    for (var j = 0; j < portion; j++) {
-      var index = (i * portion) + j;
-      if (index > list.length - 1) {
-        break;
+    for (var i = 0; i < module; i++) {
+      chunks.add([]);
+      for (var j = 0; j < portion; j++) {
+        var index = (i * portion) + j;
+        if (index > list.length - 1) {
+          break;
+        }
+        Map<String, dynamic> item = list[index];
+        String code = item["code"];
+        item["value"] = data[code];
+        chunks[i].add(item);
       }
-      Map<String, dynamic> item = list[index];
-      String code = item["code"];
-      item["value"] = data[code];
-      chunks[i].add(item);
     }
   }
+
   return chunks;
 };
 
@@ -210,10 +212,10 @@ Future<bool> getCatalog(
 
 // ignore: prefer_function_declarations_over_variables
 Function processCatalog = (name) {
-  var ctx_catalogs = getContext("catalogs");
+  var ctxCatalogs = getContext("catalogs");
 
-  if (ctx_catalogs != null) {
-    var catalogs = ctx_catalogs["catalogs"];
+  if (ctxCatalogs != null) {
+    var catalogs = ctxCatalogs["catalogs"];
     List<Map<String, dynamic>> catalog = [];
     var items = catalogs[name];
     if (items != null) {
@@ -221,6 +223,7 @@ Function processCatalog = (name) {
         Map<String, dynamic> row = {};
         row["code"] = item["code"];
         row["description"] = item["description"];
+        row["value"] = item["value"];
         catalog.add(row);
       }
     }
@@ -233,9 +236,12 @@ Function processCatalog = (name) {
 
 // ignore: prefer_function_declarations_over_variables
 Function getValue = (data, key, {def}) {
-  if (data != null && data[key] != null) {
-    return data[key];
+  if (data != null && data.length > 0) {
+    if (data[key] != null) {
+      return data[key];
+    }
   }
+
   return def;
 };
 
@@ -260,4 +266,12 @@ var getDataList = (data, sub, key) {
       // ignore: invalid_use_of_protected_member
       ? data[sub][key]
       : <Map<String, dynamic>>[];
+};
+
+// ignore: prefer_function_declarations_over_variables
+Function getParam = (key) {
+  var params = processCatalog("params");
+  var child =
+      params.toList().firstWhere((element) => element["description"] == key);
+  return child;
 };
