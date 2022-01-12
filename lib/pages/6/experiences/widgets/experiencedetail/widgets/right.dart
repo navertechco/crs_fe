@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../index.dart';
+
 class RightWidget extends StatelessWidget {
   const RightWidget({
     Key? key,
@@ -19,7 +21,7 @@ class RightWidget extends StatelessWidget {
         width: MediaQuery.of(context).size.width * 0.45,
         // color: Colors.red[50],
         child: SingleChildScrollView(
-          child: Text("AQUI"),
+          child: CustomExperienceForm(experience: experience),
         ),
       ),
     );

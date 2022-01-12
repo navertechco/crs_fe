@@ -47,7 +47,7 @@ class SwitcherWidget extends StatelessWidget {
         showDialog(
             context: context,
             builder: (context) {
-              return ExperienceDetailPage();
+              return ExperienceDetailPage(experience:experience);
             });
       }
     }

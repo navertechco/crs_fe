@@ -13,12 +13,15 @@ class LeftWidget extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(
           left: MediaQuery.of(context).size.width * 0.05,
-          top: MediaQuery.of(context).size.height * 0.3),
+          top: MediaQuery.of(context).size.height * 0.35),
       child: SizedBox(
-          height: MediaQuery.of(context).size.height * 0.6,
-          width: MediaQuery.of(context).size.width * 0.4,
-          // color: Colors.blue[50],
-          child: Text("")),
+        height: MediaQuery.of(context).size.height * 0.6,
+        width: MediaQuery.of(context).size.width * 0.45,
+        // color: Colors.red[50],
+        child: SingleChildScrollView(
+          child: Text("LEFT"),
+        ),
+      ),
     );
   }
 }

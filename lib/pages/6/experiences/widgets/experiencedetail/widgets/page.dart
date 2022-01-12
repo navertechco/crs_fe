@@ -11,6 +11,7 @@ class ExperienceDetailWidget extends GetView<ExperienceDetailController> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
+        TitleWidget(experience: experience),
         LeftWidget(experience: experience),
         RightWidget(experience: experience),
         Padding(
@@ -18,8 +19,8 @@ class ExperienceDetailWidget extends GetView<ExperienceDetailController> {
               left: MediaQuery.of(context).size.width * 0.51,
               top: MediaQuery.of(context).size.height * 0.8),
           child: CustomKeypadWidget(
-              nextlabel: "Next >",
-              prevlabel: " < Previous",
+              nextlabel: "Accept >",
+              prevlabel: " < Cancel",
               onNext: () {
                 globalctx.promoted.add(experience);
                 Get.close(1);
@@ -33,6 +34,3 @@ class ExperienceDetailWidget extends GetView<ExperienceDetailController> {
     );
   }
 }
-
-
-

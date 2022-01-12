@@ -12,7 +12,7 @@ class DGalleryPage extends GetView<DGalleryController> {
   Widget _buildView(BuildContext? _context) {
     var galleryData = [].obs;
 
-    getDestinationExperiences(destination).then((value) {
+    getExperiences(destination,"").then((value) {
       galleryData.value = value;
     });
     return GalleryLayoutWidget(

@@ -15,7 +15,7 @@ class LeftWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var galleryData = [].obs;
 
-    getDestinationExperiences(destination).then((value) {
+    getExperiences(destination,"").then((value) {
       galleryData.value = value;
     });
 

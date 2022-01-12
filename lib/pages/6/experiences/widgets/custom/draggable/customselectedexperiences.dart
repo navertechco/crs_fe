@@ -19,8 +19,8 @@ class CustomSelectedExperiencesWidget extends StatelessWidget {
         Scrollbar(
           child: SingleChildScrollView(
             child: ExperienceDragTargetWidget(
-              onAccept: (String? key) {
-                moveExperienceFunction(key!, context);
+              onAccept: (String? experience) {
+                moveExperienceFunction(experience!, context);
               },
             ),
           ),

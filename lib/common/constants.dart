@@ -296,10 +296,10 @@ Function cityData = (citylist, cities) {
   }
 };
 
-Future<dynamic> getDestinationExperiences(String name) async {
+Future<dynamic> getExperiences( String destination, String name,) async {
   var res = await fetchhandler(kDefaultSchema, kDefaultServer,
       kDefaultServerPort, kDefaultExperiencePath, 'POST', {
-    "data": {"name": name}
+    "data": {"destination": destination, "name": name}
   });
 
   if (res['state'] == true) {
