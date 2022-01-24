@@ -10,7 +10,7 @@ class DGalleryPage extends GetView<DGalleryController> {
   Widget _buildView(BuildContext? _context) {
     var galleryData = [].obs;
 
-    getExperiences(destination, "");
+    getExperiences(destination, "",null,null);
 
     galleryData.value = getContext('Experiences');
 

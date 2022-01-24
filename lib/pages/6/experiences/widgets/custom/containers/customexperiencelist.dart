@@ -16,7 +16,7 @@ class CustomExperiencesListWidget extends StatelessWidget {
 
     if (suggested) {
       for (var destination in globalctx.promoted.value) {
-        getExperiences(destination, "");
+        getExperiences(destination, "",null,null);
 
         var experiences = getContext("experiences");
 

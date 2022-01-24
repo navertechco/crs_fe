@@ -300,10 +300,17 @@ Function cityData = (citylist, cities) {
 var getExperiences = (
   String destination,
   String experience,
+  List<int>? keyActivities,
+  List<int>? travelRhythms,
 ) async {
   var res = await fetchhandler(kDefaultSchema, kDefaultServer,
       kDefaultServerPort, kDefaultExperiencePath, 'POST', {
-    "data": {"destination": destination, "experience": experience}
+    "data": {
+      "destination": destination,
+      "experience": experience,
+      "key_activities": keyActivities ?? [],
+      "travel_rhythms": travelRhythms ?? []
+    }
   });
 
   if (res['state'] == true) {
