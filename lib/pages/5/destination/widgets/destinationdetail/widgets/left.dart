@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:naver_crs/pages/5/destination/widgets/dgallery/widgets/index.dart';
 import '../../../../../index.dart';
 
 class LeftWidget extends StatelessWidget {
@@ -15,9 +14,9 @@ class LeftWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var galleryData = [].obs;
 
-    getExperiences(destination,"").then((value) {
-      galleryData.value = value;
-    });
+    getExperiences(destination, "");
+
+    galleryData.value = getContext("experiences");
 
     return Padding(
       padding: EdgeInsets.only(
@@ -28,7 +27,7 @@ class LeftWidget extends StatelessWidget {
           width: MediaQuery.of(context).size.width * 0.4,
           // color: Colors.blue[50],
           child: Obx(() {
-            return DGalleryWidget(galleryData: galleryData.value);
+            return GalleryWidget(galleryData: galleryData.value);
           })),
     );
   }

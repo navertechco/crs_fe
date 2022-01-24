@@ -36,7 +36,7 @@ var KTextSytle = (context, fontSize, fontWeight) => GoogleFonts.poppins(
     ));
 
 const kDefaultSchema = "http";
-const kDefaultServer = "192.168.101.3";
+const kDefaultServer = "192.168.101.4";
 const kDefaultServerPort = 9999;
 const kDefaultCatalogPath = "/System/FindCatalog";
 const kDefaultQueryPath = "/Agent/Query";
@@ -296,14 +296,20 @@ Function cityData = (citylist, cities) {
   }
 };
 
-Future<dynamic> getExperiences( String destination, String name,) async {
+// ignore: prefer_function_declarations_over_variables
+var getExperiences = (
+  String destination,
+  String experience,
+) async {
   var res = await fetchhandler(kDefaultSchema, kDefaultServer,
       kDefaultServerPort, kDefaultExperiencePath, 'POST', {
-    "data": {"destination": destination, "name": name}
+    "data": {"destination": destination, "experience": experience}
   });
 
   if (res['state'] == true) {
-    return res['data'];
+    setContext("experiences", res['data']);
+    return true;
+  } else {
+    return false;
   }
-  return [];
-}
+};

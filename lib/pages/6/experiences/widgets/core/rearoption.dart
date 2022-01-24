@@ -10,7 +10,11 @@ class RearOptionWidget extends StatelessWidget {
   final String experience;
   @override
   Widget build(BuildContext context) {
-    Map<String, dynamic> experiences = getContext("experiences");
+   
+    var experiences = getContext("experiences");
+    var row = experiences
+        .toList()
+        .firstWhere((element) => element["title"] == experience);
     return Column(
       children: [
         Text(

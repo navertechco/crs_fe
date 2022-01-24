@@ -101,7 +101,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                   onChanged: (value) {
                     travelRhythm.value = value!;
                   },
-                  label: "Travel Rhythm             ",
+                  label: "Travel Rhythm         ",
                   data: processCatalog("travel_rhythm"),
                 );
               }),

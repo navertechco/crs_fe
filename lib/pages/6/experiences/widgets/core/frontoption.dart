@@ -10,7 +10,10 @@ class FrontOptionWidget extends StatelessWidget {
   final String experience;
   @override
   Widget build(BuildContext context) {
-    Map<String, dynamic> experiences = getContext("experiences");
+    var experiences = getContext("experiences");
+    var row = experiences
+        .toList()
+        .firstWhere((element) => element["title"] == experience);
     return Stack(
       children: [
         Container(
@@ -31,7 +34,7 @@ class FrontOptionWidget extends StatelessWidget {
             decoration: BoxDecoration(
                 image: DecorationImage(
               image: Image.asset(
-                experiences[experience][2],
+                row["image"],
                 fit: BoxFit.cover,
               ).image,
             ))),

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../../index.dart';
-import 'widgets/index.dart';
 import 'index.dart';
 
 class DGalleryPage extends GetView<DGalleryController> {
@@ -12,12 +10,13 @@ class DGalleryPage extends GetView<DGalleryController> {
   Widget _buildView(BuildContext? _context) {
     var galleryData = [].obs;
 
-    getExperiences(destination,"").then((value) {
-      galleryData.value = value;
-    });
+    getExperiences(destination, "");
+
+    galleryData.value = getContext('Experiences');
+
     return GalleryLayoutWidget(
         child: Obx(() {
-          return DGalleryWidget(galleryData: galleryData.value);
+          return GalleryWidget(galleryData: galleryData.value);
         }),
         text: "DGallery");
   }

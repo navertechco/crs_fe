@@ -13,6 +13,8 @@ class ExperienceDetailWidget extends GetView<ExperienceDetailController> {
       children: [
         TitleWidget(experience: experience),
         LeftWidget(experience: experience),
+        Image.asset("assets/custom/img/experience.edge.png",
+            fit: BoxFit.fill, height: MediaQuery.of(context).size.height),
         RightWidget(experience: experience),
         Padding(
           padding: EdgeInsets.only(

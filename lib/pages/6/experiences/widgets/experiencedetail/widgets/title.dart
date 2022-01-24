@@ -23,7 +23,7 @@ class TitleWidget extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                "DESTINATION - 1",
+                "EXPERIENCE - 1",
                 style: GoogleFonts.poppins(
                     textStyle: TextStyle(
                   color: const Color.fromARGB(255, 255, 255, 255),

@@ -26,14 +26,14 @@ class SwitcherWidget extends StatelessWidget {
     RxBool _flipXAxis = true.obs;
 
     void _changeRotationAxis() {
-      _flipXAxis.value = !(_flipXAxis.value);
+      _flipXAxis.value = (_flipXAxis.value);
     }
 
     void _switchCard() {
-      globalctx.value.value = !globalctx.value.value;
+      globalctx.value.value = globalctx.value.value;
       RxList dest = globalctx.experiencelist;
 
-      !dest.contains(experience) && _showFrontSide.value
+      dest.contains(experience) && _showFrontSide.value
           ? dest.add(experience)
           : dest.remove(experience);
 
@@ -41,13 +41,13 @@ class SwitcherWidget extends StatelessWidget {
 
       if (suggested) {
         // print(dest);
-        _showFrontSide.value = !_showFrontSide.value;
+        _showFrontSide.value = _showFrontSide.value;
         _changeRotationAxis();
       } else {
         showDialog(
             context: context,
             builder: (context) {
-              return ExperienceDetailPage(experience:experience);
+              return ExperienceDetailPage(experience: experience);
             });
       }
     }
