@@ -2,31 +2,33 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart'; 
+import 'package:get/get.dart';
 import '../../../pages/index.dart';
 import '../../../pages/5/destination/widgets/dgallery/index.dart';
 
 class GalleryWidget extends GetView<DGalleryController> {
-  final List<dynamic> galleryData;
+  final galleryData;
   GalleryWidget({Key? key, required this.galleryData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     List<Widget> Gallery = [];
 
-    for (var item in galleryData) {
-      Gallery.add(GalleryItem(
-        onTap: () {
-          showDialog(
-              context: context,
-              builder: (context) {
-                return VideoItem(item: item);
-              });
-        },
-        key: Key(item["title"]),
-        image: item["image"],
-        title: item["title"],
-      ));
+    if (galleryData != null) {
+      for (var item in galleryData) {
+        Gallery.add(GalleryItem(
+          onTap: () {
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return VideoItem(item: item);
+                });
+          },
+          key: Key(item["title"]),
+          image: item["image"],
+          title: item["title"],
+        ));
+      }
     }
 
     return SingleChildScrollView(
@@ -46,4 +48,3 @@ class GalleryWidget extends GetView<DGalleryController> {
     );
   }
 }
-

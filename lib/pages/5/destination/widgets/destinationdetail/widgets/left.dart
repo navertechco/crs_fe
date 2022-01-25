@@ -12,11 +12,12 @@ class LeftWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var galleryData = [].obs;
+    Rx<List> galleryData = Rx([]);
 
-    getExperiences(destination, "",null,null);
+    getExperiences(destination, "", null, null, null);
 
-    galleryData.value = getContext("experiences");
+    var experiences = getContext("experiences");
+    galleryData.value = experiences;
 
     return Padding(
       padding: EdgeInsets.only(

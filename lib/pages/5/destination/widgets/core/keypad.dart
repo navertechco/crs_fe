@@ -26,6 +26,7 @@ class KeyPadWidget extends StatelessWidget {
                 Get.toNamed("/Experiences");
               },
               onPrevious: () {
+                 globalctxReset();
                 Get.back();
               },
               width: 0.3);

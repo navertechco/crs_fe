@@ -4,6 +4,7 @@ import 'package:flutter_html/shims/dart_ui_real.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sweetalert/sweetalert.dart';
 import 'context/index.dart';
 import 'index.dart';
 
@@ -14,9 +15,16 @@ import 'index.dart';
 // ignore: prefer_function_declarations_over_variables
 Function removeFromArray = (array, item) {
   if (array.contains(item)) {
-    var index = array.indexWhere((element) => element == item);
-    array.removeAt(index);
-    globalctx.experienceDragData.value.removeAt(index);
+    var index = array.indexOf(item);
+    array.value.removeAt(index);
+    if (globalctx.experienceDragData.value.isNotEmpty) {
+      if (globalctx.experienceDragData.value.length == array.value.length) {
+        globalctx.experienceDragData.value.removeAt(index);
+      } else {
+        var newIndex = index > 0 ? index - 1 : 0;
+        globalctx.experienceDragData.value.removeAt(newIndex);
+      }
+    }
   }
 };
 // ignore: prefer_function_declarations_over_variables
@@ -24,6 +32,8 @@ Function removeExperience = (experience) {
   removeFromArray(globalctx.selected, experience);
   removeFromArray(globalctx.promoted, experience);
 };
+
+// ignore: prefer_function_declarations_over_variables
 
 // ignore: constant_identifier_names, prefer_function_declarations_over_variables, non_constant_identifier_names
 var KTextSytle = (context, fontSize, fontWeight) => GoogleFonts.poppins(
@@ -297,19 +307,19 @@ Function cityData = (citylist, cities) {
 };
 
 // ignore: prefer_function_declarations_over_variables
-var getExperiences = (
-  String destination,
-  String experience,
-  List<int>? keyActivities,
-  List<int>? travelRhythms,
-) async {
+var getExperiences = (String destination,
+    String experience,
+    List<int>? keyActivities,
+    List<int>? travelRhythms,
+    int? destinationOption) async {
   var res = await fetchhandler(kDefaultSchema, kDefaultServer,
       kDefaultServerPort, kDefaultExperiencePath, 'POST', {
     "data": {
       "destination": destination,
       "experience": experience,
       "key_activities": keyActivities ?? [],
-      "travel_rhythms": travelRhythms ?? []
+      "travel_rhythms": travelRhythms ?? [],
+      "destination_option": destinationOption
     }
   });
 
@@ -318,5 +328,66 @@ var getExperiences = (
     return true;
   } else {
     return false;
+  }
+};
+
+// ignore: prefer_function_declarations_over_variables
+var globalctxReset = () {
+  globalctx.promoted.value = [];
+  globalctx.selected.value = [];
+  globalctx.destinations.value = [];
+  globalctx.experiences.value = [];
+  globalctx.destinationDragData.value = [];
+  globalctx.experienceDragData.value = [];
+  globalctx.memory = {
+    "tour": {}.obs,
+    "customer": {}.obs,
+    "destinations": {}.obs,
+    "experiences": {}.obs,
+    "days": {}.obs
+  }.obs;
+};
+
+class CustomRequiredValidator extends TextFieldValidator {
+  final ctx;
+  CustomRequiredValidator({required String errorText, required this.ctx})
+      : super(errorText);
+
+  @override
+  bool get ignoreEmptyValues => false;
+
+  @override
+  bool isValid(String? value) {
+    return value!.isNotEmpty && value != "9999" && value != "0";
+  }
+
+  @override
+  String? call(String? value) {
+    if (isValid(value)) {
+      return null;
+    } else {
+      SweetAlert.show(ctx,
+          title: errorText,
+          subtitle: 'error',
+          style: SweetAlertStyle.error, onPress: (bool isConfirm) {
+        Get.close(1);
+        return false;
+      });
+      return errorText;
+    }
+  }
+}
+
+// ignore: non_constant_identifier_names, prefer_function_declarations_over_variables
+var CustomDatetimeRequiredValidator =
+    (DateTime? date, {BuildContext? context, required String errorText}) {
+  if (date == null) {
+    SweetAlert.show(context,
+        title: errorText,
+        subtitle: 'error',
+        style: SweetAlertStyle.error, onPress: (bool isConfirm) {
+      Get.close(1);
+      return true;
+    });
   }
 };

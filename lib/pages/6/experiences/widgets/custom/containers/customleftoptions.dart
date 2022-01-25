@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -109,6 +110,14 @@ class CustomLeftOptionsWidget extends StatelessWidget {
                       }
                       return Text("");
                     }),
+                    CustomTitleWidget(
+                      fontWeight: FontWeight.bold,
+                      label: "Filter Experiences by:",
+                    ),
+                    CustomTitleWidget(
+                      fontWeight: FontWeight.bold,
+                      label: "______________________",
+                    ),
                     CustomFormDropDownFieldWidget(
                       // label: "Exploration Days",
                       value: travelOptions.value,

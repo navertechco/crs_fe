@@ -9,7 +9,7 @@ class TourFormPage extends GetView<StatelessWidget> {
     Key? key,
     this.ctrl,
   }) : super(key: key);
-  final _formKey = GlobalKey<FormState>();
+ 
   final TourController? ctrl;
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class TourFormPage extends GetView<StatelessWidget> {
       child: Stack(
         children: [
           LeftWidget(),
-          RightWidget(formKey: _formKey, ctrl: ctrl, profile: false),
+          RightWidget(ctrl: ctrl,  profile: false),
         ],
       ),
     );

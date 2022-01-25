@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart'; 
-import '../../../../index.dart'; 
-
+import 'package:get/get.dart';
+import '../../../../index.dart';
 
 class ResetPadWidget extends StatelessWidget {
   const ResetPadWidget({
@@ -21,9 +20,7 @@ class ResetPadWidget extends StatelessWidget {
               prevlabel: "< Reset >",
               nextlabel: "",
               onPrevious: () {
-                globalctx.promoted.value = [];
-                globalctx.Keys.value = [];
-                globalctx.destinationDragData.value = [];
+                globalctxReset();
               },
               width: 0.01);
         }

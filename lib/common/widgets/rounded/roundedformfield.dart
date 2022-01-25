@@ -41,6 +41,9 @@ class RoundedFormField extends StatelessWidget {
       padding: EdgeInsets.only(left: left, top: top),
       decoration: BoxDecoration(
           color: Colors.grey, borderRadius: BorderRadius.circular(50)),
+      foregroundDecoration: BoxDecoration(
+          color: Color.fromARGB(0, 0, 0, 0),
+          borderRadius: BorderRadius.circular(50)),
       child: TextFormField(
         readOnly: disabled,
         initialValue: initialValue,

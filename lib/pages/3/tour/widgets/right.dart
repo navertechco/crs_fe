@@ -7,18 +7,19 @@ import 'index.dart';
 class RightWidget extends StatelessWidget {
   RightWidget({
     Key? key,
-    required this.formKey,
-    required this.ctrl,
+  
     required this.profile,
+  this.ctrl,
   }) : super(key: key);
-
-  final GlobalKey formKey;
+ 
+  final TourController? ctrl;
   final bool profile;
-  TourController? ctrl;
+ 
 
   @override
   Widget build(BuildContext context) {
     return CustomTourInformationForm(
-        ctrl: ctrl, formKey: formKey, profile: profile);
+      ctrl: ctrl,
+          profile: profile);
   }
 }

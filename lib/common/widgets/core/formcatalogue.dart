@@ -11,7 +11,8 @@ class FormCatalogueWidget extends StatelessWidget {
       required this.data,
       this.hintText = "Choose a Option",
       required this.onChanged,
-      required this.onSaved})
+      required this.onSaved,
+      this.validator})
       : super(key: key);
 
   List<Map<String, dynamic>> data;
@@ -20,6 +21,7 @@ class FormCatalogueWidget extends StatelessWidget {
   void Function(String?) onChanged;
   final String? value;
   final bool disabled;
+  final String? Function(String?)? validator;
   @override
   Widget build(BuildContext context) {
     Rx<List<DropdownMenuItem<String>>>? items = Rx([]);
@@ -43,7 +45,7 @@ class FormCatalogueWidget extends StatelessWidget {
             "data",
             style: KTextSytle(context, 20, FontWeight.normal),
           ),
-          autovalidateMode: AutovalidateMode.onUserInteraction,
+          validator: validator,
           decoration: InputDecoration.collapsed(
             filled: false,
             hintText: hintText,

@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
+import 'package:get/get.dart'; 
 import '../../../../index.dart';
 import '../index.dart';
 
-void moveDestinationFunction(String key, BuildContext context) {
-  if (!globalctx.Keys.contains(key)) {
-    globalctx.Keys.add(key);
+void moveDestinationFunction(String destination, BuildContext context) {
+  if (!globalctx.destinations.contains(destination)) {
+    globalctx.destinations.add(destination);
     globalctx.destinationDragData.value.add(Obx(() {
-      return globalctx.Keys.contains(key)
+      return globalctx.destinations.contains(destination)
           ? Row(
               children: [
-                DestinationOptionWidget(destination: key),
-                !globalctx.promoted.contains(key)
+                DestinationOptionWidget(destination: destination),
+                !globalctx.promoted.contains(destination)
                     ? GestureDetector(
                         onTap: () {
-                          if (globalctx.Keys.contains(key)) {
-                            var index = globalctx.Keys.indexWhere(
-                                (element) => element == key);
-                            globalctx.Keys.removeAt(index);
+                          if (globalctx.destinations.contains(destination)) {
+                            var index = globalctx.destinations.indexWhere(
+                                (element) => element == destination);
+                            globalctx.destinations.removeAt(index);
                             globalctx.destinationDragData.value.removeAt(index);
                           }
                         },
@@ -27,11 +26,11 @@ void moveDestinationFunction(String key, BuildContext context) {
                       )
                     : GestureDetector(
                         onTap: () {
-                          if (globalctx.Keys.contains(key)) {
-                            globalctx.promoted.remove(key);
-                            var index = globalctx.Keys.indexWhere(
-                                (element) => element == key);
-                            globalctx.Keys.removeAt(index);
+                          if (globalctx.destinations.contains(destination)) {
+                            globalctx.promoted.remove(destination);
+                            var index = globalctx.destinations.indexWhere(
+                                (element) => element == destination);
+                            globalctx.destinations.removeAt(index);
                             globalctx.destinationDragData.value.removeAt(index);
                           }
                         },

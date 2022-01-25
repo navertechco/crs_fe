@@ -15,6 +15,8 @@ class RoundedFormDropdown extends StatelessWidget {
   void Function(String?) onSaved;
   void Function(String?) onChanged;
   final bool disabled;
+  final String? Function(String?)? validator;
+
   RoundedFormDropdown(
       {Key? key,
       required this.data,
@@ -29,7 +31,8 @@ class RoundedFormDropdown extends StatelessWidget {
       this.password = false,
       this.value = "9999",
       this.disabled = false,
-      required this.onChanged})
+      required this.onChanged,
+      this.validator})
       : super(key: key);
 
   bool password;
@@ -42,6 +45,7 @@ class RoundedFormDropdown extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.grey, borderRadius: BorderRadius.circular(50)),
       child: FormCatalogueWidget(
+          validator:validator,
           disabled: disabled,
           value: value,
           onChanged: onChanged,

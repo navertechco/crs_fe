@@ -1,25 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../index.dart';
 import 'widgets/index.dart';
-
 import 'index.dart';
+import '../../index.dart';
 
 class CustomerPage extends GetView<CustomerController> {
   const CustomerPage({Key? key}) : super(key: key);
 
-  Widget _buildView(BuildContext? _context) {
-    return ContentLayoutWidget(
-        background: "assets/custom/img/customer.png",
-        child: const CustomerWidget(),
-        text: "");
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _buildView(context),
+      body: _buildCustomerFormPage(context),
     );
   }
+}
+
+GetBuilder<CustomerController> _buildCustomerFormPage(
+  BuildContext context,
+) {
+  return GetBuilder<CustomerController>(
+    id: 'Customer_form_page',
+    builder: (controller) => Stack(
+      children: [
+        ContentLayoutWidget(
+            background: "assets/custom/img/customer.png",
+            child: CustomerFormPage(ctrl: controller),
+            text: "              "),
+      ],
+    ),
+  );
 }

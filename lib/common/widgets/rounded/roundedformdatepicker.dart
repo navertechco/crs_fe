@@ -13,6 +13,7 @@ class RoundedFormDatepicker extends StatelessWidget {
   final String hintText;
   void Function(DateTime?)? onChanged;
   void Function(DateTime?)? onSaved;
+  String? Function(DateTime?)? validator;
   DateTime? initialValue;
   RoundedFormDatepicker(
       {Key? key,
@@ -24,6 +25,7 @@ class RoundedFormDatepicker extends StatelessWidget {
       this.height = 0.05,
       this.onChanged,
       this.onSaved,
+      this.validator,
       this.initialValue})
       : super(key: key);
 
@@ -36,6 +38,7 @@ class RoundedFormDatepicker extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.grey, borderRadius: BorderRadius.circular(50)),
       child: DateTimeField(
+        validator:validator,
         decoration: InputDecoration.collapsed(hintText: hintText),
         format: format,
         onChanged: onChanged,

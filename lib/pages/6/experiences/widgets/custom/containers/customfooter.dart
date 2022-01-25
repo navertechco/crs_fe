@@ -35,6 +35,7 @@ class CustomFooterWidget extends StatelessWidget {
               Get.toNamed("/Resume");
             },
             onPrevious: () {
+               globalctxReset();
               Get.back();
             },
             width: 0.45),

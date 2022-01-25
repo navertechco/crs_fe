@@ -1,111 +1,148 @@
 import 'package:flutter/material.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 import 'package:get/get.dart';
+import 'package:sweetalert/sweetalert.dart';
 
 import '../../../index.dart';
 
 class CustomTourInformationForm extends StatelessWidget {
-  const CustomTourInformationForm(
-      {Key? key, this.formKey, this.profile, this.ctrl})
+  CustomTourInformationForm({Key? key, this.profile, this.ctrl})
       : super(key: key);
-  final formKey;
+
   final bool? profile;
   final TourController? ctrl;
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    var state = ctrl!.state;
     var tourdata = getContext("tour");
     var tour = getValue(tourdata, "tour");
     var readonly = validateData(tour);
     var destinationCountry = processCatalog("destination_country");
     var purpose = processCatalog("purpose");
     var accomodationType = processCatalog("budget");
-    return Padding(
-      padding: EdgeInsets.only(
-        top: MediaQuery.of(context).size.height * 0.18,
-        left: MediaQuery.of(context).size.width * 0.54,
-      ),
-      child: SizedBox(
-        child: Column(children: [
-          const CustomTitleWidget(
-            width: 0.3,
-            fontWeight: FontWeight.bold,
-            label: "  Agent 1",
-          ),
-          const CustomTitleWidget(
-              width: 0.225,
+
+    return Form(
+      key: _formKey,
+      child: Padding(
+        padding: EdgeInsets.only(
+          top: MediaQuery.of(context).size.height * 0.18,
+          left: MediaQuery.of(context).size.width * 0.54,
+        ),
+        child: SizedBox(
+          child: Column(children: [
+            const CustomTitleWidget(
+              width: 0.3,
               fontWeight: FontWeight.bold,
-              label: "  Tour information"),
-          CustomFormDropDownFieldWidget(
-            value: getValue(tour, "country", def: "9999"),
-            disabled: readonly,
-            onSaved: (value) {
-              state.country = value!;
-            },
-            onChanged: (value) {
-              state.country = value!;
-            },
-            label: "Destination Country",
-            data: destinationCountry,
-          ),
-          CustomFormDropDownFieldWidget(
-            value: getValue(tour, "purpose", def: "9999"),
-            disabled: readonly,
-            onSaved: (value) {
-              state.purpose = value!;
-            },
-            onChanged: (value) {
-              state.purpose = value!;
-            },
-            label: "Purpose                        ",
-            data: purpose,
-          ),
-          CustomFormDropDownFieldWidget(
-            value: getValue(tour, "accomodation_type", def: "9999"),
-            disabled: readonly,
-            onSaved: (value) {
-              state.accomodation_type = value!;
-            },
-            onChanged: (value) {
-              state.accomodation_type = value!;
-            },
-            label: "Accomodation Type",
-            data: accomodationType,
-          ),
-          const CustomTitleWidget(
-              width: 0.2,
-              fontWeight: FontWeight.bold,
-              label: "  Date                              "),
-          CustomFormDateFieldWidget(
-              initialValue: getValue(tour, "arrival_date", def: DateTime.now()),
-              label: "Arrival Date               "),
-          CustomFormDateFieldWidget(
-              initialValue: getValue(tour, "departure_date", def: DateTime.now()),
-              label: "Departure Date       "),
-          CustomFormTextFieldWidget(
-              disabled: validateData(tour),
-              value: getValue(tour, "passengers", def: "0"),
-              onSaved: (value) {
-                state.passengers = value!;
-              },
-              keyboardType: TextInputType.number,
-              label: "Passengers                  ",
-              width: 0.20),
-          Padding(
-            padding: EdgeInsets.only(
-              top: MediaQuery.of(context).size.height * 0.2,
-              left: MediaQuery.of(context).size.width * 0.022,
+              label: "  Agent 1",
             ),
-            child: CustomKeypadWidget(
-                width: 0.265,
-                onPrevious: () {
-                  Get.back();
+            const CustomTitleWidget(
+                width: 0.225,
+                fontWeight: FontWeight.bold,
+                label: "  Tour information"),
+            CustomFormDropDownFieldWidget(
+              value: getValue(tour, "country", def: "1"),
+              disabled: readonly,
+              validator: CustomRequiredValidator(
+                  errorText: "country is required ", ctx: context),
+              onSaved: (value) {
+                ctrl!.state.country = value!;
+              },
+              onChanged: (value) {
+                ctrl!.state.country = value!;
+              },
+              label: "Destination Country",
+              data: destinationCountry,
+            ),
+            CustomFormDropDownFieldWidget(
+              validator: CustomRequiredValidator(
+                  errorText: "Purpose is required ", ctx: context),
+              value: getValue(tour, "purpose", def: "9999"),
+              disabled: readonly,
+              onSaved: (value) {
+                ctrl!.state.purpose = value!;
+              },
+              onChanged: (value) {
+                ctrl!.state.purpose = value!;
+              },
+              label: "Purpose                        ",
+              data: purpose,
+            ),
+            CustomFormDropDownFieldWidget(
+              value: getValue(tour, "accomodation_type", def: "9999"),
+              disabled: readonly,
+              onSaved: (value) {
+                ctrl!.state.accomodation_type = value!;
+              },
+              onChanged: (value) {
+                ctrl!.state.accomodation_type = value!;
+              },
+              validator: CustomRequiredValidator(
+                  errorText: "Accomodation type is required ", ctx: context),
+              label: "Accomodation Type",
+              data: accomodationType,
+            ),
+            const CustomTitleWidget(
+                width: 0.2,
+                fontWeight: FontWeight.bold,
+                label: "  Date                              "),
+            CustomFormDateFieldWidget(
+              initialValue: getValue(tour, "arrival_date", def: null),
+              validator: (date) {
+                CustomDatetimeRequiredValidator(date, context: context, errorText:"Arrival Text is Required");
+              },
+              label: "Arrival Date               ",
+              onSaved: (value) {
+                ctrl!.state.arrivalDate = value!;
+              },
+              onChanged: (value) {
+                ctrl!.state.arrivalDate = value!;
+              },
+            ),
+            CustomFormDateFieldWidget(
+              initialValue: getValue(tour, "departure_date", def: null),
+              validator: (date) {
+                CustomDatetimeRequiredValidator(date, context: context, errorText:"Departure Text is Required");
+              },
+              label: "Departure Date       ",
+              onSaved: (value) {
+                ctrl!.state.departureDate = value!;
+              },
+              onChanged: (value) {
+                ctrl!.state.departureDate = value!;
+              },
+            ),
+            CustomFormTextFieldWidget(
+                disabled: validateData(tour),
+                value: getValue(tour, "passengers", def: "0"),
+                validator: CustomRequiredValidator(
+                    errorText: "Passengers is required ", ctx: context),
+                onSaved: (value) {
+                  ctrl!.state.passengers = value!;
                 },
-                onNext: () {
-                  ctrl!.saveTour();
-                }),
-          ),
-        ]),
+                keyboardType: TextInputType.number,
+                label: "Passengers                  ",
+                width: 0.20),
+            Padding(
+              padding: EdgeInsets.only(
+                top: MediaQuery.of(context).size.height * 0.2,
+                left: MediaQuery.of(context).size.width * 0.022,
+              ),
+              child: CustomKeypadWidget(
+                  width: 0.265,
+                  onPrevious: () {
+                    globalctxReset();
+                    Get.back();
+                  },
+                  onNext: () {
+                    if (_formKey.currentState!.validate()) {
+                      _formKey.currentState!.save();
+                      ctrl!.saveTour();
+                    }
+                  }),
+            ),
+          ]),
+        ),
       ),
     );
   }

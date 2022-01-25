@@ -5,8 +5,8 @@ class ExperienceOptionWidget extends StatelessWidget {
   const ExperienceOptionWidget(
       {Key? key,
       required this.experience,
-      this.height = 100,
-      this.width = 100,
+      this.height = 80,
+      this.width = 250,
       this.suggested = false})
       : super(key: key);
   final String experience;
@@ -20,7 +20,7 @@ class ExperienceOptionWidget extends StatelessWidget {
         height: height,
         child: GoldBorderWidget(
             child: SwitcherWidget(
-                suggested:suggested,
+                suggested: suggested,
                 experience: experience,
                 firstchild: FrontOptionWidget(experience: experience),
                 seccondchild: RearOptionWidget(experience: experience))));

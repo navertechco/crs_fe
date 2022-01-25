@@ -18,16 +18,24 @@ class Context with PropertyChangeNotifier<String> {
   Rx<List<Widget>> destinationDragData = Rx(<Widget>[]);
   Rx<List<Widget>> experienceDragData = Rx(<Widget>[]);
   RxBool value = true.obs;
+  RxList destinations = [].obs;
+  RxList experiences = [].obs;
   RxList<dynamic> destinationlist = [].obs;
   RxList<dynamic> experiencelist = [].obs;
-  RxList Keys = [].obs;
   RxList promoted = [].obs;
   RxList selected = [].obs;
   RxList suggested = [].obs;
+  RxMap<String, dynamic> memory = {
+    "tour": {}.obs,
+    "customer": {}.obs,
+    "destinations": {}.obs,
+    "experiences": {}.obs,
+    "days": {}.obs
+  }.obs;
   Map<String, GlobalKey<State<StatefulWidget>>> keys = {};
   Context() {
     load("data");
-    load("experiences");
+    load("destinations");
     load("countries");
   }
 

@@ -8,9 +8,9 @@ class DGalleryPage extends GetView<DGalleryController> {
   DGalleryPage({Key? key, this.destination}) : super(key: key);
 
   Widget _buildView(BuildContext? _context) {
-    var galleryData = [].obs;
+    Rx<Map> galleryData = Rx({});
 
-    getExperiences(destination, "",null,null);
+    getExperiences(destination, "", null, null,null);
 
     galleryData.value = getContext('Experiences');
 

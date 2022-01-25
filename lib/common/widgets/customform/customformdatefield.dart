@@ -12,6 +12,7 @@ class CustomFormDateFieldWidget extends StatelessWidget {
       this.height = 0.05,
       this.onChanged,
       this.onSaved,
+      this.validator,
       this.initialValue})
       : super(key: key);
   final String label;
@@ -20,6 +21,7 @@ class CustomFormDateFieldWidget extends StatelessWidget {
   final double height;
   void Function(DateTime?)? onChanged;
   void Function(DateTime?)? onSaved;
+  String? Function(DateTime?)? validator;
   DateTime? initialValue;
   @override
   Widget build(BuildContext context) {
@@ -30,6 +32,7 @@ class CustomFormDateFieldWidget extends StatelessWidget {
           CustomFormLabelWidget(label: label, fontWeight: FontWeight.normal),
           SizedBox(width: MediaQuery.of(context).size.width * 0.01),
           RoundedFormDatepicker(
+            validator:validator,
               onChanged: onChanged,
               onSaved: onSaved,
               initialValue: initialValue,

@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';  
+import 'package:get/get.dart';
 import '../index.dart';
 import 'index.dart';
 
 /// hello
-class CustomerWidget extends GetView<CustomerController> {
-  const CustomerWidget({Key? key}) : super(key: key);
+class CustomerFormPage extends GetView<CustomerController> {
+  final CustomerController? ctrl;
+  const CustomerFormPage({Key? key, this.ctrl}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: const CustomCustomerDataForm(),
+      child: CustomCustomerDataForm(ctrl: ctrl),
     );
   }
 }

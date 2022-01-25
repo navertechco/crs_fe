@@ -15,18 +15,18 @@ class DraggableTargetDestinationWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      return globalctx.Keys.contains(destination)
+      return globalctx.destinations.contains(destination)
           ? Row(
               children: [
                 DestinationOptionWidget(destination: destination),
                 !globalctx.promoted.contains(destination)
                     ? GestureDetector(
                         onTap: () {
-                          if (globalctx.Keys.contains(destination)) {
+                          if (globalctx.destinations.contains(destination)) {
                             globalctx.promoted.remove(destination);
-                            var index = globalctx.Keys.indexWhere(
+                            var index = globalctx.destinations.indexWhere(
                                 (element) => element == destination);
-                            globalctx.Keys.removeAt(index);
+                            globalctx.destinations.removeAt(index);
                             globalctx.destinationDragData.value
                                 .removeAt(index);
                           }
@@ -38,10 +38,10 @@ class DraggableTargetDestinationWidget extends StatelessWidget {
                       )
                     : GestureDetector(
                         onTap: () {
-                          if (globalctx.Keys.contains(destination)) {
-                            var index = globalctx.Keys.indexWhere(
+                          if (globalctx.destinations.contains(destination)) {
+                            var index = globalctx.destinations.indexWhere(
                                 (element) => element == destination);
-                            globalctx.Keys.removeAt(index);
+                            globalctx.destinations.removeAt(index);
                             globalctx.destinationDragData.value
                                 .removeAt(index);
                           }

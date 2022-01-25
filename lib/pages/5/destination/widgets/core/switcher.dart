@@ -51,15 +51,15 @@ class SwitcherWidget extends StatelessWidget {
       return GestureDetector(
         onTap: () {
            
-          if (globalctx.Keys.contains(destination)) {
+          if (globalctx.destinations.contains(destination)) {
             showDialog(
                 context: context,
                 builder: (context) {
                   return DestinationDetailPage(destination: destination);
                 });
           }
-          if (!globalctx.Keys.contains(destination)) {
-            globalctx.Keys.add(destination);
+          if (!globalctx.destinations.contains(destination)) {
+            globalctx.destinations.add(destination);
             globalctx.destinationDragData.value.add(DraggableTargetDestinationWidget(destination: destination));
           }
         },

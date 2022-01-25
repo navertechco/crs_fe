@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart'; 
+import 'package:get/get.dart';
 import '../../../../../index.dart';
 import '../index.dart';
 import '../../index.dart';
@@ -22,7 +22,9 @@ class DestinationDetailWidget extends GetView<DestinationDetailController> {
               nextlabel: "Next >",
               prevlabel: " < Previous",
               onNext: () {
-                globalctx.promoted.add(destination);
+                if (!globalctx.promoted.contains(destination)) {
+                  globalctx.promoted.add(destination);
+                }
                 Get.close(1);
               },
               onPrevious: () {
@@ -34,5 +36,3 @@ class DestinationDetailWidget extends GetView<DestinationDetailController> {
     );
   }
 }
-
-

@@ -17,7 +17,7 @@ class ForgotController extends GetxController {
             : 'Intenta con otro email',
         style: success ? SweetAlertStyle.success : SweetAlertStyle.error,
         onPress: (bool isConfirm) {
-      Get.toNamed("/Home");
+      Get.toNamed("/Signin");
       return false;
     });
   }

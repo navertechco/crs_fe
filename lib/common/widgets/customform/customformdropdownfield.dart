@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 
 import '../index.dart';
 
@@ -14,7 +15,8 @@ class CustomFormDropDownFieldWidget extends StatelessWidget {
       this.height = 0.05,
       this.value = "9999",
       required this.onSaved,
-      required this.onChanged})
+      required this.onChanged,
+      this.validator})
       : super(key: key);
 
   final String label;
@@ -26,6 +28,7 @@ class CustomFormDropDownFieldWidget extends StatelessWidget {
   void Function(String?) onChanged;
   final String value;
   final bool disabled;
+  final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
@@ -35,16 +38,16 @@ class CustomFormDropDownFieldWidget extends StatelessWidget {
         children: [
           CustomFormLabelWidget(label: label, fontWeight: FontWeight.normal),
           RoundedFormDropdown(
-            onChanged: onChanged,
-            width: width,
-            height: height,
-            data: data,
-            hintText: hintText,
-            label: label,
-            onSaved: onSaved,
-            value: value,
-            disabled: disabled,
-          )
+              onChanged: onChanged,
+              width: width,
+              height: height,
+              data: data,
+              hintText: hintText,
+              label: label,
+              onSaved: onSaved,
+              value: value,
+              disabled: disabled,
+              validator: validator)
         ],
       ),
     );
