@@ -293,7 +293,7 @@ Function getParam = (key) {
 };
 
 // ignore: prefer_function_declarations_over_variables
-Function cityData = (citylist, cities) {
+Function cityData = (Rx<List<Map<String, dynamic>>> citylist, cities) {
   var index = 0;
   citylist.value = [];
 
