@@ -1,5 +1,5 @@
 // ignore_for_file: must_be_immutable
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 
 import '../../index.dart';
@@ -16,6 +16,7 @@ class RoundedFormMultiDropdown extends StatelessWidget {
   final void Function(List<Map<String, dynamic>>?) onChanged;
   final List<Map<String, dynamic>> data;
   final List<Map<String, dynamic>>? value;
+  final String? Function(List<Map<String, dynamic>>?)? validator;
 
   RoundedFormMultiDropdown(
       {Key? key,
@@ -30,7 +31,8 @@ class RoundedFormMultiDropdown extends StatelessWidget {
       required this.onSaved,
       this.password = false,
       this.value = const [],
-      required this.onChanged})
+      required this.onChanged,
+      this.validator})
       : super(key: key);
 
   bool password;
@@ -40,9 +42,11 @@ class RoundedFormMultiDropdown extends StatelessWidget {
       width: MediaQuery.of(context).size.width * width,
       padding: EdgeInsets.only(left: left, top: top),
       child: MultiSelectDialogField(
+        validator:validator,
         initialValue: value,
         itemsTextStyle: KTextSytle(context, fontSize, FontWeight.normal),
-        selectedItemsTextStyle: KTextSytle(context, fontSize, FontWeight.normal),
+        selectedItemsTextStyle:
+            KTextSytle(context, fontSize, FontWeight.normal),
         searchTextStyle: KTextSytle(context, fontSize, FontWeight.normal),
         searchHintStyle: KTextSytle(context, fontSize, FontWeight.normal),
         title: Text(

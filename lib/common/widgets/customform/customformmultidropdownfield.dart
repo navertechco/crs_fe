@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:naver_crs/common/constants.dart';
 
 import '../index.dart';
 
@@ -11,8 +12,9 @@ class CustomFormMultiDropDownFieldWidget extends StatelessWidget {
     required this.value,
     required this.onSaved,
     required this.onChanged,
+    this.validator,
   }) : super(key: key);
-
+  final String? Function(List<Map<String, dynamic>>?)? validator;
   final List<Map<String, dynamic>>? value;
   final Function(List<Map<String, dynamic>>?) onSaved;
   final Function(List<Map<String, dynamic>>?) onChanged;
@@ -28,7 +30,8 @@ class CustomFormMultiDropDownFieldWidget extends StatelessWidget {
           CustomFormLabelWidget(label: label, fontWeight: FontWeight.normal),
           // SizedBox(width: MediaQuery.of(context).size.width * 0.003),
           RoundedFormMultiDropdown(
-            value:value,
+            validator: validator,
+            value: value,
             data: data,
             hintText: hintText,
             label: label,

@@ -11,7 +11,7 @@ class DestinationDetailPage extends GetView<DestinationDetailController> {
   Widget _buildView(BuildContext? _context) {
     return ContentLayoutWidget(
         background: "assets/custom/img/destination.png",
-        child: DestinationDetailWidget(destination: destination),
+        child: DestinationDetailWidget(destination: destination, ctrl:Get.put(DestinationDetailController())),
         text: "<   DestinationDetail");
   }
 

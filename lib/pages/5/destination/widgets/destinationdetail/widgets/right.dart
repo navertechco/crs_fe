@@ -6,10 +6,13 @@ class RightWidget extends StatelessWidget {
   const RightWidget({
     Key? key,
     required this.destination,
+    required this.ctrl,
+    required this.formKey,
   }) : super(key: key);
 
   final destination;
-
+  final DestinationDetailController ctrl;
+  final GlobalKey<FormState> formKey;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -21,7 +24,8 @@ class RightWidget extends StatelessWidget {
         width: MediaQuery.of(context).size.width * 0.45,
         // color: Colors.red[50],
         child: SingleChildScrollView(
-          child: CustomStarDestinationForm(destination: destination),
+          child:
+              CustomStarDestinationForm(destination: destination, ctrl: ctrl, formKey:formKey),
         ),
       ),
     );

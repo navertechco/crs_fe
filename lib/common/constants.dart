@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names, prefer_function_declarations_over_variables
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/shims/dart_ui_real.dart';
@@ -12,7 +14,6 @@ import 'index.dart';
  * DATOS DE SERVIDOR
  */
 
-// ignore: prefer_function_declarations_over_variables
 Function removeFromArray = (array, item) {
   if (array.contains(item)) {
     var index = array.indexOf(item);
@@ -27,15 +28,12 @@ Function removeFromArray = (array, item) {
     }
   }
 };
-// ignore: prefer_function_declarations_over_variables
+
 Function removeExperience = (experience) {
   removeFromArray(globalctx.selected, experience);
   removeFromArray(globalctx.promoted, experience);
 };
 
-// ignore: prefer_function_declarations_over_variables
-
-// ignore: constant_identifier_names, prefer_function_declarations_over_variables, non_constant_identifier_names
 var KTextSytle = (context, fontSize, fontWeight) => GoogleFonts.poppins(
         textStyle: TextStyle(
       color: Color.fromARGB(255, 0, 0, 0),
@@ -165,7 +163,6 @@ final maxValidator = MultiValidator(
   ],
 );
 
-// ignore: prefer_function_declarations_over_variables
 final isMobileDevice = () {
   if ((defaultTargetPlatform == TargetPlatform.iOS) ||
       (defaultTargetPlatform == TargetPlatform.android)) {
@@ -175,7 +172,6 @@ final isMobileDevice = () {
   return false;
 };
 
-// ignore: prefer_function_declarations_over_variables
 final chunkMap =
     (Map<String, dynamic> data, int portion, List<Map<String, dynamic>> list) {
   List<List<Map<String, dynamic>>> chunks = [];
@@ -226,7 +222,6 @@ Future<bool> getCatalog(
   }
 }
 
-// ignore: prefer_function_declarations_over_variables
 Function processCatalog = (name) {
   var ctxCatalogs = getContext("catalogs");
 
@@ -250,7 +245,6 @@ Function processCatalog = (name) {
   return <Map<String, dynamic>>[];
 };
 
-// ignore: prefer_function_declarations_over_variables
 Function getValue = (data, key, {def}) {
   if (data != null && data.length > 0) {
     if (data[key] != null) {
@@ -261,12 +255,10 @@ Function getValue = (data, key, {def}) {
   return def;
 };
 
-// ignore: prefer_function_declarations_over_variables
 Function validateData = (data) {
   return data != null ? data.length > 0 : false;
 };
 
-// ignore: prefer_function_declarations_over_variables
 var getData = (data, sub, key) {
   // ignore: invalid_use_of_protected_member
   return data != null && data[sub] != null
@@ -275,7 +267,6 @@ var getData = (data, sub, key) {
       : "9999";
 };
 
-// ignore: prefer_function_declarations_over_variables
 var getDataList = (data, sub, key) {
   // ignore: invalid_use_of_protected_member
   return data != null && data[sub] != null
@@ -284,7 +275,6 @@ var getDataList = (data, sub, key) {
       : <Map<String, dynamic>>[];
 };
 
-// ignore: prefer_function_declarations_over_variables
 Function getParam = (key) {
   var params = processCatalog("params");
   var child =
@@ -292,7 +282,6 @@ Function getParam = (key) {
   return child;
 };
 
-// ignore: prefer_function_declarations_over_variables
 Function cityData = (Rx<List<Map<String, dynamic>>> citylist, cities) {
   var index = 0;
   citylist.value = [];
@@ -306,7 +295,6 @@ Function cityData = (Rx<List<Map<String, dynamic>>> citylist, cities) {
   }
 };
 
-// ignore: prefer_function_declarations_over_variables
 var getExperiences = (String destination,
     String experience,
     List<int>? keyActivities,
@@ -331,7 +319,6 @@ var getExperiences = (String destination,
   }
 };
 
-// ignore: prefer_function_declarations_over_variables
 var globalctxReset = () {
   globalctx.promoted.value = [];
   globalctx.selected.value = [];
@@ -378,7 +365,6 @@ class CustomRequiredValidator extends TextFieldValidator {
   }
 }
 
-// ignore: non_constant_identifier_names, prefer_function_declarations_over_variables
 var CustomDatetimeRequiredValidator =
     (DateTime? date, {BuildContext? context, required String errorText}) {
   if (date == null) {
@@ -390,4 +376,21 @@ var CustomDatetimeRequiredValidator =
       return true;
     });
   }
+};
+
+var CustomMultiDropdownRequiredValidator = (List<Map<String, dynamic>>? value,
+    {BuildContext? context, required String errorText}) {
+  if (value == null) {
+    SweetAlert.show(context,
+        title: errorText,
+        subtitle: 'error',
+        style: SweetAlertStyle.error, onPress: (bool isConfirm) {
+      Get.close(1);
+      return true;
+    });
+  }
+};
+
+Function setData = (data, key, value) {
+  data[key] = value;
 };
