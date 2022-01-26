@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:multi_select_flutter/util/multi_select_item.dart';
 import 'package:naver_crs/pages/5/destination/widgets/destinationdetail/controller.dart';
 import '../../../../index.dart';
 
@@ -129,11 +130,21 @@ class CustomStarDestinationForm extends StatelessWidget {
                         "keyActivities", Map<String, dynamic>()[{}]),
                     onSaved: (value) {
                       setFormValue(ctrl.state.memory, destination,
-                          "keyActivities", value);
+                          "keyActivities", null);
+                      setFormValue(
+                          ctrl.state.memory,
+                          destination,
+                          "keyActivities",
+                          value!.map((e) => e["description"]).toSet().toList());
                     },
                     onChanged: (value) {
                       setFormValue(ctrl.state.memory, destination,
-                          "keyActivities", value);
+                          "keyActivities", null);
+                      setFormValue(
+                          ctrl.state.memory,
+                          destination,
+                          "keyActivities",
+                          value!.map((e) => e["description"]).toSet().toList());
                     },
                     hintText: " ",
                     label: "Key Activities            ",

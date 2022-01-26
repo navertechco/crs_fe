@@ -120,7 +120,7 @@ flutter_intl:
 
  
 flutter_icons:
-  android: true
+  android: "icon"
   ios: false
   image_path_ios: "assets/custom/img/icon.png"
   image_path_android: "assets/custom/img/icon.png"

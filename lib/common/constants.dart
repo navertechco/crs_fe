@@ -212,12 +212,9 @@ Future<bool> getCatalog(
     if (res['state'] == true) {
       setContext("catalogs", res['data']);
       return true;
-    } else {
-      Get.back();
     }
     return false;
   } catch (e) {
-    Get.back();
     return false;
   }
 }

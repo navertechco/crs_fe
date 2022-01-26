@@ -9,22 +9,15 @@ class LoadingPage extends GetView<LoadingController> {
 
   // 内容页
   Widget _buildView() {
-    RxBool catalogs = false.obs;
-    getCatalog(["ALL"]).then((value) => {
-      
-      catalogs.value = value 
-     
-      
-      });
-     return Obx(() {
-      while (!catalogs.value) {
-       
+    var catalogs = Rx(getContext("catalogs"));
+    getCatalog(["ALL"]);
+    return Obx(() {
+      while (catalogs.value==null) {
         return CustomProgressIndicatorWidget();
       }
       return LoadingWidget(
         state: controller.state,
       );
-      
     });
   }
 

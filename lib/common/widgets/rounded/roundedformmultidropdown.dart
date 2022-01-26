@@ -42,7 +42,8 @@ class RoundedFormMultiDropdown extends StatelessWidget {
       width: MediaQuery.of(context).size.width * width,
       padding: EdgeInsets.only(left: left, top: top),
       child: MultiSelectDialogField(
-        validator:validator,
+        searchable: true,
+        validator: validator,
         initialValue: value,
         itemsTextStyle: KTextSytle(context, fontSize, FontWeight.normal),
         selectedItemsTextStyle:
@@ -60,10 +61,11 @@ class RoundedFormMultiDropdown extends StatelessWidget {
         ),
         decoration: BoxDecoration(
             color: Colors.grey, borderRadius: BorderRadius.circular(50)),
-        items: data.map((e) => MultiSelectItem(e, e["description"]!)).toList(),
+        items: data.map((e) => MultiSelectItem(e, e["description"])).toList(),
         listType: MultiSelectListType.LIST,
-        onConfirm: onSaved,
+        onConfirm: onChanged,
         onSelectionChanged: onChanged,
+        onSaved: onSaved,
       ),
     );
   }

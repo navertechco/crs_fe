@@ -34,7 +34,8 @@ class Context with PropertyChangeNotifier<String> {
   }.obs;
   Map<String, GlobalKey<State<StatefulWidget>>> keys = {};
   Context() {
-    load("data"); 
+    load("catalogs");
+    load("data");
     load("countries");
   }
 
