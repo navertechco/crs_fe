@@ -18,7 +18,7 @@ class DestinationDetailState {
     keyActivities = Rx(getValue(localDestination.value, "key_Activities",
         def: <Map<String, dynamic>>[]));
   }
-
+  var memory = {}.obs;
   Rx<String> destinationOption = "9999".obs;
   Rx<String> explorationDay = "9999".obs;
   Rx<String> explorationMode = "9999".obs;

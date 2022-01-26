@@ -345,7 +345,7 @@ class CustomRequiredValidator extends TextFieldValidator {
 
   @override
   bool isValid(String? value) {
-    return value!.isNotEmpty && value != "9999" && value != "0";
+    return value != null && value != "9999" && value != "0";
   }
 
   @override
@@ -393,4 +393,21 @@ var CustomMultiDropdownRequiredValidator = (List<Map<String, dynamic>>? value,
 
 Function setData = (data, key, value) {
   data[key] = value;
+};
+
+Function getFormValue = (data, formKey, key, def) {
+  if (data.value[formKey] != null) {
+    return data.value[formKey].value[key];
+  }
+  return def;
+};
+
+Function setFormValue = (data, formKey, key, value) {
+  data ??= {}.obs;
+
+  if (data.value[formKey] == null) {
+    data.value[formKey] = {}.obs;
+  }
+
+  data.value[formKey].value[key] = value;
 };

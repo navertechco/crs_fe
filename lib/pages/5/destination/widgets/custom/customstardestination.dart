@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_function_declarations_over_variables, unused_local_variable
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/pages/5/destination/widgets/destinationdetail/controller.dart';
@@ -41,12 +43,15 @@ class CustomStarDestinationForm extends StatelessWidget {
                     validator: CustomRequiredValidator(
                         errorText: "Exploration Days is required ",
                         ctx: context),
-                    value: ctrl.state.explorationDay.value,
+                    value: getFormValue(ctrl.state.memory, destination,
+                        "explorationDay", "9999"),
                     onSaved: (value) {
-                      ctrl.state.explorationDay.value = value!;
+                      setFormValue(ctrl.state.memory, destination,
+                          "explorationDay", value);
                     },
                     onChanged: (value) {
-                      ctrl.state.explorationDay.value = value!;
+                      setFormValue(ctrl.state.memory, destination,
+                          "explorationDay", value);
                     },
                     label: "Exploration Days     ",
                     data: processCatalog("exploration_days"),
@@ -60,12 +65,15 @@ class CustomStarDestinationForm extends StatelessWidget {
                           validator: CustomRequiredValidator(
                               errorText: "Exploration mode is required ",
                               ctx: context),
-                          value: ctrl.state.explorationMode.value,
+                          value: getFormValue(ctrl.state.memory, destination,
+                              "explorationMode", "9999"),
                           onSaved: (value) {
-                            ctrl.state.explorationMode.value = value!;
+                            setFormValue(ctrl.state.memory, destination,
+                                "explorationMode", value);
                           },
                           onChanged: (value) {
-                            ctrl.state.explorationMode.value = value!;
+                            setFormValue(ctrl.state.memory, destination,
+                                "explorationMode", value);
                           },
                           label: "Exploration Mode   ",
                           data: processCatalog("exploration_mode"),
@@ -79,12 +87,15 @@ class CustomStarDestinationForm extends StatelessWidget {
                     validator: CustomRequiredValidator(
                         errorText: "Destination option is required ",
                         ctx: context),
-                    value: ctrl.state.destinationOption.value,
+                    value: getFormValue(ctrl.state.memory, destination,
+                        "destinationOption", "9999"),
                     onSaved: (value) {
-                      ctrl.state.destinationOption.value = value!;
+                      setFormValue(ctrl.state.memory, destination,
+                          "destinationOption", value);
                     },
                     onChanged: (value) {
-                      ctrl.state.destinationOption.value = value!;
+                      setFormValue(ctrl.state.memory, destination,
+                          "destinationOption", value);
                     },
                     label: "Destination Option",
                     data: processCatalog("destination_option"),
@@ -94,12 +105,15 @@ class CustomStarDestinationForm extends StatelessWidget {
                   return CustomFormDropDownFieldWidget(
                     validator: CustomRequiredValidator(
                         errorText: "Travel Rhythm is required ", ctx: context),
-                    value: ctrl.state.travelRhythm.value,
+                    value: getFormValue(
+                        ctrl.state.memory, destination, "travelRhythm", "9999"),
                     onSaved: (value) {
-                      ctrl.state.travelRhythm.value = value!;
+                      setFormValue(ctrl.state.memory, destination,
+                          "travelRhythm", value);
                     },
                     onChanged: (value) {
-                      ctrl.state.travelRhythm.value = value!;
+                      setFormValue(ctrl.state.memory, destination,
+                          "travelRhythm", value);
                     },
                     label: "Travel Rhythm         ",
                     data: processCatalog("travel_rhythm"),
@@ -111,13 +125,15 @@ class CustomStarDestinationForm extends StatelessWidget {
                         value,
                         errorText: "Key Activities are required ",
                         context: context),
-                    value: ctrl.state.keyActivities.value,
+                    value: getFormValue(ctrl.state.memory, destination,
+                        "keyActivities", Map<String, dynamic>()[{}]),
                     onSaved: (value) {
-                      print(value);
-                      ctrl.state.keyActivities.value = value!;
+                      setFormValue(ctrl.state.memory, destination,
+                          "keyActivities", value);
                     },
                     onChanged: (value) {
-                      ctrl.state.keyActivities.value = value!;
+                      setFormValue(ctrl.state.memory, destination,
+                          "keyActivities", value);
                     },
                     hintText: " ",
                     label: "Key Activities            ",
