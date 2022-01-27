@@ -23,7 +23,7 @@ class CustomStarDestinationForm extends StatelessWidget {
     var ctx = globalctx.context.value;
     var destinationData = getParam("DESTINATION_DATA");
     Map<dynamic, dynamic> destinations = getValue(destinationData, "value");
-
+    List<String> multiDefault = [];
     return Form(
       key: formKey,
       child: Column(
@@ -127,7 +127,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                         errorText: "Key Activities are required ",
                         context: context),
                     value: getFormValue(ctrl.state.memory, destination,
-                        "keyActivities", Map<String, dynamic>()[{}]),
+                        "keyActivities", multiDefault),
                     onSaved: (value) {
                       setFormValue(ctrl.state.memory, destination,
                           "keyActivities", null);
@@ -140,11 +140,8 @@ class CustomStarDestinationForm extends StatelessWidget {
                     onChanged: (value) {
                       setFormValue(ctrl.state.memory, destination,
                           "keyActivities", null);
-                      setFormValue(
-                          ctrl.state.memory,
-                          destination,
-                          "keyActivities",
-                          value!.map((e) => e["description"]).toSet().toList());
+                      setFormValue(ctrl.state.memory, destination,
+                          "keyActivities", value);
                     },
                     hintText: " ",
                     label: "Key Activities            ",
