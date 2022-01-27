@@ -40,13 +40,18 @@ class RoundedFormMultiDropdown extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.width * width,
       padding: EdgeInsets.only(left: left, top: top),
-      child: DropDownMultiSelect(
-        onChanged: onChanged,
-        options: data.map((e) => e["description"].toString()).toList(),
-        selectedValues: value,
-        whenEmpty: 'Select Something',
+      child: Container(
+        height: MediaQuery.of(context).size.height * 0.06,
+        decoration: BoxDecoration(
+            color: Colors.grey, borderRadius: BorderRadius.circular(50)),
+        child: DropDownMultiSelect(
+            onChanged: onChanged,
+            options: data.map((e) => e["description"].toString()).toList(),
+            selectedValues: value,
+            whenEmpty: 'Choose a Option',
+            decoration: InputDecoration.collapsed(
+                fillColor: Colors.grey, hintText: hintText)),
       ),
-
     );
   }
 }
