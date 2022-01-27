@@ -38,7 +38,7 @@ class RoundedFormDatepicker extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.grey, borderRadius: BorderRadius.circular(50)),
       child: DateTimeField(
-        validator:validator,
+        validator: validator,
         decoration: InputDecoration.collapsed(hintText: hintText),
         format: format,
         onChanged: onChanged,
@@ -52,11 +52,12 @@ class RoundedFormDatepicker extends StatelessWidget {
             lastDate: DateTime(2100),
           );
           if (date != null) {
-            final time = await showTimePicker(
-              context: context,
-              initialTime:
-                  TimeOfDay.fromDateTime(currentValue ?? DateTime.now()),
-            );
+            final time = TimeOfDay(hour: 12, minute: 00);
+            // final time = await showTimePicker(
+            //   context: context,
+            //   initialTime:
+            //       TimeOfDay.fromDateTime(currentValue ?? DateTime.now()),
+            // );
             return DateTimeField.combine(date, time);
           } else {
             return currentValue;

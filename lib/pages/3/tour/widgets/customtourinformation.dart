@@ -51,7 +51,7 @@ class CustomTourInformationForm extends StatelessWidget {
               onChanged: (value) {
                 ctrl!.state.country = value!;
               },
-              label: "Destination Country",
+              label: "Destination Country ",
               data: destinationCountry,
             ),
             CustomFormDropDownFieldWidget(
@@ -65,7 +65,7 @@ class CustomTourInformationForm extends StatelessWidget {
               onChanged: (value) {
                 ctrl!.state.purpose = value!;
               },
-              label: "Purpose                        ",
+              label: "Purpose                         ",
               data: purpose,
             ),
             CustomFormDropDownFieldWidget(
@@ -89,7 +89,8 @@ class CustomTourInformationForm extends StatelessWidget {
             CustomFormDateFieldWidget(
               initialValue: getValue(tour, "arrival_date", def: null),
               validator: (date) {
-                CustomDatetimeRequiredValidator(date, context: context, errorText:"Arrival Text is Required");
+                CustomDatetimeRequiredValidator(date,
+                    context: context, errorText: "Arrival Text is Required");
               },
               label: "Arrival Date               ",
               onSaved: (value) {
@@ -102,7 +103,8 @@ class CustomTourInformationForm extends StatelessWidget {
             CustomFormDateFieldWidget(
               initialValue: getValue(tour, "departure_date", def: null),
               validator: (date) {
-                CustomDatetimeRequiredValidator(date, context: context, errorText:"Departure Text is Required");
+                CustomDatetimeRequiredValidator(date,
+                    context: context, errorText: "Departure Text is Required");
               },
               label: "Departure Date       ",
               onSaved: (value) {
