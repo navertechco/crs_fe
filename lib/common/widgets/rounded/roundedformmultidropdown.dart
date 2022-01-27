@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:multiselect/multiselect.dart';
 
+import '../../index.dart';
+
 class RoundedFormMultiDropdown extends StatelessWidget {
   final double left;
   final double top;
@@ -49,6 +51,23 @@ class RoundedFormMultiDropdown extends StatelessWidget {
             options: data.map((e) => e["description"].toString()).toList(),
             selectedValues: value,
             whenEmpty: 'Choose a Option',
+            childBuilder: (value) {
+              return Padding(
+                padding: EdgeInsets.only(
+                    left: MediaQuery.of(context).size.width * 0.01,
+                    top: MediaQuery.of(context).size.height * 0.013),
+                child: Text(
+                    // ignore: unnecessary_null_comparison
+                    value != null
+                        ? value
+                            .toString()
+                            .replaceAll("[", "")
+                            .replaceAll("]", "")
+                        : "Choose a Option",
+                    style: KTextSytle(
+                        context, value == null ? 10 : 8, FontWeight.normal)),
+              );
+            },
             decoration: InputDecoration.collapsed(
                 fillColor: Colors.grey, hintText: hintText)),
       ),
