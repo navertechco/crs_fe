@@ -30,16 +30,23 @@ class CustomStarDestinationForm extends StatelessWidget {
     Rx<int> memoryDayLeft = Rx(globalctx.memory["days_left"].value);
     Rx<int> daysLeft = Rx(-memoryDayLeft.value + totalDays.value);
     Rx<int> explorationDay = Rx(int.parse(
-        getFormValue(ctrl.state.memory, destination, "explorationDay", "0")));
+        getFormValue(ctrl.state.memory, destination, "explorationDay", "1")));
 
     Rx<int> leftAccumulated = 0.obs;
+    if (globalctx.reset.value) {
+      for (var item in destinations.keys) {
+        ctrl.state.memory[item] = null;
+      }
+      globalctx.reset.value = false;
+    }
     for (var item in destinations.keys) {
       bool exists = ctrl.state.memory[item] != null && item != destination;
       if (exists) {
         leftAccumulated.value -= int.parse(
-            getFormValue(ctrl.state.memory, item, "explorationDay", "0"));
+            getFormValue(ctrl.state.memory, item, "explorationDay", "1"));
       }
     }
+
     print(globalctx.memory);
     return Form(
       key: formKey,
@@ -83,7 +90,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                         errorText: "Exploration Days is required ",
                         ctx: context),
                     value: getFormValue(
-                        ctrl.state.memory, destination, "explorationDay", "0"),
+                        ctrl.state.memory, destination, "explorationDay", "1"),
                     onSaved: (value) {
                       setFormValue(ctrl.state.memory, destination,
                           "explorationDay", value);
@@ -113,7 +120,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                                 "explorationMode", value);
                             globalctx.memory["days_left"].value -= int.parse(
                                 getFormValue(ctrl.state.memory, destination,
-                                    "explorationDay", "0"));
+                                    "explorationDay", "1"));
                           },
                           onChanged: (value) {
                             setFormValue(ctrl.state.memory, destination,

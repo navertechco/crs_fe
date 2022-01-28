@@ -324,13 +324,7 @@ var globalctxReset = () {
   globalctx.experiences.value = [];
   globalctx.destinationDragData.value = [];
   globalctx.experienceDragData.value = [];
-  // globalctx.memory = {
-  //   "tour": {}.obs,
-  //   "customer": {}.obs,
-  //   "destinations": {}.obs,
-  //   "experiences": {}.obs,
-  //   "days": {}.obs
-  // }.obs;
+  globalctx.reset.value = true;
 };
 
 class CustomRequiredValidator extends TextFieldValidator {

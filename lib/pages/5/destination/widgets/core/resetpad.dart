@@ -21,6 +21,7 @@ class ResetPadWidget extends StatelessWidget {
               nextlabel: "",
               onPrevious: () {
                 globalctxReset();
+                
               },
               width: 0.01);
         }
