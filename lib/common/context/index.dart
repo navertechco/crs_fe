@@ -11,6 +11,7 @@ import '../index.dart';
 // ignore: mixin_inherits_from_not_object
 class Context with PropertyChangeNotifier<String> {
   Rx<Map<String, dynamic>> context = Rx({
+    "dayleft": 9999,
     "index": 0.obs,
     "icons": {}.obs,
     "session": {"avatar": "".obs},

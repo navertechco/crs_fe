@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart'; 
+import 'package:get/get.dart';
 import '../../../../index.dart';
 import '../index.dart';
 
 void moveDestinationFunction(String destination, BuildContext context) {
-  if (!globalctx.destinations.contains(destination)) {
+  var dayleft = getContext("dayleft");
+  if (!globalctx.destinations.contains(destination) && dayleft != 0) {
     globalctx.destinations.add(destination);
     globalctx.destinationDragData.value.add(Obx(() {
       return globalctx.destinations.contains(destination)

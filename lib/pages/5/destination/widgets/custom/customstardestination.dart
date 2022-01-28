@@ -47,7 +47,9 @@ class CustomStarDestinationForm extends StatelessWidget {
       }
     }
 
-    print(globalctx.memory);
+    var keyActivities = getFormValue(
+        ctrl.state.memory, destination, "keyActivities", <String>[]);
+
     return Form(
       key: formKey,
       child: Column(
@@ -94,12 +96,21 @@ class CustomStarDestinationForm extends StatelessWidget {
                     onSaved: (value) {
                       setFormValue(ctrl.state.memory, destination,
                           "explorationDay", value);
+                      setContext(
+                          "dayleft",
+                          totalDays.value +
+                              leftAccumulated.value -
+                              explorationDay.value);
                     },
                     onChanged: (value) {
                       setFormValue(ctrl.state.memory, destination,
                           "explorationDay", value);
                       explorationDay.value = int.parse(value!);
-                      daysLeft.value = totalDays.value - explorationDay.value;
+                      setContext(
+                          "dayleft",
+                          totalDays.value +
+                              leftAccumulated.value -
+                              explorationDay.value);
                     },
                     label: "Exploration Days     ",
                     data: processCatalog("exploration_days"),
@@ -176,8 +187,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                         value,
                         errorText: "Key Activities are required ",
                         context: context),
-                    value: getFormValue(ctrl.state.memory, destination,
-                        "keyActivities", multiDefault),
+                    value: keyActivities,
                     onSaved: (value) {
                       setFormValue(ctrl.state.memory, destination,
                           "keyActivities", null);
