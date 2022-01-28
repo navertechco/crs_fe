@@ -49,6 +49,7 @@ class CustomStarDestinationForm extends StatelessWidget {
 
     var keyActivities = getFormValue(
         ctrl.state.memory, destination, "keyActivities", <String>[]);
+    globalctx.memory["destinations"][destination] ??= {};
 
     return Form(
       key: formKey,
@@ -96,6 +97,8 @@ class CustomStarDestinationForm extends StatelessWidget {
                     onSaved: (value) {
                       setFormValue(ctrl.state.memory, destination,
                           "explorationDay", value);
+                      globalctx.memory["destinations"][destination]["days"] =
+                          explorationDay.value;
                       setContext(
                           "dayleft",
                           totalDays.value +

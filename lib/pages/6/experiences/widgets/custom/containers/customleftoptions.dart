@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -23,6 +22,16 @@ class CustomLeftOptionsWidget extends StatelessWidget {
         Rx(getValue(localdata.value, "translate_service"));
 
     Rx<int> val = Rx(0);
+
+    Rx<DateTime> arrivalDate = Rx(globalctx.memory["tour"]["arrival_date"]);
+    Rx<DateTime> departureDate = Rx(globalctx.memory["tour"]["departure_date"]);
+    Rx<int> totalDays =
+        Rx(departureDate.value.difference(arrivalDate.value).inDays);
+
+    Rx<int> currentDay = 0.obs;
+
+    Rx<String> destination = Rx(globalctx.promoted.value[currentDay.value]);
+
     return Padding(
       padding: EdgeInsets.only(
           top: MediaQuery.of(context).size.height * 0.3,
@@ -43,7 +52,8 @@ class CustomLeftOptionsWidget extends StatelessWidget {
                     Obx(() {
                       return CustomFormMultiDropDownFieldWidget(
                         // label: "Exploration Days",
-                        value: transportService.value,
+                        value: getFormValue(transportService.value, destination,
+                            "service_type", "1"),
                         onSaved: (value) {
                           transportService.value = value;
                         },

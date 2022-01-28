@@ -134,7 +134,7 @@ class CustomTourInformationForm extends StatelessWidget {
               child: CustomKeypadWidget(
                   width: 0.265,
                   onPrevious: () {
-                    globalctxReset();
+                    
                     Get.back();
                   },
                   onNext: () {

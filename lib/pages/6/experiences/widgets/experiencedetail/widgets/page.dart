@@ -28,7 +28,7 @@ class ExperienceDetailWidget extends GetView<ExperienceDetailController> {
                 Get.close(1);
               },
               onPrevious: () {
-                globalctxReset();
+                 
                 Get.close(1);
               },
               width: 0.3),
