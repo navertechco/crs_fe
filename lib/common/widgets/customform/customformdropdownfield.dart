@@ -13,7 +13,7 @@ class CustomFormDropDownFieldWidget extends StatelessWidget {
       this.hintText,
       this.width = 0.2,
       this.height = 0.05,
-      this.value = "9999",
+      this.value = "0",
       required this.onSaved,
       required this.onChanged,
       this.validator})

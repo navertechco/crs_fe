@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 import 'package:property_change_notifier/property_change_notifier.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
+import '../index.dart';
+
 // ignore: mixin_inherits_from_not_object
 class Context with PropertyChangeNotifier<String> {
   Rx<Map<String, dynamic>> context = Rx({
@@ -30,7 +32,8 @@ class Context with PropertyChangeNotifier<String> {
     "customer": {}.obs,
     "destinations": {}.obs,
     "experiences": {}.obs,
-    "days": {}.obs
+    "days": {}.obs,
+    "days_left": 0.obs
   }.obs;
   Map<String, GlobalKey<State<StatefulWidget>>> keys = {};
   Context() {

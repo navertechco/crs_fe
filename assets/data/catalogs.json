@@ -92,6 +92,38 @@
                 "code": 1,
                 "value": null,
                 "relation": null
+            },
+            {
+                "catalog": "purpose",
+                "order": 1,
+                "description": "FAMILY",
+                "code": 2,
+                "value": null,
+                "relation": null
+            },
+            {
+                "catalog": "purpose",
+                "order": 2,
+                "description": "MAGIC",
+                "code": 3,
+                "value": null,
+                "relation": null
+            },
+            {
+                "catalog": "purpose",
+                "order": 4,
+                "description": "REDISCOVERY",
+                "code": 5,
+                "value": null,
+                "relation": null
+            },
+            {
+                "catalog": "purpose",
+                "order": 3,
+                "description": "DISCONNECT",
+                "code": 4,
+                "value": null,
+                "relation": null
             }
         ],
         "legal_client_type": [

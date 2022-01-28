@@ -262,7 +262,7 @@ var getData = (data, sub, key) {
   return data != null && data[sub] != null
       // ignore: invalid_use_of_protected_member
       ? data[sub][key]
-      : "9999";
+      : "0";
 };
 
 var getDataList = (data, sub, key) {
@@ -324,13 +324,13 @@ var globalctxReset = () {
   globalctx.experiences.value = [];
   globalctx.destinationDragData.value = [];
   globalctx.experienceDragData.value = [];
-  globalctx.memory = {
-    "tour": {}.obs,
-    "customer": {}.obs,
-    "destinations": {}.obs,
-    "experiences": {}.obs,
-    "days": {}.obs
-  }.obs;
+  // globalctx.memory = {
+  //   "tour": {}.obs,
+  //   "customer": {}.obs,
+  //   "destinations": {}.obs,
+  //   "experiences": {}.obs,
+  //   "days": {}.obs
+  // }.obs;
 };
 
 class CustomRequiredValidator extends TextFieldValidator {
@@ -343,7 +343,7 @@ class CustomRequiredValidator extends TextFieldValidator {
 
   @override
   bool isValid(String? value) {
-    return value != null && value != "9999" && value != "0";
+    return value != null && value != "0" && value != "0";
   }
 
   @override
@@ -409,3 +409,5 @@ Function setFormValue = (data, formKey, key, value) {
 
   data.value[formKey].value[key] = value;
 };
+
+List<String> multiDefault = <String>[];

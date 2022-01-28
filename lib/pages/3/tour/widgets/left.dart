@@ -1,8 +1,5 @@
-
-
-
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper/flutter_swiper.dart'; 
+import 'package:flutter_swiper/flutter_swiper.dart';
 import '../../../index.dart';
 
 class LeftWidget extends StatelessWidget {
@@ -34,7 +31,8 @@ class LeftWidget extends StatelessWidget {
                 // fit: BoxFit.fill,
                 width: MediaQuery.of(context).size.width * 0.05);
           },
-          autoplay: false,
+          autoplay: true,
+          autoplayDelay: 5000,
           itemCount: images.length,
           scrollDirection: Axis.horizontal,
         ),

@@ -26,7 +26,7 @@ class FormCatalogueWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     Rx<List<DropdownMenuItem<String>>>? items = Rx([]);
     List<Map<String, dynamic>> data2 = [];
-    data2.add({"code": "9999", "description": "Choose a Option"});
+    data2.add({"code": "0", "description": "Choose a Option"});
     data2.addAll(data);
     data2.asMap().forEach((index, item) {
       items.value.add(DropdownMenuItem(

@@ -57,7 +57,7 @@ class CustomTourInformationForm extends StatelessWidget {
             CustomFormDropDownFieldWidget(
               validator: CustomRequiredValidator(
                   errorText: "Purpose is required ", ctx: context),
-              value: getValue(tour, "purpose", def: "9999"),
+              value: getValue(tour, "purpose", def: "1"),
               disabled: readonly,
               onSaved: (value) {
                 ctrl!.state.purpose = value!;
@@ -69,7 +69,7 @@ class CustomTourInformationForm extends StatelessWidget {
               data: purpose,
             ),
             CustomFormDropDownFieldWidget(
-              value: getValue(tour, "accomodation_type", def: "9999"),
+              value: getValue(tour, "accomodation_type", def: "1"),
               disabled: readonly,
               onSaved: (value) {
                 ctrl!.state.accomodation_type = value!;
@@ -87,7 +87,7 @@ class CustomTourInformationForm extends StatelessWidget {
                 fontWeight: FontWeight.bold,
                 label: "  Date                              "),
             CustomFormDateFieldWidget(
-              initialValue: getValue(tour, "arrival_date", def: null),
+              initialValue: getValue(tour, "arrival_date", def: DateTime.now()),
               validator: (date) {
                 CustomDatetimeRequiredValidator(date,
                     context: context, errorText: "Arrival Text is Required");
@@ -101,7 +101,8 @@ class CustomTourInformationForm extends StatelessWidget {
               },
             ),
             CustomFormDateFieldWidget(
-              initialValue: getValue(tour, "departure_date", def: null),
+              initialValue:
+                  getValue(tour, "departure_date", def: DateTime(2022, 02, 05)),
               validator: (date) {
                 CustomDatetimeRequiredValidator(date,
                     context: context, errorText: "Departure Text is Required");
@@ -116,7 +117,7 @@ class CustomTourInformationForm extends StatelessWidget {
             ),
             CustomFormTextFieldWidget(
                 disabled: validateData(tour),
-                value: getValue(tour, "passengers", def: "0"),
+                value: getValue(tour, "passengers", def: "10"),
                 validator: CustomRequiredValidator(
                     errorText: "Passengers is required ", ctx: context),
                 onSaved: (value) {

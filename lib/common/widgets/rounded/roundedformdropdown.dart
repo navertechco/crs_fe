@@ -29,7 +29,7 @@ class RoundedFormDropdown extends StatelessWidget {
       this.fontSize = 0.1,
       required this.onSaved,
       this.password = false,
-      this.value = "9999",
+      this.value = "0",
       this.disabled = false,
       required this.onChanged,
       this.validator})
@@ -45,7 +45,7 @@ class RoundedFormDropdown extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.grey, borderRadius: BorderRadius.circular(50)),
       child: FormCatalogueWidget(
-          validator:validator,
+          validator: validator,
           disabled: disabled,
           value: value,
           onChanged: onChanged,
