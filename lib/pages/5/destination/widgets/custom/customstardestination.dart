@@ -31,6 +31,16 @@ class CustomStarDestinationForm extends StatelessWidget {
     Rx<int> daysLeft = Rx(-memoryDayLeft.value + totalDays.value);
     Rx<int> explorationDay = Rx(int.parse(
         getFormValue(ctrl.state.memory, destination, "explorationDay", "0")));
+
+    Rx<int> leftAccumulated = 0.obs;
+    for (var item in destinations.keys) {
+      bool exists = ctrl.state.memory[item] != null && item != destination;
+      if (exists) {
+        leftAccumulated.value -= int.parse(
+            getFormValue(ctrl.state.memory, item, "explorationDay", "0"));
+      }
+    }
+    print(globalctx.memory);
     return Form(
       key: formKey,
       child: Column(
@@ -45,10 +55,13 @@ class CustomStarDestinationForm extends StatelessWidget {
                   return Row(
                     children: [
                       Text(
-                          "Days Left: ${totalDays.value - explorationDay.value}",
+                          "Days Left: ${totalDays.value + leftAccumulated.value - explorationDay.value}",
                           style: GoogleFonts.poppins(
                               textStyle: TextStyle(
-                            color: daysLeft.value < 1
+                            color: (totalDays.value +
+                                        leftAccumulated.value -
+                                        explorationDay.value) <
+                                    1
                                 ? Color.fromARGB(255, 255, 0, 0)
                                 : Color.fromARGB(255, 0, 0, 0),
                             fontSize: MediaQuery.of(context).size.width /
@@ -98,6 +111,9 @@ class CustomStarDestinationForm extends StatelessWidget {
                           onSaved: (value) {
                             setFormValue(ctrl.state.memory, destination,
                                 "explorationMode", value);
+                            globalctx.memory["days_left"].value -= int.parse(
+                                getFormValue(ctrl.state.memory, destination,
+                                    "explorationDay", "0"));
                           },
                           onChanged: (value) {
                             setFormValue(ctrl.state.memory, destination,

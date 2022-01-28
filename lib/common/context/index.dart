@@ -61,7 +61,7 @@ class Context with PropertyChangeNotifier<String> {
 Context globalctx = Context();
 setContext(key, value) {
   globalctx.set_context(key, value);
-  print(globalctx.context.value);
+  // print(globalctx.context.value);
 }
 
 getContext(key) {

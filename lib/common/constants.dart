@@ -208,7 +208,7 @@ Future<bool> getCatalog(
       "data": {"catalogs": catalogs}
     });
     // ignore: avoid_print
-    print(res);
+    // print(res);
     if (res['state'] == true) {
       setContext("catalogs", res['data']);
       return true;

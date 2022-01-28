@@ -28,8 +28,7 @@ class DestinationDetailWidget extends GetView<DestinationDetailController> {
                 if (_formKey.currentState!.validate()) {
                   _formKey.currentState!.save();
                   if (!globalctx.promoted.contains(destination)) {
-                    globalctx.memory["days_left"].value -= getFormValue(
-                        ctrl.state.memory, destination, "explorationDay", "0");
+                    
                     globalctx.promoted.add(destination);
                   }
                   Get.close(1);

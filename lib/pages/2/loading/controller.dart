@@ -16,7 +16,7 @@ class LoadingController extends GetxController {
       }
     });
     // ignore: avoid_print
-    print(res);
+    // print(res);
     if (res['state'] == true) {
       var data = res['data'];
       if (data.length > 0) {
