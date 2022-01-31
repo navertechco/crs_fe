@@ -325,6 +325,7 @@ var globalctxReset = () {
   globalctx.destinationDragData.value = [];
   globalctx.experienceDragData.value = [];
   globalctx.reset.value = true;
+  setContext("dayleft", 9999);
 };
 
 class CustomRequiredValidator extends TextFieldValidator {

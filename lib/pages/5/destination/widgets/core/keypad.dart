@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart'; 
-import '../../../../index.dart'; 
-
-
-
+import 'package:get/get.dart';
+import 'package:sweetalert/sweetalert.dart';
+import '../../../../index.dart';
 
 class KeyPadWidget extends StatelessWidget {
   const KeyPadWidget({
@@ -23,10 +21,19 @@ class KeyPadWidget extends StatelessWidget {
               prevlabel: "< Previous",
               nextlabel: "Next >",
               onNext: () {
-                Get.toNamed("/Experiences");
+                if (globalctx.promoted.value.isNotEmpty) {
+                  Get.toNamed("/Experiences");
+                } else {
+                  SweetAlert.show(context,
+                      title: "Promote any destination is required",
+                      subtitle: 'error',
+                      style: SweetAlertStyle.error, onPress: (bool isConfirm) {
+                    Get.close(1);
+                    return false;
+                  });
+                }
               },
               onPrevious: () {
-                
                 Get.back();
               },
               width: 0.3);
