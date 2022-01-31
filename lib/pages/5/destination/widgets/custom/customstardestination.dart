@@ -30,7 +30,8 @@ class CustomStarDestinationForm extends StatelessWidget {
     Rx<int> memoryDayLeft = Rx(globalctx.memory["days_left"].value);
     Rx<int> daysLeft = Rx(-memoryDayLeft.value + totalDays.value);
     Rx<int> explorationDay = Rx(int.parse(
-        getFormValue(ctrl.state.memory, destination, "explorationDay", "1")));
+        getFormValue(ctrl.state.memory, destination, "explorationDay", "1") ??
+            "1"));
 
     Rx<int> leftAccumulated = 0.obs;
     if (globalctx.reset.value) {
@@ -97,8 +98,6 @@ class CustomStarDestinationForm extends StatelessWidget {
                     onSaved: (value) {
                       setFormValue(ctrl.state.memory, destination,
                           "explorationDay", value);
-                      globalctx.memory["destinations"][destination]["days"] =
-                          explorationDay.value;
                       setContext(
                           "dayleft",
                           totalDays.value +

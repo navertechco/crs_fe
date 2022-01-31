@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:naver_crs/pages/6/experiences/controller.dart';
 import '../index.dart';
 
 class CustomRightDayWidget extends StatelessWidget {
-  const CustomRightDayWidget({
+  final ExperiencesController ctrl;
+  CustomRightDayWidget({
     Key? key,
+    required this.ctrl,
   }) : super(key: key);
 
   @override
@@ -16,7 +19,7 @@ class CustomRightDayWidget extends StatelessWidget {
         children: [
           CustomHeaderWidget(),
           CustomContentWidget(),
-          CustomFooterWidget(),
+          CustomFooterWidget(ctrl:ctrl),
         ],
       ),
     );

@@ -4,8 +4,10 @@ import 'package:get/get.dart';
 import '../../../../../index.dart';
 
 class CustomFooterWidget extends StatelessWidget {
-  const CustomFooterWidget({
+  final ExperiencesController ctrl;
+  CustomFooterWidget({
     Key? key,
+    required this.ctrl,
   }) : super(key: key);
 
   @override
@@ -22,7 +24,10 @@ class CustomFooterWidget extends StatelessWidget {
             CustomKeypadWidget(
                 nextlabel: "< Expand >",
                 prevlabel: "",
-                onNext: () {},
+                onNext: () {
+                  setFormValue(ctrl.state.memory, destination,
+                      "destination_option", "1");
+                },
                 onPrevious: () {},
                 nextFontWeight: FontWeight.bold,
                 width: 0.002),
@@ -35,7 +40,6 @@ class CustomFooterWidget extends StatelessWidget {
               Get.toNamed("/Resume");
             },
             onPrevious: () {
-                
               Get.back();
             },
             width: 0.45),

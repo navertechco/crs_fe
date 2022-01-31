@@ -12,9 +12,9 @@ class ExperiencesWidget extends GetView<ExperiencesController> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(children: const [
-      CustomLeftOptionsWidget(),
-      CustomRightDayWidget(),
+    return Stack(children:   [
+      CustomLeftOptionsWidget(ctrl:controller),
+      CustomRightDayWidget(ctrl:controller),
     ]);
   }
 }

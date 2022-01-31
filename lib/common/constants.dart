@@ -202,20 +202,18 @@ final chunkMap =
 Future<bool> getCatalog(
   List<String> catalogs,
 ) async {
- 
-    var res = await fetchhandler(kDefaultSchema, kDefaultServer,
-        kDefaultServerPort, kDefaultCatalogPath, 'POST', {
-      "data": {"catalogs": catalogs}
-    });
-    // ignore: avoid_print
-    // print(res);
-    if (res['state'] == true) {
-      setContext("catalogs", res['data']);
-      return true;
-    } else {
-      return false;
-    }
- 
+  var res = await fetchhandler(kDefaultSchema, kDefaultServer,
+      kDefaultServerPort, kDefaultCatalogPath, 'POST', {
+    "data": {"catalogs": catalogs}
+  });
+  // ignore: avoid_print
+  // print(res);
+  if (res['state'] == true) {
+    setContext("catalogs", res['data']);
+    return true;
+  } else {
+    return false;
+  }
 }
 
 Function processCatalog = (name) {
@@ -390,7 +388,7 @@ Function getFormValue = (data, formKey, key, def) {
   if (data != null) {
     if (data.value != null) {
       if (data.value[formKey] != null) {
-        return data.value[formKey].value[key];
+        return data.value[formKey][key];
       }
     }
   }
@@ -406,3 +404,7 @@ Function setFormValue = (data, formKey, key, value) {
 
   data.value[formKey].value[key] = value;
 };
+
+Rx<int> currentDay = 0.obs;
+
+var destination = (globalctx.promoted.value[currentDay.value]);

@@ -4,41 +4,41 @@ import 'package:get/get.dart';
 import '../../../../../index.dart';
 
 class CustomLeftOptionsWidget extends StatelessWidget {
-  const CustomLeftOptionsWidget({
+  final ExperiencesController ctrl;
+  CustomLeftOptionsWidget({
     Key? key,
+    required this.ctrl,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Rx<int> currentDay = 0.obs;
+    ctrl.state.memory = globalctx.memory;
 
-    Rx<String> destination = Rx(globalctx.promoted.value[currentDay.value]);
     Rx<Map<dynamic, dynamic>> localdata =
         Rx(globalctx.context.value["experiencedata"]);
     Rx<dynamic> transportService = Rx(getFormValue(
-        globalctx.memory["experiences"],
-        destination,
-        "service_type", <String>[]));
+            ctrl.state.memory, destination, "service_type", <String>[]) ??
+        <String>[]);
 
-    Rx<int> guide = Rx(getFormValue(
-        globalctx.memory["experiences"], destination, "guide_type", 1));
+    Rx<int> guide =
+        Rx(getFormValue(ctrl.state.memory, destination, "guide_type", 1));
 
     Rx<DateTime> arrivalDate = Rx(globalctx.memory["tour"]["arrival_date"]);
     Rx<DateTime> departureDate = Rx(globalctx.memory["tour"]["departure_date"]);
     Rx<int> totalDays =
         Rx(departureDate.value.difference(arrivalDate.value).inDays);
     Rx<int> guideIndex = Rx(
-        transportService.value.indexWhere((element) => element == "GUIDING"));
+        transportService.value.indexWhere((element) => element == "GUIDING") ??
+            0);
     Rx<int> translateIndex = Rx(transportService.value
-        .indexWhere((element) => element == "TRANSLATING"));
-    Rx<List<String>> translatingService = Rx(
-      getFormValue(globalctx.memory["experiences"], destination,
-          "translating_service", <String>[]),
-    );
-    Rx<List<String>> keyActivies = Rx(
-      getFormValue(globalctx.memory["experiences"], destination,
-          "key_activities", <String>[]),
-    );
+            .indexWhere((element) => element == "TRANSLATING") ??
+        0);
+    var translatingService = (getFormValue(
+        ctrl.state.memory, destination, "translating_service", <String>[]));
+    var keyActivities = getFormValue(
+        ctrl.state.memory, destination, "key_activities", <String>[]);
+    Rx<dynamic> destinationOption = Rx(getFormValue(
+        ctrl.state.memory, destination, "destination_option", "0"));
     return Padding(
       padding: EdgeInsets.only(
           top: MediaQuery.of(context).size.height * 0.3,
@@ -47,7 +47,7 @@ class CustomLeftOptionsWidget extends StatelessWidget {
         children: [
           CustomTitleWidget(
             fontWeight: FontWeight.bold,
-            label: "Day 2: Options",
+            label: "Day $currentDay:  ${destination.toString().capitalize}",
           ),
           Divider(color: Color.fromARGB(255, 0, 0, 0)),
           SizedBox(
@@ -73,8 +73,8 @@ class CustomLeftOptionsWidget extends StatelessWidget {
                         children: [
                           CustomFormMultiDropDownFieldWidget(
                             // label: "Exploration Days",
-                            value: getFormValue(globalctx.memory["experiences"],
-                                destination, "service_type", <String>[]),
+                            value: getFormValue(ctrl.state.memory, destination,
+                                "service_type", <String>[]),
                             onSaved: (value) {
                               transportService.value = value;
                               guideIndex.value = transportService.value
@@ -83,8 +83,8 @@ class CustomLeftOptionsWidget extends StatelessWidget {
                               translateIndex.value = transportService.value
                                   .indexWhere(
                                       (element) => element == "TRANSLATING");
-                              setFormValue(globalctx.memory["experiences"],
-                                  destination, "service_type", value);
+                              setFormValue(ctrl.state.memory, destination,
+                                  "service_type", value);
                             },
                             onChanged: (value) {
                               transportService.value = value;
@@ -94,8 +94,8 @@ class CustomLeftOptionsWidget extends StatelessWidget {
                               translateIndex.value = transportService.value
                                   .indexWhere(
                                       (element) => element == "TRANSLATING");
-                              setFormValue(globalctx.memory["experiences"],
-                                  destination, "service_type", value);
+                              setFormValue(ctrl.state.memory, destination,
+                                  "service_type", value);
                             },
                             hintText: "                  Services",
                             data: processCatalog("service_type"),
@@ -103,17 +103,17 @@ class CustomLeftOptionsWidget extends StatelessWidget {
                           if (translateIndex.value != -1)
                             CustomFormMultiDropDownFieldWidget(
                               // label: "Exploration Days",
-                              value: translatingService.value,
+                              value: translatingService,
                               onSaved: (value) {
-                                setFormValue(globalctx.memory["experiences"],
-                                    destination, "translating_service", value);
+                                setFormValue(ctrl.state.memory, destination,
+                                    "translating_service", value);
                               },
                               onChanged: (value) {
                                 translateIndex.value =
                                     value!.isNotEmpty ? 0 : -1;
-                                translatingService.value = value;
-                                setFormValue(globalctx.memory["experiences"],
-                                    destination, "translating_service", value);
+                                translatingService = value;
+                                setFormValue(ctrl.state.memory, destination,
+                                    "translating_service", value);
                               },
                               hintText: "          Translating Services",
                               data: processCatalog("translating_service"),
@@ -129,11 +129,8 @@ class CustomLeftOptionsWidget extends StatelessWidget {
                                       guide.value = 0;
                                     } else {
                                       guide.value = value;
-                                      setFormValue(
-                                          globalctx.memory["experiences"],
-                                          destination,
-                                          "guide_type",
-                                          value);
+                                      setFormValue(ctrl.state.memory,
+                                          destination, "guide_type", value);
                                     }
                                   },
                                   hintText: "Driver guide?",
@@ -146,11 +143,8 @@ class CustomLeftOptionsWidget extends StatelessWidget {
                                       guide.value = 0;
                                     } else {
                                       guide.value = value;
-                                      setFormValue(
-                                          globalctx.memory["experiences"],
-                                          destination,
-                                          "guide_type",
-                                          value);
+                                      setFormValue(ctrl.state.memory,
+                                          destination, "guide_type", value);
                                     }
                                   },
                                   hintText: "Additional guide?",
@@ -172,46 +166,58 @@ class CustomLeftOptionsWidget extends StatelessWidget {
                         ),
                       ],
                     ),
-                    CustomFormDropDownFieldWidget(
-                      // label: "Exploration Days",
-                      value: getFormValue(globalctx.memory["experiences"],
-                          destination, "destination_option", "0"),
-                      onSaved: (value) {
-                        setFormValue(globalctx.memory["experiences"],
-                            destination, "destination_option", value);
-                      },
-                      onChanged: (value) {
-                        setFormValue(globalctx.memory["experiences"],
-                            destination, "destination_option", value);
-                      },
-                      hintText: "Travel Options",
-                      data: processCatalog("destination_option"),
-                    ),
+                    Obx(() {
+                      return CustomFormDropDownFieldWidget(
+                        // label: "Exploration Days",
+                        value: destinationOption.value,
+                        onSaved: (value) {
+                          setFormValue(ctrl.state.memory, destination,
+                              "destination_option", value);
+                        },
+                        onChanged: (value) {
+                          setFormValue(ctrl.state.memory, destination,
+                              "destination_option", value);
+                        },
+                        hintText: "Travel Options",
+                        data: processCatalog("destination_option"),
+                      );
+                    }),
                     CustomFormMultiDropDownFieldWidget(
-                      value: keyActivies.value,
+                      validator: (value) =>
+                          CustomMultiDropdownRequiredValidator(value,
+                              errorText: "Key Activities are required ",
+                              context: context),
+                      value: keyActivities,
                       onSaved: (value) {
-                        setFormValue(globalctx.memory["experiences"],
-                            destination, "key_activities", value);
+                        setFormValue(ctrl.state.memory, destination,
+                            "keyActivities", null);
+                        setFormValue(
+                            ctrl.state.memory,
+                            destination,
+                            "keyActivities",
+                            value!
+                                .map((e) => e["description"])
+                                .toSet()
+                                .toList());
                       },
                       onChanged: (value) {
-                        keyActivies.value = value!;
-                        setFormValue(globalctx.memory["experiences"],
-                            destination, "key_activities", value);
+                        setFormValue(ctrl.state.memory, destination,
+                            "keyActivities", value);
                       },
                       hintText: "Key Activities            ",
                       data: processCatalog("key_activity"),
                     ),
                     CustomFormDropDownFieldWidget(
                       // label: "Exploration Days",
-                      value: getFormValue(globalctx.memory["experiences"],
-                          destination, "travel_rhythm", "0"),
+                      value: getFormValue(
+                          ctrl.state.memory, destination, "travel_rhythm", "0"),
                       onSaved: (value) {
-                        setFormValue(globalctx.memory["experiences"],
-                            destination, "travel_rhythm", value);
+                        setFormValue(ctrl.state.memory, destination,
+                            "travel_rhythm", value);
                       },
                       onChanged: (value) {
-                        setFormValue(globalctx.memory["experiences"],
-                            destination, "travel_rhythm", value);
+                        setFormValue(ctrl.state.memory, destination,
+                            "travel_rhythm", value);
                       },
                       hintText: "Travel Rhythm",
                       data: processCatalog("travel_rhythm"),
