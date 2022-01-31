@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart'; 
+import 'package:get/get.dart';
 import '../controller.dart';
 import 'index.dart';
 
@@ -31,10 +31,10 @@ class SigninFormPage extends GetView<StatelessWidget> {
                 SizedBox(
                   width: double.infinity,
                   child: GestureDetector(
-                    onTap: () {
+                    onTap: () async {
                       if (_formKey.currentState!.validate()) {
                         _formKey.currentState!.save();
-                        ctrl!.onSignin(
+                        await ctrl!.onSignin(
                             ctrl!.state.username, ctrl!.state.password);
                       }
                     },

@@ -50,11 +50,23 @@ class CustomLeftOptionsWidget extends StatelessWidget {
           ),
           Divider(color: Color.fromARGB(255, 0, 0, 0)),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.3,
+            height: MediaQuery.of(context).size.height * 0.6,
             child: Scrollbar(
               child: SingleChildScrollView(
                 child: Column(
                   children: [
+                    Column(
+                      children: [
+                        CustomTitleWidget(
+                          fontWeight: FontWeight.bold,
+                          label: "Day Transport Options:",
+                        ),
+                        CustomTitleWidget(
+                          fontWeight: FontWeight.bold,
+                          label: "______________________",
+                        ),
+                      ],
+                    ),
                     Obx(() {
                       return Column(
                         children: [
@@ -137,13 +149,17 @@ class CustomLeftOptionsWidget extends StatelessWidget {
                         ],
                       );
                     }),
-                    CustomTitleWidget(
-                      fontWeight: FontWeight.bold,
-                      label: "Filter Experiences by:",
-                    ),
-                    CustomTitleWidget(
-                      fontWeight: FontWeight.bold,
-                      label: "______________________",
+                    Column(
+                      children: [
+                        CustomTitleWidget(
+                          fontWeight: FontWeight.bold,
+                          label: "Filter Experiences by:",
+                        ),
+                        CustomTitleWidget(
+                          fontWeight: FontWeight.bold,
+                          label: "______________________",
+                        ),
+                      ],
                     ),
                     CustomFormDropDownFieldWidget(
                       // label: "Exploration Days",

@@ -15,19 +15,21 @@ class SigninController extends GetxController {
     state.username = username;
     state.password = password;
 
-    var res = await fetchhandler(kDefaultSchema, kDefaultServer,
-        kDefaultServerPort, kDefaultConnectPath, 'POST', {
-      "state": "signin",
-      "data": {
-        "username": state.username,
-        "password": state.password
-        
-      }
-    });
+    try {
+      var res = await fetchhandler(kDefaultSchema, kDefaultServer,
+          kDefaultServerPort, kDefaultConnectPath, 'POST', {
+        "state": "signin",
+        "data": {"username": state.username, "password": state.password}
+      });
 
-    if (res['state'] == true) {
-      setContext('session', res['data']);
-      Get.toNamed('/Loading');
+      if (res['state'] == true) {
+        setContext("catalogs", res['data']);
+        Get.toNamed('/Loading');
+      } else {
+        print(res);
+      }
+    } catch (e) {
+      print(e);
     }
   }
 }

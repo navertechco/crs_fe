@@ -10,9 +10,9 @@ class LoadingPage extends GetView<LoadingController> {
   // 内容页
   Widget _buildView() {
     var catalogs = Rx(getContext("catalogs"));
-    getCatalog(["ALL"]);
+
     return Obx(() {
-      while (catalogs.value==null) {
+      while (catalogs.value == null) {
         return CustomProgressIndicatorWidget();
       }
       return LoadingWidget(

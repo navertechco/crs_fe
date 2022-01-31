@@ -202,7 +202,7 @@ final chunkMap =
 Future<bool> getCatalog(
   List<String> catalogs,
 ) async {
-  try {
+ 
     var res = await fetchhandler(kDefaultSchema, kDefaultServer,
         kDefaultServerPort, kDefaultCatalogPath, 'POST', {
       "data": {"catalogs": catalogs}
@@ -215,9 +215,7 @@ Future<bool> getCatalog(
     } else {
       return false;
     }
-  } catch (e) {
-    return false;
-  }
+ 
 }
 
 Function processCatalog = (name) {
