@@ -20,7 +20,8 @@ class CustomLeftOptionsWidget extends StatelessWidget {
         destination,
         "service_type", <String>[]));
 
-    Rx<int> val = Rx(0);
+    Rx<int> guide = Rx(getFormValue(
+        globalctx.memory["experiences"], destination, "guide_type", 1));
 
     Rx<DateTime> arrivalDate = Rx(globalctx.memory["tour"]["arrival_date"]);
     Rx<DateTime> departureDate = Rx(globalctx.memory["tour"]["departure_date"]);
@@ -122,24 +123,34 @@ class CustomLeftOptionsWidget extends StatelessWidget {
                               children: [
                                 CustomFormCheckboxWidget(
                                   value: 1,
-                                  groupValue: val,
+                                  groupValue: guide,
                                   onChanged: (value) {
-                                    if (val.value == value) {
-                                      val.value = 0;
+                                    if (guide.value == value) {
+                                      guide.value = 0;
                                     } else {
-                                      val.value = value;
+                                      guide.value = value;
+                                      setFormValue(
+                                          globalctx.memory["experiences"],
+                                          destination,
+                                          "guide_type",
+                                          value);
                                     }
                                   },
                                   hintText: "Driver guide?",
                                 ),
                                 CustomFormCheckboxWidget(
                                   value: 2,
-                                  groupValue: val,
+                                  groupValue: guide,
                                   onChanged: (value) {
-                                    if (val.value == value) {
-                                      val.value = 0;
+                                    if (guide.value == value) {
+                                      guide.value = 0;
                                     } else {
-                                      val.value = value;
+                                      guide.value = value;
+                                      setFormValue(
+                                          globalctx.memory["experiences"],
+                                          destination,
+                                          "guide_type",
+                                          value);
                                     }
                                   },
                                   hintText: "Additional guide?",
