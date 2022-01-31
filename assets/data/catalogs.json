@@ -1657,40 +1657,6 @@
                 "relation": null
             }
         ],
-        "translate_service": [
-            {
-                "catalog": "translate_service",
-                "order": 0,
-                "description": "ENGLISH",
-                "code": 1,
-                "value": null,
-                "relation": null
-            },
-            {
-                "catalog": "translate_service",
-                "order": 1,
-                "description": "FRENCH",
-                "code": 2,
-                "value": null,
-                "relation": null
-            },
-            {
-                "catalog": "translate_service",
-                "order": 2,
-                "description": "GERMAN",
-                "code": 3,
-                "value": null,
-                "relation": null
-            },
-            {
-                "catalog": "translate_service",
-                "order": 3,
-                "description": "PORTUGUESE",
-                "code": 4,
-                "value": null,
-                "relation": null
-            }
-        ],
         "exploration_days": [
             {
                 "catalog": "exploration_days",
@@ -1853,6 +1819,40 @@
                         "assets/custom/img/monkey.png"
                     ]
                 },
+                "relation": null
+            }
+        ],
+        "translating_service": [
+            {
+                "catalog": "translating_service",
+                "order": 0,
+                "description": "ENGLISH",
+                "code": 1,
+                "value": null,
+                "relation": null
+            },
+            {
+                "catalog": "translating_service",
+                "order": 1,
+                "description": "GERMAN",
+                "code": 2,
+                "value": null,
+                "relation": null
+            },
+            {
+                "catalog": "translating_service",
+                "order": 2,
+                "description": "PORTUGUESE",
+                "code": 3,
+                "value": null,
+                "relation": null
+            },
+            {
+                "catalog": "translating_service",
+                "order": 3,
+                "description": "FRENCH",
+                "code": 4,
+                "value": null,
                 "relation": null
             }
         ]

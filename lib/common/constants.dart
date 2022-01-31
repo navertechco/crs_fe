@@ -390,11 +390,12 @@ Function setData = (data, key, value) {
 
 Function getFormValue = (data, formKey, key, def) {
   if (data != null) {
-    if (data.value[formKey] != null) {
-      return data.value[formKey].value[key];
+    if (data.value != null) {
+      if (data.value[formKey] != null) {
+        return data.value[formKey].value[key];
+      }
     }
   }
-
   return def;
 };
 
