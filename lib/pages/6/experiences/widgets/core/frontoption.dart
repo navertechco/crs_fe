@@ -20,11 +20,11 @@ class FrontOptionWidget extends StatelessWidget {
             child: Align(
               alignment: Alignment.center,
               child: Text(
-                "Experience",
+                experience,
                 style: GoogleFonts.poppins(
                     textStyle: TextStyle(
                   color: const Color.fromARGB(255, 255, 255, 255),
-                  fontSize: MediaQuery.of(context).size.width * 0.024,
+                  fontSize: MediaQuery.of(context).size.width * 0.018,
                   fontWeight: FontWeight.bold,
                 )),
               ),

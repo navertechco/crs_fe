@@ -80,7 +80,7 @@ class EndServices extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var detail = getValue(data, "detail", def: []);
+    var detail = globalctx.memory.value;
     var end = getValue(detail, "end", def: []);
     var netrates = getValue(end, "net_rates", def: []);
     var included = getValue(end, "included", def: []);
@@ -160,13 +160,18 @@ class EndServices extends StatelessWidget {
             width: 0.5,
             fontSize: 0.014,
             fontWeight: FontWeight.bold),
-        const CustomDescriptionWidget(text: """
+        const CustomDescriptionWidget(
+            text:
+                """
             B = Breakfast
             L= Lunch
             LB= Lunch Box
             D = Dinner
             O = Overnight
-            """, width: 0.5, fontSize: 0.012, fontWeight: FontWeight.bold),
+            """,
+            width: 0.5,
+            fontSize: 0.012,
+            fontWeight: FontWeight.bold),
         const CustomDescriptionWidget(
             text: "Net Rate",
             width: 0.5,
@@ -260,13 +265,13 @@ class Cover extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var detail = getValue(data, "detail", def: []);
+    var detail = globalctx.memory.value;
     var tour = getValue(detail, "tour", def: []);
-    var client = getValue(detail, "client", def: []);
+    var customer = getValue(detail, "customer", def: []);
     var title = getValue(tour, "title", def: []);
     var passengers = getValue(tour, "passengers", def: []);
-    var days = getValue(tour, "days", def: []);
-    var nights = getValue(tour, "nights", def: []);
+    var days = currentDay.value;
+    var nights = days - 1;
     var valid = getValue(tour, "valid_until", def: []);
     var description = getValue(tour, "description", def: []);
 
@@ -278,7 +283,7 @@ class Cover extends StatelessWidget {
             fontSize: 0.020,
             fontWeight: FontWeight.bold),
         CustomDescriptionWidget(
-            text: "${client["legal_name"]} x $passengers",
+            text: "${customer["legal_name"]} x $passengers",
             width: 0.18,
             fontSize: 0.018,
             fontWeight: FontWeight.bold),
@@ -337,16 +342,16 @@ class Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var client = getValue(data["detail"], "client", def: {});
+    var customer = getValue(data["detail"], "customer", def: {});
     var tour = getValue(data["detail"], "tour", def: {});
 
-    List<Map<String, dynamic>> clientTemplate = [
+    List<Map<String, dynamic>> customerTemplate = [
       {
         "code": "brith_date",
         "description": "Birth Date",
         "value": "10/10/1950"
       },
-      {"code": "client_id", "description": "Client code", "value": "1"},
+      {"code": "customer_id", "description": "Client code", "value": "1"},
       {
         "code": "contact_name",
         "description": "Contact Name",
@@ -400,7 +405,7 @@ class Header extends StatelessWidget {
     return Column(
       children: [
         const CustomFormTitleWidget(level: 1, label: "Client Information"),
-        CustomFormHeaderWidget(data: chunkMap(client, 3, clientTemplate)),
+        CustomFormHeaderWidget(data: chunkMap(customer, 3, customerTemplate)),
         const CustomFormTitleWidget(level: 1, label: "Tour Information"),
         CustomFormHeaderWidget(data: chunkMap(tour, 3, tourTemplate)),
         const CustomFormTitleWidget(level: 2, label: "Itinerary"),
@@ -421,7 +426,7 @@ class CustomFormDestination extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<CustomFormDayWidget> daylist = [];
-    var detail = getValue(data, "detail", def: []);
+    var detail = globalctx.memory.value;
     var destinations = detail["destinations"];
     var destination = destinations[index];
     var days = destination["days"];
@@ -466,7 +471,7 @@ class CustomFormDayWidget extends StatelessWidget {
     } else {
       destinations = [];
     }
-    var destination = destinations.toList()[destinationindex];
+    var destination = destinations.toList()[destinationindex].value;
     var day = destination['days'][dayindex];
     var daydate = day['date'];
     var meals = day['meals'];

@@ -95,7 +95,7 @@ class CustomLeftOptionsWidget extends StatelessWidget {
                               setFormValue(ctrl.state.memory, destination.value,
                                   "service_type", value);
                             },
-                            hintText: "                  Services",
+                            hintText: "                  Services\n",
                             data: processCatalog("service_type"),
                           ),
                           if (translateIndex.value != -1)
@@ -215,7 +215,8 @@ class CustomLeftOptionsWidget extends StatelessWidget {
                           setFormValue(ctrl.state.memory, destination.value,
                               "keyActivities", value);
                         },
-                        hintText: "Key Activities            ",
+                        hintText:
+                            "\t\t\t\t\t\t\t\t\t\t\t\tKey Activities            \n",
                         data: processCatalog("key_activity"),
                       );
                     }),

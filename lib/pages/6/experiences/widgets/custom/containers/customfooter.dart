@@ -25,7 +25,7 @@ class CustomFooterWidget extends StatelessWidget {
                 nextlabel: "< Expand >",
                 prevlabel: "",
                 onNext: () {
-                  setFormValue(ctrl.state.memory, destination,
+                  setFormValue(ctrl.state.memory, destination.value,
                       "destination_option", "1");
                 },
                 onPrevious: () {},
