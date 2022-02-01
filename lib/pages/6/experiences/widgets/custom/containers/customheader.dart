@@ -16,7 +16,6 @@ class CustomHeaderWidget extends StatelessWidget {
     Rx<int> totalDays =
         Rx(departureDate.value.difference(arrivalDate.value).inDays);
     final currentDayFormat = DateFormat('EEEE MMMM d yyyy');
-    var destination = processDays(currentDay)["destination"];
     return Column(
       children: [
         Row(
@@ -25,17 +24,23 @@ class CustomHeaderWidget extends StatelessWidget {
               fontWeight: FontWeight.bold,
               label: "Date: ",
             ),
-            CustomTitleWidget(
-              fontWeight: FontWeight.bold,
-              label: "${currentDayFormat.format(arrivalDate.value)}",
-            ),
+            Obx(() {
+              return CustomTitleWidget(
+                fontWeight: FontWeight.bold,
+                label:
+                    "${currentDayFormat.format(arrivalDate.value.add(Duration(days: currentDay.value)))}",
+              );
+            }),
           ],
         ),
         Divider(color: Color.fromARGB(255, 0, 0, 0)),
-        CustomTitleWidget(
-          fontWeight: FontWeight.bold,
-          label: "Destination: ${destination.toString().capitalize}",
-        ),
+        Obx(() {
+          return CustomTitleWidget(
+            fontWeight: FontWeight.bold,
+            label:
+                "Destination: ${processDays(currentDay)["destination"].toString().capitalize}",
+          );
+        }),
         Divider(color: Color.fromARGB(255, 0, 0, 0)),
       ],
     );

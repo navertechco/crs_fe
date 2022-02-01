@@ -385,14 +385,12 @@ Function setData = (data, key, value) {
 };
 
 Function getFormValue = (data, formKey, key, def) {
- 
-    if (data != null) {
-      if (data[formKey] != null) {
-        return data[formKey][key];
-      }
+  if (data != null) {
+    if (data[formKey] != null) {
+      return data[formKey][key];
     }
-     return def;
-  
+  }
+  return def;
 };
 
 Function setFormValue = (data, formKey, key, value) {
@@ -408,21 +406,43 @@ Function setFormValue = (data, formKey, key, value) {
 Rx<int> currentDay = 0.obs;
 
 Function processDays = (day) {
-  var result = [];
+  var result = [
+   
+  ];
   var destinations = globalctx.memory["destinationDay"];
   for (var destination in destinations) {
     for (var i = 1; i <= destination["days"]; i++) {
       result.add({"day": i, "destination": destination["destination"]});
     }
   }
+  result.add({"day": 1, "destination": "departure"});
   return result[day.value];
 };
 
 Function processDestinations = () {
   var destinationDay = [];
   var totalDays = 0;
-  var destinations = globalctx.memory.value["destinations"];
-  for (var destination in globalctx.promoted.value) {
+  var arrival = {
+    "explorationDay": "1",
+    "destination": "quito",
+    "type": "arrival"
+  };
+  var departure = {
+    "explorationDay": "1",
+    "destination": "quito",
+    "type": "departure"
+  };
+
+  var destinations = {
+    "arrival": arrival,
+    ...globalctx.memory.value["destinations"],
+    "departure": departure
+  };
+  for (var destination in [
+    "arrival",
+    ...globalctx.promoted.value,
+    "departure"
+  ]) {
     var dest = destinations[destination];
     var explorationDays = dest["explorationDay"];
     var days = int.parse(explorationDays);
@@ -435,3 +455,5 @@ Function processDestinations = () {
   print(destinationDay);
   print(totalDays);
 };
+
+var destination = Rx(processDays(currentDay)["destination"]);

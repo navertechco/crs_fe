@@ -14,8 +14,6 @@ class CustomLeftOptionsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     ctrl.state.memory = globalctx.memory;
 
-    var destination = Rx(processDays(currentDay)["destination"]);
-
     Rx<dynamic> transportService = Rx(getFormValue(
             ctrl.state.memory, destination.value, "service_type", <String>[]) ??
         <String>[]);
@@ -194,46 +192,50 @@ class CustomLeftOptionsWidget extends StatelessWidget {
                         data: processCatalog("destination_option"),
                       );
                     }),
-                    CustomFormMultiDropDownFieldWidget(
-                      validator: (value) =>
-                          CustomMultiDropdownRequiredValidator(value,
-                              errorText: "Key Activities are required ",
-                              context: context),
-                      value: keyActivities,
-                      onSaved: (value) {
-                        setFormValue(ctrl.state.memory, destination.value,
-                            "keyActivities", null);
-                        setFormValue(
-                            ctrl.state.memory,
-                            destination.value,
-                            "keyActivities",
-                            value!
-                                .map((e) => e["description"])
-                                .toSet()
-                                .toList());
-                      },
-                      onChanged: (value) {
-                        setFormValue(ctrl.state.memory, destination.value,
-                            "keyActivities", value);
-                      },
-                      hintText: "Key Activities            ",
-                      data: processCatalog("key_activity"),
-                    ),
-                    CustomFormDropDownFieldWidget(
-                      // label: "Exploration Days",
-                      value: getFormValue(ctrl.state.memory, destination.value,
-                          "travel_rhythm", "0"),
-                      onSaved: (value) {
-                        setFormValue(ctrl.state.memory, destination.value,
-                            "travel_rhythm", value);
-                      },
-                      onChanged: (value) {
-                        setFormValue(ctrl.state.memory, destination.value,
-                            "travel_rhythm", value);
-                      },
-                      hintText: "Travel Rhythm",
-                      data: processCatalog("travel_rhythm"),
-                    ),
+                    Obx(() {
+                      return CustomFormMultiDropDownFieldWidget(
+                        validator: (value) =>
+                            CustomMultiDropdownRequiredValidator(value,
+                                errorText: "Key Activities are required ",
+                                context: context),
+                        value: keyActivities,
+                        onSaved: (value) {
+                          setFormValue(ctrl.state.memory, destination.value,
+                              "keyActivities", null);
+                          setFormValue(
+                              ctrl.state.memory,
+                              destination.value,
+                              "keyActivities",
+                              value!
+                                  .map((e) => e["description"])
+                                  .toSet()
+                                  .toList());
+                        },
+                        onChanged: (value) {
+                          setFormValue(ctrl.state.memory, destination.value,
+                              "keyActivities", value);
+                        },
+                        hintText: "Key Activities            ",
+                        data: processCatalog("key_activity"),
+                      );
+                    }),
+                    Obx(() {
+                      return CustomFormDropDownFieldWidget(
+                        // label: "Exploration Days",
+                        value: getFormValue(ctrl.state.memory,
+                            destination.value, "travel_rhythm", "0"),
+                        onSaved: (value) {
+                          setFormValue(ctrl.state.memory, destination.value,
+                              "travel_rhythm", value);
+                        },
+                        onChanged: (value) {
+                          setFormValue(ctrl.state.memory, destination.value,
+                              "travel_rhythm", value);
+                        },
+                        hintText: "Travel Rhythm",
+                        data: processCatalog("travel_rhythm"),
+                      );
+                    }),
                   ],
                 ),
               ),
