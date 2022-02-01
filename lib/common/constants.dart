@@ -386,10 +386,8 @@ Function setData = (data, key, value) {
 
 Function getFormValue = (data, formKey, key, def) {
   if (data != null) {
-    if (data.value != null) {
-      if (data.value[formKey] != null) {
-        return data.value[formKey][key];
-      }
+    if (data[formKey] != null) {
+      return data[formKey][key];
     }
   }
   return def;
@@ -398,13 +396,31 @@ Function getFormValue = (data, formKey, key, def) {
 Function setFormValue = (data, formKey, key, value) {
   data ??= {}.obs;
 
-  if (data.value[formKey] == null) {
-    data.value[formKey] = {}.obs;
+  if (data[formKey] == null) {
+    data[formKey] = {};
   }
 
-  data.value[formKey].value[key] = value;
+  data[formKey][key] = value;
 };
 
 Rx<int> currentDay = 0.obs;
 
 var destination = (globalctx.promoted.value[currentDay.value]);
+
+Function processDestinations = () {
+  var destinationDay = [];
+  var totalDays = 0;
+  var destinations = globalctx.memory.value["destinations"];
+  for (var destination in globalctx.promoted.value) {
+    var dest = destinations[destination];
+    var explorationDays = dest["explorationDay"];
+    var days = int.parse(explorationDays);
+    destinationDay.add({"destination": destination, "days": days});
+    totalDays += days;
+    print(destination);
+  }
+  globalctx.memory["destinationDay"] = destinationDay;
+  globalctx.memory["totalDays"] = totalDays;
+  print(destinationDay);
+  print(totalDays);
+};

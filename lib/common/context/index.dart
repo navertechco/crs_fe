@@ -30,12 +30,12 @@ class Context with PropertyChangeNotifier<String> {
   RxList selected = [].obs;
   RxList suggested = [].obs;
   RxMap<String, dynamic> memory = {
-    "tour": {}.obs,
-    "customer": {}.obs,
-    "destinations": {}.obs,
-    "experiences": {}.obs,
-    "days": {}.obs,
-    "days_left": 0.obs
+    "tour": {},
+    "customer": {},
+    "destinations": {},
+    "experiences": {},
+    "days": {},
+    "days_left": 0
   }.obs;
   Map<String, GlobalKey<State<StatefulWidget>>> keys = {};
   Context() {

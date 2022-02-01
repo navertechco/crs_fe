@@ -9,10 +9,9 @@ class TourController extends GetxController {
   Function saveTour = () {};
 
   TourController() {
-
 // ignore: prefer_function_declarations_over_variables
     saveTour = () {
-      globalctx.memory["tour"].value = state.toMap();
+      globalctx.memory["tour"] = state.toMap();
       Get.toNamed("/Customer");
     };
   }

@@ -19,9 +19,11 @@ class KeyPadWidget extends StatelessWidget {
         if (!globalctx.destinationlist.isNotEmpty) {
           return CustomKeypadWidget(
               prevlabel: "< Previous",
-              nextlabel: "Next >",
+              nextlabel: "     Next >",
               onNext: () {
                 if (globalctx.promoted.value.isNotEmpty) {
+                 
+                  processDestinations();
                   Get.toNamed("/Experiences");
                 } else {
                   SweetAlert.show(context,

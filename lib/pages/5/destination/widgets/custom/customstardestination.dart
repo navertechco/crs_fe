@@ -27,7 +27,7 @@ class CustomStarDestinationForm extends StatelessWidget {
     Rx<DateTime> departureDate = Rx(globalctx.memory["tour"]["departure_date"]);
     Rx<int> totalDays =
         Rx(departureDate.value.difference(arrivalDate.value).inDays);
-    Rx<int> memoryDayLeft = Rx(globalctx.memory["days_left"].value);
+    Rx<int> memoryDayLeft = Rx(globalctx.memory["days_left"]);
     Rx<int> daysLeft = Rx(-memoryDayLeft.value + totalDays.value);
     Rx<int> explorationDay = Rx(int.parse(
         getFormValue(ctrl.state.memory, destination, "explorationDay", "1") ??
@@ -35,12 +35,12 @@ class CustomStarDestinationForm extends StatelessWidget {
 
     Rx<int> leftAccumulated = 0.obs;
     if (globalctx.reset.value) {
-      for (var item in destinations.keys) {
+      for (String item in destinations.keys) {
         ctrl.state.memory[item] = null;
       }
       globalctx.reset.value = false;
     }
-    for (var item in destinations.keys) {
+    for (String item in destinations.keys) {
       bool exists = ctrl.state.memory[item] != null && item != destination;
       if (exists) {
         leftAccumulated.value -= int.parse(
@@ -131,7 +131,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                           onSaved: (value) {
                             setFormValue(ctrl.state.memory, destination,
                                 "explorationMode", value);
-                            globalctx.memory["days_left"].value -= int.parse(
+                            globalctx.memory["days_left"] -= int.parse(
                                 getFormValue(ctrl.state.memory, destination,
                                     "explorationDay", "1"));
                           },
