@@ -403,12 +403,19 @@ Function setFormValue = (data, formKey, key, value) {
   data[formKey][key] = value;
 };
 
+var airports = {"1": "quito", "2": "guayaquil"};
+
 Rx<int> currentDay = 0.obs;
 
+Function getAirport = (day) {
+  // var destination = processDays(day)["destination"];
+  // getDestination(destination);
+
+  return "quito";
+};
+
 Function processDays = (day) {
-  var result = [
-   
-  ];
+  var result = [];
   var destinations = globalctx.memory["destinationDay"];
   for (var destination in destinations) {
     for (var i = 1; i <= destination["days"]; i++) {
@@ -422,16 +429,8 @@ Function processDays = (day) {
 Function processDestinations = () {
   var destinationDay = [];
   var totalDays = 0;
-  var arrival = {
-    "explorationDay": "1",
-    "destination": "quito",
-    "type": "arrival"
-  };
-  var departure = {
-    "explorationDay": "1",
-    "destination": "quito",
-    "type": "departure"
-  };
+  var arrival = {"explorationDay": "1", "airport": "quito"};
+  var departure = {"explorationDay": "1", "airport": "quito"};
 
   var destinations = {
     "arrival": arrival,
@@ -446,7 +445,7 @@ Function processDestinations = () {
     var dest = destinations[destination];
     var explorationDays = dest["explorationDay"];
     var days = int.parse(explorationDays);
-    destinationDay.add({"destination": destination, "days": days});
+    destinationDay.add({...dest, "destination": destination, "days": days});
     totalDays += days;
     print(destination);
   }
@@ -457,3 +456,19 @@ Function processDestinations = () {
 };
 
 var destination = Rx(processDays(currentDay)["destination"]);
+
+var getDestination = (String destination) async {
+  var res = await fetchhandler(kDefaultSchema, kDefaultServer,
+      kDefaultServerPort, kDefaultDestinationPath, 'POST', {
+    "data": {
+      "destination_name": destination,
+    }
+  });
+
+  if (res['state'] == true) {
+    setContext("current", res['data']);
+    return res["data"];
+  } else {
+    return false;
+  }
+};
