@@ -13,42 +13,41 @@ class CustomLeftOptionsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ctrl.state.memory = globalctx.memory;
+    var destination = Rx(processDays(currentDay)["destination"]);
+    var day = Rx(processDays(currentDay)["day"]);
 
-    Rx<Map<dynamic, dynamic>> localdata =
-        Rx(globalctx.context.value["experiencedata"]);
     Rx<dynamic> transportService = Rx(getFormValue(
-            ctrl.state.memory, destination, "service_type", <String>[]) ??
+            ctrl.state.memory, destination.value, "service_type", <String>[]) ??
         <String>[]);
 
     Rx<int> guide =
-        Rx(getFormValue(ctrl.state.memory, destination, "guide_type", 1));
+        Rx(getFormValue(ctrl.state.memory, destination.value, "guide_type", 1));
 
-    Rx<DateTime> arrivalDate = Rx(globalctx.memory["tour"]["arrival_date"]);
-    Rx<DateTime> departureDate = Rx(globalctx.memory["tour"]["departure_date"]);
-    Rx<int> totalDays =
-        Rx(departureDate.value.difference(arrivalDate.value).inDays);
     Rx<int> guideIndex = Rx(
         transportService.value.indexWhere((element) => element == "GUIDING") ??
             0);
     Rx<int> translateIndex = Rx(transportService.value
             .indexWhere((element) => element == "TRANSLATING") ??
         0);
-    var translatingService = (getFormValue(
-        ctrl.state.memory, destination, "translating_service", <String>[]));
+    var translatingService = (getFormValue(ctrl.state.memory, destination.value,
+        "translating_service", <String>[]));
     var keyActivities = getFormValue(
-        ctrl.state.memory, destination, "key_activities", <String>[]);
+        ctrl.state.memory, destination.value, "key_activities", <String>[]);
     Rx<dynamic> destinationOption = Rx(getFormValue(
-        ctrl.state.memory, destination, "destination_option", "0"));
+        ctrl.state.memory, destination.value, "destination_option", "0"));
+
     return Padding(
       padding: EdgeInsets.only(
           top: MediaQuery.of(context).size.height * 0.3,
           left: MediaQuery.of(context).size.width * 0.05),
       child: Column(
         children: [
-          CustomTitleWidget(
-            fontWeight: FontWeight.bold,
-            label: "Day $currentDay:  ${destination.toString().capitalize}",
-          ),
+          Obx(() {
+            return CustomTitleWidget(
+              fontWeight: FontWeight.bold,
+              label: "Day :  ${destination.toString().capitalize}",
+            );
+          }),
           Divider(color: Color.fromARGB(255, 0, 0, 0)),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.6,
@@ -73,8 +72,8 @@ class CustomLeftOptionsWidget extends StatelessWidget {
                         children: [
                           CustomFormMultiDropDownFieldWidget(
                             // label: "Exploration Days",
-                            value: getFormValue(ctrl.state.memory, destination,
-                                "service_type", <String>[]),
+                            value: getFormValue(ctrl.state.memory,
+                                destination.value, "service_type", <String>[]),
                             onSaved: (value) {
                               transportService.value = value;
                               guideIndex.value = transportService.value
@@ -83,7 +82,7 @@ class CustomLeftOptionsWidget extends StatelessWidget {
                               translateIndex.value = transportService.value
                                   .indexWhere(
                                       (element) => element == "TRANSLATING");
-                              setFormValue(ctrl.state.memory, destination,
+                              setFormValue(ctrl.state.memory, destination.value,
                                   "service_type", value);
                             },
                             onChanged: (value) {
@@ -94,7 +93,7 @@ class CustomLeftOptionsWidget extends StatelessWidget {
                               translateIndex.value = transportService.value
                                   .indexWhere(
                                       (element) => element == "TRANSLATING");
-                              setFormValue(ctrl.state.memory, destination,
+                              setFormValue(ctrl.state.memory, destination.value,
                                   "service_type", value);
                             },
                             hintText: "                  Services",
@@ -105,15 +104,21 @@ class CustomLeftOptionsWidget extends StatelessWidget {
                               // label: "Exploration Days",
                               value: translatingService,
                               onSaved: (value) {
-                                setFormValue(ctrl.state.memory, destination,
-                                    "translating_service", value);
+                                setFormValue(
+                                    ctrl.state.memory,
+                                    destination.value,
+                                    "translating_service",
+                                    value);
                               },
                               onChanged: (value) {
                                 translateIndex.value =
                                     value!.isNotEmpty ? 0 : -1;
                                 translatingService = value;
-                                setFormValue(ctrl.state.memory, destination,
-                                    "translating_service", value);
+                                setFormValue(
+                                    ctrl.state.memory,
+                                    destination.value,
+                                    "translating_service",
+                                    value);
                               },
                               hintText: "          Translating Services",
                               data: processCatalog("translating_service"),
@@ -129,8 +134,11 @@ class CustomLeftOptionsWidget extends StatelessWidget {
                                       guide.value = 0;
                                     } else {
                                       guide.value = value;
-                                      setFormValue(ctrl.state.memory,
-                                          destination, "guide_type", value);
+                                      setFormValue(
+                                          ctrl.state.memory,
+                                          destination.value,
+                                          "guide_type",
+                                          value);
                                     }
                                   },
                                   hintText: "Driver guide?",
@@ -143,8 +151,11 @@ class CustomLeftOptionsWidget extends StatelessWidget {
                                       guide.value = 0;
                                     } else {
                                       guide.value = value;
-                                      setFormValue(ctrl.state.memory,
-                                          destination, "guide_type", value);
+                                      setFormValue(
+                                          ctrl.state.memory,
+                                          destination.value,
+                                          "guide_type",
+                                          value);
                                     }
                                   },
                                   hintText: "Additional guide?",
@@ -171,11 +182,11 @@ class CustomLeftOptionsWidget extends StatelessWidget {
                         // label: "Exploration Days",
                         value: destinationOption.value,
                         onSaved: (value) {
-                          setFormValue(ctrl.state.memory, destination,
+                          setFormValue(ctrl.state.memory, destination.value,
                               "destination_option", value);
                         },
                         onChanged: (value) {
-                          setFormValue(ctrl.state.memory, destination,
+                          setFormValue(ctrl.state.memory, destination.value,
                               "destination_option", value);
                         },
                         hintText: "Travel Options",
@@ -189,11 +200,11 @@ class CustomLeftOptionsWidget extends StatelessWidget {
                               context: context),
                       value: keyActivities,
                       onSaved: (value) {
-                        setFormValue(ctrl.state.memory, destination,
+                        setFormValue(ctrl.state.memory, destination.value,
                             "keyActivities", null);
                         setFormValue(
                             ctrl.state.memory,
-                            destination,
+                            destination.value,
                             "keyActivities",
                             value!
                                 .map((e) => e["description"])
@@ -201,7 +212,7 @@ class CustomLeftOptionsWidget extends StatelessWidget {
                                 .toList());
                       },
                       onChanged: (value) {
-                        setFormValue(ctrl.state.memory, destination,
+                        setFormValue(ctrl.state.memory, destination.value,
                             "keyActivities", value);
                       },
                       hintText: "Key Activities            ",
@@ -209,14 +220,14 @@ class CustomLeftOptionsWidget extends StatelessWidget {
                     ),
                     CustomFormDropDownFieldWidget(
                       // label: "Exploration Days",
-                      value: getFormValue(
-                          ctrl.state.memory, destination, "travel_rhythm", "0"),
+                      value: getFormValue(ctrl.state.memory, destination.value,
+                          "travel_rhythm", "0"),
                       onSaved: (value) {
-                        setFormValue(ctrl.state.memory, destination,
+                        setFormValue(ctrl.state.memory, destination.value,
                             "travel_rhythm", value);
                       },
                       onChanged: (value) {
-                        setFormValue(ctrl.state.memory, destination,
+                        setFormValue(ctrl.state.memory, destination.value,
                             "travel_rhythm", value);
                       },
                       hintText: "Travel Rhythm",

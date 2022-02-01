@@ -12,6 +12,7 @@ class CustomFooterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var destination = processDays(currentDay)["destination"];
     return Column(
       children: [
         Row(
@@ -37,10 +38,20 @@ class CustomFooterWidget extends StatelessWidget {
             nextlabel: "Next >",
             prevlabel: "< Previous ",
             onNext: () {
-              Get.toNamed("/Resume");
+              if (currentDay.value < globalctx.memory["totalDays"] - 1) {
+                currentDay.value += 1;
+                destination = processDays(currentDay)["destination"];
+              } else {
+                Get.toNamed("/Resume");
+              }
             },
             onPrevious: () {
-              Get.back();
+              if (currentDay.value > 0) {
+                currentDay.value -= 1;
+                destination = processDays(currentDay)["destination"];
+              } else {
+                Get.back();
+              }
             },
             width: 0.45),
       ],

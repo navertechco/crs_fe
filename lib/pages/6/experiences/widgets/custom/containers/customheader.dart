@@ -15,8 +15,8 @@ class CustomHeaderWidget extends StatelessWidget {
     Rx<DateTime> departureDate = Rx(globalctx.memory["tour"]["departure_date"]);
     Rx<int> totalDays =
         Rx(departureDate.value.difference(arrivalDate.value).inDays);
-    final currentDayFormat = DateFormat('EEEE MMMM DD yyyy');
-
+    final currentDayFormat = DateFormat('EEEE MMMM d yyyy');
+    var destination = processDays(currentDay)["destination"];
     return Column(
       children: [
         Row(
