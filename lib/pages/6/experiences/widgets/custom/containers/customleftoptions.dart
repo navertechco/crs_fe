@@ -13,8 +13,8 @@ class CustomLeftOptionsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ctrl.state.memory = globalctx.memory;
+
     var destination = Rx(processDays(currentDay)["destination"]);
-    var day = Rx(processDays(currentDay)["day"]);
 
     Rx<dynamic> transportService = Rx(getFormValue(
             ctrl.state.memory, destination.value, "service_type", <String>[]) ??
@@ -45,7 +45,8 @@ class CustomLeftOptionsWidget extends StatelessWidget {
           Obx(() {
             return CustomTitleWidget(
               fontWeight: FontWeight.bold,
-              label: "Day :  ${destination.toString().capitalize}",
+              label:
+                  "Day : ${currentDay.value + 1}  ${processDays(currentDay)["destination"].toString().capitalize}",
             );
           }),
           Divider(color: Color.fromARGB(255, 0, 0, 0)),
