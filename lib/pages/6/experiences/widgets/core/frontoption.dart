@@ -4,12 +4,12 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../../index.dart';
 
 class FrontOptionWidget extends StatelessWidget {
-  const FrontOptionWidget({Key? key, this.experience = "coast"})
+  const FrontOptionWidget({Key? key, required this.experience})
       : super(key: key);
-
   final String experience;
   @override
   Widget build(BuildContext context) {
+    getExperiences("", experience, null, null, 1);
     var experiences = getContext("experiences");
     var row = experiences
         .toList()

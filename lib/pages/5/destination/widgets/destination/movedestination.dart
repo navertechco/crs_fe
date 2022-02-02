@@ -12,7 +12,7 @@ void moveDestinationFunction(String destination, BuildContext context) {
           ? Row(
               children: [
                 DestinationOptionWidget(destination: destination),
-                !globalctx.promoted.contains(destination)
+                !globalctx.promotedDestinations.contains(destination)
                     ? GestureDetector(
                         onTap: () {
                           if (globalctx.destinations.contains(destination)) {
@@ -28,7 +28,7 @@ void moveDestinationFunction(String destination, BuildContext context) {
                     : GestureDetector(
                         onTap: () {
                           if (globalctx.destinations.contains(destination)) {
-                            globalctx.promoted.remove(destination);
+                            globalctx.promotedDestinations.remove(destination);
                             var index = globalctx.destinations.indexWhere(
                                 (element) => element == destination);
                             globalctx.destinations.removeAt(index);

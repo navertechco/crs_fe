@@ -87,7 +87,8 @@ class CustomTourInformationForm extends StatelessWidget {
                 fontWeight: FontWeight.bold,
                 label: "  Date                              "),
             CustomFormDateFieldWidget(
-              initialValue: getValue(tour, "arrival_date", def: DateTime.now()),
+              initialValue:
+                  getValue(tour, "arrival_date", def: DateTime(2022, 01, 31)),
               validator: (date) {
                 CustomDatetimeRequiredValidator(date,
                     context: context, errorText: "Arrival Text is Required");

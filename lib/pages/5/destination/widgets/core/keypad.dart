@@ -21,8 +21,7 @@ class KeyPadWidget extends StatelessWidget {
               prevlabel: "< Previous",
               nextlabel: "     Next >",
               onNext: () {
-                if (globalctx.promoted.value.isNotEmpty) {
-                 
+                if (globalctx.promotedDestinations.value.isNotEmpty) {
                   processDestinations();
                   Get.toNamed("/Experiences");
                 } else {

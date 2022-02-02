@@ -13,7 +13,7 @@ class ResumeWidget extends GetView<ResumeController> {
   final pkey;
   @override
   Widget build(BuildContext context) {
-    Map<String, dynamic> data = getContext("data");
+    Map<String, dynamic> data = globalctx.memory.value;
 
     return Itinerary(
       pkey: pkey,
@@ -80,8 +80,8 @@ class EndServices extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var detail = globalctx.memory.value;
-    var end = getValue(detail, "end", def: []);
+    var memory = globalctx.memory.value;
+    var end = getValue(memory, "end", def: []);
     var netrates = getValue(end, "net_rates", def: []);
     var included = getValue(end, "included", def: []);
     var notincluded = getValue(end, "not_included", def: []);
@@ -265,15 +265,15 @@ class Cover extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var detail = globalctx.memory.value;
-    var tour = getValue(detail, "tour", def: []);
-    var customer = getValue(detail, "customer", def: []);
-    var title = getValue(tour, "title", def: []);
-    var passengers = getValue(tour, "passengers", def: []);
+    var memory = globalctx.memory.value;
+    var tour = getValue(memory, "tour", def: {});
+    var customer = getValue(memory, "customer", def: {});
+    var title = getValue(tour, "title", def: "");
+    var passengers = getValue(tour, "passengers", def: 1);
     var days = currentDay.value;
     var nights = days - 1;
-    var valid = getValue(tour, "valid_until", def: []);
-    var description = getValue(tour, "description", def: []);
+    var valid = getValue(tour, "valid_until", def: "31-12-2022");
+    var description = getValue(tour, "description", def: "");
 
     return Column(
       children: [
@@ -318,7 +318,8 @@ class Destinations extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> destinations = [];
-    var detsdata = getValue(data["detail"], "destinations", def: []);
+    var memory = globalctx.memory.value;
+    var detsdata = getValue(memory, "destinations", def: []);
     if (data != null) {
       for (var i = 0; i < detsdata.length; i++) {
         var key = GlobalKey();
@@ -342,64 +343,42 @@ class Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var customer = getValue(data["detail"], "customer", def: {});
-    var tour = getValue(data["detail"], "tour", def: {});
+    var memory = globalctx.memory.value;
+    var customer = getValue(memory, "customer", def: {});
+    var tour = getValue(memory, "tour", def: {});
 
     List<Map<String, dynamic>> customerTemplate = [
+      {"code": "contact_name", "description": "contact_name", "value": "1"},
       {
-        "code": "brith_date",
-        "description": "Birth Date",
-        "value": "10/10/1950"
+        "code": "legal_client_type",
+        "description": "legal_client_type",
+        "value": "1"
       },
-      {"code": "customer_id", "description": "Client code", "value": "1"},
-      {
-        "code": "contact_name",
-        "description": "Contact Name",
-        "value": "Mr. Frank Stevens"
-      },
-      {"code": "customer_type", "description": "Customer Type", "value": "1"},
-      {
-        "code": "email",
-        "description": "e-Mail",
-        "value": "frank.stevens@gmail.com"
-      },
-      {"code": "id_number", "description": "DNI", "value": "15261548"},
-      {
-        "code": "legal_name",
-        "description": "Lagal Name",
-        "value": "British Bank"
-      },
+      {"code": "customer_type", "description": "customer_type", "value": "1"},
+      {"code": "country", "description": "country", "value": "1"},
+      {"code": "email", "description": "email", "value": "1"},
+      {"code": "travel_code", "description": "travel_code", "value": "1"},
+      {"code": "lead_passenger", "description": "lead_passenger", "value": "1"},
+      {"code": "address_line", "description": "address_line", "value": "1"},
+      {"code": "city", "description": "city", "value": "1"},
+      {"code": "dni", "description": "dni", "value": "1"},
+      {"code": "tax_id", "description": "tax_id", "value": "1"},
+      {"code": "names", "description": "names", "value": "1"},
+      {"code": "last_names", "description": "last_names", "value": "1"},
+      {"code": "birth_date", "description": "birth_date", "value": "1"}
     ];
 
     List<Map<String, dynamic>> tourTemplate = [
+      {"code": "country", "description": "country", "value": "1"},
       {
-        "code": "accomodation_type_id",
-        "description": "Accomodation Type",
+        "code": "accomodation_type",
+        "description": "accomodation_type",
         "value": "1"
       },
-      {"code": "passengers", "description": "Passengers", "value": "18"},
-      {
-        "code": "arrival_date",
-        "description": "Arrival Date",
-        "value": "09/10/2022"
-      },
-      {
-        "code": "departure_date",
-        "description": "Departure Date",
-        "value": "14/10/2022"
-      },
-      {"code": "valid_until", "description": "TITLE", "value": "31/12/2022"},
-      {"code": "contact_agent", "description": "Contact Agent", "value": "1"},
-      {"code": "days", "description": "Days", "value": "10"},
-      {
-        "code": "destination_country_id",
-        "description": "Destination Country",
-        "value": "1"
-      },
-      {"code": "nights", "description": "Nigths", "value": "9"},
-      {"code": "partner", "description": "Partner", "value": "CNH Tours"},
-      {"code": "purpose_id", "description": "Purpose", "value": "1"},
-      {"code": "rooms", "description": "Rooms", "value": "1s;16d;1t"},
+      {"code": "purpose", "description": "purpose", "value": "1"},
+      {"code": "passengers", "description": "passengers", "value": "1"},
+      {"code": "arrival_date", "description": "arrival_date", "value": "1"},
+      {"code": "departure_date", "description": "departure_date", "value": "1"}
     ];
 
     return Column(
@@ -426,15 +405,19 @@ class CustomFormDestination extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<CustomFormDayWidget> daylist = [];
-    var detail = globalctx.memory.value;
-    var destinations = detail["destinations"];
-    var destination = destinations[index];
-    var days = destination["days"];
-    for (int i = 0; i < days.length; i++) {
+    var memory = globalctx.memory.value;
+    var destinations = memory["destinations"];
+    var destination = destinations.entries.toList()[index].key;
+    List<dynamic> destinationData =
+        destinations.entries.map((entry) => [entry.key, entry.value]).toList();
+    var explorationDay = int.parse(destinationData[index][1]["explorationDay"]);
+
+    for (var day = 0; day < explorationDay; day++) {
       var key = GlobalKey();
-      globalctx.keys["day-$index-$i"] = key;
-      daylist.add(CustomFormDayWidget(data: data, indexes: [index, i]));
+      globalctx.keys["day-$index-$day"] = key;
+      daylist.add(CustomFormDayWidget(data: data, indexes: [index, day]));
     }
+
     return Column(
       children: [
         RepaintBoundary(
@@ -442,7 +425,7 @@ class CustomFormDestination extends StatelessWidget {
             child: CustomFormTitleWidget(
                 level: 3,
                 label:
-                    "Star Destination ${index + 1}:#Cuenca#(Between: 10-01-22 and 13-01-22)")),
+                    "Star Destination ${index + 1}:#${destination.toString().capitalize}#(Between: ${currentDayFormat.format(arrivalDate.value)} and ${currentDayFormat.format(departureDate.value)})")),
         Column(
           children: daylist,
         ),
@@ -464,15 +447,11 @@ class CustomFormDayWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var destinationindex = indexes[0];
     var dayindex = indexes[1];
-    var destinations;
-    // ignore: unnecessary_null_comparison
-    if (data != null) {
-      destinations = data['destinations'];
-    } else {
-      destinations = [];
-    }
-    var destination = destinations.toList()[destinationindex].value;
-    var day = destination['days'][dayindex];
+    var destinations = globalctx.promotedDestinations.value;
+    var destination = destinations[destinationindex];
+    var destinationsData = globalctx.memory["destinations"];
+    var destinationData = destinationsData[destination];
+    var day = globalctx.memory['days'][dayindex];
     var daydate = day['date'];
     var meals = day['meals'];
     var observation = day['observation'];
@@ -551,15 +530,10 @@ class CustomFormExperiencesDetailWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var destinationindex = indexes[0];
     var dayindex = indexes[1];
-
+    var memory = globalctx.memory.value;
     List<CustomFormExperienceRowWidget> list = [];
-
-    for (var i = 0;
-        i <
-            data["detail"]["destinations"][destinationindex]["days"][dayindex]
-                    ['experiences']
-                .length;
-        i++) {
+    var experiences = memory["days"][dayindex]['experiences'];
+    for (var i = 0; i < experiences.length; i++) {
       list.add(CustomFormExperienceRowWidget(
           data: data, indexes: [destinationindex, dayindex, i]));
     }
@@ -586,8 +560,8 @@ class CustomFormExperienceRowWidget extends StatelessWidget {
     var destinationindex = indexes[0];
     var dayindex = indexes[1];
     var experienceindex = indexes[2];
-    var day =
-        data["detail"]['destinations'][destinationindex]['days'][dayindex];
+    var memory = globalctx.memory.value;
+    var day = memory['destinations'][destinationindex]['days'][dayindex];
     var experiences = day['experiences'];
     var experience = experiences[experienceindex];
     var nextexperience = experienceindex + 1 < experiences.length
@@ -665,7 +639,7 @@ class CustomFormHeaderIterWidget extends StatelessWidget {
     for (var i = 0; i < data[index].length; i++) {
       list.add(CustomFormHeaderRowWidget(
         customlabel: data[index][i]["description"] + ":",
-        value: data[index][i]["value"],
+        value: data[index][i]["value"].toString(),
       ));
     }
     return Row(

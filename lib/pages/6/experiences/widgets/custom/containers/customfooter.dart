@@ -5,7 +5,7 @@ import '../../../../../index.dart';
 
 class CustomFooterWidget extends StatelessWidget {
   final ExperiencesController ctrl;
-  CustomFooterWidget({
+  const CustomFooterWidget({
     Key? key,
     required this.ctrl,
   }) : super(key: key);
@@ -37,9 +37,35 @@ class CustomFooterWidget extends StatelessWidget {
             nextlabel: "Next >",
             prevlabel: "< Previous ",
             onNext: () {
+              var day = {
+                "date": "",
+                "observation": "",
+                "day_description": "",
+                "day_name": "",
+                "parent": 0,
+                "option_id": 1,
+                "transport_id": 1,
+                "key_activities": [],
+                "meals": [],
+                "experiences": [],
+                "destination": destination.value
+              };
+
+              var experience = {
+                "destination": "",
+                "day": "",
+                "title": "",
+                "description": "",
+                "next": "",
+                "previous": "",
+                "experience_id": "",
+                "photo": ""
+              };
+
+              globalctx.memory.value["days"][currentDay.value] ??= {};
+              globalctx.memory.value["days"][currentDay.value] = day;
+              print(globalctx.memory.value["days"]);
               if (currentDay.value < globalctx.memory["totalDays"] - 1) {
-                // globalctx.memory =
-                //     RxMap<String, dynamic>({...ctrl.state.memory});
                 currentDay.value += 1;
                 destination.value = processDays(currentDay)["destination"];
               } else {

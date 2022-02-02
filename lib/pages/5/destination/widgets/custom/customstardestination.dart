@@ -21,14 +21,7 @@ class CustomStarDestinationForm extends StatelessWidget {
   Widget build(BuildContext context) {
     var tour = getContext("tour");
     var ctx = globalctx.context.value;
-    var destinationData = getParam("DESTINATION_DATA");
-    Map<dynamic, dynamic> destinations = getValue(destinationData, "value");
-    Rx<DateTime> arrivalDate = Rx(globalctx.memory["tour"]["arrival_date"]);
-    Rx<DateTime> departureDate = Rx(globalctx.memory["tour"]["departure_date"]);
-    Rx<int> totalDays =
-        Rx(departureDate.value.difference(arrivalDate.value).inDays);
-    Rx<int> memoryDayLeft = Rx(globalctx.memory["days_left"]);
-    Rx<int> daysLeft = Rx(-memoryDayLeft.value + totalDays.value);
+    
     Rx<int> explorationDay = Rx(int.parse(
         getFormValue(ctrl.state.memory, destination, "explorationDay", "1") ??
             "1"));

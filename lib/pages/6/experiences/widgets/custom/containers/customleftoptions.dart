@@ -41,10 +41,22 @@ class CustomLeftOptionsWidget extends StatelessWidget {
       child: Column(
         children: [
           Obx(() {
+            var destination = processDays(currentDay)["destination"];
+            var add = 1;
+            var day = currentDay.value + add;
+            if (destination == "departure") {
+              add = 0;
+            }
+            if (currentDay.value == 1) {
+              add = 0;
+            }
+            if (day > 1) {
+              day -= 1;
+            }
+
             return CustomTitleWidget(
               fontWeight: FontWeight.bold,
-              label:
-                  "Day : ${currentDay.value + 1}  ${processDays(currentDay)["destination"].toString().capitalize}",
+              label: "Day : ${day}  ${destination.toString().capitalize}",
             );
           }),
           Divider(color: Color.fromARGB(255, 0, 0, 0)),

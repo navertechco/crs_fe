@@ -24,11 +24,10 @@ class ExperienceDetailWidget extends GetView<ExperienceDetailController> {
               nextlabel: "Accept >",
               prevlabel: " < Cancel",
               onNext: () {
-                globalctx.promoted.add(experience);
+                globalctx.promotedExperiences.add(experience);
                 Get.close(1);
               },
               onPrevious: () {
-                 
                 Get.close(1);
               },
               width: 0.3),

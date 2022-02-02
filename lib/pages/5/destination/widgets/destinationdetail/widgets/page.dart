@@ -27,10 +27,9 @@ class DestinationDetailWidget extends GetView<DestinationDetailController> {
               onNext: () {
                 if (_formKey.currentState!.validate()) {
                   _formKey.currentState!.save();
-                  if (!globalctx.promoted.contains(destination)) {
-                    globalctx.promoted.add(destination);
-                    globalctx.memory["destinations"] =
-                        ctrl.state.memory;
+                  if (!globalctx.promotedDestinations.contains(destination)) {
+                    globalctx.promotedDestinations.add(destination);
+                    globalctx.memory["destinations"] = ctrl.state.memory;
                   }
                   Get.close(1);
                 }

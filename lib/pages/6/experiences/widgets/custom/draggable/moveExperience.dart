@@ -15,7 +15,7 @@ void moveExperienceFunction(String experience, BuildContext context) {
                     height: MediaQuery.of(context).size.height * 0.075,
                     width: MediaQuery.of(context).size.width * 0.2,
                     experience: experience),
-                !globalctx.promoted.contains(experience)
+                !globalctx.promotedExperiences.contains(experience)
                     ? GestureDetector(
                         onTap: () {
                           if (globalctx.experiences.contains(experience)) {
@@ -31,7 +31,7 @@ void moveExperienceFunction(String experience, BuildContext context) {
                     : GestureDetector(
                         onTap: () {
                           if (globalctx.experiences.contains(experience)) {
-                            globalctx.promoted.remove(experience);
+                            globalctx.promotedExperiences.remove(experience);
                             var index = globalctx.experiences
                                 .indexWhere((element) => element == experience);
                             globalctx.experiences.removeAt(index);

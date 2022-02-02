@@ -26,14 +26,16 @@ class Context with PropertyChangeNotifier<String> {
   RxList experiences = [].obs;
   RxList<dynamic> destinationlist = [].obs;
   RxList<dynamic> experiencelist = [].obs;
-  RxList promoted = [].obs;
-  RxList selected = [].obs;
+  RxList promotedDestinations = [].obs;
+  RxList promotedExperiences = [].obs;
+  RxList promotedDays = [].obs;
+  RxList selectedDestinations = [].obs;
+  RxList selectedExperiences = [].obs;
   RxList suggested = [].obs;
   RxMap<String, dynamic> memory = {
     "tour": {},
     "customer": {},
     "destinations": {},
-    "experiences": {},
     "days": {},
     "days_left": 0
   }.obs;

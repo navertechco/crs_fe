@@ -6,6 +6,7 @@ import 'package:flutter_html/shims/dart_ui_real.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:sweetalert/sweetalert.dart';
 import 'context/index.dart';
 import 'index.dart';
@@ -30,8 +31,8 @@ Function removeFromArray = (array, item) {
 };
 
 Function removeExperience = (experience) {
-  removeFromArray(globalctx.selected, experience);
-  removeFromArray(globalctx.promoted, experience);
+  removeFromArray(globalctx.selectedExperiences, experience);
+  removeFromArray(globalctx.promotedExperiences, experience);
 };
 
 var KTextSytle = (context, fontSize, fontWeight) => GoogleFonts.poppins(
@@ -314,8 +315,8 @@ var getExperiences = (String destination,
 };
 
 var globalctxReset = () {
-  globalctx.promoted.value = [];
-  globalctx.selected.value = [];
+  globalctx.promotedDestinations.value = [];
+  globalctx.selectedDestinations.value = [];
   globalctx.destinations.value = [];
   globalctx.experiences.value = [];
   globalctx.destinationDragData.value = [];
@@ -407,11 +408,23 @@ var airports = {"1": "quito", "2": "guayaquil"};
 
 Rx<int> currentDay = 0.obs;
 
-Function getAirport = (day) {
-  // var destination = processDays(day)["destination"];
-  // getDestination(destination);
-
-  return "quito";
+Function getAirport = (destination) {
+  var airport = "quito";
+  try {
+    var destinationData = getParam("DESTINATION_DATA")["value"];
+    var destinations = globalctx.promotedDestinations.value;
+    var first = destinations[1];
+    var last = destinations[destinations.length - 2];
+    if (destination == "arrival") {
+      airport = destinationData[first][5];
+    }
+    if (destination == "departure") {
+      airport = destinationData[last][5];
+    }
+    return airport;
+  } catch (e) {
+    return airport;
+  }
 };
 
 Function processDays = (day) {
@@ -439,7 +452,7 @@ Function processDestinations = () {
   };
   for (var destination in [
     "arrival",
-    ...globalctx.promoted.value,
+    ...globalctx.promotedDestinations.value,
     "departure"
   ]) {
     var dest = destinations[destination];
@@ -472,3 +485,12 @@ var getDestination = (String destination) async {
     return false;
   }
 };
+var destinationData = getParam("DESTINATION_DATA");
+Map<dynamic, dynamic> destinations = getValue(destinationData, "value");
+Rx<DateTime> arrivalDate = Rx(globalctx.memory["tour"]["arrival_date"]);
+Rx<DateTime> departureDate = Rx(globalctx.memory["tour"]["departure_date"]);
+Rx<int> totalDays =
+    Rx(departureDate.value.difference(arrivalDate.value).inDays);
+Rx<int> memoryDayLeft = Rx(globalctx.memory["days_left"]);
+Rx<int> daysLeft = Rx(-memoryDayLeft.value + totalDays.value);
+final currentDayFormat = DateFormat('EEEE MMMM d yyyy');

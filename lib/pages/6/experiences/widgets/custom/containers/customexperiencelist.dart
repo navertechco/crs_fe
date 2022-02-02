@@ -14,22 +14,17 @@ class CustomExperiencesListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var list = <Widget>[].obs;
 
-    if (suggested) {
-      for (var destination in globalctx.promoted.value) {
-        getExperiences(destination, "",null,null,null);
+    list = <Widget>[].obs;
+    globalctx.suggested.value = [];
+    for (var destination in globalctx.promotedDestinations.value) {
+      getExperiences(destination, "", null, null, null);
+      var experiences = getContext("experiences");
 
-        var experiences = getContext("experiences");
-
-        for (var experience in experiences) {
-          globalctx.suggested.add(experience);
-          list.add(CustomDragableExperience(
-              experience: experience["title"], suggested: suggested));
-        }
+      for (var experience in experiences) {
+        globalctx.suggested.add(experience);
+        list.add(CustomDragableExperience(
+            experience: experience["title"], suggested: suggested));
       }
-    }
-
-    while (list.value.length == 0) {
-      return Text("");
     }
 
     return SizedBox(
@@ -39,6 +34,9 @@ class CustomExperiencesListWidget extends StatelessWidget {
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Obx(() {
+            while (list.value.isEmpty) {
+              return Text("");
+            }
             return Column(
               children: list.value,
             );
