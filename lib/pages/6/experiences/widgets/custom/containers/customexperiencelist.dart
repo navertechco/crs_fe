@@ -16,14 +16,18 @@ class CustomExperiencesListWidget extends StatelessWidget {
 
     list = <Widget>[].obs;
     globalctx.suggested.value = [];
+    var exps = [];
     for (var destination in globalctx.promotedDestinations.value) {
       getExperiences(destination, "", null, null, null);
       var experiences = getContext("experiences");
 
       for (var experience in experiences) {
         globalctx.suggested.add(experience);
-        list.add(CustomDragableExperience(
-            experience: experience["title"], suggested: suggested));
+        if (!exps.contains(experience)) {
+          list.add(CustomDragableExperience(
+              experience: experience["title"], suggested: suggested));
+          exps.add(experience);
+        }
       }
     }
 
