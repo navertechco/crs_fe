@@ -9,7 +9,7 @@ class FrontOptionWidget extends StatelessWidget {
   final String experience;
   @override
   Widget build(BuildContext context) {
-    getExperiences("", experience, null, null, 1);
+    // getExperiences("", experience, null, null, 1);
     var experiences = getContext("experiences");
     var row = experiences
         .toList()

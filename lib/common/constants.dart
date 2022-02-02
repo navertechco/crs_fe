@@ -450,22 +450,22 @@ Function processDestinations = () {
     ...globalctx.memory.value["destinations"],
     "departure": departure
   };
-  for (var destination in [
+
+  var allPromotedDEstinations = [
     "arrival",
     ...globalctx.promotedDestinations.value,
     "departure"
-  ]) {
+  ];
+
+  for (var destination in allPromotedDEstinations) {
     var dest = destinations[destination];
     var explorationDays = dest["explorationDay"];
     var days = int.parse(explorationDays);
     destinationDay.add({...dest, "destination": destination, "days": days});
     totalDays += days;
-    print(destination);
   }
   globalctx.memory["destinationDay"] = destinationDay;
   globalctx.memory["totalDays"] = totalDays;
-  print(destinationDay);
-  print(totalDays);
 };
 
 var destination = Rx(processDays(currentDay)["destination"]);
