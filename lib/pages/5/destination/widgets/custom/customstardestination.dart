@@ -47,7 +47,10 @@ class CustomStarDestinationForm extends StatelessWidget {
 
     List<Map<String, dynamic>> explorationdDays =
         processCatalog("exploration_days");
-
+    var dayleft = Rx(getContext("dayleft"));
+    var current = Rx(
+        getFormValue(ctrl.state.memory, destination, "explorationDay", "1") ??
+            "1");
     return Form(
       key: formKey,
       child: Column(
@@ -85,14 +88,12 @@ class CustomStarDestinationForm extends StatelessWidget {
                   label: destinations[destination][1],
                 ),
                 Obx(() {
-                  var dayleft = getContext("dayleft");
-                  var current = getFormValue(ctrl.state.memory, destination,
-                          "explorationDay", "1") ??
-                      "1";
                   Rx<List<Map<String, dynamic>>> filteredED = Rx(
                       explorationdDays
-                          .where(
-                              (e) => e["code"] <= dayleft + int.parse(current))
+                          .where((e) =>
+                              e["code"] <=
+                              (dayleft.value < 0 ? 0 : dayleft.value) +
+                                  int.parse(current.value))
                           .toList());
                   return CustomFormDropDownFieldWidget(
                       validator: CustomRequiredValidator(
@@ -103,21 +104,16 @@ class CustomStarDestinationForm extends StatelessWidget {
                       onSaved: (value) {
                         setFormValue(ctrl.state.memory, destination,
                             "explorationDay", value);
-                        setContext(
-                            "dayleft",
-                            totalDays.value +
-                                leftAccumulated.value -
-                                explorationDay.value);
                       },
                       onChanged: (value) {
+                        current.value = value;
                         setFormValue(ctrl.state.memory, destination,
                             "explorationDay", value);
                         explorationDay.value = int.parse(value!);
-                        setContext(
-                            "dayleft",
-                            totalDays.value +
-                                leftAccumulated.value -
-                                explorationDay.value);
+                        dayleft.value = totalDays.value +
+                            leftAccumulated.value -
+                            explorationDay.value;
+                        setContext("dayleft", dayleft.value);
                       },
                       label: "Exploration Days     ",
                       data: filteredED.value);

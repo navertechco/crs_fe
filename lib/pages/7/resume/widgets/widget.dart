@@ -406,11 +406,22 @@ class CustomFormDestination extends StatelessWidget {
   Widget build(BuildContext context) {
     List<CustomFormDayWidget> daylist = [];
     var memory = globalctx.memory.value;
-    var destinations = memory["destinations"];
-    var destination = destinations.entries.toList()[index].key;
-    List<dynamic> destinationData =
-        destinations.entries.map((entry) => [entry.key, entry.value]).toList();
-    var explorationDay = int.parse(destinationData[index][1]["explorationDay"]);
+    var destinations = [
+      "arrival",
+      ...globalctx.promotedDestinations.value,
+      "departure"
+    ];
+    var destination = destinations.toList()[index];
+    var allDestinations = memory["destinations"];
+    var destinationList = allDestinations.entries
+        .map((e) => {"destination": e.key.toString(), ...e.value})
+        .toList();
+    List<dynamic> destinationData = [
+      {"destination": "arrival", "explorationDay": "1"},
+      ...destinationList,
+      {"destination": "departure", "explorationDay": "1"}
+    ];
+    var explorationDay = int.parse(destinationData[index]["explorationDay"]);
 
     for (var day = 0; day < explorationDay; day++) {
       var key = GlobalKey();
