@@ -494,3 +494,18 @@ Rx<int> totalDays =
 Rx<int> memoryDayLeft = Rx(globalctx.memory["days_left"]);
 Rx<int> daysLeft = Rx(-memoryDayLeft.value + totalDays.value);
 final currentDayFormat = DateFormat('EEEE MMMM d yyyy');
+
+Function findDestination = (destination) {
+  var promotedDestinations = globalctx.promotedDestinations.value;
+  var result = "departure";
+  var index =
+      promotedDestinations.indexWhere((element) => element == destination);
+  if (index == -1) {
+    if (destination == "arrival") {
+      result = "arrival";
+    }
+  } else {
+    result = promotedDestinations[index];
+  }
+  return result;
+};

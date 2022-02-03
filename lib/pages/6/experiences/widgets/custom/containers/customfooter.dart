@@ -61,7 +61,7 @@ class CustomFooterWidget extends StatelessWidget {
                 "experience_id": "",
                 "photo": ""
               };
-
+              destination.value = processDays(currentDay)["destination"];
               globalctx.memory.value["days"][currentDay.value] ??= {};
               globalctx.memory.value["days"][currentDay.value] = day;
               print(globalctx.memory.value["days"]);
