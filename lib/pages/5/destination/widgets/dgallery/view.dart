@@ -9,8 +9,7 @@ class DGalleryPage extends GetView<DGalleryController> {
 
   Widget _buildView(BuildContext? _context) {
     Rx<Map> galleryData = Rx({});
-
-    getExperiences(destination, "", null, null,null);
+ 
 
     galleryData.value = getContext('Experiences');
 

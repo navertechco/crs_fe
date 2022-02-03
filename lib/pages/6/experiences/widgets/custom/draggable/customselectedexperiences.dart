@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:naver_crs/pages/6/experiences/widgets/custom/draggable/experiencedragtarget.dart';
 import 'package:naver_crs/pages/6/experiences/widgets/custom/draggable/moveExperience.dart';
-import '../../../../../index.dart'; 
+import '../../../../../index.dart';
 
 class CustomSelectedExperiencesWidget extends StatelessWidget {
   const CustomSelectedExperiencesWidget({
@@ -19,7 +19,7 @@ class CustomSelectedExperiencesWidget extends StatelessWidget {
         Scrollbar(
           child: SingleChildScrollView(
             child: ExperienceDragTargetWidget(
-              onAccept: ( String experience) {
+              onAccept: (String experience) {
                 moveExperienceFunction(experience, context);
               },
             ),

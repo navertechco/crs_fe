@@ -12,8 +12,7 @@ class CustomExperienceForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var props = {}.obs;
-
-    var experiences = getContext("experiences");
+ 
     var row = experiences
         .toList()
         .firstWhere((element) => element["title"] == experience);

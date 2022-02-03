@@ -10,8 +10,7 @@ class RearOptionWidget extends StatelessWidget {
   final String experience;
   @override
   Widget build(BuildContext context) {
-   
-    var experiences = getContext("experiences");
+    
     var row = experiences
         .toList()
         .firstWhere((element) => element["title"] == experience);
