@@ -11,10 +11,6 @@ class CustomHeaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
-
-    
-
     return Column(
       children: [
         Row(
@@ -29,10 +25,20 @@ class CustomHeaderWidget extends StatelessWidget {
               for (var i = 0; i < currentDay.value - 1; i++) {
                 days += 1;
               }
+
+              var date = currentDayFormat
+                  .format(arrivalDate.value.add(Duration(days: days)));
+
+              if (destination.value == "arrival") {
+                date = currentDayFormat.format(arrivalDate.value);
+              }
+              if (destination.value == "departure") {
+                date = currentDayFormat.format(departureDate.value);
+              }
+
               return CustomTitleWidget(
                 fontWeight: FontWeight.bold,
-                label:
-                    "${currentDayFormat.format(arrivalDate.value.add(Duration(days: days)))}",
+                label: "${date}",
               );
             }),
           ],

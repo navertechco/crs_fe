@@ -21,7 +21,7 @@ class CustomStarDestinationForm extends StatelessWidget {
   Widget build(BuildContext context) {
     var tour = getContext("tour");
     var ctx = globalctx.context.value;
-    
+
     Rx<int> explorationDay = Rx(int.parse(
         getFormValue(ctrl.state.memory, destination, "explorationDay", "1") ??
             "1"));
@@ -44,6 +44,9 @@ class CustomStarDestinationForm extends StatelessWidget {
     var keyActivities = getFormValue(
         ctrl.state.memory, destination, "keyActivities", <String>[]);
     globalctx.memory["destinations"][destination] ??= {};
+
+    List<Map<String, dynamic>> explorationdDays =
+        processCatalog("exploration_days");
 
     return Form(
       key: formKey,
@@ -82,34 +85,42 @@ class CustomStarDestinationForm extends StatelessWidget {
                   label: destinations[destination][1],
                 ),
                 Obx(() {
+                  var dayleft = getContext("dayleft");
+                  var current = getFormValue(ctrl.state.memory, destination,
+                          "explorationDay", "1") ??
+                      "1";
+                  Rx<List<Map<String, dynamic>>> filteredED = Rx(
+                      explorationdDays
+                          .where(
+                              (e) => e["code"] <= dayleft + int.parse(current))
+                          .toList());
                   return CustomFormDropDownFieldWidget(
-                    validator: CustomRequiredValidator(
-                        errorText: "Exploration Days is required ",
-                        ctx: context),
-                    value: getFormValue(
-                        ctrl.state.memory, destination, "explorationDay", "1"),
-                    onSaved: (value) {
-                      setFormValue(ctrl.state.memory, destination,
-                          "explorationDay", value);
-                      setContext(
-                          "dayleft",
-                          totalDays.value +
-                              leftAccumulated.value -
-                              explorationDay.value);
-                    },
-                    onChanged: (value) {
-                      setFormValue(ctrl.state.memory, destination,
-                          "explorationDay", value);
-                      explorationDay.value = int.parse(value!);
-                      setContext(
-                          "dayleft",
-                          totalDays.value +
-                              leftAccumulated.value -
-                              explorationDay.value);
-                    },
-                    label: "Exploration Days     ",
-                    data: processCatalog("exploration_days"),
-                  );
+                      validator: CustomRequiredValidator(
+                          errorText: "Exploration Days is required ",
+                          ctx: context),
+                      value: getFormValue(ctrl.state.memory, destination,
+                          "explorationDay", "1"),
+                      onSaved: (value) {
+                        setFormValue(ctrl.state.memory, destination,
+                            "explorationDay", value);
+                        setContext(
+                            "dayleft",
+                            totalDays.value +
+                                leftAccumulated.value -
+                                explorationDay.value);
+                      },
+                      onChanged: (value) {
+                        setFormValue(ctrl.state.memory, destination,
+                            "explorationDay", value);
+                        explorationDay.value = int.parse(value!);
+                        setContext(
+                            "dayleft",
+                            totalDays.value +
+                                leftAccumulated.value -
+                                explorationDay.value);
+                      },
+                      label: "Exploration Days     ",
+                      data: filteredED.value);
                 }),
                 SizedBox(
                   child: (() {
