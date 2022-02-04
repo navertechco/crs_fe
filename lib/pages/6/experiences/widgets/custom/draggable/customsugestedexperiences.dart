@@ -16,11 +16,8 @@ class CustomSugestedExperiencesWidget extends StatelessWidget {
           fontWeight: FontWeight.bold,
           label: "Sugested Experiences\n_______________________________",
         ),
-        Scrollbar(
-          child: SingleChildScrollView(
-            child: CustomExperiencesListWidget(suggested: true),
-          ),
-        ),
+         CustomExperiencesListWidget(suggested: true),
+          
       ],
     );
   }

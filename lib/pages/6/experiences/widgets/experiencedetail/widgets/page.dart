@@ -26,6 +26,8 @@ class ExperienceDetailWidget extends GetView<ExperienceDetailController> {
               onNext: () {
                 globalctx.promotedExperiences.value[currentDay.value]!
                     .add(experience);
+                globalctx.promotedExperiences.value["all"]!
+                    .add(experience);
                 Get.close(1);
               },
               onPrevious: () {

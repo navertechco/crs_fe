@@ -55,7 +55,8 @@ class CustomFooterWidget extends StatelessWidget {
             nextlabel: "Next >",
             prevlabel: "< Previous ",
             onNext: () {
-              if (globalctx.promotedExperiences.value[currentDay.value]!.length >
+              if (globalctx
+                      .promotedExperiences.value[currentDay.value]!.length >
                   0) {
                 var day = {
                   "date": "",
@@ -103,12 +104,12 @@ class CustomFooterWidget extends StatelessWidget {
               }
             },
             onPrevious: () {
-              if (currentDay.value > 0) {
-                currentDay.value -= 1;
-                destination.value = processDays(currentDay)["destination"];
-              } else {
-                Get.back();
-              }
+              // if (currentDay.value > 0) {
+              //   currentDay.value -= 1;
+              //   destination.value = processDays(currentDay)["destination"];
+              // } else {
+              //   Get.back();
+              // }
             },
             width: 0.45),
       ],

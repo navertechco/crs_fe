@@ -462,6 +462,7 @@ Function processDestinations = () {
     globalctx.experienceDragData.value[i] = <Widget>[];
     globalctx.promotedExperiences.value[i] = [];
   }
+  globalctx.promotedExperiences.value["all"] = [];
 
   for (var destination in allPromotedDEstinations) {
     var dest = destinations[destination];

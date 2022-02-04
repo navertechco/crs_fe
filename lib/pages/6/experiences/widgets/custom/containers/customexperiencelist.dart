@@ -34,11 +34,18 @@ class CustomExperiencesListWidget extends StatelessWidget {
                 [];
             var airport =
                 getAirport(destination.value).toString().toUpperCase();
-            Iterable filteredairport = [];
+            Iterable filteredairport = filtered;
             if (destination.value == "arrival") {
               filteredairport =
-                  filtered.where((e) => e["title"].contains(airport));
+                  filtered.where((e) => e["title"].contains(airport)).toList();
             }
+
+            Iterable promoted =
+                globalctx.promotedExperiences.value["all"] ?? [];
+
+            filteredairport = filteredairport.where((e) {
+              return !promoted.contains(e["title"]);
+            }).toList();
 
             for (var experience in filteredairport) {
               globalctx.suggested.add(experience);
