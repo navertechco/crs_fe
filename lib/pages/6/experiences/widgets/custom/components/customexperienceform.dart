@@ -103,7 +103,8 @@ class ActivitiesVideoGalleryWidget extends StatelessWidget {
       actList.add(ActivityItem(item: {
         "title": activity["title"],
         "video": activity["video"],
-        "image": activity["galleryimage"]
+        "image": activity["image"],
+        "galleryimage": activity["galleryimage"],
       }));
     }
 
@@ -174,7 +175,7 @@ class ActivityItem extends StatelessWidget {
               return VideoItem(item: item);
             });
       },
-      child: Image.asset(item["galleryimage"],
+      child: Image.asset(item["image"],
           width: MediaQuery.of(context).size.width * 0.25),
     );
   }

@@ -19,12 +19,14 @@ Function removeFromArray = (array, item) {
   if (array.contains(item)) {
     var index = array.indexOf(item);
     array.value.removeAt(index);
-    if (globalctx.experienceDragData.value.isNotEmpty) {
-      if (globalctx.experienceDragData.value.length == array.value.length) {
-        globalctx.experienceDragData.value.removeAt(index);
+    if (globalctx.experienceDragData.value[currentDay.value]!.isNotEmpty) {
+      if (globalctx.experienceDragData.value[currentDay.value]!.length ==
+          array.value.length) {
+        globalctx.experienceDragData.value[currentDay.value]!.removeAt(index);
       } else {
         var newIndex = index > 0 ? index - 1 : 0;
-        globalctx.experienceDragData.value.removeAt(newIndex);
+        globalctx.experienceDragData.value[currentDay.value]!
+            .removeAt(newIndex);
       }
     }
   }
@@ -320,7 +322,7 @@ var globalctxReset = () {
   globalctx.destinations.value = [];
   globalctx.experiences.value = [];
   globalctx.destinationDragData.value = [];
-  globalctx.experienceDragData.value = [];
+  globalctx.experienceDragData.value = {};
   globalctx.reset.value = true;
   setContext("dayleft", 9999);
 };
@@ -441,7 +443,6 @@ Function processDays = (day) {
 
 Function processDestinations = () {
   var destinationDay = [];
-  var totalDays = 0;
   var arrival = {"explorationDay": "1", "airport": "quito"};
   var departure = {"explorationDay": "1", "airport": "quito"};
 
@@ -457,12 +458,17 @@ Function processDestinations = () {
     "departure"
   ];
 
+  for (var i = 0; i < totalDays.value; i++) {
+    globalctx.experienceDragData.value[i] = <Widget>[];
+    globalctx.promotedExperiences.value[i] = [];
+  }
+
   for (var destination in allPromotedDEstinations) {
     var dest = destinations[destination];
     var explorationDays = dest["explorationDay"];
     var days = int.parse(explorationDays);
     destinationDay.add({...dest, "destination": destination, "days": days});
-    totalDays += days;
+    totalDays.value += days;
   }
   globalctx.memory["destinationDay"] = destinationDay;
   globalctx.memory["totalDays"] = totalDays;

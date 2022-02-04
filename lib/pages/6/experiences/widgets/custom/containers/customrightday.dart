@@ -13,13 +13,13 @@ class CustomRightDayWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-          top: MediaQuery.of(context).size.height * 0.3,
+          top: MediaQuery.of(context).size.height * 0.29,
           left: MediaQuery.of(context).size.width * 0.375),
       child: Column(
         children: [
           CustomHeaderWidget(),
           CustomContentWidget(),
-          CustomFooterWidget(ctrl:ctrl),
+          CustomFooterWidget(ctrl: ctrl),
         ],
       ),
     );

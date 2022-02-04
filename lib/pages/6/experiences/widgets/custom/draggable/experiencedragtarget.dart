@@ -12,6 +12,12 @@ class ExperienceDragTargetWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (globalctx.experienceDragData.value.isEmpty) {
+      for (var i = 0; i < totalDays.value; i++) {
+        globalctx.experienceDragData.value[i] = <Widget>[];
+      }
+    }
+
     return SizedBox(
         width: MediaQuery.of(context).size.width * 0.3,
         height: MediaQuery.of(context).size.height * 0.44,
@@ -29,7 +35,9 @@ class ExperienceDragTargetWidget extends StatelessWidget {
                 alignment: Alignment.topCenter,
                 child: Obx(() {
                   return SingleChildScrollView(
-                    child: Column(children: globalctx.experienceDragData.value),
+                    child: Column(
+                        children: globalctx
+                            .experienceDragData.value[currentDay.value]!),
                   );
                 }),
               ),
