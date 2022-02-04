@@ -8,8 +8,7 @@ class FrontOptionWidget extends StatelessWidget {
       : super(key: key);
   final String experience;
   @override
-  Widget build(BuildContext context) { 
-    
+  Widget build(BuildContext context) {
     var row = experiences
         .toList()
         .firstWhere((element) => element["title"] == experience);

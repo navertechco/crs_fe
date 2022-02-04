@@ -25,7 +25,7 @@ class GalleryWidget extends GetView<DGalleryController> {
                 });
           },
           key: Key(item["title"]),
-          image: item["image"],
+          image: item["galleryimage"],
           title: item["title"],
         ));
       }

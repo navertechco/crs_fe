@@ -12,7 +12,7 @@ class CustomExperienceForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var props = {}.obs;
- 
+
     var row = experiences
         .toList()
         .firstWhere((element) => element["title"] == experience);
@@ -103,7 +103,7 @@ class ActivitiesVideoGalleryWidget extends StatelessWidget {
       actList.add(ActivityItem(item: {
         "title": activity["title"],
         "video": activity["video"],
-        "image": activity["image"]
+        "image": activity["galleryimage"]
       }));
     }
 
@@ -174,7 +174,7 @@ class ActivityItem extends StatelessWidget {
               return VideoItem(item: item);
             });
       },
-      child: Image.asset(item["image"],
+      child: Image.asset(item["galleryimage"],
           width: MediaQuery.of(context).size.width * 0.25),
     );
   }
