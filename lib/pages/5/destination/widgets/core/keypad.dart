@@ -16,17 +16,21 @@ class KeyPadWidget extends StatelessWidget {
         left: MediaQuery.of(context).size.width * 0.51,
       ),
       child: Obx(() {
+        var dayleft = Rx(getContext("dayleft"));
         if (!globalctx.destinationlist.isNotEmpty) {
           return CustomKeypadWidget(
               prevlabel: "< Previous",
               nextlabel: "     Next >",
               onNext: () {
-                if (globalctx.promotedDestinations.value.isNotEmpty) {
+                if (globalctx.promotedDestinations.value.isNotEmpty &
+                    (dayleft.value == 0)) {
                   processDestinations();
                   Get.toNamed("/Experiences");
                 } else {
                   SweetAlert.show(context,
-                      title: "Promote any destination is required",
+                      title: (dayleft.value > 0)
+                          ? "Days Left can't be greater than 0\n"
+                          : "" + "Promote any destination is required",
                       subtitle: 'error',
                       style: SweetAlertStyle.error, onPress: (bool isConfirm) {
                     Get.close(1);
