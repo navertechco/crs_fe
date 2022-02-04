@@ -13,8 +13,10 @@ class LeftWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Rx<List> galleryData = Rx([]);
-  
-    galleryData.value = experiences;
+
+    galleryData.value = experiences
+        .where((e) => e["destination"] == destination.toString().toUpperCase())
+        .toList();
 
     return Padding(
       padding: EdgeInsets.only(
