@@ -44,7 +44,7 @@ class CustomFooterWidget extends StatelessWidget {
                 prevlabel: "< Reset >",
                 nextlabel: "",
                 onPrevious: () {
-                  globalctx.promotedExperiences.value = {};
+                  globalctx.promotedExperiences.value = [].obs;
                   globalctx.experienceDragData =
                       Rx<Map<dynamic, List<Widget>>>({});
                 },
@@ -56,7 +56,11 @@ class CustomFooterWidget extends StatelessWidget {
             nextlabel: "Next >",
             prevlabel: "< Previous ",
             onNext: () {
-              if (globalctx.promotedExperiences.value.isNotEmpty) {
+              var experiences = getContext("experiences");
+              var promoted = globalctx.promotedExperiences.where((e) {
+                return experiences.where((f) => f["title"] == e).isEmpty;
+              });
+              if (!promoted.isEmpty) {
                 var day = {
                   "date": "",
                   "observation": "",
@@ -72,7 +76,7 @@ class CustomFooterWidget extends StatelessWidget {
                 };
 
                 var experience = {
-                  "destination": "",
+                  "destination": destination.value,
                   "day": "",
                   "title": "",
                   "description": "",
@@ -85,11 +89,11 @@ class CustomFooterWidget extends StatelessWidget {
                 globalctx.memory.value["days"][currentDay.value] ??= {};
                 globalctx.memory.value["days"][currentDay.value] = day;
                 print(globalctx.memory.value["days"]);
+                filterExperiences();
                 if (currentDay.value <
                     globalctx.memory["totalDays"].value - 1) {
                   currentDay.value += 1;
                   destination.value = processDays(currentDay)["destination"];
-                  filterExperiences();
                 } else {
                   Get.toNamed("/Resume");
                 }

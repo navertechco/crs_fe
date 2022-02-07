@@ -22,6 +22,8 @@ class CustomSelectedExperiencesWidget extends StatelessWidget {
               onAccept: (String experience) {
                 setContext("experienceContext", context);
                 moveExperienceFunction(experience, context);
+                setExperienceState(experience, "selected");
+       
               },
             ),
           ),

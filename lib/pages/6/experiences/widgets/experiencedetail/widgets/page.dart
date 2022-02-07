@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_use_of_protected_member
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../../index.dart';
@@ -24,20 +26,8 @@ class ExperienceDetailWidget extends GetView<ExperienceDetailController> {
               nextlabel: "Accept >",
               prevlabel: " < Cancel",
               onNext: () {
-                if (!globalctx.promotedExperiences.value[currentDay.value]!
-                    .contains(experience)) {
-                  globalctx.promotedExperiences.value[currentDay.value]!
-                      .add(experience);
-                  Iterable filter = globalctx.suggested;
-                  var index = filter
-                      .toList()
-                      .indexWhere((element) => element["title"] == experience);
-                  globalctx.suggested.removeAt(index);
-                  list.removeAt(index);
-                  list.refresh();
-                }
-
-                filterExperiences();
+                setExperienceState(experience, "promoted");
+                // filterExperiences();
                 Get.close(1);
               },
               onPrevious: () {
