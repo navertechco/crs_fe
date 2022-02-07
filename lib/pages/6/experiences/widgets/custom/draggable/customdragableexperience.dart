@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../../../index.dart';
 import '../../index.dart';
@@ -20,14 +21,16 @@ class CustomDragableExperience extends StatelessWidget {
       height: MediaQuery.of(context).size.height * 0.08,
       width: MediaQuery.of(context).size.width * 0.2,
     );
-    return (getExperienceState(experience) == "suggested")
-        ? Draggable<String>(
-            // Data is the value this Draggable stores.
-            data: experience,
-            feedback: experienceOptionWidget,
-            childWhenDragging: experienceOptionWidget,
-            child: experienceOptionWidget,
-          )
-        : Text("");
+    return Obx(() {
+      var state = Rx(globalctx.states["experiences"][experience]["state"]);
+      return state.value == "suggested"
+          ? Draggable<String>(
+              data: experience,
+              feedback: experienceOptionWidget,
+              childWhenDragging: experienceOptionWidget,
+              child: experienceOptionWidget,
+            )
+          : Text("");
+    });
   }
 }
