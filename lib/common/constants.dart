@@ -567,28 +567,23 @@ Function getFiltered = (dest) {
 
   return filteredairport;
 };
+Map<String, dynamic> states = {
+  "selected": globalctx.selectedExperiences,
+  "suggested": globalctx.suggestedExperiences,
+  "promoted": globalctx.promotedExperiences
+};
 
 Function proccessExperiences = () {
-  globalctx.promotedExperiences = [].obs;
-  globalctx.selectedExperiences = [].obs;
-  globalctx.suggestedExperiences = [].obs;
-
-  Map<String, dynamic> states = {
-    "selected": globalctx.selectedExperiences,
-    "suggested": globalctx.suggestedExperiences,
-    "promoted": globalctx.promotedExperiences
-  };
-
   for (var experience in experiences) {
     var state = getExperienceState(experience["title"]);
-    states[state].add(experience);
+    states[state][experience["title"]] = true;
   }
 };
 
 Function setExperienceState = (experience, state) {
   globalctx.states["experiences"][experience] ??= {}.obs;
   globalctx.states["experiences"][experience]["state"] = state;
-  // proccessExperiences();
+  proccessExperiences();
 };
 
 Function getExperienceState = (experience) {
@@ -599,14 +594,13 @@ Function getExperienceState = (experience) {
 
 Function filterExperiences = () {
   String dest = destination.value;
-  globalctx.suggestedExperiences = [].obs;
+  globalctx.suggestedExperiences = {}.obs;
   list = <Widget>[].obs;
 
   experiences = getContext("experiences");
   var filteredairport = getFiltered(dest);
   for (var exp in filteredairport) {
-    list.add(
-        CustomDragableExperience(experience: exp["title"], suggested: true));
+    list.add(CustomDragableExperience(experience: exp, suggested: true));
     setExperienceState(exp["title"], "suggested");
   }
 

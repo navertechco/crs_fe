@@ -11,21 +11,24 @@ class CustomDragableExperience extends StatelessWidget {
     required this.suggested,
   }) : super(key: key);
 
-  final String experience;
+  final experience;
   final bool suggested;
   @override
   Widget build(BuildContext context) {
     var experienceOptionWidget = ExperienceOptionWidget(
-      experience: experience,
+      experience: experience["title"],
       suggested: suggested,
       height: MediaQuery.of(context).size.height * 0.08,
       width: MediaQuery.of(context).size.width * 0.2,
     );
     return Obx(() {
-      var state = Rx(globalctx.states["experiences"][experience]["state"]);
-      return state.value == "suggested"
+      String title = experience["title"];
+      var dest = experience["destination"];
+      var state = Rx(globalctx.states["experiences"][title]["state"]);
+      return state.value == "suggested" &&
+              dest == destination.value.toString().toUpperCase()
           ? Draggable<String>(
-              data: experience,
+              data: title,
               feedback: experienceOptionWidget,
               childWhenDragging: experienceOptionWidget,
               child: experienceOptionWidget,

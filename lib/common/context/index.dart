@@ -26,12 +26,12 @@ class Context with PropertyChangeNotifier<String> {
   RxList experiences = [].obs;
   RxList<dynamic> destinationlist = [].obs;
   RxList<dynamic> experiencelist = [].obs;
-  RxList promotedDestinations = [].obs; 
+  RxList promotedDestinations = [].obs;
   RxList promotedDays = [].obs;
   RxList selectedDestinations = [].obs;
-  RxList promotedExperiences = [].obs;
-  RxList selectedExperiences = [].obs;
-  RxList suggestedExperiences = [].obs;
+  var promotedExperiences = {}.obs;
+  var selectedExperiences = {}.obs;
+  var suggestedExperiences = {}.obs;
   RxMap<String, dynamic> states = {
     "experiences": {},
   }.obs;
@@ -63,8 +63,6 @@ class Context with PropertyChangeNotifier<String> {
   dynamic get_context(key) {
     return context.value[key];
   }
-
-  
 }
 
 Context globalctx = Context();
@@ -76,5 +74,3 @@ setContext(key, value) {
 getContext(key) {
   return globalctx.get_context(key);
 }
-
- 

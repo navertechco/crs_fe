@@ -17,7 +17,6 @@ class CustomExperiencesListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
- 
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.44,
       width: MediaQuery.of(context).size.width * 0.2,
@@ -26,7 +25,7 @@ class CustomExperiencesListWidget extends StatelessWidget {
           scrollDirection: Axis.vertical,
           child: Obx(() {
             return Column(
-              children: list,
+              children: list.value,
             );
           }),
         ),

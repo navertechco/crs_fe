@@ -44,7 +44,7 @@ class CustomFooterWidget extends StatelessWidget {
                 prevlabel: "< Reset >",
                 nextlabel: "",
                 onPrevious: () {
-                  globalctx.promotedExperiences.value = [].obs;
+                  globalctx.promotedExperiences.value = {}.obs;
                   globalctx.experienceDragData =
                       Rx<Map<dynamic, List<Widget>>>({});
                 },
@@ -56,11 +56,15 @@ class CustomFooterWidget extends StatelessWidget {
             nextlabel: "Next >",
             prevlabel: "< Previous ",
             onNext: () {
-              var experiences = getContext("experiences");
-              var promoted = globalctx.promotedExperiences.where((e) {
-                return experiences.where((f) => f["title"] == e).isEmpty;
+              List experiences = getContext("experiences").toList();
+              List promoted = states["promoted"].entries.toList();
+              var filtered = promoted.where((e) {
+                return experiences.where((f) {
+                  return f["title"] == e.key;
+                }).isNotEmpty;
               });
-              if (!promoted.isEmpty) {
+              bool empty = filtered.isEmpty;
+              if (!empty) {
                 var day = {
                   "date": "",
                   "observation": "",
@@ -89,11 +93,12 @@ class CustomFooterWidget extends StatelessWidget {
                 globalctx.memory.value["days"][currentDay.value] ??= {};
                 globalctx.memory.value["days"][currentDay.value] = day;
                 print(globalctx.memory.value["days"]);
-                filterExperiences();
+
                 if (currentDay.value <
-                    globalctx.memory["totalDays"].value - 1) {
+                    globalctx.memory["totalDays"].value - 2) {
                   currentDay.value += 1;
                   destination.value = processDays(currentDay)["destination"];
+                  filterExperiences();
                 } else {
                   Get.toNamed("/Resume");
                 }
