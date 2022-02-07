@@ -1,6 +1,8 @@
 // ignore_for_file: unnecessary_this
 
-class CustomerState {
+import 'package:get/get.dart';
+
+class CustomerState extends GetXState {
   CustomerState() {
     // ignore: prefer_function_declarations_over_variables, unused_local_variable
     toMap = () {
@@ -18,8 +20,7 @@ class CustomerState {
         "tax_id": taxId,
         "names": names,
         "last_names": lastNames,
-        "birth_date":birthDate,
-        
+        "birth_date": birthDate,
       };
     };
   }
@@ -40,5 +41,4 @@ class CustomerState {
   String names = "";
   String lastNames = "";
   DateTime birthDate = DateTime.now();
-  
 }

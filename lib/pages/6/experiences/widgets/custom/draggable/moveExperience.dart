@@ -5,7 +5,8 @@ import '../../../../../index.dart';
 import '../../index.dart';
 
 void moveExperienceFunction(String experience, BuildContext context) {
-  if (!globalctx.experiences.contains(experience)) {
+  if (!globalctx.experiences.contains(experience) &&
+      globalctx.experienceDragData.value.isNotEmpty) {
     globalctx.experiences.add(experience);
     globalctx.experienceDragData.value[currentDay.value]!.add(Obx(() {
       return globalctx.experiences.contains(experience)
@@ -15,7 +16,8 @@ void moveExperienceFunction(String experience, BuildContext context) {
                     height: MediaQuery.of(context).size.height * 0.075,
                     width: MediaQuery.of(context).size.width * 0.2,
                     experience: experience),
-                !globalctx.promotedExperiences.value[currentDay.value]!.contains(experience)
+                !globalctx.promotedExperiences.value[currentDay.value]!
+                        .contains(experience)
                     ? GestureDetector(
                         onTap: () {
                           if (globalctx.experiences.contains(experience)) {
@@ -33,7 +35,9 @@ void moveExperienceFunction(String experience, BuildContext context) {
                     : GestureDetector(
                         onTap: () {
                           if (globalctx.experiences.contains(experience)) {
-                            globalctx.promotedExperiences.value[currentDay.value]!.remove(experience);
+                            globalctx
+                                .promotedExperiences.value[currentDay.value]!
+                                .remove(experience);
                             var index = globalctx.experiences
                                 .indexWhere((element) => element == experience);
                             globalctx.experiences.removeAt(index);

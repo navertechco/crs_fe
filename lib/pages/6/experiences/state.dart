@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-class ExperiencesState {
+class ExperiencesState extends GetXState {
   // title
   final _title = '''asd'''.obs;
   set title(value) => _title.value = value;

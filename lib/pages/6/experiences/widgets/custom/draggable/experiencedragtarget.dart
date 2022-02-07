@@ -37,8 +37,7 @@ class ExperienceDragTargetWidget extends StatelessWidget {
                   return SingleChildScrollView(
                     child: Column(
                         children: globalctx
-                                .experienceDragData.value[currentDay.value] ??
-                            <Widget>[]),
+                            .experienceDragData.value[currentDay.value]!),
                   );
                 }),
               ),

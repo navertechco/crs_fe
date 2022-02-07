@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-class ForgotState {
+class ForgotState extends GetXState {
   String email = "";
   // title
   final _title = "Forgot".obs;

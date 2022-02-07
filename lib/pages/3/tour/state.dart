@@ -1,6 +1,8 @@
 // ignore_for_file: unnecessary_this
 
-class TourState {
+import 'package:get/get.dart';
+
+class TourState extends GetXState {
   TourState() {
     // ignore: prefer_function_declarations_over_variables, unused_local_variable
     toMap = () {
@@ -9,8 +11,8 @@ class TourState {
         "accomodation_type": accomodation_type,
         "purpose": purpose,
         "passengers": passengers,
-        "arrival_date":arrivalDate,
-        "departure_date":departureDate
+        "arrival_date": arrivalDate,
+        "departure_date": departureDate
       };
     };
   }

@@ -24,10 +24,20 @@ class ExperienceDetailWidget extends GetView<ExperienceDetailController> {
               nextlabel: "Accept >",
               prevlabel: " < Cancel",
               onNext: () {
-                globalctx.promotedExperiences.value[currentDay.value]!
-                    .add(experience);
-                globalctx.promotedExperiences.value["all"]!
-                    .add(experience);
+                if (!globalctx.promotedExperiences.value[currentDay.value]!
+                    .contains(experience)) {
+                  globalctx.promotedExperiences.value[currentDay.value]!
+                      .add(experience);
+                  Iterable filter = globalctx.suggested;
+                  var index = filter
+                      .toList()
+                      .indexWhere((element) => element["title"] == experience);
+                  globalctx.suggested.removeAt(index);
+                  list.removeAt(index);
+                  list.refresh();
+                }
+
+                filterExperiences();
                 Get.close(1);
               },
               onPrevious: () {

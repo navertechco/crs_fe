@@ -20,6 +20,7 @@ class CustomSelectedExperiencesWidget extends StatelessWidget {
           child: SingleChildScrollView(
             child: ExperienceDragTargetWidget(
               onAccept: (String experience) {
+                setContext("experienceContext", context);
                 moveExperienceFunction(experience, context);
               },
             ),

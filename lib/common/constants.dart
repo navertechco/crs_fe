@@ -7,6 +7,8 @@ import 'package:form_field_validator/form_field_validator.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:naver_crs/pages/6/experiences/widgets/custom/draggable/moveExperience.dart';
+import 'package:naver_crs/pages/6/experiences/widgets/custom/index.dart';
 import 'package:sweetalert/sweetalert.dart';
 import 'context/index.dart';
 import 'index.dart';
@@ -322,7 +324,7 @@ var globalctxReset = () {
   globalctx.destinations.value = [];
   globalctx.experiences.value = [];
   globalctx.destinationDragData.value = [];
-  globalctx.experienceDragData.value = {};
+  globalctx.experienceDragData = Rx<Map<dynamic, List<Widget>>>({});
   globalctx.reset.value = true;
   setContext("dayleft", 9999);
 };
@@ -518,3 +520,65 @@ Function findDestination = (destination) {
 };
 
 var experiences = getContext("experiences");
+
+Function deleteExperience = (experience) {
+  if (globalctx.experiences.contains(experience)) {
+    var index =
+        globalctx.experiences.indexWhere((element) => element == experience);
+    globalctx.experiences.removeAt(index);
+    globalctx.experienceDragData.value[currentDay.value]!.removeAt(index);
+  }
+};
+
+Function filterExperienceList = (data, day) {
+  String travelRhythm = data["travelRhythm"];
+  List? currentList = globalctx.promotedExperiences.value[day];
+  Iterable filtered =
+      currentList!.where((e) => e["travelRhythm"] == travelRhythm);
+
+  for (var experience in filtered) {}
+
+  globalctx.promotedExperiences.value[day] = filtered.toList();
+};
+RxList<Widget> list = <Widget>[].obs;
+
+Function filterExperiences = () {
+  String dest = destination.value;
+  print("filterExperiences");
+  globalctx.suggested = [].obs;
+  list = <Widget>[].obs;
+  var exps = [];
+  experiences = getContext("experiences");
+  List filtered = experiences
+          .where((e) => e["destination"]
+              .toString()
+              .toUpperCase()
+              .contains(dest.toUpperCase()))
+          .toList() ??
+      [];
+  var airport = getAirport(dest).toString().toUpperCase();
+  Iterable filteredairport = filtered;
+  if (dest == "arrival") {
+    filteredairport =
+        filtered.where((e) => e["title"].contains(airport)).toList();
+  }
+
+  var promoted = globalctx.promotedExperiences.value[currentDay.value];
+
+  filteredairport = filteredairport.where((e) {
+    return !promoted!.contains(e["title"]);
+  }).toList();
+
+  for (var experience in filteredairport) {
+    globalctx.suggested.add(experience);
+    if (!exps.contains(experience)) {
+      list.add(CustomDragableExperience(
+          experience: experience["title"], suggested: true));
+      exps.add(experience);
+    }
+  }
+  list.refresh();
+  globalctx.suggested.refresh();
+  globalctx.experienceDragData.refresh();
+  globalctx.promotedExperiences.refresh();
+};

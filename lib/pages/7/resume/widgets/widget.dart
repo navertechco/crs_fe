@@ -544,7 +544,10 @@ class CustomFormExperiencesDetailWidget extends StatelessWidget {
     var memory = globalctx.memory.value;
     List<CustomFormExperienceRowWidget> list = [];
     var experiences = memory["days"][dayindex]['experiences'];
-    for (var i = 0; i < experiences.length; i++) {
+    var filtered = experiences.where((e) =>
+        !globalctx.promotedExperiences.value["all"]!.contains(e["title"]));
+
+    for (var i = 0; i < filtered.length; i++) {
       list.add(CustomFormExperienceRowWidget(
           data: data, indexes: [destinationindex, dayindex, i]));
     }

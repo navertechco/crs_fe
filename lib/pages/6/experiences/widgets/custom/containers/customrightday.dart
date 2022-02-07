@@ -18,7 +18,7 @@ class CustomRightDayWidget extends StatelessWidget {
       child: Column(
         children: [
           CustomHeaderWidget(),
-          CustomContentWidget(),
+          CustomContentWidget(ctrl: ctrl),
           CustomFooterWidget(ctrl: ctrl),
         ],
       ),

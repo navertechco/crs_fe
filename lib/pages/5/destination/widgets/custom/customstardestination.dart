@@ -120,7 +120,8 @@ class CustomStarDestinationForm extends StatelessWidget {
                 }),
                 SizedBox(
                   child: (() {
-                    if (destination == "galapagos") {
+                    if (destination == "galapagos" ||
+                        destination == "amazonas") {
                       return Obx(() {
                         return CustomFormDropDownFieldWidget(
                           validator: CustomRequiredValidator(

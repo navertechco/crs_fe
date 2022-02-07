@@ -5,9 +5,9 @@ import '../../index.dart';
 
 class CustomSugestedExperiencesWidget extends StatelessWidget {
   const CustomSugestedExperiencesWidget({
-    Key? key,
+    Key? key,  required this.ctrl,
   }) : super(key: key);
-
+final ExperiencesController ctrl;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -16,8 +16,7 @@ class CustomSugestedExperiencesWidget extends StatelessWidget {
           fontWeight: FontWeight.bold,
           label: "Sugested Experiences\n_______________________________",
         ),
-         CustomExperiencesListWidget(suggested: true),
-          
+        CustomExperiencesListWidget(suggested: true, ctrl:ctrl),
       ],
     );
   }

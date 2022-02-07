@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-class ResumeState {
+class ResumeState extends GetXState {
   // title
   final _title = '''asd'''.obs;
   set title(value) => _title.value = value;

@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-class SigninState {
+class SigninState extends GetXState {
   // title
   bool isLoading = false;
   String? error = "";
