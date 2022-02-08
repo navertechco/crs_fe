@@ -15,18 +15,13 @@ class ExperiencesController extends GetxController {
     super.onInit();
     print("init Experiences");
 
-    filterExperiences();
+    filterSuggestedExperiences();
   }
 
   @override
-  void onDestroy() {
+  void refresh() {
+    super.refresh();
     print("update Experiences");
-    filterExperiences();
-  }
-
-  @override
-  void onUpdate() {
-    print("update Experiences");
-    filterExperiences();
+    filterSuggestedExperiences();
   }
 }

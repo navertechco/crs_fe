@@ -433,10 +433,11 @@ Function getAirport = (destination) {
 
 Function processDays = (day) {
   var result = [];
+  result.add({"day": 1, "destination": "arrival"});
   var destinations = globalctx.memory["destinationDay"];
-  for (var destination in destinations) {
-    for (var i = 1; i <= destination["days"]; i++) {
-      result.add({"day": i, "destination": destination["destination"]});
+  for (var dest in destinations) {
+    for (var i = 1; i <= dest["days"]; i++) {
+      result.add({"day": i, "destination": dest["destination"]});
     }
   }
   result.add({"day": 1, "destination": "departure"});
@@ -539,39 +540,6 @@ Function filterExperienceList = (data, day) {
 
   globalctx.promotedExperiences.value[day] = filtered.toList();
 };
-RxList<Widget> list = <Widget>[].obs;
-
-Function getFiltered = (dest) {
-  var airport = getAirport(dest).toString().toUpperCase();
-  List filtered = experiences
-          .where((e) => e["destination"]
-              .toString()
-              .toUpperCase()
-              .contains(dest.toUpperCase()))
-          .toList() ??
-      [];
-  Iterable filteredairport = filtered;
-  if (dest == "arrival") {
-    filteredairport =
-        filtered.where((e) => e["title"].contains(airport)).toList();
-  }
-
-  var promoted = experiences.where((e) {
-    var state = getExperienceState(e["title"]);
-    return state == "promoted";
-  });
-
-  filteredairport = filteredairport.where((e) {
-    return !promoted!.contains(e["title"]);
-  }).toList();
-
-  return filteredairport;
-};
-Map<String, dynamic> states = {
-  "selected": globalctx.selectedExperiences,
-  "suggested": globalctx.suggestedExperiences,
-  "promoted": globalctx.promotedExperiences
-};
 
 Function proccessExperiences = () {
   for (var experience in experiences) {
@@ -592,20 +560,127 @@ Function getExperienceState = (experience) {
   return state == null ? "suggested" : state;
 };
 
-Function filterExperiences = () {
-  String dest = destination.value;
-  globalctx.suggestedExperiences = {}.obs;
-  list = <Widget>[].obs;
+Function paginateDay = (context) {
+  // Get promoted experiences by day and KA
+  var promotedExperiencesByDayAndKA =
+      getPromotedExperiencesByDayAndKA(currentDay.value);
 
-  experiences = getContext("experiences");
-  var filteredairport = getFiltered(dest);
-  for (var exp in filteredairport) {
-    list.add(CustomDragableExperience(experience: exp, suggested: true));
-    setExperienceState(exp["title"], "suggested");
+  //Decide if experiences are 2 almost to paginate
+  if (promotedExperiencesByDayAndKA) {
+    prepareDaysToResume();
+    paginateNextDay();
+  } else {
+    SweetAlert.show(context,
+        title: "Promote any experiences is required",
+        subtitle: 'error',
+        style: SweetAlertStyle.error, onPress: (bool isConfirm) {
+      Get.close(1);
+      return false;
+    });
+  }
+};
+
+Function getPromotedExperiencesByDayAndKA = (day) {
+  // Get promoted experiences by day and KA
+  List promoted = states["promoted"].entries.toList();
+  var filtered = promoted.where((e) {
+    return experiences.where((f) {
+      return f["title"] == e.key;
+    }).isNotEmpty;
+  });
+
+  return true;
+};
+
+Function prepareDaysToResume = () {
+  // Prepare Frame to send to Resume Page
+  var day = {
+    "date": "",
+    "observation": "",
+    "day_description": "",
+    "day_name": "",
+    "parent": 0,
+    "option_id": 1,
+    "transport_id": 1,
+    "key_activities": [],
+    "meals": [],
+    "experiences": [],
+    "destination": destination.value
+  };
+
+  var experience = {
+    "destination": destination.value,
+    "day": "",
+    "title": "",
+    "description": "",
+    "next": "",
+    "previous": "",
+    "experience_id": "",
+    "photo": ""
+  };
+  destination.value = processDays(currentDay)["destination"];
+  globalctx.memory.value["days"][currentDay.value] ??= {};
+  globalctx.memory.value["days"][currentDay.value] = day;
+  print(globalctx.memory.value["days"]);
+};
+
+Function paginateNextDay = () {
+  // Paginate to Next Day
+  if (currentDay.value < totalDays.value) {
+    currentDay.value += 1;
+    destination.value = processDays(currentDay)["destination"];
+    filterSuggestedExperiences();
+  } else {
+    Get.toNamed("/Resume");
+  }
+};
+
+Function filterSuggestedExperiences = () {
+  // Get airport from current destination
+  var filteredExperiences = getFiltered(destination.value);
+  // Reset suggested memory and suggested render list
+  globalctx.suggestedExperiences.value = {};
+  list.value = <Widget>[];
+  // Add New Suggested Render Components to list
+  for (var experience in filteredExperiences) {
+    list.add(CustomDragableExperience(experience: experience, suggested: true));
+  }
+  // // Refresh memory
+  // list.refresh();
+  // globalctx.suggestedExperiences.refresh();
+  // globalctx.experienceDragData.refresh();
+  // globalctx.promotedExperiences.refresh();
+};
+
+Function getFiltered = (dest) {
+  var airport = getAirport(dest).toString().toUpperCase();
+
+  List filteredByDestination = experiences
+          .where((e) => e["destination"]
+              .toString()
+              .toUpperCase()
+              .contains(dest.toUpperCase()))
+          .toList() ??
+      [];
+
+  Iterable filteredByAirport = filteredByDestination;
+
+  if (dest == "arrival") {
+    filteredByAirport = filteredByDestination
+        .where((e) => e["title"].contains(airport))
+        .toList();
   }
 
-  list.refresh();
-  globalctx.suggestedExperiences.refresh();
-  globalctx.experienceDragData.refresh();
-  globalctx.promotedExperiences.refresh();
+  var filteredBySuggested = filteredByAirport.where((e) {
+    return getExperienceState(e["title"]) == "suggested";
+  }).toList();
+
+  return filteredBySuggested;
+};
+
+RxList<Widget> list = <Widget>[].obs;
+Map<String, dynamic> states = {
+  "selected": globalctx.selectedExperiences,
+  "suggested": globalctx.suggestedExperiences,
+  "promoted": globalctx.promotedExperiences
 };

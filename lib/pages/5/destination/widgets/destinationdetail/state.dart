@@ -7,8 +7,7 @@ class DestinationDetailState extends GetXState {
   var memory = {};
 
   @override
-  void initState() {
-    filterExperiences();
+  void initState() { 
     super.initState();
   }
 }

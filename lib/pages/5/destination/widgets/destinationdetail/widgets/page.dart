@@ -31,6 +31,7 @@ class DestinationDetailWidget extends GetView<DestinationDetailController> {
                     globalctx.promotedDestinations.add(destination);
                     globalctx.memory["destinations"] = ctrl.state.memory;
                   }
+                  filterSuggestedExperiences();
                   Get.close(1);
                 }
               },

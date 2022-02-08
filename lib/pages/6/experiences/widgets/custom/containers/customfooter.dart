@@ -56,69 +56,17 @@ class CustomFooterWidget extends StatelessWidget {
             nextlabel: "Next >",
             prevlabel: "< Previous ",
             onNext: () {
-              List experiences = getContext("experiences").toList();
-              List promoted = states["promoted"].entries.toList();
-              var filtered = promoted.where((e) {
-                return experiences.where((f) {
-                  return f["title"] == e.key;
-                }).isNotEmpty;
-              });
-              bool empty = filtered.isEmpty;
-              if (!empty) {
-                var day = {
-                  "date": "",
-                  "observation": "",
-                  "day_description": "",
-                  "day_name": "",
-                  "parent": 0,
-                  "option_id": 1,
-                  "transport_id": 1,
-                  "key_activities": [],
-                  "meals": [],
-                  "experiences": [],
-                  "destination": destination.value
-                };
-
-                var experience = {
-                  "destination": destination.value,
-                  "day": "",
-                  "title": "",
-                  "description": "",
-                  "next": "",
-                  "previous": "",
-                  "experience_id": "",
-                  "photo": ""
-                };
-                destination.value = processDays(currentDay)["destination"];
-                globalctx.memory.value["days"][currentDay.value] ??= {};
-                globalctx.memory.value["days"][currentDay.value] = day;
-                print(globalctx.memory.value["days"]);
-
-                if (currentDay.value <
-                    globalctx.memory["totalDays"].value - 2) {
-                  currentDay.value += 1;
-                  destination.value = processDays(currentDay)["destination"];
-                  filterExperiences();
-                } else {
-                  Get.toNamed("/Resume");
-                }
-              } else {
-                SweetAlert.show(context,
-                    title: "Promote any experiences is required",
-                    subtitle: 'error',
-                    style: SweetAlertStyle.error, onPress: (bool isConfirm) {
-                  Get.close(1);
-                  return false;
-                });
-              }
+              paginateDay(context);
+              ctrl.refresh();
             },
             onPrevious: () {
-              // if (currentDay.value > 0) {
-              //   currentDay.value -= 1;
-              //   destination.value = processDays(currentDay)["destination"];
-              // } else {
-              //   Get.back();
-              // }
+              if (currentDay.value > 0) {
+                currentDay.value -= 1;
+                destination.value = processDays(currentDay)["destination"];
+                filterSuggestedExperiences();
+              } else {
+                Get.back();
+              }
             },
             width: 0.45),
       ],

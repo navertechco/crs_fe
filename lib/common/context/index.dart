@@ -39,6 +39,7 @@ class Context with PropertyChangeNotifier<String> {
     "tour": {},
     "customer": {},
     "destinations": {},
+    "destinationDay": [],
     "days": {},
     "days_left": 0
   }.obs;

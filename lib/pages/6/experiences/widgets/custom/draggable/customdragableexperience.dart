@@ -24,7 +24,7 @@ class CustomDragableExperience extends StatelessWidget {
     return Obx(() {
       String title = experience["title"];
       var dest = experience["destination"];
-      var state = Rx(globalctx.states["experiences"][title]["state"]);
+      var state = Rx(getExperienceState(title));
       return state.value == "suggested" &&
               dest == destination.value.toString().toUpperCase()
           ? Draggable<String>(
