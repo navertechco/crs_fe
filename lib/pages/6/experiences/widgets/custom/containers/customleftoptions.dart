@@ -32,7 +32,10 @@ class CustomLeftOptionsWidget extends StatelessWidget {
     var keyActivities = getFormValue(
         ctrl.state.memory, destination.value, "key_activities", <String>[]);
     Rx<dynamic> destinationOption = Rx(getFormValue(
-        ctrl.state.memory, destination.value, "destination_option", "0"));
+        globalctx.memory.value["destinations"],
+        destination.value,
+        "destinationOption",
+        "0"));
 
     return Padding(
       padding: EdgeInsets.only(
@@ -194,11 +197,11 @@ class CustomLeftOptionsWidget extends StatelessWidget {
                         value: destinationOption.value,
                         onSaved: (value) {
                           setFormValue(ctrl.state.memory, destination.value,
-                              "destination_option", value);
+                              "destinationOption", value);
                         },
                         onChanged: (value) {
                           setFormValue(ctrl.state.memory, destination.value,
-                              "destination_option", value);
+                              "destinationOption", value);
                         },
                         hintText: "Travel Options",
                         data: processCatalog("destination_option"),

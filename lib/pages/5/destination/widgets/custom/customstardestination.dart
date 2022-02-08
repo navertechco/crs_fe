@@ -26,7 +26,6 @@ class CustomStarDestinationForm extends StatelessWidget {
         getFormValue(ctrl.state.memory, destination, "explorationDay", "1") ??
             "1"));
 
-    
     if (globalctx.reset.value) {
       for (String item in destinations.keys) {
         ctrl.state.memory[item] = null;
@@ -41,7 +40,7 @@ class CustomStarDestinationForm extends StatelessWidget {
       }
     }
 
-    var keyActivities = getFormValue(
+    List<String> keyActivities = getFormValue(
         ctrl.state.memory, destination, "keyActivities", <String>[]);
     globalctx.memory["destinations"][destination] ??= {};
 
@@ -51,6 +50,8 @@ class CustomStarDestinationForm extends StatelessWidget {
     var current = Rx(
         getFormValue(ctrl.state.memory, destination, "explorationDay", "1") ??
             "1");
+
+    Rx<List> trCatalog = Rx(processCatalog("travel_rhythm"));
     return Form(
       key: formKey,
       child: Column(
@@ -168,21 +169,29 @@ class CustomStarDestinationForm extends StatelessWidget {
                 }),
                 Obx(() {
                   return CustomFormDropDownFieldWidget(
-                    validator: CustomRequiredValidator(
-                        errorText: "Travel Rhythm is required ", ctx: context),
-                    value: getFormValue(
-                        ctrl.state.memory, destination, "travelRhythm", "0"),
-                    onSaved: (value) {
-                      setFormValue(ctrl.state.memory, destination,
-                          "travelRhythm", value);
-                    },
-                    onChanged: (value) {
-                      setFormValue(ctrl.state.memory, destination,
-                          "travelRhythm", value);
-                    },
-                    label: "Travel Rhythm         ",
-                    data: processCatalog("travel_rhythm"),
-                  );
+                      validator: CustomRequiredValidator(
+                          errorText: "Travel Rhythm is required ",
+                          ctx: context),
+                      value: getFormValue(
+                          ctrl.state.memory, destination, "travelRhythm", "0"),
+                      onSaved: (value) {
+                        setFormValue(ctrl.state.memory, destination,
+                            "travelRhythm", value);
+                      },
+                      onChanged: (value) {
+                        setFormValue(ctrl.state.memory, destination,
+                            "travelRhythm", value);
+                      },
+                      label: "Travel Rhythm         ",
+                      data: trCatalog.value.where((value) {
+                        
+                        for (int tr in travelRhytmAges.keys) {
+                          if ((value["code"]) >= (tr)) {
+                            return true;
+                          }
+                        }
+                        return false;
+                      }).toList() as List<Map<String, dynamic>>);
                 }),
                 Obx(() {
                   return CustomFormMultiDropDownFieldWidget(

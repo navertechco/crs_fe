@@ -499,10 +499,13 @@ var getDestination = (String destination) async {
 };
 var destinationData = getParam("DESTINATION_DATA");
 Map<dynamic, dynamic> destinations = getValue(destinationData, "value");
+Rx<DateTime> birthDate = Rx(globalctx.memory["customer"]["birth_date"]);
 Rx<DateTime> arrivalDate = Rx(globalctx.memory["tour"]["arrival_date"]);
 Rx<DateTime> departureDate = Rx(globalctx.memory["tour"]["departure_date"]);
 Rx<int> totalDays =
     Rx(departureDate.value.difference(arrivalDate.value).inDays);
+Rx<double> customerAge =
+    Rx(DateTime.now().difference(birthDate.value).inDays / 365);
 Rx<int> memoryDayLeft = Rx(globalctx.memory["days_left"]);
 Rx<int> daysLeft = Rx(-memoryDayLeft.value + totalDays.value);
 final currentDayFormat = DateFormat('EEEE MMMM d yyyy');
@@ -693,4 +696,11 @@ Function resetExperiences = () {
   for (var experience in experiences) {
     setExperienceState(experience["title"], "suggested");
   }
+};
+
+var travelRhytmAges = {
+  20: ["0", "1", "2", "3"],
+  35: ["0", "1", "2"],
+  60: ["0", "1", "2"],
+  80: ["0", "1", "2"],
 };
