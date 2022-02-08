@@ -13,7 +13,7 @@ class CustomLeftStarDestinationForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var params = processCatalog("params");
-    Map<dynamic, dynamic> destinations = getValue(params[0], "value");
+    Map<dynamic, dynamic> destinations = getValue(params[1], "value");
     List<Widget> destinationlist = [];
     for (var destination in destinations.keys) {
       destinationlist.add(

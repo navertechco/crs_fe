@@ -10,6 +10,7 @@ class FrontOptionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var destinationData = getParam("DESTINATION_DATA");
     Map<dynamic, dynamic> destinations = getValue(destinationData, "value");
+    var airport = destinations[destination][6];
     return Stack(children: [
       Padding(
         padding: EdgeInsets.only(
@@ -30,6 +31,16 @@ class FrontOptionWidget extends StatelessWidget {
               width: MediaQuery.of(context).size.width * 0.2),
         ),
       ),
+      if (airport)
+        Padding(
+          padding: EdgeInsets.only(
+            top: MediaQuery.of(context).size.height * 0.01,
+            left: MediaQuery.of(context).size.width * 0.33,
+          ),
+          child: Image.asset("assets/custom/img/icon-plain.png",
+              color: Colors.red,
+              width: MediaQuery.of(context).size.width * 0.05),
+        ),
     ]);
   }
 }
