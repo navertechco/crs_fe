@@ -12,7 +12,7 @@ void moveExperienceFunction(String experience, BuildContext context) {
     var index = currentDay.value;
     globalctx.experienceDragData.value[index] ??= [];
     globalctx.experienceDragData.value[index]!.add(Obx(() {
-      var state = Rx(globalctx.states["experiences"][experience]["state"]);
+      var state = Rx(getExperienceState(experience));
       return state.value != "suggested"
           ? Row(
               children: [

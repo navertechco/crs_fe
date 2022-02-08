@@ -26,7 +26,7 @@ class CustomStarDestinationForm extends StatelessWidget {
         getFormValue(ctrl.state.memory, destination, "explorationDay", "1") ??
             "1"));
 
-    Rx<int> leftAccumulated = 0.obs;
+    
     if (globalctx.reset.value) {
       for (String item in destinations.keys) {
         ctrl.state.memory[item] = null;

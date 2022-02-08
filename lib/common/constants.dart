@@ -317,6 +317,7 @@ var getExperiences = (String destination,
     return false;
   }
 };
+Rx<int> leftAccumulated = 0.obs;
 
 var globalctxReset = () {
   globalctx.promotedDestinations.value = [];
@@ -324,9 +325,11 @@ var globalctxReset = () {
   globalctx.destinations.value = [];
   globalctx.experiences.value = [];
   globalctx.destinationDragData.value = [];
-  globalctx.experienceDragData = Rx<Map<dynamic, List<Widget>>>({});
+  globalctx.experienceDragData.value = {};
   globalctx.reset.value = true;
-  setContext("dayleft", 9999);
+  totalDays.value = departureDate.value.difference(arrivalDate.value).inDays;
+  leftAccumulated.value = 0;
+  setContext("dayleft", totalDays.value);
 };
 
 class CustomRequiredValidator extends TextFieldValidator {
