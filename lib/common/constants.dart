@@ -555,6 +555,7 @@ Function setExperienceState = (experience, state) {
   globalctx.states["experiences"][experience] ??= {}.obs;
   globalctx.states["experiences"][experience]["state"] = state;
   proccessExperiences();
+  filterSuggestedExperiences();
 };
 
 Function getExperienceState = (experience) {

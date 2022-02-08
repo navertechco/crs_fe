@@ -23,7 +23,6 @@ class CustomSelectedExperiencesWidget extends StatelessWidget {
                 setContext("experienceContext", context);
                 moveExperienceFunction(experience, context);
                 setExperienceState(experience, "selected");
-       
               },
             ),
           ),
