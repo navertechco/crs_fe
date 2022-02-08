@@ -44,9 +44,7 @@ class CustomFooterWidget extends StatelessWidget {
                 prevlabel: "< Reset >",
                 nextlabel: "",
                 onPrevious: () {
-                  globalctx.promotedExperiences.value = {};
-                  globalctx.experienceDragData.value = {};
-                
+                  resetExperiences();
                 },
                 prevFontWeight: FontWeight.bold,
                 width: 0.01),

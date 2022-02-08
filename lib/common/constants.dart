@@ -688,3 +688,9 @@ Map<String, dynamic> states = {
   "suggested": globalctx.suggestedExperiences,
   "promoted": globalctx.promotedExperiences
 };
+
+Function resetExperiences = () {
+  for (var experience in experiences) {
+    setExperienceState(experience["title"], "suggested");
+  }
+};
