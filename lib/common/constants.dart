@@ -643,7 +643,7 @@ Function filterSuggestedExperiences = () {
   // Get airport from current destination
   var filteredExperiences = getFiltered(destination.value);
   // Reset suggested memory and suggested render list
-  globalctx.suggestedExperiences.value = {};
+
   list.value = <Widget>[];
   // Add New Suggested Render Components to list
   for (var experience in filteredExperiences) {
