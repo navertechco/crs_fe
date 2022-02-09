@@ -440,11 +440,11 @@ Function processDays = (day) {
   result.add({"day": 1, "destination": "arrival"});
   var destinations = globalctx.memory["destinationDay"];
   for (var dest in destinations) {
-    for (var i = 1; i <= dest["days"]; i++) {
+    for (var i = 2; i <= dest["days"]; i++) {
       result.add({"day": i, "destination": dest["destination"]});
     }
   }
-  result.add({"day": 1, "destination": "departure"});
+  result.add({"day": destinations.length, "destination": "departure"});
   return result[day.value];
 };
 
@@ -475,7 +475,7 @@ Function processDestinations = () {
     var explorationDays = dest["explorationDay"];
     var days = int.parse(explorationDays);
     destinationDay.add({...dest, "destination": destination, "days": days});
-    totalDays.value += days;
+    // totalDays.value += days;
   }
   globalctx.memory["destinationDay"] = destinationDay;
   globalctx.memory["totalDays"] = totalDays;
@@ -652,7 +652,7 @@ Function filterSuggestedExperiences = () {
   // Add New Suggested Render Components to list
   for (var experience in filteredExperiences) {
     list.add(CustomDragableExperience(experience: experience, suggested: true));
-  } 
+  }
 };
 
 Function getFiltered = (dest) {
