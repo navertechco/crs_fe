@@ -670,12 +670,23 @@ Function getFiltered = (dest) {
           .toList() ??
       [];
 
-  Iterable filteredByAirport = filteredByDestination;
+  List filteredByTravelRhytm = filteredByDestination.where((e) {
+    return true;
+  }).toList();
+
+  List filteredByDestinationOption = filteredByTravelRhytm.where((e) {
+    return true;
+  }).toList();
+
+  List filteredByKA = filteredByDestinationOption.where((e) {
+    return true;
+  }).toList();
+
+  Iterable filteredByAirport = filteredByKA;
 
   if (dest == "arrival") {
-    filteredByAirport = filteredByDestination
-        .where((e) => e["title"].contains(airport))
-        .toList();
+    filteredByAirport =
+        filteredByKA.where((e) => e["title"].contains(airport)).toList();
   }
 
   var filteredBySuggested = filteredByAirport.where((e) {
@@ -707,3 +718,5 @@ var travelRhytmAges = {
     "1",
   ],
 };
+
+Rx<List<String>> refresh = Rx(<String>[]);

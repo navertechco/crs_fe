@@ -26,8 +26,14 @@ class CustomFooterWidget extends StatelessWidget {
                 nextlabel: "< Expand >",
                 prevlabel: "",
                 onNext: () {
-                  setFormValue(ctrl.state.memory, destination.value,
-                      "destination_option", "1");
+                  setFormValue(ctrl.state.memory["destinations"],
+                      destination.value, "destinationOption", "0");
+                  setFormValue(ctrl.state.memory["destinations"],
+                      destination.value, "travel_rhythm", "0");
+                  setFormValue(ctrl.state.memory["destinations"],
+                      destination.value, "keyActivities", {});
+                  refresh.value = <String>[];
+                  filterSuggestedExperiences();
                 },
                 onPrevious: () {},
                 nextFontWeight: FontWeight.bold,
