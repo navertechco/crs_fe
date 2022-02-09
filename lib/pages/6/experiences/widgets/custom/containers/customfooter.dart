@@ -29,6 +29,7 @@ class CustomFooterWidget extends StatelessWidget {
                 prevlabel: "",
                 onNext: () {
                   formKey.currentState!.reset();
+                  counter.value++;
                   filterSuggestedExperiences();
                 },
                 onPrevious: () {},
