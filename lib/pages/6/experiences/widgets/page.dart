@@ -10,22 +10,22 @@ import 'index.dart';
 /// hello
 class ExperiencesWidget extends HookWidget {
   final ExperiencesController ctrl;
-  const ExperiencesWidget({Key? key, required this.ctrl}) : super(key: key);
-
+  ExperiencesWidget({Key? key, required this.ctrl}) : super(key: key);
+  
   @override
   Widget build(BuildContext context) {
     final counter = useState(0);
-    Rx<Widget> left = Rx(CustomLeftOptionsWidget(ctrl: ctrl, counter:counter ));
+
     useEffect(() {
       print("PARENT LEFT RENDER");
-      left.value = CustomLeftOptionsWidget(ctrl: ctrl, counter:counter );
     }, [stream, counter.value]);
 
-    return Stack(children: [
-      Obx(() {
-        return left.value;
-      }),
-      CustomRightDayWidget(ctrl: ctrl, counter: counter),
-    ]);
+    return Form(
+      key: formKey,
+      child: Stack(children: [
+        CustomLeftOptionsWidget(ctrl: ctrl, counter: counter),
+        CustomRightDayWidget(ctrl: ctrl, counter: counter),
+      ]),
+    );
   }
 }
