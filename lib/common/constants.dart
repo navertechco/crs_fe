@@ -2,6 +2,7 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_html/shims/dart_ui_real.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:get/get.dart';
@@ -405,7 +406,7 @@ Function setFormValue = (data, formKey, key, value) {
   data ??= {}.obs;
 
   if (data[formKey] == null) {
-    data[formKey] = {};
+    data[formKey] = {}.obs;
   }
 
   data[formKey][key] = value;
@@ -651,12 +652,7 @@ Function filterSuggestedExperiences = () {
   // Add New Suggested Render Components to list
   for (var experience in filteredExperiences) {
     list.add(CustomDragableExperience(experience: experience, suggested: true));
-  }
-  // // Refresh memory
-  // list.refresh();
-  // globalctx.suggestedExperiences.refresh();
-  // globalctx.experienceDragData.refresh();
-  // globalctx.promotedExperiences.refresh();
+  } 
 };
 
 Function getFiltered = (dest) {
@@ -720,3 +716,6 @@ var travelRhytmAges = {
 };
 
 Rx<List<String>> refresh = Rx(<String>[]);
+
+Rx<int> trigger = Rx(0);
+Stream? stream;

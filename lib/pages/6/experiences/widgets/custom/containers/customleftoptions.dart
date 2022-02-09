@@ -1,22 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get.dart';
 
 import '../../../../../index.dart';
 
-class CustomLeftOptionsWidget extends StatelessWidget {
+class CustomLeftOptionsWidget extends HookWidget {
   final ExperiencesController ctrl;
+  final ValueNotifier<int> counter;
   CustomLeftOptionsWidget({
     Key? key,
     required this.ctrl,
+    required this.counter,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     ctrl.state.memory = globalctx.memory;
-
     Rx<dynamic> transportService = Rx(getFormValue(
             ctrl.state.memory, destination.value, "service_type", <String>[]) ??
         <String>[]);
+    Rx<dynamic> translatingService = Rx(getFormValue(ctrl.state.memory,
+        destination.value, "translating_service", <String>[]));
+    Rx<dynamic> keyActivities = Rx(getFormValue(
+        ctrl.state.memory["destinations"],
+        destination.value,
+        "key_activities", <String>[]));
 
     Rx<int> guide =
         Rx(getFormValue(ctrl.state.memory, destination.value, "guide_type", 1));
@@ -27,15 +35,23 @@ class CustomLeftOptionsWidget extends StatelessWidget {
     Rx<int> translateIndex = Rx(transportService.value
             .indexWhere((element) => element == "TRANSLATING") ??
         0);
-    var translatingService = (getFormValue(ctrl.state.memory, destination.value,
-        "translating_service", <String>[]));
-    var keyActivities = getFormValue(
-        ctrl.state.memory, destination.value, "key_activities", <String>[]);
+
     Rx<dynamic> destinationOption = Rx(getFormValue(
-        globalctx.memory.value["destinations"],
-        destination.value,
-        "destinationOption",
-        "0"));
+        ctrl.state.memory, destination.value, "destinationOption", "0"));
+
+    Rx<dynamic> travelRhythm = Rx(getFormValue(
+        ctrl.state.memory, destination.value, "travel_rhythm", "0"));
+
+    useEffect(() {
+      print("INNER LEFT RENDER");
+      setFormValue(
+          ctrl.state.memory, destination.value, "destinationOption", "0");
+      setFormValue(ctrl.state.memory, destination.value, "travel_rhythm", "0");
+      destinationOption.value = getFormValue(
+          ctrl.state.memory, destination.value, "destinationOption", "0");
+      travelRhythm.value = getFormValue(
+          ctrl.state.memory, destination.value, "travel_rhythm", "0");
+    }, [stream, counter.value]);
 
     return Padding(
       padding: EdgeInsets.only(
@@ -116,7 +132,7 @@ class CustomLeftOptionsWidget extends StatelessWidget {
                           if (translateIndex.value != -1)
                             CustomFormMultiDropDownFieldWidget(
                               // label: "Exploration Days",
-                              value: translatingService,
+                              value: translatingService.value,
                               onSaved: (value) {
                                 setFormValue(
                                     ctrl.state.memory,
@@ -127,7 +143,7 @@ class CustomLeftOptionsWidget extends StatelessWidget {
                               onChanged: (value) {
                                 translateIndex.value =
                                     value!.isNotEmpty ? 0 : -1;
-                                translatingService = value;
+                                translatingService.value = value;
                                 setFormValue(
                                     ctrl.state.memory,
                                     destination.value,
@@ -210,8 +226,7 @@ class CustomLeftOptionsWidget extends StatelessWidget {
                     Obx(() {
                       return CustomFormDropDownFieldWidget(
                         // label: "Exploration Days",
-                        value: getFormValue(ctrl.state.memory,
-                            destination.value, "travel_rhythm", "0"),
+                        value: travelRhythm.value,
                         onSaved: (value) {
                           setFormValue(ctrl.state.memory, destination.value,
                               "travel_rhythm", value);
@@ -230,12 +245,12 @@ class CustomLeftOptionsWidget extends StatelessWidget {
                             CustomMultiDropdownRequiredValidator(value,
                                 errorText: "Key Activities are required ",
                                 context: context),
-                        value: keyActivities,
+                        value: keyActivities.value,
                         onSaved: (value) {
-                          setFormValue(ctrl.state.memory, destination.value,
-                              "keyActivities", null);
+                          setFormValue(ctrl.state.memory["destinations"],
+                              destination.value, "keyActivities", null);
                           setFormValue(
-                              ctrl.state.memory,
+                              ctrl.state.memory["destinations"],
                               destination.value,
                               "keyActivities",
                               value!
@@ -244,8 +259,9 @@ class CustomLeftOptionsWidget extends StatelessWidget {
                                   .toList());
                         },
                         onChanged: (value) {
-                          setFormValue(ctrl.state.memory, destination.value,
-                              "keyActivities", value);
+                          setFormValue(globalctx.memory["destinations"],
+                              destination.value, "keyActivities", value);
+                          ctrl.state.memory = globalctx.memory;
                         },
                         hintText:
                             "\t\t\t\t\t\t\t\t\t\t\t\tKey Activities            \n",

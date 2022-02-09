@@ -6,9 +6,11 @@ import '../../../../../index.dart';
 
 class CustomFooterWidget extends StatelessWidget {
   final ExperiencesController ctrl;
+  final ValueNotifier<int> counter;
   const CustomFooterWidget({
     Key? key,
     required this.ctrl,
+    required this.counter,
   }) : super(key: key);
 
   @override
@@ -26,13 +28,7 @@ class CustomFooterWidget extends StatelessWidget {
                 nextlabel: "< Expand >",
                 prevlabel: "",
                 onNext: () {
-                  setFormValue(ctrl.state.memory["destinations"],
-                      destination.value, "destinationOption", "0");
-                  setFormValue(ctrl.state.memory["destinations"],
-                      destination.value, "travel_rhythm", "0");
-                  setFormValue(ctrl.state.memory["destinations"],
-                      destination.value, "keyActivities", {});
-                  refresh.value = <String>[];
+                  counter.value++;
                   filterSuggestedExperiences();
                 },
                 onPrevious: () {},
