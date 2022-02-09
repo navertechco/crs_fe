@@ -184,10 +184,25 @@ class CustomStarDestinationForm extends StatelessWidget {
                       },
                       label: "Travel Rhythm         ",
                       data: trCatalog.value.where((value) {
-                        
-                        for (int tr in travelRhytmAges.keys) {
-                          if ((value["code"]) >= (tr)) {
+                        var code = value["code"];
+                        for (var i = 0; i < travelRhytmAges.keys.length; i++) {
+                          var range = [
+                            travelRhytmAges.keys.toList()[i],
+                            travelRhytmAges.keys.toList()[
+                                i >= travelRhytmAges.keys.length - 1
+                                    ? i
+                                    : i + 1]
+                          ];
+
+                          if (customerAge.value < 20) {
                             return true;
+                          }
+                          if (customerAge.value >= range[0] &&
+                              customerAge.value <= range[1]) {
+                            if (travelRhytmAges[range[0]]!
+                                .contains(code.toString())) {
+                              return true;
+                            }
                           }
                         }
                         return false;
