@@ -1,3 +1,3 @@
 library widgets;
 
-export 'widget.dart';
+export 'resume.dart';
