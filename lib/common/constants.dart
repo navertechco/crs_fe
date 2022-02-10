@@ -447,6 +447,11 @@ Function processDays = (day) {
   result.add({"day": destinations.length, "destination": "departure"});
   return result[day.value];
 };
+var allPromotedDestinations = [
+  "arrival",
+  ...globalctx.promotedDestinations.value,
+  "departure"
+];
 
 Function processDestinations = () {
   var destinationDay = [];
@@ -459,18 +464,12 @@ Function processDestinations = () {
     "departure": departure
   };
 
-  var allPromotedDEstinations = [
-    "arrival",
-    ...globalctx.promotedDestinations.value,
-    "departure"
-  ];
-
   for (var i = 0; i < totalDays.value; i++) {
     globalctx.experienceDragData.value[i] ??= <Widget>[];
     // globalctx.promotedExperiences[i] ??= [].obs;
   }
 
-  for (var destination in allPromotedDEstinations) {
+  for (var destination in allPromotedDestinations) {
     var dest = destinations[destination];
     var explorationDays = dest["explorationDay"];
     var days = int.parse(explorationDays);
@@ -555,6 +554,16 @@ Function proccessExperiences = () {
   }
 };
 
+Function promoteDayExperience = (experience) {
+  Map<String, dynamic> experienceData =
+      experiences.firstWhere((e) => e["title"] == experience);
+  globalctx.memory["promoted"] ??= {};
+  globalctx.memory["promoted"]["day"] ??= {};
+  globalctx.memory["promoted"]["day"][currentDay.value] ??= {};
+  globalctx.memory["promoted"]["day"][currentDay.value][experience] =
+      experienceData;
+};
+
 Function setExperienceState = (experience, state) {
   globalctx.states["experiences"][experience] ??= {}.obs;
   globalctx.states["experiences"][experience]["state"] = state;
@@ -574,8 +583,7 @@ Function paginateDay = (context) {
       getPromotedExperiencesByDayAndKA(currentDay.value);
 
   //Decide if experiences are 2 almost to paginate
-  if (promotedExperiencesByDayAndKA) {
-    prepareDaysToResume();
+  if (globalctx.memory["promoted"]["day"][currentDay.value] != null) {
     paginateNextDay();
   } else {
     SweetAlert.show(context,
@@ -601,35 +609,69 @@ Function getPromotedExperiencesByDayAndKA = (day) {
 };
 
 Function prepareDaysToResume = () {
-  // Prepare Frame to send to Resume Page
-  var day = {
-    "date": "",
-    "observation": "",
-    "day_description": "",
-    "day_name": "",
-    "parent": 0,
-    "option_id": 1,
-    "transport_id": 1,
-    "key_activities": [],
-    "meals": [],
-    "experiences": [],
-    "destination": destination.value
+  var arrival = {"title": "arrival", "explorationDay": "1", "airport": "quito"};
+  var departure = {
+    "title": "departure",
+    "explorationDay": "1",
+    "airport": "quito"
   };
 
-  var experience = {
-    "destination": destination.value,
-    "day": "",
-    "title": "",
-    "description": "",
-    "next": "",
-    "previous": "",
-    "experience_id": "",
-    "photo": ""
+  var destinations = {
+    "arrival": arrival,
+    ...globalctx.memory["destinations"],
+    "departure": departure
   };
-  destination.value = processDays(currentDay)["destination"];
-  globalctx.memory.value["days"][currentDay.value] ??= {};
-  globalctx.memory.value["days"][currentDay.value] = day;
-  print(globalctx.memory.value["days"]);
+  var destinationindex = 0;
+  for (var destination in allPromotedDestinations) {
+    var dest = destinations[destination];
+    var explorationDay = dest["explorationDay"];
+    var actualDay = 0;
+    for (var i = 0; i < int.parse(explorationDay); i++) {
+      // Prepare Frame to send to Resume Page
+      var day = {
+        "date": "",
+        "observation": "",
+        "day_description": "",
+        "day_name": "",
+        "parent": 0,
+        "option_id": 1,
+        "transport_id": 1,
+        "key_activities": [],
+        "meals": [],
+        "experiences": {},
+        "destination": dest
+      };
+
+      var experience = {
+        "destination": dest,
+        "day": "",
+        "title": "",
+        "description": "",
+        "next": "",
+        "previous": "",
+        "experience_id": "",
+        "photo": ""
+      };
+      var exps = globalctx.memory["promoted"]["day"][i];
+
+      for (var exp in exps.keys) {
+        var newExp = {...experience, ...exps[exp]};
+        day["experiences"][exp] = newExp;
+      }
+
+      globalctx.memory["days"][actualDay] ??= {};
+      globalctx.memory["days"][actualDay] = day;
+      globalctx.memory["destinations"][destination]["days"] ??= {};
+      globalctx.memory["destinations"][destination]["days"][actualDay] = day;
+      globalctx.memory['destinationDay'][destinationindex] ??= {};
+      globalctx.memory['destinationDay'][destinationindex]['days'] ??= {};
+      globalctx.memory['destinationDay'][destinationindex]['days'][actualDay] =
+          day;
+      actualDay = destination == "arrival" ? 0 : actualDay + 1;
+    }
+    destinationindex++;
+  }
+  Get.toNamed("/Resume");
 };
 
 Function paginateNextDay = () {
@@ -639,7 +681,7 @@ Function paginateNextDay = () {
     destination.value = processDays(currentDay)["destination"];
     filterSuggestedExperiences();
   } else {
-    Get.toNamed("/Resume");
+    prepareDaysToResume();
   }
 };
 
@@ -721,7 +763,7 @@ Rx<int> trigger = Rx(0);
 Stream? stream;
 final formKey = GlobalKey<FormState>();
 
-var memory = globalctx.memory.value;
+var memory = globalctx.memory;
 var detsdata = getValue(memory, "destinations", def: []);
 var allDestinations = memory["destinations"];
 var destinationList = allDestinations.entries

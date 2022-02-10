@@ -19,7 +19,8 @@ class CustomFormDayWidget extends StatelessWidget {
     var destinationindex = indexes[0];
     var dayindex = indexes[1];
     var destination = customDestinationData[destinationindex]["destination"];
-    var day = globalctx.memory['days'][dayindex];
+    var days = globalctx.memory['days'];
+    var day = days[dayindex];
     var daydate = day['date'];
     var meals = day['meals'];
     var observation = day['observation'];

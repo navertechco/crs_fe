@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../../../index.dart';
@@ -29,7 +28,7 @@ class Cover extends StatelessWidget {
             fontSize: 0.020,
             fontWeight: FontWeight.bold),
         CustomDescriptionWidget(
-            text: "${customer["legal_name"]} x $passengers",
+            text: "${customer["lead_passenger"]} x $passengers",
             width: 0.18,
             fontSize: 0.018,
             fontWeight: FontWeight.bold),
@@ -52,4 +51,3 @@ class Cover extends StatelessWidget {
     );
   }
 }
-

@@ -26,8 +26,8 @@ class ExperienceDetailWidget extends GetView<ExperienceDetailController> {
               nextlabel: "Accept >",
               prevlabel: " < Cancel",
               onNext: () {
+                promoteDayExperience(experience);
                 setExperienceState(experience, "promoted");
-                
                 Get.close(1);
               },
               onPrevious: () {

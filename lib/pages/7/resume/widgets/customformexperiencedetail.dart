@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../../../index.dart';
@@ -19,10 +18,8 @@ class CustomFormExperiencesDetailWidget extends StatelessWidget {
     var memory = globalctx.memory.value;
     List<CustomFormExperienceRowWidget> list = [];
     var experiences = memory["days"][dayindex]['experiences'];
-    var filtered = experiences
-        .where((e) => !globalctx.promotedExperiences[e["title"]]==null);
 
-    for (var i = 0; i < filtered.length; i++) {
+    for (var i = 0; i < experiences.length; i++) {
       list.add(CustomFormExperienceRowWidget(
           data: data, indexes: [destinationindex, dayindex, i]));
     }
