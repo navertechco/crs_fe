@@ -661,10 +661,11 @@ Function prepareDaysToResume = () {
 
       globalctx.memory["days"][actualDay] ??= {};
       globalctx.memory["days"][actualDay] = day;
-      globalctx.memory["destinations"][destination]["days"] ??= {};
+      globalctx.memory["destinations"][destination] ??= {};
+      globalctx.memory["destinations"][destination]["days"] = {};
       globalctx.memory["destinations"][destination]["days"][actualDay] = day;
       globalctx.memory['destinationDay'][destinationindex] ??= {};
-      globalctx.memory['destinationDay'][destinationindex]['days'] ??= {};
+      globalctx.memory['destinationDay'][destinationindex]['days'] = {};
       globalctx.memory['destinationDay'][destinationindex]['days'][actualDay] =
           day;
       actualDay = destination == "arrival" ? 0 : actualDay + 1;
