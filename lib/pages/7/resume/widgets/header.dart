@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../../../index.dart';
@@ -59,9 +58,11 @@ class Header extends StatelessWidget {
         CustomFormHeaderWidget(data: chunkMap(customer, 3, customerTemplate)),
         const CustomFormTitleWidget(level: 1, label: "Tour Information"),
         CustomFormHeaderWidget(data: chunkMap(tour, 3, tourTemplate)),
-        const CustomFormTitleWidget(level: 2, label: "Itinerary"),
+        CustomFormTitleWidget(
+            level: 2,
+            label:
+                "Itinerary #(Between: ${currentDayFormat.format(arrivalDate.value)} and ${currentDayFormat.format(departureDate.value)})"),
       ],
     );
   }
 }
-

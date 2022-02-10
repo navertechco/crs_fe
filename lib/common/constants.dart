@@ -720,3 +720,21 @@ Rx<List<String>> refresh = Rx(<String>[]);
 Rx<int> trigger = Rx(0);
 Stream? stream;
 final formKey = GlobalKey<FormState>();
+
+var memory = globalctx.memory.value;
+var detsdata = getValue(memory, "destinations", def: []);
+var allDestinations = memory["destinations"];
+var destinationList = allDestinations.entries
+    .map((e) => {"destination": e.key.toString(), ...e.value})
+    .toList();
+List<dynamic> customDestinationData = [
+  {"destination": "arrival", "explorationDay": "1"},
+  ...destinationList,
+  {"destination": "departure", "explorationDay": "1"}
+];
+
+var promotedDestinations = [
+  "arrival",
+  ...globalctx.promotedDestinations.value,
+  "departure"
+];

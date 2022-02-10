@@ -35,7 +35,7 @@ class LeftHeader extends HookWidget {
         children: [
           CustomTitleWidget(
             fontWeight: FontWeight.bold,
-            label: "Day : $day  ${destination.toString().capitalize}",
+            label: "Day $day :  ${destination.toString().capitalize}",
           ),
           CustomTitleWidget(
             fontWeight: FontWeight.bold,

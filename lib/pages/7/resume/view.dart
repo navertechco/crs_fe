@@ -50,7 +50,7 @@ class ResumePage extends GetView<ResumeController> {
         background: "assets/custom/img/resume.png",
         child: Stack(
           children: [
-            ResumeWidget(pkey: keys),
+            ResumeWidget(pkeys: keys),
             Positioned(
               left: MediaQuery.of(_context).size.width * 0.4,
               top: MediaQuery.of(_context).size.height * 1.85,

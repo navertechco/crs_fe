@@ -101,7 +101,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                           errorText: "Exploration Days is required ",
                           ctx: context),
                       value: getFormValue(ctrl.state.memory, destination,
-                          "explorationDay", "1"),
+                          "explorationDay", "7"),
                       onSaved: (value) {
                         setFormValue(ctrl.state.memory, destination,
                             "explorationDay", value);
@@ -154,7 +154,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                         errorText: "Destination option is required ",
                         ctx: context),
                     value: getFormValue(ctrl.state.memory, destination,
-                        "destinationOption", "0"),
+                        "destinationOption", "1"),
                     onSaved: (value) {
                       setFormValue(ctrl.state.memory, destination,
                           "destinationOption", value);
@@ -173,7 +173,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                           errorText: "Travel Rhythm is required ",
                           ctx: context),
                       value: getFormValue(
-                          ctrl.state.memory, destination, "travelRhythm", "0"),
+                          ctrl.state.memory, destination, "travelRhythm", "1"),
                       onSaved: (value) {
                         setFormValue(ctrl.state.memory, destination,
                             "travelRhythm", value);
@@ -217,7 +217,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                     value: keyActivities,
                     onSaved: (value) {
                       setFormValue(ctrl.state.memory, destination,
-                          "keyActivities", null);
+                          "keyActivities", ["CULTURE"]);
                       setFormValue(
                           ctrl.state.memory,
                           destination,

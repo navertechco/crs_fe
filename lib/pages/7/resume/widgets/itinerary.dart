@@ -7,12 +7,12 @@ import 'endservices.dart';
 import 'header.dart';
 
 class Itinerary extends StatelessWidget {
-  Itinerary({Key? key, required this.data, required this.pkey})
+  Itinerary({Key? key, required this.data, required this.pkeys})
       : super(key: key);
 
   final Map<String, dynamic> data;
   final _controller = ScrollController();
-  final pkey;
+  final pkeys;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -32,17 +32,17 @@ class Itinerary extends StatelessWidget {
                     controller: _controller,
                     child: Column(children: [
                       RepaintBoundary(
-                          key: pkey["cover"], child: Cover(data: data)),
+                          key: pkeys["cover"], child: Cover(data: data)),
                       RepaintBoundary(
-                        key: pkey["header"],
+                        key: pkeys["header"],
                         child: Header(
                           data: data,
                         ),
                       ),
                       Destinations(data: data),
-                      if (pkey["end"] != null)
+                      if (pkeys["end"] != null)
                         RepaintBoundary(
-                          key: pkey["end"],
+                          key: pkeys["end"],
                           child: EndServices(data: data),
                         ),
                     ]),

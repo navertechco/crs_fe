@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../../../index.dart';
@@ -19,22 +18,20 @@ class CustomFormDayWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var destinationindex = indexes[0];
     var dayindex = indexes[1];
-    var destinations = globalctx.promotedDestinations.value;
-    var destination = destinations[destinationindex];
-    var destinationsData = globalctx.memory["destinations"];
-    var destinationData = destinationsData[destination];
+    var destination = customDestinationData[destinationindex]["destination"];
     var day = globalctx.memory['days'][dayindex];
     var daydate = day['date'];
     var meals = day['meals'];
     var observation = day['observation'];
-    var parent = day['parent'];
     var daydescription = day['day_description'];
     return RepaintBoundary(
         key: globalctx.keys["day-$destinationindex-$dayindex"],
         child: Column(
           children: [
             CustomFormTitleWidget(
-                level: 4, label: "Day: ${parent + 1}#####Date: $daydate"),
+                level: 4,
+                label:
+                    "Day: ${destination == "departure" ? totalDays : dayindex + 1}#####Date: $daydate"),
             CustomDescriptionWidget(
                 text: daydescription, width: 0.55, fontSize: 0.016),
             CustomFormExperiencesDetailWidget(data: data, indexes: indexes),
