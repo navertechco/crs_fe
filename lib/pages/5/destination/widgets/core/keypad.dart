@@ -22,21 +22,7 @@ class KeyPadWidget extends StatelessWidget {
               prevlabel: "< Previous",
               nextlabel: "     Next >",
               onNext: () {
-                if (globalctx.promotedDestinations.isNotEmpty &
-                    (dayleft.value == 0)) {
-                  processDestinations();
-                  Get.toNamed("/Experiences");
-                } else {
-                  SweetAlert.show(context,
-                      title: (dayleft.value > 0)
-                          ? "Days Left can't be greater than 0\n"
-                          : "" + "Promote any destination is required",
-                      subtitle: 'error',
-                      style: SweetAlertStyle.error, onPress: (bool isConfirm) {
-                    Get.close(1);
-                    return false;
-                  });
-                }
+                processDestinations(dayleft, context);
               },
               onPrevious: () {
                 Get.back();

@@ -1,4 +1,3 @@
-
 // Experience functions
 
 // ignore_for_file: prefer_function_declarations_over_variables
@@ -8,24 +7,10 @@ import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:naver_crs/pages/6/experiences/widgets/custom/index.dart';
 
 import '../index.dart';
- 
-Function findDestination = (destination) {
-  var promotedDestinations = globalctx.promotedDestinations.value;
-  var result = "departure";
-  var index =
-      promotedDestinations.indexWhere((element) => element == destination);
-  if (index == -1) {
-    if (destination == "arrival") {
-      result = "arrival";
-    }
-  } else {
-    result = promotedDestinations[index];
-  }
-  return result;
-};
+
 Function filterSuggestedExperiences = () {
   // Get airport from current destination
-  var filteredExperiences = getFiltered(destination.value);
+  var filteredExperiences = getFilteredDestination(destination.value);
   // Reset suggested memory and suggested render list
 
   list.value = <Widget>[];
@@ -35,7 +20,7 @@ Function filterSuggestedExperiences = () {
   }
 };
 
-Function removeFromArray = (array, item) {
+Function removeExperienceFromArray = (array, item) {
   if (array.contains(item)) {
     var index = array.indexOf(item);
     array.value.removeAt(index);
@@ -53,8 +38,8 @@ Function removeFromArray = (array, item) {
 };
 
 Function removeExperience = (experience) {
-  removeFromArray(globalctx.selectedExperiences, experience);
-  removeFromArray(globalctx.promotedExperiences, experience);
+  removeExperienceFromArray(globalctx.selectedExperiences, experience);
+  removeExperienceFromArray(globalctx.promotedExperiences, experience);
 };
 
 Function resetExperiences = () {
@@ -74,13 +59,13 @@ Function deleteExperience = (experience) {
 
 Function filterExperienceList = (data, day) {
   String travelRhythm = data["travelRhythm"];
-  List? currentList = globalctx.promotedExperiences.value[day];
+  List? currentList = globalctx.promotedExperiences[day];
   Iterable filtered =
       currentList!.where((e) => e["travelRhythm"] == travelRhythm);
 
   // for (var experience in filtered) {}
 
-  globalctx.promotedExperiences.value[day] = filtered.toList();
+  globalctx.promotedExperiences[day] = filtered.toList();
 };
 
 Function proccessExperiences = () {
@@ -100,7 +85,6 @@ Function promoteDayExperience = (experience) {
       experienceData;
 };
 
-
 Function setExperienceState = (experience, state) {
   globalctx.states["experiences"][experience] ??= {}.obs;
   globalctx.states["experiences"][experience]["state"] = state;
@@ -111,21 +95,21 @@ Function setExperienceState = (experience, state) {
 Function getExperienceState = (experience) {
   globalctx.states["experiences"][experience] ??= {}.obs;
   var state = globalctx.states["experiences"][experience]["state"];
-  return state == null ? "suggested" : state;
+  state ??= "suggested";
+  return state;
 };
 
 Function getPromotedExperiencesByDayAndKA = (day) {
   // Get promoted experiences by day and KA
   List promoted = states["promoted"].entries.toList();
-  var filtered = promoted.where((e) {
-    return experiences.where((f) {
-      return f["title"] == e.key;
-    }).isNotEmpty;
-  });
+  // var filtered = promoted.where((e) {
+  //   return experiences.where((f) {
+  //     return f["title"] == e.key;
+  //   }).isNotEmpty;
+  // });
 
   return true;
 };
-
 
 Function getExperiences = (String destination,
     String experience,
