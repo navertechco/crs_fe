@@ -5,12 +5,13 @@
 import 'package:get/get.dart';
 import 'package:sweetalert/sweetalert.dart';
 
-import 'index.dart';
+import '../index.dart';
+import 'functions.dart'; 
 
 Function paginateNextDay = () {
   // Paginate to Next Day
   if (currentDay.value < totalDays.value) {
-    // currentDay.value += 1;
+    currentDay.value += 1;
     destination.value = processDays(currentDay)["destination"];
     filterSuggestedExperiences();
   } else {
@@ -36,8 +37,6 @@ Function paginateDay = (context) {
     });
   }
 };
-
-
 
 Function prepareDaysToResume = () {
   var arrival = {"title": "arrival", "explorationDay": "1", "airport": "quito"};
@@ -105,7 +104,6 @@ Function prepareDaysToResume = () {
   }
   Get.toNamed("/Resume");
 };
-
 
 Function processDays = (day) {
   result = [];

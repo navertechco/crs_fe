@@ -7,8 +7,8 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:naver_crs/pages/6/experiences/widgets/custom/index.dart';
 
-import 'index.dart';
-
+import '../index.dart';
+ 
 Function findDestination = (destination) {
   var promotedDestinations = globalctx.promotedDestinations.value;
   var result = "departure";

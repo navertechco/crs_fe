@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 
-import './functions.dart';
-import 'index.dart';
+import '../index.dart';
+import './functions.dart'; 
 
 // Destination Functions
 

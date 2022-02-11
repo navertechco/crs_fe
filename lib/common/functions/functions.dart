@@ -3,8 +3,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import './constants.dart';
-import 'index.dart';
+import '../constants.dart';
+import '../index.dart';
 export 'dayfunctions.dart';
 export './destinationfunctions.dart';
 export './experiencefunctions.dart';

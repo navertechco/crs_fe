@@ -7,7 +7,7 @@ import 'package:sweetalert/sweetalert.dart';
 import 'context/index.dart';
 import 'index.dart';
 export './variables.dart';
-export './functions.dart';
+export './functions/functions.dart';
 
 /*
  * DATOS DE SERVIDOR
