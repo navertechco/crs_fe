@@ -46,7 +46,7 @@ class CustomHeaderWidget extends StatelessWidget {
         Divider(color: Color.fromARGB(255, 0, 0, 0)),
         Obx(() {
           var destination = processDays(currentDay)["destination"];
-          var airport = getAirport(destination);
+          var airport = getDestinationAirport(destination);
 
           return Row(
             children: [

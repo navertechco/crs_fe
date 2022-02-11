@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:naver_crs/common/validators.dart';
 import 'package:naver_crs/pages/5/destination/widgets/destinationdetail/controller.dart';
 import '../../../../index.dart';
 
