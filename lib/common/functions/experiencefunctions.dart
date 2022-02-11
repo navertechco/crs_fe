@@ -10,7 +10,7 @@ import '../index.dart';
 
 Function filterSuggestedExperiences = () {
   // Get airport from current destination
-  var filteredExperiences = getFilteredDestination(destination.value);
+  var filteredExperiences = getFilteredDestination();
   // Reset suggested memory and suggested render list
 
   list.value = <Widget>[];

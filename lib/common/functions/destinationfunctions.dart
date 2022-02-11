@@ -7,17 +7,17 @@ import '../index.dart';
 import './functions.dart';
 
 // Destination Functions
-Function getDestinationAirport = (destination) {
+Function getDestinationAirport = () {
   var airport = "quito";
   try {
     var destinationData = getParam("DESTINATION_DATA")["value"];
     var destinations = globalctx.promotedDestinations;
     var first = destinations[0];
     var last = destinations[destinations.length - 2];
-    if (destination == "arrival") {
+    if (destination.value == "arrival") {
       airport = destinationData[first][5];
     }
-    if (destination == "departure") {
+    if (destination.value == "departure") {
       airport = destinationData[last][5];
     }
     return airport;
@@ -26,14 +26,14 @@ Function getDestinationAirport = (destination) {
   }
 };
 
-Function getFilteredDestination = (dest) {
-  var airport = getDestinationAirport(dest).toString().toUpperCase();
+Function getFilteredDestination = () {
+  var airport = getDestinationAirport().toString().toUpperCase();
 
   List filteredByDestination = experiences
           .where((e) => e["destination"]
               .toString()
               .toUpperCase()
-              .contains(dest.toUpperCase()))
+              .contains(destination.value.toUpperCase()))
           .toList() ??
       [];
 
@@ -51,7 +51,7 @@ Function getFilteredDestination = (dest) {
 
   Iterable filteredByAirport = filteredByKA;
 
-  if (dest == "arrival") {
+  if (destination.value == "arrival") {
     filteredByAirport =
         filteredByKA.where((e) => e["title"].contains(airport)).toList();
   }

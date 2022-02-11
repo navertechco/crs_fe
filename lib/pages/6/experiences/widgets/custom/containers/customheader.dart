@@ -45,17 +45,17 @@ class CustomHeaderWidget extends StatelessWidget {
         ),
         Divider(color: Color.fromARGB(255, 0, 0, 0)),
         Obx(() {
-          var destination = processDays(currentDay)["destination"];
-          var airport = getDestinationAirport(destination);
+          // var destination = processDays()["destination"];
+          var airport = getDestinationAirport();
 
           return Row(
             children: [
-              if (destination != "arrival")
+              if (destination.value != "arrival")
                 CustomTitleWidget(
                   fontWeight: FontWeight.bold,
-                  label: "Destination: ${destination}",
+                  label: "Destination: $destination.value",
                 ),
-              if (destination != "arrival")
+              if (destination.value != "arrival")
                 SizedBox(width: MediaQuery.of(context).size.width * 0.05),
               CustomTitleWidget(
                 fontWeight: FontWeight.bold,

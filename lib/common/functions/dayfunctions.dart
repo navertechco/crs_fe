@@ -6,13 +6,13 @@ import 'package:get/get.dart';
 import 'package:sweetalert/sweetalert.dart';
 
 import '../index.dart';
-import 'functions.dart'; 
+import 'functions.dart';
 
 Function paginateNextDay = () {
   // Paginate to Next Day
   if (currentDay.value < totalDays.value) {
     currentDay.value += 1;
-    destination.value = processDays(currentDay)["destination"];
+    destination.value = processDays()["destination"];
     filterSuggestedExperiences();
   } else {
     prepareDaysToResume();
@@ -105,7 +105,7 @@ Function prepareDaysToResume = () {
   Get.toNamed("/Resume");
 };
 
-Function processDays = (day) {
+Function processDays = () {
   result = [];
   result.add({"day": 1, "destination": "arrival"});
   var destinations = globalctx.memory["destinationDay"];
@@ -115,5 +115,15 @@ Function processDays = (day) {
     }
   }
   result.add({"day": destinations.length, "destination": "departure"});
-  return result[day.value];
+  return result[currentDay.value];
+};
+
+Function previousDay = () {
+  if (currentDay.value > 0) {
+    currentDay.value -= 1;
+    destination.value = processDays()["destination"];
+    filterSuggestedExperiences();
+  } else {
+    Get.back();
+  }
 };

@@ -18,10 +18,10 @@ class LeftHeader extends HookWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      var destination = processDays(currentDay)["destination"];
+      // var destination = processDays()["destination"];
       var add = 1;
       var day = currentDay.value + add;
-      if (destination == "departure") {
+      if (destination.value == "departure") {
         add = 0;
       }
       if (currentDay.value == 1) {

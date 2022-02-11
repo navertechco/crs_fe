@@ -62,13 +62,7 @@ class CustomFooterWidget extends StatelessWidget {
               ctrl.refresh();
             },
             onPrevious: () {
-              if (currentDay.value > 0) {
-                currentDay.value -= 1;
-                destination.value = processDays(currentDay)["destination"];
-                filterSuggestedExperiences();
-              } else {
-                Get.back();
-              }
+              previousDay();
             },
             width: 0.45),
       ],

@@ -14,7 +14,7 @@ var allPromotedDestinations = [
   ...globalctx.promotedDestinations.value,
   "departure"
 ];
-var destination = Rx(processDays(currentDay)["destination"]);
+var destination = Rx(processDays()["destination"]);
 var getDestination = (String destination) async {
   var res = await fetchhandler(kDefaultSchema, kDefaultServer,
       kDefaultServerPort, kDefaultDestinationPath, 'POST', {
