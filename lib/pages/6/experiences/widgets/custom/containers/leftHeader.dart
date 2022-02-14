@@ -18,10 +18,9 @@ class LeftHeader extends HookWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      // var destination = processDays()["destination"];
       var add = 1;
       var day = currentDay.value + add;
-      if (destination.value == "departure") {
+      if (globalDestination.value == "departure") {
         add = 0;
       }
       if (currentDay.value == 1) {
@@ -35,7 +34,7 @@ class LeftHeader extends HookWidget {
         children: [
           CustomTitleWidget(
             fontWeight: FontWeight.bold,
-            label: "Day $day :  ${destination.toString().capitalize}",
+            label: "Day $day :  ${globalDestination.value.toString().capitalize}",
           ),
           CustomTitleWidget(
             fontWeight: FontWeight.bold,

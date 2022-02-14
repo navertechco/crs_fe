@@ -25,15 +25,7 @@ class DestinationDetailWidget extends GetView<DestinationDetailController> {
               nextlabel: "Next >",
               prevlabel: " < Previous",
               onNext: () {
-                if (_formKey.currentState!.validate()) {
-                  _formKey.currentState!.save();
-                  if (!globalctx.promotedDestinations.contains(destination)) {
-                    globalctx.promotedDestinations.add(destination);
-                    globalctx.memory["destinations"] = ctrl.state.memory;
-                  }
-                  filterSuggestedExperiences();
-                  Get.close(1);
-                }
+                promoteDestination(ctrl, _formKey, destination);
               },
               onPrevious: () {
                 Get.close(1);

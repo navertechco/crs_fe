@@ -18,18 +18,18 @@ class TravelFilter extends HookWidget {
   Widget build(BuildContext context) {
     Rx<dynamic> keyActivities = Rx(getFormValue(
         ctrl.state.memory["destinations"],
-        destination.value,
+        globalDestination.value,
         "keyActivities", <String>[]));
 
     Rx<dynamic> destinationOption = Rx(getFormValue(
         ctrl.state.memory["destinations"],
-        destination.value,
+        globalDestination.value,
         "destinationOption",
         "0"));
 
     Rx<dynamic> travelRhythm = Rx(getFormValue(
         ctrl.state.memory["destinations"],
-        destination.value,
+        globalDestination.value,
         "travel_rhythm",
         "0"));
 
@@ -55,29 +55,27 @@ class TravelFilter extends HookWidget {
           return Column(
             children: [
               CustomFormDropDownFieldWidget(
-                // label: "Exploration Days",
                 value: destinationOption.value,
                 onSaved: (value) {
                   setFormValue(ctrl.state.memory["destinations"],
-                      destination.value, "destinationOption", value);
+                      globalDestination.value, "destinationOption", value);
                 },
                 onChanged: (value) {
                   setFormValue(ctrl.state.memory["destinations"],
-                      destination.value, "destinationOption", value);
+                      globalDestination.value, "destinationOption", value);
                 },
                 hintText: "Travel Options",
                 data: processCatalog("destination_option"),
               ),
               CustomFormDropDownFieldWidget(
-                // label: "Exploration Days",
                 value: travelRhythm.value,
                 onSaved: (value) {
                   setFormValue(ctrl.state.memory["destinations"],
-                      destination.value, "travel_rhythm", value);
+                      globalDestination.value, "travel_rhythm", value);
                 },
                 onChanged: (value) {
                   setFormValue(ctrl.state.memory["destinations"],
-                      destination.value, "travel_rhythm", value);
+                      globalDestination.value, "travel_rhythm", value);
                 },
                 hintText: "Travel Rhythm",
                 data: processCatalog("travel_rhythm"),
@@ -90,16 +88,16 @@ class TravelFilter extends HookWidget {
                 value: keyActivities.value,
                 onSaved: (value) {
                   setFormValue(ctrl.state.memory["destinations"],
-                      destination.value, "keyActivities", null);
+                      globalDestination.value, "keyActivities", null);
                   setFormValue(
                       ctrl.state.memory["destinations"],
-                      destination.value,
+                      globalDestination.value,
                       "keyActivities",
                       value!.map((e) => e["description"]).toSet().toList());
                 },
                 onChanged: (value) {
                   setFormValue(globalctx.memory["destinations"],
-                      destination.value, "keyActivities", value);
+                      globalDestination.value, "keyActivities", value);
                 },
                 hintText:
                     "\t\t\t\t\t\t\t\t\t\t\t\tKey Activities            \n",

@@ -9,14 +9,17 @@ import '../index.dart';
 import 'functions.dart';
 
 Function paginateNextDay = () {
-  // Paginate to Next Day
-  if (currentDay.value < totalDays.value) {
-    currentDay.value += 1;
-    destination.value = processDays()["destination"];
-    filterSuggestedExperiences();
+  if (currentDay.value < totalDays.value - 1) {
+    nextDay();
   } else {
     prepareDaysToResume();
   }
+};
+
+Function nextDay = () {
+  currentDay.value++;
+  globalDestination.value = processDays()["destination"];
+  filterSuggestedExperiences();
 };
 
 Function paginateDay = (context) {
@@ -38,90 +41,103 @@ Function paginateDay = (context) {
   }
 };
 
-Function prepareDaysToResume = () {
+Function getDtos = () {
   var arrival = {"title": "arrival", "explorationDay": "1", "airport": "quito"};
   var departure = {
     "title": "departure",
     "explorationDay": "1",
     "airport": "quito"
   };
+  var day = {
+    "date": "",
+    "observation": "",
+    "day_description": "",
+    "day_name": "",
+    "parent": 0,
+    "option_id": 1,
+    "transport_id": 1,
+    "key_activities": [],
+    "meals": "B/L/D/O",
+    "experiences": {},
+    "destination": ""
+  };
 
-  var destinations = {
+  var experience = {
+    "destination": "",
+    "day": "",
+    "title": "",
+    "description": "",
+    "next": "",
+    "previous": "",
+    "experience_id": "",
+    "photo": ""
+  };
+
+  return [arrival, departure, day, experience];
+};
+
+Function getDestinations = () {
+  var dtos = getDtos();
+  var arrival = dtos[0];
+  var departure = dtos[1];
+
+  Map destinations = {
     "arrival": arrival,
     ...globalctx.memory["destinations"],
     "departure": departure
   };
-  var destinationindex = 0;
-  for (var destination in allPromotedDestinations) {
-    var dest = destinations[destination];
-    var explorationDay = dest["explorationDay"];
-    var actualDay = 0;
+
+  return destinations;
+};
+
+Function prepareDaysToResume = () {
+  List dtos = getDtos();
+  Map experience = dtos[3];
+  Map dayDto = dtos[2];
+  var dayIndex = 0;
+  for (String destination in allPromotedDestinations) {
+    var destinationDay = globalctx.memory["destinationDay"]
+        .firstWhere((e) => e["destination"] == destination);
+    var explorationDay = destinationDay["explorationDay"];
     for (var i = 0; i < int.parse(explorationDay); i++) {
+      var day = dayDto;
       // Prepare Frame to send to Resume Page
-      var day = {
-        "date": "",
-        "observation": "",
-        "day_description": "",
-        "day_name": "",
-        "parent": 0,
-        "option_id": 1,
-        "transport_id": 1,
-        "key_activities": [],
-        "meals": [],
-        "experiences": {},
-        "destination": dest
-      };
-
-      var experience = {
-        "destination": dest,
-        "day": "",
-        "title": "",
-        "description": "",
-        "next": "",
-        "previous": "",
-        "experience_id": "",
-        "photo": ""
-      };
-      var exps = globalctx.memory["promoted"]["day"][i];
-
+      var exps = globalctx.memory["promoted"]["day"][dayIndex];
       for (var exp in exps.keys) {
-        var newExp = {...experience, ...exps[exp]};
+        Map newExp = {...experience, ...exps[exp]};
         day["experiences"][exp] = newExp;
       }
-
-      globalctx.memory["days"][actualDay] ??= {};
-      globalctx.memory["days"][actualDay] = day;
       globalctx.memory["destinations"][destination] ??= {};
-      globalctx.memory["destinations"][destination]["days"] = {};
-      globalctx.memory["destinations"][destination]["days"][actualDay] = day;
-      globalctx.memory['destinationDay'][destinationindex] ??= {};
-      globalctx.memory['destinationDay'][destinationindex]['days'] = {};
-      globalctx.memory['destinationDay'][destinationindex]['days'][actualDay] =
-          day;
-      actualDay = destination == "arrival" ? 0 : actualDay + 1;
+      globalctx.memory["destinations"][destination]["daysData"] ??= {};
+      globalctx.memory["destinations"][destination]["daysData"][dayIndex] = day;
+      dayIndex++;
     }
-    destinationindex++;
   }
   Get.toNamed("/Resume");
 };
 
 Function processDays = () {
   result = [];
-  result.add({"day": 1, "destination": "arrival"});
-  var destinations = globalctx.memory["destinationDay"];
-  for (var dest in destinations) {
-    for (var i = 2; i <= dest["days"]; i++) {
+  // result.add({"day": 1, "destination": "arrival"});
+  var destinationDay = globalctx.memory["destinationDay"];
+  var destDays = 0;
+  for (var dest in destinationDay) {
+    for (var i = 1; i <= dest["days"]; i++) {
       result.add({"day": i, "destination": dest["destination"]});
+      destDays++;
     }
   }
-  result.add({"day": destinations.length, "destination": "departure"});
-  return result[currentDay.value];
+  if (result.isNotEmpty) {
+    return result[currentDay.value];
+  }
+  // result.add({"day": destDays + 2, "destination": "departure"});
+  return {};
 };
 
 Function previousDay = () {
   if (currentDay.value > 0) {
-    currentDay.value -= 1;
-    destination.value = processDays()["destination"];
+    currentDay.value--;
+    globalDestination.value = processDays()["destination"];
     filterSuggestedExperiences();
   } else {
     Get.back();

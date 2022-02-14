@@ -14,12 +14,15 @@ class Destinations extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> destinations = [];
-    
+
     if (data != null) {
-      for (var i = 0; i < customDestinationData.length; i++) {
+      var i = 0;
+      for (var destination in promotedDestinations) {
         var key = GlobalKey();
         globalctx.keys["destination-$i"] = key;
-        destinations.add(CustomFormDestination(data: data, index: i));
+        destinations.add(CustomFormDestination(
+            data: data, index: i, destination: destination));
+        i++;
       }
     }
     return Column(

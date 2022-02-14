@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable, prefer_function_declarations_over_variables
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../index.dart';
@@ -24,16 +26,8 @@ class FormCatalogueWidget extends StatelessWidget {
   final String? Function(String?)? validator;
   @override
   Widget build(BuildContext context) {
-    Rx<List<DropdownMenuItem<String>>>? items = Rx([]);
-    List<Map<String, dynamic>> data2 = [];
-    data2.add({"code": "0", "description": "Choose a Option"});
-    data2.addAll(data);
-    data2.asMap().forEach((index, item) {
-      items.value.add(DropdownMenuItem(
-        value: item["code"].toString(),
-        child: Text(item["description"]),
-      ));
-    });
+    var items = getItems(data, value);
+
     return Obx(() {
       return DropdownButtonHideUnderline(
         child: DropdownButtonFormField(
@@ -53,7 +47,7 @@ class FormCatalogueWidget extends StatelessWidget {
           ),
           onSaved: onSaved,
           onChanged: disabled ? null : onChanged,
-          items: items.value,
+          items: items,
         ),
       );
     });

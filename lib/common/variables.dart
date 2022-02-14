@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import './constants.dart';
 import 'index.dart';
+
 ////
 Rx<int> leftAccumulated = 0.obs;
 var airports = {"1": "quito", "2": "guayaquil"};
@@ -14,7 +15,7 @@ var allPromotedDestinations = [
   ...globalctx.promotedDestinations.value,
   "departure"
 ];
-var destination = Rx(processDays()["destination"]);
+var globalDestination = Rx("");
 var getDestination = (String destination) async {
   var res = await fetchhandler(kDefaultSchema, kDefaultServer,
       kDefaultServerPort, kDefaultDestinationPath, 'POST', {
@@ -36,6 +37,7 @@ Rx<DateTime> arrivalDate = Rx(globalctx.memory["tour"]["arrival_date"]);
 Rx<DateTime> departureDate = Rx(globalctx.memory["tour"]["departure_date"]);
 Rx<int> totalDays =
     Rx(departureDate.value.difference(arrivalDate.value).inDays);
+var dayleft = totalDays;
 Rx<double> customerAge =
     Rx(DateTime.now().difference(birthDate.value).inDays / 365);
 Rx<int> memoryDayLeft = Rx(globalctx.memory["days_left"]);

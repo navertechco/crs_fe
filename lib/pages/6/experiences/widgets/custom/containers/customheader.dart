@@ -29,33 +29,32 @@ class CustomHeaderWidget extends StatelessWidget {
               var date = currentDayFormat
                   .format(arrivalDate.value.add(Duration(days: days)));
 
-              if (destination.value == "arrival") {
+              if (globalDestination.value == "arrival") {
                 date = currentDayFormat.format(arrivalDate.value);
               }
-              if (destination.value == "departure") {
+              if (globalDestination.value == "departure") {
                 date = currentDayFormat.format(departureDate.value);
               }
 
               return CustomTitleWidget(
                 fontWeight: FontWeight.bold,
-                label: "${date}",
+                label: date,
               );
             }),
           ],
         ),
         Divider(color: Color.fromARGB(255, 0, 0, 0)),
         Obx(() {
-          // var destination = processDays()["destination"];
           var airport = getDestinationAirport();
 
           return Row(
             children: [
-              if (destination.value != "arrival")
+              if (globalDestination.value != "arrival")
                 CustomTitleWidget(
                   fontWeight: FontWeight.bold,
-                  label: "Destination: $destination.value",
+                  label: "Destination: $globalDestination.value",
                 ),
-              if (destination.value != "arrival")
+              if (globalDestination.value != "arrival")
                 SizedBox(width: MediaQuery.of(context).size.width * 0.05),
               CustomTitleWidget(
                 fontWeight: FontWeight.bold,

@@ -18,10 +18,12 @@ class CustomFormDayWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var destinationindex = indexes[0];
     var dayindex = indexes[1];
-    var destination = customDestinationData[destinationindex]["destination"];
-    var days = globalctx.memory['days'];
-    var day = days[dayindex];
-    var daydate = day['date'];
+    var destinationDay = globalctx.memory["destinationDay"];
+    var destination = destinationDay[destinationindex]["destination"];
+    var destinationData = globalctx.memory["destinations"][destination];
+    var daysData = destinationData["daysData"];
+    var days = daysData.entries.toList();
+    var day = days[dayindex].value;
     var meals = day['meals'];
     var observation = day['observation'];
     var daydescription = day['day_description'];
@@ -31,8 +33,7 @@ class CustomFormDayWidget extends StatelessWidget {
           children: [
             CustomFormTitleWidget(
                 level: 4,
-                label:
-                    "Day: ${destination == "departure" ? totalDays : dayindex + 1}#####Date: $daydate"),
+                label: "Day: ${destinationindex + dayindex + 1}#####"),
             CustomDescriptionWidget(
                 text: daydescription, width: 0.55, fontSize: 0.016),
             CustomFormExperiencesDetailWidget(data: data, indexes: indexes),

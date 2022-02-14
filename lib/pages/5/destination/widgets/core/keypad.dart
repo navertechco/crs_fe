@@ -16,13 +16,12 @@ class KeyPadWidget extends StatelessWidget {
         left: MediaQuery.of(context).size.width * 0.51,
       ),
       child: Obx(() {
-        var dayleft = Rx(getContext("dayleft"));
         if (!globalctx.destinationlist.isNotEmpty) {
           return CustomKeypadWidget(
               prevlabel: "< Previous",
               nextlabel: "     Next >",
               onNext: () {
-                processDestinations(dayleft, context);
+                processDestinations(context);
               },
               onPrevious: () {
                 Get.back();

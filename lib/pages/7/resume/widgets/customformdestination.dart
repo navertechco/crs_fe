@@ -10,16 +10,19 @@ class CustomFormDestination extends StatelessWidget {
     Key? key,
     required this.data,
     required this.index,
+    required this.destination,
   }) : super(key: key);
 
   final Map<String, dynamic> data;
   final int index;
+  final destination;
   @override
   Widget build(BuildContext context) {
     List<Widget> daylist = [];
-    var destination = promotedDestinations.toList()[index];
-    var explorationDay =
-        int.parse(customDestinationData[index]["explorationDay"]);
+    var promotedDestinationDay = globalctx.memory["destinationDay"];
+    var destination = promotedDestinationDay[index];
+    var explorationDay = int.parse(destination["explorationDay"]);
+    var title = destination["destination"].toString().capitalize;
     for (var day = 0; day < explorationDay; day++) {
       var key = GlobalKey();
       globalctx.keys["day-$index-$day"] = key;
@@ -27,8 +30,7 @@ class CustomFormDestination extends StatelessWidget {
         children: [
           RepaintBoundary(
               // key: globalctx.keys["day-$index-$day"],
-              child: CustomFormTitleWidget(
-                  level: 3, label: "${destination.toString().capitalize}")),
+              child: CustomFormTitleWidget(level: 3, label: "$title")),
           CustomFormDayWidget(data: data, indexes: [index, day]),
         ],
       ));

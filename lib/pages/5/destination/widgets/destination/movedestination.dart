@@ -4,7 +4,7 @@ import '../../../../index.dart';
 import '../index.dart';
 
 void moveDestinationFunction(String destination, BuildContext context) {
-  var dayleft = Rx(getContext("dayleft"));
+   
   if (!globalctx.destinations.contains(destination) && dayleft.value != 0) {
     globalctx.destinations.add(destination);
     globalctx.destinationDragData.value.add(Obx(() {

@@ -6,6 +6,19 @@ import 'package:sweetalert/sweetalert.dart';
 import '../index.dart';
 import './functions.dart';
 
+Function promoteDestination = (ctrl, _formKey, destination) {
+  if (_formKey.currentState!.validate()) {
+    _formKey.currentState!.save();
+    if (!globalctx.promotedDestinations.contains(destination)) {
+      globalctx.promotedDestinations.add(destination);
+      globalctx.memory["destinations"] = ctrl.state.memory;
+    }
+    globalDestination.value = destination;
+    filterSuggestedExperiences();
+    Get.close(1);
+  }
+};
+
 // Destination Functions
 Function getDestinationAirport = () {
   var airport = "quito";
@@ -14,10 +27,10 @@ Function getDestinationAirport = () {
     var destinations = globalctx.promotedDestinations;
     var first = destinations[0];
     var last = destinations[destinations.length - 2];
-    if (destination.value == "arrival") {
+    if (globalDestination.value == "arrival") {
       airport = destinationData[first][5];
     }
-    if (destination.value == "departure") {
+    if (globalDestination.value == "departure") {
       airport = destinationData[last][5];
     }
     return airport;
@@ -33,7 +46,7 @@ Function getFilteredDestination = () {
           .where((e) => e["destination"]
               .toString()
               .toUpperCase()
-              .contains(destination.value.toUpperCase()))
+              .contains(globalDestination.value.toUpperCase()))
           .toList() ??
       [];
 
@@ -51,7 +64,7 @@ Function getFilteredDestination = () {
 
   Iterable filteredByAirport = filteredByKA;
 
-  if (destination.value == "arrival") {
+  if (globalDestination.value == "arrival") {
     filteredByAirport =
         filteredByKA.where((e) => e["title"].contains(airport)).toList();
   }
@@ -63,11 +76,12 @@ Function getFilteredDestination = () {
   return filteredBySuggested;
 };
 
-Function processDestinations = (dayleft, context) {
-  if (globalctx.promotedDestinations.isNotEmpty & (dayleft.value == 0)) {
+Function processDestinations = (context) {
+   
+  if (globalctx.promotedDestinations.isNotEmpty & (dayleft == 0)) {
     var destinationDay = [];
-    var arrival = {"explorationDay": "1", "airport": "quito"};
-    var departure = {"explorationDay": "1", "airport": "quito"};
+    var arrival = {"explorationDay": "1", "days": "1", "airport": "quito"};
+    var departure = {"explorationDay": "1", "days": "1", "airport": "quito"};
 
     var destinations = {
       "arrival": arrival,
@@ -79,14 +93,15 @@ Function processDestinations = (dayleft, context) {
       globalctx.experienceDragData.value[i] ??= <Widget>[];
       // globalctx.promotedExperiences[i] ??= [].obs;
     }
-
+    var destDays = 0;
     for (var destination in allPromotedDestinations) {
       var dest = destinations[destination];
       var explorationDays = dest["explorationDay"];
       var days = int.parse(explorationDays);
       destinationDay.add({...dest, "destination": destination, "days": days});
-      // totalDays.value += days;
+      destDays += days;
     }
+    totalDays.value = destDays;
     globalctx.memory["destinationDay"] = destinationDay;
     globalctx.memory["totalDays"] = totalDays;
     Get.toNamed("/Experiences");
@@ -94,7 +109,7 @@ Function processDestinations = (dayleft, context) {
     SweetAlert.show(context,
         title: (dayleft.value > 0)
             ? "Days Left can't be greater than 0\n"
-            : "" + "Promote any destination is required",
+            : "Promote any destination is required",
         subtitle: 'error',
         style: SweetAlertStyle.error, onPress: (bool isConfirm) {
       Get.close(1);

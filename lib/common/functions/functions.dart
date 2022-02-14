@@ -111,7 +111,23 @@ Function globalctxReset = () {
   globalctx.reset.value = true;
   totalDays.value = departureDate.value.difference(arrivalDate.value).inDays;
   leftAccumulated.value = 0;
-  setContext("dayleft", totalDays.value);
+  dayleft.value = totalDays.value;
+};
+Function getItems = (data, value) {
+  RxList<DropdownMenuItem<String>> items = <DropdownMenuItem<String>>[].obs;
+  List<Map<String, dynamic>> data2 = [];
+  data2.add({"code": "0", "description": "Choose a Option"});
+  if (data.isNotEmpty) {
+    items = <DropdownMenuItem<String>>[].obs;
+    data2.addAll(data);
+    data2.asMap().forEach((index, item) {
+      items.add(DropdownMenuItem(
+        value: item["code"].toString(),
+        child: Text(item["description"]),
+      ));
+    });
+  }
+  return items;
 };
 
 Function chunkMap =

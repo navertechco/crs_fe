@@ -26,7 +26,7 @@ class CustomDragableExperience extends StatelessWidget {
       var dest = experience["destination"];
       var state = Rx(getExperienceState(title));
       return state.value == "suggested" &&
-              dest == destination.value.toString().toUpperCase()
+              dest == globalDestination.value.toString().toUpperCase()
           ? Draggable<String>(
               data: title,
               feedback: experienceOptionWidget,
