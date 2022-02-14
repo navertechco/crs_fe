@@ -91,25 +91,28 @@ Function getDestinations = () {
 };
 
 Function prepareDaysToResume = () {
-  List dtos = getDtos();
-  Map experience = dtos[3];
-  Map dayDto = dtos[2];
   var dayIndex = 0;
   for (String destination in allPromotedDestinations) {
+    globalctx.memory["destinations"][destination] ??= {};
+    globalctx.memory["destinations"][destination]["daysData"] = {};
+    var destData = globalctx.memory["destinations"][destination];
+    var daysData = destData["daysData"];
     var destinationDay = globalctx.memory["destinationDay"]
         .firstWhere((e) => e["destination"] == destination);
     var explorationDay = destinationDay["explorationDay"];
+
     for (var i = 0; i < int.parse(explorationDay); i++) {
-      var day = dayDto;
+      var dayDto = getDtos()[2];
+      var expDto = getDtos()[3];
       // Prepare Frame to send to Resume Page
       var exps = globalctx.memory["promoted"]["day"][dayIndex];
       for (var exp in exps.keys) {
-        Map newExp = {...experience, ...exps[exp]};
-        day["experiences"][exp] = newExp;
+        Map newExp = {};
+        newExp = {...expDto, ...exps[exp]};
+        dayDto["experiences"][exp] = newExp;
       }
-      globalctx.memory["destinations"][destination] ??= {};
-      globalctx.memory["destinations"][destination]["daysData"] ??= {};
-      globalctx.memory["destinations"][destination]["daysData"][dayIndex] = day;
+      globalctx.memory["destinations"][destination]["daysData"][dayIndex] =
+          dayDto;
       dayIndex++;
     }
   }
