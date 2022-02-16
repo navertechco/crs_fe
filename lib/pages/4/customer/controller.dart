@@ -9,10 +9,10 @@ class CustomerController extends GetxController {
   Function saveCustomer = () {};
 
   CustomerController() {
-
 // ignore: prefer_function_declarations_over_variables
     saveCustomer = () {
-      globalctx.memory["customer"] = state.toMap();
+      Map mem = {...globalctx.memory["customer"], ...state.toMap()};
+      globalctx.memory["customer"] = mem;
       Get.toNamed("/Destination");
     };
   }

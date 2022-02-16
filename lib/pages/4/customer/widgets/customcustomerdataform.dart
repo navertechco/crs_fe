@@ -15,10 +15,13 @@ class CustomCustomerDataForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var customerTypeCatalog = processCatalog("legal_client_type");
+
+    var client = globalctx.memory["customer"];
     Rx<List<Map<String, dynamic>>> citylist = Rx([]);
-    RxString customerType = "".obs;
-    RxString country = "".obs;
-    RxString city = "".obs;
+    RxString customerType = client["client_type_id"].toString().obs;
+    RxString country = client["origin_id"].toString().obs;
+    RxString city = client["city_id"].toString().obs;
     List<Map<String, dynamic>> countrylist = [];
     // ignore: prefer_function_declarations_over_variables
 
@@ -42,9 +45,6 @@ class CustomCustomerDataForm extends StatelessWidget {
       return countrylist;
     })());
 
-    var customerTypeCatalog = processCatalog("legal_client_type");
-    var tourdata = getContext("tour");
-    var client = getValue(tourdata, "client");
     return Form(
       key: _formKey,
       child: SingleChildScrollView(
@@ -71,7 +71,7 @@ class CustomCustomerDataForm extends StatelessWidget {
                               validator: CustomRequiredValidator(
                                   errorText: "Legal Client Type is required ",
                                   ctx: context),
-                              value: getValue(client, "legal_client:type",
+                              value: getValue(client, "legal_client_type_id",
                                   def: "1"),
                               width: 0.2,
                               label: "Customer Type          ",
@@ -133,7 +133,8 @@ class CustomCustomerDataForm extends StatelessWidget {
                                     validator: CustomRequiredValidator(
                                         errorText: "DNI/Passport is required ",
                                         ctx: context),
-                                    value: getValue(client, "dni", def: "dddd"),
+                                    value: getValue(client, "client_dni",
+                                        def: "dddd"),
                                     onSaved: (value) {
                                       ctrl!.state.dni = value!;
                                     },
@@ -163,8 +164,8 @@ class CustomCustomerDataForm extends StatelessWidget {
                                 validator: CustomRequiredValidator(
                                     errorText: "Last Names is required ",
                                     ctx: context),
-                                value:
-                                    getValue(client, "last_names", def: "dddd"),
+                                value: getValue(client, "contact_name_2",
+                                    def: "dddd"),
                                 onSaved: (value) {
                                   ctrl!.state.lastNames = value!;
                                 },
@@ -180,9 +181,9 @@ class CustomCustomerDataForm extends StatelessWidget {
                                 validator: (date) {
                                   CustomDatetimeRequiredValidator(date,
                                       context: context,
-                                      errorText: "Birth day is Required");
+                                      errorText: "Birth date is Required");
                                 },
-                                initialValue: getValue(client, "birthday",
+                                initialValue: getDateValue(client, "birth_date",
                                     def: DateTime(1981, 02, 20)),
                                 onSaved: (value) {
                                   ctrl!.state.birthDate = value!;
@@ -213,7 +214,7 @@ class CustomCustomerDataForm extends StatelessWidget {
                                 validator: CustomRequiredValidator(
                                     errorText: "Country is required ",
                                     ctx: context),
-                                value: getValue(client, "country", def: "1"),
+                                value: getValue(client, "origin_id", def: "1"),
                                 width: country.value == "" ? 0.2 : 0.1,
                                 label: "Country          ",
                                 onChanged: (value) {
@@ -242,7 +243,7 @@ class CustomCustomerDataForm extends StatelessWidget {
                                   validator: CustomRequiredValidator(
                                       errorText: "City is required ",
                                       ctx: context),
-                                  value: getValue(client, "city", def: "1"),
+                                  value: getValue(client, "city_id", def: "1"),
                                   width: 0.1,
                                   hintText: "City          ",
                                   onChanged: (value) {
@@ -266,8 +267,7 @@ class CustomCustomerDataForm extends StatelessWidget {
                             validator: CustomRequiredValidator(
                                 errorText: "Address Line is required ",
                                 ctx: context),
-                            value:
-                                getValue(client, "address_line", def: "dddd"),
+                            value: getValue(client, "address", def: "dddd"),
                             onSaved: (value) {
                               ctrl!.state.addressLine = value!;
                             },

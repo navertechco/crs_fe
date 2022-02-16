@@ -8,8 +8,12 @@ class FrontOptionWidget extends StatelessWidget {
   final String destination;
   @override
   Widget build(BuildContext context) {
-    var destinationData = getParam("DESTINATION_DATA");
-    Map<dynamic, dynamic> destinations = getValue(destinationData, "value");
+    List destinationParam = getParam("DESTINATION_DATA").values.toList();
+    CatalogDto destinationData = CatalogDto(
+        code: destinationParam[0],
+        description: destinationParam[1],
+        value: destinationParam[2]);
+    Map<String, dynamic> destinations = destinationData.value;
     var airport = destinations[destination][6];
     var boat = destinations[destination][7];
     return Stack(children: [

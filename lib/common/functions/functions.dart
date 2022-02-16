@@ -65,7 +65,7 @@ Function getValue = (data, key, {def}) {
   try {
     if (data != null && data.length > 0) {
       if (data[key] != null) {
-        return data[key];
+        return data[key].toString();
       }
     }
   } catch (e) {

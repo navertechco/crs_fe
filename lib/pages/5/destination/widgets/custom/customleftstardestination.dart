@@ -5,6 +5,8 @@ import '../../../../index.dart';
 import '../index.dart';
 import 'index.dart';
 
+
+
 class CustomLeftStarDestinationForm extends StatelessWidget {
   const CustomLeftStarDestinationForm({
     Key? key,
@@ -12,12 +14,15 @@ class CustomLeftStarDestinationForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var params = processCatalog("params");
-    Map<dynamic, dynamic> destinations = getValue(params[1], "value");
+    var destinations = processCatalog("destinations");
+
     List<Widget> destinationlist = [];
-    for (var destination in destinations.keys) {
+    for (Map item in destinations) {
+      List itemList = item.values.toList();
+      CatalogDto destination = CatalogDto(
+          code: itemList[0], description: itemList[1], value: itemList[2]);
       destinationlist.add(
-        CustomDragableDestination(destination: destination),
+        CustomDragableDestination(destination: destination.description),
       );
     }
     return DestinationListWidget(

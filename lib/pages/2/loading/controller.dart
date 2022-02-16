@@ -11,9 +11,9 @@ class LoadingController extends GetxController {
   Future<void> getTour({int tourId = 0}) async {
     if (tourId > 0) {
       var res = await fetchhandler(kDefaultSchema, kDefaultServer,
-          kDefaultServerPort, kDefaultQueryPath, 'POST', {
+          kDefaultServerPort, kDefaultFindTour, 'POST', {
         "data": {
-          "table": {"name": "Tour", "id": "$tourId"}
+           "tour_id": "$tourId"
         }
       });
       // ignore: avoid_print
@@ -21,7 +21,12 @@ class LoadingController extends GetxController {
       if (res['state'] == true) {
         var data = res['data'];
         if (data.length > 0) {
-          globalctx.memory["tour"] = data[0];
+          globalctx.memory["tour"] = data[0][0];
+          globalctx.memory["tour"]["customer"] ??= {};
+          globalctx.memory["tour"]["customer"] = data[1][0];
+          globalctx.memory["customer"] = data[1][0];
+          setContext("tour", data[0][0]);
+          setContext("customer", data[1][0]);
           setContext("readonly", true);
         }
       }

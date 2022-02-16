@@ -11,7 +11,10 @@ class TourController extends GetxController {
   TourController() {
 // ignore: prefer_function_declarations_over_variables
     saveTour = () {
-      globalctx.memory["tour"] = state.toMap();
+      Map tour = globalctx.memory["tour"];
+      Map formData = state.toMap();
+      Map mem = {...tour, ...formData};
+      globalctx.memory["tour"] = mem;
       Get.toNamed("/Customer");
     };
   }
