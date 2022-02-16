@@ -11,14 +11,9 @@ class LoadingPage extends GetView<LoadingController> {
   Widget _buildView() {
     var catalogs = Rx(getContext("catalogs"));
 
-    return Obx(() {
-      while (catalogs.value == null) {
-        return CustomProgressIndicatorWidget();
-      }
-      return LoadingWidget(
-        state: controller.state,
-      );
-    });
+    return LoadingWidget(
+      ctrl: controller,
+    );
   }
 
   @override

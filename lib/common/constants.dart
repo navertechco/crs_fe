@@ -33,6 +33,7 @@ const kDefaultConnectPath = "/User/Connect";
 const kDefaultSendPollPath = "/Gamer/SendPoll";
 const kDefaultBuyCreditsPath = "/Gamer/BuyCredit";
 const kDefaultJoinTournmanetPath = "/Gamer/JoinTournament";
+const kDefaultFindTour = "/Tour/FindTour";
 
 //DIMENSIONES
 var kDefaultPadding = 20.0;

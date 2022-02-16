@@ -50,15 +50,27 @@ Function processCatalog = (name) {
 
   return <Map<String, dynamic>>[];
 };
-
-Function getValue = (data, key, {def}) {
-  if (data != null && data.length > 0) {
-    if (data[key] != null) {
-      return data[key];
+Function getDateValue = (data, key, {def}) {
+  try {
+    if (data != null && data.length > 0) {
+      if (data[key] != null) {
+        return DateTime.parse(data[key]);
+      }
     }
+  } catch (e) {
+    return def;
   }
-
-  return def;
+};
+Function getValue = (data, key, {def}) {
+  try {
+    if (data != null && data.length > 0) {
+      if (data[key] != null) {
+        return data[key];
+      }
+    }
+  } catch (e) {
+    return def;
+  }
 };
 
 Function validateData = (data) {

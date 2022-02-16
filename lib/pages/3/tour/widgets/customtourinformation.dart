@@ -16,7 +16,7 @@ class CustomTourInformationForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var tourdata = getContext("tour");
+    var tourdata = globalctx.memory;
     var tour = getValue(tourdata, "tour");
     var readonly = validateData(tour);
     var destinationCountry = processCatalog("destination_country");
@@ -89,7 +89,7 @@ class CustomTourInformationForm extends StatelessWidget {
                 label: "  Date                              "),
             CustomFormDateFieldWidget(
               initialValue:
-                  getValue(tour, "arrival_date", def: DateTime(2022, 01, 31)),
+                  getDateValue(tour, "arrival_date", def: DateTime(2022, 01, 31)),
               validator: (date) {
                 CustomDatetimeRequiredValidator(date,
                     context: context, errorText: "Arrival Text is Required");
@@ -104,7 +104,7 @@ class CustomTourInformationForm extends StatelessWidget {
             ),
             CustomFormDateFieldWidget(
               initialValue:
-                  getValue(tour, "departure_date", def: DateTime(2022, 02, 02)),
+                  getDateValue(tour, "departure_date", def: DateTime(2022, 02, 02)),
               validator: (date) {
                 CustomDatetimeRequiredValidator(date,
                     context: context, errorText: "Departure Text is Required");

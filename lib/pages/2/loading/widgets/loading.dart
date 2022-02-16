@@ -7,10 +7,9 @@ import '../../../index.dart';
 class LoadingWidget extends GetView<LoadingController> {
   LoadingWidget({
     Key? key,
-    required this.state,
+    required this.ctrl,
   }) : super(key: key); 
-  LoadingState state;
-
+  LoadingController ctrl;
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -20,14 +19,13 @@ class LoadingWidget extends GetView<LoadingController> {
           child: Stack(
             children: [
               Padding(
-                padding: EdgeInsets.only(
-                    left: MediaQuery.of(context).size.width * 0.4,
-                    top: MediaQuery.of(context).size.height * 0.62),
-                child: RoundedFormField(
-                  onSaved: (value) => state.title = value!,
-                  hintText: 'Search Quote',
-                ),
-              ),
+                  padding: EdgeInsets.only(
+                      left: MediaQuery.of(context).size.width * 0.4,
+                      top: MediaQuery.of(context).size.height * 0.62),
+                  child: RoundedFormField(
+                      onChanged: (value) => ctrl.state.tourId = value!,
+                      hintText: 'Search Quote',
+                      keyboardType: TextInputType.number)),
               Padding(
                 padding: EdgeInsets.only(
                     left: MediaQuery.of(context).size.width * 0.4,
@@ -37,7 +35,7 @@ class LoadingWidget extends GetView<LoadingController> {
                     height: 0.07,
                     fontSize: 12,
                     onTap: () {
-                      controller.getTour();
+                      ctrl.getTour(tourId: int.parse(ctrl.state.tourId));
                     }),
               ),
             ],

@@ -95,8 +95,6 @@ Function prepareDaysToResume = () {
   for (String destination in allPromotedDestinations) {
     globalctx.memory["destinations"][destination] ??= {};
     globalctx.memory["destinations"][destination]["daysData"] = {};
-    var destData = globalctx.memory["destinations"][destination];
-    var daysData = destData["daysData"];
     var destinationDay = globalctx.memory["destinationDay"]
         .firstWhere((e) => e["destination"] == destination);
     var explorationDay = destinationDay["explorationDay"];
