@@ -30,8 +30,10 @@ var getDestination = (String destination) async {
     return false;
   }
 };
-var destinationData = getParam("DESTINATION_DATA");
-Map<dynamic, dynamic> destinations = getValue(destinationData, "value");
+List destList = getParam("DESTINATION_DATA").values.toList();
+CatalogDto destinationData =
+    CatalogDto(code: destList[0], description: destList[1], value: destList[2]);
+Map<dynamic, dynamic> destinations = destinationData.value;
 Rx<DateTime> birthDate = Rx(globalctx.memory["customer"]["birth_date"]);
 Rx<DateTime> arrivalDate = Rx(globalctx.memory["tour"]["arrival_date"]);
 Rx<DateTime> departureDate = Rx(globalctx.memory["tour"]["departure_date"]);
