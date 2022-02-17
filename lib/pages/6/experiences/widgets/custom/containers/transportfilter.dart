@@ -6,13 +6,14 @@ import '../../../../../index.dart';
 import '../../../controller.dart';
 
 class TransportFilter extends HookWidget {
-  const TransportFilter({
+  TransportFilter({
     Key? key,
     required this.ctrl,
   }) : super(key: key);
 
   final ExperiencesController ctrl;
-
+  final serviceTypeCatalog = Rx(processCatalog("service_type"));
+  final translatingCatalog = Rx(processCatalog("translating_service"));
   @override
   Widget build(BuildContext context) {
     Rx<dynamic> transportService = Rx(getFormValue(
@@ -33,8 +34,7 @@ class TransportFilter extends HookWidget {
     Rx<int> translateIndex = Rx(transportService.value
             .indexWhere((element) => element == "TRANSLATING") ??
         0);
-    var serviceTypeCatalog = Rx(processCatalog("service_type"));
-    var translatingCatalog = Rx(processCatalog("translating_service"));
+
     return Obx(() {
       return Column(
         children: [

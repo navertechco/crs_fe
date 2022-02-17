@@ -141,6 +141,7 @@ Function previousDay = () {
     globalDestination.value = processDays()["destination"];
     filterSuggestedExperiences();
   } else {
+    dayleft.value = 0;
     Get.back();
   }
 };

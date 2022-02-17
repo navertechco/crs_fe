@@ -153,7 +153,8 @@ class CustomCustomerDataForm extends StatelessWidget {
                                 validator: CustomRequiredValidator(
                                     errorText: "Names is required ",
                                     ctx: context),
-                                value: getValue(client, "names", def: "dddd"),
+                                value: getValue(client, "contact_name_2",
+                                    def: "dddd"),
                                 onSaved: (value) {
                                   ctrl!.state.names = value!;
                                 },

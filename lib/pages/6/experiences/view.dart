@@ -18,8 +18,11 @@ class ExperiencesPage extends GetView<ExperiencesController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _buildView(context),
+    return WillPopScope(
+        onWillPop: () async => false,
+        child: Scaffold(
+        body: _buildView(context),
+      ),
     );
   }
 }

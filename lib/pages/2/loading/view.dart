@@ -11,8 +11,11 @@ class LoadingPage extends GetView<LoadingController> {
   Widget _buildView() {
     var catalogs = Rx(getContext("catalogs"));
 
-    return LoadingWidget(
-      ctrl: controller,
+    return WillPopScope(
+        onWillPop: () async => false,
+        child: LoadingWidget(
+        ctrl: controller,
+      ),
     );
   }
 

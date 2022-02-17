@@ -9,8 +9,11 @@ class CustomerPage extends GetView<CustomerController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _buildCustomerFormPage(context),
+    return WillPopScope(
+        onWillPop: () async => false,
+        child: Scaffold(
+        body: _buildCustomerFormPage(context),
+      ),
     );
   }
 }

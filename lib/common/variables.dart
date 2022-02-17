@@ -69,7 +69,7 @@ var memory = globalctx.memory;
 var detsdata = getValue(memory, "destinations", def: []);
 var allDestinations = memory["destinations"];
 var destinationList = allDestinations.entries
-    .map((e) => {"destination": e.key.toString(), ...e.value})
+    .map((e) => {"destination": e.key.toString(), ...e.value}) 
     .toList();
 List<dynamic> customDestinationData = [
   {"destination": "arrival", "explorationDay": "1"},

@@ -9,8 +9,11 @@ class TourPage extends GetView<TourController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _buildTourFormPage(context),
+    return WillPopScope(
+        onWillPop: () async => false,
+        child: Scaffold(
+        body: _buildTourFormPage(context),
+      ),
     );
   }
 }
