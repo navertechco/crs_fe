@@ -28,13 +28,13 @@ class RoundedFormCheckbox extends StatelessWidget {
       this.fontSize = 0.1,
       this.password = false,
       this.value = 0,
-    required  this.groupValue,
+      required this.groupValue,
       required this.onChanged})
       : super(key: key);
 
   bool password;
   @override
-  Widget build(BuildContext context) { 
+  Widget build(BuildContext context) {
     return Container(
         width: MediaQuery.of(context).size.width * width,
         height: MediaQuery.of(context).size.height * height,
@@ -48,10 +48,15 @@ class RoundedFormCheckbox extends StatelessWidget {
           children: [
             Obx(() {
               return Radio(
-                  value: value, groupValue: groupValue.value, onChanged: onChanged);
+                  value: value,
+                  groupValue: groupValue.value,
+                  onChanged: onChanged);
             }),
             CustomFormLabelWidget(
-                label: hintText!, fontWeight: FontWeight.normal),
+                label: hintText!,
+                fontWeight: value == groupValue.value
+                    ? FontWeight.bold
+                    : FontWeight.normal),
           ],
         ));
   }
