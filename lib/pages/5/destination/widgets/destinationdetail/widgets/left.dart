@@ -13,10 +13,12 @@ class LeftWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Rx<List> galleryData = Rx([]);
-
-    galleryData.value = experiences
-        .where((e) => e["destination"] == destination.toString().toUpperCase())
-        .toList();
+    List experiences = processCatalog("experiences");
+    galleryData.value = experiences.where((experience) {
+      var value = experience["value"]; 
+      var dest = value["destination"].toString().toUpperCase();
+      return dest == destination.toString().toUpperCase();
+    }).toList();
 
     return Padding(
       padding: EdgeInsets.only(

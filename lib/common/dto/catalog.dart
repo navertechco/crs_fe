@@ -1,8 +1,11 @@
 class CatalogDto {
-  final int code;
-  final String description;
-  final dynamic value;
+  int? code;
+  String? description;
+  dynamic value;
 
-  CatalogDto(
-      {required this.code, required this.description, required this.value});
+  CatalogDto(List data, {this.code, this.description, this.value}) {
+    code = data[0] ?? code;
+    description = data[1] ?? description;
+    value = data[2] ?? value;
+  }
 }

@@ -32,7 +32,7 @@ var getDestination = (String destination) async {
 };
 List destList = getParam("DESTINATION_DATA").values.toList();
 CatalogDto destinationData =
-    CatalogDto(code: destList[0], description: destList[1], value: destList[2]);
+    CatalogDto(destList);
 Map<dynamic, dynamic> destinations = destinationData.value;
 Rx<DateTime> birthDate = Rx(globalctx.memory["customer"]["birth_date"]);
 Rx<DateTime> arrivalDate = Rx(globalctx.memory["tour"]["arrival_date"]);

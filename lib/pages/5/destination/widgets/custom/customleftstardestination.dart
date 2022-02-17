@@ -5,8 +5,6 @@ import '../../../../index.dart';
 import '../index.dart';
 import 'index.dart';
 
-
-
 class CustomLeftStarDestinationForm extends StatelessWidget {
   const CustomLeftStarDestinationForm({
     Key? key,
@@ -19,10 +17,9 @@ class CustomLeftStarDestinationForm extends StatelessWidget {
     List<Widget> destinationlist = [];
     for (Map item in destinations) {
       List itemList = item.values.toList();
-      CatalogDto destination = CatalogDto(
-          code: itemList[0], description: itemList[1], value: itemList[2]);
+      CatalogDto destination = CatalogDto(itemList);
       destinationlist.add(
-        CustomDragableDestination(destination: destination.description),
+        CustomDragableDestination(destination: destination.description!),
       );
     }
     return DestinationListWidget(

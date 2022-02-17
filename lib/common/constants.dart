@@ -13,14 +13,15 @@ export './functions/functions.dart';
  * DATOS DE SERVIDOR
  */
 
-var KTextSytle = ({context, fontSize, fontWeight, disabled=false}) => GoogleFonts.poppins(
-        textStyle: TextStyle(
-      color: Color.fromARGB(255, 0, 0, 0),
-      fontSize: MediaQuery.of(context).size.width /
-          MediaQuery.of(context).size.height *
-          fontSize,
-      fontWeight: fontWeight ?? FontWeight.normal,
-    ));
+var KTextSytle =
+    ({context, fontSize, fontWeight, disabled = false}) => GoogleFonts.poppins(
+            textStyle: TextStyle(
+          color: Color.fromARGB(255, 0, 0, 0),
+          fontSize: MediaQuery.of(context).size.width /
+              MediaQuery.of(context).size.height *
+              fontSize,
+          fontWeight: fontWeight ?? FontWeight.normal,
+        ));
 
 const kDefaultSchema = "http";
 const kDefaultServer = "192.168.101.4";
