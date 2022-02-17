@@ -12,7 +12,7 @@ class Cover extends StatelessWidget {
   Widget build(BuildContext context) {
     var memory = globalctx.memory.value;
     var tour = getValue(memory, "tour", def: {});
-    var customer = getValue(memory, "customer", def: {});
+    Map customer = memory["customer"] ?? {};
     var title = getValue(tour, "title", def: "");
     var passengers = getValue(tour, "passengers", def: 1);
     var days = currentDay.value;

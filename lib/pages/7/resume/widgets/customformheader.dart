@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import 'customformheaderiter.dart';
@@ -8,7 +7,7 @@ class CustomFormHeaderWidget extends StatelessWidget {
     Key? key,
     required this.data,
   }) : super(key: key);
-  final List<List<Map<String, dynamic>>> data;
+  final data;
 
   @override
   Widget build(BuildContext context) {

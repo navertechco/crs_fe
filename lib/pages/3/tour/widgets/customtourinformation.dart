@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/common/validators.dart';
 import 'package:sweetalert/sweetalert.dart';
@@ -87,8 +87,9 @@ class CustomTourInformationForm extends StatelessWidget {
                 fontWeight: FontWeight.bold,
                 label: "  Date                              "),
             CustomFormDateFieldWidget(
-              initialValue:
-                  getDateValue(tour, "arrival_date", def: DateTime(2022, 01, 31)),
+              disabled: readonly,
+              initialValue: getDateValue(tour, "arrival_date",
+                  def: DateTime(2022, 01, 31)),
               validator: (date) {
                 CustomDatetimeRequiredValidator(date,
                     context: context, errorText: "Arrival Text is Required");
@@ -102,8 +103,9 @@ class CustomTourInformationForm extends StatelessWidget {
               },
             ),
             CustomFormDateFieldWidget(
-              initialValue:
-                  getDateValue(tour, "departure_date", def: DateTime(2022, 02, 02)),
+              disabled: readonly,
+              initialValue: getDateValue(tour, "departure_date",
+                  def: DateTime(2022, 02, 02)),
               validator: (date) {
                 CustomDatetimeRequiredValidator(date,
                     context: context, errorText: "Departure Text is Required");
@@ -117,7 +119,7 @@ class CustomTourInformationForm extends StatelessWidget {
               },
             ),
             CustomFormTextFieldWidget(
-                disabled: validateData(tour),
+                disabled: readonly,
                 value: getValue(tour, "passengers", def: "10"),
                 validator: CustomRequiredValidator(
                     errorText: "Passengers is required ", ctx: context),

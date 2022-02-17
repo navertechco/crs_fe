@@ -110,27 +110,4 @@ Function getPromotedExperiencesByDayAndKA = (day) {
 
   return true;
 };
-
-Function getExperiences = (String destination,
-    String experience,
-    List<int>? keyActivities,
-    List<int>? travelRhythms,
-    int? destinationOption) async {
-  var res = await fetchhandler(kDefaultSchema, kDefaultServer,
-      kDefaultServerPort, kDefaultExperiencePath, 'POST', {
-    "data": {
-      "destination": destination,
-      "experience": experience,
-      "key_activities": keyActivities ?? [],
-      "travel_rhythms": travelRhythms ?? [],
-      "destination_option": destinationOption
-    }
-  });
-
-  if (res['state'] == true) {
-    setContext("experiences", res['data']);
-    return true;
-  } else {
-    return false;
-  }
-};
+ 

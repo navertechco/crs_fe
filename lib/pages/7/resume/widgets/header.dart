@@ -15,8 +15,8 @@ class Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var memory = globalctx.memory.value;
-    var customer = getValue(memory, "customer", def: {});
-    var tour = getValue(memory, "tour", def: {});
+    var customer = memory["customer"] ?? {};
+    var tour = memory["tour"] ?? {};
 
     List<Map<String, dynamic>> customerTemplate = [
       {"code": "contact_name", "description": "contact_name", "value": "1"},

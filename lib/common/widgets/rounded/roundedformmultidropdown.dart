@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, unnecessary_null_comparison
 import 'package:flutter/material.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:multiselect/multiselect.dart';
@@ -58,23 +58,22 @@ class RoundedFormMultiDropdown extends StatelessWidget {
                     left: MediaQuery.of(context).size.width * 0.01,
                     top: MediaQuery.of(context).size.height * 0.013),
                 child: Text(
-                    // ignore: unnecessary_null_comparison
                     value == null
                         ? hintText!
                         : value
                             .toString()
-                            .replaceAll("\[", "")
-                            .replaceAll("\]", ""),
-                    // ignore: unnecessary_null_comparison
-                    style: KTextSytle(context, value == null ? 10 : 8,
-                        // ignore: unnecessary_null_comparison
-                        value == null ? FontWeight.normal : FontWeight.bold)),
+                            .replaceAll("[", "")
+                            .replaceAll("]", ""),
+                    style: KTextSytle(
+                        context: context,
+                        fontSize: (value == null ? 10 : 8),
+                        fontWeight: (value == null
+                            ? FontWeight.normal
+                            : FontWeight.bold))),
               );
             },
             decoration: InputDecoration.collapsed(
-                // ignore: unnecessary_null_comparison
-                fillColor: Colors.grey,
-                hintText: "")),
+                fillColor: Colors.grey, hintText: "")),
       ),
     );
   }

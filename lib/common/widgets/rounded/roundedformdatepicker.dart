@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:intl/intl.dart';
 
+import '../../constants.dart';
+
 class RoundedFormDatepicker extends StatelessWidget {
   final double left;
   final double top;
@@ -15,6 +17,7 @@ class RoundedFormDatepicker extends StatelessWidget {
   void Function(DateTime?)? onSaved;
   String? Function(DateTime?)? validator;
   DateTime? initialValue;
+  final disabled;
   RoundedFormDatepicker(
       {Key? key,
       required this.format,
@@ -26,7 +29,8 @@ class RoundedFormDatepicker extends StatelessWidget {
       this.onChanged,
       this.onSaved,
       this.validator,
-      this.initialValue})
+      this.initialValue,
+      this.disabled})
       : super(key: key);
 
   @override
@@ -38,8 +42,11 @@ class RoundedFormDatepicker extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.grey, borderRadius: BorderRadius.circular(50)),
       child: DateTimeField(
+        enabled: !disabled,
         validator: validator,
-        decoration: InputDecoration.collapsed(hintText: hintText),
+        decoration: InputDecoration.collapsed(
+            hintText: hintText, enabled: !disabled, fillColor: Colors.red),
+        style: KTextSytle(context:context, fontSize:10, fontWeight:FontWeight.normal),
         format: format,
         onChanged: onChanged,
         onSaved: onSaved,

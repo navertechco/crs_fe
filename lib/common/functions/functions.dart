@@ -114,6 +114,7 @@ Function cityData = (Rx<List<Map<String, dynamic>>> citylist, cities) {
 };
 
 Function globalctxReset = () {
+  allPromotedDestinations = [];
   globalctx.promotedDestinations.value = [];
   globalctx.selectedDestinations.value = [];
   globalctx.destinations.value = [];
@@ -142,8 +143,7 @@ Function getItems = (data, value) {
   return items;
 };
 
-Function chunkMap =
-    (Map<String, dynamic> data, int portion, List<Map<String, dynamic>> list) {
+Function chunkMap = (data, int portion, List<Map<String, dynamic>> list) {
   List<List<Map<String, dynamic>>> chunks = [];
   int aprox = (list.length / portion).round() * portion;
   int module = aprox > list.length
