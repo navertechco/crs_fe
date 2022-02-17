@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:naver_crs/common/index.dart';
+import 'package:flutter_hooks/flutter_hooks.dart'; 
 import 'package:naver_crs/pages/6/experiences/controller.dart';
 import '../index.dart';
 
 class CustomRightDayWidget extends HookWidget {
   final ExperiencesController ctrl;
   final ValueNotifier<int> counter;
-  CustomRightDayWidget({
+  const CustomRightDayWidget({
     Key? key,
     required this.ctrl,
     required this.counter,

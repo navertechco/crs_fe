@@ -9,11 +9,7 @@ import '../../../../index.dart';
 import 'index.dart';
 
 class DGalleryController extends GetxController {
-  DGalleryController(){
-
-
-
-  }
+   
 
   final state = DGalleryState();
   var session = getContext('session');

@@ -33,8 +33,7 @@ class TravelFilter extends HookWidget {
         "travel_rhythm",
         "0"));
 
-    useEffect(() {
-      print("INNER LEFT RENDER");
+    useEffect(() { 
       destinationOption.value = "0";
       travelRhythm.value = "0";
       keyActivities.value = <String>[];

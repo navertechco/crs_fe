@@ -1,10 +1,8 @@
 // ignore_for_file: unused_local_variable, prefer_function_declarations_over_variables
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
-import '../../../../../index.dart';
-import '../../index.dart';
+import 'package:get/get.dart'; 
+import '../../../../../index.dart'; 
 
 class CustomExperiencesListWidget extends StatelessWidget {
   final bool suggested;

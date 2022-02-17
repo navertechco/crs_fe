@@ -5,7 +5,7 @@ import '../index.dart';
 import './index.dart';
 
 class TourFormPage extends GetView<StatelessWidget> {
-  TourFormPage({
+  const TourFormPage({
     Key? key,
     this.ctrl,
   }) : super(key: key);

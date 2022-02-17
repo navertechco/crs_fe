@@ -8,8 +8,7 @@ class LoadingPage extends GetView<LoadingController> {
   const LoadingPage({Key? key}) : super(key: key);
 
   // 内容页
-  Widget _buildView() {
-    var catalogs = Rx(getContext("catalogs"));
+  Widget _buildView() { 
 
     return WillPopScope(
         onWillPop: () async => false,

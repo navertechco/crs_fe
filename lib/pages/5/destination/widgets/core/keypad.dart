@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sweetalert/sweetalert.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import '../../../../index.dart';
 
 class KeyPadWidget extends StatelessWidget {

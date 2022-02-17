@@ -1,8 +1,6 @@
 // ignore_for_file: must_be_immutable, unnecessary_null_comparison
-import 'package:flutter/material.dart';
-import 'package:multi_select_flutter/multi_select_flutter.dart';
-import 'package:multiselect/multiselect.dart';
-
+import 'package:flutter/material.dart'; 
+import 'package:multiselect/multiselect.dart'; 
 import '../../index.dart';
 
 class RoundedFormMultiDropdown extends StatelessWidget {
@@ -49,8 +47,7 @@ class RoundedFormMultiDropdown extends StatelessWidget {
         child: DropDownMultiSelect(
             onChanged: onChanged,
             options: data.map((e) => e["description"].toString()).toList(),
-            selectedValues: value,
-            // ignore: unnecessary_null_comparison
+            selectedValues: value, 
             whenEmpty: value == null ? hintText : '',
             childBuilder: (value) {
               return Padding(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../index.dart';
 
+// ignore: must_be_immutable
 class CustomFormTextFieldWidget extends StatelessWidget {
   CustomFormTextFieldWidget(
       {Key? key,

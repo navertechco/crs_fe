@@ -4,6 +4,7 @@ import '../index.dart';
 import '../../../index.dart';
 
 /// Loading
+// ignore: must_be_immutable
 class LoadingWidget extends GetView<LoadingController> {
   LoadingWidget({
     Key? key,

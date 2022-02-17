@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:naver_crs/common/constants.dart';
-
 import '../index.dart';
 
 class CustomFormMultiDropDownFieldWidget extends StatelessWidget {

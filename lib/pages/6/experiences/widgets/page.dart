@@ -1,8 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:get/get.dart';
+import 'package:flutter_hooks/flutter_hooks.dart'; 
 import '../../../index.dart';
 import '../index.dart';
 import 'index.dart';
@@ -10,14 +9,13 @@ import 'index.dart';
 /// hello
 class ExperiencesWidget extends HookWidget {
   final ExperiencesController ctrl;
-  ExperiencesWidget({Key? key, required this.ctrl}) : super(key: key);
+  const ExperiencesWidget({Key? key, required this.ctrl}) : super(key: key);
   
   @override
   Widget build(BuildContext context) {
     final counter = useState(0);
 
-    useEffect(() {
-      print("PARENT LEFT RENDER");
+    useEffect(() { 
     }, [stream, counter.value]);
 
     return Form(

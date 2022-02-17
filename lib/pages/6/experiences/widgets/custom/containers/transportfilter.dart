@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:get/get.dart';
-import 'package:naver_crs/common/validators.dart';
-
+import 'package:get/get.dart';  
 import '../../../../../index.dart';
 import '../../../controller.dart';
 
 class TransportFilter extends HookWidget {
-  TransportFilter({
+  const TransportFilter({
     Key? key,
     required this.ctrl,
   }) : super(key: key);

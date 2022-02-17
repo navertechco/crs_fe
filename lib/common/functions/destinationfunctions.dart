@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:sweetalert/sweetalert.dart';
 import '../index.dart';
 import './functions.dart';
@@ -78,6 +79,7 @@ Function getFilteredDestination = () {
 
 Function processDestinations = (context) {
    
+  // ignore: unrelated_type_equality_checks
   if (globalctx.promotedDestinations.isNotEmpty & (dayleft == 0)) {
     var destinationDay = [];
     var arrival = {"explorationDay": "1", "days": "1", "airport": "quito"};

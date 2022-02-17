@@ -3,8 +3,8 @@
 // ignore_for_file: prefer_function_declarations_over_variables
 
 import 'package:get/get.dart';
-import 'package:sweetalert/sweetalert.dart';
-
+// ignore: import_of_legacy_library_into_null_safe
+import 'package:sweetalert/sweetalert.dart'; 
 import '../index.dart';
 import 'functions.dart';
 
@@ -121,11 +121,11 @@ Function processDays = () {
   result = [];
   // result.add({"day": 1, "destination": "arrival"});
   var destinationDay = globalctx.memory["destinationDay"];
-  var destDays = 0;
+ 
   for (var dest in destinationDay) {
     for (var i = 1; i <= dest["days"]; i++) {
       result.add({"day": i, "destination": dest["destination"]});
-      destDays++;
+     
     }
   }
   if (result.isNotEmpty) {

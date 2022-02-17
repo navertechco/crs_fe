@@ -5,7 +5,7 @@ import 'package:naver_crs/pages/3/tour/controller.dart';
 import 'index.dart';
 
 class RightWidget extends StatelessWidget {
-  RightWidget({
+  const RightWidget({
     Key? key,
   
     required this.profile,

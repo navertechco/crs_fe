@@ -71,7 +71,7 @@ class EndServices extends StatelessWidget {
                 fontSize: MediaQuery.of(context).size.width * 0.012,
                 fontWeight: FontWeight.bold,
               ))),
-          Text("\$ ${roh}",
+          Text("\$ $roh",
               style: GoogleFonts.poppins(
                   textStyle: TextStyle(
                 color: const Color.fromARGB(255, 0, 0, 0),

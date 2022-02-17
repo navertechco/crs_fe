@@ -1,9 +1,8 @@
-// ignore_for_file: non_constant_identifier_names, prefer_function_declarations_over_variables
+// ignore_for_file: non_constant_identifier_names, prefer_function_declarations_over_variables, import_of_legacy_library_into_null_safe
 
 import 'package:flutter/material.dart';
 import 'package:flutter_html/shims/dart_ui_real.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sweetalert/sweetalert.dart';
 import 'context/index.dart';
 import 'index.dart';
 export './variables.dart';

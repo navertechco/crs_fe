@@ -8,7 +8,7 @@ import 'package:naver_crs/pages/5/destination/widgets/destinationdetail/controll
 import '../../../../index.dart';
 
 class CustomStarDestinationForm extends StatelessWidget {
-  CustomStarDestinationForm({
+  const CustomStarDestinationForm({
     Key? key,
     required this.destination,
     required this.ctrl,

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-
-import '../../../../index.dart';
+import 'package:google_fonts/google_fonts.dart';  
 
 class RearOptionWidget extends StatelessWidget {
   const RearOptionWidget({Key? key, this.experience = "coast"})
@@ -11,9 +9,7 @@ class RearOptionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     
-    var row = experiences
-        .toList()
-        .firstWhere((element) => element["title"] == experience);
+    
     return Column(
       children: [
         Text(
