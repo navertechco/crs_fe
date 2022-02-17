@@ -13,7 +13,7 @@ export './functions/functions.dart';
  * DATOS DE SERVIDOR
  */
 
-var KTextSytle = (context, fontSize, fontWeight) => GoogleFonts.poppins(
+var KTextSytle = ({context, fontSize, fontWeight, disabled=false}) => GoogleFonts.poppins(
         textStyle: TextStyle(
       color: Color.fromARGB(255, 0, 0, 0),
       fontSize: MediaQuery.of(context).size.width /
