@@ -50,7 +50,8 @@ class RoundedFormMultiDropdown extends StatelessWidget {
             onChanged: onChanged,
             options: data.map((e) => e["description"].toString()).toList(),
             selectedValues: value,
-            whenEmpty: 'Choose a Option',
+            // ignore: unnecessary_null_comparison
+            whenEmpty: value == null ? hintText : '',
             childBuilder: (value) {
               return Padding(
                 padding: EdgeInsets.only(
@@ -58,18 +59,22 @@ class RoundedFormMultiDropdown extends StatelessWidget {
                     top: MediaQuery.of(context).size.height * 0.013),
                 child: Text(
                     // ignore: unnecessary_null_comparison
-                    value != null
-                        ? value
+                    value == null
+                        ? hintText!
+                        : value
                             .toString()
-                            .replaceAll("[", "")
-                            .replaceAll("]", "")
-                        : "Choose a Option",
-                    style: KTextSytle(
-                        context, value == null ? 10 : 8, FontWeight.normal)),
+                            .replaceAll("\[", "")
+                            .replaceAll("\]", ""),
+                    // ignore: unnecessary_null_comparison
+                    style: KTextSytle(context, value == null ? 10 : 8,
+                        // ignore: unnecessary_null_comparison
+                        value == null ? FontWeight.normal : FontWeight.bold)),
               );
             },
             decoration: InputDecoration.collapsed(
-                fillColor: Colors.grey, hintText: hintText)),
+                // ignore: unnecessary_null_comparison
+                fillColor: Colors.grey,
+                hintText: "")),
       ),
     );
   }

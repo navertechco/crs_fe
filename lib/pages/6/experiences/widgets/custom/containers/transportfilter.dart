@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get.dart';
+import 'package:naver_crs/common/validators.dart';
 
 import '../../../../../index.dart';
 import '../../../controller.dart';
@@ -12,8 +13,7 @@ class TransportFilter extends HookWidget {
   }) : super(key: key);
 
   final ExperiencesController ctrl;
-  final serviceTypeCatalog = Rx(processCatalog("service_type"));
-  final translatingCatalog = Rx(processCatalog("translating_service"));
+
   @override
   Widget build(BuildContext context) {
     Rx<dynamic> transportService = Rx(getFormValue(
@@ -35,6 +35,9 @@ class TransportFilter extends HookWidget {
             .indexWhere((element) => element == "TRANSLATING") ??
         0);
 
+    var serviceTypeCatalog = Rx(processCatalog("service_type"));
+    var translatingCatalog = Rx(processCatalog("translating_service"));
+
     return Obx(() {
       return Column(
         children: [
@@ -48,7 +51,8 @@ class TransportFilter extends HookWidget {
           ),
           CustomFormMultiDropDownFieldWidget(
             value: getFormValue(ctrl.state.memory["destinations"],
-                globalDestination.value, "service_type", <String>[]),
+                    globalDestination.value, "service_type", <String>[]) ??
+                <String>[],
             onSaved: (value) {
               transportService.value = value;
               guideIndex.value = transportService.value
@@ -72,7 +76,7 @@ class TransportFilter extends HookWidget {
           ),
           if (translateIndex.value != -1)
             CustomFormMultiDropDownFieldWidget(
-              value: translatingService.value,
+              value: translatingService.value ?? <String>[],
               onSaved: (value) {
                 setFormValue(ctrl.state.memory["destinations"],
                     globalDestination.value, "translating_service", value);
