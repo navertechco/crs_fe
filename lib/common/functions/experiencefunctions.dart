@@ -11,12 +11,9 @@ import '../index.dart';
 Function filterSuggestedExperiences = () {
   // Get airport from current destination
   var filteredExperiences = getFilteredDestination();
-  // Reset suggested memory and suggested render list
-
   list.value = <Widget>[];
-  // Add New Suggested Render Components to list
-  for (var experience in filteredExperiences) {
-    list.add(CustomDragableExperience(experience: experience, suggested: true));
+  for (var exp in filteredExperiences) {
+    list.add(CustomDragableExperience(experience: exp, suggested: true));
   }
 };
 

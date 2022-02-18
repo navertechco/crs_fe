@@ -5,11 +5,11 @@ import 'package:get/get.dart';
 import '../../../../../index.dart'; 
 
 class CustomExperiencesListWidget extends StatelessWidget {
-  final bool suggested;
+  
   final ExperiencesController ctrl;
   const CustomExperiencesListWidget({
     Key? key,
-    this.suggested = false,
+   
     required this.ctrl,
   }) : super(key: key);
 
@@ -23,7 +23,7 @@ class CustomExperiencesListWidget extends StatelessWidget {
           scrollDirection: Axis.vertical,
           child: Obx(() {
             return Column(
-              children: list.value,
+              children: list,
             );
           }),
         ),

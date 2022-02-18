@@ -57,7 +57,7 @@ class CustomFooterWidget extends StatelessWidget {
             prevlabel: "< Previous ",
             onNext: () {
               paginateDay(context);
-              ctrl.refresh();
+              // ctrl.refresh();
             },
             onPrevious: () {
               previousDay();

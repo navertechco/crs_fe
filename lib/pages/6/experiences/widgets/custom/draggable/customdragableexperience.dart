@@ -21,19 +21,15 @@ class CustomDragableExperience extends StatelessWidget {
       height: MediaQuery.of(context).size.height * 0.08,
       width: MediaQuery.of(context).size.width * 0.2,
     );
-    return Obx(() {
-      String title = experience["title"];
-      var dest = experience["destination"];
-      var state = Rx(getExperienceState(title));
-      return state.value == "suggested" &&
-              dest == globalDestination.value.toString().toUpperCase()
-          ? Draggable<String>(
-              data: title,
-              feedback: experienceOptionWidget,
-              childWhenDragging: experienceOptionWidget,
-              child: experienceOptionWidget,
-            )
-          : Text("");
-    });
+
+    String title = experience["title"];
+    // var dest = experience["destination"];
+    // var state = Rx(getExperienceState(title));
+    return Draggable<String>(
+      data: title,
+      feedback: experienceOptionWidget,
+      childWhenDragging: experienceOptionWidget,
+      child: experienceOptionWidget,
+    );
   }
 }

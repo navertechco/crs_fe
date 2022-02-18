@@ -14,9 +14,9 @@ final ExperiencesController ctrl;
       children: [
         CustomTitleWidget(
           fontWeight: FontWeight.bold,
-          label: "Sugested Experiences\n_______________________________",
+          label: "Suggested Experiences\n_______________________________",
         ),
-        CustomExperiencesListWidget(suggested: true, ctrl:ctrl),
+        CustomExperiencesListWidget(  ctrl:ctrl),
       ],
     );
   }

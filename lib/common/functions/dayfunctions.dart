@@ -8,20 +8,6 @@ import 'package:sweetalert/sweetalert.dart';
 import '../index.dart';
 import 'functions.dart';
 
-Function paginateNextDay = () {
-  if (currentDay.value < totalDays.value - 1) {
-    nextDay();
-  } else {
-    prepareDaysToResume();
-  }
-};
-
-Function nextDay = () {
-  currentDay.value++;
-  globalDestination.value = processDays()["destination"];
-  filterSuggestedExperiences();
-};
-
 Function paginateDay = (context) {
   // Get promoted experiences by day and KA
   // var promotedExperiencesByDayAndKA =
@@ -41,6 +27,19 @@ Function paginateDay = (context) {
       return false;
     });
   }
+};
+Function paginateNextDay = () {
+  if (currentDay.value < totalDays.value - 1) {
+    nextDay();
+  } else {
+    prepareDaysToResume();
+  }
+};
+
+Function nextDay = () {
+  currentDay.value++;
+  globalDestination.value = processDays()["destination"];
+  filterSuggestedExperiences();
 };
 
 Function getDtos = () {
