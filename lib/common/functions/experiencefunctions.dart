@@ -110,4 +110,3 @@ Function getPromotedExperiencesByDayAndKA = (day) {
 
   return true;
 };
- 

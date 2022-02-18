@@ -4,7 +4,7 @@
 
 import 'package:get/get.dart';
 // ignore: import_of_legacy_library_into_null_safe
-import 'package:sweetalert/sweetalert.dart'; 
+import 'package:sweetalert/sweetalert.dart';
 import '../index.dart';
 import 'functions.dart';
 
@@ -28,7 +28,9 @@ Function paginateDay = (context) {
   //     getPromotedExperiencesByDayAndKA(currentDay.value);
 
   //Decide if experiences are 2 almost to paginate
-  if (globalctx.memory["promoted"]["day"][currentDay.value] != null) {
+  if (globalctx.memory["promoted"] != null &&
+      globalctx.memory["promoted"]["day"] != null &&
+      globalctx.memory["promoted"]["day"][currentDay.value] != null) {
     paginateNextDay();
   } else {
     SweetAlert.show(context,
@@ -121,11 +123,10 @@ Function processDays = () {
   result = [];
   // result.add({"day": 1, "destination": "arrival"});
   var destinationDay = globalctx.memory["destinationDay"];
- 
+
   for (var dest in destinationDay) {
     for (var i = 1; i <= dest["days"]; i++) {
       result.add({"day": i, "destination": dest["destination"]});
-     
     }
   }
   if (result.isNotEmpty) {

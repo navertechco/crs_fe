@@ -14,8 +14,8 @@ Function promoteDestination = (ctrl, _formKey, destination) {
       globalctx.promotedDestinations.add(destination);
       globalctx.memory["destinations"] = ctrl.state.memory;
     }
-    globalDestination.value = destination;
-    filterSuggestedExperiences();
+    // globalDestination.value = destination;
+    // filterSuggestedExperiences();
     Get.close(1);
   }
 };
@@ -25,6 +25,7 @@ Function getDestinationAirport = () {
   var airport = "quito";
   try {
     var destinationData = getParam("DESTINATION_DATA")["value"];
+
     var destinations = globalctx.promotedDestinations;
     var first = destinations[0];
     var last = destinations[destinations.length - 2];
@@ -41,13 +42,12 @@ Function getDestinationAirport = () {
 };
 
 Function getFilteredDestination = () {
+  var localDest = globalDestination.value.toUpperCase();
   var airport = getDestinationAirport().toString().toUpperCase();
 
   List filteredByDestination = experiences
-          .where((e) => e["destination"]
-              .toString()
-              .toUpperCase()
-              .contains(globalDestination.value.toUpperCase()))
+          .where((e) =>
+              e["destination"].toString().toUpperCase().contains(localDest))
           .toList() ??
       [];
 
@@ -78,7 +78,7 @@ Function getFilteredDestination = () {
 };
 
 Function processDestinations = (context) {
-   
+  globalDestination.value = "arrival";
   // ignore: unrelated_type_equality_checks
   if (globalctx.promotedDestinations.isNotEmpty & (dayleft == 0)) {
     var destinationDay = [];
@@ -108,15 +108,17 @@ Function processDestinations = (context) {
     globalctx.memory["totalDays"] = totalDays;
     Get.toNamed("/Experiences");
   } else {
-    SweetAlert.show(context,
-        title: (dayleft.value > 0)
-            ? "Days Left can't be greater than 0\n"
-            : "Promote any destination is required",
-        subtitle: 'error',
-        style: SweetAlertStyle.error, onPress: (bool isConfirm) {
-      Get.close(1);
-      return false;
-    });
+    if (context != null) {
+      SweetAlert.show(context,
+          title: (dayleft.value > 0)
+              ? "Days Left can't be greater than 0\n"
+              : "Promote any destination is required",
+          subtitle: 'error',
+          style: SweetAlertStyle.error, onPress: (bool isConfirm) {
+        Get.close(1);
+        return false;
+      });
+    }
   }
 };
 Function findDestination = (destination) {

@@ -15,19 +15,25 @@ class GalleryWidget extends GetView<DGalleryController> {
     List<Widget> Gallery = [];
 
     if (galleryData != null && galleryData.isNotEmpty) {
-      for (CatalogDto item in galleryData) {
+      var index = 0;
+      for (var item in galleryData) {
+        var ctlg = CatalogDto(null,
+            code: item["code"],
+            description: item["description"],
+            value: item["value"]);
         Gallery.add(GalleryItem(
           onTap: () {
             showDialog(
                 context: context,
                 builder: (context) {
-                  return VideoItem(item: item.value);
+                  return VideoItem(item: ctlg.value);
                 });
           },
-          key: Key(item.value["title"]),
-          image: item.value["image"],
-          title: item.value["title"],
+          key: Key(index.toString()),
+          image: ctlg.value["image"],
+          title: ctlg.value["title"],
         ));
+        index++;
       }
     }
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart'; 
+import 'package:get/get.dart';
 import '../../../../../index.dart';
 
 class CustomHeaderWidget extends StatelessWidget {
@@ -50,7 +50,7 @@ class CustomHeaderWidget extends StatelessWidget {
               if (globalDestination.value != "arrival")
                 CustomTitleWidget(
                   fontWeight: FontWeight.bold,
-                  label: "Destination: $globalDestination.value",
+                  label: "Destination: $globalDestination",
                 ),
               if (globalDestination.value != "arrival")
                 SizedBox(width: MediaQuery.of(context).size.width * 0.05),

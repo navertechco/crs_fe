@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -93,18 +92,13 @@ class EndServices extends StatelessWidget {
             width: 0.5,
             fontSize: 0.014,
             fontWeight: FontWeight.bold),
-        const CustomDescriptionWidget(
-            text:
-                """
+        const CustomDescriptionWidget(text: """
             B = Breakfast
             L= Lunch
             LB= Lunch Box
             D = Dinner
             O = Overnight
-            """,
-            width: 0.5,
-            fontSize: 0.012,
-            fontWeight: FontWeight.bold),
+            """, width: 0.5, fontSize: 0.012, fontWeight: FontWeight.bold),
         const CustomDescriptionWidget(
             text: "Net Rate",
             width: 0.5,

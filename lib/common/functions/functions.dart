@@ -52,10 +52,12 @@ Function processCatalog = (name) {
 };
 Function getDateValue = (data, key, {def}) {
   try {
-    if (data != null && data.length > 0) {
-      if (data[key] != null) {
+    if (data ?? true) {
+      if (data[key] ?? true) {
         return DateTime.parse(data[key]);
       }
+    } else {
+      return def;
     }
   } catch (e) {
     return def;
@@ -63,10 +65,12 @@ Function getDateValue = (data, key, {def}) {
 };
 Function getValue = (data, key, {def}) {
   try {
-    if (data != null && data.length > 0) {
-      if (data[key] != null) {
+    if (data ?? true) {
+      if (data[key] ?? true) {
         return data[key].toString();
       }
+    } else {
+      return def;
     }
   } catch (e) {
     return def;
