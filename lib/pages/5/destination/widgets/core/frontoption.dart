@@ -8,18 +8,25 @@ class FrontOptionWidget extends StatelessWidget {
   final String destination;
   @override
   Widget build(BuildContext context) {
-    List destinationParam = getParam("DESTINATION_DATA").values.toList();
-    CatalogDto destinationData = CatalogDto(destinationParam);
-    Map<String, dynamic> destinations = destinationData.value;
-    var airport = destinations[destination][6];
-    var boat = destinations[destination][7];
+    var destinations = processCatalog("destinations");
+    // List destinationParam = getParam("DESTINATION_DATA").values.toList();
+    // CatalogDto destinationData = CatalogDto(destinationParam);
+    // Map<String, dynamic> destinations = destinationData.value;
+    var airport = false;
+    var boat = false;
+    var dest = destinations
+        .firstWhere((e) => e["description"] == destination)["value"];
+    if (dest != null) {
+      airport = dest[6];
+      boat = dest[7];
+    }
     return Stack(children: [
       Padding(
         padding: EdgeInsets.only(
           top: MediaQuery.of(context).size.height * 0.01,
           left: MediaQuery.of(context).size.width * 0.01,
         ),
-        child: Image.asset(destinations[destination][2],
+        child: Image.asset(dest[2],
             width: MediaQuery.of(context).size.width * 0.4),
       ),
       Padding(
@@ -29,7 +36,7 @@ class FrontOptionWidget extends StatelessWidget {
         ),
         child: Align(
           alignment: Alignment.centerLeft,
-          child: Image.asset(destinations[destination][3],
+          child: Image.asset(dest[3],
               width: MediaQuery.of(context).size.width * 0.2),
         ),
       ),

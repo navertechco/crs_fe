@@ -44,10 +44,12 @@ Function getDestinationAirport = () {
 Function getFilteredDestination = () {
   var localDest = globalDestination.value.toUpperCase();
   var airport = getDestinationAirport().toString().toUpperCase();
-
+  var experiences = processCatalog("experiences");
   List filteredByDestination = experiences
-          .where((e) =>
-              e["destination"].toString().toUpperCase().contains(localDest))
+          .where((e) => e.value["destination"]
+              .toString()
+              .toUpperCase()
+              .contains(localDest))
           .toList() ??
       [];
 
