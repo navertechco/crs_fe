@@ -45,13 +45,16 @@ Function getFilteredDestination = () {
   var localDest = globalDestination.value.toUpperCase();
   var airport = getDestinationAirport().toString().toUpperCase();
   var experiences = processCatalog("experiences");
-  List filteredByDestination = experiences
-          .where((e) => e.value["destination"]
-              .toString()
-              .toUpperCase()
-              .contains(localDest))
-          .toList() ??
-      [];
+  List filteredByDestination = [];
+
+  for (Map item in experiences) {
+    List itemList = item.values.toList();
+    CatalogDto experience = CatalogDto(itemList);
+    if (experience.value["destination"].toString().toUpperCase() ==
+        localDest.toUpperCase()) {
+      filteredByDestination.add(experience);
+    }
+  }
 
   List filteredByTravelRhytm = filteredByDestination.where((e) {
     return true;
@@ -67,13 +70,13 @@ Function getFilteredDestination = () {
 
   Iterable filteredByAirport = filteredByKA;
 
-  if (globalDestination.value == "arrival") {
-    filteredByAirport =
-        filteredByKA.where((e) => e["title"].contains(airport)).toList();
-  }
+  // if (globalDestination.value == "arrival") {
+  //   filteredByAirport =
+  //       filteredByKA.where((e) => e["title"].contains(airport)).toList();
+  // }
 
   var filteredBySuggested = filteredByAirport.where((e) {
-    return getExperienceState(e["title"]) == "suggested";
+    return getExperienceState(e.description) == "suggested";
   }).toList();
 
   return filteredBySuggested;

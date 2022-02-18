@@ -107,7 +107,8 @@ Function prepareDaysToResume = () {
       var exps = globalctx.memory["promoted"]["day"][dayIndex];
       for (var exp in exps.keys) {
         Map newExp = {};
-        newExp = {...expDto, ...exps[exp]};
+        Map newEntry = exps[exp].value;
+        newExp = {...expDto, ...newEntry};
         dayDto["experiences"][exp] = newExp;
       }
       globalctx.memory["destinations"][destination]["daysData"][dayIndex] =

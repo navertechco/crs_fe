@@ -12,11 +12,20 @@ class CustomExperienceForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var props = {}.obs;
+    var experiences = processCatalog("experiences");
+    List filteredByDestination = [];
+    for (Map item in experiences) {
+      List itemList = item.values.toList();
+      CatalogDto exp = CatalogDto(itemList);
+      if (exp.description.toString().toUpperCase() ==
+          experience.toString().toUpperCase()) {
+        filteredByDestination.add(exp);
+      }
+    }
 
-    var row = experiences
-        .toList()
-        .firstWhere((element) => element["title"] == experience);
-    props.value = row["props"];
+    var row = filteredByDestination[0];
+
+    props.value = row.value;
 
     return Obx(() {
       return Column(

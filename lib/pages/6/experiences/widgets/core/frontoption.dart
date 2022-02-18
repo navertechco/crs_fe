@@ -9,9 +9,20 @@ class FrontOptionWidget extends StatelessWidget {
   final String experience;
   @override
   Widget build(BuildContext context) {
-    var row = experiences
-        .toList()
-        .firstWhere((element) => element["title"] == experience);
+    var experiences = processCatalog("experiences");
+    List filteredByDestination = [];
+
+    for (Map item in experiences) {
+      List itemList = item.values.toList();
+      CatalogDto exp = CatalogDto(itemList);
+      if (exp.description.toString().toUpperCase() ==
+          experience.toString().toUpperCase()) {
+        filteredByDestination.add(exp);
+      }
+    }
+
+    var row = filteredByDestination[0];
+
     return Stack(
       children: [
         Container(
@@ -32,7 +43,7 @@ class FrontOptionWidget extends StatelessWidget {
             decoration: BoxDecoration(
                 image: DecorationImage(
               image: Image.asset(
-                row["image"],
+                row.value["image"],
                 fit: BoxFit.cover,
               ).image,
             ))),

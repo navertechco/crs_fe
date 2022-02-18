@@ -41,7 +41,7 @@ Function removeExperience = (experience) {
 
 Function resetExperiences = () {
   for (var experience in experiences) {
-    setExperienceState(experience["title"], "suggested");
+    setExperienceState(experience.description, "suggested");
   }
 };
 
@@ -66,15 +66,30 @@ Function filterExperienceList = (data, day) {
 };
 
 Function proccessExperiences = () {
-  for (var experience in experiences) {
-    var state = getExperienceState(experience["title"]);
-    states[state][experience["title"]] = true;
+  var experiences = processCatalog("experiences");
+
+  for (Map item in experiences) {
+    List itemList = item.values.toList();
+    CatalogDto exp = CatalogDto(itemList);
+
+    var state = getExperienceState(exp.description);
+    states[state][exp.description] = true;
   }
 };
 
 Function promoteDayExperience = (experience) {
-  Map<String, dynamic> experienceData =
-      experiences.firstWhere((e) => e["title"] == experience);
+  var experiences = processCatalog("experiences");
+  List filteredByDestination = [];
+
+  for (Map item in experiences) {
+    List itemList = item.values.toList();
+    CatalogDto exp = CatalogDto(itemList);
+    filteredByDestination.add(exp);
+  }
+
+  var experienceData =
+      filteredByDestination.firstWhere((e) => e.description == experience);
+
   globalctx.memory["promoted"] ??= {};
   globalctx.memory["promoted"]["day"] ??= {};
   globalctx.memory["promoted"]["day"][currentDay.value] ??= {};
