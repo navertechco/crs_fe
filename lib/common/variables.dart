@@ -78,7 +78,7 @@ List<dynamic> customDestinationData = [
   {"destination": "departure", "explorationDay": "1"}
 ];
 var promotedDestinations = [
-  "arrival",
+  // "arrival",
   ...globalctx.promotedDestinations.value,
   "departure"
 ];

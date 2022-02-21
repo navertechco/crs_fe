@@ -27,13 +27,15 @@ class CustomFormDayWidget extends StatelessWidget {
     var meals = day['meals'];
     var observation = day['observation'];
     var daydescription = day['day_description'];
+    var dayLabel = destinationindex + dayindex + 1;
+    if (destination == "departure") {
+      dayLabel = totalDays.value;
+    }
     return RepaintBoundary(
         key: globalctx.keys["day-$destinationindex-$dayindex"],
         child: Column(
           children: [
-            CustomFormTitleWidget(
-                level: 4,
-                label: "Day: ${destinationindex + dayindex + 1}#####"),
+            CustomFormTitleWidget(level: 4, label: "Day: ${dayLabel}#####"),
             CustomDescriptionWidget(
                 text: daydescription, width: 0.55, fontSize: 0.016),
             CustomFormExperiencesDetailWidget(data: data, indexes: indexes),
