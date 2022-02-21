@@ -4,8 +4,9 @@ import '../../../../index.dart';
 import '../index.dart';
 
 void moveDestinationFunction(String destination, BuildContext context) {
-   
-  if (!globalctx.destinations.contains(destination) && dayleft.value != 0) {
+  if (!globalctx.destinations.contains(destination) &&
+      dayleft.value != 0 &&
+      checkPromotedAirport(destination)) {
     globalctx.destinations.add(destination);
     globalctx.destinationDragData.value.add(Obx(() {
       return globalctx.destinations.contains(destination)

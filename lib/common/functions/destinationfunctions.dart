@@ -42,7 +42,7 @@ Function getDestinationAirport = () {
 };
 
 Function getFilteredDestination = () {
-  var localDest = globalDestination.value.toUpperCase();
+  var localDest = globalDestination.value;
   var airport = getDestinationAirport().toString().toUpperCase();
   var experiences = processCatalog("experiences");
   List filteredByDestination = [];
@@ -81,7 +81,17 @@ Function getFilteredDestination = () {
 
   return filteredBySuggested;
 };
+Function checkPromotedAirport = (destination) {
+  bool quitoPromoted = globalctx.promotedDestinations.contains("quito");
+  bool gyePromoted = globalctx.promotedDestinations.contains("guayaquil");
+  bool quitoSelected = globalctx.destinations.contains("quito");
+  bool gyeSelected = globalctx.destinations.contains("guayaquil");
+  if (destination != "quito" && destination != "guayaquil") {
+    return (quitoPromoted || gyePromoted);
+  }
 
+  return !(quitoSelected || gyeSelected);
+};
 Function processDestinations = (context) {
   globalDestination.value = "arrival";
   // ignore: unrelated_type_equality_checks

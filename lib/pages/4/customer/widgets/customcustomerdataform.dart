@@ -17,6 +17,7 @@ class CustomCustomerDataForm extends StatelessWidget {
     var customerTypeCatalog = processCatalog("legal_client_type");
 
     var client = globalctx.memory["customer"];
+    var tour = globalctx.memory["tour"];
     Rx<List<Map<String, dynamic>>> citylist = Rx([]);
     RxString customerType = client["client_type_id"].toString().obs;
     RxString country = getValue(client, "origin_id", def: "148").toString().obs;
@@ -299,18 +300,14 @@ class CustomCustomerDataForm extends StatelessWidget {
                                 },
                                 keyboardType: TextInputType.name,
                                 hintText: "Lead Passenger                  ",
-                                width: 0.2),
-                            CustomFormTextFieldWidget(
-                                value: getValue(client, "travel_code",
-                                    def: "112244"),
-                                onSaved: (value) {
-                                  ctrl!.state.travelCode = value!;
-                                },
-                                keyboardType: TextInputType.number,
-                                hintText: "Travel Code                ",
-                                width: 0.15),
+                                width: 0.2)
                           ],
                         ),
+                        CustomTitleWidget(
+                            width: 0.1,
+                            fontWeight: FontWeight.normal,
+                            label:
+                                "Travel Code: ${getValue(client, "lead_passenger", def: "jose cuevas").toString().replaceAll(" ", "-") + "-" + tour["passengers"] + "-" + dayFormat.format(arrivalDate.value).replaceAll(" ", "-")}")
                       ]),
                     ),
                   ),

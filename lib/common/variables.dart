@@ -32,8 +32,7 @@ var getDestination = (String destination) async {
 };
 RxInt destDays = 0.obs;
 List destList = getParam("DESTINATION_DATA").values.toList();
-CatalogDto destinationData =
-    CatalogDto(destList);
+CatalogDto destinationData = CatalogDto(destList);
 Map<dynamic, dynamic> destinations = destinationData.value;
 Rx<DateTime> birthDate = Rx(globalctx.memory["customer"]["birth_date"]);
 Rx<DateTime> arrivalDate = Rx(globalctx.memory["tour"]["arrival_date"]);
@@ -46,6 +45,7 @@ Rx<double> customerAge =
 Rx<int> memoryDayLeft = Rx(globalctx.memory["days_left"]);
 // Rx<int> daysLeft = Rx(-memoryDayLeft.value + totalDays.value);
 final currentDayFormat = DateFormat('EEEE MMMM d yyyy');
+final dayFormat = DateFormat('d-MM-yyyy');
 var experiences = processCatalog("experiences");
 RxList<Widget> list = <Widget>[].obs;
 Map<String, dynamic> states = {
@@ -70,7 +70,7 @@ var memory = globalctx.memory;
 var detsdata = getValue(memory, "destinations", def: []);
 var allDestinations = memory["destinations"];
 var destinationList = allDestinations.entries
-    .map((e) => {"destination": e.key.toString(), ...e.value}) 
+    .map((e) => {"destination": e.key.toString(), ...e.value})
     .toList();
 List<dynamic> customDestinationData = [
   {"destination": "arrival", "explorationDay": "1"},
