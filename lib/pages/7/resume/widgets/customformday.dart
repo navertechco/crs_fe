@@ -28,9 +28,9 @@ class CustomFormDayWidget extends StatelessWidget {
     var observation = day['observation'];
     var daydescription = day['day_description'];
     var dayLabel = destinationindex + dayindex + 1;
-    if (destination == "departure") {
-      dayLabel = totalDays.value;
-    }
+    // if (destination == "departure") {
+    //   dayLabel = totalDays.value;
+    // }
     return RepaintBoundary(
         key: globalctx.keys["day-$destinationindex-$dayindex"],
         child: Column(
