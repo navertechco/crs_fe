@@ -13,7 +13,7 @@ class ExperienceDragTargetWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (globalctx.experienceDragData.value.isEmpty) {
-      for (var i = 0; i < totalDays.value; i++) {
+      for (var i = 0; i < destDays.value; i++) {
         globalctx.experienceDragData.value[i] = <Widget>[];
       }
     }

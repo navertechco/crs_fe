@@ -30,6 +30,7 @@ var getDestination = (String destination) async {
     return false;
   }
 };
+RxInt destDays = 0.obs;
 List destList = getParam("DESTINATION_DATA").values.toList();
 CatalogDto destinationData =
     CatalogDto(destList);
@@ -43,9 +44,9 @@ var dayleft = totalDays;
 Rx<double> customerAge =
     Rx(DateTime.now().difference(birthDate.value).inDays / 365);
 Rx<int> memoryDayLeft = Rx(globalctx.memory["days_left"]);
-Rx<int> daysLeft = Rx(-memoryDayLeft.value + totalDays.value);
+// Rx<int> daysLeft = Rx(-memoryDayLeft.value + totalDays.value);
 final currentDayFormat = DateFormat('EEEE MMMM d yyyy');
-var experiences = getContext("experiences");
+var experiences = processCatalog("experiences");
 RxList<Widget> list = <Widget>[].obs;
 Map<String, dynamic> states = {
   "selected": globalctx.selectedExperiences,

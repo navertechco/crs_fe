@@ -40,8 +40,9 @@ Function removeExperience = (experience) {
 };
 
 Function resetExperiences = () {
-  for (var experience in experiences) {
-    setExperienceState(experience.description, "suggested");
+  for (Map experience in experiences) {
+    CatalogDto expCatalog = toCatalog(experience);
+    setExperienceState(expCatalog.description, "suggested");
   }
 };
 

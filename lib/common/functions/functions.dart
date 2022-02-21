@@ -196,11 +196,18 @@ Function getFormValue = (data, formKey, key, def) {
   return def;
 };
 
+Function toCatalog = (item) {
+  List list = item.values.toList();
+  CatalogDto ctlg = CatalogDto(list);
+  return ctlg;
+};
+
 Function getDestinationDay = (destination) {
-  if (globalctx.memory!=null) {
-    if (globalctx.memory["destinations"]!=null) {
-      if (globalctx.memory["destinations"][destination]!=null) {
-        if (globalctx.memory["destinations"][destination]["explorationDay"]!=null) {
+  if (globalctx.memory != null) {
+    if (globalctx.memory["destinations"] != null) {
+      if (globalctx.memory["destinations"][destination] != null) {
+        if (globalctx.memory["destinations"][destination]["explorationDay"] !=
+            null) {
           return int.parse(
               globalctx.memory["destinations"][destination]["explorationDay"]);
         }
@@ -212,9 +219,9 @@ Function getDestinationDay = (destination) {
 };
 
 Function setDestinationDay = (destination, value) {
-  globalctx.memory["destinations"]??={};
-  globalctx.memory["destinations"][destination]??={};
-  globalctx.memory["destinations"][destination]["explorationDay"]??=value;
+  globalctx.memory["destinations"] ??= {};
+  globalctx.memory["destinations"][destination] ??= {};
+  globalctx.memory["destinations"][destination]["explorationDay"] ??= value;
 };
 
 Function getLeftAccumulated = (destination) {

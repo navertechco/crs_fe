@@ -100,13 +100,13 @@ Function processDestinations = (context) {
       globalctx.experienceDragData.value[i] ??= <Widget>[];
       // globalctx.promotedExperiences[i] ??= [].obs;
     }
-    var destDays = 0;
+
     for (var destination in allPromotedDestinations) {
       var dest = destinations[destination];
       var explorationDays = dest["explorationDay"];
       var days = int.parse(explorationDays);
       destinationDay.add({...dest, "destination": destination, "days": days});
-      destDays += days;
+      destDays.value += days;
     }
     // totalDays.value = destDays;
     globalctx.memory["destinationDay"] = destinationDay;

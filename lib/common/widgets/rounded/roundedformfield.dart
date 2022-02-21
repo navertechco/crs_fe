@@ -52,7 +52,7 @@ class RoundedFormField extends StatelessWidget {
         validator: validator,
         keyboardType: keyboardType,
         onSaved: onSaved,
-        onChanged: onChanged,
+        onFieldSubmitted: onChanged,
         obscureText: password,
         cursorColor: Colors.black54,
         style: TextStyle(

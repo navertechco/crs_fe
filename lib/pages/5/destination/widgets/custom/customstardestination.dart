@@ -93,19 +93,19 @@ class CustomStarDestinationForm extends StatelessWidget {
                       },
                       onChanged: (value) {
                         int valueInt = parseIntValue(value);
-                        value = valueInt.toString();
-                        if (valueInt > dayleft.value) {
-                          value = dayleft.value.toString();
-                          valueInt = parseIntValue(value);
+                        if (valueInt <= dayleft.value) {
+                          value = valueInt.toString();
+                          if (valueInt > dayleft.value) {
+                            value = dayleft.value.toString();
+                            valueInt = parseIntValue(value);
+                          }
+                          int acc = getLeftAccumulated(destination);
+                          dayleft.value = totalDays.value + acc - valueInt;
+                          setFormValue(ctrl.state.memory, destination,
+                              "explorationDay", value);
+                          explorationDay.value = valueInt;
+                          setDestinationDay(destination, value);
                         }
-
-                        var acc = getLeftAccumulated(destination);
-                        dayleft.value =
-                            totalDays.value + leftAccumulated.value - valueInt;
-                        setFormValue(ctrl.state.memory, destination,
-                            "explorationDay", value);
-                        explorationDay.value = valueInt;
-                        setDestinationDay(destination, value);
                       },
                       keyboardType: TextInputType.number,
                       label: "Exploration Days    ",
