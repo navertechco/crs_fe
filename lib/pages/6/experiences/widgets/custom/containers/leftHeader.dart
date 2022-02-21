@@ -20,9 +20,9 @@ class LeftHeader extends HookWidget {
     return Obx(() {
       var add = 1;
       var day = currentDay.value + add;
-      if (globalDestination.value == "departure") {
-        add = 0;
-      }
+      // if (globalDestination.value == "departure") {
+      //   add = 0;
+      // }
       if (currentDay.value == 1) {
         add = 0;
       }

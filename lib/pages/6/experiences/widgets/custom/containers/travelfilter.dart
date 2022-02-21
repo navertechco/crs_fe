@@ -33,7 +33,7 @@ class TravelFilter extends HookWidget {
         "travel_rhythm",
         "0"));
 
-    useEffect(() { 
+    useEffect(() {
       destinationOption.value = "0";
       travelRhythm.value = "0";
       keyActivities.value = <String>[];
@@ -95,7 +95,7 @@ class TravelFilter extends HookWidget {
                       value!.map((e) => e["description"]).toSet().toList());
                 },
                 onChanged: (value) {
-                  setFormValue(globalctx.memory["destinations"],
+                  setFormValue(ctrl.state.memory["destinations"],
                       globalDestination.value, "keyActivities", value);
                 },
                 hintText:

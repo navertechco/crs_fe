@@ -83,7 +83,7 @@ Function getDestinations = () {
   var departure = dtos[1];
 
   Map destinations = {
-    "arrival": arrival,
+    // "arrival": arrival,
     ...globalctx.memory["destinations"],
     "departure": departure
   };
@@ -100,7 +100,7 @@ Function prepareDaysToResume = () {
         .firstWhere((e) => e["destination"] == destination);
     var explorationDay = destinationDay["explorationDay"];
 
-    for (var i = 0; i < int.parse(explorationDay); i++) {
+    for (var i = 0; i < int.parse(explorationDay) ; i++) {
       var dayDto = getDtos()[2];
       var expDto = getDtos()[3];
       // Prepare Frame to send to Resume Page

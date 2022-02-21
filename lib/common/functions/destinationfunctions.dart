@@ -93,15 +93,15 @@ Function checkPromotedAirport = (destination) {
   return !(quitoSelected || gyeSelected);
 };
 Function processDestinations = (context) {
-  globalDestination.value = "arrival";
+  globalDestination.value = globalctx.promotedDestinations[0];
   // ignore: unrelated_type_equality_checks
   if (globalctx.promotedDestinations.isNotEmpty & (dayleft == 0)) {
     var destinationDay = [];
-    var arrival = {"explorationDay": "1", "days": "1", "airport": "quito"};
+    // var arrival = {"explorationDay": "1", "days": "1", "airport": "quito"};
     var departure = {"explorationDay": "1", "days": "1", "airport": "quito"};
 
     var destinations = {
-      "arrival": arrival,
+      // "arrival": arrival,
       ...globalctx.memory["destinations"],
       "departure": departure
     };

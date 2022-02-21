@@ -11,7 +11,7 @@ var airports = {"1": "quito", "2": "guayaquil"};
 Rx<int> currentDay = 0.obs;
 var result = [];
 var allPromotedDestinations = [
-  "arrival",
+  // "arrival",
   ...globalctx.promotedDestinations.value,
   "departure"
 ];
@@ -73,7 +73,7 @@ var destinationList = allDestinations.entries
     .map((e) => {"destination": e.key.toString(), ...e.value})
     .toList();
 List<dynamic> customDestinationData = [
-  {"destination": "arrival", "explorationDay": "1"},
+  // {"destination": "arrival", "explorationDay": "1"},
   ...destinationList,
   {"destination": "departure", "explorationDay": "1"}
 ];
