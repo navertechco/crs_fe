@@ -24,8 +24,8 @@ class CustomStarDestinationForm extends StatelessWidget {
     var ctx = globalctx.context.value;
 
     Rx<int> explorationDay = Rx(int.parse(
-        getFormValue(ctrl.state.memory, destination, "explorationDay", "1") ??
-            "1"));
+        getFormValue(ctrl.state.memory, destination, "explorationDay", "0") ??
+            "0"));
 
     if (globalctx.reset.value) {
       for (String item in destinations.keys) {
@@ -33,13 +33,9 @@ class CustomStarDestinationForm extends StatelessWidget {
       }
       globalctx.reset.value = false;
     }
-    for (String item in destinations.keys) {
-      bool exists = ctrl.state.memory[item] != null && item != destination;
-      if (exists) {
-        leftAccumulated.value -= int.parse(
-            getFormValue(ctrl.state.memory, item, "explorationDay", "1"));
-      }
-    }
+
+    var acc = getLeftAccumulated("");
+    dayleft.value = totalDays.value + leftAccumulated.value;
 
     List<String> keyActivities = getFormValue(
         ctrl.state.memory, destination, "keyActivities", <String>[]);
@@ -47,10 +43,6 @@ class CustomStarDestinationForm extends StatelessWidget {
 
     List<Map<String, dynamic>> explorationdDays =
         processCatalog("exploration_days");
-
-    var current = Rx(
-        getFormValue(ctrl.state.memory, destination, "explorationDay", "1") ??
-            "1");
 
     Rx<List> trCatalog = Rx(processCatalog("travel_rhythm"));
     return Form(
@@ -69,10 +61,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                       Text("Days Left: $dayleft",
                           style: GoogleFonts.poppins(
                               textStyle: TextStyle(
-                            color: (totalDays.value +
-                                        leftAccumulated.value -
-                                        explorationDay.value) <
-                                    1
+                            color: (dayleft.value) < 1
                                 ? Color.fromARGB(255, 255, 0, 0)
                                 : Color.fromARGB(255, 0, 0, 0),
                             fontSize: MediaQuery.of(context).size.width /
@@ -93,30 +82,34 @@ class CustomStarDestinationForm extends StatelessWidget {
                       explorationdDays
                           .where((e) => e["code"] <= totalDays.value)
                           .toList());
-                  return CustomFormDropDownFieldWidget(
-                      validator: CustomRequiredValidator(
-                          errorText: "Exploration Days is required ",
-                          ctx: context),
+                  return CustomFormTextFieldWidget(
                       value: getFormValue(ctrl.state.memory, destination,
                           "explorationDay", "0"),
+                      validator: CustomRequiredValidator(
+                          errorText: "Exploration Days required ",
+                          ctx: context),
                       onSaved: (value) {
-                        setFormValue(ctrl.state.memory, destination,
-                            "explorationDay", value);
+                        setContext("dayleft", dayleft.value);
                       },
                       onChanged: (value) {
-                        current.value = value;
+                        int valueInt = parseIntValue(value);
+                        value = valueInt.toString();
+                        if (valueInt > dayleft.value) {
+                          value = dayleft.value.toString();
+                          valueInt = parseIntValue(value);
+                        }
+
+                        var acc = getLeftAccumulated(destination);
+                        dayleft.value =
+                            totalDays.value + leftAccumulated.value - valueInt;
                         setFormValue(ctrl.state.memory, destination,
                             "explorationDay", value);
-
-                        if (int.parse(value!) < explorationDay.value) {
-                          dayleft.value += int.parse(value);
-                        } else {
-                          dayleft.value -= int.parse(value);
-                        }
-                        explorationDay.value = int.parse(value);
+                        explorationDay.value = valueInt;
+                        setDestinationDay(destination, value);
                       },
-                      label: "Exploration Days     ",
-                      data: filteredED.value);
+                      keyboardType: TextInputType.number,
+                      label: "Exploration Days    ",
+                      width: 0.20);
                 }),
                 SizedBox(
                   child: (() {

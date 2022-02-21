@@ -187,10 +187,55 @@ Function setData = (data, key, value) {
 Function getFormValue = (data, formKey, key, def) {
   if (data != null) {
     if (data[formKey] != null) {
+      if (data[formKey][key] == "") {
+        return def;
+      }
       return data[formKey][key];
     }
   }
   return def;
+};
+
+Function getDestinationDay = (destination) {
+  if (globalctx.memory!=null) {
+    if (globalctx.memory["destinations"]!=null) {
+      if (globalctx.memory["destinations"][destination]!=null) {
+        if (globalctx.memory["destinations"][destination]["explorationDay"]!=null) {
+          return int.parse(
+              globalctx.memory["destinations"][destination]["explorationDay"]);
+        }
+      }
+    }
+  }
+
+  return 0;
+};
+
+Function setDestinationDay = (destination, value) {
+  globalctx.memory["destinations"]??={};
+  globalctx.memory["destinations"][destination]??={};
+  globalctx.memory["destinations"][destination]["explorationDay"]??=value;
+};
+
+Function getLeftAccumulated = (destination) {
+  leftAccumulated.value = 0;
+  totalDays.value = departureDate.value.difference(arrivalDate.value).inDays;
+  for (String item in destinations.keys) {
+    bool exists = item != destination;
+    if (exists) {
+      leftAccumulated.value -= getDestinationDay(item) as int;
+    }
+  }
+  return leftAccumulated.value;
+};
+
+Function parseIntValue = (value) {
+  value ??= "0";
+  if (value == "") {
+    value = "0";
+  }
+  value == value.replaceAll(RegExp(r'[^0-9]'), '').replaceAll("-", "");
+  return int.parse(value);
 };
 
 Function setFormValue = (data, formKey, key, value) {

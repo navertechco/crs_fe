@@ -14,7 +14,8 @@ class CustomFormTextFieldWidget extends StatelessWidget {
       this.height = 0.05,
       this.disabled = false,
       this.value,
-      required this.onSaved})
+      required this.onSaved,
+      this.onChanged})
       : super(key: key);
 
   final String label;
@@ -24,6 +25,7 @@ class CustomFormTextFieldWidget extends StatelessWidget {
   final TextInputType? keyboardType;
   String? Function(String?)? validator;
   final void Function(String?)? onSaved;
+  final void Function(String?)? onChanged;
   final bool disabled;
   final value;
 
@@ -35,9 +37,10 @@ class CustomFormTextFieldWidget extends StatelessWidget {
         children: [
           CustomFormLabelWidget(label: label, fontWeight: FontWeight.normal),
           RoundedFormField(
-              initialValue: value,
+              initialValue: value.toString(),
               disabled: disabled,
               onSaved: onSaved,
+              onChanged: onChanged,
               hintText: hintText,
               keyboardType: keyboardType,
               validator: validator,

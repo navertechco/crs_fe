@@ -108,7 +108,7 @@ Function processDestinations = (context) {
       destinationDay.add({...dest, "destination": destination, "days": days});
       destDays += days;
     }
-    totalDays.value = destDays;
+    // totalDays.value = destDays;
     globalctx.memory["destinationDay"] = destinationDay;
     globalctx.memory["totalDays"] = totalDays;
     Get.toNamed("/Experiences");

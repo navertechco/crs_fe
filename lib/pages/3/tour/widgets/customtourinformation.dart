@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:naver_crs/common/validators.dart';  
+import 'package:naver_crs/common/validators.dart';
 import '../../../index.dart';
 
 class CustomTourInformationForm extends StatelessWidget {
@@ -110,10 +110,14 @@ class CustomTourInformationForm extends StatelessWidget {
               },
               label: "Departure Date       ",
               onSaved: (value) {
-                ctrl!.state.departureDate = value!;
+                if (value != null) {
+                  ctrl!.state.departureDate = value;
+                }
               },
               onChanged: (value) {
-                ctrl!.state.departureDate = value!;
+                if (value != null) {
+                  ctrl!.state.departureDate = value;
+                }
               },
             ),
             CustomFormTextFieldWidget(

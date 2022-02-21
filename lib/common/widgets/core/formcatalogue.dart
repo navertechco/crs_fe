@@ -1,4 +1,4 @@
-// ignore_for_file: unused_local_variable, prefer_function_declarations_over_variables
+// ignore_for_file: unused_local_variable, prefer_function_declarations_over_variables, unnecessary_null_comparison
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,13 +21,20 @@ class FormCatalogueWidget extends StatelessWidget {
   final String? hintText;
   void Function(String?) onSaved;
   void Function(String?) onChanged;
-  final String? value;
+  final String value;
   final bool disabled;
   final String? Function(String?)? validator;
   @override
   Widget build(BuildContext context) {
     var items = getItems(data, value);
-
+    var realValue = (() {
+      if (value != null) {
+        return (int.parse(value) > items.length - 1)
+            ? (items.length - 1).toString()
+            : value;
+      }
+      return "0";
+    })();
     return Obx(() {
       return DropdownButtonHideUnderline(
         child: DropdownButtonFormField(
@@ -37,7 +44,7 @@ class FormCatalogueWidget extends StatelessWidget {
               fontWeight: value == null ? FontWeight.normal : FontWeight.bold),
           alignment: Alignment.centerLeft,
           isExpanded: true,
-          value: value,
+          value: realValue,
           disabledHint: Text(
             "data",
             style: KTextSytle(
