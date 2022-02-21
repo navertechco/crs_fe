@@ -8,7 +8,7 @@ import '../../../pages/5/destination/widgets/dgallery/index.dart';
 
 class GalleryWidget extends GetView<DGalleryController> {
   final galleryData;
-  GalleryWidget({Key? key, required this.galleryData}) : super(key: key);
+  const GalleryWidget({Key? key, required this.galleryData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

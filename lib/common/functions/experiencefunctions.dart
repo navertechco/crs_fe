@@ -114,7 +114,7 @@ Function getExperienceState = (experience) {
 
 Function getPromotedExperiencesByDayAndKA = (day) {
   // Get promoted experiences by day and KA
-  List promoted = states["promoted"].entries.toList();
+  // List promoted = states["promoted"].entries.toList();
   // var filtered = promoted.where((e) {
   //   return experiences.where((f) {
   //     return f["title"] == e.key;

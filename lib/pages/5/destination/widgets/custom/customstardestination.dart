@@ -84,7 +84,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                           .toList());
                   return CustomFormTextFieldWidget(
                       value: getFormValue(ctrl.state.memory, destination,
-                          "explorationDay", "0"),
+                              "explorationDay", "0"),
                       validator: CustomRequiredValidator(
                           errorText: "Exploration Days required ",
                           ctx: context),

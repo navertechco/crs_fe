@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 
 import '../index.dart';
 
+// ignore: must_be_immutable
 class CustomFormDateFieldWidget extends StatelessWidget {
   CustomFormDateFieldWidget(
       {Key? key,

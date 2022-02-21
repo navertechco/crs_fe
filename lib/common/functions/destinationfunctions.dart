@@ -43,7 +43,7 @@ Function getDestinationAirport = () {
 
 Function getFilteredDestination = () {
   var localDest = globalDestination.value;
-  var airport = getDestinationAirport().toString().toUpperCase();
+  // var airport = getDestinationAirport().toString().toUpperCase();
   var experiences = processCatalog("experiences");
   List filteredByDestination = [];
 
@@ -121,6 +121,7 @@ Function processDestinations = (context) {
     // totalDays.value = destDays;
     globalctx.memory["destinationDay"] = destinationDay;
     globalctx.memory["totalDays"] = totalDays;
+
     Get.toNamed("/Experiences");
   } else {
     if (context != null) {

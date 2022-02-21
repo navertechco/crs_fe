@@ -190,7 +190,7 @@ Function getFormValue = (data, formKey, key, def) {
       if (data[formKey][key] == "") {
         return def;
       }
-      return data[formKey][key];
+      return data[formKey][key]??def;
     }
   }
   return def;

@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
-import '../../../../../index.dart';
+import 'package:flutter/material.dart'; 
 import '../../index.dart';
 
 class CustomDragableExperience extends StatelessWidget {

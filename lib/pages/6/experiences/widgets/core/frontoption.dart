@@ -43,7 +43,7 @@ class FrontOptionWidget extends StatelessWidget {
             decoration: BoxDecoration(
                 image: DecorationImage(
               image: Image.asset(
-                row.value["image"],
+                row.value["experience_image"],
                 fit: BoxFit.cover,
               ).image,
             ))),

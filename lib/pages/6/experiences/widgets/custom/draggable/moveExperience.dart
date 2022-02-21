@@ -17,8 +17,8 @@ void moveExperienceFunction(String experience, BuildContext context) {
           ? Row(
               children: [
                 ExperienceOptionWidget(
-                    height: MediaQuery.of(context).size.height * 0.075,
-                    width: MediaQuery.of(context).size.width * 0.2,
+                    height: Get.height * 0.075,
+                    width: Get.width * 0.2,
                     experience: experience),
                 state.value != "promoted"
                     ? GestureDetector(
@@ -26,14 +26,14 @@ void moveExperienceFunction(String experience, BuildContext context) {
                           setExperienceState(experience, "suggested");
                         },
                         child: Image.asset("assets/custom/img/redmark.png",
-                            width: MediaQuery.of(context).size.width * 0.02),
+                            width: Get.width * 0.02),
                       )
                     : GestureDetector(
                         onTap: () {
                           setExperienceState(experience, "suggested");
                         },
                         child: Image.asset("assets/custom/img/greencheck.png",
-                            width: MediaQuery.of(context).size.width * 0.02),
+                            width: Get.width * 0.02),
                       )
               ],
             )
