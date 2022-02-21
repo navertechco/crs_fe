@@ -42,6 +42,7 @@ Function getDestinationAirport = () {
 };
 
 Function getFilteredDestination = () {
+  globalDestination.value = processDays()["destination"];
   var localDest = globalDestination.value;
   // var airport = getDestinationAirport().toString().toUpperCase();
   var experiences = processCatalog("experiences");
@@ -50,8 +51,7 @@ Function getFilteredDestination = () {
   for (Map item in experiences) {
     List itemList = item.values.toList();
     CatalogDto experience = CatalogDto(itemList);
-    if (experience.value["destination"].toString().toUpperCase() ==
-        localDest.toUpperCase()) {
+    if (experience.value["destination"].toString().toLowerCase() == localDest) {
       filteredByDestination.add(experience);
     }
   }
@@ -90,7 +90,7 @@ Function checkPromotedAirport = (destination) {
     return (quitoPromoted || gyePromoted);
   }
 
-  return !(quitoSelected || gyeSelected);
+  return true;
 };
 Function processDestinations = (context) {
   globalDestination.value = globalctx.promotedDestinations[0];
