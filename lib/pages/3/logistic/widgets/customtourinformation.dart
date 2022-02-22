@@ -17,9 +17,8 @@ class CustomLogisticInformationForm extends StatelessWidget {
     var tourdata = globalctx.memory;
     var tour = getValue(tourdata, "tour");
     var readonly = getContext("readonly") ?? false;
-    var destinationCountry = processCatalog("destination_country");
-    var purpose = processCatalog("purpose");
-    var accomodationType = processCatalog("budget");
+    var arrivalPort = processCatalog("airport");
+    var departurePort = processCatalog("airport");
 
     return Form(
       key: _formKey,
@@ -33,58 +32,27 @@ class CustomLogisticInformationForm extends StatelessWidget {
             const CustomTitleWidget(
               width: 0.3,
               fontWeight: FontWeight.bold,
-              label: "  Agent 1",
+              label: "Logistic Information",
             ),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.05),
             const CustomTitleWidget(
                 width: 0.225,
                 fontWeight: FontWeight.bold,
-                label: "  Logistic information"),
+                label: "  Arrival information"),
             CustomFormDropDownFieldWidget(
-              value: getValue(tour, "country", def: "1"),
-              disabled: readonly,
-              validator: CustomRequiredValidator(
-                  errorText: "country is required ", ctx: context),
-              onSaved: (value) {
-                ctrl!.state.country = value!;
-              },
-              onChanged: (value) {
-                ctrl!.state.country = value!;
-              },
-              label: "Destination Country ",
-              data: destinationCountry,
-            ),
-            CustomFormDropDownFieldWidget(
-              validator: CustomRequiredValidator(
-                  errorText: "Purpose is required ", ctx: context),
-              value: getValue(tour, "purpose", def: "1"),
+              value: getValue(tour, "arrival_port", def: "1"),
               disabled: readonly,
               onSaved: (value) {
-                ctrl!.state.purpose = value!;
+                ctrl!.state.arrival_port = value!;
               },
               onChanged: (value) {
-                ctrl!.state.purpose = value!;
-              },
-              label: "Purpose                         ",
-              data: purpose,
-            ),
-            CustomFormDropDownFieldWidget(
-              value: getValue(tour, "accomodation_type", def: "1"),
-              disabled: readonly,
-              onSaved: (value) {
-                ctrl!.state.accomodation_type = value!;
-              },
-              onChanged: (value) {
-                ctrl!.state.accomodation_type = value!;
+                ctrl!.state.arrival_port = value!;
               },
               validator: CustomRequiredValidator(
-                  errorText: "Accomodation type is required ", ctx: context),
-              label: "Accomodation Type",
-              data: accomodationType,
+                  errorText: "Arrival Port is required ", ctx: context),
+              label: "Arrival Port\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t",
+              data: arrivalPort,
             ),
-            const CustomTitleWidget(
-                width: 0.2,
-                fontWeight: FontWeight.bold,
-                label: "  Date                              "),
             CustomFormDateFieldWidget(
               disabled: readonly,
               initialValue: getDateValue(tour, "arrival_date",
@@ -100,6 +68,25 @@ class CustomLogisticInformationForm extends StatelessWidget {
               onChanged: (value) {
                 ctrl!.state.arrivalDate = value!;
               },
+            ),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+            const CustomTitleWidget(
+                width: 0.225,
+                fontWeight: FontWeight.bold,
+                label: "  Departure information"),
+            CustomFormDropDownFieldWidget(
+              value: getValue(tour, "departure_port", def: "1"),
+              disabled: readonly,
+              onSaved: (value) {
+                ctrl!.state.departure_port = value!;
+              },
+              onChanged: (value) {
+                ctrl!.state.departure_port = value!;
+              },
+              validator: CustomRequiredValidator(
+                  errorText: "Departure Port is required ", ctx: context),
+              label: "Departure Port            ",
+              data: departurePort,
             ),
             CustomFormDateFieldWidget(
               disabled: readonly,
@@ -121,17 +108,6 @@ class CustomLogisticInformationForm extends StatelessWidget {
                 }
               },
             ),
-            CustomFormTextFieldWidget(
-                disabled: readonly,
-                value: getValue(tour, "passengers", def: "10"),
-                validator: CustomRequiredValidator(
-                    errorText: "Passengers is required ", ctx: context),
-                onSaved: (value) {
-                  ctrl!.state.passengers = value!;
-                },
-                keyboardType: TextInputType.number,
-                label: "Passengers                  ",
-                width: 0.20),
             Padding(
               padding: EdgeInsets.only(
                 top: MediaQuery.of(context).size.height * 0.2,
@@ -146,6 +122,7 @@ class CustomLogisticInformationForm extends StatelessWidget {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
                       ctrl!.saveLogistic();
+                      selectedIndex++;
                     }
                   }),
             ),

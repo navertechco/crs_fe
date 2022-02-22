@@ -8,8 +8,8 @@ class NavBarWidget extends StatelessWidget {
   NavBarWidget({Key? key}) : super(key: key);
   List pageList = [
     "Tour",
-    "Customer",
     "Logistic",
+    "Customer",
     "Destination",
     "Experiences"
   ];

@@ -15,7 +15,7 @@ class TourController extends GetxController {
       Map formData = state.toMap();
       Map mem = {...tour, ...formData};
       globalctx.memory["tour"] = mem;
-      Get.toNamed("/Customer");
+      Get.toNamed("/Logistic");
     };
   }
 }

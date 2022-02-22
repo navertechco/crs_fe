@@ -32,8 +32,9 @@ class CustomTourInformationForm extends StatelessWidget {
             const CustomTitleWidget(
               width: 0.3,
               fontWeight: FontWeight.bold,
-              label: "  Agent 1",
+              label: "  Tour Information",
             ),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.03),
             const CustomTitleWidget(
                 width: 0.225,
                 fontWeight: FontWeight.bold,
@@ -80,46 +81,6 @@ class CustomTourInformationForm extends StatelessWidget {
               label: "Accomodation Type",
               data: accomodationType,
             ),
-            const CustomTitleWidget(
-                width: 0.2,
-                fontWeight: FontWeight.bold,
-                label: "  Date                              "),
-            CustomFormDateFieldWidget(
-              disabled: readonly,
-              initialValue: getDateValue(tour, "arrival_date",
-                  def: DateTime(2022, 01, 31)),
-              validator: (date) {
-                CustomDatetimeRequiredValidator(date,
-                    context: context, errorText: "Arrival Text is Required");
-              },
-              label: "Arrival Date               ",
-              onSaved: (value) {
-                ctrl!.state.arrivalDate = value!;
-              },
-              onChanged: (value) {
-                ctrl!.state.arrivalDate = value!;
-              },
-            ),
-            CustomFormDateFieldWidget(
-              disabled: readonly,
-              initialValue: getDateValue(tour, "departure_date",
-                  def: DateTime(2022, 02, 02)),
-              validator: (date) {
-                CustomDatetimeRequiredValidator(date,
-                    context: context, errorText: "Departure Text is Required");
-              },
-              label: "Departure Date       ",
-              onSaved: (value) {
-                if (value != null) {
-                  ctrl!.state.departureDate = value;
-                }
-              },
-              onChanged: (value) {
-                if (value != null) {
-                  ctrl!.state.departureDate = value;
-                }
-              },
-            ),
             CustomFormTextFieldWidget(
                 disabled: readonly,
                 value: getValue(tour, "passengers", def: "10"),
@@ -131,6 +92,7 @@ class CustomTourInformationForm extends StatelessWidget {
                 keyboardType: TextInputType.number,
                 label: "Passengers                  ",
                 width: 0.20),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.075),
             Padding(
               padding: EdgeInsets.only(
                 top: MediaQuery.of(context).size.height * 0.2,

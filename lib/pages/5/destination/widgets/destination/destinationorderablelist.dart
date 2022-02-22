@@ -15,7 +15,7 @@ class DestinationsOrderableListWidget extends StatelessWidget {
     };
     return Padding(
         padding: EdgeInsets.only(
-          top: MediaQuery.of(context).size.height * 0.16,
+          top: MediaQuery.of(context).size.height * 0.1,
           left: MediaQuery.of(context).size.width * 0.46,
         ),
         child: DestinationDragTargetWidget(onAccept: onAccept));
