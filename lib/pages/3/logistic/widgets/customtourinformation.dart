@@ -15,7 +15,7 @@ class CustomLogisticInformationForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var tourdata = globalctx.memory;
-    var tour = getValue(tourdata, "tour");
+    var logistic = getValue(tourdata, "logistic");
     var readonly = getContext("readonly") ?? false;
     var arrivalPort = processCatalog("airport");
     var departurePort = processCatalog("airport");
@@ -40,7 +40,7 @@ class CustomLogisticInformationForm extends StatelessWidget {
                 fontWeight: FontWeight.bold,
                 label: "  Arrival information"),
             CustomFormDropDownFieldWidget(
-              value: getValue(tour, "arrival_port", def: "1"),
+              value: getValue(logistic, "arrival_port", def: "1"),
               disabled: readonly,
               onSaved: (value) {
                 ctrl!.state.arrival_port = value!;
@@ -55,7 +55,7 @@ class CustomLogisticInformationForm extends StatelessWidget {
             ),
             CustomFormDateFieldWidget(
               disabled: readonly,
-              initialValue: getDateValue(tour, "arrival_date",
+              initialValue: getDateValue(logistic, "arrival_date",
                   def: DateTime(2022, 01, 31)),
               validator: (date) {
                 CustomDatetimeRequiredValidator(date,
@@ -75,7 +75,7 @@ class CustomLogisticInformationForm extends StatelessWidget {
                 fontWeight: FontWeight.bold,
                 label: "  Departure information"),
             CustomFormDropDownFieldWidget(
-              value: getValue(tour, "departure_port", def: "1"),
+              value: getValue(logistic, "departure_port", def: "1"),
               disabled: readonly,
               onSaved: (value) {
                 ctrl!.state.departure_port = value!;
@@ -90,7 +90,7 @@ class CustomLogisticInformationForm extends StatelessWidget {
             ),
             CustomFormDateFieldWidget(
               disabled: readonly,
-              initialValue: getDateValue(tour, "departure_date",
+              initialValue: getDateValue(logistic, "departure_date",
                   def: DateTime(2022, 02, 02)),
               validator: (date) {
                 CustomDatetimeRequiredValidator(date,
