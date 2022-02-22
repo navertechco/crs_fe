@@ -79,7 +79,7 @@ Function getDtos = () {
 
 Function getDestinations = () {
   var dtos = getDtos();
-  var arrival = dtos[0];
+  // var arrival = dtos[0];
   var departure = dtos[1];
 
   Map destinations = {

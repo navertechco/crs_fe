@@ -120,7 +120,7 @@ Function processDestinations = (context) {
     // totalDays.value = destDays;
     globalctx.memory["destinationDay"] = destinationDay;
     globalctx.memory["totalDays"] = totalDays;
-
+    selectedIndex++;
     Get.toNamed("/Experiences");
   } else {
     if (context != null) {
