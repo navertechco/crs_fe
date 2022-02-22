@@ -69,6 +69,7 @@ dependencies:
   flutter_hooks: ^0.18.2+1
   dropdown_formfield: ^0.1.4
   web_browser: ^0.5.0
+  flutter_inappwebview: ^5.3.2
   # image_picker: ^0.8.4+4
   # image_picker_for_web: ^2.1.4
 

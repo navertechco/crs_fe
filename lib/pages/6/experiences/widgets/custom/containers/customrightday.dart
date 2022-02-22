@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart'; 
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:naver_crs/pages/6/experiences/controller.dart';
 import '../index.dart';
 
@@ -14,11 +14,9 @@ class CustomRightDayWidget extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    
-
     return Padding(
       padding: EdgeInsets.only(
-          top: MediaQuery.of(context).size.height * 0.29,
+          top: MediaQuery.of(context).size.height * 0.25,
           left: MediaQuery.of(context).size.width * 0.375),
       child: Column(
         children: [

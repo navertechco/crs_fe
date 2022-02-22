@@ -26,7 +26,7 @@ class CustomLeftOptionsWidget extends HookWidget {
         children: [
           LeftHeader(ctrl: ctrl, counter: counter),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.6,
+            height: MediaQuery.of(context).size.height * 0.5,
             child: Scrollbar(
               child: SingleChildScrollView(
                 child: Column(

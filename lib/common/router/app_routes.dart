@@ -34,7 +34,7 @@ List<dynamic> routes = [
       page: () => const TourPage(),
       transition: Transition.native,
       binding: TourBinding()),
-        PRegistry(
+  PRegistry(
       name: '/Logistic',
       page: () => const LogisticPage(),
       transition: Transition.native,
@@ -59,4 +59,9 @@ List<dynamic> routes = [
       page: () => ResumePage(),
       transition: Transition.native,
       binding: ResumeBinding()),
+  PRegistry(
+      name: '/NetRate',
+      page: () => NetRatePage(),
+      transition: Transition.native,
+      binding: NetRateBinding()),
 ];

@@ -143,6 +143,7 @@ Function previousDay = () {
     filterSuggestedExperiences();
   } else {
     dayleft.value = 0;
+    selectedIndex--;
     Get.back();
   }
 };

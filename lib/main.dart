@@ -18,7 +18,6 @@ void main() {
   PRegistry registry =
       routes.toList().firstWhere((element) => element.name == "/Splash");
 
-
   runApp(GetMaterialApp(
       scrollBehavior: ScrollBehavior(),
       debugShowCheckedModeBanner: false,

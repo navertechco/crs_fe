@@ -13,7 +13,7 @@ class NavBarWidget extends StatelessWidget {
     "Destination",
     "Experiences"
   ];
-  List<BottomNavigationBarItem> itemList = [];
+
   void _onItemTapped(int index) {
     selectedIndex.value = index;
     Get.toNamed("/${pageList[index]}");
@@ -21,13 +21,14 @@ class NavBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    for (var page in pageList) {
-      itemList.add(BottomNavigationBarItem(
-        icon: Icon(Icons.pages),
-        label: page,
-      ));
-    }
     return Obx(() {
+      List<BottomNavigationBarItem> itemList = [];
+      for (var page in pageList) {
+        itemList.add(BottomNavigationBarItem(
+          icon: Icon(Icons.pages),
+          label: page,
+        ));
+      }
       return BottomNavigationBar(
         backgroundColor: Colors.black,
         unselectedItemColor: Colors.black,

@@ -37,7 +37,7 @@ void moveDestinationFunction(String destination, BuildContext context) {
                           }
                         },
                         child: Image.asset("assets/custom/img/greencheck.png",
-                            width: MediaQuery.of(context).size.width * 0.02),
+                            width: Get.width * 0.02),
                       )
               ],
             )
