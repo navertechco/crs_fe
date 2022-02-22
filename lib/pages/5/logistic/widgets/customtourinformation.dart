@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/common/validators.dart';
 import '../../../index.dart';
+import '../index.dart';
 
-class CustomTourInformationForm extends StatelessWidget {
-  CustomTourInformationForm({Key? key, this.profile, this.ctrl})
+class CustomLogisticInformationForm extends StatelessWidget {
+  CustomLogisticInformationForm({Key? key, this.profile, this.ctrl})
       : super(key: key);
 
   final bool? profile;
-  final TourController? ctrl;
+  final LogisticController? ctrl;
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -37,7 +38,7 @@ class CustomTourInformationForm extends StatelessWidget {
             const CustomTitleWidget(
                 width: 0.225,
                 fontWeight: FontWeight.bold,
-                label: "  Tour information"),
+                label: "  Logistic information"),
             CustomFormDropDownFieldWidget(
               value: getValue(tour, "country", def: "1"),
               disabled: readonly,
@@ -144,8 +145,7 @@ class CustomTourInformationForm extends StatelessWidget {
                   onNext: () {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
-                      ctrl!.saveTour();
-                      selectedIndex++;
+                      ctrl!.saveLogistic();
                     }
                   }),
             ),

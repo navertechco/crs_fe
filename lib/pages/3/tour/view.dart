@@ -10,9 +10,10 @@ class TourPage extends GetView<TourController> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-        onWillPop: () async => false,
-        child: Scaffold(
+      onWillPop: () async => false,
+      child: Scaffold(
         body: _buildTourFormPage(context),
+        bottomNavigationBar: NavBarWidget(),
       ),
     );
   }

@@ -82,3 +82,4 @@ var promotedDestinations = [
   ...globalctx.promotedDestinations.value,
   "departure"
 ];
+ RxInt selectedIndex = 0.obs;

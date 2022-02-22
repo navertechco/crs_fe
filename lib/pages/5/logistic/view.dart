@@ -1,34 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../index.dart';
 import 'widgets/index.dart';
 import 'index.dart';
-import '../../index.dart';
 
-class CustomerPage extends GetView<CustomerController> {
-  const CustomerPage({Key? key}) : super(key: key);
+class LogisticPage extends GetView<LogisticController> {
+  const LogisticPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-        body: _buildCustomerFormPage(context),
+        body: _buildLogisticFormPage(context),
         bottomNavigationBar: NavBarWidget(),
       ),
     );
   }
 }
 
-GetBuilder<CustomerController> _buildCustomerFormPage(
+GetBuilder<LogisticController> _buildLogisticFormPage(
   BuildContext context,
 ) {
-  return GetBuilder<CustomerController>(
-    id: 'Customer_form_page',
+  return GetBuilder<LogisticController>(
+    id: 'Logistic_form_page',
     builder: (controller) => Stack(
       children: [
         ContentLayoutWidget(
-            background: "assets/custom/img/customer.png",
-            child: CustomerFormPage(ctrl: controller),
+            background: "assets/custom/img/tourparameters.png",
+            child: LogisticFormPage(ctrl: controller),
             text: "              "),
       ],
     ),

@@ -69,8 +69,8 @@ class ResumePage extends GetView<ResumeController> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-        onWillPop: () async => false,
-        child:  Scaffold(
+      onWillPop: () async => false,
+      child: Scaffold(
         floatingActionButton: Stack(
           children: [
             Positioned(
@@ -88,6 +88,7 @@ class ResumePage extends GetView<ResumeController> {
               height: MediaQuery.of(context).size.height * 2,
               child: _buildView(context)),
         )),
+        bottomNavigationBar: NavBarWidget(),
       ),
     );
   }

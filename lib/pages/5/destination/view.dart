@@ -18,9 +18,10 @@ class DestinationPage extends GetView<DestinationController> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-        onWillPop: () async => false,
-        child: Scaffold(
+      onWillPop: () async => false,
+      child: Scaffold(
         body: _buildView(context),
+        bottomNavigationBar: NavBarWidget(),
       ),
     );
   }
