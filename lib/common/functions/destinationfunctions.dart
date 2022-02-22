@@ -128,7 +128,6 @@ Function processDestinations = (context) {
           title: (dayleft.value > 0)
               ? "Days Left can't be greater than 0\n"
               : "Promote any destination is required",
-          subtitle: 'error',
           style: SweetAlertStyle.error, onPress: (bool isConfirm) {
         Get.close(1);
         return false;

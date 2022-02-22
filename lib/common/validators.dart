@@ -62,10 +62,8 @@ class CustomRequiredValidator extends TextFieldValidator {
     if (isValid(value)) {
       return null;
     } else {
-      SweetAlert.show(ctx,
-          title: errorText,
-          subtitle: 'error',
-          style: SweetAlertStyle.error, onPress: (bool isConfirm) {
+      SweetAlert.show(ctx, title: errorText, style: SweetAlertStyle.error,
+          onPress: (bool isConfirm) {
         Get.close(1);
         return false;
       });
@@ -77,10 +75,8 @@ class CustomRequiredValidator extends TextFieldValidator {
 final CustomDatetimeRequiredValidator =
     (DateTime? date, {BuildContext? context, required String errorText}) {
   if (date == null) {
-    SweetAlert.show(context,
-        title: errorText,
-        subtitle: 'error',
-        style: SweetAlertStyle.error, onPress: (bool isConfirm) {
+    SweetAlert.show(context, title: errorText, style: SweetAlertStyle.error,
+        onPress: (bool isConfirm) {
       Get.close(1);
       return true;
     });
@@ -90,10 +86,8 @@ final CustomDatetimeRequiredValidator =
 final CustomMultiDropdownRequiredValidator = (List<Map<String, dynamic>>? value,
     {BuildContext? context, required String errorText}) {
   if (value == null) {
-    SweetAlert.show(context,
-        title: errorText,
-        subtitle: 'error',
-        style: SweetAlertStyle.error, onPress: (bool isConfirm) {
+    SweetAlert.show(context, title: errorText, style: SweetAlertStyle.error,
+        onPress: (bool isConfirm) {
       Get.close(1);
       return true;
     });

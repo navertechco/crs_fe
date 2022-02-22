@@ -21,7 +21,6 @@ Function paginateDay = (context) {
   } else {
     SweetAlert.show(context,
         title: "Promote any experiences is required",
-        subtitle: 'error',
         style: SweetAlertStyle.error, onPress: (bool isConfirm) {
       Get.close(1);
       return false;
@@ -100,7 +99,7 @@ Function prepareDaysToResume = () {
         .firstWhere((e) => e["destination"] == destination);
     var explorationDay = destinationDay["explorationDay"];
 
-    for (var i = 0; i < int.parse(explorationDay) ; i++) {
+    for (var i = 0; i < int.parse(explorationDay); i++) {
       var dayDto = getDtos()[2];
       var expDto = getDtos()[3];
       // Prepare Frame to send to Resume Page
