@@ -25,6 +25,11 @@ class ForgotFormPage extends GetView<StatelessWidget> {
               SizedBox(height: kDefaultPadding * 1),
               SizedBox(
                 child: RoundedFormButton(
+                  height: 0.06,
+                  fontSize: 6,
+                  color: Color.fromARGB(255, 115, 115, 115),
+                  textColor: Colors.white70,
+                  fontWeight: FontWeight.bold,
                   label: "Send",
                   onTap: () {
                     if (_formKey.currentState!.validate()) {

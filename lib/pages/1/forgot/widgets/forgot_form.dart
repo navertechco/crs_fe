@@ -26,6 +26,7 @@ class ForgotForm extends StatelessWidget {
             child: RoundedFormField(
               onSaved: (value) => state.email = value!,
               hintText: 'Email',
+              keyboardType: TextInputType.emailAddress,
             ),
           ),
         ],

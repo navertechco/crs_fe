@@ -2,24 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:naver_crs/common/constants.dart';
 
 class RoundedFormButton extends StatelessWidget {
-  final double horizontal;
-  final double vertical;
+  final double left;
+  final double top;
   final double width;
   final double height;
   final double fontSize;
   final String label;
   final Color color;
+  final Color textColor;
   final void Function()? onTap;
+  final fontWeight;
 
   const RoundedFormButton({
     Key? key,
     required this.label,
-    this.horizontal = 0,
-    this.vertical = 0,
+    this.left = 0,
+    this.top = 0,
     this.width = 0.2,
     this.height = 0.05,
     this.fontSize = 8,
     this.color = Colors.black54,
+    this.textColor = Colors.black54,
+    this.fontWeight = FontWeight.normal,
     required this.onTap,
   }) : super(key: key);
 
@@ -32,13 +36,13 @@ class RoundedFormButton extends StatelessWidget {
         width: MediaQuery.of(context).size.width * width,
         height: MediaQuery.of(context).size.height * height,
         padding: EdgeInsets.only(
-          left: horizontal,
-          top: vertical,
+          left: left,
+          top: top,
         ),
         decoration: BoxDecoration(
             color: color, borderRadius: BorderRadius.circular(50)),
         child: Align(
-          alignment: Alignment.topCenter,
+          alignment: Alignment.center,
           child: Text(
             label,
             strutStyle: StrutStyle(
@@ -47,7 +51,15 @@ class RoundedFormButton extends StatelessWidget {
                   isMobile *
                   fontSize,
             ),
-            style: KTextSytle(context:context, fontSize:10, fontWeight:FontWeight.normal),
+            style: KTextSytle(
+                    context: context,
+                    fontSize: MediaQuery.of(context).size.width /
+                        MediaQuery.of(context).size.height *
+                        isMobile *
+                        fontSize,
+                    fontWeight: fontWeight,
+                    color: textColor)
+                .getStyle(),
             textAlign: TextAlign.start,
             overflow: TextOverflow.ellipsis,
           ),

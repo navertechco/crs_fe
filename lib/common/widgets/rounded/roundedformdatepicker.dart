@@ -46,7 +46,7 @@ class RoundedFormDatepicker extends StatelessWidget {
         validator: validator,
         decoration: InputDecoration.collapsed(
             hintText: hintText, enabled: !disabled, fillColor: Colors.red),
-        style: KTextSytle(context:context, fontSize:10, fontWeight:FontWeight.normal),
+        style: KTextSytle(context:context, fontSize:10, fontWeight:FontWeight.normal).getStyle(),
         format: format,
         onChanged: onChanged,
         onSaved: onSaved,

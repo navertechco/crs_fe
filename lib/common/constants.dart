@@ -12,15 +12,26 @@ export './functions/functions.dart';
  * DATOS DE SERVIDOR
  */
 
-var KTextSytle =
-    ({context, fontSize, fontWeight, disabled = false}) => GoogleFonts.poppins(
-            textStyle: TextStyle(
-          color: Color.fromARGB(255, 0, 0, 0),
-          fontSize: MediaQuery.of(context).size.width /
-              MediaQuery.of(context).size.height *
-              fontSize,
-          fontWeight: fontWeight ?? FontWeight.normal,
-        ));
+class KTextSytle {
+  var getStyle;
+  KTextSytle(
+      {context,
+      fontSize,
+      fontWeight,
+      disabled = false,
+      color = const Color.fromARGB(255, 0, 0, 0)}) {
+    getStyle = () {
+      return GoogleFonts.poppins(
+          textStyle: TextStyle(
+        color: color,
+        fontSize: MediaQuery.of(context).size.width /
+            MediaQuery.of(context).size.height *
+            fontSize,
+        fontWeight: fontWeight ?? FontWeight.normal,
+      ));
+    };
+  }
+}
 
 const kDefaultSchema = "http";
 const kDefaultServer = "192.168.101.4";
@@ -34,6 +45,7 @@ const kDefaultSendPollPath = "/Gamer/SendPoll";
 const kDefaultBuyCreditsPath = "/Gamer/BuyCredit";
 const kDefaultJoinTournmanetPath = "/Gamer/JoinTournament";
 const kDefaultFindTour = "/Tour/FindTour";
+const kDefaultCreateCatalog = "/Admin/CreateCatalog";
 
 //DIMENSIONES
 var kDefaultPadding = 20.0;

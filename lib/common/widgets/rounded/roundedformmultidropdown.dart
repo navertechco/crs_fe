@@ -66,7 +66,7 @@ class RoundedFormMultiDropdown extends StatelessWidget {
                         fontSize: (value == null ? 10 : 8),
                         fontWeight: (value == null
                             ? FontWeight.normal
-                            : FontWeight.bold))),
+                            : FontWeight.bold)).getStyle()),
               );
             },
             decoration: InputDecoration.collapsed(

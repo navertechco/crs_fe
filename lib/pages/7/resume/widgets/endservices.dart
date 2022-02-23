@@ -12,7 +12,7 @@ class EndServices extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var memory = globalctx.memory.value;
+     
     var end = getValue(memory, "end", def: []);
     var netrates = getValue(end, "net_rates", def: []);
     var included = getValue(end, "included", def: []);

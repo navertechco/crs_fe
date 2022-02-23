@@ -7,30 +7,35 @@ class SigninController extends GetxController {
   SigninController();
 
   var state = SigninState();
+  var isLoading = false;
 
   Future<void> onSignin(String username, String password) async {
     // Get.toNamed('/Loading');
-    state.isLoading = true;
+
     state.error = null;
     state.username = username;
     state.password = password;
 
     try {
-      var res = await fetchhandler(kDefaultSchema, kDefaultServer,
-          kDefaultServerPort, kDefaultConnectPath, 'POST', {
-        "state": "signin",
-        "data": {"username": state.username, "password": state.password}
-      });
+      if (!isLoading) {
+        isLoading = !isLoading;
+        var res = await fetchhandler(kDefaultSchema, kDefaultServer,
+            kDefaultServerPort, kDefaultConnectPath, 'POST', {
+          "state": "signin",
+          "data": {"username": state.username, "password": state.password}
+        });
 
-      if (res['state'] == true) {
-        setContext("catalogs", res['data']["catalogs"]);
-   
-        Get.toNamed('/Loading');
-      } else {
-        print(res);
+        if (res['state'] == true) {
+          setContext("catalogs", res['data']["catalogs"]);
+
+          Get.toNamed('/Loading');
+        } else {
+          print(res);
+        }
       }
     } catch (e) {
+       isLoading = !isLoading;
       print(e);
-    }
+    }  
   }
 }

@@ -33,10 +33,12 @@ var getDestination = (String destination) async {
 RxInt destDays = 0.obs;
 List destList = getParam("DESTINATION_DATA").values.toList();
 CatalogDto destinationData = CatalogDto(destList);
-Map<dynamic, dynamic> destinations = destinationData.value;
-Rx<DateTime> birthDate = Rx(globalctx.memory["customer"]["birth_date"]);
-Rx<DateTime> arrivalDate = Rx(globalctx.memory["logistic"]["arrival_date"]);
-Rx<DateTime> departureDate = Rx(globalctx.memory["logistic"]["departure_date"]);
+Map<dynamic, dynamic> destinations = globalctx.memory["destinations"]??{};
+Rx<DateTime> birthDate = Rx(DateTime.parse(globalctx.memory["customer"]["birth_date"]));
+Rx<DateTime> arrivalDate =
+    Rx(DateTime.parse(globalctx.memory["logistic"]["arrival_date"]));
+Rx<DateTime> departureDate =
+    Rx(DateTime.parse(globalctx.memory["logistic"]["departure_date"]));
 Rx<int> totalDays =
     Rx(departureDate.value.difference(arrivalDate.value).inDays);
 var dayleft = totalDays;
@@ -66,7 +68,7 @@ Rx<List<String>> refresh = Rx(<String>[]);
 Rx<int> trigger = Rx(0);
 Stream? stream;
 final formKey = GlobalKey<FormState>();
-var memory = globalctx.memory;
+var memory = globalctx.memory.value;
 var detsdata = getValue(memory, "destinations", def: []);
 var allDestinations = memory["destinations"];
 var destinationList = allDestinations.entries
@@ -83,3 +85,4 @@ var promotedDestinations = [
   "departure"
 ];
 RxInt selectedIndex = 0.obs;
+ 

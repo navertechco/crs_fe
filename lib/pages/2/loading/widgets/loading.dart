@@ -9,7 +9,7 @@ class LoadingWidget extends GetView<LoadingController> {
   LoadingWidget({
     Key? key,
     required this.ctrl,
-  }) : super(key: key); 
+  }) : super(key: key);
   LoadingController ctrl;
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class LoadingWidget extends GetView<LoadingController> {
                 child: RoundedFormButton(
                     label: "Go",
                     height: 0.07,
-                    fontSize: 12,
+                    fontSize: 7,
                     onTap: () {
                       ctrl.getTour(tourId: int.parse(ctrl.state.tourId));
                     }),

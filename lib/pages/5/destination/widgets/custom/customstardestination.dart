@@ -39,7 +39,6 @@ class CustomStarDestinationForm extends StatelessWidget {
 
     List<String> keyActivities = getFormValue(
         ctrl.state.memory, destination, "keyActivities", <String>[]);
-    globalctx.memory["destinations"][destination] ??= {};
 
     List<Map<String, dynamic>> explorationdDays =
         processCatalog("exploration_days");
@@ -75,7 +74,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                 CustomTitleWidget(
                   width: 0.2,
                   fontWeight: FontWeight.bold,
-                  label: destinations[destination][1],
+                  label: destination,
                 ),
                 Obx(() {
                   Rx<List<Map<String, dynamic>>> filteredED = Rx(
@@ -84,7 +83,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                           .toList());
                   return CustomFormTextFieldWidget(
                       value: getFormValue(ctrl.state.memory, destination,
-                              "explorationDay", "0"),
+                          "explorationDay", "0"),
                       validator: CustomRequiredValidator(
                           errorText: "Exploration Days required ",
                           ctx: context),

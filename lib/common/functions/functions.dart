@@ -190,7 +190,7 @@ Function getFormValue = (data, formKey, key, def) {
       if (data[formKey][key] == "") {
         return def;
       }
-      return data[formKey][key]??def;
+      return data[formKey][key] ?? def;
     }
   }
   return def;
@@ -202,14 +202,14 @@ Function toCatalog = (item) {
   return ctlg;
 };
 
-Function getDestinationDay = (destination) {
+Function getDestinationDay = (String destination) {
   if (globalctx.memory != null) {
-    if (globalctx.memory["destinations"] != null) {
-      if (globalctx.memory["destinations"][destination] != null) {
-        if (globalctx.memory["destinations"][destination]["explorationDay"] !=
+    if (destinations != null) {
+      if (destinations[destination] != null) {
+        if (destinations[destination]["explorationDay"] !=
             null) {
           return int.parse(
-              globalctx.memory["destinations"][destination]["explorationDay"]);
+              destinations[destination]["explorationDay"]);
         }
       }
     }
@@ -218,10 +218,14 @@ Function getDestinationDay = (destination) {
   return 0;
 };
 
-Function setDestinationDay = (destination, value) {
-  globalctx.memory["destinations"] ??= {};
-  globalctx.memory["destinations"][destination] ??= {};
-  globalctx.memory["destinations"][destination]["explorationDay"] ??= value;
+Function setDestination = (String destination) {
+
+  destinations[destination] ??= {};
+};
+
+Function setDestinationDay = (String destination, value) {
+  setDestination(destination);
+  destinations[destination]["explorationDay"] ??= value;
 };
 
 Function getLeftAccumulated = (destination) {
@@ -254,3 +258,10 @@ Function setFormValue = (data, formKey, key, value) {
 
   data[formKey][key] = value;
 };
+
+dynamic myEncode(dynamic item) {
+  if (item is DateTime || item is Map) {
+    return item.toIso8601String();
+  }
+  return item;
+}

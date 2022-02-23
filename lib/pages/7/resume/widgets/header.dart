@@ -13,7 +13,7 @@ class Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var memory = globalctx.memory.value;
+    
     var customer = memory["customer"] ?? {};
     var tour = memory["tour"] ?? {};
 

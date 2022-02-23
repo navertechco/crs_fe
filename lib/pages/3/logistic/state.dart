@@ -20,6 +20,6 @@ class LogisticState extends GetXState {
   String arrival_port = "";
   // ignore: non_constant_identifier_names
   String departure_port = "";
-  DateTime arrivalDate = DateTime.now();
-  DateTime departureDate = DateTime.now();
+  String arrivalDate = DateTime.now().toString();
+  String departureDate = DateTime.now().toString();
 }

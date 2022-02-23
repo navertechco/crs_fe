@@ -12,21 +12,16 @@ class LoadingController extends GetxController {
     if (tourId > 0) {
       var res = await fetchhandler(kDefaultSchema, kDefaultServer,
           kDefaultServerPort, kDefaultFindTour, 'POST', {
-        "data": {
-           "tour_id": "$tourId"
-        }
+        "data": {"tour_id": "$tourId"}
       });
       // ignore: avoid_print
       // print(res);
       if (res['state'] == true) {
         var data = res['data'];
         if (data.length > 0) {
-          globalctx.memory["tour"] = data[0][0];
-          globalctx.memory["tour"]["customer"] ??= {};
-          globalctx.memory["tour"]["customer"] = data[1][0];
-          globalctx.memory["customer"] = data[1][0];
-          setContext("tour", data[0][0]);
-          setContext("customer", data[1][0]);
+          globalctx.memory.value = {...globalctx.memory.value, ...data};
+          setContext("tour", data);
+          setContext("customer", data["customer"]);
           setContext("readonly", true);
         }
       }

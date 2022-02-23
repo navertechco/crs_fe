@@ -12,7 +12,7 @@ Function promoteDestination = (ctrl, _formKey, destination) {
     _formKey.currentState!.save();
     if (!globalctx.promotedDestinations.contains(destination)) {
       globalctx.promotedDestinations.add(destination);
-      globalctx.memory["destinations"] = ctrl.state.memory;
+      destinations = ctrl.state.memory;
     }
     // globalDestination.value = destination;
     // filterSuggestedExperiences();
@@ -90,6 +90,25 @@ Function checkPromotedAirport = (destination) {
 
   return true;
 };
+
+Function getCombinedDestinations = () {
+  var departure = {"explorationDay": "1", "days": "1", "airport": "quito", "daysData":{}};
+  var memoryDestinations = {};
+  for (var destination in destinations.entries) {
+    var key = destination.key;
+    var value = destination.value;
+    memoryDestinations = {...memoryDestinations, key: value};
+  }
+  destinations = memoryDestinations;
+  var result = {
+    // "arrival": arrival,
+    ...memoryDestinations,
+    "departure": departure
+  };
+
+  return result;
+};
+
 Function processDestinations = (context) {
   // ignore: unrelated_type_equality_checks
   if (globalctx.promotedDestinations.isNotEmpty & (dayleft == 0)) {
@@ -97,18 +116,13 @@ Function processDestinations = (context) {
 
     var destinationDay = [];
     // var arrival = {"explorationDay": "1", "days": "1", "airport": "quito"};
-    var departure = {"explorationDay": "1", "days": "1", "airport": "quito"};
-
-    var destinations = {
-      // "arrival": arrival,
-      ...globalctx.memory["destinations"],
-      "departure": departure
-    };
 
     for (var i = 0; i < totalDays.value; i++) {
       globalctx.experienceDragData.value[i] ??= <Widget>[];
       // globalctx.promotedExperiences[i] ??= [].obs;
     }
+
+    var destinations = getCombinedDestinations();
 
     for (var destination in allPromotedDestinations) {
       var dest = destinations[destination];
@@ -119,7 +133,7 @@ Function processDestinations = (context) {
     }
     // totalDays.value = destDays;
     globalctx.memory["destinationDay"] = destinationDay;
-    globalctx.memory["totalDays"] = totalDays;
+    globalctx.memory["totalDays"] = totalDays.value;
     selectedIndex++;
     Get.toNamed("/Experiences");
   } else {

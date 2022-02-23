@@ -11,7 +11,7 @@ class ResumeWidget extends GetView<ResumeController> {
   final pkeys;
   @override
   Widget build(BuildContext context) {
-    Map<String, dynamic> data = globalctx.memory.value;
+    Map<String, dynamic> data = memory;
 
     return Itinerary(
       pkeys: pkeys,

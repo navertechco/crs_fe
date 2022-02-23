@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:sweetalert/sweetalert.dart';
 import '../index.dart';
 import 'functions.dart';
+import 'tourfunctions.dart';
 
 Function paginateDay = (context) {
   // Get promoted experiences by day and KA
@@ -76,25 +77,12 @@ Function getDtos = () {
   return [arrival, departure, day, experience];
 };
 
-Function getDestinations = () {
-  var dtos = getDtos();
-  // var arrival = dtos[0];
-  var departure = dtos[1];
-
-  Map destinations = {
-    // "arrival": arrival,
-    ...globalctx.memory["destinations"],
-    "departure": departure
-  };
-
-  return destinations;
-};
-
 Function prepareDaysToResume = () {
   var dayIndex = 0;
+  var destinations = getCombinedDestinations();
   for (String destination in allPromotedDestinations) {
-    globalctx.memory["destinations"][destination] ??= {};
-    globalctx.memory["destinations"][destination]["daysData"] = {};
+    destinations[destination]["daysData"] ??= {};
+    destinations[destination]["daysData"] = {};
     var destinationDay = globalctx.memory["destinationDay"]
         .firstWhere((e) => e["destination"] == destination);
     var explorationDay = destinationDay["explorationDay"];
@@ -110,12 +98,14 @@ Function prepareDaysToResume = () {
         newExp = {...expDto, ...newEntry};
         dayDto["experiences"][exp] = newExp;
       }
-      globalctx.memory["destinations"][destination]["daysData"][dayIndex] =
+      destinations[destination]["daysData"][dayIndex] =
           dayDto;
       dayIndex++;
     }
   }
-  Get.toNamed("/Resume");
+  // print(globalctx.memory);
+  saveTour(globalctx.memory);
+  // Get.toNamed("/Resume");
 };
 
 Function processDays = () {

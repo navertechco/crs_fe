@@ -41,7 +41,7 @@ class FormCatalogueWidget extends StatelessWidget {
           style: KTextSytle(
               context: context,
               fontSize: value == null ? 10 : 8,
-              fontWeight: value == null ? FontWeight.normal : FontWeight.bold),
+              fontWeight: value == null ? FontWeight.normal : FontWeight.bold).getStyle(),
           alignment: Alignment.centerLeft,
           isExpanded: true,
           value: realValue,
@@ -51,7 +51,7 @@ class FormCatalogueWidget extends StatelessWidget {
                 context: context,
                 fontSize: value == null ? 10 : 8,
                 fontWeight:
-                    value == null ? FontWeight.normal : FontWeight.bold),
+                    value == null ? FontWeight.normal : FontWeight.bold).getStyle(),
           ),
           validator: validator,
           decoration: InputDecoration.collapsed(
@@ -61,7 +61,7 @@ class FormCatalogueWidget extends StatelessWidget {
                 context: context,
                 fontSize: value == null ? 10 : 8,
                 fontWeight:
-                    value == null ? FontWeight.normal : FontWeight.bold),
+                    value == null ? FontWeight.normal : FontWeight.bold).getStyle(),
           ),
           onSaved: onSaved,
           onChanged: disabled ? null : onChanged,

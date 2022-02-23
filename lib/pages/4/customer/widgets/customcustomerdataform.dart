@@ -187,7 +187,7 @@ class CustomCustomerDataForm extends StatelessWidget {
                                 initialValue: getDateValue(client, "birth_date",
                                     def: DateTime(1981, 02, 20)),
                                 onSaved: (value) {
-                                  ctrl!.state.birthDate = value!;
+                                  ctrl!.state.birthDate = value.toString();
                                 },
                                 width: 0.35,
                                 hintText: "Birth Day               "),

@@ -23,6 +23,6 @@ class TourState extends GetXState {
   String accomodation_type = "";
   String purpose = "";
   String passengers = "";
-  DateTime arrivalDate = DateTime.now();
-  DateTime departureDate = DateTime.now();
+  String arrivalDate = DateTime.now().toString();
+  String departureDate = DateTime.now().toString();
 }
