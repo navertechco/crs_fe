@@ -204,14 +204,10 @@ class CustomCustomerDataForm extends StatelessWidget {
                     ),
                     child: SizedBox(
                       child: Column(children: [
-                        const CustomTitleWidget(
-                            width: 0.225,
-                            fontWeight: FontWeight.bold,
-                            label: "  "),
-                        Row(
-                          children: [
-                            Obx(() {
-                              return CustomFormDropDownFieldWidget(
+                        Obx(() {
+                          return Row(
+                            children: [
+                              CustomFormDropDownFieldWidget(
                                 validator: CustomRequiredValidator(
                                     errorText: "Country is required ",
                                     ctx: context),
@@ -237,34 +233,29 @@ class CustomCustomerDataForm extends StatelessWidget {
                                   // print("SAVED: ");
                                 },
                                 data: countrydata.value,
-                              );
-                            }),
-                            Obx(() {
-                              if (country.value != "") {
-                                return CustomFormDropDownFieldWidget(
-                                  validator: CustomRequiredValidator(
-                                      errorText: "City is required ",
-                                      ctx: context),
-                                  value: getValue(client, "city_id", def: "16"),
-                                  width: 0.1,
-                                  hintText: "City          ",
-                                  onChanged: (value) {
-                                    city.value = value!;
-                                    // print(value);
-                                  },
-                                  onSaved: (value) {
-                                    city.value = value!;
-                                    ctrl!.state.city = value;
-                                    // print(value);
-                                  },
-                                  data: citylist.value,
-                                );
-                              } else {
-                                return Text("");
-                              }
-                            }),
-                          ],
-                        ),
+                              ),
+                              // if (country.value != "")
+                              CustomFormDropDownFieldWidget(
+                                validator: CustomRequiredValidator(
+                                    errorText: "City is required ",
+                                    ctx: context),
+                                value: getValue(client, "city_id", def: "1"),
+                                width: 0.1,
+                                label: "City          ",
+                                onChanged: (value) {
+                                  city.value = value!;
+                                  // print(value);
+                                },
+                                onSaved: (value) {
+                                  city.value = value!;
+                                  ctrl!.state.city = value;
+                                  // print(value);
+                                },
+                                data: citylist.value,
+                              ),
+                            ],
+                          );
+                        }),
                         CustomFormTextFieldWidget(
                             validator: CustomRequiredValidator(
                                 errorText: "Address Line is required ",
