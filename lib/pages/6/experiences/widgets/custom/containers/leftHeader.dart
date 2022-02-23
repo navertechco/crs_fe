@@ -30,17 +30,27 @@ class LeftHeader extends HookWidget {
         day -= 1;
       }
 
-      return Column(
-        children: [
-          CustomTitleWidget(
-            fontWeight: FontWeight.bold,
-            label: "Day $day :  ${globalDestination.value.toString().capitalize}",
+      return Align(
+        alignment: Alignment.centerLeft,
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width * 0.25,
+          child: Column(
+            children: [
+              CustomTitleWidget(
+                fontWeight: FontWeight.bold,
+                label:
+                    "Day  :  ${globalDestination.value.toString().capitalize}",
+              ),
+              const Divider(
+                color: Colors.black,
+                height: 25,
+                thickness: 2,
+                indent: 5,
+                endIndent: 5,
+              ),
+            ],
           ),
-          CustomTitleWidget(
-            fontWeight: FontWeight.bold,
-            label: "______________________",
-          ),
-        ],
+        ),
       );
     });
   }

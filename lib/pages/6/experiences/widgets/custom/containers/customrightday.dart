@@ -16,11 +16,11 @@ class CustomRightDayWidget extends HookWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-          top: MediaQuery.of(context).size.height * 0.25,
+          top: MediaQuery.of(context).size.height * 0.27,
           left: MediaQuery.of(context).size.width * 0.375),
       child: Column(
         children: [
-          CustomHeaderWidget(),
+          // CustomHeaderWidget(),
           CustomContentWidget(ctrl: ctrl),
           CustomFooterWidget(ctrl: ctrl, counter: counter),
         ],

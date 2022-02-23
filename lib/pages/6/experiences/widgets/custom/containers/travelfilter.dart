@@ -40,72 +40,88 @@ class TravelFilter extends HookWidget {
     }, [stream, counter.value]);
 
     var kaDataCatalog = Rx(processCatalog("key_activity"));
-    return Column(
-      children: [
-        CustomTitleWidget(
-          fontWeight: FontWeight.bold,
-          label: "Filter Experiences by:",
-        ),
-        CustomTitleWidget(
-          fontWeight: FontWeight.bold,
-          label: "______________________",
-        ),
-        Obx(() {
-          return Column(
-            children: [
-              CustomFormDropDownFieldWidget(
-                value: destinationOption.value,
-                onSaved: (value) {
-                  setFormValue(ctrl.state.memory["destinations"],
-                      globalDestination.value, "destinationOption", value);
-                },
-                onChanged: (value) {
-                  setFormValue(ctrl.state.memory["destinations"],
-                      globalDestination.value, "destinationOption", value);
-                },
-                hintText: "Travel Options",
-                data: processCatalog("destination_option"),
-              ),
-              CustomFormDropDownFieldWidget(
-                value: travelRhythm.value,
-                onSaved: (value) {
-                  setFormValue(ctrl.state.memory["destinations"],
-                      globalDestination.value, "travel_rhythm", value);
-                },
-                onChanged: (value) {
-                  setFormValue(ctrl.state.memory["destinations"],
-                      globalDestination.value, "travel_rhythm", value);
-                },
-                hintText: "Travel Rhythm",
-                data: processCatalog("travel_rhythm"),
-              ),
-              CustomFormMultiDropDownFieldWidget(
-                validator: (value) => CustomMultiDropdownRequiredValidator(
-                    value,
-                    errorText: "Key Activities are required ",
-                    context: context),
-                value: keyActivities.value,
-                onSaved: (value) {
-                  setFormValue(ctrl.state.memory["destinations"],
-                      globalDestination.value, "keyActivities", null);
-                  setFormValue(
-                      ctrl.state.memory["destinations"],
-                      globalDestination.value,
-                      "keyActivities",
-                      value!.map((e) => e["description"]).toSet().toList());
-                },
-                onChanged: (value) {
-                  setFormValue(ctrl.state.memory["destinations"],
-                      globalDestination.value, "keyActivities", value);
-                },
-                hintText:
-                    "\t\t\t\t\t\t\t\t\t\t\t\tKey Activities            \n",
-                data: kaDataCatalog.value,
-              )
-            ],
-          );
-        }),
-      ],
-    );
+    return Align(
+        alignment: Alignment.centerLeft,
+        child: SizedBox(
+            width: MediaQuery.of(context).size.width * 0.25,
+            child: Column(
+              children: [
+                CustomTitleWidget(
+                  fontWeight: FontWeight.bold,
+                  label: "Filter Experiences by:",
+                ),
+                const Divider(
+                  color: Colors.black,
+                  height: 25,
+                  thickness: 2,
+                  indent: 5,
+                  endIndent: 5,
+                ),
+                Obx(() {
+                  return Column(
+                    children: [
+                      CustomFormDropDownFieldWidget(
+                        value: destinationOption.value,
+                        onSaved: (value) {
+                          setFormValue(
+                              ctrl.state.memory["destinations"],
+                              globalDestination.value,
+                              "destinationOption",
+                              value);
+                        },
+                        onChanged: (value) {
+                          setFormValue(
+                              ctrl.state.memory["destinations"],
+                              globalDestination.value,
+                              "destinationOption",
+                              value);
+                        },
+                        hintText: "Travel Options",
+                        data: processCatalog("destination_option"),
+                      ),
+                      CustomFormDropDownFieldWidget(
+                        value: travelRhythm.value,
+                        onSaved: (value) {
+                          setFormValue(ctrl.state.memory["destinations"],
+                              globalDestination.value, "travel_rhythm", value);
+                        },
+                        onChanged: (value) {
+                          setFormValue(ctrl.state.memory["destinations"],
+                              globalDestination.value, "travel_rhythm", value);
+                        },
+                        hintText: "Travel Rhythm",
+                        data: processCatalog("travel_rhythm"),
+                      ),
+                      CustomFormMultiDropDownFieldWidget(
+                        validator: (value) =>
+                            CustomMultiDropdownRequiredValidator(value,
+                                errorText: "Key Activities are required ",
+                                context: context),
+                        value: keyActivities.value,
+                        onSaved: (value) {
+                          setFormValue(ctrl.state.memory["destinations"],
+                              globalDestination.value, "keyActivities", null);
+                          setFormValue(
+                              ctrl.state.memory["destinations"],
+                              globalDestination.value,
+                              "keyActivities",
+                              value!
+                                  .map((e) => e["description"])
+                                  .toSet()
+                                  .toList());
+                        },
+                        onChanged: (value) {
+                          setFormValue(ctrl.state.memory["destinations"],
+                              globalDestination.value, "keyActivities", value);
+                        },
+                        hintText:
+                            "\t\t\t\t\t\t\t\t\t\t\t\tKey Activities            \n",
+                        data: kaDataCatalog.value,
+                      )
+                    ],
+                  );
+                }),
+              ],
+            )));
   }
 }

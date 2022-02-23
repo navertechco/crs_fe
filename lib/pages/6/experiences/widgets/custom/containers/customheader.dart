@@ -41,7 +41,7 @@ class CustomHeaderWidget extends StatelessWidget {
         //     }),
         //   ],
         // ),
-        Divider(color: Color.fromARGB(255, 0, 0, 0)),
+
         // Obx(() {
         //   var airport = getDestinationAirport();
 
@@ -61,7 +61,6 @@ class CustomHeaderWidget extends StatelessWidget {
         //     ],
         //   );
         // }),
-        Divider(color: Color.fromARGB(255, 0, 0, 0)),
       ],
     );
   }

@@ -10,24 +10,35 @@ class CustomSelectedExperiencesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        CustomTitleWidget(
-          fontWeight: FontWeight.bold,
-          label: "Selected Experiences\n______________________________________",
-        ),
-        Scrollbar(
-          child: SingleChildScrollView(
-            child: ExperienceDragTargetWidget(
-              onAccept: (String experience) {
-                setContext("experienceContext", context);
-                moveExperienceFunction(experience, context);
-                setExperienceState(experience, "selected");
-              },
+    return Align(
+        alignment: Alignment.centerRight,
+        child: SizedBox(
+            // width: MediaQuery.of(context).size.width * 0.1,
+            child: Column(
+          children: [
+            CustomTitleWidget(
+              fontWeight: FontWeight.bold,
+              label: "Selected Experiences\n",
             ),
-          ),
-        ),
-      ],
-    );
+            const Divider(
+              color: Colors.black,
+              height: 25,
+              thickness: 2,
+              indent: 5,
+              endIndent: 5,
+            ),
+            Scrollbar(
+              child: SingleChildScrollView(
+                child: ExperienceDragTargetWidget(
+                  onAccept: (String experience) {
+                    setContext("experienceContext", context);
+                    moveExperienceFunction(experience, context);
+                    setExperienceState(experience, "selected");
+                  },
+                ),
+              ),
+            ),
+          ],
+        )));
   }
 }

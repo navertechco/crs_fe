@@ -12,7 +12,7 @@ class CustomContentWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: Alignment.centerLeft,
+      alignment: Alignment.centerRight,
       child: Row(
         children: [
           CustomSugestedExperiencesWidget(ctrl: ctrl),
