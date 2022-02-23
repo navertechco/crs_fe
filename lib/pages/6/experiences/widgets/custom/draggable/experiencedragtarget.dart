@@ -30,7 +30,7 @@ class ExperienceDragTargetWidget extends StatelessWidget {
             return Container(
               height: MediaQuery.of(context).size.height * 0.2,
               width: MediaQuery.of(context).size.width * 0.2,
-              color: Colors.grey[50],
+              color: Color.fromARGB(0, 0, 0, 0),
               child: Obx(() {
                 return SingleChildScrollView(
                   child: Column(
