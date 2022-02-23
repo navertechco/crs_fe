@@ -55,14 +55,12 @@ class RoundedFormField extends StatelessWidget {
         onFieldSubmitted: onChanged,
         obscureText: password,
         cursorColor: Colors.black54,
-        style: TextStyle(
-          color: Colors.black54,
-          fontSize: MediaQuery.of(context).size.width /
-              MediaQuery.of(context).size.height *
-              isMobile *
-              10,
-          decorationStyle: TextDecorationStyle.solid,
-        ),
+        style: KTextSytle(
+                context: context,
+                fontSize: initialValue == null ? 12 : 10,
+                fontWeight:
+                    initialValue == null ? FontWeight.normal : FontWeight.bold)
+            .getStyle(),
         decoration: InputDecoration.collapsed(
           hintText: hintText,
           hintStyle: TextStyle(
