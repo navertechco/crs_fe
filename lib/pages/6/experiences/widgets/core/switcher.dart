@@ -7,7 +7,7 @@ import 'package:naver_crs/pages/6/experiences/widgets/experiencedetail/index.dar
 import '../../../../index.dart';
 
 class SwitcherWidget extends StatelessWidget {
-  const SwitcherWidget(
+  SwitcherWidget(
       {Key? key,
       required this.firstchild,
       required this.seccondchild,
@@ -18,7 +18,7 @@ class SwitcherWidget extends StatelessWidget {
   final Widget firstchild;
   final Widget seccondchild;
   final String experience;
-  final bool suggested;
+  bool suggested;
 
   @override
   Widget build(BuildContext context) {
@@ -26,22 +26,22 @@ class SwitcherWidget extends StatelessWidget {
     RxBool _flipXAxis = true.obs;
 
     void _changeRotationAxis() {
-      _flipXAxis.value = (_flipXAxis.value);
+      // print(exps);
+      _showFrontSide.value = !_showFrontSide.value;
+      _flipXAxis.value = !_flipXAxis.value;
     }
 
     void _switchCard() {
       globalctx.value.value = globalctx.value.value;
-      RxList dest = globalctx.experiencelist;
+      RxList exps = globalctx.experiencelist;
 
-      dest.contains(experience) && _showFrontSide.value
-          ? dest.add(experience)
-          : dest.remove(experience);
+      exps.contains(experience) && _showFrontSide.value
+          ? exps.add(experience)
+          : exps.remove(experience);
 
-      globalctx.experiencelist = dest;
-
+      globalctx.experiencelist = exps;
+      suggested = getExperienceState(experience) == "suggested";
       if (suggested) {
-        // print(dest);
-        _showFrontSide.value = _showFrontSide.value;
         _changeRotationAxis();
       } else {
         showDialog(

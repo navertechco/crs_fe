@@ -28,14 +28,17 @@ class FrontOptionWidget extends StatelessWidget {
         Container(
             child: Align(
               alignment: Alignment.center,
-              child: Text(
-                experience,
-                style: GoogleFonts.poppins(
-                    textStyle: TextStyle(
-                  color: const Color.fromARGB(255, 255, 255, 255),
-                  fontSize: MediaQuery.of(context).size.width * 0.018,
-                  fontWeight: FontWeight.bold,
-                )),
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Text(
+                  experience.toString().replaceAll("-", " "),
+                  style: GoogleFonts.poppins(
+                      textStyle: TextStyle(
+                    color: const Color.fromARGB(255, 204, 164, 61),
+                    fontSize: MediaQuery.of(context).size.width * 0.010,
+                    fontWeight: FontWeight.bold,
+                  )),
+                ),
               ),
             ),
             width: MediaQuery.of(context).size.width * 0.271,
@@ -43,7 +46,8 @@ class FrontOptionWidget extends StatelessWidget {
             decoration: BoxDecoration(
                 image: DecorationImage(
               image: Image.asset(
-                row.value["experience_image"],
+                // row.value["experience_image"],
+                "assets/custom/img/1x/Recurso_211mdpi.png",
                 fit: BoxFit.cover,
               ).image,
             ))),
