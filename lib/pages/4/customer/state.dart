@@ -7,8 +7,7 @@ class CustomerState extends GetXState {
     // ignore: prefer_function_declarations_over_variables, unused_local_variable
     toMap = () {
       return {
-        "contact_name": contactName,
-        "legal_client_type": legalClientType,
+        "contact_name": contactName, 
         "customer_type": customerType,
         "country": country,
         "email": email,
@@ -26,8 +25,7 @@ class CustomerState extends GetXState {
   }
   // ignore: prefer_function_declarations_over_variables
   Function toMap = () {};
-  String contactName = "";
-  String legalClientType = "";
+  String contactName = ""; 
   String city = "";
   String addressLine = "";
   String leadPassenger = "";

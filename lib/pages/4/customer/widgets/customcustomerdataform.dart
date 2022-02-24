@@ -81,7 +81,7 @@ class CustomCustomerDataForm extends StatelessWidget {
                               },
                               onSaved: (value) {
                                 customerType.value = value!;
-                                ctrl!.state.legalClientType = value;
+                                ctrl!.state.customerType = value;
                                 // print(value);
                               },
                               data: customerTypeCatalog,
@@ -217,6 +217,7 @@ class CustomCustomerDataForm extends StatelessWidget {
                                 label: "Country          ",
                                 onChanged: (value) {
                                   country.value = value!;
+                                  
                                   cityData(
                                       citylist,
                                       countries[countrylist[int.parse(value)]
@@ -273,7 +274,7 @@ class CustomCustomerDataForm extends StatelessWidget {
                             value:
                                 getValue(client, "email", def: "jose@aol.com"),
                             onSaved: (value) {
-                              ctrl!.state.taxId = value!;
+                              ctrl!.state.email = value!;
                             },
                             keyboardType: TextInputType.emailAddress,
                             hintText: "e-Mail                          ",
@@ -288,6 +289,7 @@ class CustomCustomerDataForm extends StatelessWidget {
                                     def: "jose cuevas"),
                                 onSaved: (value) {
                                   ctrl!.state.leadPassenger = value!;
+                                  ctrl!.state.travelCode = "${getValue(client, "lead_passenger", def: "jose cuevas").toString().replaceAll(" ", "-") + "-" + tour["passengers"] + "-" + dayFormat.format(arrivalDate.value).replaceAll(" ", "-")}";
                                 },
                                 keyboardType: TextInputType.name,
                                 hintText: "Lead Passenger                  ",

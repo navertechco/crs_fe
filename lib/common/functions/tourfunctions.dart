@@ -7,9 +7,8 @@ Function sendTour = (data) async {
   var description = tour["tour"]["dataTravel"];
   var payload = tour.toString();
   var yaml = loadYaml(payload);
-  print(yaml);
-  var res = await fetchhandler(kDefaultSchema, kDefaultServer,
-      kDefaultServerPort, kDefaultCreateCatalog, 'POST', {
+  await fetchhandler(kDefaultSchema, kDefaultServer, kDefaultServerPort,
+      kDefaultCreateCatalog, 'POST', {
     "state": "tour",
     "data": {
       "catalog_id": 40,
@@ -20,5 +19,4 @@ Function sendTour = (data) async {
       "value": yaml.toString()
     }
   });
-  print(res);
 };
