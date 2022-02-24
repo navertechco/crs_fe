@@ -80,7 +80,7 @@ Function proccessExperiences = () {
 
 Function promoteDayExperience = (experience) {
   var experiences = processCatalog("experiences");
-  List filteredByDestination = [];
+  List<CatalogDto> filteredByDestination = [];
 
   for (Map item in experiences) {
     List itemList = item.values.toList();
@@ -88,14 +88,14 @@ Function promoteDayExperience = (experience) {
     filteredByDestination.add(exp);
   }
 
-  var experienceData =
+  CatalogDto experienceData =
       filteredByDestination.firstWhere((e) => e.description == experience);
 
   globalctx.memory["promoted"] ??= {};
   globalctx.memory["promoted"]["day"] ??= {};
   globalctx.memory["promoted"]["day"][currentDay.value] ??= {};
   globalctx.memory["promoted"]["day"][currentDay.value][experience] =
-      experienceData;
+      experienceData.toJson();
 };
 
 Function setExperienceState = (experience, state) {

@@ -1,5 +1,6 @@
 // ignore_for_file: import_of_legacy_library_into_null_safe
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sweetalert/sweetalert.dart';
 import 'index.dart';
@@ -11,6 +12,7 @@ class ForgotController extends GetxController {
   final state = ForgotState();
   void onEnd(ctx, msg, success) {
     return SweetAlert.show(ctx,
+        curve: ElasticInCurve(),
         title: msg,
         subtitle: success
             ? 'Se envió un formulario de recuperación a tu correo'

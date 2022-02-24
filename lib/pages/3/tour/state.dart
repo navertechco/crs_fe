@@ -10,9 +10,7 @@ class TourState extends GetXState {
         "country": country,
         "accomodation_type": accomodation_type,
         "purpose": purpose,
-        "passengers": passengers,
-        "arrival_date": arrivalDate,
-        "departure_date": departureDate
+        "passengers": passengers, 
       };
     };
   }
@@ -22,7 +20,5 @@ class TourState extends GetXState {
   // ignore: non_constant_identifier_names
   String accomodation_type = "";
   String purpose = "";
-  String passengers = "";
-  String arrivalDate = DateTime.now().toString();
-  String departureDate = DateTime.now().toString();
+  String passengers = ""; 
 }

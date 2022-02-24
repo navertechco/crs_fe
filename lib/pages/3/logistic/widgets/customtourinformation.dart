@@ -63,10 +63,10 @@ class CustomLogisticInformationForm extends StatelessWidget {
               },
               label: "Arrival Date               ",
               onSaved: (value) {
-                ctrl!.state.arrivalDate = value.toString();
+                ctrl!.state.arrivalDate = "${value.toString().split(" ")[0]}";
               },
               onChanged: (value) {
-                ctrl!.state.arrivalDate = value.toString();
+                ctrl!.state.arrivalDate = "${value.toString().split(" ")[0]}";
               },
             ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.03),
@@ -99,12 +99,12 @@ class CustomLogisticInformationForm extends StatelessWidget {
               label: "Departure Date       ",
               onSaved: (value) {
                 if (value != null) {
-                  ctrl!.state.departureDate = value.toString();
+                  ctrl!.state.departureDate = value.toString().split(" ")[0];
                 }
               },
               onChanged: (value) {
                 if (value != null) {
-                  ctrl!.state.departureDate = value.toString();
+                  ctrl!.state.departureDate = value.toString().split(" ")[0];
                 }
               },
             ),

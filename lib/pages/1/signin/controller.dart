@@ -27,15 +27,16 @@ class SigninController extends GetxController {
 
         if (res['state'] == true) {
           setContext("catalogs", res['data']["catalogs"]);
-
+          isLoading = !isLoading;
           Get.toNamed('/Loading');
         } else {
+          isLoading = !isLoading;
           print(res);
         }
       }
     } catch (e) {
-       isLoading = !isLoading;
+      isLoading = !isLoading;
       print(e);
-    }  
+    }
   }
 }

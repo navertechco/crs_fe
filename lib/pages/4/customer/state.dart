@@ -40,5 +40,5 @@ class CustomerState extends GetXState {
   String taxId = "";
   String names = "";
   String lastNames = "";
-  String birthDate = DateTime.now().toString() ;
+  String birthDate = "" ;
 }

@@ -92,7 +92,12 @@ Function checkPromotedAirport = (destination) {
 };
 
 Function getCombinedDestinations = () {
-  var departure = {"explorationDay": "1", "days": "1", "airport": "quito", "daysData":{}};
+  var departure = {
+    "explorationDay": "1",
+    "days": "1",
+    "airport": "quito",
+    "daysData": {}
+  };
   var memoryDestinations = {};
   for (var destination in destinations.entries) {
     var key = destination.key;
@@ -139,6 +144,7 @@ Function processDestinations = (context) {
   } else {
     if (context != null) {
       SweetAlert.show(context,
+          curve: ElasticInCurve(),
           title: (dayleft.value > 0)
               ? "Days Left can't be greater than 0\n"
               : "Promote any destination is required",

@@ -2,6 +2,7 @@
 
 // ignore_for_file: prefer_function_declarations_over_variables
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:sweetalert/sweetalert.dart';
@@ -21,6 +22,7 @@ Function paginateDay = (context) {
     paginateNextDay();
   } else {
     SweetAlert.show(context,
+        curve: ElasticInCurve(),
         title: "Promote any experiences is required",
         style: SweetAlertStyle.error, onPress: (bool isConfirm) {
       Get.close(1);
@@ -94,17 +96,16 @@ Function prepareDaysToResume = () {
       var exps = globalctx.memory["promoted"]["day"][dayIndex];
       for (var exp in exps.keys) {
         Map newExp = {};
-        Map newEntry = exps[exp].value;
+        Map newEntry = exps[exp];
         newExp = {...expDto, ...newEntry};
         dayDto["experiences"][exp] = newExp;
       }
-      destinations[destination]["daysData"][dayIndex] =
-          dayDto;
+      destinations[destination]["daysData"][dayIndex] = dayDto;
       dayIndex++;
     }
   }
   // print(globalctx.memory);
-  saveTour(globalctx.memory);
+  sendTour(globalctx.memory);
   // Get.toNamed("/Resume");
 };
 

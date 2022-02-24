@@ -1,6 +1,6 @@
 // ignore_for_file: import_of_legacy_library_into_null_safe
- 
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:pdf/widgets.dart' as pw;
@@ -9,13 +9,9 @@ import '../../../../index.dart';
 import 'index.dart';
 
 class DGalleryController extends GetxController {
-   
-
   final state = DGalleryState();
   var session = getContext('session');
   var galeryData;
-
-    
 
   Future<void> pdf() async {
     final pdf = pw.Document();
@@ -33,6 +29,7 @@ class DGalleryController extends GetxController {
 
   void onEnd(ctx, msg) {
     return SweetAlert.show(ctx,
+        curve: ElasticInCurve(),
         title: msg,
         subtitle: 'Nos vemos en el siguiente torneo',
         style: SweetAlertStyle.success, onPress: (bool isConfirm) {
