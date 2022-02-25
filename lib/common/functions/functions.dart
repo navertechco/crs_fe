@@ -187,10 +187,12 @@ Function setData = (data, key, value) {
 Function getFormValue = (data, formKey, key, def) {
   if (data != null) {
     if (data[formKey] != null) {
-      if (data[formKey][key] == "") {
-        return def;
+      if (data[formKey][key] != null) {
+        if (data[formKey][key] == "") {
+          return def;
+        }
+        return data[formKey][key] ?? def;
       }
-      return data[formKey][key] ?? def;
     }
   }
   return def;
@@ -206,10 +208,8 @@ Function getDestinationDay = (String destination) {
   if (globalctx.memory != null) {
     if (destinations != null) {
       if (destinations[destination] != null) {
-        if (destinations[destination]["explorationDay"] !=
-            null) {
-          return int.parse(
-              destinations[destination]["explorationDay"]);
+        if (destinations[destination]["explorationDay"] != null) {
+          return int.parse(destinations[destination]["explorationDay"]);
         }
       }
     }
@@ -219,7 +219,6 @@ Function getDestinationDay = (String destination) {
 };
 
 Function setDestination = (String destination) {
-
   destinations[destination] ??= {};
 };
 

@@ -24,12 +24,12 @@ class CustomStarDestinationForm extends StatelessWidget {
     var ctx = globalctx.context.value;
 
     Rx<int> explorationDay = Rx(int.parse(
-        getFormValue(ctrl.state.memory, destination, "explorationDay", "0") ??
+        getFormValue(globalctx.memory["destinations"], destination, "explorationDay", "0") ??
             "0"));
 
     if (globalctx.reset.value) {
       for (String item in destinations.keys) {
-        ctrl.state.memory[item] = null;
+        globalctx.memory["destinations"][item] = null;
       }
       globalctx.reset.value = false;
     }
@@ -38,7 +38,7 @@ class CustomStarDestinationForm extends StatelessWidget {
     dayleft.value = totalDays.value + leftAccumulated.value;
 
     List<String> keyActivities = getFormValue(
-        ctrl.state.memory, destination, "keyActivities", <String>[]);
+        globalctx.memory["destinations"], destination, "keyActivities", <String>[]);
 
     List<Map<String, dynamic>> explorationdDays =
         processCatalog("exploration_days");
@@ -82,7 +82,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                           .where((e) => e["code"] <= totalDays.value)
                           .toList());
                   return CustomFormTextFieldWidget(
-                      value: getFormValue(ctrl.state.memory, destination,
+                      value: getFormValue(globalctx.memory["destinations"], destination,
                           "explorationDay", "0"),
                       validator: CustomRequiredValidator(
                           errorText: "Exploration Days required ",
@@ -100,7 +100,9 @@ class CustomStarDestinationForm extends StatelessWidget {
                           }
                           int acc = getLeftAccumulated(destination);
                           dayleft.value = totalDays.value + acc - valueInt;
-                          setFormValue(ctrl.state.memory, destination,
+                          setFormValue(globalctx.memory["destinations"], destination,
+                              "explorationDay", value);
+                          setFormValue(globalctx.memory, destination,
                               "explorationDay", value);
                           explorationDay.value = valueInt;
                           setDestinationDay(destination, value);
@@ -118,17 +120,15 @@ class CustomStarDestinationForm extends StatelessWidget {
                           validator: CustomRequiredValidator(
                               errorText: "Exploration mode is required ",
                               ctx: context),
-                          value: getFormValue(ctrl.state.memory, destination,
+                          value: getFormValue(globalctx.memory["destinations"], destination,
                               "explorationMode", "0"),
                           onSaved: (value) {
-                            setFormValue(ctrl.state.memory, destination,
+                            setFormValue(globalctx.memory["destinations"], destination,
                                 "explorationMode", value);
-                            globalctx.memory["days_left"] -= int.parse(
-                                getFormValue(ctrl.state.memory, destination,
-                                    "explorationDay", "1"));
+                            
                           },
                           onChanged: (value) {
-                            setFormValue(ctrl.state.memory, destination,
+                            setFormValue(globalctx.memory["destinations"], destination,
                                 "explorationMode", value);
                           },
                           label: "Exploration Mode   ",
@@ -143,14 +143,14 @@ class CustomStarDestinationForm extends StatelessWidget {
                     validator: CustomRequiredValidator(
                         errorText: "Destination option is required ",
                         ctx: context),
-                    value: getFormValue(ctrl.state.memory, destination,
+                    value: getFormValue(globalctx.memory["destinations"], destination,
                         "destinationOption", "1"),
                     onSaved: (value) {
-                      setFormValue(ctrl.state.memory, destination,
+                      setFormValue(globalctx.memory["destinations"], destination,
                           "destinationOption", value);
                     },
                     onChanged: (value) {
-                      setFormValue(ctrl.state.memory, destination,
+                      setFormValue(globalctx.memory["destinations"], destination,
                           "destinationOption", value);
                     },
                     label: "Destination Option",
@@ -163,13 +163,13 @@ class CustomStarDestinationForm extends StatelessWidget {
                           errorText: "Travel Rhythm is required ",
                           ctx: context),
                       value: getFormValue(
-                          ctrl.state.memory, destination, "travelRhythm", "1"),
+                          globalctx.memory["destinations"], destination, "travelRhythm", "1"),
                       onSaved: (value) {
-                        setFormValue(ctrl.state.memory, destination,
+                        setFormValue(globalctx.memory["destinations"], destination,
                             "travelRhythm", value);
                       },
                       onChanged: (value) {
-                        setFormValue(ctrl.state.memory, destination,
+                        setFormValue(globalctx.memory["destinations"], destination,
                             "travelRhythm", value);
                       },
                       label: "Travel Rhythm         ",
@@ -206,16 +206,16 @@ class CustomStarDestinationForm extends StatelessWidget {
                         context: context),
                     value: keyActivities,
                     onSaved: (value) {
-                      setFormValue(ctrl.state.memory, destination,
+                      setFormValue(globalctx.memory["destinations"], destination,
                           "keyActivities", ["CULTURE"]);
                       setFormValue(
-                          ctrl.state.memory,
+                          globalctx.memory["destinations"],
                           destination,
                           "keyActivities",
                           value!.map((e) => e["description"]).toSet().toList());
                     },
                     onChanged: (value) {
-                      setFormValue(ctrl.state.memory, destination,
+                      setFormValue(globalctx.memory["destinations"], destination,
                           "keyActivities", value);
                     },
                     hintText: " ",

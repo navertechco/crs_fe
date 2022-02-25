@@ -12,7 +12,7 @@ Function promoteDestination = (ctrl, _formKey, destination) {
     _formKey.currentState!.save();
     if (!globalctx.promotedDestinations.contains(destination)) {
       globalctx.promotedDestinations.add(destination);
-      destinations = ctrl.state.memory;
+      destinations = globalctx.memory["destinations"];
     }
     // globalDestination.value = destination;
     // filterSuggestedExperiences();

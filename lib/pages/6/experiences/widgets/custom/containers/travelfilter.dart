@@ -17,21 +17,18 @@ class TravelFilter extends HookWidget {
   @override
   Widget build(BuildContext context) {
     Rx<dynamic> keyActivities = Rx(getFormValue(
-        ctrl.state.memory["destinations"],
+        globalctx.memory["destinations"],
         globalDestination.value,
         "keyActivities", <String>[]));
 
     Rx<dynamic> destinationOption = Rx(getFormValue(
-        ctrl.state.memory["destinations"],
+        globalctx.memory["destinations"],
         globalDestination.value,
         "destinationOption",
         "0"));
 
-    Rx<dynamic> travelRhythm = Rx(getFormValue(
-        ctrl.state.memory["destinations"],
-        globalDestination.value,
-        "travel_rhythm",
-        "0"));
+    Rx<dynamic> travelRhythm = Rx(getFormValue(globalctx.memory["destinations"],
+        globalDestination.value, "travel_rhythm", "0"));
 
     useEffect(() {
       destinationOption.value = "0";
@@ -64,14 +61,14 @@ class TravelFilter extends HookWidget {
                         value: destinationOption.value,
                         onSaved: (value) {
                           setFormValue(
-                              ctrl.state.memory["destinations"],
+                              globalctx.memory["destinations"],
                               globalDestination.value,
                               "destinationOption",
                               value);
                         },
                         onChanged: (value) {
                           setFormValue(
-                              ctrl.state.memory["destinations"],
+                              globalctx.memory["destinations"],
                               globalDestination.value,
                               "destinationOption",
                               value);
@@ -82,11 +79,11 @@ class TravelFilter extends HookWidget {
                       CustomFormDropDownFieldWidget(
                         value: travelRhythm.value,
                         onSaved: (value) {
-                          setFormValue(ctrl.state.memory["destinations"],
+                          setFormValue(globalctx.memory["destinations"],
                               globalDestination.value, "travel_rhythm", value);
                         },
                         onChanged: (value) {
-                          setFormValue(ctrl.state.memory["destinations"],
+                          setFormValue(globalctx.memory["destinations"],
                               globalDestination.value, "travel_rhythm", value);
                         },
                         hintText: "Travel Rhythm",
@@ -99,10 +96,10 @@ class TravelFilter extends HookWidget {
                                 context: context),
                         value: keyActivities.value,
                         onSaved: (value) {
-                          setFormValue(ctrl.state.memory["destinations"],
+                          setFormValue(globalctx.memory["destinations"],
                               globalDestination.value, "keyActivities", null);
                           setFormValue(
-                              ctrl.state.memory["destinations"],
+                              globalctx.memory["destinations"],
                               globalDestination.value,
                               "keyActivities",
                               value!
@@ -111,7 +108,7 @@ class TravelFilter extends HookWidget {
                                   .toList());
                         },
                         onChanged: (value) {
-                          setFormValue(ctrl.state.memory["destinations"],
+                          setFormValue(globalctx.memory["destinations"],
                               globalDestination.value, "keyActivities", value);
                         },
                         hintText:
