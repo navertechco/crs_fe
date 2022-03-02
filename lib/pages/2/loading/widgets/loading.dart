@@ -33,6 +33,7 @@ class LoadingWidget extends GetView<LoadingController> {
                               height: 0.07,
                               fontSize: 5,
                               onTap: () {
+                                setContext("readonly", false);
                                 Get.toNamed("/Tour");
                               }),
                         if (newtour.value)
