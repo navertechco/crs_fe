@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sweetalert/sweetalert.dart';
 
 import '../../index.dart';
 import 'index.dart';
@@ -8,7 +10,7 @@ class LoadingController extends GetxController {
 
   final state = LoadingState();
 
-  Future<void> getTour({int tourId = 0}) async {
+  Future<void> getTour(ctx, {int tourId = 0}) async {
     if (tourId > 0) {
       var res = await fetchhandler(kDefaultSchema, kDefaultServer,
           kDefaultServerPort, kDefaultFindTour, 'POST', {
@@ -23,10 +25,19 @@ class LoadingController extends GetxController {
           setContext("tour", data);
           setContext("customer", data["customer"]);
           setContext("readonly", true);
+          Get.toNamed("/Tour");
         }
+      } else {
+        SweetAlert.show(ctx,
+            curve: ElasticInCurve(),
+            title: res['message'],
+            style: SweetAlertStyle.error, onPress: (bool isConfirm) {
+          Get.close(1);
+          return false;
+        });
       }
     }
 
-    Get.toNamed("/Tour");
+    
   }
 }

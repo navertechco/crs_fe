@@ -16,20 +16,7 @@ var allPromotedDestinations = [
   "departure"
 ];
 var globalDestination = Rx("");
-var getDestination = (String destination) async {
-  var res = await fetchhandler(kDefaultSchema, kDefaultServer,
-      kDefaultServerPort, kDefaultDestinationPath, 'POST', {
-    "data": {
-      "destination_name": destination,
-    }
-  });
-  if (res['state'] == true) {
-    setContext("current", res['data']);
-    return res["data"];
-  } else {
-    return false;
-  }
-};
+ 
 RxInt destDays = 0.obs;
 List destList = getParam("DESTINATION_DATA").values.toList();
 CatalogDto destinationData = CatalogDto(destList);

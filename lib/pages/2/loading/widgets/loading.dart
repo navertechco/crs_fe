@@ -36,7 +36,7 @@ class LoadingWidget extends GetView<LoadingController> {
                     height: 0.07,
                     fontSize: 7,
                     onTap: () {
-                      ctrl.getTour(tourId: int.parse(ctrl.state.tourId));
+                      ctrl.getTour(context, tourId: int.parse(ctrl.state.tourId));
                     }),
               ),
             ],
