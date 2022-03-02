@@ -74,3 +74,4 @@ var promotedDestinations = [
 ];
 RxInt selectedIndex = 0.obs;
 RxString travelCode = "".obs;
+RxString leadPassenger ="".obs;

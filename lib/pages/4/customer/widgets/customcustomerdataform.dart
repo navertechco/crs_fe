@@ -6,7 +6,7 @@ import '../../../index.dart';
 class CustomCustomerDataForm extends StatelessWidget {
   final CustomerController? ctrl;
   final _formKey = GlobalKey<FormState>();
-  
+
   CustomCustomerDataForm({
     Key? key,
     this.ctrl,
@@ -287,9 +287,10 @@ class CustomCustomerDataForm extends StatelessWidget {
                                     errorText: "Lead Passenger is required ",
                                     ctx: context),
                                 value: getValue(client, "lead_passenger",
-                                    def: "jose cuevas"),
+                                    def: leadPassenger),
                                 onSaved: (value) {
-                                  ctrl!.state.leadPassenger = value!;
+                                  leadPassenger.value = value!;
+                                  ctrl!.state.leadPassenger = value;
                                   ctrl!.state.travelCode =
                                       "${getValue(client, "lead_passenger", def: "jose cuevas").toString().replaceAll(" ", "-") + "-" + tour["passengers"] + "-" + dayFormat.format(arrivalDate.value).replaceAll(" ", "-")}";
                                 },
