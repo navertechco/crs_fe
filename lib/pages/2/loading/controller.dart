@@ -36,6 +36,8 @@ class LoadingController extends GetxController {
           return false;
         });
       }
+    }else{
+       Get.toNamed("/Tour");
     }
 
     
