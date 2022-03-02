@@ -6,7 +6,7 @@ import '../../../index.dart';
 class CustomCustomerDataForm extends StatelessWidget {
   final CustomerController? ctrl;
   final _formKey = GlobalKey<FormState>();
-  RxString travelCode = "".obs;
+  
   CustomCustomerDataForm({
     Key? key,
     this.ctrl,
