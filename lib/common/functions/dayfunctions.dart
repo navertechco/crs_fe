@@ -106,7 +106,7 @@ Function prepareDaysToResume = () {
   }
   // print(globalctx.memory);
   sendTour(globalctx.memory);
-  // Get.toNamed("/Resume");
+  Get.toNamed("/Resume");
 };
 
 Function processDays = () {

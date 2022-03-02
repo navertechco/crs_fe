@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sweetalert/sweetalert.dart';
 
 import '../../index.dart';
 import 'index.dart';
@@ -9,7 +11,7 @@ class SigninController extends GetxController {
   var state = SigninState();
   var isLoading = false;
 
-  Future<void> onSignin(String username, String password) async {
+  Future<void> onSignin(ctx, String username, String password) async {
     // Get.toNamed('/Loading');
 
     state.error = null;
@@ -31,6 +33,13 @@ class SigninController extends GetxController {
           Get.toNamed('/Loading');
         } else {
           isLoading = !isLoading;
+          SweetAlert.show(ctx,
+              curve: ElasticInCurve(),
+              title: res['message'],
+              style: SweetAlertStyle.error, onPress: (bool isConfirm) {
+            Get.close(1);
+            return false;
+          });
           print(res);
         }
       }
