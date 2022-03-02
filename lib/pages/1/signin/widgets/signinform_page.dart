@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import '../../../index.dart';
 import '../controller.dart';
 import 'index.dart';
 
@@ -29,20 +30,19 @@ class SigninFormPage extends GetView<StatelessWidget> {
                 SigninForm(formKey: _formKey, state: ctrl!.state),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.05),
                 SizedBox(
-                  width: double.infinity,
-                  child: GestureDetector(
+                  width: MediaQuery.of(context).size.width * 0.2,
+                  child: RoundedFormButton(
+                    color: Colors.white,
+                    label: "SignIn",
+                    height: 0.07,
+                    fontSize: 5,
                     onTap: () async {
                       if (_formKey.currentState!.validate()) {
                         _formKey.currentState!.save();
-                        await ctrl!.onSignin(context,
-                            ctrl!.state.username, ctrl!.state.password);
+                        await ctrl!.onSignin(context, ctrl!.state.username,
+                            ctrl!.state.password);
                       }
                     },
-                    child: SvgPicture.asset(
-                      "assets/custom/svg/images/IngresarButton.svg",
-                      width: MediaQuery.of(context).size.width * 0.2,
-                      // fit: BoxFit.fill,
-                    ),
                   ),
                 ),
                 SizedBox(
