@@ -50,7 +50,7 @@ class LoadingWidget extends GetView<LoadingController> {
                         if (!newtour.value)
                           RoundedFormField(
                               onChanged: (value) => ctrl.state.tourId = value!,
-                              hintText: 'Search Quote',
+                              hintText: 'Find Tour',
                               keyboardType: TextInputType.number),
                         if (!newtour.value)
                           SizedBox(
