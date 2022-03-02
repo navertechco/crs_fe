@@ -6,7 +6,7 @@ import '../../../index.dart';
 class CustomCustomerDataForm extends StatelessWidget {
   final CustomerController? ctrl;
   final _formKey = GlobalKey<FormState>();
-
+  RxString travelCode = "".obs;
   CustomCustomerDataForm({
     Key? key,
     this.ctrl,
@@ -187,7 +187,8 @@ class CustomCustomerDataForm extends StatelessWidget {
                                 initialValue: getDateValue(client, "birth_date",
                                     def: DateTime(1981, 02, 20)),
                                 onSaved: (value) {
-                                  ctrl!.state.birthDate = "${value.toString().split(" ")[0]}";
+                                  ctrl!.state.birthDate =
+                                      "${value.toString().split(" ")[0]}";
                                 },
                                 width: 0.35,
                                 hintText: "Birth Day               "),
@@ -217,7 +218,7 @@ class CustomCustomerDataForm extends StatelessWidget {
                                 label: "Country          ",
                                 onChanged: (value) {
                                   country.value = value!;
-                                  
+
                                   cityData(
                                       citylist,
                                       countries[countrylist[int.parse(value)]
@@ -289,18 +290,24 @@ class CustomCustomerDataForm extends StatelessWidget {
                                     def: "jose cuevas"),
                                 onSaved: (value) {
                                   ctrl!.state.leadPassenger = value!;
-                                  ctrl!.state.travelCode = "${getValue(client, "lead_passenger", def: "jose cuevas").toString().replaceAll(" ", "-") + "-" + tour["passengers"] + "-" + dayFormat.format(arrivalDate.value).replaceAll(" ", "-")}";
+                                  ctrl!.state.travelCode =
+                                      "${getValue(client, "lead_passenger", def: "jose cuevas").toString().replaceAll(" ", "-") + "-" + tour["passengers"] + "-" + dayFormat.format(arrivalDate.value).replaceAll(" ", "-")}";
+                                },
+                                onChanged: (value) {
+                                  travelCode.value =
+                                      "${value.toString() + "-" + tour["passengers"] + "-" + dayFormat.format(arrivalDate.value).replaceAll(" ", "-")}";
                                 },
                                 keyboardType: TextInputType.name,
                                 hintText: "Lead Passenger                  ",
                                 width: 0.2)
                           ],
                         ),
-                        CustomTitleWidget(
-                            width: 0.1,
-                            fontWeight: FontWeight.normal,
-                            label:
-                                "Travel Code: ${getValue(client, "lead_passenger", def: "jose cuevas").toString().replaceAll(" ", "-") + "-" + tour["passengers"] + "-" + dayFormat.format(arrivalDate.value).replaceAll(" ", "-")}")
+                        Obx(() {
+                          return CustomTitleWidget(
+                              width: 0.1,
+                              fontWeight: FontWeight.normal,
+                              label: "Travel Code: $travelCode");
+                        })
                       ]),
                     ),
                   ),
