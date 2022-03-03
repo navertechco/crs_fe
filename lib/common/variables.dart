@@ -17,6 +17,8 @@ var allPromotedDestinations = [
 ];
 var globalDestination = Rx("");
 
+ 
+
 RxInt destDays = 0.obs;
 List destList = getParam("DESTINATION_DATA").values.toList();
 CatalogDto destinationData = CatalogDto(destList);
@@ -24,9 +26,9 @@ Map<dynamic, dynamic> destinations = globalctx.memory["destinations"] ?? {};
 Rx<DateTime> birthDate =
     Rx(DateTime.parse(globalctx.memory["customer"]["birth_date"]));
 Rx<DateTime> arrivalDate =
-    Rx(DateTime.parse(globalctx.memory["logistic"]["arrival_date"]));
+    Rx(DateTime.now()); 
 Rx<DateTime> departureDate =
-    Rx(DateTime.parse(globalctx.memory["logistic"]["departure_date"]));
+    Rx(DateTime.now());
 Rx<int> totalDays =
     Rx(departureDate.value.difference(arrivalDate.value).inDays);
 var dayleft = totalDays;

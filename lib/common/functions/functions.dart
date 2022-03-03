@@ -198,6 +198,20 @@ Function getFormValue = (data, formKey, key, def) {
   return def;
 };
 
+Function getFormDateValue = (data, formKey, key, def) {
+  if (data != null) {
+    if (data[formKey] != null) {
+      if (data[formKey][key] != null) {
+        if (data[formKey][key] == "") {
+          return DateTime.parse(def);
+        }
+        return DateTime.parse(data[formKey][key]) ;
+      }
+    }
+  }
+  return DateTime.parse(def);
+};
+
 Function toCatalog = (item) {
   List list = item.values.toList();
   CatalogDto ctlg = CatalogDto(list);

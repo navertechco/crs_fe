@@ -58,21 +58,20 @@ class CustomLogisticInformationForm extends StatelessWidget {
             ),
             CustomFormDateFieldWidget(
               disabled: readonly,
-              initialValue: getDateValue(logistic, "arrival_date",
-                  def: DateTime(2022, 01, 31)),
-              validator: (date) {
-                CustomDatetimeRequiredValidator(date,
-                    context: context, errorText: "Arrival Text is Required");
-              },
+              initialValue: arrivalDate.value,
+              validator: CustomDatetimeGreaterValidator(
+                  context: context,
+                  compare: departureDate.value,
+                  errorText: "Arrival can't be greater than Departure date"),
               label: "Arrival Date               ",
               onSaved: (value) {
-                var newvalue = value.toString().split(" ")[0];
-                ctrl!.state.arrivalDate = newvalue;
-                setFormValue(
-                    globalctx.memory, "logistic", "arrival_date", newvalue);
+                ctrl!.state.arrivalDate = value!;
+                arrivalDate.value = value;
               },
               onChanged: (value) {
-                ctrl!.state.arrivalDate = value.toString().split(" ")[0];
+                value ??= DateTime.now();
+                ctrl!.state.arrivalDate = value;
+                arrivalDate.value = value;
               },
             ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.03),
@@ -97,28 +96,29 @@ class CustomLogisticInformationForm extends StatelessWidget {
               label: "Departure Port            ",
               data: departurePortCatalog,
             ),
-            CustomFormDateFieldWidget(
-              disabled: readonly,
-              initialValue: getDateValue(logistic, "departure_date",
-                  def: DateTime(2022, 02, 02)),
-              validator: (date) {
-                CustomDatetimeRequiredValidator(date,
-                    context: context, errorText: "Departure Text is Required");
-              },
-              label: "Departure Date       ",
-              onSaved: (value) {
-                if (value != null) {
-                  ctrl!.state.departureDate = value.toString().split(" ")[0];
-                  setFormValue(globalctx.memory, "logistic", "departure_date",
-                      value.toString().split(" ")[0]);
-                }
-              },
-              onChanged: (value) {
-                if (value != null) {
-                  ctrl!.state.departureDate = value.toString().split(" ")[0];
-                }
-              },
-            ),
+            Obx(() {
+              return CustomFormDateFieldWidget(
+                disabled: readonly,
+                initialValue: departureDate.value,
+                validator: CustomDatetimeGreaterValidator(
+                    context: context,
+                    compare: arrivalDate.value,
+                    errorText: "Departure can't be less than Arrival date",
+                    invert:true
+                    
+                    ),
+                label: "Departure Date       ",
+                onSaved: (value) {
+                  ctrl!.state.departureDate = value!;
+                  departureDate.value = value;
+                },
+                onChanged: (value) {
+                  value ??= DateTime.now();
+                  ctrl!.state.departureDate = value;
+                  departureDate.value = value;
+                },
+              );
+            }),
             Padding(
               padding: EdgeInsets.only(
                 top: MediaQuery.of(context).size.height * 0.2,

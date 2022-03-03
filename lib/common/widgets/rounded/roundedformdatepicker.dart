@@ -62,11 +62,6 @@ class RoundedFormDatepicker extends StatelessWidget {
           );
           if (date != null) {
             final time = TimeOfDay(hour: 12, minute: 00);
-            // final time = await showTimePicker(
-            //   context: context,
-            //   initialTime:
-            //       TimeOfDay.fromDateTime(currentValue ?? DateTime.now()),
-            // );
             return DateTimeField.combine(date, time);
           } else {
             return currentValue;

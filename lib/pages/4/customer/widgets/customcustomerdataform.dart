@@ -188,7 +188,7 @@ class CustomCustomerDataForm extends StatelessWidget {
                                     def: DateTime(1981, 02, 20)),
                                 onSaved: (value) {
                                   ctrl!.state.birthDate =
-                                      "${value.toString().split(" ")[0]}";
+                                      value.toString().split(" ")[0];
                                 },
                                 width: 0.35,
                                 hintText: "Birth Day               "),

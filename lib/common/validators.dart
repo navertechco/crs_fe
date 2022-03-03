@@ -4,6 +4,7 @@
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:get/get.dart';
+import 'package:naver_crs/common/index.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:sweetalert/sweetalert.dart';
 
@@ -76,16 +77,57 @@ class CustomRequiredValidator extends TextFieldValidator {
 
 final CustomDatetimeRequiredValidator =
     (DateTime? date, {BuildContext? context, required String errorText}) {
-  if (date == null) {
+  if (date != null) {
+    return null;
+  } else {
     SweetAlert.show(context,
         curve: ElasticInCurve(),
         title: errorText,
         style: SweetAlertStyle.error, onPress: (bool isConfirm) {
       Get.close(1);
-      return true;
+      return false;
     });
+    return false;
   }
 };
+
+class CustomDatetimeGreaterValidator extends FieldValidator<DateTime?> {
+  static String _errorText = '';
+  DateTime compare = DateTime.now();
+  BuildContext? context;
+  bool invert = false;
+  CustomDatetimeGreaterValidator(
+      {required this.context,
+      required this.compare,
+      required String errorText,
+      this.invert = false})
+      : super(_errorText) {
+    _errorText = errorText;
+  }
+
+  @override
+  bool isValid(value) {
+    int inv = invert ? -1 : 1;
+    var diff = compare.difference(value!).inDays * inv;
+    if ((diff >= 0)) {
+      return true;
+    } else {
+      SweetAlert.show(context,
+          curve: ElasticInCurve(),
+          title: _errorText,
+          style: SweetAlertStyle.error, onPress: (bool isConfirm) {
+        return true;
+      });
+    }
+
+    return false;
+  }
+
+  @override
+  String? call(dynamic value) {
+    return isValid(value) ? null : _errorText;
+  }
+}
 
 final CustomMultiDropdownRequiredValidator = (List<Map<String, dynamic>>? value,
     {BuildContext? context, required String errorText}) {
@@ -95,7 +137,7 @@ final CustomMultiDropdownRequiredValidator = (List<Map<String, dynamic>>? value,
         title: errorText,
         style: SweetAlertStyle.error, onPress: (bool isConfirm) {
       Get.close(1);
-      return true;
+      return false;
     });
   }
 };
