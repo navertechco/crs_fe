@@ -18,12 +18,10 @@ class CustomLeftStarDestinationForm extends StatelessWidget {
     for (Map item in destinations) {
       List itemList = item.values.toList();
       CatalogDto destination = CatalogDto(itemList);
-      if (destination.description != "arrival" &&
-          destination.description != "departure") {
-        destinationlist.add(
-          CustomDragableDestination(destination: destination.description!),
-        );
-      }
+
+      destinationlist.add(
+        CustomDragableDestination(destination: destination.description!),
+      );
     }
     return DestinationListWidget(
       children: destinationlist,

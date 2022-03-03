@@ -39,7 +39,8 @@ Rx<int> memoryDayLeft = Rx(globalctx.memory["days_left"]);
 final currentDayFormat = DateFormat('EEEE MMMM d yyyy');
 final dayFormat = DateFormat('d-MM-yyyy');
 var experiences = processCatalog("experiences");
-RxList<Widget> list = <Widget>[].obs;
+RxList<Widget> explist = <Widget>[].obs;
+RxList<Widget> destlist = <Widget>[].obs;
 Map<String, dynamic> states = {
   "selected": globalctx.selectedExperiences,
   "suggested": globalctx.suggestedExperiences,
@@ -78,3 +79,4 @@ RxInt selectedIndex = 0.obs;
 RxString travelCode = "".obs;
 RxString leadPassenger = "".obs;
 RxString arrivalPort = "1".obs;
+RxString departurePort = "1".obs;

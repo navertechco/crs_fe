@@ -23,7 +23,7 @@ class CustomExperiencesListWidget extends StatelessWidget {
           scrollDirection: Axis.vertical,
           child: Obx(() {
             return Column(
-              children: list,
+              children: explist,
             );
           }),
         ),

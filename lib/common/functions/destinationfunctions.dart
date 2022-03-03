@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:naver_crs/pages/5/destination/widgets/index.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:sweetalert/sweetalert.dart';
 import '../index.dart';
@@ -41,46 +42,6 @@ Function getDestinationAirport = () {
   }
 };
 
-Function getFilteredDestination = () {
-  globalDestination.value = processDays()["destination"];
-  var localDest = globalDestination.value;
-  // var airport = getDestinationAirport().toString().toUpperCase();
-  var experiences = processCatalog("experiences");
-  List filteredByDestination = [];
-
-  for (Map item in experiences) {
-    List itemList = item.values.toList();
-    CatalogDto experience = CatalogDto(itemList);
-    if (experience.value["destination"].toString().toLowerCase() == localDest) {
-      filteredByDestination.add(experience);
-    }
-  }
-
-  List filteredByTravelRhytm = filteredByDestination.where((e) {
-    return true;
-  }).toList();
-
-  List filteredByDestinationOption = filteredByTravelRhytm.where((e) {
-    return true;
-  }).toList();
-
-  List filteredByKA = filteredByDestinationOption.where((e) {
-    return true;
-  }).toList();
-
-  Iterable filteredByAirport = filteredByKA;
-
-  // if (globalDestination.value == "arrival") {
-  //   filteredByAirport =
-  //       filteredByKA.where((e) => e["title"].contains(airport)).toList();
-  // }
-
-  var filteredBySuggested = filteredByAirport.where((e) {
-    return getExperienceState(e.description) == "suggested";
-  }).toList();
-
-  return filteredBySuggested;
-};
 Function checkPromotedAirport = (destination) {
   bool quitoPromoted = globalctx.promotedDestinations.contains("quito");
   bool gyePromoted = globalctx.promotedDestinations.contains("guayaquil");
@@ -168,4 +129,10 @@ Function findDestination = (destination) {
     result = promotedDestinations[index];
   }
   return result;
+};
+
+Function filterSelectedDestinations = () {
+  var filteredDestinations = globalctx.promotedDestinations;
+  
+
 };

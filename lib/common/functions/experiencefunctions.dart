@@ -10,13 +10,53 @@ import '../index.dart';
 
 Function filterSuggestedExperiences = () {
   // Get airport from current destination
-  var filteredExperiences = getFilteredDestination();
-  list.value = <Widget>[];
+  var filteredExperiences = getFilteredExperiences();
+  explist.value = <Widget>[];
   for (var exp in filteredExperiences) {
-    list.add(CustomDragableExperience(experience: exp, suggested: true));
+    explist.add(CustomDragableExperience(experience: exp, suggested: true));
   }
 };
 
+Function getFilteredExperiences = () {
+  globalDestination.value = processDays()["destination"];
+  var localDest = globalDestination.value;
+  // var airport = getDestinationAirport().toString().toUpperCase();
+  var experiences = processCatalog("experiences");
+  List filteredByDestination = [];
+
+  for (Map item in experiences) {
+    List itemList = item.values.toList();
+    CatalogDto experience = CatalogDto(itemList);
+    if (experience.value["destination"].toString().toLowerCase() == localDest) {
+      filteredByDestination.add(experience);
+    }
+  }
+
+  List filteredByTravelRhytm = filteredByDestination.where((e) {
+    return true;
+  }).toList();
+
+  List filteredByDestinationOption = filteredByTravelRhytm.where((e) {
+    return true;
+  }).toList();
+
+  List filteredByKA = filteredByDestinationOption.where((e) {
+    return true;
+  }).toList();
+
+  Iterable filteredByAirport = filteredByKA;
+
+  // if (globalDestination.value == "arrival") {
+  //   filteredByAirport =
+  //       filteredByKA.where((e) => e["title"].contains(airport)).toList();
+  // }
+
+  var filteredBySuggested = filteredByAirport.where((e) {
+    return getExperienceState(e.description) == "suggested";
+  }).toList();
+
+  return filteredBySuggested;
+};
 Function removeExperienceFromArray = (array, item) {
   if (array.contains(item)) {
     var index = array.indexOf(item);

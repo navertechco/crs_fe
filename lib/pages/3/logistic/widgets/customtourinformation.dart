@@ -18,8 +18,7 @@ class CustomLogisticInformationForm extends StatelessWidget {
     var logistic = getValue(tourdata, "logistic");
     var readonly = getContext("readonly") ?? false;
     var arrivalPortCatalog = processCatalog("airport");
-    var departurePortCatalog = processCatalog("airport");
-    arrivalPort.value = getValue(logistic, "arrival_port", def: "1");
+    var departurePortCatalog = processCatalog("airport"); 
     return Form(
       key: _formKey,
       child: Padding(
@@ -40,13 +39,13 @@ class CustomLogisticInformationForm extends StatelessWidget {
                 fontWeight: FontWeight.bold,
                 label: "  Arrival information"),
             CustomFormDropDownFieldWidget(
-              value: getFormValue(
-                  globalctx.memory, "logistic", "arrival_port", "1"),
+              value: arrivalPort.value,
               disabled: readonly,
               onSaved: (value) {
                 ctrl!.state.arrival_port = value!;
                 setFormValue(
                     globalctx.memory, "logistic", "arrival_port", value);
+                arrivalPort.value = value;
               },
               onChanged: (value) {
                 ctrl!.state.arrival_port = value!;
@@ -82,13 +81,13 @@ class CustomLogisticInformationForm extends StatelessWidget {
                 fontWeight: FontWeight.bold,
                 label: "  Departure information"),
             CustomFormDropDownFieldWidget(
-              value: getFormValue(
-                  globalctx.memory, "logistic", "departure_port", "1"),
+              value: departurePort.value,
               disabled: readonly,
               onSaved: (value) {
                 ctrl!.state.departure_port = value!;
                 setFormValue(
                     globalctx.memory, "logistic", "departure_port", value);
+                departurePort.value = value;
               },
               onChanged: (value) {
                 ctrl!.state.departure_port = value!;
