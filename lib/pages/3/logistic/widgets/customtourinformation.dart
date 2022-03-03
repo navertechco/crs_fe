@@ -56,24 +56,26 @@ class CustomLogisticInformationForm extends StatelessWidget {
               label: "Arrival Port\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t",
               data: arrivalPortCatalog,
             ),
-            CustomFormDateFieldWidget(
-              disabled: readonly,
-              initialValue: arrivalDate.value,
-              validator: CustomDatetimeGreaterValidator(
-                  context: context,
-                  compare: departureDate.value,
-                  errorText: "Arrival can't be greater than Departure date"),
-              label: "Arrival Date               ",
-              onSaved: (value) {
-                ctrl!.state.arrivalDate = value!;
-                arrivalDate.value = value;
-              },
-              onChanged: (value) {
-                value ??= DateTime.now();
-                ctrl!.state.arrivalDate = value;
-                arrivalDate.value = value;
-              },
-            ),
+            Obx(() {
+              return CustomFormDateFieldWidget(
+                disabled: readonly,
+                initialValue: arrivalDate.value,
+                validator: CustomDatetimeGreaterValidator(
+                    context: context,
+                    compare: departureDate.value,
+                    errorText: "There is a problem with the Departure Date"),
+                label: "Arrival Date               ",
+                onSaved: (value) {
+                  ctrl!.state.arrivalDate = value!;
+                  arrivalDate.value = value;
+                },
+                onChanged: (value) {
+                  value ??= DateTime.now();
+                  ctrl!.state.arrivalDate = value;
+                  arrivalDate.value = value;
+                },
+              );
+            }),
             SizedBox(height: MediaQuery.of(context).size.height * 0.03),
             const CustomTitleWidget(
                 width: 0.225,
@@ -103,10 +105,8 @@ class CustomLogisticInformationForm extends StatelessWidget {
                 validator: CustomDatetimeGreaterValidator(
                     context: context,
                     compare: arrivalDate.value,
-                    errorText: "Departure can't be less than Arrival date",
-                    invert:true
-                    
-                    ),
+                    errorText: "There is a problem with the Arrival Date",
+                    invert: true),
                 label: "Departure Date       ",
                 onSaved: (value) {
                   ctrl!.state.departureDate = value!;

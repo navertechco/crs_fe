@@ -55,7 +55,7 @@ class CustomRequiredValidator extends TextFieldValidator {
 
   @override
   bool isValid(String? value) {
-    return value != null && value != "" && value != "0" ;
+    return value != null && value != "" && value != "0";
   }
 
   @override
@@ -109,7 +109,9 @@ class CustomDatetimeGreaterValidator extends FieldValidator<DateTime?> {
   bool isValid(value) {
     int inv = invert ? -1 : 1;
     var diff = compare.difference(value!).inDays * inv;
-    if ((diff >= 0)) {
+    var newDate = value.difference(DateTime.now()).inDays ;
+
+    if ((diff >= 0) && (newDate >= 0)) {
       return true;
     } else {
       SweetAlert.show(context,
