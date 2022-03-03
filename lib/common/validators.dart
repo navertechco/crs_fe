@@ -55,7 +55,7 @@ class CustomRequiredValidator extends TextFieldValidator {
 
   @override
   bool isValid(String? value) {
-    return value != null && value != "0" && value != "0";
+    return value != null && value != "" && value != "0" ;
   }
 
   @override

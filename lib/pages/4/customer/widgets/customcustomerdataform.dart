@@ -286,17 +286,31 @@ class CustomCustomerDataForm extends StatelessWidget {
                                 validator: CustomRequiredValidator(
                                     errorText: "Lead Passenger is required ",
                                     ctx: context),
-                                value: getValue(client, "lead_passenger",
-                                    def: leadPassenger),
+                                value: leadPassenger.value,
                                 onSaved: (value) {
                                   leadPassenger.value = value!;
                                   ctrl!.state.leadPassenger = value;
-                                  ctrl!.state.travelCode =
-                                      "${getValue(client, "lead_passenger", def: "jose cuevas").toString().replaceAll(" ", "-") + "-" + tour["passengers"] + "-" + dayFormat.format(arrivalDate.value).replaceAll(" ", "-")}";
+                                  ctrl!.state.travelCode = getValue(
+                                              client, "lead_passenger",
+                                              def: "jose cuevas")
+                                          .toString()
+                                          .replaceAll(" ", "-") +
+                                      "-" +
+                                      tour["passengers"] +
+                                      "-" +
+                                      dayFormat
+                                          .format(arrivalDate.value)
+                                          .replaceAll(" ", "-");
                                 },
                                 onChanged: (value) {
-                                  travelCode.value =
-                                      "${value.toString() + "-" + tour["passengers"] + "-" + dayFormat.format(arrivalDate.value).replaceAll(" ", "-")}";
+                                  leadPassenger.value = value!;
+                                  travelCode.value = value.toString() +
+                                      "-" +
+                                      tour["passengers"] +
+                                      "-" +
+                                      dayFormat
+                                          .format(arrivalDate.value)
+                                          .replaceAll(" ", "-");
                                 },
                                 keyboardType: TextInputType.name,
                                 hintText: "Lead Passenger                  ",
