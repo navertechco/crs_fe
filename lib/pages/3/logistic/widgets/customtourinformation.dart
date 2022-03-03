@@ -17,9 +17,9 @@ class CustomLogisticInformationForm extends StatelessWidget {
     var tourdata = globalctx.memory;
     var logistic = getValue(tourdata, "logistic");
     var readonly = getContext("readonly") ?? false;
-    var arrivalPort = processCatalog("airport");
-    var departurePort = processCatalog("airport");
-
+    var arrivalPortCatalog = processCatalog("airport");
+    var departurePortCatalog = processCatalog("airport");
+    arrivalPort.value = getValue(logistic, "arrival_port", def: "1");
     return Form(
       key: _formKey,
       child: Padding(
@@ -40,10 +40,13 @@ class CustomLogisticInformationForm extends StatelessWidget {
                 fontWeight: FontWeight.bold,
                 label: "  Arrival information"),
             CustomFormDropDownFieldWidget(
-              value: getValue(logistic, "arrival_port", def: "1"),
+              value: getFormValue(
+                  globalctx.memory, "logistic", "arrival_port", "1"),
               disabled: readonly,
               onSaved: (value) {
                 ctrl!.state.arrival_port = value!;
+                setFormValue(
+                    globalctx.memory, "logistic", "arrival_port", value);
               },
               onChanged: (value) {
                 ctrl!.state.arrival_port = value!;
@@ -51,7 +54,7 @@ class CustomLogisticInformationForm extends StatelessWidget {
               validator: CustomRequiredValidator(
                   errorText: "Arrival Port is required ", ctx: context),
               label: "Arrival Port\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t",
-              data: arrivalPort,
+              data: arrivalPortCatalog,
             ),
             CustomFormDateFieldWidget(
               disabled: readonly,
@@ -63,10 +66,13 @@ class CustomLogisticInformationForm extends StatelessWidget {
               },
               label: "Arrival Date               ",
               onSaved: (value) {
-                ctrl!.state.arrivalDate = "${value.toString().split(" ")[0]}";
+                var newvalue = value.toString().split(" ")[0];
+                ctrl!.state.arrivalDate = newvalue;
+                setFormValue(
+                    globalctx.memory, "logistic", "arrival_date", newvalue);
               },
               onChanged: (value) {
-                ctrl!.state.arrivalDate = "${value.toString().split(" ")[0]}";
+                ctrl!.state.arrivalDate = value.toString().split(" ")[0];
               },
             ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.03),
@@ -75,10 +81,13 @@ class CustomLogisticInformationForm extends StatelessWidget {
                 fontWeight: FontWeight.bold,
                 label: "  Departure information"),
             CustomFormDropDownFieldWidget(
-              value: getValue(logistic, "departure_port", def: "1"),
+              value: getFormValue(
+                  globalctx.memory, "logistic", "departure_port", "1"),
               disabled: readonly,
               onSaved: (value) {
                 ctrl!.state.departure_port = value!;
+                setFormValue(
+                    globalctx.memory, "logistic", "departure_port", value);
               },
               onChanged: (value) {
                 ctrl!.state.departure_port = value!;
@@ -86,7 +95,7 @@ class CustomLogisticInformationForm extends StatelessWidget {
               validator: CustomRequiredValidator(
                   errorText: "Departure Port is required ", ctx: context),
               label: "Departure Port            ",
-              data: departurePort,
+              data: departurePortCatalog,
             ),
             CustomFormDateFieldWidget(
               disabled: readonly,
@@ -100,6 +109,8 @@ class CustomLogisticInformationForm extends StatelessWidget {
               onSaved: (value) {
                 if (value != null) {
                   ctrl!.state.departureDate = value.toString().split(" ")[0];
+                  setFormValue(globalctx.memory, "logistic", "departure_date",
+                      value.toString().split(" ")[0]);
                 }
               },
               onChanged: (value) {
