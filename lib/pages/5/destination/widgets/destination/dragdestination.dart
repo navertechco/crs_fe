@@ -1,14 +1,22 @@
+
+// ignore: must_be_immutable
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../../index.dart';
+import 'package:naver_crs/common/context/index.dart';
+
 import '../index.dart';
 
-void moveDestinationFunction(String destination, BuildContext context) {
-  if (!globalctx.destinations.contains(destination) &&
-      dayleft.value != 0 &&
-      checkPromotedAirport(destination)) {
-    globalctx.destinations.add(destination);
-    globalctx.destinationDragData.value.add(Obx(() {
+// ignore: must_be_immutable
+class DragDestinationWidget extends StatelessWidget {
+  String destination;
+    DragDestinationWidget({
+    Key? key,
+    required this.destination,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Obx(() {
       return globalctx.destinations.contains(destination)
           ? Row(
               children: [
@@ -42,6 +50,6 @@ void moveDestinationFunction(String destination, BuildContext context) {
               ],
             )
           : Text("");
-    }));
+    });
   }
 }

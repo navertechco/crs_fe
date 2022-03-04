@@ -1,5 +1,6 @@
 // ignore: must_be_immutable
 import 'package:flutter/material.dart';
+import '../../../../index.dart';
 import 'index.dart';
 
 // ignore: must_be_immutable
@@ -11,7 +12,7 @@ class DestinationsOrderableListWidget extends StatelessWidget {
     Null Function(String key) onAccept;
 
     onAccept = (String destination) {
-      moveDestinationFunction(destination, context);
+      moveDestination(destination);
     };
     return Padding(
         padding: EdgeInsets.only(

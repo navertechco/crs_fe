@@ -131,8 +131,51 @@ Function findDestination = (destination) {
   return result;
 };
 
-Function filterSelectedDestinations = () {
-  var filteredDestinations = globalctx.promotedDestinations;
-  
+var filteredYet = false;
 
+Function filterSelectedDestinations = () {
+  var selectedDestinations = globalctx.destinations;
+  var allDestinations = processCatalog("destinations");
+  var arrival = allDestinations
+      .toList()
+      .where((element) => element["code"] == int.parse(arrivalPort.value))
+      .first;
+  var departure = allDestinations
+      .toList()
+      .where((element) => element["code"] == int.parse(departurePort.value))
+      .first;
+  if (selectedDestinations.contains(arrival["description"])) {
+    selectedDestinations.remove(arrival["description"]);
+  }
+  if (selectedDestinations.contains(departure["description"])) {
+    selectedDestinations.remove(departure["description"]);
+  }
+  selectedDestinations.insert(0, arrival["description"]);
+  selectedDestinations.add(departure["description"]);
+  globalctx.selectedDestinations.value = [];
+  globalctx.destinationDragData.value = <Widget>[];
+
+  if (!filteredYet) {
+    for (var selected in selectedDestinations) {
+      moveDestination(selected);
+    }
+  }
+
+  filteredYet = true;
+};
+
+Function moveDestination = (String destination) {
+  var checked = checkPromotedAirport(destination);
+  if (!globalctx.destinations.contains(destination) &&
+      !globalctx.selectedDestinations.contains(destination) &&
+      dayleft.value != 0 &&
+      checked) {
+    globalctx.destinations.add(destination);
+    globalctx.selectedDestinations.add(destination);
+    globalctx.destinationDragData.value
+        .add(DragDestinationWidget(destination: destination));
+  }
+  // if (!filteredYet) {
+  //   filterSelectedDestinations();
+  // }
 };

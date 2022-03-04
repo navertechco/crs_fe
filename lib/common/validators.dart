@@ -109,9 +109,9 @@ class CustomDatetimeGreaterValidator extends FieldValidator<DateTime?> {
   bool isValid(value) {
     int inv = invert ? -1 : 1;
     var diff = compare.difference(value!).inDays * inv;
-    var newDate = value.difference(DateTime.now()).inDays ;
+    var newDate = value.difference(DateTime.now()).inDays;
 
-    if ((diff >= 0) && (newDate >= 0)) {
+    if ((diff > 0) && (newDate >= 0)) {
       return true;
     } else {
       SweetAlert.show(context,
