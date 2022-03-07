@@ -131,7 +131,11 @@ Function findDestination = (destination) {
   return result;
 };
 
-var filteredYet = false;
+Function addDestination = (String destination) {
+  if (!globalctx.destinations.contains(destination)) {
+    globalctx.destinations.add(destination);
+  }
+};
 
 Function filterSelectedDestinations = () {
   var selectedDestinations = globalctx.destinations;
@@ -155,26 +159,21 @@ Function filterSelectedDestinations = () {
   globalctx.selectedDestinations.value = [];
   globalctx.destinationDragData.value = <Widget>[];
 
-  if (!filteredYet) {
-    for (var selected in selectedDestinations) {
-      moveDestination(selected);
-    }
+  for (var selected in selectedDestinations) {
+    moveDestination(selected);
   }
-
-  filteredYet = true;
 };
 
 Function moveDestination = (String destination) {
-  var checked = checkPromotedAirport(destination);
-  if (!globalctx.destinations.contains(destination) &&
-      !globalctx.selectedDestinations.contains(destination) &&
-      dayleft.value != 0 &&
-      checked) {
-    globalctx.destinations.add(destination);
-    globalctx.selectedDestinations.add(destination);
-    globalctx.destinationDragData.value
-        .add(DragDestinationWidget(destination: destination));
-  }
+  // var checked = checkPromotedAirport(destination);
+  // if ( !globalctx.selectedDestinations.contains(destination) &&
+  //     dayleft.value != 0 &&
+  //     checked) {
+  // globalctx.destinations.add(destination);
+  globalctx.selectedDestinations.add(destination);
+  globalctx.destinationDragData.value
+      .add(DragDestinationWidget(destination: destination));
+  // }
   // if (!filteredYet) {
   //   filterSelectedDestinations();
   // }

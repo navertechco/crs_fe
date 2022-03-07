@@ -27,41 +27,45 @@ class FormCatalogueWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var items = getItems(data, value);
-    var realValue = (() {
-      if (value != null) {
-        return (int.parse(value) > items.length - 1)
-            ? (items.length - 1).toString()
-            : value;
-      }
-      return "0";
-    })();
+    // var realValue = (() {
+    //   if (value != null) {
+    //     return (int.parse(value) > items.length - 1)
+    //         ? (items.length - 1).toString()
+    //         : value;
+    //   }
+    //   return "0";
+    // })();
     return Obx(() {
       return DropdownButtonHideUnderline(
         child: DropdownButtonFormField(
           style: KTextSytle(
-              context: context,
-              fontSize: value == null ? 10 : 8,
-              fontWeight: value == null ? FontWeight.normal : FontWeight.bold).getStyle(),
+                  context: context,
+                  fontSize: value == null ? 10 : 8,
+                  fontWeight:
+                      value == null ? FontWeight.normal : FontWeight.bold)
+              .getStyle(),
           alignment: Alignment.centerLeft,
           isExpanded: true,
-          value: realValue,
+          value: value,
           disabledHint: Text(
             "data",
             style: KTextSytle(
-                context: context,
-                fontSize: value == null ? 10 : 8,
-                fontWeight:
-                    value == null ? FontWeight.normal : FontWeight.bold).getStyle(),
+                    context: context,
+                    fontSize: value == null ? 10 : 8,
+                    fontWeight:
+                        value == null ? FontWeight.normal : FontWeight.bold)
+                .getStyle(),
           ),
           validator: validator,
           decoration: InputDecoration.collapsed(
             filled: false,
             hintText: hintText,
             hintStyle: KTextSytle(
-                context: context,
-                fontSize: value == null ? 10 : 8,
-                fontWeight:
-                    value == null ? FontWeight.normal : FontWeight.bold).getStyle(),
+                    context: context,
+                    fontSize: value == null ? 10 : 8,
+                    fontWeight:
+                        value == null ? FontWeight.normal : FontWeight.bold)
+                .getStyle(),
           ),
           onSaved: onSaved,
           onChanged: disabled ? null : onChanged,

@@ -21,7 +21,6 @@ class KeyPadWidget extends StatelessWidget {
               prevlabel: "< Previous",
               nextlabel: "     Next >",
               onNext: () {
-              
                 processDestinations(context);
               },
               onPrevious: () {

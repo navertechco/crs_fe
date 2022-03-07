@@ -18,7 +18,7 @@ class CustomLogisticInformationForm extends StatelessWidget {
     var logistic = getValue(tourdata, "logistic");
     var readonly = getContext("readonly") ?? false;
     var arrivalPortCatalog = processCatalog("airport");
-    var departurePortCatalog = processCatalog("airport"); 
+    var departurePortCatalog = processCatalog("airport");
     return Form(
       key: _formKey,
       child: Padding(
