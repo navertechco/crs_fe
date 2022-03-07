@@ -45,12 +45,12 @@ Function nextDay = () {
 };
 
 Function getDtos = () {
-  var arrival = {"title": "arrival", "explorationDay": "1", "airport": "quito"};
-  var departure = {
-    "title": "departure",
-    "explorationDay": "1",
-    "airport": "quito"
-  };
+  // var arrival = {"title": "arrival", "explorationDay": "1", "airport": "quito"};
+  // var departure = {
+  //   "title": "departure",
+  //   "explorationDay": "1",
+  //   "airport": "quito"
+  // };
   var day = {
     "date": "",
     "observation": "",
@@ -76,7 +76,7 @@ Function getDtos = () {
     "photo": ""
   };
 
-  return [arrival, departure, day, experience];
+  return [ day, experience];
 };
 
 Function prepareDaysToResume = () {
@@ -90,8 +90,8 @@ Function prepareDaysToResume = () {
     var explorationDay = destinationDay["explorationDay"];
 
     for (var i = 0; i < int.parse(explorationDay); i++) {
-      var dayDto = getDtos()[2];
-      var expDto = getDtos()[3];
+      var dayDto = getDtos()[0];
+      var expDto = getDtos()[1];
       // Prepare Frame to send to Resume Page
       var exps = globalctx.memory["promoted"]["day"][dayIndex];
       for (var exp in exps.keys) {

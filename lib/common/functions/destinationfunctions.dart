@@ -25,17 +25,17 @@ Function promoteDestination = (ctrl, _formKey, destination) {
 Function getDestinationAirport = () {
   var airport = "quito";
   try {
-    var destinationData = getParam("DESTINATION_DATA")["value"];
+    // var destinationData = getParam("DESTINATION_DATA")["value"];
 
-    var destinations = globalctx.promotedDestinations;
-    var first = destinations[0];
-    var last = destinations[destinations.length - 2];
-    if (globalDestination.value == "arrival") {
-      airport = destinationData[first][5];
-    }
-    if (globalDestination.value == "departure") {
-      airport = destinationData[last][5];
-    }
+    // var destinations = globalctx.promotedDestinations;
+    // var first = destinations[0];
+    // var last = destinations[destinations.length - 2];
+    // if (globalDestination.value == "arrival") {
+    //   airport = destinationData[first][5];
+    // }
+    // if (globalDestination.value == "departure") {
+    //   airport = destinationData[last][5];
+    // }
     return airport;
   } catch (e) {
     return airport;
@@ -69,7 +69,7 @@ Function getCombinedDestinations = () {
   var result = {
     // "arrival": arrival,
     ...memoryDestinations,
-    "departure": departure
+    // "departure": departure
   };
 
   return result;
@@ -118,16 +118,16 @@ Function processDestinations = (context) {
 };
 Function findDestination = (destination) {
   var promotedDestinations = globalctx.promotedDestinations;
-  var result = "departure";
+  // var result = "departure";
   var index =
       promotedDestinations.indexWhere((element) => element == destination);
-  if (index == -1) {
-    if (destination == "arrival") {
-      result = "arrival";
-    }
-  } else {
-    result = promotedDestinations[index];
-  }
+  // if (index == -1) {
+  //   if (destination == "arrival") {
+  //     result = "arrival";
+  //   }
+  // } else {
+  var result = promotedDestinations[index];
+  // }
   return result;
 };
 
@@ -170,6 +170,7 @@ Function moveDestination = (String destination) {
   //     dayleft.value != 0 &&
   //     checked) {
   // globalctx.destinations.add(destination);
+  setDestinationState(destination, "selected");
   globalctx.selectedDestinations.add(destination);
   globalctx.destinationDragData.value
       .add(DragDestinationWidget(destination: destination));
@@ -186,4 +187,23 @@ Function getDestinationId = (String destination) {
       .where((element) => element["description"] == destination)
       .first;
   return id["code"].toString();
+};
+
+Function getDestinationValue = (String destination) {
+  var allDestinations = processCatalog("destinations");
+  var result = allDestinations
+        .firstWhere((e) => e["description"] == destination)["value"];
+  return result;
+};
+
+Function setDestinationState = (destination, state) {
+  globalctx.states["destinations"][destination] ??= {}.obs;
+  globalctx.states["destinations"][destination]["state"] = state;
+};
+
+Function getDestinationState = (destination) {
+  globalctx.states["destinations"][destination] ??= {}.obs;
+  var state = globalctx.states["destinations"][destination]["state"];
+  state ??= "suggested";
+  return state;
 };

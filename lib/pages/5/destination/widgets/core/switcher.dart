@@ -2,9 +2,9 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:naver_crs/pages/5/destination/widgets/draggable/draggabletargetdestination.dart'; 
-import '../../../../index.dart'; 
-import '../index.dart'; 
+import 'package:naver_crs/pages/5/destination/widgets/draggable/draggabletargetdestination.dart';
+import '../../../../index.dart';
+import '../index.dart';
 
 class SwitcherWidget extends StatelessWidget {
   const SwitcherWidget(
@@ -22,6 +22,33 @@ class SwitcherWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     RxBool _showFrontSide = true.obs;
     RxBool _flipXAxis = true.obs;
+
+    void _changeRotationAxis() {
+      // print(dests);
+      _showFrontSide.value = !_showFrontSide.value;
+      _flipXAxis.value = !_flipXAxis.value;
+    }
+
+    void _switchCard() {
+      globalctx.value.value = globalctx.value.value;
+      RxList dests = globalctx.destinationlist;
+
+      dests.contains(destination) && _showFrontSide.value
+          ? dests.add(destination)
+          : dests.remove(destination);
+
+      globalctx.destinationlist = dests;
+      var suggested = getDestinationState(destination) == "suggested";
+      if (suggested) {
+        _changeRotationAxis();
+      } else {
+        showDialog(
+            context: context,
+            builder: (context) {
+              return DestinationDetailPage(destination: destination);
+            });
+      }
+    }
 
     Widget _transitionBuilder(Widget widget, Animation<double> animation) {
       final rotateAnim = Tween(begin: pi, end: 0.0).animate(animation);
@@ -49,20 +76,7 @@ class SwitcherWidget extends StatelessWidget {
 
     Widget _buildFlipAnimation() {
       return GestureDetector(
-        onTap: () {
-           
-          if (globalctx.destinations.contains(destination)) {
-            showDialog(
-                context: context,
-                builder: (context) {
-                  return DestinationDetailPage(destination: destination);
-                });
-          }
-          if (!globalctx.destinations.contains(destination)) {
-            globalctx.destinations.add(destination);
-            globalctx.destinationDragData.value.add(DraggableTargetDestinationWidget(destination: destination));
-          }
-        },
+        onTap: _switchCard,
         child: AnimatedSwitcher(
           duration: const Duration(milliseconds: 800),
           transitionBuilder: _transitionBuilder,
@@ -79,4 +93,3 @@ class SwitcherWidget extends StatelessWidget {
     return _buildFlipAnimation();
   }
 }
-

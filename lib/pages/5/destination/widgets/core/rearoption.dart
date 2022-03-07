@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart'; 
-import '../../../../index.dart'; 
+import 'package:google_fonts/google_fonts.dart';
+import '../../../../index.dart';
 
 class RearOptionWidget extends StatelessWidget {
   const RearOptionWidget(
@@ -16,8 +16,9 @@ typesetting, Lorem Ipsum has been but also................."""})
   final String description;
   @override
   Widget build(BuildContext context) {
-    Map<String, dynamic> destinations = getContext("destinations");
-    String title = destinations[destination][1];
+    var value = getDestinationValue(destination);
+    var title = value[1];
+    // title = value["title"];
     return Stack(children: [
       // TitleWidget(title: title),
       DescriptionWidget(title: title, description: description),

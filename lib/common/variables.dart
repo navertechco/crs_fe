@@ -13,7 +13,7 @@ var result = [];
 var allPromotedDestinations = [
   // "arrival",
   ...globalctx.promotedDestinations.value,
-  "departure"
+  // "departure"
 ];
 var globalDestination = Rx("");
 
@@ -64,12 +64,12 @@ var destinationList = allDestinations.entries
 List<dynamic> customDestinationData = [
   // {"destination": "arrival", "explorationDay": "1"},
   ...destinationList,
-  {"destination": "departure", "explorationDay": "1"}
+  // {"destination": "departure", "explorationDay": "1"}
 ];
 var promotedDestinations = [
   // "arrival",
   ...globalctx.promotedDestinations.value,
-  "departure"
+  // "departure"
 ];
 RxInt selectedIndex = 0.obs;
 RxString travelCode = "".obs;

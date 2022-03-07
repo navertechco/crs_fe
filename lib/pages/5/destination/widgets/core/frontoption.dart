@@ -8,14 +8,9 @@ class FrontOptionWidget extends StatelessWidget {
   final String destination;
   @override
   Widget build(BuildContext context) {
-    var destinations = processCatalog("destinations");
-    // List destinationParam = getParam("DESTINATION_DATA").values.toList();
-    // CatalogDto destinationData = CatalogDto(destinationParam);
-    // Map<String, dynamic> destinations = destinationData.value;
     var airport = false;
     var boat = false;
-    var dest = destinations
-        .firstWhere((e) => e["description"] == destination)["value"];
+    var dest = getDestinationValue(destination);
     if (dest != null) {
       airport = dest[6];
       boat = dest[7];
