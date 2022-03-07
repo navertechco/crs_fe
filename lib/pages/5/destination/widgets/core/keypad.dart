@@ -24,7 +24,7 @@ class KeyPadWidget extends StatelessWidget {
                 processDestinations(context);
               },
               onPrevious: () {
-                selectedIndex--;
+                selectedIndex.value = selectedIndex.value - 1;
                 Get.back();
               },
               width: 0.3);

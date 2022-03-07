@@ -11,11 +11,10 @@ class CustomLeftStarDestinationForm extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    var destinations = processCatalog("destinations");
+  Widget build(BuildContext context) { 
 
     List<Widget> destinationlist = [];
-    for (Map item in destinations) {
+    for (Map item in destinationsCatalog) {
       List itemList = item.values.toList();
       CatalogDto destination = CatalogDto(itemList);
 

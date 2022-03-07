@@ -41,6 +41,7 @@ Function processCatalog = (name) {
         row["code"] = item["code"];
         row["description"] = item["description"];
         row["value"] = item["value"];
+        row["relation"] = item["relation"];
         catalog.add(row);
       }
     }
@@ -282,3 +283,32 @@ dynamic myEncode(dynamic item) {
   }
   return item;
 }
+
+Function getCountryNameById = (id) {
+  var country = destinationCountry
+      .firstWhere((element) => element["code"] == int.parse(id));
+  var name = country["description"];
+  return name;
+};
+
+Function updateDestinationsCatalog = () {
+  var countryName = getCountryNameById(destCountry.value);
+  destinationsCatalog = processCatalog("destinations").where((element) =>
+      element["relation"]["country"].toString().toLowerCase() ==
+      countryName.toString().toLowerCase());
+
+  airportCatalog = processCatalog("airport").where((element) =>
+      element["relation"]["country"].toString().toLowerCase() ==
+      countryName.toString().toLowerCase());
+};
+
+Function updateAirPortName = () {
+  try {
+    arrival = destinationsCatalog.toList().firtsWhere(
+        (element) => element["code"] == int.parse(arrivalPort.value));
+    departure = destinationsCatalog.toList().firtsWhere(
+        (element) => element["code"] == int.parse(departurePort.value));
+  } catch (e) {
+    print(e);
+  }
+};

@@ -6,13 +6,6 @@ import '../index.dart';
 // ignore: must_be_immutable
 class NavBarWidget extends StatelessWidget {
   NavBarWidget({Key? key}) : super(key: key);
-  List pageList = [
-    "Tour",
-    "Logistic",
-    "Customer",
-    "Destination",
-    "Experiences"
-  ];
 
   void _onItemTapped(int index) {
     selectedIndex.value = index;
@@ -35,7 +28,8 @@ class NavBarWidget extends StatelessWidget {
         iconSize: 20,
         showUnselectedLabels: true,
         items: itemList,
-        currentIndex: selectedIndex.value,
+        currentIndex:
+            selectedIndex.value >= pageList.length ? 0 : selectedIndex.value,
         selectedItemColor: Colors.amber[800],
         onTap: _onItemTapped,
       );

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'; 
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../index.dart';
 
@@ -91,14 +91,19 @@ class DescriptionWidget extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 )),
               ),
-              Text(
-                description,
-                style: GoogleFonts.poppins(
-                    textStyle: TextStyle(
-                  color: const Color.fromARGB(255, 128, 128, 128),
-                  fontSize: MediaQuery.of(context).size.width * 0.010,
-                  fontWeight: FontWeight.bold,
-                )),
+              GestureDetector(
+                onTap: () {
+                  showMyDialog(context);
+                },
+                child: Text(
+                  description,
+                  style: GoogleFonts.poppins(
+                      textStyle: TextStyle(
+                    color: const Color.fromARGB(255, 128, 128, 128),
+                    fontSize: MediaQuery.of(context).size.width * 0.010,
+                    fontWeight: FontWeight.bold,
+                  )),
+                ),
               ),
             ],
           )),

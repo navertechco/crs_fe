@@ -38,6 +38,7 @@ class _ResultsLayoutWidgetState extends State<ResultsLayoutWidget> {
                   "assets/custom/svg/images/LeftArrow.svg",
                 ),
                 onPressed: () {
+                  selectedIndex.value = selectedIndex.value - 1;
                   Get.back();
                 },
               ),

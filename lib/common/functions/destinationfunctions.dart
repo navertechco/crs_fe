@@ -100,7 +100,7 @@ Function processDestinations = (context) {
     // totalDays.value = destDays;
     globalctx.memory["destinationDay"] = destinationDay;
     globalctx.memory["totalDays"] = totalDays.value;
-    selectedIndex++;
+    selectedIndex.value = selectedIndex.value + 1;
     Get.toNamed("/Experiences");
   } else {
     if (context != null) {
@@ -170,9 +170,14 @@ Function getDestinationId = (String destination) {
 };
 
 Function getDestinationValue = (String destination) {
-  var destinationsCatalog = processCatalog("destinations");
-  var result = destinationsCatalog
-      .firstWhere((e) => e["description"] == destination)["value"];
+  var result = [];
+  try {
+    result = destinationsCatalog
+        .firstWhere((e) => e["description"] == destination)["value"];
+  } catch (e) {
+    print(e);
+  }
+ 
   return result;
 };
 
@@ -194,3 +199,31 @@ Function updateDraggableDestinations = () {
     draggable.value = 1;
   }
 };
+
+Future<void> showMyDialog(context) async {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('AlertDialog Title'),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: const <Widget>[
+              Text('This is a demo alert dialog.'),
+              Text('Would you like to approve of this message?'),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: const Text('Approve'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
+}

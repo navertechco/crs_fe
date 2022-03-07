@@ -17,8 +17,6 @@ class CustomLogisticInformationForm extends StatelessWidget {
     var tourdata = globalctx.memory;
     var logistic = getValue(tourdata, "logistic");
     var readonly = getContext("readonly") ?? false;
-    var arrivalPortCatalog = processCatalog("airport");
-    var departurePortCatalog = processCatalog("airport");
     return Form(
       key: _formKey,
       child: Padding(
@@ -53,7 +51,7 @@ class CustomLogisticInformationForm extends StatelessWidget {
               validator: CustomRequiredValidator(
                   errorText: "Arrival Port is required ", ctx: context),
               label: "Arrival Port\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t",
-              data: arrivalPortCatalog,
+              data: airportCatalog.toList(),
             ),
             Obx(() {
               return CustomFormDateFieldWidget(
@@ -95,7 +93,7 @@ class CustomLogisticInformationForm extends StatelessWidget {
               validator: CustomRequiredValidator(
                   errorText: "Departure Port is required ", ctx: context),
               label: "Departure Port            ",
-              data: departurePortCatalog,
+              data: airportCatalog.toList(),
             ),
             Obx(() {
               return CustomFormDateFieldWidget(
@@ -126,13 +124,14 @@ class CustomLogisticInformationForm extends StatelessWidget {
               child: CustomKeypadWidget(
                   width: 0.265,
                   onPrevious: () {
+                    selectedIndex.value = selectedIndex.value - 1;
                     Get.back();
                   },
                   onNext: () {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
                       ctrl!.saveLogistic();
-                      selectedIndex++;
+                      selectedIndex.value = selectedIndex.value + 1;
                     }
                   }),
             ),

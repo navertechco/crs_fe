@@ -16,7 +16,6 @@ class CustomTourInformationForm extends StatelessWidget {
     var tourdata = globalctx.memory;
     var tour = getValue(tourdata, "tour");
     var readonly = getContext("readonly") ?? false;
-    var destinationCountry = processCatalog("destination_country");
     var purpose = processCatalog("purpose");
     var accomodationType = processCatalog("budget");
 
@@ -40,15 +39,19 @@ class CustomTourInformationForm extends StatelessWidget {
                 fontWeight: FontWeight.bold,
                 label: "  Tour information"),
             CustomFormDropDownFieldWidget(
-              value: getValue(tour, "country", def: "1"),
+              value: destCountry.value,
               disabled: readonly,
               validator: CustomRequiredValidator(
                   errorText: "country is required ", ctx: context),
               onSaved: (value) {
                 ctrl!.state.country = value!;
+                destCountry.value = value;
+                updateDestinationsCatalog();
               },
               onChanged: (value) {
                 ctrl!.state.country = value!;
+                destCountry.value = value;
+                updateDestinationsCatalog();
               },
               label: "Destination Country ",
               data: destinationCountry,
@@ -101,13 +104,14 @@ class CustomTourInformationForm extends StatelessWidget {
               child: CustomKeypadWidget(
                   width: 0.265,
                   onPrevious: () {
+                    selectedIndex.value = selectedIndex.value - 1;
                     Get.back();
                   },
                   onNext: () {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
                       ctrl!.saveTour();
-                      selectedIndex++;
+                      selectedIndex.value = selectedIndex.value + 1;
                     }
                   }),
             ),
