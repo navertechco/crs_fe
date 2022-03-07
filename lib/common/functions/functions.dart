@@ -129,6 +129,7 @@ Function globalctxReset = () {
   totalDays.value = departureDate.value.difference(arrivalDate.value).inDays;
   leftAccumulated.value = 0;
   dayleft.value = totalDays.value;
+  filterSelectedDestinations();
 };
 Function getItems = (data, value) {
   RxList<DropdownMenuItem<String>> items = <DropdownMenuItem<String>>[].obs;

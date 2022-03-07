@@ -39,7 +39,10 @@ class DraggableTargetDestinationWidget extends StatelessWidget {
                       )
                     : GestureDetector(
                         onTap: () {
-                          if (globalctx.destinations.contains(destination)) {
+                          if (arrivalPort.value !=
+                                  getDestinationId(destination) &&
+                              departurePort.value !=
+                                  getDestinationId(destination) &&globalctx.destinations.contains(destination)) {
                             var index = globalctx.destinations.indexWhere(
                                 (element) => element == destination);
                             globalctx.destinations.removeAt(index);
