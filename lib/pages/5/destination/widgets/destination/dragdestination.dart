@@ -1,15 +1,15 @@
-
 // ignore: must_be_immutable
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/common/context/index.dart';
 
+import '../../../../index.dart';
 import '../index.dart';
 
 // ignore: must_be_immutable
 class DragDestinationWidget extends StatelessWidget {
   String destination;
-    DragDestinationWidget({
+  DragDestinationWidget({
     Key? key,
     required this.destination,
   }) : super(key: key);
@@ -24,7 +24,11 @@ class DragDestinationWidget extends StatelessWidget {
                 !globalctx.promotedDestinations.contains(destination)
                     ? GestureDetector(
                         onTap: () {
-                          if (globalctx.destinations.contains(destination)) {
+                          if (arrivalPort.value !=
+                                  getDestinationId(destination) &&
+                              departurePort.value !=
+                                  getDestinationId(destination) &&
+                              globalctx.destinations.contains(destination)) {
                             var index = globalctx.destinations.indexWhere(
                                 (element) => element == destination);
                             globalctx.destinations.removeAt(index);

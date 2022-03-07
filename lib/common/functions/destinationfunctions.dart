@@ -178,3 +178,12 @@ Function moveDestination = (String destination) {
   //   filterSelectedDestinations();
   // }
 };
+
+Function getDestinationId = (String destination) {
+  var allDestinations = processCatalog("destinations");
+  var id = allDestinations
+      .toList()
+      .where((element) => element["description"] == destination)
+      .first;
+  return id["code"].toString();
+};
