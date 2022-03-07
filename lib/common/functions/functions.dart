@@ -129,6 +129,7 @@ Function globalctxReset = () {
   totalDays.value = departureDate.value.difference(arrivalDate.value).inDays;
   leftAccumulated.value = 0;
   dayleft.value = totalDays.value;
+  globalctx.states["destinations"] = {};
   filterSelectedDestinations();
 };
 Function getItems = (data, value) {
@@ -206,7 +207,7 @@ Function getFormDateValue = (data, formKey, key, def) {
         if (data[formKey][key] == "") {
           return DateTime.parse(def);
         }
-        return DateTime.parse(data[formKey][key]) ;
+        return DateTime.parse(data[formKey][key]);
       }
     }
   }

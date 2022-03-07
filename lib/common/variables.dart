@@ -76,3 +76,15 @@ RxString travelCode = "".obs;
 RxString leadPassenger = "".obs;
 RxString arrivalPort = "0".obs;
 RxString departurePort = "0".obs;
+var selectedDestinations = globalctx.destinations;
+var destinationsCatalog = processCatalog("destinations");
+var arrival = destinationsCatalog
+    .toList()
+    .where((element) => element["code"] == int.parse(arrivalPort.value))
+    .first;
+var departure = destinationsCatalog
+    .toList()
+    .where((element) => element["code"] == int.parse(departurePort.value))
+    .first;
+
+RxInt draggable = 0.obs;

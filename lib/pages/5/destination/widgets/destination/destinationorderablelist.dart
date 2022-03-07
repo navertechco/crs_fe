@@ -13,8 +13,7 @@ class DestinationsOrderableListWidget extends StatelessWidget {
 
     onAccept = (String destination) {
       addDestination(destination);
-      filterSelectedDestinations();
-      // moveDestination(destination);
+      filterSelectedDestinations(); 
     };
     return Padding(
         padding: EdgeInsets.only(

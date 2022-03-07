@@ -15,8 +15,8 @@ Function promoteDestination = (ctrl, _formKey, destination) {
       globalctx.promotedDestinations.add(destination);
       destinations = globalctx.memory["destinations"];
     }
-    // globalDestination.value = destination;
-    // filterSuggestedExperiences();
+    setDestinationState(destination, "promoted");
+    updateDraggableDestinations();
     Get.close(1);
   }
 };
@@ -138,16 +138,6 @@ Function addDestination = (String destination) {
 };
 
 Function filterSelectedDestinations = () {
-  var selectedDestinations = globalctx.destinations;
-  var allDestinations = processCatalog("destinations");
-  var arrival = allDestinations
-      .toList()
-      .where((element) => element["code"] == int.parse(arrivalPort.value))
-      .first;
-  var departure = allDestinations
-      .toList()
-      .where((element) => element["code"] == int.parse(departurePort.value))
-      .first;
   if (selectedDestinations.contains(arrival["description"])) {
     selectedDestinations.remove(arrival["description"]);
   }
@@ -165,24 +155,14 @@ Function filterSelectedDestinations = () {
 };
 
 Function moveDestination = (String destination) {
-  // var checked = checkPromotedAirport(destination);
-  // if ( !globalctx.selectedDestinations.contains(destination) &&
-  //     dayleft.value != 0 &&
-  //     checked) {
-  // globalctx.destinations.add(destination);
   setDestinationState(destination, "selected");
   globalctx.selectedDestinations.add(destination);
   globalctx.destinationDragData.value
       .add(DragDestinationWidget(destination: destination));
-  // }
-  // if (!filteredYet) {
-  //   filterSelectedDestinations();
-  // }
 };
 
 Function getDestinationId = (String destination) {
-  var allDestinations = processCatalog("destinations");
-  var id = allDestinations
+  var id = destinationsCatalog
       .toList()
       .where((element) => element["description"] == destination)
       .first;
@@ -190,9 +170,9 @@ Function getDestinationId = (String destination) {
 };
 
 Function getDestinationValue = (String destination) {
-  var allDestinations = processCatalog("destinations");
-  var result = allDestinations
-        .firstWhere((e) => e["description"] == destination)["value"];
+  var destinationsCatalog = processCatalog("destinations");
+  var result = destinationsCatalog
+      .firstWhere((e) => e["description"] == destination)["value"];
   return result;
 };
 
@@ -206,4 +186,11 @@ Function getDestinationState = (destination) {
   var state = globalctx.states["destinations"][destination]["state"];
   state ??= "suggested";
   return state;
+};
+
+Function updateDraggableDestinations = () {
+  if (getDestinationState(arrival["description"]) == "promoted" &&
+      getDestinationState(departure["description"]) == "promoted") {
+    draggable.value = 1;
+  }
 };

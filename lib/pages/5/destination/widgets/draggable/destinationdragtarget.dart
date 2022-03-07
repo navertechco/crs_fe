@@ -21,44 +21,7 @@ class DestinationDragTargetWidget extends StatelessWidget {
             List<dynamic> rejected,
           ) {
             return Container(
-              height: MediaQuery.of(context).size.height * 0.65
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              
-              ,
+              height: MediaQuery.of(context).size.height * 0.65,
               width: MediaQuery.of(context).size.width * 0.35,
               color: Color.fromARGB(0, 0, 0, 0),
               child: Align(

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import '../../../../index.dart';
 import '../index.dart';
 
 class CustomDragableDestination extends StatelessWidget {
@@ -12,12 +14,17 @@ class CustomDragableDestination extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Draggable<String>(
-      // Data is the value this Draggable stores.
-      data: destination,
-      feedback: DestinationOptionWidget(destination: destination),
-      childWhenDragging: DestinationOptionWidget(destination: destination),
-      child: DestinationOptionWidget(destination: destination),
-    );
+    
+
+    return Obx(() {
+      return Draggable<String>(
+        // Data is the value this Draggable stores.
+        maxSimultaneousDrags: draggable.value,
+        data: destination,
+        feedback: DestinationOptionWidget(destination: destination),
+        childWhenDragging: DestinationOptionWidget(destination: destination),
+        child: DestinationOptionWidget(destination: destination),
+      );
+    });
   }
 }
