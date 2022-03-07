@@ -130,6 +130,8 @@ Function globalctxReset = () {
   leftAccumulated.value = 0;
   dayleft.value = totalDays.value;
   globalctx.states["destinations"] = {};
+  draggable.value = 0;
+  updateDraggableDestinations();
   filterSelectedDestinations();
 };
 Function getItems = (data, value) {
