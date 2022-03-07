@@ -107,7 +107,7 @@ Function processDestinations = (context) {
       SweetAlert.show(context,
           curve: ElasticInCurve(),
           title: (dayleft.value > 0)
-              ? "Days Left can't be greater than 0\n"
+              ? "You still have $dayleft days to enjoy, do you want to review the other options we have for you?"
               : "Promote any destination is required",
           style: SweetAlertStyle.error, onPress: (bool isConfirm) {
         Get.close(1);

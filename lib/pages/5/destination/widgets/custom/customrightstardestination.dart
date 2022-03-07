@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart'; 
-import '../index.dart'; 
+import '../index.dart';
 
 class CustomRightStarDestinationForm extends StatelessWidget {
   const CustomRightStarDestinationForm({
@@ -10,6 +10,7 @@ class CustomRightStarDestinationForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+      
         DestinationsOrderableListWidget(),
         const ResetPadWidget(),
         const KeyPadWidget(),
@@ -17,6 +18,3 @@ class CustomRightStarDestinationForm extends StatelessWidget {
     );
   }
 }
-
-
-

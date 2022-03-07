@@ -34,8 +34,8 @@ class CustomStarDestinationForm extends StatelessWidget {
       globalctx.reset.value = false;
     }
 
-    var acc = getLeftAccumulated("");
-    dayleft.value = totalDays.value + leftAccumulated.value;
+ 
+    // dayleft.value = totalDays.value + leftAccumulated.value;
 
     List<String> keyActivities = getFormValue(
         globalctx.memory["destinations"], destination, "keyActivities", <String>[]);
