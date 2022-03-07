@@ -5,7 +5,7 @@ import '../index.dart';
 
 // ignore: must_be_immutable
 class NavBarWidget extends StatelessWidget {
-  NavBarWidget({Key? key}) : super(key: key);
+  const NavBarWidget({Key? key}) : super(key: key);
 
   void _onItemTapped(int index) {
     selectedIndex.value = index;

@@ -20,8 +20,7 @@ class FrontOptionWidget extends StatelessWidget {
         filteredByDestination.add(exp);
       }
     }
-
-    var row = filteredByDestination[0];
+ 
 
     return Stack(
       children: [

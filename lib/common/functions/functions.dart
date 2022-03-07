@@ -133,7 +133,7 @@ Function globalctxReset = () {
   globalctx.states["destinations"] = {};
   draggable.value = 0;
   updateDraggableDestinations();
-  filterSelectedDestinations();
+  updateAirPorts();
 };
 Function getItems = (data, value) {
   RxList<DropdownMenuItem<String>> items = <DropdownMenuItem<String>>[].obs;
@@ -302,13 +302,15 @@ Function updateDestinationsCatalog = () {
       countryName.toString().toLowerCase());
 };
 
-Function updateAirPortName = () {
-  try {
-    arrival = destinationsCatalog.toList().firtsWhere(
-        (element) => element["code"] == int.parse(arrivalPort.value));
-    departure = destinationsCatalog.toList().firtsWhere(
-        (element) => element["code"] == int.parse(departurePort.value));
-  } catch (e) {
-    print(e);
-  }
+Function updateAirPorts = () {
+  var arr = destinationsCatalog
+      .toList()
+      .where((element) => element["code"] == int.parse(arrivalPort.value)).first;
+  var dep = destinationsCatalog.toList().where(
+      (element) => element["code"] == int.parse(departurePort.value)).first;
+
+  arrival.value = arr;
+  departure.value = dep;
+
+  filterSelectedDestinations();
 };

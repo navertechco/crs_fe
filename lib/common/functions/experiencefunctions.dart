@@ -45,12 +45,7 @@ Function getFilteredExperiences = () {
   }).toList();
 
   Iterable filteredByAirport = filteredByKA;
-
-  // if (globalDestination.value == "arrival") {
-  //   filteredByAirport =
-  //       filteredByKA.where((e) => e["title"].contains(airport)).toList();
-  // }
-
+ 
   var filteredBySuggested = filteredByAirport.where((e) {
     return getExperienceState(e.description) == "suggested";
   }).toList();

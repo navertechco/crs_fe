@@ -24,6 +24,7 @@ class CustomFormCheckboxWidget extends StatelessWidget {
   final double height;
   final groupValue;
   List<Map<String, dynamic>> data = [];
+  // ignore: prefer_function_declarations_over_variables
   void Function(Rx<String?>?) _onChanged = (Rx<String?>? value) {};
   final int? value;
   @override

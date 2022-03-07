@@ -5,9 +5,7 @@ import 'package:get/get.dart';
 import 'package:naver_crs/pages/5/destination/widgets/index.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:sweetalert/sweetalert.dart';
-import '../index.dart';
-import './functions.dart';
-
+import '../index.dart'; 
 Function promoteDestination = (ctrl, _formKey, destination) {
   if (_formKey.currentState!.validate()) {
     _formKey.currentState!.save();
@@ -24,18 +22,7 @@ Function promoteDestination = (ctrl, _formKey, destination) {
 // Destination Functions
 Function getDestinationAirport = () {
   var airport = "quito";
-  try {
-    // var destinationData = getParam("DESTINATION_DATA")["value"];
-
-    // var destinations = globalctx.promotedDestinations;
-    // var first = destinations[0];
-    // var last = destinations[destinations.length - 2];
-    // if (globalDestination.value == "arrival") {
-    //   airport = destinationData[first][5];
-    // }
-    // if (globalDestination.value == "departure") {
-    //   airport = destinationData[last][5];
-    // }
+  try { 
     return airport;
   } catch (e) {
     return airport;
@@ -53,12 +40,7 @@ Function checkPromotedAirport = (destination) {
 };
 
 Function getCombinedDestinations = () {
-  var departure = {
-    "explorationDay": "1",
-    "days": "1",
-    "airport": "quito",
-    "daysData": {}
-  };
+ 
   var memoryDestinations = {};
   for (var destination in destinations.entries) {
     var key = destination.key;
@@ -66,10 +48,8 @@ Function getCombinedDestinations = () {
     memoryDestinations = {...memoryDestinations, key: value};
   }
   destinations = memoryDestinations;
-  var result = {
-    // "arrival": arrival,
-    ...memoryDestinations,
-    // "departure": departure
+  var result = { 
+    ...memoryDestinations, 
   };
 
   return result;
@@ -80,9 +60,7 @@ Function processDestinations = (context) {
   if (globalctx.promotedDestinations.isNotEmpty & (dayleft == 0)) {
     globalDestination.value = globalctx.promotedDestinations[0];
 
-    var destinationDay = [];
-    // var arrival = {"explorationDay": "1", "days": "1", "airport": "quito"};
-
+    var destinationDay = []; 
     for (var i = 0; i < totalDays.value; i++) {
       globalctx.experienceDragData.value[i] ??= <Widget>[];
       // globalctx.promotedExperiences[i] ??= [].obs;
@@ -117,15 +95,9 @@ Function processDestinations = (context) {
   }
 };
 Function findDestination = (destination) {
-  var promotedDestinations = globalctx.promotedDestinations;
-  // var result = "departure";
+  var promotedDestinations = globalctx.promotedDestinations; 
   var index =
-      promotedDestinations.indexWhere((element) => element == destination);
-  // if (index == -1) {
-  //   if (destination == "arrival") {
-  //     result = "arrival";
-  //   }
-  // } else {
+      promotedDestinations.indexWhere((element) => element == destination); 
   var result = promotedDestinations[index];
   // }
   return result;

@@ -14,8 +14,6 @@ class CustomLogisticInformationForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var tourdata = globalctx.memory;
-    var logistic = getValue(tourdata, "logistic");
     var readonly = getContext("readonly") ?? false;
     return Form(
       key: _formKey,

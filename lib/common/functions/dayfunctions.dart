@@ -44,13 +44,7 @@ Function nextDay = () {
   filterSuggestedExperiences();
 };
 
-Function getDtos = () {
-  // var arrival = {"title": "arrival", "explorationDay": "1", "airport": "quito"};
-  // var departure = {
-  //   "title": "departure",
-  //   "explorationDay": "1",
-  //   "airport": "quito"
-  // };
+Function getDtos = () { 
   var day = {
     "date": "",
     "observation": "",
@@ -110,8 +104,7 @@ Function prepareDaysToResume = () {
 };
 
 Function processDays = () {
-  result = [];
-  // result.add({"day": 1, "destination": "arrival"});
+  result = []; 
   var destinationDay = globalctx.memory["destinationDay"];
 
   for (var dest in destinationDay) {

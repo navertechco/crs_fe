@@ -36,7 +36,7 @@ class CustomFormDayWidget extends StatelessWidget {
         key: globalctx.keys["day-$destinationindex-$dayindex"],
         child: Column(
           children: [
-            CustomFormTitleWidget(level: 4, label: "Day: ${dayLabel}#####"),
+            CustomFormTitleWidget(level: 4, label: "Day: $dayLabel#####"),
             CustomDescriptionWidget(
                 text: daydescription, width: 0.55, fontSize: 0.016),
             CustomFormExperiencesDetailWidget(data: data, indexes: indexes),

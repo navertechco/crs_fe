@@ -6,6 +6,7 @@ import 'package:naver_crs/pages/6/experiences/widgets/experiencedetail/index.dar
 
 import '../../../../index.dart';
 
+// ignore: must_be_immutable
 class SwitcherWidget extends StatelessWidget {
   SwitcherWidget(
       {Key? key,
