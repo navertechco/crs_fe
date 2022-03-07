@@ -18,11 +18,11 @@ class FrontOptionWidget extends StatelessWidget {
     return Stack(children: [
       Padding(
         padding: EdgeInsets.only(
-          top: MediaQuery.of(context).size.height * 0.01,
-          left: MediaQuery.of(context).size.width * 0.01,
+          top: MediaQuery.of(context).size.height * 0.017,
+          left: MediaQuery.of(context).size.width * 0.013,
         ),
         child: Image.asset(dest[2],
-            width: MediaQuery.of(context).size.width * 0.4),
+            width: MediaQuery.of(context).size.width * 0.39),
       ),
       Padding(
         padding: EdgeInsets.only(
