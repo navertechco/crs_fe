@@ -10,7 +10,9 @@ class LogisticState extends GetXState {
         "departure_port": departure_port,
         "arrival_port": arrival_port,
         "arrival_date": arrivalDate,
-        "departure_date": departureDate
+        "since_date": sinceDate,
+        "departure_date": departureDate,
+        "until_date": untilDate
       };
     };
   }
@@ -21,5 +23,7 @@ class LogisticState extends GetXState {
   // ignore: non_constant_identifier_names
   String departure_port = "";
   DateTime arrivalDate = DateTime.now();
+  DateTime sinceDate = DateTime.now();
   DateTime departureDate = DateTime.now();
+  DateTime untilDate = DateTime.now();
 }

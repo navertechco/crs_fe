@@ -13,13 +13,11 @@ class LogisticFormPage extends GetView<StatelessWidget> {
   final LogisticController? ctrl;
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Stack(
-        children: [
-          LeftWidget(),
-          RightWidget(ctrl: ctrl, profile: false),
-        ],
-      ),
+    return Stack(
+      children: [
+        LeftWidget(),
+        RightWidget(ctrl: ctrl, profile: false),
+      ],
     );
   }
 }

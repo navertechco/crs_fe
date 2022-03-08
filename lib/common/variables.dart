@@ -10,8 +10,8 @@ Rx<int> leftAccumulated = 0.obs;
 var airports = {"1": "quito", "2": "guayaquil"};
 Rx<int> currentDay = 0.obs;
 var result = [];
-var allPromotedDestinations = [ 
-  ...globalctx.promotedDestinations.value, 
+var allPromotedDestinations = [
+  ...globalctx.promotedDestinations.value,
 ];
 var globalDestination = Rx("");
 
@@ -23,6 +23,9 @@ Rx<DateTime> birthDate =
     Rx(DateTime.parse(globalctx.memory["customer"]["birth_date"]));
 Rx<DateTime> arrivalDate = Rx(DateTime.now());
 Rx<DateTime> departureDate = Rx(DateTime.now());
+Rx<DateTime> sinceDate = Rx(DateTime.now());
+Rx<DateTime> untilDate = Rx(DateTime.now());
+RxString tourOption = "0".obs;
 Rx<int> totalDays =
     Rx(departureDate.value.difference(arrivalDate.value).inDays);
 var dayleft = totalDays;
@@ -59,11 +62,11 @@ var allDestinations = memory["destinations"];
 var destinationList = allDestinations.entries
     .map((e) => {"destination": e.key.toString(), ...e.value})
     .toList();
-List<dynamic> customDestinationData = [ 
-  ...destinationList, 
+List<dynamic> customDestinationData = [
+  ...destinationList,
 ];
-var promotedDestinations = [ 
-  ...globalctx.promotedDestinations.value, 
+var promotedDestinations = [
+  ...globalctx.promotedDestinations.value,
 ];
 RxInt selectedIndex = 0.obs;
 RxString travelCode = "".obs;
@@ -82,10 +85,4 @@ var airportCatalog = processCatalog("airport");
 
 RxInt draggable = 0.obs;
 
- List pageList = [
-    "Tour",
-    "Logistic",
-    "Customer",
-    "Destination",
-    "Experiences"
-  ];
+List pageList = ["Tour", "Logistic", "Customer", "Destination", "Experiences"];
