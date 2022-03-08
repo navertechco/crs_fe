@@ -28,12 +28,27 @@ Future<bool> getCatalog(
   }
 }
 
+RxList<Map<String, dynamic>> daysCatalog = <Map<String, dynamic>>[].obs;
+
+Function processDaysCatalog = () {
+  int total = departureDate.value.difference(arrivalDate.value).inDays;
+  if (total > 0) {
+    daysCatalog.value = [];
+    for (int i = 1; i < total; i++) {
+      Map<String, dynamic> row = {};
+      row["code"] = i;
+      row["description"] = "Day $i";
+      daysCatalog.add(row);
+    }
+  }
+};
+
 Function processCatalog = (name) {
   var ctxCatalogs = getContext("catalogs");
+  List<Map<String, dynamic>> catalog = [];
 
   if (ctxCatalogs != null) {
     var catalogs = ctxCatalogs["catalogs"];
-    List<Map<String, dynamic>> catalog = [];
     var items = catalogs[name];
     if (items != null) {
       for (var item in items) {
@@ -45,11 +60,9 @@ Function processCatalog = (name) {
         catalog.add(row);
       }
     }
-
-    return catalog;
   }
 
-  return <Map<String, dynamic>>[];
+  return catalog;
 };
 Function getDateValue = (data, key, {def}) {
   try {
@@ -305,9 +318,12 @@ Function updateDestinationsCatalog = () {
 Function updateAirPorts = () {
   var arr = destinationsCatalog
       .toList()
-      .where((element) => element["code"] == int.parse(arrivalPort.value)).first;
-  var dep = destinationsCatalog.toList().where(
-      (element) => element["code"] == int.parse(departurePort.value)).first;
+      .where((element) => element["code"] == int.parse(arrivalPort.value))
+      .first;
+  var dep = destinationsCatalog
+      .toList()
+      .where((element) => element["code"] == int.parse(departurePort.value))
+      .first;
 
   arrival.value = arr;
   departure.value = dep;
@@ -315,17 +331,17 @@ Function updateAirPorts = () {
   filterSelectedDestinations();
 };
 
-
-Future<void> showMyDialog(context, String title, String errorText, String question, String button) async {
+Future<void> showMyDialog(context, String title, String errorText,
+    String question, String button) async {
   return showDialog<void>(
     context: context,
     barrierDismissible: false, // user must tap button!
     builder: (BuildContext context) {
       return AlertDialog(
-        title:   Text(title),
+        title: Text(title),
         content: SingleChildScrollView(
           child: ListBody(
-            children:   <Widget>[
+            children: <Widget>[
               Text(errorText),
               Text(question),
             ],
@@ -333,7 +349,7 @@ Future<void> showMyDialog(context, String title, String errorText, String questi
         ),
         actions: <Widget>[
           TextButton(
-            child:   Text(button),
+            child: Text(button),
             onPressed: () {
               Navigator.of(context).pop();
             },

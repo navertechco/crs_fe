@@ -67,6 +67,7 @@ class CustomLogisticInformationForm extends StatelessWidget {
                           value ??= DateTime.now();
                           ctrl!.state.arrivalDate = value;
                           arrivalDate.value = value;
+                          processDaysCatalog();
                         },
                       );
                     }),
@@ -106,6 +107,7 @@ class CustomLogisticInformationForm extends StatelessWidget {
                         onSaved: (value) {
                           ctrl!.state.departureDate = value!;
                           departureDate.value = value;
+                          processDaysCatalog();
                         },
                         onChanged: (value) {
                           value ??= DateTime.now();
@@ -153,17 +155,20 @@ class CustomLogisticInformationForm extends StatelessWidget {
                                 setFormValue(globalctx.memory, "logistic",
                                     "open_credit", value);
                                 openCredit.value = value!;
+                                processDaysCatalog();
                               },
                               label: "Open Credit Options ",
                               data: processCatalog("open_credit"),
                             ),
-                          if (openCredit.value == "2")
+                          if (openCredit.value == "2" && daysCatalog.isNotEmpty)
                             CustomFormMultiDropDownFieldWidget(
                               validator: (value) =>
                                   CustomMultiDropdownRequiredValidator(value,
                                       errorText: "OC Days are required ",
                                       context: context),
-                              value: ocDays,
+                              value: getFormValue(globalctx.memory, "logistic",
+                                      "oc_days", <String>[]) ??
+                                  <String>[],
                               onSaved: (value) {
                                 setFormValue(globalctx.memory, "logistic",
                                     "oc_days", value);
@@ -175,7 +180,7 @@ class CustomLogisticInformationForm extends StatelessWidget {
                               },
                               hintText: " ",
                               label: "Open Credit Days      ",
-                              data: processCatalog("key_activity"),
+                              data: daysCatalog,
                             ),
                           if (tourOption.value == "2")
                             Column(
