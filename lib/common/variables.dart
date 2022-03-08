@@ -25,7 +25,9 @@ Rx<DateTime> arrivalDate = Rx(DateTime.now());
 Rx<DateTime> departureDate = Rx(DateTime.now());
 Rx<DateTime> sinceDate = Rx(DateTime.now());
 Rx<DateTime> untilDate = Rx(DateTime.now());
+RxList<String> ocDays = <String>[].obs;
 RxString tourOption = "0".obs;
+RxString openCredit = "0".obs;
 Rx<int> totalDays =
     Rx(departureDate.value.difference(arrivalDate.value).inDays);
 var dayleft = totalDays;

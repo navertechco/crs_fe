@@ -26,100 +26,8 @@ class CustomLogisticInformationForm extends StatelessWidget {
             ),
             child: Column(
               children: [
-                const CustomTitleWidget(
-                  width: 0.3,
-                  fontWeight: FontWeight.bold,
-                  label: "  Logistic Information",
-                ),
                 SingleChildScrollView(
                   child: Column(children: [
-                    Obx(() {
-                      return Column(
-                        children: [
-                          CustomFormDropDownFieldWidget(
-                            validator: CustomRequiredValidator(
-                                errorText: "Destination option is required ",
-                                ctx: context),
-                            value: tourOption.value,
-                            onSaved: (value) {
-                              setFormValue(globalctx.memory, "logistic",
-                                  "tour_option", value);
-                            },
-                            onChanged: (value) {
-                              setFormValue(globalctx.memory, "logistic",
-                                  "tour_option", value);
-                              tourOption.value = value!;
-                            },
-                            label: "Tour Options\t\t\t\t\t\t\t\t\t\t\t\t\t",
-                            data: processCatalog("destination_option"),
-                          ),
-                          if (tourOption.value == "4")
-                            CustomFormDropDownFieldWidget(
-                              validator: CustomRequiredValidator(
-                                  errorText: "Open Credit is required ",
-                                  ctx: context),
-                              value: getFormValue(globalctx.memory, "logistic",
-                                  "open_credit", "0"),
-                              onSaved: (value) {
-                                setFormValue(globalctx.memory, "logistic",
-                                    "open_credit", value);
-                              },
-                              onChanged: (value) {
-                                setFormValue(globalctx.memory, "logistic",
-                                    "open_credit", value);
-                              },
-                              label: "Open Credit Options ",
-                              data: processCatalog("open_credit"),
-                            ),
-                          if (tourOption.value == "2")
-                            Column(
-                              children: [
-                                CustomFormDateFieldWidget(
-                                  disabled: readonly,
-                                  initialValue: sinceDate.value,
-                                  validator: CustomDatetimeGreaterValidator(
-                                      context: context,
-                                      compare: sinceDate.value,
-                                      errorText:
-                                          "There is a problem with the Range Date",
-                                      invert: false),
-                                  label: "Since Date\t\t\t\t\t\t\t\t\t\t\t\t\t",
-                                  onSaved: (value) {
-                                    ctrl!.state.sinceDate = value!;
-                                    sinceDate.value = value;
-                                  },
-                                  onChanged: (value) {
-                                    value ??= DateTime.now();
-                                    ctrl!.state.sinceDate = value;
-                                    sinceDate.value = value;
-                                  },
-                                ),
-                                CustomFormDateFieldWidget(
-                                  disabled: readonly,
-                                  initialValue: untilDate.value,
-                                  validator: CustomDatetimeGreaterValidator(
-                                      context: context,
-                                      compare: untilDate.value,
-                                      errorText:
-                                          "There is a problem with the Range Date",
-                                      invert: true),
-                                  label:
-                                      "Until Date\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t",
-                                  onSaved: (value) {
-                                    ctrl!.state.untilDate = value!;
-                                    untilDate.value = value;
-                                  },
-                                  onChanged: (value) {
-                                    value ??= DateTime.now();
-                                    ctrl!.state.untilDate = value;
-                                    untilDate.value = value;
-                                  },
-                                )
-                              ],
-                            ),
-                        ],
-                      );
-                    }),
                     const CustomTitleWidget(
                         width: 0.225,
                         fontWeight: FontWeight.bold,
@@ -204,6 +112,118 @@ class CustomLogisticInformationForm extends StatelessWidget {
                           ctrl!.state.departureDate = value;
                           departureDate.value = value;
                         },
+                      );
+                    }),
+                    Obx(() {
+                      return Column(
+                        children: [
+                          const CustomTitleWidget(
+                            width: 0.3,
+                            fontWeight: FontWeight.bold,
+                            label: "  Logistic Information",
+                          ),
+                          CustomFormDropDownFieldWidget(
+                            validator: CustomRequiredValidator(
+                                errorText: "Destination option is required ",
+                                ctx: context),
+                            value: tourOption.value,
+                            onSaved: (value) {
+                              setFormValue(globalctx.memory, "logistic",
+                                  "tour_option", value);
+                            },
+                            onChanged: (value) {
+                              setFormValue(globalctx.memory, "logistic",
+                                  "tour_option", value);
+                              tourOption.value = value!;
+                            },
+                            label: "Tour Options\t\t\t\t\t\t\t\t\t\t\t\t\t",
+                            data: processCatalog("destination_option"),
+                          ),
+                          if (tourOption.value == "4")
+                            CustomFormDropDownFieldWidget(
+                              validator: CustomRequiredValidator(
+                                  errorText: "Open Credit is required ",
+                                  ctx: context),
+                              value: openCredit.value,
+                              onSaved: (value) {
+                                setFormValue(globalctx.memory, "logistic",
+                                    "open_credit", value);
+                              },
+                              onChanged: (value) {
+                                setFormValue(globalctx.memory, "logistic",
+                                    "open_credit", value);
+                                openCredit.value = value!;
+                              },
+                              label: "Open Credit Options ",
+                              data: processCatalog("open_credit"),
+                            ),
+                          if (openCredit.value == "2")
+                            CustomFormMultiDropDownFieldWidget(
+                              validator: (value) =>
+                                  CustomMultiDropdownRequiredValidator(value,
+                                      errorText: "OC Days are required ",
+                                      context: context),
+                              value: ocDays,
+                              onSaved: (value) {
+                                setFormValue(globalctx.memory, "logistic",
+                                    "oc_days", value);
+                              },
+                              onChanged: (value) {
+                                setFormValue(globalctx.memory, "logistic",
+                                    "oc_days", value);
+                                ocDays.value = value!;
+                              },
+                              hintText: " ",
+                              label: "Open Credit Days      ",
+                              data: processCatalog("key_activity"),
+                            ),
+                          if (tourOption.value == "2")
+                            Column(
+                              children: [
+                                CustomFormDateFieldWidget(
+                                  disabled: readonly,
+                                  initialValue: sinceDate.value,
+                                  validator: CustomDatetimeGreaterValidator(
+                                      context: context,
+                                      compare: sinceDate.value,
+                                      errorText:
+                                          "There is a problem with the Range Date",
+                                      invert: false),
+                                  label: "Since Date\t\t\t\t\t\t\t\t\t\t\t\t\t",
+                                  onSaved: (value) {
+                                    ctrl!.state.sinceDate = value!;
+                                    sinceDate.value = value;
+                                  },
+                                  onChanged: (value) {
+                                    value ??= DateTime.now();
+                                    ctrl!.state.sinceDate = value;
+                                    sinceDate.value = value;
+                                  },
+                                ),
+                                CustomFormDateFieldWidget(
+                                  disabled: readonly,
+                                  initialValue: untilDate.value,
+                                  validator: CustomDatetimeGreaterValidator(
+                                      context: context,
+                                      compare: untilDate.value,
+                                      errorText:
+                                          "There is a problem with the Range Date",
+                                      invert: true),
+                                  label:
+                                      "Until Date\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t",
+                                  onSaved: (value) {
+                                    ctrl!.state.untilDate = value!;
+                                    untilDate.value = value;
+                                  },
+                                  onChanged: (value) {
+                                    value ??= DateTime.now();
+                                    ctrl!.state.untilDate = value;
+                                    untilDate.value = value;
+                                  },
+                                )
+                              ],
+                            ),
+                        ],
                       );
                     }),
                   ]),
