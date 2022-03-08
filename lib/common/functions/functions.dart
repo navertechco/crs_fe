@@ -314,3 +314,32 @@ Function updateAirPorts = () {
 
   filterSelectedDestinations();
 };
+
+
+Future<void> showMyDialog(context, String title, String errorText, String question, String button) async {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title:   Text(title),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children:   <Widget>[
+              Text(errorText),
+              Text(question),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            child:   Text(button),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
+}

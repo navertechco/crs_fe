@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../index.dart';
 
@@ -93,7 +93,12 @@ class DescriptionWidget extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  showMyDialog(context);
+                  showMyDialog(
+                      context,
+                      "The Exploration Days amount can´t exceed Days left",
+                      "Error",
+                      "Error?",
+                      "button");
                 },
                 child: Text(
                   description,

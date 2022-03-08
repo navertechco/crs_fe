@@ -27,14 +27,7 @@ class FormCatalogueWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var items = getItems(data, value);
-    // var realValue = (() {
-    //   if (value != null) {
-    //     return (int.parse(value) > items.length - 1)
-    //         ? (items.length - 1).toString()
-    //         : value;
-    //   }
-    //   return "0";
-    // })();
+
     return Obx(() {
       return DropdownButtonHideUnderline(
         child: DropdownButtonFormField(
