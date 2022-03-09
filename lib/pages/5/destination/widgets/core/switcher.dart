@@ -1,7 +1,7 @@
 import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart'; 
+import 'package:get/get.dart';
 import '../../../../index.dart';
 import '../index.dart';
 
@@ -10,12 +10,17 @@ class SwitcherWidget extends StatelessWidget {
       {Key? key,
       required this.firstchild,
       required this.seccondchild,
-      required this.destination})
+      required this.destination,
+      required this.type,
+      required this.index
+      })
       : super(key: key);
 
   final Widget firstchild;
   final Widget seccondchild;
   final String destination;
+  final String type;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +49,8 @@ class SwitcherWidget extends StatelessWidget {
         showDialog(
             context: context,
             builder: (context) {
-              return DestinationDetailPage(destination: destination);
+              return DestinationDetailPage(
+                  destination: destination, type: type, index:index);
             });
       }
     }

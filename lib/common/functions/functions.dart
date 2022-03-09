@@ -36,8 +36,8 @@ Function processDaysCatalog = () {
     daysCatalog.value = [];
     for (int i = 0; i < total; i++) {
       Map<String, dynamic> row = {};
-      row["code"] = i+1;
-      row["description"] = "Day ${i+1}";
+      row["code"] = i + 1;
+      row["description"] = "Day ${i + 1}";
       daysCatalog.add(row);
     }
   }
@@ -236,39 +236,18 @@ Function toCatalog = (item) {
   return ctlg;
 };
 
-Function getDestinationDay = (String destination) {
+Function getDestinationDay = (String destination, int index) {
   if (globalctx.memory != null) {
     if (destinations != null) {
-      if (destinations[destination] != null) {
-        if (destinations[destination]["explorationDay"] != null) {
-          return int.parse(destinations[destination]["explorationDay"]);
+      if (destinations[index][destination] != null) {
+        if (destinations[index][destination]["explorationDay"] != null) {
+          return int.parse(destinations[index][destination]["explorationDay"]);
         }
       }
     }
   }
 
   return 0;
-};
-
-Function setDestination = (String destination) {
-  destinations[destination] ??= {};
-};
-
-Function setDestinationDay = (String destination, value) {
-  setDestination(destination);
-  destinations[destination]["explorationDay"] ??= value;
-};
-
-Function getLeftAccumulated = (destination) {
-  leftAccumulated.value = 0;
-  totalDays.value = departureDate.value.difference(arrivalDate.value).inDays;
-  for (String item in destinations.keys) {
-    bool exists = item != destination;
-    if (exists) {
-      leftAccumulated.value -= getDestinationDay(item) as int;
-    }
-  }
-  return leftAccumulated.value;
 };
 
 Function parseIntValue = (value) {
@@ -316,14 +295,8 @@ Function updateDestinationsCatalog = () {
 };
 
 Function updateAirPorts = () {
-  var arr = destinationsCatalog
-      .toList()
-      .where((element) => element["code"] == int.parse(arrivalPort.value))
-      .first;
-  var dep = destinationsCatalog
-      .toList()
-      .where((element) => element["code"] == int.parse(departurePort.value))
-      .first;
+  var arr = getDestinationData(arrivalPort.value);
+  var dep = getDestinationData(departurePort.value);
 
   arrival.value = arr;
   departure.value = dep;

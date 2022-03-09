@@ -40,6 +40,7 @@ class CustomLogisticInformationForm extends StatelessWidget {
                         setFormValue(globalctx.memory, "logistic",
                             "arrival_port", value);
                         arrivalPort.value = value;
+                        globalctxReset();
                       },
                       onChanged: (value) {
                         ctrl!.state.arrival_port = value!;
@@ -86,6 +87,8 @@ class CustomLogisticInformationForm extends StatelessWidget {
                       },
                       onChanged: (value) {
                         ctrl!.state.departure_port = value!;
+                        departurePort.value = value;
+                        globalctxReset();
                       },
                       validator: CustomRequiredValidator(
                           errorText: "Departure Port is required ",

@@ -15,6 +15,7 @@ class CustomFormTextFieldWidget extends StatelessWidget {
       this.disabled = false,
       this.value,
       required this.onSaved,
+      this.onFieldSubmitted,
       this.onChanged})
       : super(key: key);
 
@@ -26,6 +27,7 @@ class CustomFormTextFieldWidget extends StatelessWidget {
   String? Function(String?)? validator;
   final void Function(String?)? onSaved;
   final void Function(String?)? onChanged;
+  final void Function(String?)? onFieldSubmitted;
   final bool disabled;
   final value;
 
@@ -41,6 +43,7 @@ class CustomFormTextFieldWidget extends StatelessWidget {
               disabled: disabled,
               onSaved: onSaved,
               onChanged: onChanged,
+              onFieldSubmitted:onFieldSubmitted,
               hintText: hintText,
               keyboardType: keyboardType,
               validator: validator,

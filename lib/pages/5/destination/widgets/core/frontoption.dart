@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../index.dart';
 
-class FrontOptionWidget extends StatelessWidget {
-  const FrontOptionWidget({Key? key, this.destination = "coast"})
+class DestinationFrontOptionWidget extends StatelessWidget {
+  const DestinationFrontOptionWidget({Key? key, this.destination = "coast", required this.index})
       : super(key: key);
 
   final String destination;
+  final index;
   @override
   Widget build(BuildContext context) {
     // ignore: unnecessary_null_comparison
@@ -14,7 +15,7 @@ class FrontOptionWidget extends StatelessWidget {
     var airport = false;
     var boat = false;
     var dest = getDestinationValue(destination);
-    RxString state = getDestinationState(destination).toString().obs;
+    RxString state = getDestinationState(destination, index).toString().obs;
 
     if (dest != null) {
       airport = dest[6];

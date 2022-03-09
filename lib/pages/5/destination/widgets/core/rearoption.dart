@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../index.dart';
 
-class RearOptionWidget extends StatelessWidget {
-  const RearOptionWidget(
+class DestinationRearOptionWidget extends StatelessWidget {
+  const DestinationRearOptionWidget(
       {Key? key,
       this.destination = "coast",
       this.description =

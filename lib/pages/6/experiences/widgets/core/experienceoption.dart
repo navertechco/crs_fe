@@ -22,7 +22,7 @@ class ExperienceOptionWidget extends StatelessWidget {
             child: SwitcherWidget(
                 suggested: suggested,
                 experience: experience,
-                firstchild: FrontOptionWidget(experience: experience),
-                seccondchild: RearOptionWidget(experience: experience))));
+                firstchild: ExperienceFrontOptionWidget(experience: experience),
+                seccondchild: ExperienceRearOptionWidget(experience: experience))));
   }
 }

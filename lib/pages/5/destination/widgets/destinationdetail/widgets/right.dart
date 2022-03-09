@@ -6,11 +6,13 @@ class RightWidget extends StatelessWidget {
   const RightWidget({
     Key? key,
     required this.destination,
+    required this.index,
     required this.ctrl,
     required this.formKey,
   }) : super(key: key);
 
   final destination;
+  final index;
   final DestinationDetailController ctrl;
   final GlobalKey<FormState> formKey;
   @override
@@ -25,7 +27,7 @@ class RightWidget extends StatelessWidget {
         // color: Colors.red[50],
         child: SingleChildScrollView(
           child:
-              CustomStarDestinationForm(destination: destination, ctrl: ctrl, formKey:formKey),
+              CustomStarDestinationForm(destination: destination, index:index, ctrl: ctrl, formKey:formKey),
         ),
       ),
     );

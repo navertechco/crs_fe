@@ -3,8 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../index.dart';
 
-class FrontOptionWidget extends StatelessWidget {
-  const FrontOptionWidget({Key? key, required this.experience})
+class ExperienceFrontOptionWidget extends StatelessWidget {
+  const ExperienceFrontOptionWidget({Key? key, required this.experience})
       : super(key: key);
   final String experience;
   @override

@@ -6,9 +6,11 @@ class LeftWidget extends StatelessWidget {
   const LeftWidget({
     Key? key,
     required this.destination,
+    required this.index,
   }) : super(key: key);
 
   final destination;
+  final index;
 
   @override
   Widget build(BuildContext context) {

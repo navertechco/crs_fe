@@ -13,6 +13,7 @@ class RoundedFormField extends StatelessWidget {
   final String hintText;
   final void Function(String?)? onSaved;
   final void Function(String?)? onChanged;
+  final void Function(String?)? onFieldSubmitted;
   final TextInputType? keyboardType;
   String? Function(String?)? validator;
   final String? initialValue;
@@ -26,6 +27,7 @@ class RoundedFormField extends StatelessWidget {
       this.fontSize = 0.1,
       this.validator,
       this.onChanged,
+      this.onFieldSubmitted,
       this.onSaved,
       this.initialValue,
       this.keyboardType = TextInputType.text,
@@ -47,12 +49,14 @@ class RoundedFormField extends StatelessWidget {
           color: Color.fromARGB(0, 0, 0, 0),
           borderRadius: BorderRadius.circular(50)),
       child: TextFormField(
+        // autofocus: true,
         readOnly: disabled,
         initialValue: initialValue,
         validator: validator,
         keyboardType: keyboardType,
         onSaved: onSaved,
-        onFieldSubmitted: onChanged,
+        onFieldSubmitted: onFieldSubmitted,
+        onChanged: onChanged,
         obscureText: password,
         cursorColor: Colors.black54,
         style: KTextSytle(

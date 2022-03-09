@@ -9,9 +9,13 @@ import '../index.dart';
 // ignore: must_be_immutable
 class DragDestinationWidget extends StatelessWidget {
   String destination;
+  String type;
+  int index;
   DragDestinationWidget({
     Key? key,
     required this.destination,
+    required this.type,
+    required this.index,
   }) : super(key: key);
 
   @override
@@ -20,7 +24,7 @@ class DragDestinationWidget extends StatelessWidget {
       return globalctx.destinations.contains(destination)
           ? Row(
               children: [
-                DestinationOptionWidget(destination: destination),
+                DestinationOptionWidget(destination: destination, type:type, index:index),
                 !globalctx.promotedDestinations.contains(destination)
                     ? GestureDetector(
                         onTap: () {

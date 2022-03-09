@@ -10,6 +10,7 @@ import '../../../../index.dart';
 class CustomStarDestinationForm extends StatelessWidget {
   const CustomStarDestinationForm({
     Key? key,
+    required this.index,
     required this.destination,
     required this.ctrl,
     required this.formKey,
@@ -17,6 +18,7 @@ class CustomStarDestinationForm extends StatelessWidget {
   final String destination;
   final DestinationDetailController ctrl;
   final GlobalKey<FormState> formKey;
+  final index;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class CustomStarDestinationForm extends StatelessWidget {
 
     Rx<int> explorationDay = Rx(int.parse(getFormValue(
             globalctx.memory["destinations"],
-            destination,
+            index,
             "explorationDay",
             "0") ??
         "0"));
@@ -39,13 +41,27 @@ class CustomStarDestinationForm extends StatelessWidget {
 
     // dayleft.value = totalDays.value + leftAccumulated.value;
 
-    List<String> keyActivities = getFormValue(globalctx.memory["destinations"],
-        destination, "keyActivities", <String>[]);
+    List<String> keyActivities = getFormValue(
+        globalctx.memory["destinations"],
+        index,
+        "keyActivities", <String>[]);
 
     List<Map<String, dynamic>> explorationdDays =
         processCatalog("exploration_days");
 
     Rx<List> trCatalog = Rx(processCatalog("travel_rhythm"));
+
+    Function saveExplorationDays = (int valueInt) {
+      int acc = getLeftAccumulated(index);
+      dayleft.value = totalDays.value + acc - valueInt;
+      setFormValue(globalctx.memory["destinations"], index,
+          "explorationDay", valueInt.toString());
+      setFormValue(
+          globalctx.memory, index, "explorationDay", valueInt.toString());
+      explorationDay.value = valueInt;
+      setDestinationDay(index, valueInt.toString());
+      // updateTotalLeftAccumulated();
+    };
 
     Function validateExplorationDays = (value, context) async {
       int valueInt = parseIntValue(value);
@@ -55,19 +71,12 @@ class CustomStarDestinationForm extends StatelessWidget {
           value = dayleft.value.toString();
           valueInt = parseIntValue(value);
         }
-        int acc = getLeftAccumulated(destination);
-        dayleft.value = totalDays.value + acc - valueInt;
-        setFormValue(globalctx.memory["destinations"], destination,
-            "explorationDay", value);
-        setFormValue(globalctx.memory, destination, "explorationDay", value);
-        explorationDay.value = valueInt;
-        setDestinationDay(destination, value);
+        saveExplorationDays(valueInt);
       } else {
         await showMyDialog(context,
             "The Exploration Days amount can´t exceed Days left", "", "", "Ok");
       }
     };
-
     return Form(
       key: formKey,
       child: Column(
@@ -98,7 +107,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                 CustomTitleWidget(
                   width: 0.2,
                   fontWeight: FontWeight.bold,
-                  label: destination,
+                  label: "Destination: ${destination.capitalize}",
                 ),
                 Obx(() {
                   Rx<List<Map<String, dynamic>>> filteredED = Rx(
@@ -106,13 +115,19 @@ class CustomStarDestinationForm extends StatelessWidget {
                           .where((e) => e["code"] <= totalDays.value)
                           .toList());
                   return CustomFormTextFieldWidget(
-                      value: getFormValue(globalctx.memory["destinations"],
-                          destination, "explorationDay", "0"),
+                      value: getFormValue(
+                          globalctx.memory["destinations"],
+                          index,
+                          "explorationDay",
+                          "0"),
                       validator: CustomRequiredValidator(
                           errorText: "Exploration Days required ",
                           ctx: context),
                       onSaved: (value) {
                         setContext("dayleft", dayleft.value);
+                      },
+                      onFieldSubmitted: (value) {
+                        // validateExplorationDays(value, context);
                       },
                       onChanged: (value) {
                         validateExplorationDays(value, context);
@@ -129,15 +144,24 @@ class CustomStarDestinationForm extends StatelessWidget {
                           validator: CustomRequiredValidator(
                               errorText: "Exploration mode is required ",
                               ctx: context),
-                          value: getFormValue(globalctx.memory["destinations"],
-                              destination, "explorationMode", "0"),
+                          value: getFormValue(
+                              globalctx.memory["destinations"],
+                              index,
+                              "explorationMode",
+                              "0"),
                           onSaved: (value) {
-                            setFormValue(globalctx.memory["destinations"],
-                                destination, "explorationMode", value);
+                            setFormValue(
+                                globalctx.memory["destinations"],
+                                index,
+                                "explorationMode",
+                                value);
                           },
                           onChanged: (value) {
-                            setFormValue(globalctx.memory["destinations"],
-                                destination, "explorationMode", value);
+                            setFormValue(
+                                globalctx.memory["destinations"],
+                                index,
+                                "explorationMode",
+                                value);
                           },
                           label: "Exploration Mode   ",
                           data: processCatalog("exploration_mode"),
@@ -152,14 +176,14 @@ class CustomStarDestinationForm extends StatelessWidget {
                         errorText: "Destination option is required ",
                         ctx: context),
                     value: getFormValue(globalctx.memory["destinations"],
-                        destination, "destinationOption", "1"),
+                        index, "destinationOption", "1"),
                     onSaved: (value) {
                       setFormValue(globalctx.memory["destinations"],
-                          destination, "destinationOption", value);
+                          index, "destinationOption", value);
                     },
                     onChanged: (value) {
                       setFormValue(globalctx.memory["destinations"],
-                          destination, "destinationOption", value);
+                          index, "destinationOption", value);
                     },
                     label: "Destination Option",
                     data: processCatalog("destination_option"),
@@ -170,15 +194,18 @@ class CustomStarDestinationForm extends StatelessWidget {
                       validator: CustomRequiredValidator(
                           errorText: "Travel Rhythm is required ",
                           ctx: context),
-                      value: getFormValue(globalctx.memory["destinations"],
-                          destination, "travelRhythm", "1"),
+                      value: getFormValue(
+                          globalctx.memory["destinations"],
+                          index,
+                          "travelRhythm",
+                          "1"),
                       onSaved: (value) {
                         setFormValue(globalctx.memory["destinations"],
-                            destination, "travelRhythm", value);
+                            index, "travelRhythm", value);
                       },
                       onChanged: (value) {
                         setFormValue(globalctx.memory["destinations"],
-                            destination, "travelRhythm", value);
+                            index, "travelRhythm", value);
                       },
                       label: "Travel Rhythm         ",
                       data: trCatalog.value.where((value) {
@@ -215,16 +242,16 @@ class CustomStarDestinationForm extends StatelessWidget {
                     value: keyActivities,
                     onSaved: (value) {
                       setFormValue(globalctx.memory["destinations"],
-                          destination, "keyActivities", ["CULTURE"]);
+                          index, "keyActivities", ["CULTURE"]);
                       setFormValue(
                           globalctx.memory["destinations"],
-                          destination,
+                          index,
                           "keyActivities",
                           value!.map((e) => e["description"]).toSet().toList());
                     },
                     onChanged: (value) {
                       setFormValue(globalctx.memory["destinations"],
-                          destination, "keyActivities", value);
+                          index, "keyActivities", value);
                     },
                     hintText: " ",
                     label: "Key Activities            ",

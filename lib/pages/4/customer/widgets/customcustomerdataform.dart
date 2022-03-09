@@ -336,7 +336,6 @@ class CustomCustomerDataForm extends StatelessWidget {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
                       ctrl!.saveCustomer();
-                   selectedIndex.value = selectedIndex.value + 1;
                     }
                   },
                   child: const CustomTitleWidget(

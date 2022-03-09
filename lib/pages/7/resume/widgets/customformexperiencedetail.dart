@@ -17,7 +17,7 @@ class CustomFormExperiencesDetailWidget extends StatelessWidget {
     var dayindex = indexes[1];
     var destinationDay = globalctx.memory["destinationDay"];
     var destination = destinationDay[destinationindex]["destination"];
-    var destinationData = destinations[destination];
+    var destinationData = destinations[destinationindex][destination];
     var daysData = destinationData["daysData"];
     var days = daysData.entries.toList();
     var day = days[dayindex].value;

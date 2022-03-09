@@ -28,11 +28,6 @@ class CustomTourInformationForm extends StatelessWidget {
         ),
         child: SizedBox(
           child: Column(children: [
-            const CustomTitleWidget(
-              width: 0.3,
-              fontWeight: FontWeight.bold,
-              label: "  Tour Information",
-            ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.03),
             const CustomTitleWidget(
                 width: 0.225,
@@ -96,6 +91,7 @@ class CustomTourInformationForm extends StatelessWidget {
                 label: "Passengers                  ",
                 width: 0.20),
             SizedBox(height: MediaQuery.of(context).size.height * 0.075),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.03),
             Padding(
               padding: EdgeInsets.only(
                 top: MediaQuery.of(context).size.height * 0.2,

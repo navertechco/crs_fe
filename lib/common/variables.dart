@@ -10,9 +10,7 @@ Rx<int> leftAccumulated = 0.obs;
 var airports = {"1": "quito", "2": "guayaquil"};
 Rx<int> currentDay = 0.obs;
 var result = [];
-var allPromotedDestinations = [
-  ...globalctx.promotedDestinations.value,
-];
+var allPromotedDestinations = globalctx.promotedDestinations.value;
 var globalDestination = Rx("");
 
 RxInt destDays = 0.obs;
@@ -88,3 +86,5 @@ var airportCatalog = processCatalog("airport");
 RxInt draggable = 0.obs;
 
 List pageList = ["Tour", "Logistic", "Customer", "Destination", "Experiences"];
+
+RxInt accumulated = 0.obs;

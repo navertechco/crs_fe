@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 import '../../../index.dart';
-import 'customdescription.dart'; 
+import 'customdescription.dart';
 
 class CustomFormExperienceRowWidget extends StatelessWidget {
   const CustomFormExperienceRowWidget({
@@ -17,7 +17,7 @@ class CustomFormExperienceRowWidget extends StatelessWidget {
     var experienceindex = indexes[2];
     var destinationDay = globalctx.memory["destinationDay"];
     var destination = destinationDay[destinationindex]["destination"];
-    var destinationData = destinations[destination];
+    var destinationData = destinations[destinationindex][destination];
     var daysData = destinationData["daysData"];
     var days = daysData.entries.toList();
     var day = days[dayindex].value;
