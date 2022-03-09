@@ -196,8 +196,6 @@ class CustomStarDestinationForm extends StatelessWidget {
                         setFormValue(globalctx.memory["destinations"], index,
                             "travelRhythm", value);
                             setFormValue(globalctx.memory["destinations"], index,
-                            "destData", destData);
-                            setFormValue(globalctx.memory["destinations"], index,
                             "type", type);
                             setFormValue(globalctx.memory["destinations"], index,
                             "index", index);

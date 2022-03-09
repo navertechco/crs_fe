@@ -53,7 +53,7 @@ Function processDestinations = (context) {
 
     var destinations = getCombinedDestinations();
     int idx = 0;
-    for (var destination in allPromotedDestinations) {
+    for (var destination in destinations.entries.toList()) {
       var dest = destinations[idx.toString()];
       var explorationDays = dest["explorationDay"];
       var days = int.parse(explorationDays);
@@ -146,12 +146,12 @@ Function getDestinationValue = (String destination) {
   return result;
 };
 
-Function setDestinationState = (destination, index, state, type) {
+Function setDestinationState = (String dest, index, state, type) {
   globalctx.states["destinations"][index] ??= {}.obs;
   globalctx.states["destinations"][index]["state"] = state;
   globalctx.states["destinations"][index]["type"] = type;
   globalctx.states["destinations"][index]["index"] = index;
-  globalctx.states["destinations"][index]["destination"] = destination;
+  globalctx.states["destinations"][index]["destination"] = dest;
 };
 
 Function getDestinationState = (destination, index) {

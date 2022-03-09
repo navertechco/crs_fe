@@ -20,8 +20,7 @@ class CustomDragableExperience extends StatelessWidget {
     );
 
     String title = experience.description;
-    // var dest = experience["destination"];
-    // var state = Rx(getExperienceState(title));
+   
     return Draggable<String>(
       data: title,
       feedback: experienceOptionWidget,
