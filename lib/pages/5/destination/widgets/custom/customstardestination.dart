@@ -51,8 +51,7 @@ class CustomStarDestinationForm extends StatelessWidget {
       dayleft.value = totalDays.value + acc - valueInt;
       setFormValue(globalctx.memory["destinations"], index, "explorationDay",
           valueInt.toString());
-      setFormValue(
-          globalctx.memory, index, "explorationDay", valueInt.toString());
+
       explorationDay.value = valueInt;
       setDestinationDay(destination, index, valueInt.toString());
       // updateTotalLeftAccumulated();
@@ -73,7 +72,8 @@ class CustomStarDestinationForm extends StatelessWidget {
       }
     };
 
-    var destData = globalctx.memory["destinations"][index];
+    var destData = globalctx.memory["destinations"][index.toString()];
+    var type = globalctx.states["destinations"][index]["type"];
     return Form(
       key: formKey,
       child: Column(
@@ -110,6 +110,11 @@ class CustomStarDestinationForm extends StatelessWidget {
                   width: 0.2,
                   fontWeight: FontWeight.bold,
                   label: "Index: $index",
+                ),
+                CustomTitleWidget(
+                  width: 0.2,
+                  fontWeight: FontWeight.bold,
+                  label: "Type: ${type.toString().capitalize}",
                 ),
                 Obx(() {
                   Rx<List<Map<String, dynamic>>> filteredED = Rx(
