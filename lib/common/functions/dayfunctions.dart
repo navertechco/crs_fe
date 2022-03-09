@@ -77,8 +77,8 @@ Function prepareDaysToResume = (int index) {
   var dayIndex = 0;
   var destinations = getCombinedDestinations();
   for (String destination in allPromotedDestinations) {
-    destinations[index][destination]["daysData"] ??= {};
-    destinations[index][destination]["daysData"] = {};
+    destinations[index]["daysData"] ??= {};
+    destinations[index]["daysData"] = {};
     var destinationDay = globalctx.memory["destinationDay"]
         .firstWhere((e) => e["destination"] == destination);
     var explorationDay = destinationDay["explorationDay"];
@@ -94,7 +94,7 @@ Function prepareDaysToResume = (int index) {
         newExp = {...expDto, ...newEntry};
         dayDto["experiences"][exp] = newExp;
       }
-      destinations[index][destination]["daysData"][dayIndex] = dayDto;
+      destinations[index]["daysData"][dayIndex] = dayDto;
       dayIndex++;
     }
   }

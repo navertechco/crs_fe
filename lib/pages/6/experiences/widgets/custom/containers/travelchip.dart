@@ -4,15 +4,10 @@ import 'package:get/get.dart';
 import '../../../../../index.dart';
 
 class TravelChips extends HookWidget {
-  TravelChips(
-      {Key? key,
-      required this.ctrl,
-      required this.counter 
-       })
+  TravelChips({Key? key, required this.ctrl, required this.counter})
       : super(key: key);
   final ValueNotifier<int> counter;
   final ExperiencesController ctrl;
-  
 
   @override
   Widget build(BuildContext context) {
@@ -22,24 +17,20 @@ class TravelChips extends HookWidget {
     //   keyActivities.value = <String>[];
     // }, [stream, counter.value]);
 
+    var index = getDestinationIndex(globalDestination.value);
+    Rx<dynamic> keyActivities = Rx(getFormValue(
+        globalctx.memory["destinations"],
+        index,
+        "keyActivities", <String>[]));
 
-  var index = getDestinationIndex(globalDestination.value);
-  Rx<dynamic> keyActivities = Rx(getFormValue(
-      globalctx.memory["destinations"][index],
-      globalDestination.value,
-      "keyActivities", <String>[]));
+    Rx<dynamic> destinationOption = Rx(getFormValue(
+        globalctx.memory["destinations"],
+        index,
+        "destinationOption",
+        "0"));
 
-  Rx<dynamic> destinationOption = Rx(getFormValue(
-      globalctx.memory["destinations"][index],
-      globalDestination.value,
-      "destinationOption",
-      "0"));
-
-  Rx<dynamic> travelRhythm = Rx(getFormValue(
-      globalctx.memory["destinations"][index],
-      globalDestination.value,
-      "travelRhythm",
-      "0"));
+    Rx<dynamic> travelRhythm = Rx(getFormValue(globalctx.memory["destinations"],
+        index, "travelRhythm", "0"));
     return Align(
         alignment: Alignment.centerLeft,
         child: SizedBox(

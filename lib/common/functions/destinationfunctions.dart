@@ -12,7 +12,7 @@ Function promoteDestination = (ctrl, _formKey, destination, index, type) {
     _formKey.currentState!.save();
     if (!globalctx.promotedDestinations.contains(destination)) {
       globalctx.promotedDestinations.add(destination);
-      destinations = globalctx.memory["destinations"][index];
+      destinations = globalctx.memory["destinations"];
     }
     setDestinationState(destination, index, "promoted", type);
     updateDraggableDestinations();
@@ -199,23 +199,26 @@ Function updateDraggableDestinations = () {
 Function updateTotalLeftAccumulated = () {
   accumulated.value = 0;
   if (destinations.isNotEmpty) {
+    var idx = 0;
     for (var destination in destinations.keys) {
-      accumulated.value += getLeftAccumulated(destination) as int;
+      accumulated.value += getLeftAccumulated(destination, idx) as int;
+      idx++;
     }
   }
 };
 
-Function setDestination = (String destination, int index) {
-  destinations[index][destination] ??= {};
+Function setDestination = (String destination, index) {
+  index = index.toString();
+  destinations[index] ??= {};
 };
 
-Function setDestinationDay = (String destination, int index, value) {
-  setDestination(destination);
-  destinations[index][destination]["explorationDay"] ??= value;
+Function setDestinationDay = (String destination, index, value) {
+  index = index.toString();
+  setDestination(destination, index);
+  destinations[index]["explorationDay"] ??= value;
 };
 
-Function getLeftAccumulated = (id) {
-  var destination = destinations[id].key;
+Function getLeftAccumulated = (destination, id) {
   leftAccumulated.value = 0;
   totalDays.value = departureDate.value.difference(arrivalDate.value).inDays;
   for (String item in destinations.keys) {

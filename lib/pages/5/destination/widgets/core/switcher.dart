@@ -12,8 +12,7 @@ class SwitcherWidget extends StatelessWidget {
       required this.seccondchild,
       required this.destination,
       required this.type,
-      required this.index
-      })
+      required this.index})
       : super(key: key);
 
   final Widget firstchild;
@@ -42,7 +41,7 @@ class SwitcherWidget extends StatelessWidget {
           : dests.remove(destination);
 
       globalctx.destinationlist = dests;
-      var suggested = getDestinationState(destination) == "suggested";
+      var suggested = getDestinationState(destination, index) == "suggested";
       if (suggested) {
         _changeRotationAxis();
       } else {
@@ -50,7 +49,7 @@ class SwitcherWidget extends StatelessWidget {
             context: context,
             builder: (context) {
               return DestinationDetailPage(
-                  destination: destination, type: type, index:index);
+                  destination: destination, type: type, index: index);
             });
       }
     }

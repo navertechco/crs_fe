@@ -203,6 +203,7 @@ Function setData = (data, key, value) {
 };
 
 Function getFormValue = (data, formKey, key, def) {
+  formKey = formKey.toString();
   if (data != null) {
     if (data[formKey] != null) {
       if (data[formKey][key] != null) {
@@ -236,12 +237,13 @@ Function toCatalog = (item) {
   return ctlg;
 };
 
-Function getDestinationDay = (String destination, int index) {
+Function getDestinationDay = (index) {
+  index = index.toString();
   if (globalctx.memory != null) {
     if (destinations != null) {
-      if (destinations[index][destination] != null) {
-        if (destinations[index][destination]["explorationDay"] != null) {
-          return int.parse(destinations[index][destination]["explorationDay"]);
+      if (destinations[index] != null) {
+        if (destinations[index]["explorationDay"] != null) {
+          return int.parse(destinations[index]["explorationDay"]);
         }
       }
     }
@@ -261,7 +263,7 @@ Function parseIntValue = (value) {
 
 Function setFormValue = (data, formKey, key, value) {
   data ??= {}.obs;
-
+  formKey = formKey.toString();
   if (data[formKey] == null) {
     data[formKey] = {}.obs;
   }
