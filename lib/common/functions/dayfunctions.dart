@@ -44,7 +44,7 @@ Function nextDay = () {
   filterSuggestedExperiences();
 };
 
-Function getDtos = () { 
+Function getDtos = () {
   var day = {
     "date": "",
     "observation": "",
@@ -70,7 +70,7 @@ Function getDtos = () {
     "photo": ""
   };
 
-  return [ day, experience];
+  return [day, experience];
 };
 
 Function prepareDaysToResume = () {
@@ -104,7 +104,7 @@ Function prepareDaysToResume = () {
 };
 
 Function processDays = () {
-  result = []; 
+  result = [];
   var destinationDay = globalctx.memory["destinationDay"];
 
   for (var dest in destinationDay) {

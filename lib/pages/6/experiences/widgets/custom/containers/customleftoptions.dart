@@ -4,6 +4,7 @@ import 'package:naver_crs/pages/6/experiences/widgets/custom/containers/transpor
 import 'package:naver_crs/pages/6/experiences/widgets/custom/containers/travelfilter.dart';
 import '../../../../../index.dart';
 import 'leftHeader.dart';
+import 'travelchip.dart';
 
 class CustomLeftOptionsWidget extends HookWidget {
   final ExperiencesController ctrl;
@@ -32,7 +33,7 @@ class CustomLeftOptionsWidget extends HookWidget {
                 child: Column(
                   children: [
                     TransportFilter(ctrl: ctrl),
-                    TravelFilter(ctrl: ctrl, counter: counter),
+                    TravelChips(ctrl: ctrl, counter: counter),
                   ],
                 ),
               ),

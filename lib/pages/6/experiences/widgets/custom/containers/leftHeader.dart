@@ -39,7 +39,7 @@ class LeftHeader extends HookWidget {
               CustomTitleWidget(
                 fontWeight: FontWeight.bold,
                 label:
-                    "Day  :  ${globalDestination.value.toString().capitalize}",
+                    "Day  ${currentDay.value + 1}:  ${globalDestination.value.toString().capitalize}",
               ),
               const Divider(
                 color: Colors.black,

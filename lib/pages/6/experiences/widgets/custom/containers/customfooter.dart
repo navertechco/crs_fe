@@ -16,26 +16,26 @@ class CustomFooterWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          children: [
-            CustomTitleWidget(
-              fontWeight: FontWeight.normal,
-              label:
-                  "If you want not any these experience please click on \"Expand\" to amplify the options",
-            ),
-            CustomKeypadWidget(
-                nextlabel: "< Expand >",
-                prevlabel: "",
-                onNext: () {
-                  formKey.currentState!.reset();
-                  counter.value++;
-                  filterSuggestedExperiences();
-                },
-                onPrevious: () {},
-                nextFontWeight: FontWeight.bold,
-                width: 0.002),
-          ],
-        ),
+        // Row(
+        //   children: [
+        //     CustomTitleWidget(
+        //       fontWeight: FontWeight.normal,
+        //       label:
+        //           "If you want not any these experience please click on \"Expand\" to amplify the options",
+        //     ),
+        //     CustomKeypadWidget(
+        //         nextlabel: "< Expand >",
+        //         prevlabel: "",
+        //         onNext: () {
+        //           formKey.currentState!.reset();
+        //           counter.value++;
+        //           filterSuggestedExperiences();
+        //         },
+        //         onPrevious: () {},
+        //         nextFontWeight: FontWeight.bold,
+        //         width: 0.002),
+        //   ],
+        // ),
         Row(
           children: [
             CustomTitleWidget(

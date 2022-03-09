@@ -28,7 +28,9 @@ class CustomFormDayWidget extends StatelessWidget {
     var meals = day['meals'];
     var observation = day['observation'];
     var daydescription = day['day_description'];
-    var dayLabel = destinationindex + dayindex + 1;
+    var dayLabel =
+        (destinationindex != 0 ? destinationindex + 1 : destinationindex) +
+            (destinationindex == 0 ? dayindex + 1 : dayindex + 2);
     // if (destination == "departure") {
     //   dayLabel = totalDays.value;
     // }

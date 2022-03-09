@@ -1,0 +1,86 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:get/get.dart';
+import '../../../../../index.dart';
+
+class TravelChips extends HookWidget {
+  TravelChips({
+    Key? key,
+    required this.ctrl,
+    required this.counter,
+  }) : super(key: key);
+  final ValueNotifier<int> counter;
+  final ExperiencesController ctrl;
+  Rx<dynamic> keyActivities = Rx(getFormValue(globalctx.memory["destinations"],
+      globalDestination.value, "keyActivities", <String>[]));
+
+  Rx<dynamic> destinationOption = Rx(getFormValue(
+      globalctx.memory["destinations"],
+      globalDestination.value,
+      "destinationOption",
+      "0"));
+
+  Rx<dynamic> travelRhythm = Rx(getFormValue(globalctx.memory["destinations"],
+      globalDestination.value, "travelRhythm", "0"));
+  @override
+  Widget build(BuildContext context) {
+    // useEffect(() {
+    //   destinationOption.value = "0";
+    //   travelRhythm.value = "0";
+    //   keyActivities.value = <String>[];
+    // }, [stream, counter.value]);
+
+    return Align(
+        alignment: Alignment.centerLeft,
+        child: SizedBox(
+            width: MediaQuery.of(context).size.width * 0.25,
+            child: Column(
+              children: [
+                CustomTitleWidget(
+                  fontWeight: FontWeight.bold,
+                  label: "Filtered Experiences by:",
+                ),
+                const Divider(
+                  color: Colors.black,
+                  height: 25,
+                  thickness: 2,
+                  indent: 5,
+                  endIndent: 5,
+                ),
+                Obx(() {
+                  return Column(
+                    children: [
+                      if (keyActivities.value.length > 0)
+                        InputChip(
+                          deleteIcon: Icon(Icons.cancel),
+                          label: Text("${keyActivities.value}"),
+                          onSelected: (bool value) {},
+                          onDeleted: () {
+                            keyActivities.value = [];
+                          },
+                        ),
+                      if (destinationOption.value != "0")
+                        InputChip(
+                          deleteIcon: Icon(Icons.cancel),
+                          label: Text("${destinationOption.value}"),
+                          onSelected: (bool value) {},
+                          onDeleted: () {
+                            destinationOption.value = "0";
+                          },
+                        ),
+                      if (travelRhythm.value != "0")
+                        InputChip(
+                          deleteIcon: Icon(Icons.cancel),
+                          label: Text("${travelRhythm.value}"),
+                          onSelected: (bool value) {},
+                          onDeleted: () {
+                            travelRhythm.value = "0";
+                          },
+                        ),
+                    ],
+                  );
+                })
+              ],
+            )));
+  }
+}

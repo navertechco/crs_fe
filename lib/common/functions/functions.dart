@@ -34,10 +34,10 @@ Function processDaysCatalog = () {
   int total = departureDate.value.difference(arrivalDate.value).inDays;
   if (total > 0) {
     daysCatalog.value = [];
-    for (int i = 1; i < total; i++) {
+    for (int i = 0; i < total; i++) {
       Map<String, dynamic> row = {};
-      row["code"] = i;
-      row["description"] = "Day $i";
+      row["code"] = i+1;
+      row["description"] = "Day ${i+1}";
       daysCatalog.add(row);
     }
   }
