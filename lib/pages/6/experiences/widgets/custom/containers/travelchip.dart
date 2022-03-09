@@ -17,20 +17,15 @@ class TravelChips extends HookWidget {
     //   keyActivities.value = <String>[];
     // }, [stream, counter.value]);
 
-    var index = getDestinationIndex(globalDestination.value);
+    var index = getDestinationIndex(globalDestinationName.value, globalDestinationType.value);
     Rx<dynamic> keyActivities = Rx(getFormValue(
-        globalctx.memory["destinations"],
-        index,
-        "keyActivities", <String>[]));
+        globalctx.memory["destinations"], index, "keyActivities", <String>[]));
 
     Rx<dynamic> destinationOption = Rx(getFormValue(
-        globalctx.memory["destinations"],
-        index,
-        "destinationOption",
-        "0"));
+        globalctx.memory["destinations"], index, "destinationOption", "0"));
 
-    Rx<dynamic> travelRhythm = Rx(getFormValue(globalctx.memory["destinations"],
-        index, "travelRhythm", "0"));
+    Rx<dynamic> travelRhythm = Rx(getFormValue(
+        globalctx.memory["destinations"], index, "travelRhythm", "0"));
     return Align(
         alignment: Alignment.centerLeft,
         child: SizedBox(

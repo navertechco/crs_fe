@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 
 class CustomHeaderWidget extends StatelessWidget {
   const CustomHeaderWidget({
@@ -25,10 +25,10 @@ class CustomHeaderWidget extends StatelessWidget {
         //       var date = currentDayFormat
         //           .format(arrivalDate.value.add(Duration(days: days)));
 
-        //       if (globalDestination.value == "arrival") {
+        //       if (globalDestinationName.value == "arrival") {
         //         date = currentDayFormat.format(arrivalDate.value);
         //       }
-        //       if (globalDestination.value == "departure") {
+        //       if (globalDestinationName.value == "departure") {
         //         date = currentDayFormat.format(departureDate.value);
         //       }
 
@@ -45,12 +45,12 @@ class CustomHeaderWidget extends StatelessWidget {
 
         //   return Row(
         //     children: [
-        //       if (globalDestination.value != "arrival")
+        //       if (globalDestinationName.value != "arrival")
         //         CustomTitleWidget(
         //           fontWeight: FontWeight.bold,
         //           label: "Destination: $globalDestination",
         //         ),
-        //       if (globalDestination.value != "arrival")
+        //       if (globalDestinationName.value != "arrival")
         //         SizedBox(width: MediaQuery.of(context).size.width * 0.05),
         //       CustomTitleWidget(
         //         fontWeight: FontWeight.bold,

@@ -40,7 +40,7 @@ Function paginateNextDay = () {
 
 Function nextDay = () {
   currentDay.value++;
-  globalDestination.value = processDays()["destination"];
+  processDays();
   filterSuggestedExperiences();
 };
 
@@ -105,24 +105,22 @@ Function prepareDaysToResume = (int index) {
 
 Function processDays = () {
   result = [];
-  var destinationDay = globalctx.memory["destinationDay"];
 
-  for (var dest in destinationDay) {
-    for (var i = 1; i <= dest["days"]; i++) {
-      result.add({"day": i, "destination": dest["destination"]});
+  for (String dest in destinations.keys.toList()) {
+    for (int i = 1; i <= int.parse(destinations[dest]["explorationDay"]); i++) {
+      result.add({"day": i, "destination": destinations[dest]["destination"]});
     }
   }
+
   if (result.isNotEmpty) {
-    return result[currentDay.value];
+    globalDestinationName.value = result[currentDay.value]["destination"];
   }
-  // result.add({"day": destDays + 2, "destination": "departure"});
-  return {};
 };
 
 Function previousDay = () {
   if (currentDay.value > 0) {
     currentDay.value--;
-    globalDestination.value = processDays()["destination"];
+    processDays();
     filterSuggestedExperiences();
   } else {
     dayleft.value = 0;

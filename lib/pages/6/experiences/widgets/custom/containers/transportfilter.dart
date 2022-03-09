@@ -15,16 +15,16 @@ class TransportFilter extends HookWidget {
   @override
   Widget build(BuildContext context) {
     Rx<dynamic> transportService = Rx(getFormValue(
-            ctrl.state.memory["destinations"],
-            globalDestination.value,
+            globalctx.memory["destinations"],
+            globalDestinationIndex.value,
             "service_type", <String>[]) ??
         <String>[]);
     Rx<dynamic> translatingService = Rx(getFormValue(
-        ctrl.state.memory["destinations"],
-        globalDestination.value,
+        globalctx.memory["destinations"],
+        globalDestinationIndex.value,
         "translating_service", <String>[]));
-    Rx<int> guide = Rx(getFormValue(ctrl.state.memory["destinations"],
-        globalDestination.value, "guide_type", 1));
+    Rx<int> guide = Rx(getFormValue(globalctx.memory["destinations"],
+        globalDestinationIndex.value, "guide_type", 1));
 
     Rx<int> guideIndex = Rx(
         transportService.value.indexWhere((element) => element == "GUIDING") ??
@@ -56,8 +56,8 @@ class TransportFilter extends HookWidget {
                   ),
                   CustomFormMultiDropDownFieldWidget(
                     value: getFormValue(
-                            ctrl.state.memory["destinations"],
-                            globalDestination.value,
+                            globalctx.memory["destinations"],
+                            globalDestinationIndex.value,
                             "service_type", <String>[]) ??
                         <String>[],
                     onSaved: (value) {
@@ -66,8 +66,8 @@ class TransportFilter extends HookWidget {
                           .indexWhere((element) => element == "GUIDING");
                       translateIndex.value = transportService.value
                           .indexWhere((element) => element == "TRANSLATING");
-                      setFormValue(ctrl.state.memory["destinations"],
-                          globalDestination.value, "service_type", value);
+                      setFormValue(globalctx.memory["destinations"],
+                          globalDestinationIndex.value, "service_type", value);
                     },
                     onChanged: (value) {
                       transportService.value = value;
@@ -75,8 +75,8 @@ class TransportFilter extends HookWidget {
                           .indexWhere((element) => element == "GUIDING");
                       translateIndex.value = transportService.value
                           .indexWhere((element) => element == "TRANSLATING");
-                      setFormValue(ctrl.state.memory["destinations"],
-                          globalDestination.value, "service_type", value);
+                      setFormValue(globalctx.memory["destinations"],
+                          globalDestinationIndex.value, "service_type", value);
                     },
                     hintText: "                  Services\n",
                     data: serviceTypeCatalog.value,
@@ -86,8 +86,8 @@ class TransportFilter extends HookWidget {
                       value: translatingService.value ?? <String>[],
                       onSaved: (value) {
                         setFormValue(
-                            ctrl.state.memory["destinations"],
-                            globalDestination.value,
+                            globalctx.memory["destinations"],
+                            globalDestinationIndex.value,
                             "translating_service",
                             value);
                       },
@@ -95,8 +95,8 @@ class TransportFilter extends HookWidget {
                         translateIndex.value = value!.isNotEmpty ? 0 : -1;
                         translatingService.value = value;
                         setFormValue(
-                            ctrl.state.memory["destinations"],
-                            globalDestination.value,
+                            globalctx.memory["destinations"],
+                            globalDestinationIndex.value,
                             "translating_service",
                             value);
                       },
@@ -114,8 +114,11 @@ class TransportFilter extends HookWidget {
                               guide.value = 0;
                             } else {
                               guide.value = value;
-                              setFormValue(ctrl.state.memory["destinations"],
-                                  globalDestination.value, "guide_type", value);
+                              setFormValue(
+                                  globalctx.memory["destinations"],
+                                  globalDestinationIndex.value,
+                                  "guide_type",
+                                  value);
                             }
                           },
                           hintText: "Driver guide?",
@@ -128,8 +131,11 @@ class TransportFilter extends HookWidget {
                               guide.value = 0;
                             } else {
                               guide.value = value;
-                              setFormValue(ctrl.state.memory["destinations"],
-                                  globalDestination.value, "guide_type", value);
+                              setFormValue(
+                                  globalctx.memory["destinations"],
+                                  globalDestinationIndex.value,
+                                  "guide_type",
+                                  value);
                             }
                           },
                           hintText: "Additional guide?",

@@ -257,7 +257,7 @@ Function parseIntValue = (value) {
   if (value == "") {
     value = "0";
   }
-  value == value.replaceAll(RegExp(r'[^0-9]'), '').replaceAll("-", "");
+  value = value.replaceAll(RegExp(r'[^0-9]'), '').replaceAll("-", "");
   return int.parse(value);
 };
 

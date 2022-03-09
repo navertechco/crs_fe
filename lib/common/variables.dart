@@ -11,7 +11,9 @@ var airports = {"1": "quito", "2": "guayaquil"};
 Rx<int> currentDay = 0.obs;
 var result = [];
 var allPromotedDestinations = globalctx.promotedDestinations.value;
-var globalDestination = Rx("");
+var globalDestinationName = Rx("");
+var globalDestinationType = Rx("");
+var globalDestinationIndex = Rx("");
 
 RxInt destDays = 0.obs;
 List destList = getParam("DESTINATION_DATA").values.toList();
@@ -19,12 +21,12 @@ CatalogDto destinationData = CatalogDto(destList);
 Map<dynamic, dynamic> destinations = globalctx.memory["destinations"] ?? {};
 Rx<DateTime> birthDate =
     Rx(DateTime.parse(globalctx.memory["customer"]["birth_date"]));
-Rx<DateTime> arrivalDate = Rx(DateTime.now());
-Rx<DateTime> departureDate = Rx(DateTime.now());
+Rx<DateTime> arrivalDate = Rx(DateTime(2022, 12, 10));
+Rx<DateTime> departureDate = Rx(DateTime(2022, 12, 15));
 Rx<DateTime> sinceDate = Rx(DateTime.now());
 Rx<DateTime> untilDate = Rx(DateTime.now());
 RxList<String> ocDays = <String>[].obs;
-RxString tourOption = "0".obs;
+RxString tourOption = "1".obs;
 RxString openCredit = "0".obs;
 Rx<int> totalDays =
     Rx(departureDate.value.difference(arrivalDate.value).inDays);
@@ -65,13 +67,13 @@ var destinationList = allDestinations.entries
 List<dynamic> customDestinationData = [
   ...destinationList,
 ];
-var promotedDestinations = globalctx.promotedDestinations.value ;
+var promotedDestinations = globalctx.promotedDestinations.value;
 RxInt selectedIndex = 0.obs;
 RxString travelCode = "".obs;
-RxString leadPassenger = "".obs;
-RxString arrivalPort = "0".obs;
-RxString departurePort = "0".obs;
-RxString destCountry = "0".obs;
+RxString leadPassenger = "pp".obs;
+RxString arrivalPort = "6".obs;
+RxString departurePort = "6".obs;
+RxString destCountry = "1".obs;
 var selectedDestinations = globalctx.destinations;
 var destinationsCatalog = processCatalog("destinations");
 

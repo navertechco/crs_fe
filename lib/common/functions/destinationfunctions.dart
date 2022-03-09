@@ -30,8 +30,6 @@ Function getDestinationAirport = () {
   }
 };
 
- 
-
 Function getCombinedDestinations = () {
   var memoryDestinations = {};
   for (var destination in destinations.entries) {
@@ -46,18 +44,17 @@ Function getCombinedDestinations = () {
 Function processDestinations = (context) {
   // ignore: unrelated_type_equality_checks
   if (globalctx.promotedDestinations.isNotEmpty & (dayleft == 0)) {
-    globalDestination.value = globalctx.promotedDestinations[0];
-
     var destinationDay = [];
+    totalDays.value = departureDate.value.difference(arrivalDate.value).inDays;
+    globalctx.experienceDragData.value = {};
     for (var i = 0; i < totalDays.value; i++) {
       globalctx.experienceDragData.value[i] ??= <Widget>[];
-      // globalctx.promotedExperiences[i] ??= [].obs;
     }
 
     var destinations = getCombinedDestinations();
     int idx = 0;
     for (var destination in allPromotedDestinations) {
-      var dest = destinations[idx][destination];
+      var dest = destinations[idx.toString()];
       var explorationDays = dest["explorationDay"];
       var days = int.parse(explorationDays);
       destinationDay.add({...dest, "destination": destination, "days": days});
@@ -67,7 +64,12 @@ Function processDestinations = (context) {
     // totalDays.value = destDays;
     globalctx.memory["destinationDay"] = destinationDay;
     globalctx.memory["totalDays"] = totalDays.value;
-    selectedIndex.value = selectedIndex.value + 1;
+    selectedIndex.value = 1;
+    arrival.value = getDestinationData(arrivalPort.value);
+    departure.value = getDestinationData(departurePort.value);
+    globalDestinationName.value = arrival["description"];
+    globalDestinationType.value = "arrival";
+    globalDestinationIndex.value = "0";
     Get.toNamed("/Experiences");
   } else {
     if (context != null) {
@@ -83,7 +85,7 @@ Function processDestinations = (context) {
     }
   }
 };
- 
+
 Function addDestination = (String destination) {
   if (!globalctx.destinations.contains(destination)) {
     globalctx.destinations.add(destination);
@@ -159,7 +161,7 @@ Function getDestinationState = (destination, index) {
   return state;
 };
 
-Function getDestinationData = (String destId) {
+Function getDestinationData = (destId) {
   var dest = destinationsCatalog
       .toList()
       .where((element) => element["code"] == int.parse(destId))

@@ -18,8 +18,7 @@ Function filterSuggestedExperiences = () {
 };
 
 Function getFilteredExperiences = () {
-  globalDestination.value = processDays()["destination"];
-  var localDest = globalDestination.value;
+  processDays();
   // var airport = getDestinationAirport().toString().toUpperCase();
   var experiences = processCatalog("experiences");
   List filteredByDestination = [];
@@ -27,7 +26,8 @@ Function getFilteredExperiences = () {
   for (Map item in experiences) {
     List itemList = item.values.toList();
     CatalogDto experience = CatalogDto(itemList);
-    if (experience.value["destination"].toString().toLowerCase() == localDest) {
+    if (experience.value["destination"].toString().toLowerCase() ==
+        globalDestinationName.value) {
       filteredByDestination.add(experience);
     }
   }
@@ -45,7 +45,7 @@ Function getFilteredExperiences = () {
   }).toList();
 
   Iterable filteredByAirport = filteredByKA;
- 
+
   var filteredBySuggested = filteredByAirport.where((e) {
     return getExperienceState(e.description) == "suggested";
   }).toList();

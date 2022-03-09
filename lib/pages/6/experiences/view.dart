@@ -18,16 +18,12 @@ class ExperiencesPage extends GetView<ExperiencesController> {
 
   @override
   Widget build(BuildContext context) {
-    try {
-      return WillPopScope(
-        onWillPop: () async => false,
-        child: Scaffold(
-          body: _buildView(context),
-          bottomNavigationBar: NavBarWidget(),
-        ),
-      );
-    } catch (e) {
-      return Text("");
-    }
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        body: _buildView(context),
+        bottomNavigationBar: NavBarWidget(),
+      ),
+    );
   }
 }

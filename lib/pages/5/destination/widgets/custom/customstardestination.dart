@@ -153,6 +153,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                           onSaved: (value) {
                             setFormValue(globalctx.memory["destinations"],
                                 index, "explorationMode", value);
+                            
                           },
                           onChanged: (value) {
                             setFormValue(globalctx.memory["destinations"],
@@ -165,25 +166,25 @@ class CustomStarDestinationForm extends StatelessWidget {
                     }
                   })(),
                 ),
-                Obx(() {
-                  return CustomFormDropDownFieldWidget(
-                    validator: CustomRequiredValidator(
-                        errorText: "Destination option is required ",
-                        ctx: context),
-                    value: getFormValue(globalctx.memory["destinations"], index,
-                        "destinationOption", "1"),
-                    onSaved: (value) {
-                      setFormValue(globalctx.memory["destinations"], index,
-                          "destinationOption", value);
-                    },
-                    onChanged: (value) {
-                      setFormValue(globalctx.memory["destinations"], index,
-                          "destinationOption", value);
-                    },
-                    label: "Destination Option",
-                    data: processCatalog("destination_option"),
-                  );
-                }),
+                // Obx(() {
+                //   return CustomFormDropDownFieldWidget(
+                //     validator: CustomRequiredValidator(
+                //         errorText: "Destination option is required ",
+                //         ctx: context),
+                //     value: getFormValue(globalctx.memory["destinations"], index,
+                //         "destinationOption", "1"),
+                //     onSaved: (value) {
+                //       setFormValue(globalctx.memory["destinations"], index,
+                //           "destinationOption", value);
+                //     },
+                //     onChanged: (value) {
+                //       setFormValue(globalctx.memory["destinations"], index,
+                //           "destinationOption", value);
+                //     },
+                //     label: "Destination Option",
+                //     data: processCatalog("destination_option"),
+                //   );
+                // }),
                 Obx(() {
                   return CustomFormDropDownFieldWidget(
                       validator: CustomRequiredValidator(
@@ -194,6 +195,15 @@ class CustomStarDestinationForm extends StatelessWidget {
                       onSaved: (value) {
                         setFormValue(globalctx.memory["destinations"], index,
                             "travelRhythm", value);
+                            setFormValue(globalctx.memory["destinations"], index,
+                            "destData", destData);
+                            setFormValue(globalctx.memory["destinations"], index,
+                            "type", type);
+                            setFormValue(globalctx.memory["destinations"], index,
+                            "index", index);
+                            setFormValue(globalctx.memory["destinations"], index,
+                            "destination", destination);
+                        
                       },
                       onChanged: (value) {
                         setFormValue(globalctx.memory["destinations"], index,
@@ -250,7 +260,6 @@ class CustomStarDestinationForm extends StatelessWidget {
                     data: processCatalog("key_activity"),
                   );
                 }),
-                const Divider(color: Color.fromARGB(255, 0, 0, 0)),
               ]),
             ),
           ),

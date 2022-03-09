@@ -18,18 +18,6 @@ class LeftHeader extends HookWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      var add = 1;
-      var day = currentDay.value + add;
-      // if (globalDestination.value == "departure") {
-      //   add = 0;
-      // }
-      if (currentDay.value == 1) {
-        add = 0;
-      }
-      if (day > 1) {
-        day -= 1;
-      }
-
       return Align(
         alignment: Alignment.centerLeft,
         child: SizedBox(
@@ -39,7 +27,7 @@ class LeftHeader extends HookWidget {
               CustomTitleWidget(
                 fontWeight: FontWeight.bold,
                 label:
-                    "Day  ${currentDay.value + 1}:  ${globalDestination.value.toString().capitalize}",
+                    "Day  ${currentDay.value + 1}:  ${globalDestinationName.value.toString().capitalize}",
               ),
               const Divider(
                 color: Colors.black,
