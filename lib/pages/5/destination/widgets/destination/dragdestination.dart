@@ -24,8 +24,9 @@ class DragDestinationWidget extends StatelessWidget {
       return globalctx.destinations.contains(destination)
           ? Row(
               children: [
-                DestinationOptionWidget(destination: destination, type:type, index:index),
-                !globalctx.promotedDestinations.contains(destination)
+                DestinationOptionWidget(
+                    destination: destination, type: type, index: index),
+                !globalctx.promotedDestinations.contains(index)
                     ? GestureDetector(
                         onTap: () {
                           if (arrivalPort.value !=

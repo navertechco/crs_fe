@@ -10,8 +10,8 @@ import '../index.dart';
 Function promoteDestination = (ctrl, _formKey, destination, index, type) {
   if (_formKey.currentState!.validate()) {
     _formKey.currentState!.save();
-    if (!globalctx.promotedDestinations.contains(destination)) {
-      globalctx.promotedDestinations.add(destination);
+    if (!globalctx.promotedDestinations.contains(index)) {
+      globalctx.promotedDestinations.add(index);
       destinations = globalctx.memory["destinations"];
     }
     setDestinationState(destination, index, "promoted", type);
@@ -30,15 +30,7 @@ Function getDestinationAirport = () {
   }
 };
 
-Function checkPromotedAirport = (destination) {
-  bool quitoPromoted = globalctx.promotedDestinations.contains("quito");
-  bool gyePromoted = globalctx.promotedDestinations.contains("guayaquil");
-  if (destination != "quito" && destination != "guayaquil") {
-    return (quitoPromoted || gyePromoted);
-  }
-
-  return true;
-};
+ 
 
 Function getCombinedDestinations = () {
   var memoryDestinations = {};
@@ -91,15 +83,7 @@ Function processDestinations = (context) {
     }
   }
 };
-Function findDestination = (destination) {
-  var promotedDestinations = globalctx.promotedDestinations;
-  var index =
-      promotedDestinations.indexWhere((element) => element == destination);
-  var result = promotedDestinations[index];
-  // }
-  return result;
-};
-
+ 
 Function addDestination = (String destination) {
   if (!globalctx.destinations.contains(destination)) {
     globalctx.destinations.add(destination);

@@ -65,9 +65,7 @@ var destinationList = allDestinations.entries
 List<dynamic> customDestinationData = [
   ...destinationList,
 ];
-var promotedDestinations = [
-  ...globalctx.promotedDestinations.value,
-];
+var promotedDestinations = globalctx.promotedDestinations.value ;
 RxInt selectedIndex = 0.obs;
 RxString travelCode = "".obs;
 RxString leadPassenger = "".obs;
