@@ -15,7 +15,7 @@ class GalleryWidget extends GetView<DGalleryController> {
   @override
   Widget build(BuildContext context) {
     List<Widget> galleryList = [];
-
+    var destData = getDestinationValue(destination);
     if (galleryData != null && galleryData.isNotEmpty) {
       var index = 0;
       for (var item in galleryData) {
@@ -49,8 +49,16 @@ class GalleryWidget extends GetView<DGalleryController> {
                     fontWeight: FontWeight.bold,
                     color: Colors.white)
                 .getStyle()),
+        Text("${destData[8]}",
+            style: KTextSytle(
+                    context: context,
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.grey)
+                .getStyle()),
+        SizedBox(height: MediaQuery.of(context).size.height * 0.1),
         SizedBox(
-          height: MediaQuery.of(context).size.height * 0.7,
+          height: MediaQuery.of(context).size.height * 0.5,
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: Column(

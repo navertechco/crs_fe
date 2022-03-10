@@ -4,7 +4,7 @@ import 'package:naver_crs/pages/5/destination/widgets/destinationdetail/widgets/
 import '../../../../index.dart';
 
 class DestinationRearOptionWidget extends StatelessWidget {
-  const DestinationRearOptionWidget(
+  DestinationRearOptionWidget(
       {Key? key,
       this.destination = "coast",
       this.description =
@@ -14,11 +14,12 @@ typesetting, Lorem Ipsum has been but also................."""})
       : super(key: key);
 
   final String destination;
-  final String description;
+  String description;
   @override
   Widget build(BuildContext context) {
     var value = getDestinationValue(destination);
     var title = value[1];
+    description = value[8];
     // title = value["title"];
     return Stack(children: [
       // TitleWidget(title: title),

@@ -6,7 +6,12 @@ import '../../index.dart';
 import 'index.dart';
 
 class DestinationDetailWidget extends GetView<DestinationDetailController> {
-  DestinationDetailWidget({Key? key, required this.destination, required this.type, required this.index, required this.ctrl})
+  DestinationDetailWidget(
+      {Key? key,
+      required this.destination,
+      required this.type,
+      required this.index,
+      required this.ctrl})
       : super(key: key);
   final destination;
   final type;
@@ -17,8 +22,20 @@ class DestinationDetailWidget extends GetView<DestinationDetailController> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        LeftWidget(destination: destination, index:index,),
-        RightWidget(destination: destination,index:index, ctrl: ctrl, formKey: _formKey),
+        Padding(
+          padding: EdgeInsets.only(
+              top: MediaQuery.of(context).size.height * 0.10,
+              left: MediaQuery.of(context).size.width * 0.05),
+          child: LeftWidget(
+            destination: destination,
+            index: index,
+          ),
+        ),
+        RightWidget(
+            destination: destination,
+            index: index,
+            ctrl: ctrl,
+            formKey: _formKey),
         Padding(
           padding: EdgeInsets.only(
               left: MediaQuery.of(context).size.width * 0.51,
@@ -27,7 +44,7 @@ class DestinationDetailWidget extends GetView<DestinationDetailController> {
               nextlabel: "Next >",
               prevlabel: " < Previous",
               onNext: () {
-                promoteDestination(ctrl, _formKey, destination,index,  type);
+                promoteDestination(ctrl, _formKey, destination, index, type);
               },
               onPrevious: () {
                 Get.close(1);
