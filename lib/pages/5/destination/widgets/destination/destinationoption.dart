@@ -15,7 +15,7 @@ class DestinationOptionWidget extends StatelessWidget {
             destination: destination,
             type: type,
             index: index,
-            firstchild: DestinationFrontOptionWidget(destination: destination, index:index),
+            firstchild: DestinationFrontOptionWidget(destination: destination, index:index, type: type,),
             seccondchild: DestinationRearOptionWidget(destination: destination)));
   }
 }

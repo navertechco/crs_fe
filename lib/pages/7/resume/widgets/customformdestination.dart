@@ -20,10 +20,7 @@ class CustomFormDestination extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> daylist = [];
     var promotedDestinationDay = globalctx.memory["destinations"];
-    var destindex = index;
-    // > promotedDestinationDay.length - 1
-    //     ? promotedDestinationDay.length - 1
-    //     : index;
+    var destindex = index; 
     var destination = promotedDestinationDay[destindex.toString()];
     var explorationDay = int.parse(destination["explorationDay"]);
     var title = destination["destination"].toString().capitalize;

@@ -88,3 +88,6 @@ RxInt draggable = 0.obs;
 List pageList = ["Tour", "Logistic", "Customer", "Destination", "Experiences"];
 
 RxInt accumulated = 0.obs;
+RxString arrivalState = getDestinationState("", 0).toString().obs;
+RxString departureState =
+    getDestinationState("", destinations.length - 1).toString().obs;

@@ -1,5 +1,4 @@
 // ignore_for_file: prefer_function_declarations_over_variables
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/pages/5/destination/widgets/index.dart';
@@ -15,8 +14,21 @@ Function promoteDestination = (ctrl, _formKey, destination, index, type) {
       destinations = globalctx.memory["destinations"];
     }
     setDestinationState(destination, index, "promoted", type);
+    arrivalState.value = "selected";
+    departureState.value = "selected";
+    if (globalctx.promotedDestinations.length > 1) {
+      arrivalState.value = "promoted";
+      departureState.value = "promoted";
+    }
+
     updateDraggableDestinations();
     Get.close(1);
+  }
+};
+
+Function updateDraggableDestinations = () {
+  if (arrivalState.value == "promoted" && departureState.value == "promoted") {
+    draggable.value = 1;
   }
 };
 
@@ -168,18 +180,6 @@ Function getDestinationData = (destId) {
       .first;
 
   return dest;
-};
-
-Function updateDraggableDestinations = () {
-  var arr = getDestinationData(arrivalPort.value);
-  var dep = getDestinationData(departurePort.value);
-
-  if (getDestinationState(arr["description"], 0) == "promoted" &&
-      getDestinationState(dep["description"],
-              globalctx.states["destinations"].entries.toList().length - 1) ==
-          "promoted") {
-    draggable.value = 1;
-  }
 };
 
 Function updateTotalLeftAccumulated = () {

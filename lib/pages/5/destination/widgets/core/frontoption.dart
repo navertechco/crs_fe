@@ -3,24 +3,22 @@ import 'package:get/get.dart';
 import '../../../../index.dart';
 
 class DestinationFrontOptionWidget extends StatelessWidget {
-  const DestinationFrontOptionWidget({Key? key, this.destination = "coast", required this.index})
+  const DestinationFrontOptionWidget(
+      {Key? key,
+      this.destination = "coast",
+      required this.index,
+      required this.type})
       : super(key: key);
 
   final String destination;
   final index;
+  final type;
   @override
   Widget build(BuildContext context) {
     // ignore: unnecessary_null_comparison
 
-    var airport = false;
-    var boat = false;
     var dest = getDestinationValue(destination);
-    RxString state = getDestinationState(destination, index).toString().obs;
-
-    if (dest != null) {
-      airport = dest[6];
-      boat = dest[7];
-    }
+    
 
     return Stack(children: [
       Padding(
@@ -44,7 +42,7 @@ class DestinationFrontOptionWidget extends StatelessWidget {
       ),
       Row(
         children: [
-          if (airport)
+          if (type == "arrival" || type == "departure")
             Padding(
               padding: EdgeInsets.only(
                 top: MediaQuery.of(context).size.height * 0.01,
@@ -54,17 +52,17 @@ class DestinationFrontOptionWidget extends StatelessWidget {
                   color: Colors.red,
                   width: MediaQuery.of(context).size.width * 0.05),
             ),
-          if (boat)
-            Padding(
-              padding: EdgeInsets.only(
-                top: MediaQuery.of(context).size.height * 0.01,
-                left: MediaQuery.of(context).size.width * 0.33,
-              ),
-              child: Image.asset("assets/custom/img/boat.png",
-                  color: Colors.blue,
-                  width: MediaQuery.of(context).size.width * 0.05),
-            ),
-          if (!boat & !airport)
+          // if (boat)
+          //   Padding(
+          //     padding: EdgeInsets.only(
+          //       top: MediaQuery.of(context).size.height * 0.01,
+          //       left: MediaQuery.of(context).size.width * 0.33,
+          //     ),
+          //     child: Image.asset("assets/custom/img/boat.png",
+          //         color: Colors.blue,
+          //         width: MediaQuery.of(context).size.width * 0.05),
+          //   ),
+          if (type == "tour")
             Padding(
               padding: EdgeInsets.only(
                 top: MediaQuery.of(context).size.height * 0.01,
@@ -77,7 +75,9 @@ class DestinationFrontOptionWidget extends StatelessWidget {
         ],
       ),
       Obx(() {
-        if (draggable.value == 0 && state.value == "suggested") {
+        if (draggable.value == 0 &&
+            arrivalState.value != "promoted" &&
+            departureState.value != "promoted"&&type=="tour") {
           return Padding(
             padding: EdgeInsets.only(
               top: MediaQuery.of(context).size.height * 0.017,
