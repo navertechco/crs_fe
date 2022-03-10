@@ -300,8 +300,8 @@ Function updateDestinationsCatalog = () {
 };
 
 Function updateAirPorts = () {
-  var arr = getDestinationData(arrivalPort.value);
-  var dep = getDestinationData(departurePort.value);
+  var arr = getDestinationById(arrivalPort.value);
+  var dep = getDestinationById(departurePort.value);
 
   arrival.value = arr;
   departure.value = dep;

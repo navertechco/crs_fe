@@ -3,25 +3,27 @@ import 'package:flutter/material.dart';
 import '../../../index.dart';
 import 'customformdestination.dart';
 
+// ignore: must_be_immutable
 class Destinations extends StatelessWidget {
-  const Destinations({
+  Destinations({
     Key? key,
     required this.data,
   }) : super(key: key);
 
-  final data;
+  var data;
 
   @override
   Widget build(BuildContext context) {
     List<Widget> destinations = [];
-
-    if (data != null) {
+    Map<String, dynamic> data = memory;
+    if (data != null && globalctx.promotedDestinations.isNotEmpty) {
       var i = 0;
-      for (var destination in promotedDestinations) {
+      for (var dest in globalctx.promotedDestinations) {
+        var destData = getDestinationById(dest);
         var key = GlobalKey();
         globalctx.keys["destination-$i"] = key;
-        destinations.add(CustomFormDestination(
-            data: data, index: i, destination: destination));
+        destinations.add(
+            CustomFormDestination(data: data, index: i, destination: dest));
         i++;
       }
     }

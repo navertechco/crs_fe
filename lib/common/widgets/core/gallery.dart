@@ -15,7 +15,7 @@ class GalleryWidget extends GetView<DGalleryController> {
   @override
   Widget build(BuildContext context) {
     List<Widget> galleryList = [];
-    var destData = getDestinationValue(destination);
+    var destData = getDestinationValueByName(destination);
     if (galleryData != null && galleryData.isNotEmpty) {
       var index = 0;
       for (var item in galleryData) {

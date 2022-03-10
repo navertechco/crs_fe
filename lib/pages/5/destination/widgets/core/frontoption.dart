@@ -17,7 +17,7 @@ class DestinationFrontOptionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     // ignore: unnecessary_null_comparison
 
-    var dest = getDestinationValue(destination);
+    var dest = getDestinationValueByName(destination);
 
     return Stack(children: [
       Padding(
@@ -74,7 +74,7 @@ class DestinationFrontOptionWidget extends StatelessWidget {
         ],
       ),
       Obx(() {
-        if (!validateDestinationDialog(destination,type).value) {
+        if (!validateDestinationDialog(destination, type).value) {
           return Padding(
             padding: EdgeInsets.only(
               top: MediaQuery.of(context).size.height * 0.017,

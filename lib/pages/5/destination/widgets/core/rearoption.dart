@@ -17,7 +17,7 @@ typesetting, Lorem Ipsum has been but also................."""})
   String description;
   @override
   Widget build(BuildContext context) {
-    var value = getDestinationValue(destination);
+    var value = getDestinationValueByName(destination);
     var title = value[1];
     description = value[8];
     // title = value["title"];

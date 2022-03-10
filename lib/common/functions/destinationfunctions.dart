@@ -85,8 +85,8 @@ Function processDestinations = (context) {
     globalctx.memory["destinationDay"] = destinationDay;
     globalctx.memory["totalDays"] = totalDays.value;
     selectedIndex.value = 1;
-    arrival.value = getDestinationData(arrivalPort.value);
-    departure.value = getDestinationData(departurePort.value);
+    arrival.value = getDestinationById(arrivalPort.value);
+    departure.value = getDestinationById(departurePort.value);
     globalDestinationName.value = arrival["description"];
     globalDestinationType.value = "arrival";
     globalDestinationIndex.value = "0";
@@ -150,20 +150,40 @@ Function moveDestination = (String destination, int index, String type) {
   globalctx.destinationDragData.value.add(DragDestinationWidget(
       destination: destination, index: index, type: type));
 };
+Function getDestinationById = (destId) {
+  try {
+    var dest = destinationsCatalog
+        .toList()
+        .where((element) => element["code"] == int.parse(destId))
+        .first;
 
-Function getDestinationId = (String destination) {
-  var id = destinationsCatalog
-      .toList()
-      .where((element) => element["description"] == destination)
-      .first;
-  return id["code"].toString();
+    return dest;
+  } catch (e) {
+    print(e);
+  }
 };
 
-Function getDestinationValue = (String destination) {
+Function getDestinationIdByName = (String destination) {
+  var id = getDestinationByName(destination)["code"].toString();
+  return id;
+};
+
+Function getDestinationValueByName = (String destination) {
   var result = [];
   try {
-    result = destinationsCatalog
-        .firstWhere((e) => e["description"] == destination)["value"];
+    result = getDestinationByName(destination)["value"];
+  } catch (e) {
+    print(e);
+  }
+
+  return result;
+};
+Function getDestinationByName = (String destination) {
+  var result ;
+  try {
+    List<Map<String, dynamic>> list = destinationsCatalog.toList();
+    result =
+        list.firstWhere((element) => element["description"].toString() == destination);
   } catch (e) {
     print(e);
   }
@@ -184,15 +204,6 @@ Function getDestinationState = (destination, index) {
   globalctx.states["destinations"][index] ??= {}.obs;
   state = globalctx.states["destinations"][index]["state"] ?? "suggested";
   return state;
-};
-
-Function getDestinationData = (destId) {
-  var dest = destinationsCatalog
-      .toList()
-      .where((element) => element["code"] == int.parse(destId))
-      .first;
-
-  return dest;
 };
 
 Function updateTotalLeftAccumulated = () {
