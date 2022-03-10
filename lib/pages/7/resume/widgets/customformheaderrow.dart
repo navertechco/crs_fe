@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
 
+import '../../../index.dart';
 import 'custompadingtitle.dart';
 
 class CustomFormHeaderRowWidget extends StatelessWidget {
@@ -15,11 +15,16 @@ class CustomFormHeaderRowWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        CustomPadingTitleWidget(
-            width: 0.02,
-            customlabel: customlabel,
-            fontWeight: FontWeight.normal),
-        Text(value!),
+        Text(customlabel,
+            style: KTextSytle(
+                    context: context, fontSize: 12, fontWeight: FontWeight.bold)
+                .getStyle()),
+        Text(" $value  ",
+            style: KTextSytle(
+                    context: context,
+                    fontSize: 12,
+                    fontWeight: FontWeight.normal)
+                .getStyle()),
       ],
     );
   }

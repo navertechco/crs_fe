@@ -20,38 +20,40 @@ class DestinationDetailWidget extends GetView<DestinationDetailController> {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Padding(
-          padding: EdgeInsets.only(
-              top: MediaQuery.of(context).size.height * 0.10,
-              left: MediaQuery.of(context).size.width * 0.04),
-          child: LeftWidget(
-            destination: destination,
-            index: index,
+    return SingleChildScrollView(
+      child: Stack(
+        children: [
+          Padding(
+            padding: EdgeInsets.only(
+                top: MediaQuery.of(context).size.height * 0.10,
+                left: MediaQuery.of(context).size.width * 0.04),
+            child: LeftWidget(
+              destination: destination,
+              index: index,
+            ),
           ),
-        ),
-        RightWidget(
-            destination: destination,
-            index: index,
-            ctrl: ctrl,
-            formKey: _formKey),
-        Padding(
-          padding: EdgeInsets.only(
-              left: MediaQuery.of(context).size.width * 0.51,
-              top: MediaQuery.of(context).size.height * 0.8),
-          child: CustomKeypadWidget(
-              nextlabel: "Next >",
-              prevlabel: " < Previous",
-              onNext: () {
-                promoteDestination(ctrl, _formKey, destination, index, type);
-              },
-              onPrevious: () {
-                Get.close(1);
-              },
-              width: 0.3),
-        ),
-      ],
+          RightWidget(
+              destination: destination,
+              index: index,
+              ctrl: ctrl,
+              formKey: _formKey),
+          Padding(
+            padding: EdgeInsets.only(
+                left: MediaQuery.of(context).size.width * 0.51,
+                top: MediaQuery.of(context).size.height * 0.8),
+            child: CustomKeypadWidget(
+                nextlabel: "Next >",
+                prevlabel: " < Previous",
+                onNext: () {
+                  promoteDestination(ctrl, _formKey, destination, index, type);
+                },
+                onPrevious: () {
+                  Get.close(1);
+                },
+                width: 0.3),
+          ),
+        ],
+      ),
     );
   }
 }

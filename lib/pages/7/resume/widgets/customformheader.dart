@@ -17,8 +17,11 @@ class CustomFormHeaderWidget extends StatelessWidget {
       list.add(CustomFormHeaderIterWidget(data: data, index: i));
     }
 
-    return Column(
-      children: list,
+    return Padding(
+      padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.05),
+      child: Column(
+        children: list,
+      )
     );
   }
 }

@@ -72,8 +72,7 @@ class CustomCustomerDataForm extends StatelessWidget {
                               validator: CustomRequiredValidator(
                                   errorText: "Legal Client Type is required ",
                                   ctx: context),
-                              value: getValue(client, "legal_client_type_id",
-                                  def: "2"),
+                              value: client["legal_client_type_id"] ?? "2",
                               width: 0.2,
                               label: "Customer Type          ",
                               onChanged: (value) {

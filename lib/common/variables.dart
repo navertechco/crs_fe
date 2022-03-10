@@ -85,7 +85,14 @@ var airportCatalog = processCatalog("airport");
 
 RxInt draggable = 0.obs;
 
-List pageList = ["Tour", "Logistic", "Customer", "Destination", "Experiences"];
+List pageList = [
+  "Tour",
+  "Logistic",
+  "Customer",
+  "Destination",
+  "Experiences",
+  "Resume"
+];
 
 RxInt accumulated = 0.obs;
 RxString arrivalState = getDestinationState("", 0).toString().obs;
@@ -109,3 +116,149 @@ Function validateDestinationDialog = (destination, type) {
   var rule4 = globalctx.selectedDestinations.contains(destination);
   return ((rule1 || rule2 || rule3) && rule4).obs;
 };
+
+  List<Map<String, dynamic>> customerTemplate = [
+      {
+        "code": "contact_name",
+        "description": "contact_name",
+        "value": "1",
+        "convert": true,
+        "def": ""
+      },
+      {
+        "code": "legal_client_type",
+        "description": "legal_client_type",
+        "value": "1",
+        "convert": true,
+        "def": "Natural"
+      },
+      {
+        "code": "customer_type",
+        "description": "customer_type",
+        "value": "1",
+        "convert": true,
+        "def": ""
+      },
+      {
+        "code": "country",
+        "description": "country",
+        "value": "1",
+        "convert": true,
+        "def": "Ecuador"
+      },
+      {
+        "code": "email",
+        "description": "email",
+        "value": "1",
+        "convert": true,
+        "def": ""
+      },
+      {
+        "code": "travel_code",
+        "description": "travel_code",
+        "value": "1",
+        "convert": true,
+        "def": "000000"
+      },
+      {
+        "code": "lead_passenger",
+        "description": "lead_passenger",
+        "value": "1",
+        "convert": true,
+        "def": ""
+      },
+      {
+        "code": "address_line",
+        "description": "address_line",
+        "value": "1",
+        "convert": true,
+        "def": ""
+      },
+      {
+        "code": "city",
+        "description": "city",
+        "value": "1",
+        "convert": true,
+        "def": ""
+      },
+      {
+        "code": "dni",
+        "description": "dni",
+        "value": "1",
+        "convert": true,
+        "def": "000000"
+      },
+      {
+        "code": "tax_id",
+        "description": "tax_id",
+        "value": "1",
+        "convert": true,
+        "def": "000000"
+      },
+      {
+        "code": "names",
+        "description": "names",
+        "value": "1",
+        "convert": true,
+        "def": ""
+      },
+      {
+        "code": "last_names",
+        "description": "last_names",
+        "value": "1",
+        "convert": true,
+        "def": ""
+      },
+      {
+        "code": "birth_date",
+        "description": "birth_date",
+        "value": "1",
+        "convert": false,
+        "def": ""
+      },
+    ];
+
+    List<Map<String, dynamic>> tourTemplate = [
+      {
+        "code": "country",
+        "description": "country",
+        "value": "1",
+        "convert": true,
+        "def": ""
+      },
+      {
+        "code": "accomodation_type",
+        "description": "accomodation_type",
+        "value": "1",
+        "convert": true,
+        "def": ""
+      },
+      {
+        "code": "purpose",
+        "description": "purpose",
+        "value": "1",
+        "convert": true,
+        "def": ""
+      },
+      {
+        "code": "passengers",
+        "description": "passengers",
+        "value": "1",
+        "convert": true,
+        "def": ""
+      },
+      {
+        "code": "arrival_date",
+        "description": "arrival_date",
+        "value": "1",
+        "convert": true,
+        "def": ""
+      },
+      {
+        "code": "departure_date",
+        "description": "departure_date",
+        "value": "1",
+        "convert": true,
+        "def": ""
+      },
+    ];

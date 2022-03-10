@@ -10,15 +10,15 @@ class Cover extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
- 
-    var tour = getValue(memory, "tour", def: {});
-    Map customer = memory["customer"] ?? {};
-    var title = getValue(tour, "title", def: "");
-    var passengers = getValue(tour, "passengers", def: 1);
-    var days = currentDay.value;
+    Map tour = globalctx.memory["tour"];
+    Map customer = globalctx.memory["customer"];
+    var title = tour["title"] ?? "Enchanting Ecuador";
+    var passengers = tour["passengers"] ?? "1";
+    var days = totalDays.value;
     var nights = days - 1;
     var valid = getValue(tour, "valid_until", def: "31-12-2022");
-    var description = getValue(tour, "description", def: "");
+    var description = tour["description"] ??
+        "We present below this proposal document of our excellent travel experience services, unique in Ecuador";
 
     return Column(
       children: [
