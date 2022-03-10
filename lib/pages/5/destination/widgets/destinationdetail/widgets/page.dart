@@ -25,7 +25,7 @@ class DestinationDetailWidget extends GetView<DestinationDetailController> {
         Padding(
           padding: EdgeInsets.only(
               top: MediaQuery.of(context).size.height * 0.10,
-              left: MediaQuery.of(context).size.width * 0.05),
+              left: MediaQuery.of(context).size.width * 0.04),
           child: LeftWidget(
             destination: destination,
             index: index,

@@ -40,33 +40,36 @@ class GalleryWidget extends GetView<DGalleryController> {
       }
     }
 
-    return Column(
-      children: [
-        Text(destination.toString().toUpperCase(),
-            style: KTextSytle(
-                    context: context,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white)
-                .getStyle()),
-        Text("${destData[8]}",
-            style: KTextSytle(
-                    context: context,
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.grey)
-                .getStyle()),
-        SizedBox(height: MediaQuery.of(context).size.height * 0.1),
-        SizedBox(
-          height: MediaQuery.of(context).size.height * 0.5,
-          child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Column(
-              children: galleryList,
+    return SizedBox(
+      width: MediaQuery.of(context).size.width * 0.4,
+      child: Column(
+        children: [
+          Text(destination.toString().toUpperCase(),
+              style: KTextSytle(
+                      context: context,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white)
+                  .getStyle()),
+          Text("${destData[8]}",
+              style: KTextSytle(
+                      context: context,
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.grey)
+                  .getStyle()),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.1),
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.5,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: Column(
+                children: galleryList,
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
