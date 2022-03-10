@@ -337,3 +337,30 @@ Future<void> showMyDialog(context, String title, String errorText,
     },
   );
 }
+
+Future<void> showCustomDialog(context, Widget child, String button) async {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        backgroundColor: Colors.black54,
+        content: child,
+        actions: <Widget>[
+          TextButton(
+            child: Text(button,
+                style: KTextSytle(
+                        context: context,
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white)
+                    .getStyle()),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
+}

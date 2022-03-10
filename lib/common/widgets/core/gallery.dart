@@ -8,11 +8,13 @@ import '../../../pages/5/destination/widgets/dgallery/index.dart';
 
 class GalleryWidget extends GetView<DGalleryController> {
   final galleryData;
-  const GalleryWidget({Key? key, required this.galleryData}) : super(key: key);
+  final destination;
+  const GalleryWidget({Key? key, required this.galleryData, this.destination})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> Gallery = [];
+    List<Widget> galleryList = [];
 
     if (galleryData != null && galleryData.isNotEmpty) {
       var index = 0;
@@ -21,7 +23,8 @@ class GalleryWidget extends GetView<DGalleryController> {
             code: item["code"],
             description: item["description"],
             value: item["value"]);
-        Gallery.add(GalleryItem(
+        galleryList.add(GalleryItem(
+          data: item,
           onTap: () {
             showDialog(
                 context: context,
@@ -37,20 +40,25 @@ class GalleryWidget extends GetView<DGalleryController> {
       }
     }
 
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: [
-          SizedBox(width: MediaQuery.of(context).size.width * 0.1),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            // ignore: prefer_const_literals_to_create_immutables
-            children: Gallery,
+    return Column(
+      children: [
+        Text(destination.toString().toUpperCase(),
+            style: KTextSytle(
+                    context: context,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white)
+                .getStyle()),
+        SizedBox(
+          height: MediaQuery.of(context).size.height * 0.7,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Column(
+              children: galleryList,
+            ),
           ),
-          SizedBox(width: MediaQuery.of(context).size.width * 0.1),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

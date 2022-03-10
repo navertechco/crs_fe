@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:naver_crs/pages/5/destination/widgets/destinationdetail/widgets/index.dart';
 import '../../../../index.dart';
 
 class DestinationRearOptionWidget extends StatelessWidget {
@@ -93,12 +94,8 @@ class DescriptionWidget extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  showMyDialog(
-                      context,
-                      "The Exploration Days amount can´t exceed Days left",
-                      "Error",
-                      "Error?",
-                      "button");
+                  showCustomDialog(context,
+                      LeftWidget(destination: "quito", index: 0), "Close");
                 },
                 child: Text(
                   description,
