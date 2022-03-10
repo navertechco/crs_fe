@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/common/validators.dart';
 import '../../../index.dart';
@@ -88,6 +89,9 @@ class CustomTourInformationForm extends StatelessWidget {
                   ctrl!.state.passengers = value!;
                 },
                 keyboardType: TextInputType.number,
+                inputFormatters: <TextInputFormatter>[
+                  FilteringTextInputFormatter.digitsOnly
+                ],
                 label: "Passengers                  ",
                 width: 0.20),
             SizedBox(height: MediaQuery.of(context).size.height * 0.075),

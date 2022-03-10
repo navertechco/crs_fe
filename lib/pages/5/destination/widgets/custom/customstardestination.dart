@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_function_declarations_over_variables, unused_local_variable
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:naver_crs/common/validators.dart';
@@ -35,7 +36,6 @@ class CustomStarDestinationForm extends StatelessWidget {
       }
       globalctx.reset.value = false;
     }
- 
 
     List<String> keyActivities = getFormValue(
         globalctx.memory["destinations"], index, "keyActivities", <String>[]);
@@ -135,6 +135,13 @@ class CustomStarDestinationForm extends StatelessWidget {
                       onChanged: (value) {
                         validateExplorationDays(value, context);
                       },
+                      onBack: (value) {
+                        value = "0";
+                        validateExplorationDays(value, context);
+                      },
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter.digitsOnly
+                      ],
                       keyboardType: TextInputType.number,
                       label: "Exploration Days    ",
                       width: 0.20);
@@ -152,7 +159,6 @@ class CustomStarDestinationForm extends StatelessWidget {
                           onSaved: (value) {
                             setFormValue(globalctx.memory["destinations"],
                                 index, "explorationMode", value);
-                            
                           },
                           onChanged: (value) {
                             setFormValue(globalctx.memory["destinations"],
@@ -194,13 +200,12 @@ class CustomStarDestinationForm extends StatelessWidget {
                       onSaved: (value) {
                         setFormValue(globalctx.memory["destinations"], index,
                             "travelRhythm", value);
-                            setFormValue(globalctx.memory["destinations"], index,
+                        setFormValue(globalctx.memory["destinations"], index,
                             "type", type);
-                            setFormValue(globalctx.memory["destinations"], index,
+                        setFormValue(globalctx.memory["destinations"], index,
                             "index", index);
-                            setFormValue(globalctx.memory["destinations"], index,
+                        setFormValue(globalctx.memory["destinations"], index,
                             "destination", destination);
-                        
                       },
                       onChanged: (value) {
                         setFormValue(globalctx.memory["destinations"], index,

@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:naver_crs/common/constants.dart';
 
 class RoundedFormField extends StatelessWidget {
@@ -17,6 +18,7 @@ class RoundedFormField extends StatelessWidget {
   final TextInputType? keyboardType;
   String? Function(String?)? validator;
   String? initialValue;
+  List<TextInputFormatter>? inputFormatters;
   RoundedFormField(
       {Key? key,
       required this.hintText,
@@ -31,6 +33,7 @@ class RoundedFormField extends StatelessWidget {
       this.onSaved,
       this.initialValue,
       this.keyboardType = TextInputType.text,
+      this.inputFormatters = const [],
       this.password = false,
       this.disabled = false})
       : super(key: key);
@@ -52,9 +55,7 @@ class RoundedFormField extends StatelessWidget {
         // autofocus: true,
         readOnly: disabled,
         initialValue: initialValue,
-        onTap: () {
-          initialValue = "";
-        },
+        inputFormatters: inputFormatters,
         validator: validator,
         keyboardType: keyboardType,
         onSaved: onSaved,
