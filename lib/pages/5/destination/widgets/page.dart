@@ -33,9 +33,9 @@ class DestinationWidget extends GetView<DestinationController> {
                 Text("      Days Selected: $accumulated",
                     style: GoogleFonts.poppins(
                         textStyle: TextStyle(
-                      color: (dayleft.value) < 1
+                      color: (accumulated.value) == 0
                           ? Color.fromARGB(255, 255, 0, 0)
-                          : Color.fromARGB(255, 0, 0, 0),
+                          : Color.fromARGB(255, 0, 255, 0),
                       fontSize: MediaQuery.of(context).size.width /
                           MediaQuery.of(context).size.height *
                           10,

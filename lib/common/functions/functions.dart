@@ -145,6 +145,7 @@ Function globalctxReset = () {
   dayleft.value = totalDays.value;
   globalctx.states["destinations"] = {};
   draggable.value = 0;
+  accumulated.value = 0;
   arrivalState.value = "selected";
   departureState.value = "selected";
   updateDraggableDestinations();

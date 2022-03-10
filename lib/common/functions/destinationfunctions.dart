@@ -21,6 +21,7 @@ Function promoteDestination = (ctrl, _formKey, destination, index, type) {
     }
 
     updateDraggableDestinations();
+    updateTotalLeftAccumulated();
     Get.close(1);
   }
 };
@@ -197,10 +198,8 @@ Function getDestinationData = (destId) {
 Function updateTotalLeftAccumulated = () {
   accumulated.value = 0;
   if (destinations.isNotEmpty) {
-    var idx = 0;
     for (var destination in destinations.keys) {
-      accumulated.value += getLeftAccumulated(destination, idx) as int;
-      idx++;
+      accumulated.value += getDestinationDay(destination) as int;
     }
   }
 };

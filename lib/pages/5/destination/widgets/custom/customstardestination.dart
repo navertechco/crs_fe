@@ -53,7 +53,6 @@ class CustomStarDestinationForm extends StatelessWidget {
 
       explorationDay.value = valueInt;
       setDestinationDay(destination, index, valueInt.toString());
-      // updateTotalLeftAccumulated();
     };
 
     Function validateExplorationDays = (value, context) async {
