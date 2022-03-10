@@ -15,6 +15,7 @@ class Header extends StatelessWidget {
   Widget build(BuildContext context) {
     var customer = memory["customer"] ?? {};
     var tour = memory["tour"] ?? {};
+    var logistic = memory["logistic"] ?? {};
 
     return Column(
       children: [
@@ -22,6 +23,8 @@ class Header extends StatelessWidget {
         CustomFormHeaderWidget(data: chunkMap(customer, 3, customerTemplate)),
         const CustomFormTitleWidget(level: 1, label: "Tour Information"),
         CustomFormHeaderWidget(data: chunkMap(tour, 3, tourTemplate)),
+        const CustomFormTitleWidget(level: 1, label: "Logistic Information"),
+        CustomFormHeaderWidget(data: chunkMap(logistic, 3, logisticTemplate)),
         CustomFormTitleWidget(
             level: 2,
             label:

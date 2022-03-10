@@ -117,148 +117,171 @@ Function validateDestinationDialog = (destination, type) {
   return ((rule1 || rule2 || rule3) && rule4).obs;
 };
 
-  List<Map<String, dynamic>> customerTemplate = [
-      {
-        "code": "contact_name",
-        "description": "contact_name",
-        "value": "1",
-        "convert": true,
-        "def": ""
-      },
-      {
-        "code": "legal_client_type",
-        "description": "legal_client_type",
-        "value": "1",
-        "convert": true,
-        "def": "Natural"
-      },
-      {
-        "code": "customer_type",
-        "description": "customer_type",
-        "value": "1",
-        "convert": true,
-        "def": ""
-      },
-      {
-        "code": "country",
-        "description": "country",
-        "value": "1",
-        "convert": true,
-        "def": "Ecuador"
-      },
-      {
-        "code": "email",
-        "description": "email",
-        "value": "1",
-        "convert": true,
-        "def": ""
-      },
-      {
-        "code": "travel_code",
-        "description": "travel_code",
-        "value": "1",
-        "convert": true,
-        "def": "000000"
-      },
-      {
-        "code": "lead_passenger",
-        "description": "lead_passenger",
-        "value": "1",
-        "convert": true,
-        "def": ""
-      },
-      {
-        "code": "address_line",
-        "description": "address_line",
-        "value": "1",
-        "convert": true,
-        "def": ""
-      },
-      {
-        "code": "city",
-        "description": "city",
-        "value": "1",
-        "convert": true,
-        "def": ""
-      },
-      {
-        "code": "dni",
-        "description": "dni",
-        "value": "1",
-        "convert": true,
-        "def": "000000"
-      },
-      {
-        "code": "tax_id",
-        "description": "tax_id",
-        "value": "1",
-        "convert": true,
-        "def": "000000"
-      },
-      {
-        "code": "names",
-        "description": "names",
-        "value": "1",
-        "convert": true,
-        "def": ""
-      },
-      {
-        "code": "last_names",
-        "description": "last_names",
-        "value": "1",
-        "convert": true,
-        "def": ""
-      },
-      {
-        "code": "birth_date",
-        "description": "birth_date",
-        "value": "1",
-        "convert": false,
-        "def": ""
-      },
-    ];
+List<Map<String, dynamic>> tourTemplate = [
+  {
+    "code": "country",
+    "description": "country",
+    "value": "1",
+    "convert": true,
+    "label": "Destination Country",
+    "def": ""
+  },
+  {
+    "code": "accomodation_type",
+    "description": "accomodation_type",
+    "value": "1",
+    "convert": true,
+    "label": "Accomodation Type",
+    "def": ""
+  },
+  {
+    "code": "purpose",
+    "description": "purpose",
+    "value": "1",
+    "convert": true,
+    "label": "Purpose",
+    "def": ""
+  },
+  {
+    "code": "passengers",
+    "description": "passengers",
+    "value": "1",
+    "convert": true,
+    "label": "Passengers",
+    "def": ""
+  },
+];
 
-    List<Map<String, dynamic>> tourTemplate = [
-      {
-        "code": "country",
-        "description": "country",
-        "value": "1",
-        "convert": true,
-        "def": ""
-      },
-      {
-        "code": "accomodation_type",
-        "description": "accomodation_type",
-        "value": "1",
-        "convert": true,
-        "def": ""
-      },
-      {
-        "code": "purpose",
-        "description": "purpose",
-        "value": "1",
-        "convert": true,
-        "def": ""
-      },
-      {
-        "code": "passengers",
-        "description": "passengers",
-        "value": "1",
-        "convert": true,
-        "def": ""
-      },
-      {
-        "code": "arrival_date",
-        "description": "arrival_date",
-        "value": "1",
-        "convert": true,
-        "def": ""
-      },
-      {
-        "code": "departure_date",
-        "description": "departure_date",
-        "value": "1",
-        "convert": true,
-        "def": ""
-      },
-    ];
+List<Map<String, dynamic>> customerTemplate = [
+  {
+    "code": "contact_name",
+    "description": "contact_name",
+    "value": "1",
+    "convert": true,
+    "label": "Contact Name",
+    "def": ""
+  },
+  {
+    "code": "legal_client_type",
+    "description": "legal_client_type",
+    "value": "1",
+    "convert": true,
+    "label": "Legal Client",
+    "def": "Natural"
+  },
+  {
+    "code": "customer_type",
+    "description": "customer_type",
+    "value": "1",
+    "convert": true,
+    "label": "Customer Type",
+    "def": ""
+  },
+  {
+    "code": "country",
+    "description": "country",
+    "value": "1",
+    "convert": true,
+    "label": "Country",
+    "def": "Ecuador"
+  },
+  {
+    "code": "email",
+    "description": "email",
+    "value": "1",
+    "convert": true,
+    "label": "e-Mail",
+    "def": ""
+  },
+  {
+    "code": "travel_code",
+    "description": "travel_code",
+    "value": "1",
+    "convert": true,
+    "label": "Travel Code",
+    "def": "000000"
+  },
+  {
+    "code": "lead_passenger",
+    "description": "lead_passenger",
+    "value": "1",
+    "convert": true,
+    "label": "Lead Passenger",
+    "def": ""
+  },
+  {
+    "code": "address_line",
+    "description": "address_line",
+    "value": "1",
+    "convert": true,
+    "label": "Address Line",
+    "def": ""
+  },
+  {
+    "code": "city",
+    "description": "city",
+    "value": "1",
+    "convert": true,
+    "label": "City",
+    "def": ""
+  },
+  {
+    "code": "dni",
+    "description": "dni",
+    "value": "1",
+    "convert": true,
+    "label": "DNI/PASSPORT",
+    "def": "000000"
+  },
+  {
+    "code": "tax_id",
+    "description": "tax_id",
+    "value": "1",
+    "convert": true,
+    "label": "TAX-ID",
+    "def": "000000"
+  },
+  {
+    "code": "names",
+    "description": "names",
+    "value": "1",
+    "convert": true,
+    "label": "Names",
+    "def": ""
+  },
+  {
+    "code": "last_names",
+    "description": "last_names",
+    "value": "1",
+    "convert": true,
+    "label": "Last Names",
+    "def": ""
+  },
+  {
+    "code": "birth_date",
+    "description": "birth_date",
+    "value": "1",
+    "convert": false,
+    "label": "Birth Date",
+    "def": ""
+  },
+];
+
+List<Map<String, dynamic>> logisticTemplate = [
+  {
+    "code": "arrival_date",
+    "description": "arrival_date",
+    "value": "1",
+    "convert": true,
+    "label": "Arrival Date",
+    "def": ""
+  },
+  {
+    "code": "departure_date",
+    "description": "departure_date",
+    "value": "1",
+    "convert": true,
+    "label": "Departure Date",
+    "def": ""
+  },
+];

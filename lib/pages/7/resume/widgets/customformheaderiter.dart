@@ -17,13 +17,13 @@ class CustomFormHeaderIterWidget extends StatelessWidget {
 
     for (var i = 0; i < data[index].length; i++) {
       list.add(CustomFormHeaderRowWidget(
-        customlabel: data[index][i]["description"] + ":",
+        customlabel: data[index][i]["label"] + ":",
         value: data[index][i]["value"].toString(),
       ));
     }
     return Row(
       children: [
-        SizedBox(width: MediaQuery.of(context).size.width * 0.083),
+        SizedBox(width: MediaQuery.of(context).size.width * 0.07),
         Row(
           children: list,
         ),

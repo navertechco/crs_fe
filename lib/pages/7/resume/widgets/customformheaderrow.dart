@@ -19,12 +19,14 @@ class CustomFormHeaderRowWidget extends StatelessWidget {
             style: KTextSytle(
                     context: context, fontSize: 12, fontWeight: FontWeight.bold)
                 .getStyle()),
-        Text(" $value  ",
+        SizedBox(width: MediaQuery.of(context).size.width * 0.01),
+        Text("$value",
             style: KTextSytle(
                     context: context,
                     fontSize: 12,
                     fontWeight: FontWeight.normal)
                 .getStyle()),
+        SizedBox(width: MediaQuery.of(context).size.width * 0.03)
       ],
     );
   }
