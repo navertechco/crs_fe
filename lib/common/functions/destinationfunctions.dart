@@ -31,6 +31,12 @@ Function updateDraggableDestinations = () {
           globalctx.selectedDestinations.length - 1) {
     draggable.value = 1;
   }
+  if (arrivalState.value == "promoted" &&
+      departureState.value == "promoted" &&
+      globalctx.promotedDestinations.length ==
+          globalctx.selectedDestinations.length) {
+    draggable.value = 0;
+  }
 };
 
 // Destination Functions
@@ -108,28 +114,32 @@ int idx = 0;
 String type = "";
 
 Function filterSelectedDestinations = () {
-  if (selectedDestinations.contains(arrival["description"])) {
-    selectedDestinations.remove(arrival["description"]);
-  }
-  if (selectedDestinations.contains(departure["description"])) {
-    selectedDestinations.remove(departure["description"]);
-  }
-  selectedDestinations.insert(0, arrival["description"]);
-  selectedDestinations.add(departure["description"]);
-  globalctx.selectedDestinations.value = [];
-  globalctx.destinationDragData.value = <Widget>[];
-  idx = 0;
-  var destlength = selectedDestinations.length;
-  for (var selected in selectedDestinations) {
-    type = "tour";
-    if (idx == 0) {
-      type = "arrival";
+  if (dayleft.value > 1 &&
+      globalctx.promotedDestinations.length >=
+          globalctx.selectedDestinations.length - 1) {
+    if (selectedDestinations.contains(arrival["description"])) {
+      selectedDestinations.remove(arrival["description"]);
     }
-    if (idx == destlength - 1) {
-      type = "departure";
+    if (selectedDestinations.contains(departure["description"])) {
+      selectedDestinations.remove(departure["description"]);
     }
-    moveDestination(selected, idx, type);
-    idx++;
+    selectedDestinations.insert(0, arrival["description"]);
+    selectedDestinations.add(departure["description"]);
+    globalctx.selectedDestinations.value = [];
+    globalctx.destinationDragData.value = <Widget>[];
+    idx = 0;
+    var destlength = selectedDestinations.length;
+    for (var selected in selectedDestinations) {
+      type = "tour";
+      if (idx == 0) {
+        type = "arrival";
+      }
+      if (idx == destlength - 1) {
+        type = "departure";
+      }
+      moveDestination(selected, idx, type);
+      idx++;
+    }
   }
 };
 

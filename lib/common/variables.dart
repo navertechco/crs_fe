@@ -92,13 +92,20 @@ RxString arrivalState = getDestinationState("", 0).toString().obs;
 RxString departureState =
     getDestinationState("", destinations.length - 1).toString().obs;
 
-Function validateDestinationDialog = (type) {
+Function validateDestinationDialog = (destination, type) {
   var rule1 = (draggable.value == 0 && type == "arrival");
-  var rule2 = (draggable.value != 0 && type == "tour");
+  var rule2 = (draggable.value != 0 &&
+      type == "tour" &&
+      destination != arrival["description"] &&
+      destination != departure["description"]);
   var rule3 = (draggable.value != 0 &&
-      globalctx.promotedDestinations.length >
+      globalctx.promotedDestinations.length !=
           globalctx.selectedDestinations.length &&
+      globalctx.promotedDestinations.length >=
+          globalctx.selectedDestinations.length - 1 &&
+      globalctx.selectedDestinations.length >= 3 &&
+      globalctx.promotedDestinations.length >= 2 &&
       type == "departure");
-
-  return (rule1 || rule2 || rule3).obs;
+  var rule4 = globalctx.selectedDestinations.contains(destination);
+  return ((rule1 || rule2 || rule3) && rule4).obs;
 };

@@ -41,11 +41,10 @@ class SwitcherWidget extends StatelessWidget {
           : dests.remove(destination);
 
       globalctx.destinationlist = dests;
-      var suggested = getDestinationState(destination, index) == "suggested";
-      if (suggested) {
+      if (!validateDestinationDialog(destination, type).value) {
         _changeRotationAxis();
       } else {
-        if (validateDestinationDialog(type).value) {
+        if (validateDestinationDialog(destination, type).value) {
           showDialog(
               context: context,
               builder: (context) {

@@ -74,7 +74,7 @@ class DestinationFrontOptionWidget extends StatelessWidget {
         ],
       ),
       Obx(() {
-        if (!validateDestinationDialog(type).value) {
+        if (!validateDestinationDialog(destination,type).value) {
           return Padding(
             padding: EdgeInsets.only(
               top: MediaQuery.of(context).size.height * 0.017,

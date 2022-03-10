@@ -16,7 +16,7 @@ class RoundedFormField extends StatelessWidget {
   final void Function(String?)? onFieldSubmitted;
   final TextInputType? keyboardType;
   String? Function(String?)? validator;
-  final String? initialValue;
+  String? initialValue;
   RoundedFormField(
       {Key? key,
       required this.hintText,
@@ -52,6 +52,9 @@ class RoundedFormField extends StatelessWidget {
         // autofocus: true,
         readOnly: disabled,
         initialValue: initialValue,
+        onTap: () {
+          initialValue = "";
+        },
         validator: validator,
         keyboardType: keyboardType,
         onSaved: onSaved,
