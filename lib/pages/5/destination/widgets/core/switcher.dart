@@ -45,12 +45,14 @@ class SwitcherWidget extends StatelessWidget {
       if (suggested) {
         _changeRotationAxis();
       } else {
-        showDialog(
-            context: context,
-            builder: (context) {
-              return DestinationDetailPage(
-                  destination: destination, type: type, index: index);
-            });
+        if (validateDestinationDialog(type).value) {
+          showDialog(
+              context: context,
+              builder: (context) {
+                return DestinationDetailPage(
+                    destination: destination, type: type, index: index);
+              });
+        }
       }
     }
 

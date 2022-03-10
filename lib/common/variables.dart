@@ -91,3 +91,14 @@ RxInt accumulated = 0.obs;
 RxString arrivalState = getDestinationState("", 0).toString().obs;
 RxString departureState =
     getDestinationState("", destinations.length - 1).toString().obs;
+
+Function validateDestinationDialog = (type) {
+  var rule1 = (draggable.value == 0 && type == "arrival");
+  var rule2 = (draggable.value != 0 && type == "tour");
+  var rule3 = (draggable.value != 0 &&
+      globalctx.promotedDestinations.length >
+          globalctx.selectedDestinations.length &&
+      type == "departure");
+
+  return (rule1 || rule2 || rule3).obs;
+};

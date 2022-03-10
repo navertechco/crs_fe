@@ -18,7 +18,6 @@ class DestinationFrontOptionWidget extends StatelessWidget {
     // ignore: unnecessary_null_comparison
 
     var dest = getDestinationValue(destination);
-    
 
     return Stack(children: [
       Padding(
@@ -49,7 +48,7 @@ class DestinationFrontOptionWidget extends StatelessWidget {
                 left: MediaQuery.of(context).size.width * 0.33,
               ),
               child: Image.asset("assets/custom/img/icon-plain.png",
-                  color: Colors.red,
+                  color: type == "arrival" ? Colors.blue : Colors.red,
                   width: MediaQuery.of(context).size.width * 0.05),
             ),
           // if (boat)
@@ -62,22 +61,20 @@ class DestinationFrontOptionWidget extends StatelessWidget {
           //         color: Colors.blue,
           //         width: MediaQuery.of(context).size.width * 0.05),
           //   ),
-          if (type == "tour")
-            Padding(
-              padding: EdgeInsets.only(
-                top: MediaQuery.of(context).size.height * 0.01,
-                left: MediaQuery.of(context).size.width * 0.33,
-              ),
-              child: Image.asset("assets/custom/img/car.png",
-                  color: Colors.green,
-                  width: MediaQuery.of(context).size.width * 0.05),
-            ),
+          // if (type == "tour")
+          //   Padding(
+          //     padding: EdgeInsets.only(
+          //       top: MediaQuery.of(context).size.height * 0.01,
+          //       left: MediaQuery.of(context).size.width * 0.33,
+          //     ),
+          //     child: Image.asset("assets/custom/img/car.png",
+          //         color: Colors.green,
+          //         width: MediaQuery.of(context).size.width * 0.05),
+          //   ),
         ],
       ),
       Obx(() {
-        if (draggable.value == 0 &&
-            arrivalState.value != "promoted" &&
-            departureState.value != "promoted"&&type=="tour") {
+        if (!validateDestinationDialog(type).value) {
           return Padding(
             padding: EdgeInsets.only(
               top: MediaQuery.of(context).size.height * 0.017,

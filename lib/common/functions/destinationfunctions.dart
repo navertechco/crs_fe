@@ -16,9 +16,8 @@ Function promoteDestination = (ctrl, _formKey, destination, index, type) {
     setDestinationState(destination, index, "promoted", type);
     arrivalState.value = "selected";
     departureState.value = "selected";
-    if (globalctx.promotedDestinations.length > 1) {
+    if (globalctx.promotedDestinations.isNotEmpty) {
       arrivalState.value = "promoted";
-      departureState.value = "promoted";
     }
 
     updateDraggableDestinations();
@@ -27,7 +26,9 @@ Function promoteDestination = (ctrl, _formKey, destination, index, type) {
 };
 
 Function updateDraggableDestinations = () {
-  if (arrivalState.value == "promoted" && departureState.value == "promoted") {
+  if (arrivalState.value == "promoted" &&
+      globalctx.promotedDestinations.length >=
+          globalctx.selectedDestinations.length - 1) {
     draggable.value = 1;
   }
 };
@@ -120,6 +121,7 @@ Function filterSelectedDestinations = () {
   idx = 0;
   var destlength = selectedDestinations.length;
   for (var selected in selectedDestinations) {
+    type = "tour";
     if (idx == 0) {
       type = "arrival";
     }
