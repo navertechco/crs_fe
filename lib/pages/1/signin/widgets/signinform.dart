@@ -21,7 +21,7 @@ class SigninForm extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
-            child: RoundedFormField(
+            child: RoundedFormTextField(
               initialValue:"jcuevas2",
               onSaved: (value) => state.username = value!,
               hintText: 'Username',
@@ -30,7 +30,7 @@ class SigninForm extends StatelessWidget {
           ),
           SizedBox(height: kDefaultPadding),
           SizedBox(
-            child: RoundedFormField(
+            child: RoundedFormTextField(
               initialValue:"jcuevas123!",
                 onSaved: (value) => state.password = value!,
                 hintText: 'Password',

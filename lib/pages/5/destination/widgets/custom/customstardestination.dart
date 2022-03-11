@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:naver_crs/common/validators.dart';
+import 'package:naver_crs/common/widgets/customform/customformcounterfield.dart';
 import 'package:naver_crs/pages/5/destination/widgets/destinationdetail/controller.dart';
 import '../../../../index.dart';
 
@@ -119,29 +120,12 @@ class CustomStarDestinationForm extends StatelessWidget {
                       explorationdDays
                           .where((e) => e["code"] <= totalDays.value)
                           .toList());
-                  return CustomFormTextFieldWidget(
-                      value: getFormValue(globalctx.memory["destinations"],
-                          index, "explorationDay", "0"),
-                      validator: CustomRequiredValidator(
-                          errorText: "Exploration Days required ",
-                          ctx: context),
-                      onSaved: (value) {
-                        setContext("dayleft", dayleft.value);
-                      },
-                      onFieldSubmitted: (value) {
-                        // validateExplorationDays(value, context);
-                      },
-                      onChanged: (value) {
+                  return CustomFormCounterFieldWidget(
+                      initial: getFormValue(globalctx.memory["destinations"],
+                          index, "explorationDay", 0),
+                      onValueChanged: (value) {
                         validateExplorationDays(value, context);
                       },
-                      onBack: (value) {
-                        value = "0";
-                        validateExplorationDays(value, context);
-                      },
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.digitsOnly
-                      ],
-                      keyboardType: TextInputType.number,
                       label: "Exploration Days    ",
                       width: 0.20);
                 }),

@@ -49,7 +49,7 @@ class LoadingWidget extends GetView<LoadingController> {
                             ),
                           ),
                         if (!newtour.value)
-                          RoundedFormField(
+                          RoundedFormTextField(
                               onChanged: (value) => ctrl.state.tourId = value!,
                               hintText: 'Find Tour',
                               keyboardType: TextInputType.number),

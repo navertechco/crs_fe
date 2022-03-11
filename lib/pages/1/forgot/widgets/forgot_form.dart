@@ -23,7 +23,7 @@ class ForgotForm extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
-            child: RoundedFormField(
+            child: RoundedFormTextField(
               onSaved: (value) => state.email = value!,
               hintText: 'Email',
               keyboardType: TextInputType.emailAddress,

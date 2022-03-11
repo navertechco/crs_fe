@@ -364,3 +364,19 @@ Future<void> showCustomDialog(context, Widget child, String button) async {
     },
   );
 }
+
+Function upDayLeft = (int value) {
+  selected.value = value;
+  accumulated.value += selected.value;
+  updateDayleft();
+};
+
+Function downDayLeft = (int value) {
+  selected.value = value;
+  accumulated.value -= selected.value;
+  updateDayleft();
+};
+
+Function updateDayleft = () {
+  dayleft.value = (totalDays.value - (accumulated.value + selected.value));
+};

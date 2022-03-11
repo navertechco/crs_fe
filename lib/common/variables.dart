@@ -30,7 +30,9 @@ RxString tourOption = "1".obs;
 RxString openCredit = "0".obs;
 Rx<int> totalDays =
     Rx(departureDate.value.difference(arrivalDate.value).inDays);
-var dayleft = totalDays;
+RxInt accumulated = 1.obs;
+RxInt selected = 0.obs;
+RxInt dayleft = 0.obs;
 Rx<double> customerAge =
     Rx(DateTime.now().difference(birthDate.value).inDays / 365);
 Rx<int> memoryDayLeft = Rx(globalctx.memory["days_left"]);
@@ -94,7 +96,6 @@ List pageList = [
   "Resume"
 ];
 
-RxInt accumulated = 0.obs;
 RxString arrivalState = getDestinationState("", 0).toString().obs;
 RxString departureState =
     getDestinationState("", destinations.length - 1).toString().obs;

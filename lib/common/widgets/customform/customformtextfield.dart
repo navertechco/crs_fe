@@ -49,7 +49,7 @@ class CustomFormTextFieldWidget extends StatelessWidget {
                 onBack!(value);
               }
             },
-            child: RoundedFormField(
+            child: RoundedFormTextField(
                 initialValue: value.toString(),
                 disabled: disabled,
                 onSaved: onSaved,

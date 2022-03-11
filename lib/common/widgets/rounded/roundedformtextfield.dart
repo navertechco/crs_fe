@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:naver_crs/common/constants.dart';
 
-class RoundedFormField extends StatelessWidget {
+class RoundedFormTextField extends StatelessWidget {
   final bool disabled;
   final double left;
   final double top;
@@ -19,7 +19,7 @@ class RoundedFormField extends StatelessWidget {
   String? Function(String?)? validator;
   String? initialValue;
   List<TextInputFormatter>? inputFormatters;
-  RoundedFormField(
+  RoundedFormTextField(
       {Key? key,
       required this.hintText,
       this.left = 45,
