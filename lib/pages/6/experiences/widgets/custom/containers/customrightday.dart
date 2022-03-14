@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:naver_crs/pages/6/experiences/controller.dart';
-import '../index.dart';
+import 'package:naver_crs/pages/6/experiences/widgets/custom/containers/leftHeader.dart';
+import 'package:naver_crs/pages/6/experiences/widgets/custom/containers/transportfilter.dart';
+import 'package:naver_crs/pages/6/experiences/widgets/custom/containers/travelchip.dart';
 
-class CustomRightDayWidget extends HookWidget {
+class CustomTopDayWidget extends HookWidget {
   final ExperiencesController ctrl;
   final ValueNotifier<int> counter;
-  const CustomRightDayWidget({
+  const CustomTopDayWidget({
     Key? key,
     required this.ctrl,
     required this.counter,
@@ -16,14 +18,18 @@ class CustomRightDayWidget extends HookWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-          top: MediaQuery.of(context).size.height * 0.27,
-          left: MediaQuery.of(context).size.width * 0.375),
-      child: Column(
-        children: [
-          // CustomHeaderWidget(),
-          CustomContentWidget(ctrl: ctrl),
-          CustomFooterWidget(ctrl: ctrl, counter: counter),
-        ],
+        top: MediaQuery.of(context).size.height * 0.1,
+        left: MediaQuery.of(context).size.width * 0.07,
+      ),
+      child: SizedBox(
+        height: MediaQuery.of(context).size.height * 0.5,
+        width: MediaQuery.of(context).size.width * 1,
+        child: Stack(
+          children: [
+            LeftHeader(ctrl: ctrl, counter: counter),
+            TransportFilter(ctrl: ctrl, counter: counter),
+          ],
+        ),
       ),
     );
   }

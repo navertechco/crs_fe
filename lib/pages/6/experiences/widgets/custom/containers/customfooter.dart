@@ -16,54 +16,46 @@ class CustomFooterWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // Row(
-        //   children: [
-        //     CustomTitleWidget(
-        //       fontWeight: FontWeight.normal,
-        //       label:
-        //           "If you want not any these experience please click on \"Expand\" to amplify the options",
-        //     ),
-        //     CustomKeypadWidget(
-        //         nextlabel: "< Expand >",
-        //         prevlabel: "",
-        //         onNext: () {
-        //           formKey.currentState!.reset();
-        //           counter.value++;
-        //           filterSuggestedExperiences();
-        //         },
-        //         onPrevious: () {},
-        //         nextFontWeight: FontWeight.bold,
-        //         width: 0.002),
-        //   ],
-        // ),
         Row(
           children: [
-            CustomTitleWidget(
-              width: 0.002,
-              fontWeight: FontWeight.normal,
-              label: "If you want to Reset options click to ->    ",
+            TextButton(
+              child: Text("Previous",
+                  style: KTextSytle(
+                          context: context,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white)
+                      .getStyle()),
+              onPressed: () {
+                previousDay();
+              },
             ),
-            CustomKeypadWidget(
-                prevlabel: "< Reset >",
-                nextlabel: "",
-                onPrevious: () {
-                  resetExperiences();
-                },
-                prevFontWeight: FontWeight.bold,
-                width: 0.01),
+            TextButton(
+              child: Text("Reset",
+                  style: KTextSytle(
+                          context: context,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white)
+                      .getStyle()),
+              onPressed: () {
+                resetExperiences();
+              },
+            ),
+            TextButton(
+              child: Text("Next",
+                  style: KTextSytle(
+                          context: context,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white)
+                      .getStyle()),
+              onPressed: () {
+                paginateDay(context);
+              },
+            ),
           ],
         ),
-        CustomKeypadWidget(
-            nextlabel: "Next >",
-            prevlabel: "< Previous ",
-            onNext: () {
-              paginateDay(context);
-              // ctrl.refresh();
-            },
-            onPrevious: () {
-              previousDay();
-            },
-            width: 0.45),
       ],
     );
   }

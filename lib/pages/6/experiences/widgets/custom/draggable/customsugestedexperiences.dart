@@ -11,25 +11,14 @@ class CustomSugestedExperiencesWidget extends StatelessWidget {
   final ExperiencesController ctrl;
   @override
   Widget build(BuildContext context) {
-    return Align(
-        alignment: Alignment.centerLeft,
-        child: SizedBox(
-            // width: MediaQuery.of(context).size.width * 0.1,
-            child: Column(
-          children: [
-            CustomTitleWidget(
-              fontWeight: FontWeight.bold,
-              label: "Suggested Experiences\n",
-            ),
-            const Divider(
-              color: Colors.black,
-              height: 25,
-              thickness: 2,
-              indent: 5,
-              endIndent: 5,
-            ),
-            CustomExperiencesListWidget(ctrl: ctrl),
-          ],
-        )));
+    return Column(
+      children: [
+        CustomTitleWidget(
+            fontWeight: FontWeight.bold,
+            label: "Experience Categories",
+            color: Colors.white),
+        CustomExperiencesListWidget(ctrl: ctrl),
+      ],
+    );
   }
 }

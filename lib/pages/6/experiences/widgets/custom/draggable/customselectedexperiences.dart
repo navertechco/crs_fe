@@ -17,9 +17,9 @@ class CustomSelectedExperiencesWidget extends StatelessWidget {
             child: Column(
           children: [
             CustomTitleWidget(
-              fontWeight: FontWeight.bold,
-              label: "Selected Experiences\n",
-            ),
+                fontWeight: FontWeight.bold,
+                label: "Selected Experiences",
+                color: Colors.white),
             const Divider(
               color: Colors.black,
               height: 25,

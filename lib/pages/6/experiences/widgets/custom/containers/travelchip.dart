@@ -17,7 +17,8 @@ class TravelChips extends HookWidget {
     //   keyActivities.value = <String>[];
     // }, [stream, counter.value]);
 
-    var index = getDestinationIndex(globalDestinationName.value, globalDestinationType.value);
+    var index = getDestinationIndex(
+        globalDestinationName.value, globalDestinationType.value);
     Rx<dynamic> keyActivities = Rx(getFormValue(
         globalctx.memory["destinations"], index, "keyActivities", <String>[]));
 
@@ -35,13 +36,7 @@ class TravelChips extends HookWidget {
                 CustomTitleWidget(
                   fontWeight: FontWeight.bold,
                   label: "Filtered Experiences by:",
-                ),
-                const Divider(
-                  color: Colors.black,
-                  height: 25,
-                  thickness: 2,
-                  indent: 5,
-                  endIndent: 5,
+                  color: Colors.white
                 ),
                 Obx(() {
                   return Column(

@@ -11,15 +11,11 @@ class CustomContentWidget extends StatelessWidget {
   final ExperiencesController ctrl;
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.centerRight,
-      child: Row(
-        children: [
-          CustomSugestedExperiencesWidget(ctrl: ctrl),
-          CustomSelectedExperiencesWidget(),
-        ],
-      ),
+    return Row(
+      children: [
+        CustomSugestedExperiencesWidget(ctrl: ctrl),
+        CustomSelectedExperiencesWidget(),
+      ],
     );
-    
   }
 }

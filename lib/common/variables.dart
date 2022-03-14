@@ -291,3 +291,26 @@ List<Map<String, dynamic>> logisticTemplate = [
     "def": ""
   },
 ];
+
+
+ Rx<dynamic> transportService = Rx(getFormValue(
+            globalctx.memory["destinations"],
+            globalDestinationIndex.value,
+            "service_type", <String>[]) ??
+        <String>[]);
+    Rx<dynamic> translatingService = Rx(getFormValue(
+        globalctx.memory["destinations"],
+        globalDestinationIndex.value,
+        "translating_service", <String>[]));
+    Rx<int> guide = Rx(getFormValue(globalctx.memory["destinations"],
+        globalDestinationIndex.value, "guide_type", 1));
+
+    Rx<int> guideIndex = Rx(
+        transportService.value.indexWhere((element) => element == "GUIDING") ??
+            0);
+    Rx<int> translateIndex = Rx(transportService.value
+            .indexWhere((element) => element == "TRANSLATING") ??
+        0);
+
+    var serviceTypeCatalog = Rx(processCatalog("service_type"));
+    var translatingCatalog = Rx(processCatalog("translating_service"));

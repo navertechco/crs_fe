@@ -11,7 +11,7 @@ class ExperiencesPage extends GetView<ExperiencesController> {
 
   Widget _buildView(BuildContext? _context) {
     return ContentLayoutWidget(
-        background: "assets/custom/img/experience-detail.png",
+        background: "assets/custom/img/layout.png",
         child: ExperiencesWidget(ctrl: controller),
         text: "");
   }
