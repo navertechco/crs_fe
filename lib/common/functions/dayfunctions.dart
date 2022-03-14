@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:naver_crs/pages/5/destination/widgets/destinationdetail/widgets/index.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:sweetalert/sweetalert.dart';
 import '../index.dart';
@@ -21,13 +22,8 @@ Function paginateDay = (context) {
       globalctx.memory["promoted"]["day"][currentDay.value] != null) {
     paginateNextDay();
   } else {
-    SweetAlert.show(context,
-        curve: ElasticInCurve(),
-        title: "Promote any experiences is required",
-        style: SweetAlertStyle.error, onPress: (bool isConfirm) {
-      Get.close(1);
-      return false;
-    });
+    showCustomDialog(
+        context, LeftWidget(destination: "quito", index: 0), "Close");
   }
 };
 Function paginateNextDay = () {

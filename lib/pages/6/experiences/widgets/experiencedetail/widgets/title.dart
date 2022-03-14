@@ -20,7 +20,7 @@ class TitleWidget extends StatelessWidget {
                 context: context,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: Colors.white)
+                color: Color.fromARGB(255, 204, 164, 61))
             .getStyle());
   }
 }

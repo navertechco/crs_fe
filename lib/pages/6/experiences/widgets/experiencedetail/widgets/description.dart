@@ -20,7 +20,7 @@ class DescriptionWidget extends StatelessWidget {
                 context: context,
                 fontSize: 15,
                 fontWeight: FontWeight.bold,
-                color: Colors.white)
+                color: Color.fromARGB(255, 128, 128, 128))
             .getStyle());
   }
 }
