@@ -349,7 +349,8 @@ Future<void> showCustomDialog(context, Widget child, String button) async {
     builder: (BuildContext context) {
       return AlertDialog(
         backgroundColor: Colors.black54,
-        content: child,
+        content: Container(
+            width: MediaQuery.of(context).size.width * 0.5, child: child),
         actions: <Widget>[
           TextButton(
             child: Text(button,

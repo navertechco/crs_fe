@@ -2,7 +2,7 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:naver_crs/pages/6/experiences/widgets/experiencedetail/index.dart';
+import 'package:naver_crs/pages/6/experiences/widgets/experiencedetail/widgets/index.dart';
 
 import '../../../../index.dart';
 
@@ -45,11 +45,8 @@ class SwitcherWidget extends StatelessWidget {
       if (suggested) {
         _changeRotationAxis();
       } else {
-        showDialog(
-            context: context,
-            builder: (context) {
-              return ExperienceDetailPage(experience: experience);
-            });
+        showCustomDialog(
+            context, ExperienceDetailWidget(experience: experience), "Close");
       }
     }
 

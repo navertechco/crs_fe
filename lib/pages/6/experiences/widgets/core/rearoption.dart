@@ -2,6 +2,9 @@ import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:naver_crs/pages/6/experiences/widgets/experiencedetail/index.dart';
+import 'package:naver_crs/pages/6/experiences/widgets/experiencedetail/widgets/index.dart';
+
+import '../../../../index.dart';
 
 class ExperienceRearOptionWidget extends StatelessWidget {
   const ExperienceRearOptionWidget({Key? key, this.experience = "coast"})
@@ -23,11 +26,8 @@ class ExperienceRearOptionWidget extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
-            showModal(
-                context: context,
-                builder: (context) {
-                  return ExperienceDetailPage(experience: experience);
-                });
+            showCustomDialog(context,
+                ExperienceDetailWidget(experience: experience), "Close");
           },
           child: Text(
             "click here for details...\n",

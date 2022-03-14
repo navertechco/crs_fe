@@ -6,36 +6,52 @@ import '../../../../../index.dart';
 class CarouselWidget extends StatelessWidget {
   const CarouselWidget({
     Key? key,
+    this.experience,
   }) : super(key: key);
-
+  final experience;
   @override
   Widget build(BuildContext context) {
-    var destinationData = getParam("DESTINATION_DATA")["value"];
+    var experiences = processCatalog("experiences");
+    var expData = experiences
+        .toList()
+        .firstWhere((element) => element["description"] == experience)["value"];
     var images = [];
+    var datas = [];
 
-    for (var destination in destinationData.keys) {
-      var image = destinationData[destination][4];
-      images.add(image);
+    for (var data in expData["activities"]) {
+      images.add(data["image"]);
+      datas.add(data);
     }
 
-    return Padding(
-      padding: EdgeInsets.only(
-        top: MediaQuery.of(context).size.height * 0.28,
-        right: MediaQuery.of(context).size.width * 0.5,
-      ),
-      child: SizedBox(
-        height: MediaQuery.of(context).size.height * 0.8,
-        width: MediaQuery.of(context).size.width * 0.8,
-        child: Swiper(
-          itemBuilder: (BuildContext context, int index) {
-            return Image.asset(images[index],
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * 0.3,
+      width: MediaQuery.of(context).size.width * 0.3,
+      child: Swiper(
+        itemBuilder: (BuildContext context, int index) {
+          return GestureDetector(
+            onTap: () {
+              showCustomDialog(
+                  context,
+                  Stack(
+                    children: [
+                      SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.5,
+                          width: MediaQuery.of(context).size.width * 0.5,
+                          child: YoutubeWidget(
+                            videoId: datas[index]["video"],
+                          )),
+                    ],
+                  ),
+                  "Close");
+            },
+            child: Image.asset(images[index],
                 // fit: BoxFit.fill,
-                width: MediaQuery.of(context).size.width * 0.05);
-          },
-          autoplay: false,
-          itemCount: images.length,
-          scrollDirection: Axis.horizontal,
-        ),
+                width: MediaQuery.of(context).size.width * 0.05),
+          );
+        },
+        autoplay: false,
+        itemCount: images.length,
+        scrollDirection: Axis.horizontal,
       ),
     );
   }
