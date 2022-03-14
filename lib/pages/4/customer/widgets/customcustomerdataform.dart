@@ -217,8 +217,8 @@ class CustomCustomerDataForm extends StatelessWidget {
                                     ctx: context),
                                 value:
                                     getValue(client, "origin_id", def: "148"),
-                                width: country.value == "" ? 0.2 : 0.1,
-                                label: "Country          ",
+                                width: country.value == "" ? 0.3 : 0.15,
+                                label: "Country",
                                 onChanged: (value) {
                                   country.value = value!;
 
@@ -316,7 +316,7 @@ class CustomCustomerDataForm extends StatelessWidget {
                                           .replaceAll(" ", "-");
                                 },
                                 keyboardType: TextInputType.name,
-                                hintText: "Lead Passenger                  ",
+                                label: "Lead Passenger",
                                 width: 0.2)
                           ],
                         ),

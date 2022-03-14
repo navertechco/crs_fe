@@ -71,7 +71,12 @@ List<dynamic> customDestinationData = [
 ];
 var promotedDestinations = globalctx.promotedDestinations.value;
 RxInt selectedIndex = 0.obs;
-RxString travelCode = "".obs;
+RxString travelCode = (leadPassenger.value.toString() +
+        "-" +
+        globalctx.memory["tour"]["passengers"] +
+        "-" +
+        dayFormat.format(arrivalDate.value).replaceAll(" ", "-"))
+    .obs;
 RxString leadPassenger = "pp".obs;
 RxString arrivalPort = "6".obs;
 RxString departurePort = "6".obs;

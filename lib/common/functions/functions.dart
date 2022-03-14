@@ -44,11 +44,10 @@ Function processDaysCatalog = () {
 };
 
 Function processCatalog = (name) {
-  var ctxCatalogs = getContext("catalogs");
+  var catalogs = getContext("catalogs");
   List<Map<String, dynamic>> catalog = [];
 
-  if (ctxCatalogs != null) {
-    var catalogs = ctxCatalogs["catalogs"];
+  if (catalogs != null) {
     var items = catalogs[name];
     if (items != null) {
       for (var item in items) {
@@ -256,6 +255,9 @@ Function getDestinationDay = (index) {
 };
 
 Function parseIntValue = (value) {
+  if (value is int) {
+    return value;
+  }
   value ??= "0";
   if (value == "") {
     value = "0";
@@ -265,13 +267,15 @@ Function parseIntValue = (value) {
 };
 
 Function setFormValue = (data, formKey, key, value) {
-  data ??= {}.obs;
-  formKey = formKey.toString();
-  if (data[formKey] == null) {
-    data[formKey] = {}.obs;
-  }
+  try {
+    data ??= {}.obs;
+    formKey = formKey.toString();
+    if (data[formKey] == null) {
+      data[formKey] = {}.obs;
+    }
 
-  data[formKey][key] = value;
+    data[formKey][key] = value;
+  } catch (e) {}
 };
 
 dynamic myEncode(dynamic item) {

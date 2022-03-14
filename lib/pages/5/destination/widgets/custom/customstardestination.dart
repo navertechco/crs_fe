@@ -46,29 +46,23 @@ class CustomStarDestinationForm extends StatelessWidget {
 
     Rx<List> trCatalog = Rx(processCatalog("travel_rhythm"));
 
-    Function saveExplorationDays = (int valueInt) {
-      int acc = getLeftAccumulated(destination, index);
-      dayleft.value = totalDays.value + acc - valueInt;
-      setFormValue(globalctx.memory["destinations"], index, "explorationDay",
-          valueInt.toString());
+    Function saveExplorationDays = (int init0, int value) {
+      try {
+        int acc0 = accumulated.value;
+        int td1 = totalDays.value;
 
-      explorationDay.value = valueInt;
-      setDestinationDay(destination, index, valueInt.toString());
-    };
+        if (acc0 < td1) {
+          int val1 = value - init0;
+          int init1 = init0 + val1;
+          int acc1 = acc0 + val1;
+          int dl1 = td1 - acc1;
 
-    Function validateExplorationDays = (value, context) async {
-      int valueInt = parseIntValue(value);
-      if (valueInt <= dayleft.value) {
-        value = valueInt.toString();
-        if (valueInt > dayleft.value) {
-          value = dayleft.value.toString();
-          valueInt = parseIntValue(value);
+          dayleft.value = dl1;
+          accumulated.value = acc1;
+          setFormValue(globalctx.memory["destinations"], index,
+              "explorationDay", value.toString());
         }
-        saveExplorationDays(valueInt);
-      } else {
-        await showMyDialog(context,
-            "The Exploration Days amount can´t exceed Days left", "", "", "Ok");
-      }
+      } catch (e) {}
     };
 
     var destData = globalctx.memory["destinations"][index.toString()];
@@ -96,7 +90,24 @@ class CustomStarDestinationForm extends StatelessWidget {
                                 MediaQuery.of(context).size.height *
                                 10,
                             fontWeight: FontWeight.bold,
-                          ))),
+                          )))
+                    ],
+                  );
+                }),
+                Obx(() {
+                  return Row(
+                    children: [
+                      Text("Days Selected: $accumulated",
+                          style: GoogleFonts.poppins(
+                              textStyle: TextStyle(
+                            color: (dayleft.value) < 1
+                                ? Color.fromARGB(255, 255, 0, 0)
+                                : Color.fromARGB(255, 0, 0, 0),
+                            fontSize: MediaQuery.of(context).size.width /
+                                MediaQuery.of(context).size.height *
+                                10,
+                            fontWeight: FontWeight.bold,
+                          )))
                     ],
                   );
                 }),
@@ -116,15 +127,23 @@ class CustomStarDestinationForm extends StatelessWidget {
                   label: "Type: ${type.toString().capitalize}",
                 ),
                 Obx(() {
-                  Rx<List<Map<String, dynamic>>> filteredED = Rx(
-                      explorationdDays
-                          .where((e) => e["code"] <= totalDays.value)
-                          .toList());
                   return CustomFormCounterFieldWidget(
-                      initial: getFormValue(globalctx.memory["destinations"],
-                          index, "explorationDay", 0),
+                      initial: int.parse(getFormValue(
+                          globalctx.memory["destinations"],
+                          index,
+                          "explorationDay",
+                          "0")),
+                      min: 0,
+                      max: totalDays.value,
+                      bound: 0,
                       onValueChanged: (value) {
-                        validateExplorationDays(value, context);
+                        saveExplorationDays(
+                            int.parse(getFormValue(
+                                globalctx.memory["destinations"],
+                                index,
+                                "explorationDay",
+                                "0")),
+                            value as int);
                       },
                       label: "Exploration Days    ",
                       width: 0.20);

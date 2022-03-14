@@ -27,10 +27,10 @@ class RoundedFormCounterField extends StatelessWidget {
       this.fontSize = 0.1,
       this.onValueChanged,
       this.initial,
-      this.min,
-      this.max,
-      this.bound,
-      this.step,
+      this.min = 0,
+      this.max = 10,
+      this.bound = 0,
+      this.step = 1,
       this.disabled = false})
       : super(key: key);
 
@@ -50,8 +50,8 @@ class RoundedFormCounterField extends StatelessWidget {
         min: min,
         max: max,
         bound: bound,
-        step: step,
-        onValueChanged: onValueChanged,
+        step: step ?? 1,
+        onValueChanged: onValueChanged ?? (value) {},
       ),
     );
   }
