@@ -385,3 +385,17 @@ Function downDayLeft = (int value) {
 Function updateDayleft = () {
   dayleft.value = (totalDays.value - (accumulated.value + selected.value));
 };
+
+Function findTravelRhythmDescription = (int code) {
+  var travelData = processCatalog("travel_rhythm").toList();
+  var description = travelData
+      .firstWhere((element) => element["code"] == code)["description"];
+  return description;
+};
+
+Function parseInt = (value) {
+  if (value is String) {
+    return int.parse(value);
+  }
+  return value;
+};

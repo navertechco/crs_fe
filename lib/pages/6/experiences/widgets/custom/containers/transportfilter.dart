@@ -30,11 +30,16 @@ class BodyWidget extends StatelessWidget {
   final counter;
   @override
   Widget build(BuildContext context) {
+    var index = getDestinationIndex(
+        globalDestinationName.value, globalDestinationType.value);
+
+    Rx<dynamic> travelRhythm = Rx(getFormValue(
+        globalctx.memory["destinations"], index, "travelRhythm", "0"));
     return Obx(() {
       return Padding(
         padding: EdgeInsets.only(
           top: MediaQuery.of(context).size.height * 0.05,
-          left: MediaQuery.of(context).size.width * 0.05,
+          left: MediaQuery.of(context).size.width * 0.08,
         ),
         child: SizedBox(
             width: MediaQuery.of(context).size.width * 0.25,
@@ -46,7 +51,8 @@ class BodyWidget extends StatelessWidget {
                   children: [
                     CustomTitleWidget(
                         fontWeight: FontWeight.bold,
-                        label: "Travel Rhythm:",
+                        label:
+                            "Travel Rhythm: ${findTravelRhythmDescription(parseInt(travelRhythm.value))}",
                         color: Colors.white,
                         fontSize: 15),
                     CustomTitleWidget(

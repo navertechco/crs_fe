@@ -27,51 +27,51 @@ class TravelChips extends HookWidget {
 
     Rx<dynamic> travelRhythm = Rx(getFormValue(
         globalctx.memory["destinations"], index, "travelRhythm", "0"));
-    return Align(
-        alignment: Alignment.centerLeft,
-        child: SizedBox(
-            width: MediaQuery.of(context).size.width * 0.25,
-            child: Column(
-              children: [
-                CustomTitleWidget(
-                  fontWeight: FontWeight.bold,
-                  label: "Filtered Experiences by:",
-                  color: Colors.white
-                ),
-                Obx(() {
-                  return Column(
-                    children: [
-                      if (keyActivities.value.length > 0)
-                        InputChip(
-                          deleteIcon: Icon(Icons.cancel),
-                          label: Text("${keyActivities.value}"),
-                          onSelected: (bool value) {},
-                          onDeleted: () {
-                            keyActivities.value = [];
-                          },
-                        ),
-                      if (destinationOption.value != "0")
-                        InputChip(
-                          deleteIcon: Icon(Icons.cancel),
-                          label: Text("${destinationOption.value}"),
-                          onSelected: (bool value) {},
-                          onDeleted: () {
-                            destinationOption.value = "0";
-                          },
-                        ),
-                      if (travelRhythm.value != "0")
-                        InputChip(
-                          deleteIcon: Icon(Icons.cancel),
-                          label: Text("${travelRhythm.value}"),
-                          onSelected: (bool value) {},
-                          onDeleted: () {
-                            travelRhythm.value = "0";
-                          },
-                        ),
-                    ],
-                  );
-                })
-              ],
-            )));
+    return SizedBox(
+        width: MediaQuery.of(context).size.width * 0.25,
+        child: Column(
+          children: [
+            CustomTitleWidget(
+                fontWeight: FontWeight.bold,
+                label: "Filtered Experiences by:",
+                color: Colors.white),
+            Obx(() {
+              return Column(
+                children: [
+                  if (keyActivities.value.length > 0)
+                    InputChip(
+                      deleteIcon: Icon(Icons.cancel),
+                      label: Text(
+                          " Key Activities: ${keyActivities.value.toString().replaceAll("[", "").replaceAll("]", "")}"),
+                      onSelected: (bool value) {},
+                      onDeleted: () {
+                        keyActivities.value = [];
+                      },
+                    ),
+                  if (destinationOption.value != "0")
+                    InputChip(
+                      deleteIcon: Icon(Icons.cancel),
+                      label: Text(
+                          "Destination Options: ${destinationOption.value}"),
+                      onSelected: (bool value) {},
+                      onDeleted: () {
+                        destinationOption.value = "0";
+                      },
+                    ),
+                  if (travelRhythm.value != "0")
+                    InputChip(
+                      deleteIcon: Icon(Icons.cancel),
+                      label: Text(
+                          "Travel Rhythm: ${findTravelRhythmDescription(parseInt(travelRhythm.value))}"),
+                      onSelected: (bool value) {},
+                      onDeleted: () {
+                        travelRhythm.value = "0";
+                      },
+                    ),
+                ],
+              );
+            })
+          ],
+        ));
   }
 }

@@ -20,37 +20,18 @@ class ExperienceFrontOptionWidget extends StatelessWidget {
         filteredByDestination.add(exp);
       }
     }
- 
 
-    return Stack(
-      children: [
-        Container(
-            child: Align(
-              alignment: Alignment.center,
-              child: Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Text(
-                  experience.toString().replaceAll("-", " "),
-                  style: GoogleFonts.poppins(
-                      textStyle: TextStyle(
-                    color: const Color.fromARGB(255, 204, 164, 61),
-                    fontSize: MediaQuery.of(context).size.width * 0.010,
-                    fontWeight: FontWeight.bold,
-                  )),
-                ),
-              ),
-            ),
-            width: MediaQuery.of(context).size.width * 0.271,
-            height: MediaQuery.of(context).size.height * 0.11,
-            decoration: BoxDecoration(
-                image: DecorationImage(
-              image: Image.asset(
-                // row.value["experience_image"],
-                "assets/custom/img/1x/Recurso_211mdpi.png",
-                fit: BoxFit.cover,
-              ).image,
-            ))),
-      ],
+    return Padding(
+      padding: const EdgeInsets.all(15.0),
+      child: Text(
+        experience.toString().split("-")[0],
+        style: GoogleFonts.poppins(
+            textStyle: TextStyle(
+          color: const Color.fromARGB(255, 204, 164, 61),
+          fontSize: MediaQuery.of(context).size.width * 0.010,
+          fontWeight: FontWeight.bold,
+        )),
+      ),
     );
   }
 }

@@ -20,7 +20,7 @@ class CustomSelectedExperiencesWidget extends StatelessWidget {
             color: Colors.white),
         const Divider(
           color: Colors.black,
-          height: 25,
+          height: 20,
           thickness: 2,
           indent: 5,
           endIndent: 5,

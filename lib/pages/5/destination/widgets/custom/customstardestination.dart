@@ -26,7 +26,7 @@ class CustomStarDestinationForm extends StatelessWidget {
   Widget build(BuildContext context) {
     var tour = getContext("tour");
     var ctx = globalctx.context.value;
-
+    
     Rx<int> explorationDay = Rx(int.parse(getFormValue(
             globalctx.memory["destinations"], index, "explorationDay", "0") ??
         "0"));

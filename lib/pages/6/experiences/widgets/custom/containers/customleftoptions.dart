@@ -21,7 +21,7 @@ class CustomBodyDaysWidget extends HookWidget {
         Padding(
           padding: EdgeInsets.only(
               top: MediaQuery.of(context).size.height * 0.8,
-              left: MediaQuery.of(context).size.width * 0.7),
+              left: MediaQuery.of(context).size.width * 0.675),
           child: CustomFooterWidget(ctrl: ctrl, counter: counter),
         ),
         Padding(

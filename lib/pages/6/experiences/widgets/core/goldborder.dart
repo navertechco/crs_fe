@@ -12,10 +12,15 @@ class GoldBorderWidget extends StatelessWidget {
           image: DecorationImage(
             image: Image.asset(
               "assets/custom/img/1x/Recurso_211mdpi.png",
+              width: MediaQuery.of(context).size.width * 0.1,
               fit: BoxFit.fill,
             ).image,
           ),
         ),
-        child: Center(child: child));
+        child: Stack(
+          children: [
+            Center(child: child),
+          ],
+        ));
   }
 }

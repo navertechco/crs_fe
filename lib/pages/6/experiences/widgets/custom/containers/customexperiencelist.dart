@@ -22,7 +22,7 @@ class CustomExperiencesListWidget extends StatelessWidget {
           color: Colors.white),
       const Divider(
         color: Colors.black,
-        height: 25,
+        height: 20,
         thickness: 2,
         indent: 5,
         endIndent: 5,
@@ -31,7 +31,7 @@ class CustomExperiencesListWidget extends StatelessWidget {
           child: SingleChildScrollView(
               child: SizedBox(
                   width: MediaQuery.of(context).size.width * 0.3,
-                  height: MediaQuery.of(context).size.height * 0.72,
+                  height: MediaQuery.of(context).size.height * 0.75,
                   child: Obx(() {
                     return Scrollbar(
                         child: SingleChildScrollView(
