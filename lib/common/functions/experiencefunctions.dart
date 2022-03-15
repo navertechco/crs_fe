@@ -3,7 +3,9 @@
 // ignore_for_file: prefer_function_declarations_over_variables
 
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:naver_crs/pages/6/experiences/widgets/core/index.dart';
 import 'package:naver_crs/pages/6/experiences/widgets/custom/index.dart';
 
 import '../index.dart';
@@ -82,10 +84,10 @@ Function resetExperiences = () {
 };
 
 Function deleteExperience = (experience) {
-  if (globalctx.experiences.contains(experience)) {
-    var index =
-        globalctx.experiences.indexWhere((element) => element == experience);
-    globalctx.experiences.removeAt(index);
+  if (globalctx.experiences[currentDay.value].contains(experience)) {
+    var index = globalctx.experiences[currentDay.value]
+        .indexWhere((element) => element == experience);
+    globalctx.experiences[currentDay.value].removeAt(index);
     globalctx.experienceDragData.value[currentDay.value]!.removeAt(index);
   }
 };
@@ -134,15 +136,22 @@ Function promoteDayExperience = (experience) {
 };
 
 Function setExperienceState = (experience, state) {
-  globalctx.states["experiences"][experience] ??= {}.obs;
-  globalctx.states["experiences"][experience]["state"] = state;
-  proccessExperiences();
+  globalctx.states["experiences"][currentDay.value] ??= {}.obs;
+  globalctx.states["experiences"][currentDay.value][experience] ??= {}.obs;
+  globalctx.states["experiences"][currentDay.value][experience]["state"] =
+      state;
+  // proccessExperiences();
+  if (state == "selected") {
+    moveExperience(experience);
+  }
   filterSuggestedExperiences();
 };
 
 Function getExperienceState = (experience) {
-  globalctx.states["experiences"][experience] ??= {}.obs;
-  var state = globalctx.states["experiences"][experience]["state"];
+  globalctx.states["experiences"][currentDay.value] ??= {}.obs;
+  globalctx.states["experiences"][currentDay.value][experience] ??= {}.obs;
+  var state =
+      globalctx.states["experiences"][currentDay.value][experience]["state"];
   state ??= "suggested";
   return state;
 };
@@ -157,4 +166,14 @@ Function getPromotedExperiencesByDayAndKA = (day) {
   // });
 
   return true;
+};
+
+Function moveExperience = (String experience) {
+  globalctx.experiences[currentDay.value] ??= [];
+  globalctx.experienceDragData.value[currentDay.value] ??= [];
+  if (!globalctx.experiences[currentDay.value].contains(experience)) {
+    globalctx.experiences[currentDay.value].add(experience);
+    globalctx.experienceDragData.value[currentDay.value]!
+        .add(DragExperienceOptionWidget(experience: experience));
+  }
 };

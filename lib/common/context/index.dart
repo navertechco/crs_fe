@@ -22,7 +22,7 @@ class Context with PropertyChangeNotifier<String> {
   RxBool value = true.obs;
   RxBool reset = false.obs;
   RxList destinations = [].obs;
-  RxList experiences = [].obs;
+  RxMap experiences = {}.obs;
   RxList<dynamic> destinationlist = [].obs;
   RxList<dynamic> experiencelist = [].obs;
   RxList promotedDestinations = [].obs;
