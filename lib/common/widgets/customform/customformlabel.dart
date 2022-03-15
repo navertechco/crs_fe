@@ -7,17 +7,19 @@ class CustomFormLabelWidget extends StatelessWidget {
     required this.label,
     required this.fontWeight,
     this.color = Colors.black,
+    this.fontSize = 10
   }) : super(key: key);
   final String label;
   final FontWeight fontWeight;
   final Color color;
+  final fontSize;
   @override
   Widget build(BuildContext context) {
     return Text(
       label,
       style: KTextSytle(
               context: context,
-              fontSize: 10,
+              fontSize: fontSize,
               fontWeight: fontWeight,
               color: color)
           .getStyle(),

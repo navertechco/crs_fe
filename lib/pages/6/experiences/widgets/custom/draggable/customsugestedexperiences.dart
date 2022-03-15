@@ -11,14 +11,6 @@ class CustomSugestedExperiencesWidget extends StatelessWidget {
   final ExperiencesController ctrl;
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        CustomTitleWidget(
-            fontWeight: FontWeight.bold,
-            label: "Experience Categories",
-            color: Colors.white),
-        CustomExperiencesListWidget(ctrl: ctrl),
-      ],
-    );
+    return CustomExperiencesListWidget(ctrl: ctrl);
   }
 }

@@ -1,6 +1,6 @@
 // ignore_for_file: must_be_immutable, unnecessary_null_comparison
-import 'package:flutter/material.dart'; 
-import 'package:multiselect/multiselect.dart'; 
+import 'package:flutter/material.dart';
+import 'package:multiselect/multiselect.dart';
 import '../../index.dart';
 
 class RoundedFormMultiDropdown extends StatelessWidget {
@@ -25,7 +25,7 @@ class RoundedFormMultiDropdown extends StatelessWidget {
       this.left = 0,
       this.top = 8,
       this.width = 0.2,
-      this.height = 0.05,
+      this.height = 0.025,
       this.fontSize = 10,
       required this.onSaved,
       this.password = false,
@@ -41,19 +41,20 @@ class RoundedFormMultiDropdown extends StatelessWidget {
       width: MediaQuery.of(context).size.width * width,
       padding: EdgeInsets.only(left: left, top: top),
       child: Container(
-        height: MediaQuery.of(context).size.height * 0.06,
+        height: MediaQuery.of(context).size.height * 0.05,
         decoration: BoxDecoration(
             color: Colors.grey, borderRadius: BorderRadius.circular(50)),
         child: DropDownMultiSelect(
             onChanged: onChanged,
             options: data.map((e) => e["description"].toString()).toList(),
-            selectedValues: value, 
+            selectedValues: value,
             whenEmpty: value == null ? hintText : '',
             childBuilder: (value) {
               return Padding(
                 padding: EdgeInsets.only(
-                    left: MediaQuery.of(context).size.width * 0.01,
-                    top: MediaQuery.of(context).size.height * 0.013),
+                  top: MediaQuery.of(context).size.height * 0.015,
+                  left: MediaQuery.of(context).size.width * 0.03,
+                ),
                 child: Text(
                     value == null
                         ? hintText!
@@ -62,11 +63,12 @@ class RoundedFormMultiDropdown extends StatelessWidget {
                             .replaceAll("[", "")
                             .replaceAll("]", ""),
                     style: KTextSytle(
-                        context: context,
-                        fontSize: (value == null ? 10 : 8),
-                        fontWeight: (value == null
-                            ? FontWeight.normal
-                            : FontWeight.bold)).getStyle()),
+                            context: context,
+                            fontSize: (value == null ? 10 : 8),
+                            fontWeight: (value == null
+                                ? FontWeight.normal
+                                : FontWeight.bold))
+                        .getStyle()),
               );
             },
             decoration: InputDecoration.collapsed(

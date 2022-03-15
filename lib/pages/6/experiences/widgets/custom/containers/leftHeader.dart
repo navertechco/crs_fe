@@ -25,15 +25,21 @@ class LeftHeader extends HookWidget {
   })();
   @override
   Widget build(BuildContext context) {
-    return Obx(() {
-      return Text(
-          "Day  ${currentDay.value + 1}:  ${globalDestinationName.value.toString().capitalize} $type ",
-          style: KTextSytle(
-                  context: context,
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white)
-              .getStyle());
-    });
+    return Padding(
+      padding: EdgeInsets.only(
+        top: MediaQuery.of(context).size.height * 0.01,
+        left: MediaQuery.of(context).size.width * 0.0,
+      ),
+      child: Obx(() {
+        return Text(
+            "Day  ${currentDay.value + 1}:  ${globalDestinationName.value.toString().capitalize} $type ",
+            style: KTextSytle(
+                    context: context,
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white)
+                .getStyle());
+      }),
+    );
   }
 }
