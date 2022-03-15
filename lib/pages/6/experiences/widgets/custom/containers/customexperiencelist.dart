@@ -31,7 +31,7 @@ class CustomExperiencesListWidget extends StatelessWidget {
           child: SingleChildScrollView(
               child: SizedBox(
                   width: MediaQuery.of(context).size.width * 0.3,
-                  height: MediaQuery.of(context).size.height * 0.44,
+                  height: MediaQuery.of(context).size.height * 0.72,
                   child: Obx(() {
                     return Scrollbar(
                         child: SingleChildScrollView(
