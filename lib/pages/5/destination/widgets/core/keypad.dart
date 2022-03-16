@@ -24,8 +24,8 @@ class KeyPadWidget extends StatelessWidget {
                 processDestinations(context);
               },
               onPrevious: () {
-                selectedIndex.value = selectedIndex.value - 1;
-                Get.back();
+                selectedIndex.value = pageList.indexOf("Customer");
+                Get.toNamed("/Customer");
               },
               width: 0.3);
         }

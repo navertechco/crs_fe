@@ -83,14 +83,14 @@ Function processDestinations = (context) {
     }
     // totalDays.value = destDays;
     globalctx.memory["destinationDay"] = destinationDay;
-    globalctx.memory["totalDays"] = totalDays.value;
-    selectedIndex.value = 1;
+    globalctx.memory["totalDays"] = totalDays.value; 
     arrival.value = getDestinationById(arrivalPort.value);
     departure.value = getDestinationById(departurePort.value);
     globalDestinationName.value = arrival["description"];
     globalDestinationType.value = "arrival";
     globalDestinationIndex.value = "0";
     resetExperiences();
+    selectedIndex.value = pageList.indexOf("Experiences");
     Get.toNamed("/Experiences");
   } else {
     if (context != null) {

@@ -149,6 +149,7 @@ Function globalctxReset = () {
   departureState.value = "selected";
   updateDraggableDestinations();
   updateAirPorts();
+  resetExperiences();
 };
 Function getItems = (data, value) {
   RxList<DropdownMenuItem<String>> items = <DropdownMenuItem<String>>[].obs;

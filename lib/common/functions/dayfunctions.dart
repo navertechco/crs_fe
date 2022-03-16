@@ -94,6 +94,7 @@ Function prepareDaysToResume = () {
   }
   // print(globalctx.memory);
   // sendTour(globalctx.memory);
+  selectedIndex.value = pageList.indexOf("Resume");
   Get.toNamed("/Resume");
 };
 
@@ -126,7 +127,7 @@ Function previousDay = () {
     processDays();
   } else {
     dayleft.value = 0;
-    selectedIndex.value = selectedIndex.value - 1;
-    Get.back();
+    selectedIndex.value = pageList.indexOf("Destination");
+    Get.toNamed("/Destination");
   }
 };
