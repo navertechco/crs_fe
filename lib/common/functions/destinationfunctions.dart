@@ -90,6 +90,7 @@ Function processDestinations = (context) {
     globalDestinationName.value = arrival["description"];
     globalDestinationType.value = "arrival";
     globalDestinationIndex.value = "0";
+    resetExperiences();
     Get.toNamed("/Experiences");
   } else {
     if (context != null) {

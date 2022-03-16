@@ -24,7 +24,7 @@ Function paginateDay = (context) {
   }
 };
 Function paginateNextDay = () {
-  if (currentDay.value < destDays.value - 1) {
+  if (currentDay.value < totalDays.value - 1) {
     nextDay();
   } else {
     prepareDaysToResume();
