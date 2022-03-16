@@ -1,13 +1,9 @@
 // Experience functions
-
 // ignore_for_file: prefer_function_declarations_over_variables
-
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
-import 'package:naver_crs/pages/6/experiences/widgets/core/index.dart';
 import 'package:naver_crs/pages/6/experiences/widgets/custom/index.dart';
-
 import '../index.dart';
 
 Function filterSuggestedExperiences = () {
@@ -35,7 +31,10 @@ Function getFilteredExperiences = () {
   }
 
   List filteredByTravelRhytm = filteredByDestination.where((e) {
-    return true;
+    var compare = currentDestinationTr["description"];
+    var tr = getExperienceTravelRhythm(e.description);
+    var rule = tr  == compare;
+    return rule;
   }).toList();
 
   List filteredByDestinationOption = filteredByTravelRhytm.where((e) {
@@ -176,4 +175,36 @@ Function moveExperience = (String experience) {
     globalctx.experienceDragData.value[currentDay.value]!
         .add(DragExperienceOptionWidget(experience: experience));
   }
+};
+
+Function getExperienceTravelRhythm = (experience) {
+  var expData = getExperienceValueByName(experience);
+  var trData = processCatalog("travel_rhythm").toList();
+  var trObject = trData
+      .firstWhere((e) => e["code"] == int.parse(expData["travel_rhythm"]));
+  return trObject;
+};
+
+Function getExperienceValueByName = (String experience) {
+  var result = [];
+  try {
+    result = getExperienceByName(experience)["value"];
+  } catch (e) {
+    print(e);
+  }
+
+  return result;
+};
+
+Function getExperienceByName = (String experience) {
+  var result;
+  try {
+    List<Map<String, dynamic>> list = experiencesCatalog.toList();
+    result = list.firstWhere(
+        (element) => element["description"].toString() == experience);
+  } catch (e) {
+    print(e);
+  }
+
+  return result;
 };

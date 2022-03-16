@@ -83,6 +83,7 @@ RxString departurePort = "6".obs;
 RxString destCountry = "1".obs;
 var selectedDestinations = globalctx.destinations;
 var destinationsCatalog = processCatalog("destinations");
+var experiencesCatalog = processCatalog("experiences");
 
 var destinationCountry = processCatalog("destination_country");
 var arrival = {}.obs;
@@ -106,6 +107,9 @@ RxString departureState =
     getDestinationState("", destinations.length - 1).toString().obs;
 
 Function validateDestinationDialog = (destination, type) {
+  var rule5 = accumulated.value > 0;
+  var rule6 = dayleft.value > 0;
+
   var rule1 = (draggable.value == 0 && type == "arrival");
   var rule2 = (draggable.value != 0 &&
       type == "tour" &&
@@ -120,7 +124,9 @@ Function validateDestinationDialog = (destination, type) {
       globalctx.promotedDestinations.length >= 2 &&
       type == "departure");
   var rule4 = globalctx.selectedDestinations.contains(destination);
-  return ((rule1 || rule2 || rule3) && rule4).obs;
+  return (((rule1 || rule2 || rule3) && rule4 ||
+          (rule1 || rule2 || rule3) && rule5)&&rule6 )
+      .obs;
 };
 
 List<Map<String, dynamic>> tourTemplate = [
@@ -292,25 +298,27 @@ List<Map<String, dynamic>> logisticTemplate = [
   },
 ];
 
+Rx<dynamic> transportService = Rx(getFormValue(globalctx.memory["destinations"],
+        globalDestinationIndex.value, "service_type", <String>[]) ??
+    <String>[]);
+Rx<dynamic> translatingService = Rx(getFormValue(
+    globalctx.memory["destinations"],
+    globalDestinationIndex.value,
+    "translating_service", <String>[]));
+Rx<int> guide = Rx(getFormValue(globalctx.memory["destinations"],
+    globalDestinationIndex.value, "guide_type", 1));
 
- Rx<dynamic> transportService = Rx(getFormValue(
-            globalctx.memory["destinations"],
-            globalDestinationIndex.value,
-            "service_type", <String>[]) ??
-        <String>[]);
-    Rx<dynamic> translatingService = Rx(getFormValue(
-        globalctx.memory["destinations"],
-        globalDestinationIndex.value,
-        "translating_service", <String>[]));
-    Rx<int> guide = Rx(getFormValue(globalctx.memory["destinations"],
-        globalDestinationIndex.value, "guide_type", 1));
-
-    Rx<int> guideIndex = Rx(
-        transportService.value.indexWhere((element) => element == "GUIDING") ??
-            0);
-    Rx<int> translateIndex = Rx(transportService.value
-            .indexWhere((element) => element == "TRANSLATING") ??
+Rx<int> guideIndex = Rx(
+    transportService.value.indexWhere((element) => element == "GUIDING") ?? 0);
+Rx<int> translateIndex = Rx(
+    transportService.value.indexWhere((element) => element == "TRANSLATING") ??
         0);
 
-    var serviceTypeCatalog = Rx(processCatalog("service_type"));
-    var translatingCatalog = Rx(processCatalog("translating_service"));
+var serviceTypeCatalog = Rx(processCatalog("service_type"));
+var translatingCatalog = Rx(processCatalog("translating_service"));
+
+var currentDestinationTr =
+    getDestinationTravelRhythm(globalDestinationName.value).obs;
+var currentDestinationTrRange = currentDestinationTr["value"];
+var currentDestinationTrMinRange = Rx(currentDestinationTrRange["min"]);
+var currentDestinationTrMaxRange = Rx(currentDestinationTrRange["max"]);

@@ -245,3 +245,12 @@ Function getDestinationIndex = (String destination, String type) {
 
   return index;
 };
+
+
+Function getDestinationTravelRhythm = (destination) {
+  var destData = getDestinationValueByName(destination);
+  var trData = processCatalog("travel_rhythm").toList();
+  var trRange = trData.firstWhere((e) =>
+      e["code"] == int.parse(destData["TravelRhythm"]));
+  return trRange;
+};
