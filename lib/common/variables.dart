@@ -107,9 +107,6 @@ RxString departureState =
     getDestinationState("", destinations.length - 1).toString().obs;
 
 Function validateDestinationDialog = (destination, type) {
-  var rule5 = accumulated.value > 0;
-  var rule6 = dayleft.value > 0;
-
   var rule1 = (draggable.value == 0 && type == "arrival");
   var rule2 = (draggable.value != 0 &&
       type == "tour" &&
@@ -124,8 +121,11 @@ Function validateDestinationDialog = (destination, type) {
       globalctx.promotedDestinations.length >= 2 &&
       type == "departure");
   var rule4 = globalctx.selectedDestinations.contains(destination);
+  var rule5 = accumulated.value > 0;
+  var rule6 = dayleft.value > 0;
   return (((rule1 || rule2 || rule3) && rule4 ||
-          (rule1 || rule2 || rule3) && rule5)&&rule6 )
+              (rule1 || rule2 || rule3) && rule5) &&
+          rule6)
       .obs;
 };
 
