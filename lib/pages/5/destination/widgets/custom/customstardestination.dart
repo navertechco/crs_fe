@@ -26,7 +26,7 @@ class CustomStarDestinationForm extends StatelessWidget {
   Widget build(BuildContext context) {
     var tour = getContext("tour");
     var ctx = globalctx.context.value;
-    
+
     Rx<int> explorationDay = Rx(int.parse(getFormValue(
             globalctx.memory["destinations"], index, "explorationDay", "0") ??
         "0"));
@@ -100,9 +100,9 @@ class CustomStarDestinationForm extends StatelessWidget {
                       Text("Days Selected: $accumulated",
                           style: GoogleFonts.poppins(
                               textStyle: TextStyle(
-                            color: (dayleft.value) < 1
+                            color: (accumulated.value) == 0
                                 ? Color.fromARGB(255, 255, 0, 0)
-                                : Color.fromARGB(255, 0, 0, 0),
+                                : Color.fromARGB(255, 0, 255, 0),
                             fontSize: MediaQuery.of(context).size.width /
                                 MediaQuery.of(context).size.height *
                                 10,
