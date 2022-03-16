@@ -318,7 +318,8 @@ var serviceTypeCatalog = Rx(processCatalog("service_type"));
 var translatingCatalog = Rx(processCatalog("translating_service"));
 
 var currentDestinationTr =
-    getDestinationTravelRhythm(globalDestinationName.value).obs;
+    getDestinationTravelRhythm(globalDestinationName.value, "arrival");
 var currentDestinationTrRange = currentDestinationTr["value"];
 var currentDestinationTrMinRange = Rx(currentDestinationTrRange["min"]);
 var currentDestinationTrMaxRange = Rx(currentDestinationTrRange["max"]);
+var currentDestinationType = "arrival";

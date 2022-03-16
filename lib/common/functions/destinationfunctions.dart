@@ -179,11 +179,11 @@ Function getDestinationValueByName = (String destination) {
   return result;
 };
 Function getDestinationByName = (String destination) {
-  var result ;
+  var result;
   try {
     List<Map<String, dynamic>> list = destinationsCatalog.toList();
-    result =
-        list.firstWhere((element) => element["description"].toString() == destination);
+    result = list.firstWhere(
+        (element) => element["description"].toString() == destination);
   } catch (e) {
     print(e);
   }
@@ -239,18 +239,24 @@ Function getLeftAccumulated = (destination, id) {
 };
 
 Function getDestinationIndex = (String destination, String type) {
-  var index = 0;
-  var filtered =
-      destinations.entries.toList().where((item) => item == destination);
+  int destIndex = 0;
+  destIndex = globalctx.destinations.indexOf((e) => e == destination);
 
-  return index;
+  if (type == "arrival") {
+    destIndex = 0;
+  }
+  if (type == "departure") {
+    destIndex = globalctx.promotedDestinations.length - 1;
+  }
+
+  return destIndex;
 };
 
-
-Function getDestinationTravelRhythm = (destination) {
-  var destData = getDestinationValueByName(destination);
+Function getDestinationTravelRhythm = (destination, type) {
+  int destIndex = getDestinationIndex(destination, type);
+  var destData = globalctx.memory["destinations"][destIndex.toString()];
   var trData = processCatalog("travel_rhythm").toList();
-  var trRange = trData.firstWhere((e) =>
-      e["code"] == int.parse(destData["TravelRhythm"]));
+  var trRange = trData
+      .firstWhere((e) => e["code"] == int.parse(destData["travelRhythm"]));
   return trRange;
 };

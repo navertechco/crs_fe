@@ -2,14 +2,11 @@
 
 // ignore_for_file: prefer_function_declarations_over_variables
 
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/pages/5/destination/widgets/destinationdetail/widgets/index.dart';
 // ignore: import_of_legacy_library_into_null_safe
-import 'package:sweetalert/sweetalert.dart';
 import '../index.dart';
 import 'functions.dart';
-import 'tourfunctions.dart';
 
 Function paginateDay = (context) {
   // Get promoted experiences by day and KA
@@ -36,6 +33,7 @@ Function paginateNextDay = () {
 
 Function nextDay = () {
   currentDay.value++;
+  updateDestinationType();
   processDays();
   filterSuggestedExperiences();
 };

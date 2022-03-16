@@ -399,3 +399,14 @@ Function parseInt = (value) {
   }
   return value;
 };
+
+Function updateDestinationType = () {
+  var type = "tour";
+  if (currentDay.value == 0) {
+    type = "arrival";
+  }
+  if (currentDay.value == totalDays.value - 1) {
+    type = "departure";
+  }
+  currentDestinationType = type;
+};
