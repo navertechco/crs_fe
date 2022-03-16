@@ -111,12 +111,19 @@ Function processDays = () {
   }
 };
 
+Function updateCurrentDestinationTravelRhythm = () {
+  var index = getDestinationIndex(
+      globalDestinationName.value, globalDestinationType.value);
+  var travelRhythm = (getFormValue(
+      globalctx.memory["destinations"], index, "travelRhythm", "1"));
+  currentTravelRhythm.value = travelRhythm;
+};
+
 Function previousDay = () {
   if (currentDay.value > 0) {
     currentDay.value--;
-    processDays();
     updateDestinationType();
-    filterSuggestedExperiences();
+    processDays();
   } else {
     dayleft.value = 0;
     selectedIndex.value = selectedIndex.value - 1;

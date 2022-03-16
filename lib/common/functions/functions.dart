@@ -409,4 +409,5 @@ Function updateDestinationType = () {
     type = "departure";
   }
   currentDestinationType = type;
+  globalDestinationType.value = type;
 };

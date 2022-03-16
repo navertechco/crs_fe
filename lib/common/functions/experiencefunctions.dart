@@ -29,9 +29,12 @@ Function getFilteredExperiences = () {
   }
   List filteredByTravelRhytm = filteredByDestination.where((e) {
     // return true;
-    var compare = currentDestinationTr["description"];
+    if (currentTravelRhythm.value == "0") {
+      return true;
+    }
+    compareTr = currentDestinationTr["description"];
     var tr = getExperienceTravelRhythmByName(e.description)["description"];
-    var rule = tr == compare;
+    var rule = tr == compareTr;
     return rule;
   }).toList();
   List filteredByType = filteredByTravelRhytm.where((e) {
