@@ -57,7 +57,7 @@ class BodyWidget extends StatelessWidget {
                         fontSize: 15),
                     CustomTitleWidget(
                         fontWeight: FontWeight.bold,
-                        label: "Accumulated Hours:",
+                        label: "Accumulated Hours: $accumulatedHours",
                         color: Colors.white,
                         fontSize: 15),
                     SizedBox(height: MediaQuery.of(context).size.height * 0.05),

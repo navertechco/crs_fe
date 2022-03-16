@@ -115,6 +115,7 @@ Function previousDay = () {
   if (currentDay.value > 0) {
     currentDay.value--;
     processDays();
+    updateDestinationType();
     filterSuggestedExperiences();
   } else {
     dayleft.value = 0;

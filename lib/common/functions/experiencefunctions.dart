@@ -158,6 +158,7 @@ Function moveExperience = (String experience) {
     globalctx.experiences[currentDay.value].add(experience);
     globalctx.experienceDragData.value[currentDay.value]!
         .add(DragExperienceOptionWidget(experience: experience));
+    accumulatedHours += 0;
   }
 };
 Function getExperienceTravelRhythmByName = (String experience) {

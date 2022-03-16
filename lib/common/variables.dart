@@ -323,3 +323,4 @@ var currentDestinationTrRange = currentDestinationTr["value"];
 var currentDestinationTrMinRange = Rx(currentDestinationTrRange["min"]);
 var currentDestinationTrMaxRange = Rx(currentDestinationTrRange["max"]);
 var currentDestinationType = "arrival";
+var accumulatedHours = 0.obs;
