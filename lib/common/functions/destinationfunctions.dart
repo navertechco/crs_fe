@@ -83,7 +83,7 @@ Function processDestinations = (context) {
     }
     // totalDays.value = destDays;
     globalctx.memory["destinationDay"] = destinationDay;
-    globalctx.memory["totalDays"] = totalDays.value; 
+    globalctx.memory["totalDays"] = totalDays.value;
     arrival.value = getDestinationById(arrivalPort.value);
     departure.value = getDestinationById(departurePort.value);
     globalDestinationName.value = arrival["description"];
@@ -149,7 +149,7 @@ Function moveDestination = (String destination, int index, String type) {
   setDestinationState(destination, index, "selected", type);
   globalctx.selectedDestinations.add(destination);
   globalctx.destinationDragData.value.add(DragDestinationWidget(
-      destination: destination, index: index, type: type, out:false));
+      destination: destination, index: index, type: type, out: false));
 };
 Function getDestinationById = (destId) {
   try {
@@ -214,6 +214,7 @@ Function updateTotalLeftAccumulated = () {
       accumulated.value += getDestinationDay(destination) as int;
     }
   }
+  dayleft.value = totalDays.value - accumulated.value;
 };
 
 Function setDestination = (String destination, index) {

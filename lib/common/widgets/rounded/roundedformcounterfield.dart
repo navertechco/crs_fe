@@ -46,10 +46,10 @@ class RoundedFormCounterField extends StatelessWidget {
           color: Color.fromARGB(0, 0, 0, 0),
           borderRadius: BorderRadius.circular(50)),
       child: Counter(
-        initial: initial,
+        initial: initial < min ? min : initial,
         min: min,
         max: max,
-        bound: bound,
+        bound: bound < initial ? initial : bound,
         step: step ?? 1,
         onValueChanged: onValueChanged ?? (value) {},
       ),

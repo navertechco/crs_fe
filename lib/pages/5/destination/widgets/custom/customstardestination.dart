@@ -67,6 +67,16 @@ class CustomStarDestinationForm extends StatelessWidget {
 
     var destData = globalctx.memory["destinations"][index.toString()];
     var type = globalctx.states["destinations"][index]["type"];
+    RxString explorationMode = getFormValue(
+            globalctx.memory["destinations"], index, "explorationMode", "0")
+        .toString()
+        .obs;
+    RxInt minExpDay = (explorationMode.value == "1"
+            ? 2
+            : explorationMode.value == "2"
+                ? 4
+                : 0)
+        .obs;
     return Form(
       key: formKey,
       child: Column(
@@ -127,26 +137,30 @@ class CustomStarDestinationForm extends StatelessWidget {
                   label: "Type: ${type.toString().capitalize}",
                 ),
                 Obx(() {
-                  return CustomFormCounterFieldWidget(
-                      initial: int.parse(getFormValue(
-                          globalctx.memory["destinations"],
-                          index,
-                          "explorationDay",
-                          "0")),
-                      min: 0,
-                      max: totalDays.value,
-                      bound: 0,
-                      onValueChanged: (value) {
-                        saveExplorationDays(
-                            int.parse(getFormValue(
-                                globalctx.memory["destinations"],
-                                index,
-                                "explorationDay",
-                                "0")),
-                            value as int);
-                      },
-                      label: "Exploration Days    ",
-                      width: 0.20);
+                  var expDay = explorationDay.value;
+                  if (destination != "galapagos") {
+                    return CustomFormCounterFieldWidget(
+                        initial: int.parse(getFormValue(
+                            globalctx.memory["destinations"],
+                            index,
+                            "explorationDay",
+                            "0")),
+                        min: 0,
+                        max: totalDays.value,
+                        bound: 0,
+                        onValueChanged: (value) {
+                          saveExplorationDays(
+                              int.parse(getFormValue(
+                                  globalctx.memory["destinations"],
+                                  index,
+                                  "explorationDay",
+                                  "0")),
+                              value as int);
+                        },
+                        label: "Exploration Days    ",
+                        width: 0.20);
+                  }
+                  return Text("");
                 }),
                 SizedBox(
                   child: (() {
@@ -156,8 +170,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                           validator: CustomRequiredValidator(
                               errorText: "Exploration mode is required ",
                               ctx: context),
-                          value: getFormValue(globalctx.memory["destinations"],
-                              index, "explorationMode", "0"),
+                          value: explorationMode.value,
                           onSaved: (value) {
                             setFormValue(globalctx.memory["destinations"],
                                 index, "explorationMode", value);
@@ -165,6 +178,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                           onChanged: (value) {
                             setFormValue(globalctx.memory["destinations"],
                                 index, "explorationMode", value);
+                            explorationMode.value = value!;
                           },
                           label: "Exploration Mode   ",
                           data: processCatalog("exploration_mode"),
@@ -173,96 +187,145 @@ class CustomStarDestinationForm extends StatelessWidget {
                     }
                   })(),
                 ),
-                // Obx(() {
-                //   return CustomFormDropDownFieldWidget(
-                //     validator: CustomRequiredValidator(
-                //         errorText: "Destination option is required ",
-                //         ctx: context),
-                //     value: getFormValue(globalctx.memory["destinations"], index,
-                //         "destinationOption", "1"),
-                //     onSaved: (value) {
-                //       setFormValue(globalctx.memory["destinations"], index,
-                //           "destinationOption", value);
-                //     },
-                //     onChanged: (value) {
-                //       setFormValue(globalctx.memory["destinations"], index,
-                //           "destinationOption", value);
-                //     },
-                //     label: "Destination Option",
-                //     data: processCatalog("destination_option"),
-                //   );
-                // }),
+                SizedBox(child: Obx(() {
+                  var expMode = explorationMode.value;
+                  if (destination == "galapagos" &&
+                      (explorationMode.value == "3" ||
+                          explorationMode.value == "1")) {
+                    return CustomFormCounterFieldWidget(
+                        initial: int.parse(getFormValue(
+                            globalctx.memory["destinations"],
+                            index,
+                            "explorationDay",
+                            "2")),
+                        min: 2,
+                        max: totalDays.value,
+                        bound: 2,
+                        onValueChanged: (value) {
+                          saveExplorationDays(
+                              int.parse(getFormValue(
+                                  globalctx.memory["destinations"],
+                                  index,
+                                  "explorationDay",
+                                  "2")),
+                              value as int);
+                        },
+                        label: "IH Exploration Days",
+                        width: 0.20);
+                  }
+                  return Text("");
+                })),
+                SizedBox(child: Obx(() {
+                  var expMode = explorationMode.value;
+                  if (destination == "galapagos" &&
+                      (explorationMode.value == "3" ||
+                          explorationMode.value == "2")) {
+                    return CustomFormCounterFieldWidget(
+                        initial: int.parse(getFormValue(
+                            globalctx.memory["destinations"],
+                            index,
+                            "explorationDay",
+                            "4")),
+                        min: 4,
+                        max: totalDays.value,
+                        bound: 4,
+                        onValueChanged: (value) {
+                          saveExplorationDays(
+                              int.parse(getFormValue(
+                                  globalctx.memory["destinations"],
+                                  index,
+                                  "explorationDay",
+                                  "4")),
+                              value as int);
+                        },
+                        label: "Cruise Exp. Days      ",
+                        width: 0.20);
+                  }
+                  return Text("");
+                })),
                 Obx(() {
-                  return CustomFormDropDownFieldWidget(
-                      validator: CustomRequiredValidator(
-                          errorText: "Travel Rhythm is required ",
-                          ctx: context),
-                      value: getFormValue(globalctx.memory["destinations"],
-                          index, "travelRhythm", "1"),
+                  var expMode = explorationMode.value;
+                  if (explorationMode.value != "2") {
+                    return CustomFormDropDownFieldWidget(
+                        validator: CustomRequiredValidator(
+                            errorText: "Travel Rhythm is required ",
+                            ctx: context),
+                        value: getFormValue(globalctx.memory["destinations"],
+                            index, "travelRhythm", "1"),
+                        onSaved: (value) {
+                          setFormValue(globalctx.memory["destinations"], index,
+                              "travelRhythm", value);
+                          setFormValue(globalctx.memory["destinations"], index,
+                              "type", type);
+                          setFormValue(globalctx.memory["destinations"], index,
+                              "index", index);
+                          setFormValue(globalctx.memory["destinations"], index,
+                              "destination", destination);
+                        },
+                        onChanged: (value) {
+                          setFormValue(globalctx.memory["destinations"], index,
+                              "travelRhythm", value);
+                        },
+                        label: "Travel Rhythm         ",
+                        data: trCatalog.value.where((value) {
+                          var code = value["code"];
+                          for (var i = 0;
+                              i < travelRhytmAges.keys.length;
+                              i++) {
+                            var range = [
+                              travelRhytmAges.keys.toList()[i],
+                              travelRhytmAges.keys.toList()[
+                                  i >= travelRhytmAges.keys.length - 1
+                                      ? i
+                                      : i + 1]
+                            ];
+
+                            if (customerAge.value < 20) {
+                              return true;
+                            }
+                            if (customerAge.value >= range[0] &&
+                                customerAge.value <= range[1]) {
+                              if (travelRhytmAges[range[0]]!
+                                  .contains(code.toString())) {
+                                return true;
+                              }
+                            }
+                          }
+                          return false;
+                        }).toList() as List<Map<String, dynamic>>);
+                  }
+                  return Text("");
+                }),
+                Obx(() {
+                  if (explorationMode.value != "2") {
+                    return CustomFormMultiDropDownFieldWidget(
+                      validator: (value) =>
+                          CustomMultiDropdownRequiredValidator(value,
+                              errorText: "Key Activities are required ",
+                              context: context),
+                      value: keyActivities,
                       onSaved: (value) {
                         setFormValue(globalctx.memory["destinations"], index,
-                            "travelRhythm", value);
-                        setFormValue(globalctx.memory["destinations"], index,
-                            "type", type);
-                        setFormValue(globalctx.memory["destinations"], index,
-                            "index", index);
-                        setFormValue(globalctx.memory["destinations"], index,
-                            "destination", destination);
+                            "keyActivities", ["CULTURE"]);
+                        setFormValue(
+                            globalctx.memory["destinations"],
+                            index,
+                            "keyActivities",
+                            value!
+                                .map((e) => e["description"])
+                                .toSet()
+                                .toList());
                       },
                       onChanged: (value) {
                         setFormValue(globalctx.memory["destinations"], index,
-                            "travelRhythm", value);
+                            "keyActivities", value);
                       },
-                      label: "Travel Rhythm         ",
-                      data: trCatalog.value.where((value) {
-                        var code = value["code"];
-                        for (var i = 0; i < travelRhytmAges.keys.length; i++) {
-                          var range = [
-                            travelRhytmAges.keys.toList()[i],
-                            travelRhytmAges.keys.toList()[
-                                i >= travelRhytmAges.keys.length - 1
-                                    ? i
-                                    : i + 1]
-                          ];
-
-                          if (customerAge.value < 20) {
-                            return true;
-                          }
-                          if (customerAge.value >= range[0] &&
-                              customerAge.value <= range[1]) {
-                            if (travelRhytmAges[range[0]]!
-                                .contains(code.toString())) {
-                              return true;
-                            }
-                          }
-                        }
-                        return false;
-                      }).toList() as List<Map<String, dynamic>>);
-                }),
-                Obx(() {
-                  return CustomFormMultiDropDownFieldWidget(
-                    validator: (value) => CustomMultiDropdownRequiredValidator(
-                        value,
-                        errorText: "Key Activities are required ",
-                        context: context),
-                    value: keyActivities,
-                    onSaved: (value) {
-                      setFormValue(globalctx.memory["destinations"], index,
-                          "keyActivities", ["CULTURE"]);
-                      setFormValue(
-                          globalctx.memory["destinations"],
-                          index,
-                          "keyActivities",
-                          value!.map((e) => e["description"]).toSet().toList());
-                    },
-                    onChanged: (value) {
-                      setFormValue(globalctx.memory["destinations"], index,
-                          "keyActivities", value);
-                    },
-                    hintText: " ",
-                    label: "Key Activities            ",
-                    data: processCatalog("key_activity"),
-                  );
+                      hintText: " ",
+                      label: "Key Activities            ",
+                      data: processCatalog("key_activity"),
+                    );
+                  }
+                  return Text("");
                 }),
               ]),
             ),
