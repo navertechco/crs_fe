@@ -139,6 +139,7 @@ Function globalctxReset = () {
   globalctx.destinationDragData.value = [];
   globalctx.experienceDragData.value = {};
   globalctx.reset.value = true;
+  globalctx.memory["destinations"] = {};
   totalDays.value = departureDate.value.difference(arrivalDate.value).inDays;
   leftAccumulated.value = 0;
   dayleft.value = totalDays.value;

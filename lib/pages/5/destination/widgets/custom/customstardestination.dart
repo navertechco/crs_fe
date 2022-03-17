@@ -196,7 +196,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                         initial: int.parse(getFormValue(
                             globalctx.memory["destinations"],
                             index,
-                            "explorationDay",
+                            "ihExplorationDay",
                             "2")),
                         min: 2,
                         max: totalDays.value,
@@ -206,7 +206,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                               int.parse(getFormValue(
                                   globalctx.memory["destinations"],
                                   index,
-                                  "explorationDay",
+                                  "ihExplorationDay",
                                   "2")),
                               value as int);
                         },
@@ -224,7 +224,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                         initial: int.parse(getFormValue(
                             globalctx.memory["destinations"],
                             index,
-                            "explorationDay",
+                            "cExplorationDay",
                             "4")),
                         min: 4,
                         max: totalDays.value,
@@ -234,7 +234,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                               int.parse(getFormValue(
                                   globalctx.memory["destinations"],
                                   index,
-                                  "explorationDay",
+                                  "cExplorationDay",
                                   "4")),
                               value as int);
                         },
