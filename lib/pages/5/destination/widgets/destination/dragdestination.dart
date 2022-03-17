@@ -23,6 +23,8 @@ class DragDestinationWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
+      var explorationDay = getFormValue(
+          globalctx.memory["destinations"], index, "explorationDay", "0");
       return globalctx.destinations.contains(destination) &&
               ((!out && type == "tour") || (out && type != "tour"))
           ? Row(
@@ -30,39 +32,68 @@ class DragDestinationWidget extends StatelessWidget {
                 DestinationOptionWidget(
                     destination: destination, type: type, index: index),
                 !globalctx.promotedDestinations.contains(index)
-                    ? GestureDetector(
-                        onTap: () {
-                          if (arrivalPort.value !=
-                                  getDestinationIdByName(destination) &&
-                              departurePort.value !=
-                                  getDestinationIdByName(destination) &&
-                              globalctx.destinations.contains(destination)) {
-                            var index = globalctx.destinations.indexWhere(
-                                (element) => element == destination);
-                            globalctx.destinations.removeAt(index);
-                            globalctx.destinationDragData.value.removeAt(index);
-                          }
-                        },
-                        child: Image.asset("assets/custom/img/redmark.png",
-                            width: MediaQuery.of(context).size.width * 0.02),
+                    ? Column(
+                        children: [
+                          Text(explorationDay,
+                              style: KTextSytle(
+                                      context: context,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color.fromARGB(255, 204, 164, 61))
+                                  .getStyle()),
+                          GestureDetector(
+                            onTap: () {
+                              if (arrivalPort.value !=
+                                      getDestinationIdByName(destination) &&
+                                  departurePort.value !=
+                                      getDestinationIdByName(destination) &&
+                                  globalctx.destinations
+                                      .contains(destination)) {
+                                var index = globalctx.destinations.indexWhere(
+                                    (element) => element == destination);
+                                globalctx.destinations.removeAt(index);
+                                globalctx.destinationDragData.value
+                                    .removeAt(index);
+                              }
+                            },
+                            child: Image.asset("assets/custom/img/redmark.png",
+                                width:
+                                    MediaQuery.of(context).size.width * 0.02),
+                          ),
+                        ],
                       )
-                    : GestureDetector(
-                        onTap: () {
-                          if (arrivalPort.value !=
-                                  getDestinationIdByName(destination) &&
-                              departurePort.value !=
-                                  getDestinationIdByName(destination) &&
-                              globalctx.destinations.contains(destination)) {
-                            globalctx.promotedDestinations.remove(destination);
-                            var index = globalctx.destinations.indexWhere(
-                                (element) => element == destination);
-                            globalctx.destinations.removeAt(index);
-                            globalctx.destinationDragData.value.removeAt(index);
-                          }
-                        },
-                        child: Image.asset("assets/custom/img/greencheck.png",
-                            width: Get.width * 0.02),
-                      )
+                    : Column(
+                        children: [
+                          Text(explorationDay,
+                              style: KTextSytle(
+                                      context: context,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color.fromARGB(255, 204, 164, 61))
+                                  .getStyle()),
+                          GestureDetector(
+                            onTap: () {
+                              if (arrivalPort.value !=
+                                      getDestinationIdByName(destination) &&
+                                  departurePort.value !=
+                                      getDestinationIdByName(destination) &&
+                                  globalctx.destinations
+                                      .contains(destination)) {
+                                globalctx.promotedDestinations
+                                    .remove(destination);
+                                var index = globalctx.destinations.indexWhere(
+                                    (element) => element == destination);
+                                globalctx.destinations.removeAt(index);
+                                globalctx.destinationDragData.value
+                                    .removeAt(index);
+                              }
+                            },
+                            child: Image.asset(
+                                "assets/custom/img/greencheck.png",
+                                width: Get.width * 0.02),
+                          ),
+                        ],
+                      ),
               ],
             )
           : Text("");

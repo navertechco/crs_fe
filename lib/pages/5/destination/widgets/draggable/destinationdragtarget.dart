@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../../index.dart';
-import '../index.dart';
+import '../../../../index.dart'; 
 
 class DestinationDragTargetWidget extends StatelessWidget {
   const DestinationDragTargetWidget({
