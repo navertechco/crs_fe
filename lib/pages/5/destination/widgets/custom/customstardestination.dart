@@ -247,11 +247,16 @@ class CustomStarDestinationForm extends StatelessWidget {
                   var expMode = explorationMode.value;
                   if (explorationMode.value != "2") {
                     return CustomFormDropDownFieldWidget(
+                        disabled:
+                            type == "arrival" || explorationMode.value != "0",
                         validator: CustomRequiredValidator(
                             errorText: "Travel Rhythm is required ",
                             ctx: context),
-                        value: getFormValue(globalctx.memory["destinations"],
-                            index, "travelRhythm", "1"),
+                        value: getFormValue(
+                            globalctx.memory["destinations"],
+                            index,
+                            "travelRhythm",
+                            explorationMode.value == "0" ? "1" : "3"),
                         onSaved: (value) {
                           setFormValue(globalctx.memory["destinations"], index,
                               "travelRhythm", value);
@@ -267,32 +272,8 @@ class CustomStarDestinationForm extends StatelessWidget {
                               "travelRhythm", value);
                         },
                         label: "Travel Rhythm         ",
-                        data: trCatalog.value.where((value) {
-                          var code = value["code"];
-                          for (var i = 0;
-                              i < travelRhytmAges.keys.length;
-                              i++) {
-                            var range = [
-                              travelRhytmAges.keys.toList()[i],
-                              travelRhytmAges.keys.toList()[
-                                  i >= travelRhytmAges.keys.length - 1
-                                      ? i
-                                      : i + 1]
-                            ];
-
-                            if (customerAge.value < 20) {
-                              return true;
-                            }
-                            if (customerAge.value >= range[0] &&
-                                customerAge.value <= range[1]) {
-                              if (travelRhytmAges[range[0]]!
-                                  .contains(code.toString())) {
-                                return true;
-                              }
-                            }
-                          }
-                          return false;
-                        }).toList() as List<Map<String, dynamic>>);
+                        data: multiDropDownKaAgeFilter(
+                            trCatalog, travelRhytmAges));
                   }
                   return Text("");
                 }),

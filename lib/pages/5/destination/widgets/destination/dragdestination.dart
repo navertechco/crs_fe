@@ -54,6 +54,17 @@ class DragDestinationWidget extends StatelessWidget {
                                 globalctx.destinations.removeAt(index);
                                 globalctx.destinationDragData.value
                                     .removeAt(index);
+                                globalctx.selectedDestinations.removeAt(index);
+                                accumulated -= int.parse(
+                                    globalctx.memory["destinations"]
+                                        [index.toString()]["explorationDay"]);
+                                dayleft += int.parse(
+                                    globalctx.memory["destinations"]
+                                        [index.toString()]["explorationDay"]);
+                                globalctx.memory["destinations"]
+                                    [index.toString()] = {};
+                                setDestinationState(
+                                    destination, index, "suggested", type);
                               }
                             },
                             child: Image.asset("assets/custom/img/redmark.png",
@@ -84,8 +95,19 @@ class DragDestinationWidget extends StatelessWidget {
                                 var index = globalctx.destinations.indexWhere(
                                     (element) => element == destination);
                                 globalctx.destinations.removeAt(index);
+                                globalctx.selectedDestinations.removeAt(index);
                                 globalctx.destinationDragData.value
                                     .removeAt(index);
+                                accumulated -= int.parse(
+                                    globalctx.memory["destinations"]
+                                        [index.toString()]["explorationDay"]);
+                                dayleft += int.parse(
+                                    globalctx.memory["destinations"]
+                                        [index.toString()]["explorationDay"]);
+                                globalctx.memory["destinations"]
+                                    [index.toString()] = {};
+                                setDestinationState(
+                                    destination, index, "suggested", type);
                               }
                             },
                             child: Image.asset(
