@@ -22,7 +22,7 @@ class DestinationDragTargetWidget extends StatelessWidget {
             List<dynamic> rejected,
           ) {
             return Container(
-              height: MediaQuery.of(context).size.height * 0.65,
+              height: MediaQuery.of(context).size.height * 0.375,
               width: MediaQuery.of(context).size.width * 0.35,
               color: Color.fromARGB(0, 0, 0, 0),
               child: Align(
@@ -33,9 +33,6 @@ class DestinationDragTargetWidget extends StatelessWidget {
                       children: [
                         Column(
                           children: [
-                            SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.1),
                             Align(
                               alignment: Alignment.topCenter,
                               child: Image.asset("assets/custom/img/dots.png",
@@ -48,19 +45,6 @@ class DestinationDragTargetWidget extends StatelessWidget {
                         Column(children: [
                           ...globalctx.destinationDragData.value,
                         ]),
-                        Padding(
-                          padding: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width * 0.0,
-                            top: MediaQuery.of(context).size.height * 0.5,
-                          ),
-                          child: DragDestinationWidget(
-                              destination: departure["description"],
-                              index:
-                                  globalctx.destinationDragData.value.length -
-                                      1,
-                              type: "departure",
-                              out: true),
-                        )
                       ],
                     ),
                   );

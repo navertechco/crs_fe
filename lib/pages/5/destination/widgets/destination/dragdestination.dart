@@ -24,7 +24,7 @@ class DragDestinationWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() {
       return globalctx.destinations.contains(destination) &&
-              ((!out && type != "departure") || (out && type == "departure"))
+              ((!out && type == "tour") || (out && type != "tour"))
           ? Row(
               children: [
                 DestinationOptionWidget(
