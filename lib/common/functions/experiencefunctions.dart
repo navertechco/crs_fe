@@ -29,11 +29,22 @@ Function getFilteredExperiences = () {
   }
   List filteredByTravelRhytm = filteredByDestination.where((e) {
     // return true;
+    if (currentDay.value == 0) {
+      return true;
+    }
+    var tr = getExperienceTravelRhythmByName(e.description)["description"];
+
     if (currentTravelRhythm.value == "0") {
       return true;
     }
+
     compareTr = currentDestinationTr["description"];
-    var tr = getExperienceTravelRhythmByName(e.description)["description"];
+    if (compareTr == "HARD") {
+      return true;
+    }
+    if (compareTr == "MEDIUM" && tr == "SOFT") {
+      return true;
+    }
     var rule = tr == compareTr;
     return rule;
   }).toList();
@@ -50,9 +61,68 @@ Function getFilteredExperiences = () {
     // return rule;
   }).toList();
   List filteredByKA = filteredByType.where((e) {
+    if (currentDay.value == 0) {
+      return true;
+    }
+    return true;
+    try {
+      var compare = currentTravelRhythm.value;
+      String ka1 =
+          getExperienceByName(e.description).value["keyActivityType_fk"];
+      String ka2 =
+          getExperienceByName(e.description).value["keyActivityType_fk2"];
+      var rule1 = compare.contains(ka1.toString().toUpperCase());
+      var rule2 = compare.contains(ka2.toString().toUpperCase());
+      return rule1 || rule2;
+    } catch (e) {
+      print(e);
+    }
     return true;
   }).toList();
-  Iterable filteredByAirport = filteredByKA;
+  List filteredByPurpose = filteredByKA.where((e) {
+    if (currentDay.value == 0) {
+      return true;
+    }
+      return true;
+    try {
+      var pCode = globalctx.memory["tour"]["purpose"];
+      var purposes = processCatalog("purpose").toList();
+      var compare = toCatalog(purposes.firstWhere(
+          (e) => e["code"].toString() == pCode.toString())).description;
+      String p1 = getExperienceByName(e.description).value["purpose_fk"];
+      String p2 = getExperienceByName(e.description).value["purpose_fk2"];
+      var rule1 =
+          compare.toString().toUpperCase() == p1.toString().toUpperCase();
+      var rule2 =
+          compare.toString().toUpperCase() == p2.toString().toUpperCase();
+      return rule1 || rule2;
+    } catch (e) {
+      print(e);
+    }
+    return true;
+  }).toList();
+  List filteredByBudget = filteredByPurpose.where((e) {
+    return true;
+  }).toList();
+  List filteredByMaxCapacity = filteredByBudget.where((e) {
+    return true;
+  }).toList();
+
+  List filteredByExpMode = filteredByMaxCapacity.where((e) {
+    if (globalDestinationName.value.toString().toUpperCase() !=
+            "galapagos".toString().toUpperCase() &&
+        globalDestinationName.value.toString().toUpperCase() !=
+            "amazon".toString().toUpperCase()) {
+      return true;
+    }
+
+
+
+
+    
+    return true;
+  }).toList();
+  Iterable filteredByAirport = filteredByExpMode;
   var filteredBySuggested = filteredByAirport.where((e) {
     return getExperienceState(e.description) == "suggested";
   }).toList();
@@ -157,11 +227,13 @@ Function getPromotedExperiencesByDayAndKA = (day) {
 Function moveExperience = (String experience) {
   globalctx.experiences[currentDay.value] ??= [];
   globalctx.experienceDragData.value[currentDay.value] ??= [];
+  var expData = getExperienceByName(experience).value;
   if (!globalctx.experiences[currentDay.value].contains(experience)) {
     globalctx.experiences[currentDay.value].add(experience);
     globalctx.experienceDragData.value[currentDay.value]!
         .add(DragExperienceOptionWidget(experience: experience));
-    accumulatedHours += 0;
+    var exptime = (parseInt(expData['exptime']) * 1.0) as double;
+    accumulatedHours.value += exptime / 60;
   }
 };
 Function getExperienceTravelRhythmByName = (String experience) {

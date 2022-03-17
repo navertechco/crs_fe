@@ -41,15 +41,49 @@ class DestinationFrontOptionWidget extends StatelessWidget {
       ),
       Row(
         children: [
-          if (type == "arrival" || type == "departure")
+          if (type == "arrival")
             Padding(
               padding: EdgeInsets.only(
-                top: MediaQuery.of(context).size.height * 0.01,
-                left: MediaQuery.of(context).size.width * 0.33,
+                top: MediaQuery.of(context).size.height * 0.025,
+                left: MediaQuery.of(context).size.width * 0.05,
               ),
-              child: Image.asset("assets/custom/img/icon-plain.png",
-                  color: type == "arrival" ? Colors.blue : Colors.red,
-                  width: MediaQuery.of(context).size.width * 0.05),
+              child: Row(
+                children: [
+                  Text("Arrival",
+                      style: KTextSytle(
+                              context: context,
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white)
+                          .getStyle()),
+                  SizedBox(width: MediaQuery.of(context).size.width * 0.25),
+                  Image.asset("assets/custom/img/arrival.png",
+                      color: Colors.blue,
+                      width: MediaQuery.of(context).size.width * 0.05),
+                ],
+              ),
+            ),
+          if (type == "departure")
+            Padding(
+              padding: EdgeInsets.only(
+                top: MediaQuery.of(context).size.height * 0.025,
+                left: MediaQuery.of(context).size.width * 0.05,
+              ),
+              child: Row(
+                children: [
+                  Text("Departure",
+                      style: KTextSytle(
+                              context: context,
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white)
+                          .getStyle()),
+                  SizedBox(width: MediaQuery.of(context).size.width * 0.22),
+                  Image.asset("assets/custom/img/departure.png",
+                      color: Colors.red,
+                      width: MediaQuery.of(context).size.width * 0.05),
+                ],
+              ),
             ),
           // if (boat)
           //   Padding(

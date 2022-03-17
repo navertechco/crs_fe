@@ -149,7 +149,7 @@ Function moveDestination = (String destination, int index, String type) {
   setDestinationState(destination, index, "selected", type);
   globalctx.selectedDestinations.add(destination);
   globalctx.destinationDragData.value.add(DragDestinationWidget(
-      destination: destination, index: index, type: type));
+      destination: destination, index: index, type: type, out:false));
 };
 Function getDestinationById = (destId) {
   try {

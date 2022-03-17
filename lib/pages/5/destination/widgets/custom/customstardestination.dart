@@ -80,7 +80,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                 Obx(() {
                   return Row(
                     children: [
-                      Text("Days Left: $dayleft",
+                      Text("Remaining Days: $dayleft",
                           style: GoogleFonts.poppins(
                               textStyle: TextStyle(
                             color: (dayleft.value) < 1
@@ -97,7 +97,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                 Obx(() {
                   return Row(
                     children: [
-                      Text("Days Selected: $accumulated",
+                      Text("   Selected Days: $accumulated",
                           style: GoogleFonts.poppins(
                               textStyle: TextStyle(
                             color: (accumulated.value) == 0

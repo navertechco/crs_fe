@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 import '../index.dart';
 
 class CustomRightStarDestinationForm extends StatelessWidget {
@@ -10,9 +10,7 @@ class CustomRightStarDestinationForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-      
         DestinationsOrderableListWidget(),
-        const ResetPadWidget(),
         const KeyPadWidget(),
       ],
     );

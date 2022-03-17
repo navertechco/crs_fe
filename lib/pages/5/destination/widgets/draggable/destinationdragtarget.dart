@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../index.dart';
+import '../index.dart';
 
 class DestinationDragTargetWidget extends StatelessWidget {
   const DestinationDragTargetWidget({
@@ -28,8 +29,40 @@ class DestinationDragTargetWidget extends StatelessWidget {
                 alignment: Alignment.topCenter,
                 child: Obx(() {
                   return SingleChildScrollView(
-                    child:
-                        Column(children: globalctx.destinationDragData.value),
+                    child: Stack(
+                      children: [
+                        Column(
+                          children: [
+                            SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.1),
+                            Align(
+                              alignment: Alignment.topCenter,
+                              child: Image.asset("assets/custom/img/dots.png",
+                                  color: Colors.grey,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.05),
+                            ),
+                          ],
+                        ),
+                        Column(children: [
+                          ...globalctx.destinationDragData.value,
+                        ]),
+                        Padding(
+                          padding: EdgeInsets.only(
+                            left: MediaQuery.of(context).size.width * 0.0,
+                            top: MediaQuery.of(context).size.height * 0.5,
+                          ),
+                          child: DragDestinationWidget(
+                              destination: departure["description"],
+                              index:
+                                  globalctx.destinationDragData.value.length -
+                                      1,
+                              type: "departure",
+                              out: true),
+                        )
+                      ],
+                    ),
                   );
                 }),
               ),

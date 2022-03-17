@@ -10,7 +10,7 @@ class DestinationPage extends GetView<DestinationController> {
 
   Widget _buildView(BuildContext? _context) {
     return ContentLayoutWidget(
-        background: "assets/custom/img/stardestination.png",
+        background: "assets/custom/img/dest2.png",
         child: const DestinationWidget(),
         text: "<   Destination");
   }

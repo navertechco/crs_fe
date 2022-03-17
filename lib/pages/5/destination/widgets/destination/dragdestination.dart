@@ -11,17 +11,20 @@ class DragDestinationWidget extends StatelessWidget {
   String destination;
   String type;
   int index;
+  bool out;
   DragDestinationWidget({
     Key? key,
     required this.destination,
     required this.type,
     required this.index,
+    this.out = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      return globalctx.destinations.contains(destination)
+      return globalctx.destinations.contains(destination) &&
+              ((!out && type != "departure") || (out && type == "departure"))
           ? Row(
               children: [
                 DestinationOptionWidget(

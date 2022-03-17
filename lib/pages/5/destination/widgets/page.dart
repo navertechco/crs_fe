@@ -15,11 +15,11 @@ class DestinationWidget extends GetView<DestinationController> {
         CustomLeftStarDestinationForm(),
         Positioned(
           top: MediaQuery.of(context).size.height * 0.1,
-          left: MediaQuery.of(context).size.width * 0.51,
+          left: MediaQuery.of(context).size.width * 0.1,
           child: Obx(() {
             return Row(
               children: [
-                Text("Days Left: $dayleft",
+                Text("Remaining Days: $dayleft",
                     style: GoogleFonts.poppins(
                         textStyle: TextStyle(
                       color: (dayleft.value) < 1
@@ -30,7 +30,7 @@ class DestinationWidget extends GetView<DestinationController> {
                           10,
                       fontWeight: FontWeight.bold,
                     ))),
-                Text("      Days Selected: $accumulated",
+                Text("    Selected Days: $accumulated",
                     style: GoogleFonts.poppins(
                         textStyle: TextStyle(
                       color: (accumulated.value) == 0
