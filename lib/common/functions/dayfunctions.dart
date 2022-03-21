@@ -92,7 +92,7 @@ Function prepareDaysToResume = () {
       dayIndex++;
     }
   }
-  // print(globalctx.memory);
+  // log(globalctx.memory);
   // sendTour(globalctx.memory);
   selectedIndex.value = pageList.indexOf("Resume");
   Get.toNamed("/Resume");
@@ -156,7 +156,7 @@ Function saveExplorationDays = (int index, int init0, int value) {
 
     if (acc0 < td1) {
       int val1 = value - init0;
-      int init1 = init0 + val1;
+      // int init1 = init0 + val1;
       int acc1 = acc0 + val1;
       int dl1 = td1 - acc1;
 
@@ -165,7 +165,7 @@ Function saveExplorationDays = (int index, int init0, int value) {
       setFormValue(globalctx.memory["destinations"], index, "explorationDay",
           value.toString());
     }
-  } catch (e) {}
+  } catch (e) {
+    log(e);
+  }
 };
-
- 

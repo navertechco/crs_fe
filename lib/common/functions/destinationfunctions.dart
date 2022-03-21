@@ -182,7 +182,7 @@ Function getDestinationById = (destId) {
 
     return dest;
   } catch (e) {
-    print(e);
+    log(e);
   }
 };
 
@@ -196,7 +196,7 @@ Function getDestinationValueByName = (String destination) {
   try {
     result = getDestinationByName(destination)["value"];
   } catch (e) {
-    print(e);
+    log(e);
   }
 
   return result;
@@ -208,7 +208,7 @@ Function getDestinationByName = (String destination) {
     result = list.firstWhere(
         (element) => element["description"].toString() == destination);
   } catch (e) {
-    print(e);
+    log(e);
   }
 
   return result;
@@ -333,10 +333,9 @@ Function updateDestinationType = () {
   globalDestinationType.value = type;
 };
 
-
 Function resetDestinations = () {
   draggable.value = 0;
-  allPromotedDestinations = [];
+  allPromotedDestinations.value = [];
   globalctx.promotedDestinations.value = [];
   globalctx.selectedDestinations.value = [];
   globalctx.destinations.value = [];

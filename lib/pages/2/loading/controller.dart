@@ -18,7 +18,7 @@ class LoadingController extends GetxController {
         "data": {"tour_id": "$tourId"}
       });
       // ignore: avoid_print
-      // print(res);
+      // log(res);
       if (res['state'] == true) {
         var data = res['data'];
         if (data.length > 0) {
@@ -37,10 +37,8 @@ class LoadingController extends GetxController {
           return false;
         });
       }
-    }else{
-       Get.toNamed("/Tour");
+    } else {
+      Get.toNamed("/Tour");
     }
-
-    
   }
 }

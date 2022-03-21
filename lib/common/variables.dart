@@ -9,7 +9,7 @@ Rx<int> leftAccumulated = 0.obs;
 var airports = {"1": "quito", "2": "guayaquil"};
 Rx<int> currentDay = 0.obs;
 var result = [];
-var allPromotedDestinations = globalctx.promotedDestinations.value;
+var allPromotedDestinations = globalctx.promotedDestinations;
 var globalDestinationName = Rx("");
 var globalDestinationType = Rx("");
 var globalDestinationIndex = Rx("");
@@ -59,7 +59,7 @@ Rx<List<String>> refresh = Rx(<String>[]);
 Rx<int> trigger = Rx(0);
 Stream? stream;
 final formKey = GlobalKey<FormState>();
-var memory = globalctx.memory.value;
+var memory = globalctx.memory;
 var detsdata = getValue(memory, "destinations", def: []);
 var allDestinations = memory["destinations"];
 var destinationList = allDestinations.entries
@@ -68,7 +68,7 @@ var destinationList = allDestinations.entries
 List<dynamic> customDestinationData = [
   ...destinationList,
 ];
-var promotedDestinations = globalctx.promotedDestinations.value;
+var promotedDestinations = globalctx.promotedDestinations;
 RxInt selectedIndex = 0.obs;
 RxString travelCode = (leadPassenger.value.toString() +
         "-" +

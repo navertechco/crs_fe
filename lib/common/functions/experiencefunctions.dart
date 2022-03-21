@@ -55,7 +55,7 @@ Function getFilteredExperiences = () {
       var rule = tr == compare;
       return rule;
     } catch (e) {
-      print(e);
+      log(e);
     }
     return true;
     // return rule;
@@ -75,7 +75,7 @@ Function getFilteredExperiences = () {
       var rule2 = compare.contains(ka2.toString().toUpperCase());
       return rule1 || rule2;
     } catch (e) {
-      print(e);
+      log(e);
     }
     return true;
   }).toList();
@@ -83,7 +83,7 @@ Function getFilteredExperiences = () {
     if (currentDay.value == 0) {
       return true;
     }
-      return true;
+    return true;
     try {
       var pCode = globalctx.memory["tour"]["purpose"];
       var purposes = processCatalog("purpose").toList();
@@ -97,7 +97,7 @@ Function getFilteredExperiences = () {
           compare.toString().toUpperCase() == p2.toString().toUpperCase();
       return rule1 || rule2;
     } catch (e) {
-      print(e);
+      log(e);
     }
     return true;
   }).toList();
@@ -116,10 +116,6 @@ Function getFilteredExperiences = () {
       return true;
     }
 
-
-
-
-    
     return true;
   }).toList();
   Iterable filteredByAirport = filteredByExpMode;
@@ -249,7 +245,7 @@ Function getExperienceValueByName = (String experience) {
   try {
     result = getExperienceByName(experience).value;
   } catch (e) {
-    print(e);
+    log(e);
   }
   return result;
 };
@@ -260,7 +256,7 @@ Function getExperienceByName = (String experience) {
     result = toCatalog(experiences.firstWhere(
         (element) => element["description"].toString() == experience));
   } catch (e) {
-    print(e);
+    log(e);
   }
   return result;
 };

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sweetalert/sweetalert.dart';
-
 import '../../index.dart';
 import 'index.dart';
 
@@ -40,12 +39,12 @@ class SigninController extends GetxController {
             Get.close(1);
             return false;
           });
-          print(res);
+          log(res);
         }
       }
     } catch (e) {
       isLoading = !isLoading;
-      print(e);
+      log(e);
     }
   }
 }

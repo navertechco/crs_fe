@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:naver_crs/pages/5/destination/widgets/index.dart';
-
 import '../../constants.dart';
 
 class GalleryItem extends StatelessWidget {

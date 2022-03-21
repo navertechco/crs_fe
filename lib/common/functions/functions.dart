@@ -17,7 +17,7 @@ Future<bool> getCatalog(
     "data": {"catalogs": catalogs}
   });
   // ignore: avoid_print
-  // print(res);
+  // log(res);
   if (res['state'] == true) {
     setContext("catalogs", res['data']);
     return true;
@@ -216,7 +216,9 @@ Function setFormValue = (data, formKey, key, value) {
       data[formKey] = {}.obs;
     }
     data[formKey][key] = value;
-  } catch (e) {}
+  } catch (e) {
+    log(e);
+  }
 };
 dynamic myEncode(dynamic item) {
   if (item is DateTime || item is Map) {
@@ -267,7 +269,7 @@ Future<void> showCustomDialog(context, Widget child, String button) async {
     builder: (BuildContext context) {
       return AlertDialog(
         backgroundColor: Colors.black54,
-        content: Container(
+        content: SizedBox(
             width: MediaQuery.of(context).size.width * 0.5, child: child),
         actions: <Widget>[
           TextButton(
@@ -287,7 +289,6 @@ Future<void> showCustomDialog(context, Widget child, String button) async {
     },
   );
 }
-
 
 Function findTravelRhythmDescription = (int code) {
   var travelData = processCatalog("travel_rhythm").toList();
@@ -323,3 +324,6 @@ Function multiDropDownKaAgeFilter = (trCatalog, travelRhytmAges) {
   }).toList() as List<Map<String, dynamic>>;
 };
 
+Function log = (e) {
+  print(e);
+};

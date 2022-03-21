@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import '../../../../../index.dart';
 
 class TravelChips extends HookWidget {
-  TravelChips({Key? key, required this.ctrl, required this.counter})
+  const TravelChips({Key? key, required this.ctrl, required this.counter})
       : super(key: key);
   final ValueNotifier<int> counter;
   final ExperiencesController ctrl;

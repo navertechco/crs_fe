@@ -30,7 +30,7 @@ class CustomExperienceForm extends StatelessWidget {
     return Obx(() {
       return Column(
         children: [
-          FirstTextwidget(props: props.value),
+          FirstTextwidget(props: props),
         ],
       );
     });
