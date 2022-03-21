@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:naver_crs/common/validators.dart';
+import 'package:naver_crs/common/index.dart';
+import 'package:naver_crs/common/index.dart';
+import 'package:naver_crs/common/index.dart';
 import 'package:naver_crs/common/widgets/customform/customformcounterfield.dart';
 import 'package:naver_crs/pages/5/destination/widgets/destinationdetail/controller.dart';
 import '../../../../index.dart';
@@ -45,26 +47,6 @@ class CustomStarDestinationForm extends StatelessWidget {
         processCatalog("exploration_days");
 
     Rx<List> trCatalog = Rx(processCatalog("travel_rhythm"));
-
-    Function saveExplorationDays = (int init0, int value) {
-      try {
-        int acc0 = accumulated.value;
-        int td1 = totalDays.value;
-
-        if (acc0 < td1) {
-          int val1 = value - init0;
-          int init1 = init0 + val1;
-          int acc1 = acc0 + val1;
-          int dl1 = td1 - acc1;
-
-          dayleft.value = dl1;
-          accumulated.value = acc1;
-          setFormValue(globalctx.memory["destinations"], index,
-              "explorationDay", value.toString());
-        }
-      } catch (e) {}
-    };
-
     var destData = globalctx.memory["destinations"][index.toString()];
     var type = globalctx.states["destinations"][index]["type"];
     RxString explorationMode = getFormValue(
@@ -77,6 +59,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                 ? 4
                 : 0)
         .obs;
+
     return Form(
       key: formKey,
       child: Column(
@@ -150,6 +133,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                         bound: 0,
                         onValueChanged: (value) {
                           saveExplorationDays(
+                              index,
                               int.parse(getFormValue(
                                   globalctx.memory["destinations"],
                                   index,
@@ -203,6 +187,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                         bound: 2,
                         onValueChanged: (value) {
                           saveExplorationDays(
+                              index,
                               int.parse(getFormValue(
                                   globalctx.memory["destinations"],
                                   index,
@@ -231,6 +216,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                         bound: 4,
                         onValueChanged: (value) {
                           saveExplorationDays(
+                              index,
                               int.parse(getFormValue(
                                   globalctx.memory["destinations"],
                                   index,

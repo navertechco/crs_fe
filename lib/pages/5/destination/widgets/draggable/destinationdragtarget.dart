@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../../index.dart'; 
+import '../../../../index.dart';
 
 class DestinationDragTargetWidget extends StatelessWidget {
   const DestinationDragTargetWidget({
@@ -21,7 +21,7 @@ class DestinationDragTargetWidget extends StatelessWidget {
             List<dynamic> rejected,
           ) {
             return Container(
-              height: MediaQuery.of(context).size.height * 0.375,
+              height: MediaQuery.of(context).size.height * 0.47,
               width: MediaQuery.of(context).size.width * 0.35,
               color: Color.fromARGB(0, 0, 0, 0),
               child: Align(

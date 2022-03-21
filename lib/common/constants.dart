@@ -5,8 +5,7 @@ import 'package:flutter_html/shims/dart_ui_real.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'context/index.dart';
 import 'index.dart';
-export './variables.dart';
-export './functions/functions.dart';
+
 
 /*
  * DATOS DE SERVIDOR

@@ -15,8 +15,8 @@ class LogisticController extends GetxController {
       Map formData = state.toMap();
       Map mem = {...logistic, ...formData};
       globalctx.memory["logistic"] = mem;
-      updateAirPorts();
-      
+      filterDestinations();
+
       Get.toNamed("/Customer");
     };
   }

@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import './constants.dart';
 import 'index.dart';
 
 ////
@@ -327,3 +326,6 @@ var currentDestinationKeyActivities = [];
 var accumulatedHours = Rx(0.0);
 var compareTr = "soft";
 var currentTravelRhythm = "1".obs;
+
+
+

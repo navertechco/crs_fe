@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:naver_crs/common/constants.dart';
+import 'package:naver_crs/common/index.dart';
+
+import '../../index.dart';
 
 class RoundedFormButton extends StatelessWidget {
   final double left;

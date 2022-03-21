@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:naver_crs/common/index.dart';
 
 import '../../../../index.dart';
 import '../index.dart';
@@ -14,8 +15,6 @@ class CustomDragableDestination extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
-
     return Obx(() {
       return Draggable<String>(
         // Data is the value this Draggable stores.

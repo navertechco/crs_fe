@@ -2,7 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:naver_crs/common/constants.dart';
+import 'package:naver_crs/common/index.dart';
+
+import '../../index.dart';
 
 class RoundedFormTextField extends StatelessWidget {
   final bool disabled;

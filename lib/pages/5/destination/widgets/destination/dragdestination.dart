@@ -1,7 +1,7 @@
 // ignore: must_be_immutable
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:naver_crs/common/context/index.dart';
+import 'package:naver_crs/common/index.dart';
 
 import '../../../../index.dart';
 import '../index.dart';
@@ -43,29 +43,7 @@ class DragDestinationWidget extends StatelessWidget {
                                   .getStyle()),
                           GestureDetector(
                             onTap: () {
-                              if (arrivalPort.value !=
-                                      getDestinationIdByName(destination) &&
-                                  departurePort.value !=
-                                      getDestinationIdByName(destination) &&
-                                  globalctx.destinations
-                                      .contains(destination)) {
-                                var index = globalctx.destinations.indexWhere(
-                                    (element) => element == destination);
-                                globalctx.destinations.removeAt(index);
-                                globalctx.destinationDragData.value
-                                    .removeAt(index);
-                                globalctx.selectedDestinations.removeAt(index);
-                                accumulated -= int.parse(
-                                    globalctx.memory["destinations"]
-                                        [index.toString()]["explorationDay"]);
-                                dayleft += int.parse(
-                                    globalctx.memory["destinations"]
-                                        [index.toString()]["explorationDay"]);
-                                globalctx.memory["destinations"]
-                                    [index.toString()] = {};
-                                setDestinationState(
-                                    destination, index, "suggested", type);
-                              }
+                              deleteDestination(destination);
                             },
                             child: Image.asset("assets/custom/img/redmark.png",
                                 width:
@@ -84,31 +62,7 @@ class DragDestinationWidget extends StatelessWidget {
                                   .getStyle()),
                           GestureDetector(
                             onTap: () {
-                              if (arrivalPort.value !=
-                                      getDestinationIdByName(destination) &&
-                                  departurePort.value !=
-                                      getDestinationIdByName(destination) &&
-                                  globalctx.destinations
-                                      .contains(destination)) {
-                                globalctx.promotedDestinations
-                                    .remove(destination);
-                                var index = globalctx.destinations.indexWhere(
-                                    (element) => element == destination);
-                                globalctx.destinations.removeAt(index);
-                                globalctx.selectedDestinations.removeAt(index);
-                                globalctx.destinationDragData.value
-                                    .removeAt(index);
-                                accumulated -= int.parse(
-                                    globalctx.memory["destinations"]
-                                        [index.toString()]["explorationDay"]);
-                                dayleft += int.parse(
-                                    globalctx.memory["destinations"]
-                                        [index.toString()]["explorationDay"]);
-                                globalctx.memory["destinations"]
-                                    [index.toString()] = {};
-                                setDestinationState(
-                                    destination, index, "suggested", type);
-                              }
+                              deleteDestination(destination);
                             },
                             child: Image.asset(
                                 "assets/custom/img/greencheck.png",

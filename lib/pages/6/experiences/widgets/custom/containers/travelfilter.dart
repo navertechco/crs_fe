@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get.dart';
-import 'package:naver_crs/common/validators.dart';
+import 'package:naver_crs/common/index.dart';
 
 import '../../../../../index.dart';
 
@@ -19,18 +19,13 @@ class TravelFilter extends HookWidget {
     var index = 0;
 
     Rx<dynamic> keyActivities = Rx(getFormValue(
-        globalctx.memory["destinations"],
-        index,
-        "keyActivities", <String>[]));
+        globalctx.memory["destinations"], index, "keyActivities", <String>[]));
 
     Rx<dynamic> destinationOption = Rx(getFormValue(
-        globalctx.memory["destinations"],
-        index,
-        "destinationOption",
-        "0"));
+        globalctx.memory["destinations"], index, "destinationOption", "0"));
 
-    Rx<dynamic> travelRhythm = Rx(getFormValue(globalctx.memory["destinations"],
-        index, "travel_rhythm", "0"));
+    Rx<dynamic> travelRhythm = Rx(getFormValue(
+        globalctx.memory["destinations"], index, "travel_rhythm", "0"));
 
     useEffect(() {
       destinationOption.value = "0";
@@ -62,18 +57,12 @@ class TravelFilter extends HookWidget {
                       CustomFormDropDownFieldWidget(
                         value: destinationOption.value,
                         onSaved: (value) {
-                          setFormValue(
-                              globalctx.memory["destinations"],
-                              index,
-                              "destinationOption",
-                              value);
+                          setFormValue(globalctx.memory["destinations"], index,
+                              "destinationOption", value);
                         },
                         onChanged: (value) {
-                          setFormValue(
-                              globalctx.memory["destinations"],
-                              index,
-                              "destinationOption",
-                              value);
+                          setFormValue(globalctx.memory["destinations"], index,
+                              "destinationOption", value);
                         },
                         hintText: "Travel Options",
                         data: processCatalog("destination_option"),
@@ -81,12 +70,12 @@ class TravelFilter extends HookWidget {
                       CustomFormDropDownFieldWidget(
                         value: travelRhythm.value,
                         onSaved: (value) {
-                          setFormValue(globalctx.memory["destinations"],
-                              index, "travel_rhythm", value);
+                          setFormValue(globalctx.memory["destinations"], index,
+                              "travel_rhythm", value);
                         },
                         onChanged: (value) {
-                          setFormValue(globalctx.memory["destinations"],
-                              index, "travel_rhythm", value);
+                          setFormValue(globalctx.memory["destinations"], index,
+                              "travel_rhythm", value);
                         },
                         hintText: "Travel Rhythm",
                         data: processCatalog("travel_rhythm"),
@@ -98,8 +87,8 @@ class TravelFilter extends HookWidget {
                                 context: context),
                         value: keyActivities.value,
                         onSaved: (value) {
-                          setFormValue(globalctx.memory["destinations"],
-                              index, "keyActivities", null);
+                          setFormValue(globalctx.memory["destinations"], index,
+                              "keyActivities", null);
                           setFormValue(
                               globalctx.memory["destinations"],
                               index,
@@ -110,8 +99,8 @@ class TravelFilter extends HookWidget {
                                   .toList());
                         },
                         onChanged: (value) {
-                          setFormValue(globalctx.memory["destinations"],
-                              index, "keyActivities", value);
+                          setFormValue(globalctx.memory["destinations"], index,
+                              "keyActivities", value);
                         },
                         hintText:
                             "\t\t\t\t\t\t\t\t\t\t\t\tKey Activities            \n",

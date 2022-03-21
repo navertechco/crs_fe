@@ -1,5 +1,4 @@
 // ignore_for_file: prefer_function_declarations_over_variables
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,7 +9,6 @@ export './destinationfunctions.dart';
 export './experiencefunctions.dart';
 
 // Other Functions
-
 Future<bool> getCatalog(
   List<String> catalogs,
 ) async {
@@ -30,23 +28,9 @@ Future<bool> getCatalog(
 
 RxList<Map<String, dynamic>> daysCatalog = <Map<String, dynamic>>[].obs;
 
-Function processDaysCatalog = () {
-  int total = departureDate.value.difference(arrivalDate.value).inDays;
-  if (total > 0) {
-    daysCatalog.value = [];
-    for (int i = 0; i < total; i++) {
-      Map<String, dynamic> row = {};
-      row["code"] = i + 1;
-      row["description"] = "Day ${i + 1}";
-      daysCatalog.add(row);
-    }
-  }
-};
-
 Function processCatalog = (name) {
   var catalogs = getContext("catalogs");
   List<Map<String, dynamic>> catalog = [];
-
   if (catalogs != null) {
     var items = catalogs[name];
     if (items != null) {
@@ -60,7 +44,6 @@ Function processCatalog = (name) {
       }
     }
   }
-
   return catalog;
 };
 Function getDateValue = (data, key, {def}) {
@@ -89,11 +72,9 @@ Function getValue = (data, key, {def}) {
     return def;
   }
 };
-
 Function validateData = (data) {
   return data != null ? data.length > 0 : false;
 };
-
 Function getData = (data, sub, key) {
   // ignore: invalid_use_of_protected_member
   return data != null && data[sub] != null
@@ -101,7 +82,6 @@ Function getData = (data, sub, key) {
       ? data[sub][key]
       : "0";
 };
-
 Function getDataList = (data, sub, key) {
   // ignore: invalid_use_of_protected_member
   return data != null && data[sub] != null
@@ -109,18 +89,15 @@ Function getDataList = (data, sub, key) {
       ? data[sub][key]
       : <Map<String, dynamic>>[];
 };
-
 Function getParam = (key) {
   var params = processCatalog("params");
   var child =
       params.toList().firstWhere((element) => element["description"] == key);
   return child;
 };
-
 Function cityData = (Rx<List<Map<String, dynamic>>> citylist, cities) {
   var index = 0;
   citylist.value = [];
-
   for (var city in cities) {
     citylist.value.add({
       "code": "$index",
@@ -129,29 +106,17 @@ Function cityData = (Rx<List<Map<String, dynamic>>> citylist, cities) {
     index++;
   }
 };
-
 Function globalctxReset = () {
-  allPromotedDestinations = [];
-  globalctx.promotedDestinations.value = [];
-  globalctx.selectedDestinations.value = [];
-  globalctx.destinations.value = [];
   globalctx.experiences.value = {};
-  globalctx.destinationDragData.value = [];
   globalctx.experienceDragData.value = {};
   globalctx.reset.value = true;
-  globalctx.memory["destinations"] = {};
-  totalDays.value = departureDate.value.difference(arrivalDate.value).inDays;
-  leftAccumulated.value = 0;
-  dayleft.value = totalDays.value;
-  globalctx.states["destinations"] = {};
-  draggable.value = 0;
-  accumulated.value = 0;
-  arrivalState.value = "selected";
-  departureState.value = "selected";
+  resetDays();
+  resetDestinations();
   updateDraggableDestinations();
-  updateAirPorts();
+  filterDestinations();
   resetExperiences();
 };
+
 Function getItems = (data, value) {
   RxList<DropdownMenuItem<String>> items = <DropdownMenuItem<String>>[].obs;
   List<Map<String, dynamic>> data2 = [];
@@ -168,14 +133,12 @@ Function getItems = (data, value) {
   }
   return items;
 };
-
 Function chunkMap = (data, int portion, List<Map<String, dynamic>> list) {
   List<List<Map<String, dynamic>>> chunks = [];
   int aprox = (list.length / portion).round() * portion;
   int module = aprox > list.length
       ? (list.length / portion).round()
       : (list.length / portion).round() + 1;
-
   for (var i = 0; i < module; i++) {
     chunks.add([]);
     for (var j = 0; j < portion; j++) {
@@ -189,10 +152,8 @@ Function chunkMap = (data, int portion, List<Map<String, dynamic>> list) {
       chunks[i].add(item);
     }
   }
-
   return chunks;
 };
-
 Function isMobileDevice = () {
   if ((defaultTargetPlatform == TargetPlatform.iOS) ||
       (defaultTargetPlatform == TargetPlatform.android)) {
@@ -201,11 +162,9 @@ Function isMobileDevice = () {
   }
   return false;
 };
-
 Function setData = (data, key, value) {
   data[key] = value;
 };
-
 Function getFormValue = (data, formKey, key, def) {
   formKey = formKey.toString();
   if (data != null) {
@@ -220,7 +179,6 @@ Function getFormValue = (data, formKey, key, def) {
   }
   return def;
 };
-
 Function getFormDateValue = (data, formKey, key, def) {
   if (data != null) {
     if (data[formKey] != null) {
@@ -234,28 +192,11 @@ Function getFormDateValue = (data, formKey, key, def) {
   }
   return DateTime.parse(def);
 };
-
 Function toCatalog = (item) {
   List list = item.values.toList();
   CatalogDto ctlg = CatalogDto(list);
   return ctlg;
 };
-
-Function getDestinationDay = (index) {
-  index = index.toString();
-  if (globalctx.memory != null) {
-    if (destinations != null) {
-      if (destinations[index] != null) {
-        if (destinations[index]["explorationDay"] != null) {
-          return int.parse(destinations[index]["explorationDay"]);
-        }
-      }
-    }
-  }
-
-  return 0;
-};
-
 Function parseIntValue = (value) {
   if (value is int) {
     return value;
@@ -267,7 +208,6 @@ Function parseIntValue = (value) {
   value = value.replaceAll(RegExp(r'[^0-9]'), '').replaceAll("-", "");
   return int.parse(value);
 };
-
 Function setFormValue = (data, formKey, key, value) {
   try {
     data ??= {}.obs;
@@ -275,11 +215,9 @@ Function setFormValue = (data, formKey, key, value) {
     if (data[formKey] == null) {
       data[formKey] = {}.obs;
     }
-
     data[formKey][key] = value;
   } catch (e) {}
 };
-
 dynamic myEncode(dynamic item) {
   if (item is DateTime || item is Map) {
     return item.toIso8601String();
@@ -293,28 +231,6 @@ Function getCountryNameById = (id) {
   var name = country["description"];
   return name;
 };
-
-Function updateDestinationsCatalog = () {
-  var countryName = getCountryNameById(destCountry.value);
-  destinationsCatalog = processCatalog("destinations").where((element) =>
-      element["relation"]["country"].toString().toLowerCase() ==
-      countryName.toString().toLowerCase());
-
-  airportCatalog = processCatalog("airport").where((element) =>
-      element["relation"]["country"].toString().toLowerCase() ==
-      countryName.toString().toLowerCase());
-};
-
-Function updateAirPorts = () {
-  var arr = getDestinationById(arrivalPort.value);
-  var dep = getDestinationById(departurePort.value);
-
-  arrival.value = arr;
-  departure.value = dep;
-
-  filterSelectedDestinations();
-};
-
 Future<void> showMyDialog(context, String title, String errorText,
     String question, String button) async {
   return showDialog<void>(
@@ -372,21 +288,6 @@ Future<void> showCustomDialog(context, Widget child, String button) async {
   );
 }
 
-Function upDayLeft = (int value) {
-  selected.value = value;
-  accumulated.value += selected.value;
-  updateDayleft();
-};
-
-Function downDayLeft = (int value) {
-  selected.value = value;
-  accumulated.value -= selected.value;
-  updateDayleft();
-};
-
-Function updateDayleft = () {
-  dayleft.value = (totalDays.value - (accumulated.value + selected.value));
-};
 
 Function findTravelRhythmDescription = (int code) {
   var travelData = processCatalog("travel_rhythm").toList();
@@ -394,26 +295,12 @@ Function findTravelRhythmDescription = (int code) {
       .firstWhere((element) => element["code"] == code)["description"];
   return description;
 };
-
 Function parseInt = (value) {
   if (value is String) {
     return int.parse(value);
   }
   return value;
 };
-
-Function updateDestinationType = () {
-  var type = "tour";
-  if (currentDay.value == 0) {
-    type = "arrival";
-  }
-  if (currentDay.value == totalDays.value - 1) {
-    type = "departure";
-  }
-  currentDestinationType = type;
-  globalDestinationType.value = type;
-};
-
 Function multiDropDownKaAgeFilter = (trCatalog, travelRhytmAges) {
   return trCatalog.value.where((value) {
     var code = value["code"];
@@ -423,7 +310,6 @@ Function multiDropDownKaAgeFilter = (trCatalog, travelRhytmAges) {
         travelRhytmAges.keys
             .toList()[i >= travelRhytmAges.keys.length - 1 ? i : i + 1]
       ];
-
       if (customerAge.value < 20) {
         return true;
       }
@@ -436,3 +322,4 @@ Function multiDropDownKaAgeFilter = (trCatalog, travelRhytmAges) {
     return false;
   }).toList() as List<Map<String, dynamic>>;
 };
+

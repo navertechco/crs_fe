@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:naver_crs/common/index.dart';
 import '../../../../index.dart';
 import '../index.dart';
 
@@ -14,7 +15,7 @@ class CustomRightStarDestinationForm extends StatelessWidget {
       children: [
         Padding(
           padding: EdgeInsets.only(
-            top: MediaQuery.of(context).size.height * 0.05,
+            top: MediaQuery.of(context).size.height * 0.055,
             left: MediaQuery.of(context).size.width * 0.5,
           ),
           child: DragDestinationWidget(

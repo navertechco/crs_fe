@@ -131,3 +131,41 @@ Function previousDay = () {
     Get.toNamed("/Destination");
   }
 };
+Function processDaysCatalog = () {
+  int total = departureDate.value.difference(arrivalDate.value).inDays;
+  if (total > 0) {
+    daysCatalog.value = [];
+    for (int i = 0; i < total; i++) {
+      Map<String, dynamic> row = {};
+      row["code"] = i + 1;
+      row["description"] = "Day ${i + 1}";
+      daysCatalog.add(row);
+    }
+  }
+};
+Function resetDays = () {
+  totalDays.value = departureDate.value.difference(arrivalDate.value).inDays;
+  leftAccumulated.value = 0;
+  dayleft.value = totalDays.value;
+  accumulated.value = 0;
+};
+Function saveExplorationDays = (int index, int init0, int value) {
+  try {
+    int acc0 = accumulated.value;
+    int td1 = totalDays.value;
+
+    if (acc0 < td1) {
+      int val1 = value - init0;
+      int init1 = init0 + val1;
+      int acc1 = acc0 + val1;
+      int dl1 = td1 - acc1;
+
+      dayleft.value = dl1;
+      accumulated.value = acc1;
+      setFormValue(globalctx.memory["destinations"], index, "explorationDay",
+          value.toString());
+    }
+  } catch (e) {}
+};
+
+ 

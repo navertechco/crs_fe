@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:naver_crs/common/functions/functions.dart';
+import 'package:naver_crs/common/index.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import '../../../../../index.dart';
 

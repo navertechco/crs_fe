@@ -26,7 +26,8 @@ class DestinationFrontOptionWidget extends StatelessWidget {
           left: MediaQuery.of(context).size.width * 0.013,
         ),
         child: Image.asset(dest[2],
-            width: MediaQuery.of(context).size.width * 0.39),
+            width: MediaQuery.of(context).size.width * 0.39,
+            height: MediaQuery.of(context).size.height * 0.13),
       ),
       Padding(
         padding: EdgeInsets.only(
@@ -36,7 +37,8 @@ class DestinationFrontOptionWidget extends StatelessWidget {
         child: Align(
           alignment: Alignment.centerLeft,
           child: Image.asset(dest[3],
-              width: MediaQuery.of(context).size.width * 0.2),
+              width: MediaQuery.of(context).size.width * 0.39,
+              height: MediaQuery.of(context).size.height * 0.13),
         ),
       ),
       Row(
@@ -44,7 +46,7 @@ class DestinationFrontOptionWidget extends StatelessWidget {
           if (type == "arrival")
             Padding(
               padding: EdgeInsets.only(
-                top: MediaQuery.of(context).size.height * 0.025,
+                top: MediaQuery.of(context).size.height * 0.000,
                 left: MediaQuery.of(context).size.width * 0.05,
               ),
               child: Row(
@@ -59,14 +61,15 @@ class DestinationFrontOptionWidget extends StatelessWidget {
                   SizedBox(width: MediaQuery.of(context).size.width * 0.25),
                   Image.asset("assets/custom/img/arrival.png",
                       color: Colors.blue,
-                      width: MediaQuery.of(context).size.width * 0.05),
+                      width: MediaQuery.of(context).size.width * 0.05,
+                      height: MediaQuery.of(context).size.height * 0.1),
                 ],
               ),
             ),
           if (type == "departure")
             Padding(
               padding: EdgeInsets.only(
-                top: MediaQuery.of(context).size.height * 0.025,
+                top: MediaQuery.of(context).size.height * 0.0,
                 left: MediaQuery.of(context).size.width * 0.05,
               ),
               child: Row(
@@ -81,30 +84,11 @@ class DestinationFrontOptionWidget extends StatelessWidget {
                   SizedBox(width: MediaQuery.of(context).size.width * 0.22),
                   Image.asset("assets/custom/img/departure.png",
                       color: Colors.red,
-                      width: MediaQuery.of(context).size.width * 0.05),
+                      width: MediaQuery.of(context).size.width * 0.05,
+                      height: MediaQuery.of(context).size.height * 0.1),
                 ],
               ),
             ),
-          // if (boat)
-          //   Padding(
-          //     padding: EdgeInsets.only(
-          //       top: MediaQuery.of(context).size.height * 0.01,
-          //       left: MediaQuery.of(context).size.width * 0.33,
-          //     ),
-          //     child: Image.asset("assets/custom/img/boat.png",
-          //         color: Colors.blue,
-          //         width: MediaQuery.of(context).size.width * 0.05),
-          //   ),
-          // if (type == "tour")
-          //   Padding(
-          //     padding: EdgeInsets.only(
-          //       top: MediaQuery.of(context).size.height * 0.01,
-          //       left: MediaQuery.of(context).size.width * 0.33,
-          //     ),
-          //     child: Image.asset("assets/custom/img/car.png",
-          //         color: Colors.green,
-          //         width: MediaQuery.of(context).size.width * 0.05),
-          //   ),
         ],
       ),
       Obx(() {
@@ -116,7 +100,8 @@ class DestinationFrontOptionWidget extends StatelessWidget {
             ),
             child: Image.asset(dest[2],
                 color: Color.fromARGB(100, 10, 10, 10),
-                width: MediaQuery.of(context).size.width * 0.39),
+                width: MediaQuery.of(context).size.width * 0.39,
+                height: MediaQuery.of(context).size.height * 0.13),
           );
         } else {
           return Text("");

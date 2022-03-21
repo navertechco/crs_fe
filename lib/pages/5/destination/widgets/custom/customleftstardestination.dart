@@ -1,5 +1,6 @@
 // ignore_file: file_names
 import 'package:flutter/material.dart';
+import 'package:naver_crs/common/index.dart';
 
 import '../../../../index.dart';
 import '../index.dart';
@@ -11,8 +12,7 @@ class CustomLeftStarDestinationForm extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) { 
-
+  Widget build(BuildContext context) {
     List<Widget> destinationlist = [];
     for (Map item in destinationsCatalog) {
       List itemList = item.values.toList();

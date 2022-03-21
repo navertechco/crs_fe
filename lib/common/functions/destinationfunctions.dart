@@ -151,6 +151,28 @@ Function moveDestination = (String destination, int index, String type) {
   globalctx.destinationDragData.value.add(DragDestinationWidget(
       destination: destination, index: index, type: type, out: false));
 };
+
+Function deleteDestination = (String destination) {
+  if (arrivalPort.value != getDestinationIdByName(destination) &&
+      departurePort.value != getDestinationIdByName(destination) &&
+      globalctx.destinations.contains(destination)) {
+    globalctx.promotedDestinations.remove(destination);
+    var index =
+        globalctx.destinations.indexWhere((element) => element == destination);
+    globalctx.destinations.removeAt(index);
+    globalctx.selectedDestinations.removeAt(index);
+    globalctx.destinationDragData.value.removeAt(index);
+    if (globalctx.memory["destinations"].keys.contains(index.toString())) {
+      accumulated -= int.parse(
+          globalctx.memory["destinations"][index.toString()]["explorationDay"]);
+      dayleft += int.parse(
+          globalctx.memory["destinations"][index.toString()]["explorationDay"]);
+    }
+
+    setDestinationState(destination, index, "suggested", type);
+  }
+};
+
 Function getDestinationById = (destId) {
   try {
     var dest = destinationsCatalog
@@ -261,4 +283,66 @@ Function getDestinationTravelRhythm = (destination, type) {
   var trRange = trData
       .firstWhere((e) => e["code"] == int.parse(destData["travelRhythm"]));
   return trRange;
+};
+
+Function filterDestinations = () {
+  var arr = getDestinationById(arrivalPort.value);
+  var dep = getDestinationById(departurePort.value);
+
+  arrival.value = arr;
+  departure.value = dep;
+
+  filterSelectedDestinations();
+};
+
+Function getDestinationDay = (index) {
+  index = index.toString();
+  if (globalctx.memory != null) {
+    if (destinations != null) {
+      if (destinations[index] != null) {
+        if (destinations[index]["explorationDay"] != null) {
+          return int.parse(destinations[index]["explorationDay"]);
+        }
+      }
+    }
+  }
+
+  return 0;
+};
+
+Function updateDestinationsCatalog = () {
+  var countryName = getCountryNameById(destCountry.value);
+  destinationsCatalog = processCatalog("destinations").where((element) =>
+      element["relation"]["country"].toString().toLowerCase() ==
+      countryName.toString().toLowerCase());
+
+  airportCatalog = processCatalog("airport").where((element) =>
+      element["relation"]["country"].toString().toLowerCase() ==
+      countryName.toString().toLowerCase());
+};
+
+Function updateDestinationType = () {
+  var type = "tour";
+  if (currentDay.value == 0) {
+    type = "arrival";
+  }
+  if (currentDay.value == totalDays.value - 1) {
+    type = "departure";
+  }
+  currentDestinationType = type;
+  globalDestinationType.value = type;
+};
+
+
+Function resetDestinations = () {
+  draggable.value = 0;
+  allPromotedDestinations = [];
+  globalctx.promotedDestinations.value = [];
+  globalctx.selectedDestinations.value = [];
+  globalctx.destinations.value = [];
+  globalctx.destinationDragData.value = [];
+  globalctx.memory["destinations"] = {};
+  globalctx.states["destinations"] = {};
+  arrivalState.value = "selected";
+  departureState.value = "selected";
 };
