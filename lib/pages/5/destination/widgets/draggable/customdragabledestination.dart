@@ -18,7 +18,7 @@ class CustomDragableDestination extends StatelessWidget {
     return Obx(() {
       return Draggable<String>(
         // Data is the value this Draggable stores.
-        maxSimultaneousDrags: draggable.value,
+        maxSimultaneousDrags: destDraggable.value,
         data: destination,
         feedback: DestinationOptionWidget(destination: destination),
         childWhenDragging: DestinationOptionWidget(destination: destination),

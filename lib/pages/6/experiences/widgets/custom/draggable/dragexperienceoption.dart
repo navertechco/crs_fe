@@ -25,14 +25,16 @@ class DragExperienceOptionWidget extends StatelessWidget {
                 state.value != "promoted"
                     ? GestureDetector(
                         onTap: () {
-                          setExperienceState(experience, "suggested");
+                          removeExperience(experience);
+                         
                         },
                         child: Image.asset("assets/custom/img/redmark.png",
                             width: Get.width * 0.02),
                       )
                     : GestureDetector(
                         onTap: () {
-                          setExperienceState(experience, "suggested");
+                          removeExperience(experience);
+                          
                         },
                         child: Image.asset("assets/custom/img/greencheck.png",
                             width: Get.width * 0.02),

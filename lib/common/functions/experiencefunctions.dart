@@ -135,6 +135,8 @@ Function getFilteredExperiences = () {
 };
 
 Function resetExperiences = () {
+  expDraggable.value = 1;
+  accumulatedHours[currentDay.value] = 0.0.obs;
   for (Map experience in experiences) {
     CatalogDto expCatalog = toCatalog(experience);
     setExperienceState(expCatalog.description, "suggested");
@@ -149,7 +151,14 @@ Function deleteExperience = (experience) {
   }
 };
 
-Function promoteDayExperience = (experience) {
+Function removeExperience = (experience) {
+  setExperienceState(experience, "suggested");
+  downgradeExperienceDays(experience);
+};
+
+Function promoteExperience = (experience) {
+  upgradeExperienceDays(experience);
+  setExperienceState(experience, "promoted");
   var experiences = processCatalog("experiences");
   List<CatalogDto> filtered = [];
   for (Map item in experiences) {
@@ -188,15 +197,39 @@ Function getExperienceState = (experience) {
 Function moveExperience = (String experience) {
   globalctx.experiences[currentDay.value] ??= [];
   globalctx.experienceDragData.value[currentDay.value] ??= [];
-  var expData = getExperienceByName(experience).value;
   if (!globalctx.experiences[currentDay.value].contains(experience)) {
     globalctx.experiences[currentDay.value].add(experience);
     globalctx.experienceDragData.value[currentDay.value]!
         .add(DragExperienceOptionWidget(experience: experience));
-    var exptime = (parseInt(expData['exptime']) * 1.0) as double;
-    accumulatedHours.value += exptime / 60;
   }
 };
+
+Function upgradeExperienceDays = (String experience) {
+  accumulatedHours[currentDay.value].value +=
+      calculateExperienceDays(experience);
+  updateDayLeftHours();
+};
+
+Function downgradeExperienceDays = (String experience) {
+  accumulatedHours[currentDay.value].value -=
+      calculateExperienceDays(experience);
+  updateDayLeftHours();
+};
+
+Function calculateExperienceDays = (String experience) {
+  var expData = getExperienceByName(experience).value;
+  var exptime = (parseInt(expData['exptime']) * 1.0) as double;
+  accumulatedHours[currentDay.value] ??= 0.0.obs;
+  return exptime / 60;
+};
+
+Function updateDayLeftHours = () {
+  leftHours[currentDay.value] ??= 0.0.obs;
+  accumulatedHours[currentDay.value] ??= 0.0.obs;
+  leftHours[currentDay.value].value = totalHours[currentDay.value].value -
+      accumulatedHours[currentDay.value].value;
+};
+
 Function getExperienceTravelRhythmByName = (String experience) {
   var expData = getExperienceValueByName(experience);
   var trData = processCatalog("travel_rhythm").toList();
@@ -224,4 +257,10 @@ Function getExperienceByName = (String experience) {
     log(e);
   }
   return result;
+};
+
+Function updateDraggableExperiences = () {
+  if (globalctx.promotedExperiences.keys.contains("Leisure Time")) {
+    destDraggable.value = 0;
+  }
 };

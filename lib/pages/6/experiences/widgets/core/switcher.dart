@@ -41,11 +41,16 @@ class SwitcherWidget extends StatelessWidget {
 
       globalctx.experiencelist = exps;
       suggested = getExperienceState(experience) == "suggested";
+
       if (suggested) {
         _changeRotationAxis();
       } else {
-        showCustomDialog(
-            context, ExperienceDetailWidget(experience: experience), "Close");
+        if (experience == "Leisure Time") {
+          showCustomDialog(context, Text(experience), "Close");
+        } else {
+          showCustomDialog(
+              context, ExperienceDetailWidget(experience: experience), "Close");
+        }
       }
     }
 

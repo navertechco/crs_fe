@@ -90,7 +90,8 @@ var departure = {}.obs;
 
 var airportCatalog = processCatalog("airport");
 
-RxInt draggable = 0.obs;
+RxInt destDraggable = 0.obs;
+RxInt expDraggable = 1.obs;
 
 List pageList = [
   "Tour",
@@ -106,12 +107,12 @@ RxString departureState =
     getDestinationState("", destinations.length - 1).toString().obs;
 
 Function validateDestinationDialog = (destination, type) {
-  var rule1 = (draggable.value == 0 && type == "arrival");
-  var rule2 = (draggable.value != 0 &&
+  var rule1 = (destDraggable.value == 0 && type == "arrival");
+  var rule2 = (destDraggable.value != 0 &&
       type == "tour" &&
       destination != arrival["description"] &&
       destination != departure["description"]);
-  var rule3 = (draggable.value != 0 &&
+  var rule3 = (destDraggable.value != 0 &&
       globalctx.promotedDestinations.length !=
           globalctx.selectedDestinations.length &&
       globalctx.promotedDestinations.length >=
@@ -323,7 +324,9 @@ var currentDestinationTrMinRange = Rx(currentDestinationTrRange["min"]);
 var currentDestinationTrMaxRange = Rx(currentDestinationTrRange["max"]);
 var currentDestinationType = "arrival";
 var currentDestinationKeyActivities = [];
-var accumulatedHours = Rx(0.0);
+var leftHours = {}.obs;
+var accumulatedHours = {}.obs;
+var totalHours = {}.obs;
 var compareTr = "soft";
 var currentTravelRhythm = "1".obs;
 

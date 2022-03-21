@@ -35,6 +35,8 @@ class BodyWidget extends StatelessWidget {
 
     Rx<dynamic> travelRhythm = Rx(getFormValue(
         globalctx.memory["destinations"], index, "travelRhythm", "0"));
+    
+     
     return Obx(() {
       return Padding(
         padding: EdgeInsets.only(
@@ -57,7 +59,13 @@ class BodyWidget extends StatelessWidget {
                         fontSize: 15),
                     CustomTitleWidget(
                         fontWeight: FontWeight.bold,
-                        label: "Accumulated Hours: $accumulatedHours",
+                        label:
+                            "Accumulated Hours: ${accumulatedHours[currentDay.value] ?? 0}",
+                        color: Colors.white,
+                        fontSize: 15),
+                    CustomTitleWidget(
+                        fontWeight: FontWeight.bold,
+                        label: "Left Hours: ${leftHours[currentDay.value] ?? 0}",
                         color: Colors.white,
                         fontSize: 15),
                     SizedBox(height: MediaQuery.of(context).size.height * 0.05),

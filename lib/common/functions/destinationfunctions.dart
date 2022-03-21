@@ -30,13 +30,13 @@ Function updateDraggableDestinations = () {
   if (arrivalState.value == "promoted" &&
       globalctx.promotedDestinations.length >=
           globalctx.selectedDestinations.length - 1) {
-    draggable.value = 1;
+    destDraggable.value = 1;
   }
   if (arrivalState.value == "promoted" &&
       departureState.value == "promoted" &&
       globalctx.promotedDestinations.length ==
           globalctx.selectedDestinations.length) {
-    draggable.value = 0;
+    destDraggable.value = 0;
   }
 };
 
@@ -91,6 +91,7 @@ Function processDestinations = (context) {
     globalDestinationIndex.value = "0";
     resetExperiences();
     selectedIndex.value = pageList.indexOf("Experiences");
+    updateDayTotalHours();
     Get.toNamed("/Experiences");
   } else {
     if (context != null) {
@@ -334,7 +335,7 @@ Function updateDestinationType = () {
 };
 
 Function resetDestinations = () {
-  draggable.value = 0;
+  destDraggable.value = 0;
   allPromotedDestinations.value = [];
   globalctx.promotedDestinations.value = [];
   globalctx.selectedDestinations.value = [];

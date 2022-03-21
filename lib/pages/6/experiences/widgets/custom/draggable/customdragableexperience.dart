@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart'; 
+import '../../../../../index.dart';
 import '../../index.dart';
 
 class CustomDragableExperience extends StatelessWidget {
@@ -22,6 +23,7 @@ class CustomDragableExperience extends StatelessWidget {
     String title = experience.description;
    
     return Draggable<String>(
+      maxSimultaneousDrags: expDraggable.value,
       data: title,
       feedback: experienceOptionWidget,
       childWhenDragging: experienceOptionWidget,

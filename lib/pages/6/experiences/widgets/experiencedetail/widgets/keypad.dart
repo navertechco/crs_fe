@@ -27,8 +27,7 @@ class KeypadWidget extends StatelessWidget {
                       color: Colors.white)
                   .getStyle()),
           onPressed: () {
-            promoteDayExperience(experience);
-            setExperienceState(experience, "promoted");
+            promoteExperience(experience);            
             Get.close(1);
           },
         ),
