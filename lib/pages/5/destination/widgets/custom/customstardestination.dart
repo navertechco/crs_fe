@@ -1,15 +1,11 @@
 // ignore_for_file: prefer_function_declarations_over_variables, unused_local_variable
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:naver_crs/common/index.dart';
-import 'package:naver_crs/common/index.dart';
-import 'package:naver_crs/common/index.dart';
-import 'package:naver_crs/common/widgets/customform/customformcounterfield.dart';
-import 'package:naver_crs/pages/5/destination/widgets/destinationdetail/controller.dart';
 import '../../../../index.dart';
+import '../index.dart';
 
 class CustomStarDestinationForm extends StatelessWidget {
   const CustomStarDestinationForm({
