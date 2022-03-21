@@ -327,3 +327,7 @@ Function multiDropDownKaAgeFilter = (trCatalog, travelRhytmAges) {
 Function log = (e) {
   print(e);
 };
+
+Function promoteLeisureTime = (String experience, int value) {
+  promoteExperience(experience);
+};

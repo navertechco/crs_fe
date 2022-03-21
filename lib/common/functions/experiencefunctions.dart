@@ -175,6 +175,7 @@ Function promoteExperience = (experience) {
   globalctx.memory["promoted"]["day"][currentDay.value][experience] =
       experienceData.toJson();
 };
+
 Function setExperienceState = (experience, state) {
   globalctx.states["experiences"][currentDay.value] ??= {}.obs;
   globalctx.states["experiences"][currentDay.value][experience] ??= {}.obs;
