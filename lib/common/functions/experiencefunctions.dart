@@ -137,6 +137,7 @@ Function getFilteredExperiences = () {
 Function resetExperiences = () {
   expDraggable.value = 1;
   accumulatedHours[currentDay.value] = 0.0.obs;
+  updateDayLeftHours();
   for (Map experience in experiences) {
     CatalogDto expCatalog = toCatalog(experience);
     setExperienceState(expCatalog.description, "suggested");
@@ -226,6 +227,7 @@ Function calculateExperienceDays = (String experience) {
 Function updateDayLeftHours = () {
   leftHours[currentDay.value] ??= 0.0.obs;
   accumulatedHours[currentDay.value] ??= 0.0.obs;
+  totalHours[currentDay.value] ??= 6.0.obs;
   leftHours[currentDay.value].value = totalHours[currentDay.value].value -
       accumulatedHours[currentDay.value].value;
 };

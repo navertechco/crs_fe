@@ -140,6 +140,7 @@ Function previousDay = () {
     currentDay.value--;
     updateDestinationType();
     processDays();
+    filterSuggestedExperiences();
   } else {
     dayleft.value = 0;
     selectedIndex.value = pageList.indexOf("Destination");
