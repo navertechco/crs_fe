@@ -27,7 +27,6 @@ class SwitcherWidget extends StatelessWidget {
     RxBool _flipXAxis = true.obs;
 
     void _changeRotationAxis() {
-      // log(exps);
       _showFrontSide.value = !_showFrontSide.value;
       _flipXAxis.value = !_flipXAxis.value;
     }

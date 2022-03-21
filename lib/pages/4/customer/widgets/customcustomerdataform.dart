@@ -29,7 +29,7 @@ class CustomCustomerDataForm extends StatelessWidget {
     // var countryParam = getParam("COUNTRIES");
     Map<dynamic, dynamic> countries = getContext("countries");
     Rx<List<Map<String, dynamic>>> countrydata = Rx((() {
-      // log("Countries: $countries\n\n");
+      log("Countries: $countries\n\n");
       countrylist = [];
       var index = 0;
       if (countries != null) {
@@ -42,7 +42,7 @@ class CustomCustomerDataForm extends StatelessWidget {
         }
       }
 
-      // log("CountryList: $countrylist");
+      log("CountryList: $countrylist");
       return countrylist;
     })());
 
@@ -77,12 +77,12 @@ class CustomCustomerDataForm extends StatelessWidget {
                               label: "Customer Type          ",
                               onChanged: (value) {
                                 customerType.value = value!;
-                                // log(value);
+                                log(value);
                               },
                               onSaved: (value) {
                                 customerType.value = value!;
                                 ctrl!.state.customerType = value;
-                                // log(value);
+                                log(value);
                               },
                               data: customerTypeCatalog,
                             ),
@@ -226,7 +226,7 @@ class CustomCustomerDataForm extends StatelessWidget {
                                       citylist,
                                       countries[countrylist[int.parse(value)]
                                           ["description"]]);
-                                  // log("CHANGED: ");
+                                  log("CHANGED: ");
                                 },
                                 onSaved: (value) {
                                   ctrl!.state.country = value!;
@@ -235,7 +235,7 @@ class CustomCustomerDataForm extends StatelessWidget {
                                       citylist,
                                       countries[countrylist[int.parse(value)]
                                           ["description"]]);
-                                  // log("SAVED: ");
+                                  log("SAVED: ");
                                 },
                                 data: countrydata.value,
                               ),
@@ -249,12 +249,12 @@ class CustomCustomerDataForm extends StatelessWidget {
                                 label: "City          ",
                                 onChanged: (value) {
                                   city.value = value!;
-                                  // log(value);
+                                  log(value);
                                 },
                                 onSaved: (value) {
                                   city.value = value!;
                                   ctrl!.state.city = value;
-                                  // log(value);
+                                  log(value);
                                 },
                                 data: citylist.value,
                               ),

@@ -92,7 +92,7 @@ Function prepareDaysToResume = () {
       dayIndex++;
     }
   }
-  // log(globalctx.memory);
+  log(globalctx.memory);
   // sendTour(globalctx.memory);
   selectedIndex.value = pageList.indexOf("Resume");
   Get.toNamed("/Resume");

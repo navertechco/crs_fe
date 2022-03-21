@@ -18,16 +18,19 @@ Function getFilteredExperiences = () {
   processDays();
   // var airport = getDestinationAirport().toString().toUpperCase();
   var experiences = processCatalog("experiences");
-  List filteredByDestination = [];
+  List filtered = [];
   for (Map item in experiences) {
     List itemList = item.values.toList();
     CatalogDto experience = CatalogDto(itemList);
+    if (experience.value["destination"].toString().toLowerCase() == "all") {
+      filtered.add(experience);
+    }
     if (experience.value["destination"].toString().toLowerCase() ==
         globalDestinationName.value) {
-      filteredByDestination.add(experience);
+      filtered.add(experience);
     }
   }
-  List filteredByTravelRhytm = filteredByDestination.where((e) {
+  List filteredByTravelRhytm = filtered.where((e) {
     // return true;
     if (currentDay.value == 0) {
       return true;
@@ -118,32 +121,19 @@ Function getFilteredExperiences = () {
 
     return true;
   }).toList();
-  Iterable filteredByAirport = filteredByExpMode;
-  var filteredBySuggested = filteredByAirport.where((e) {
+  List filteredByAirport = filteredByExpMode;
+  List filteredBySuggested = filteredByAirport.where((e) {
+    if (e.description == "Leisure Time") {
+      return true;
+    }
     return getExperienceState(e.description) == "suggested";
   }).toList();
-  return filteredBySuggested;
+
+  Iterable result = filteredBySuggested;
+
+  return result;
 };
-Function removeExperienceFromArray = (array, item) {
-  if (array.contains(item)) {
-    var index = array.indexOf(item);
-    array.value.removeAt(index);
-    if (globalctx.experienceDragData.value[currentDay.value]!.isNotEmpty) {
-      if (globalctx.experienceDragData.value[currentDay.value]!.length ==
-          array.value.length) {
-        globalctx.experienceDragData.value[currentDay.value]!.removeAt(index);
-      } else {
-        var newIndex = index > 0 ? index - 1 : 0;
-        globalctx.experienceDragData.value[currentDay.value]!
-            .removeAt(newIndex);
-      }
-    }
-  }
-};
-Function removeExperience = (experience) {
-  removeExperienceFromArray(globalctx.selectedExperiences, experience);
-  removeExperienceFromArray(globalctx.promotedExperiences, experience);
-};
+
 Function resetExperiences = () {
   for (Map experience in experiences) {
     CatalogDto expCatalog = toCatalog(experience);
@@ -158,33 +148,17 @@ Function deleteExperience = (experience) {
     globalctx.experienceDragData.value[currentDay.value]!.removeAt(index);
   }
 };
-Function filterExperienceList = (data, day) {
-  String travelRhythm = data["travelRhythm"];
-  List? currentList = globalctx.promotedExperiences[day];
-  Iterable filtered =
-      currentList!.where((e) => e["travelRhythm"] == travelRhythm);
-  // for (var experience in filtered) {}
-  globalctx.promotedExperiences[day] = filtered.toList();
-};
-Function proccessExperiences = () {
-  var experiences = processCatalog("experiences");
-  for (Map item in experiences) {
-    List itemList = item.values.toList();
-    CatalogDto exp = CatalogDto(itemList);
-    var state = getExperienceState(exp.description);
-    states[state][exp.description] = true;
-  }
-};
+
 Function promoteDayExperience = (experience) {
   var experiences = processCatalog("experiences");
-  List<CatalogDto> filteredByDestination = [];
+  List<CatalogDto> filtered = [];
   for (Map item in experiences) {
     List itemList = item.values.toList();
     CatalogDto exp = CatalogDto(itemList);
-    filteredByDestination.add(exp);
+    filtered.add(exp);
   }
   CatalogDto experienceData =
-      filteredByDestination.firstWhere((e) => e.description == experience);
+      filtered.firstWhere((e) => e.description == experience);
   globalctx.memory["promoted"] ??= {};
   globalctx.memory["promoted"]["day"] ??= {};
   globalctx.memory["promoted"]["day"][currentDay.value] ??= {};
@@ -210,16 +184,7 @@ Function getExperienceState = (experience) {
   state ??= "suggested";
   return state;
 };
-Function getPromotedExperiencesByDayAndKA = (day) {
-  // Get promoted experiences by day and KA
-  // List promoted = states["promoted"].entries.toList();
-  // var filtered = promoted.where((e) {
-  //   return experiences.where((f) {
-  //     return f["title"] == e.key;
-  //   }).isNotEmpty;
-  // });
-  return true;
-};
+
 Function moveExperience = (String experience) {
   globalctx.experiences[currentDay.value] ??= [];
   globalctx.experienceDragData.value[currentDay.value] ??= [];

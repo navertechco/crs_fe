@@ -18,7 +18,7 @@ class LoadingController extends GetxController {
         "data": {"tour_id": "$tourId"}
       });
       // ignore: avoid_print
-      // log(res);
+      log(res);
       if (res['state'] == true) {
         var data = res['data'];
         if (data.length > 0) {
