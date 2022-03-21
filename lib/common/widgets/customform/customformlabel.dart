@@ -5,7 +5,7 @@ class CustomFormLabelWidget extends StatelessWidget {
   const CustomFormLabelWidget({
     Key? key,
     required this.label,
-    required this.fontWeight,
+    this.fontWeight= FontWeight.normal,
     this.color = Colors.black,
     this.fontSize = 10
   }) : super(key: key);

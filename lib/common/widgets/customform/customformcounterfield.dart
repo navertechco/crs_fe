@@ -17,7 +17,12 @@ class CustomFormCounterFieldWidget extends StatelessWidget {
     this.min,
     this.max,
     this.bound,
-    this.step, this.left=0, this.top=0, this.fontSize=10,
+    this.step,
+    this.left = 0,
+    this.top = 0,
+    this.fontSize = 10,
+    this.fontWeight = FontWeight.normal,
+    this.color = Colors.black,
   }) : super(key: key);
 
   final label;
@@ -28,7 +33,8 @@ class CustomFormCounterFieldWidget extends StatelessWidget {
   final double height;
   final double fontSize;
   final String hintText;
-
+  final FontWeight fontWeight;
+  final Color color;
   final void Function(num?)? onValueChanged;
   final initial;
   final min;
@@ -42,7 +48,8 @@ class CustomFormCounterFieldWidget extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Row(
         children: [
-          CustomFormLabelWidget(label: label, fontWeight: FontWeight.normal),
+          CustomFormLabelWidget(
+              label: label, color: color, fontWeight: fontWeight),
           RoundedFormCounterField(
               disabled: disabled,
               hintText: hintText,

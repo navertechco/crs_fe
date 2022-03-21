@@ -11,6 +11,7 @@ class CustomLeisureTimeDetailForm extends StatelessWidget {
   final LeisureTimeDetailController? ctrl;
   final _formKey = GlobalKey<FormState>();
   final String experience;
+  final TimeOfDay _time = TimeOfDay(hour: 7, minute: 15);
 
   @override
   Widget build(BuildContext context) {
@@ -20,15 +21,36 @@ class CustomLeisureTimeDetailForm extends StatelessWidget {
             key: _formKey,
             child: Column(
               children: [
-                CustomFormCounterFieldWidget(
-                    initial: accumulatedHours[currentDay.value].value,
-                    min: 0,
-                    max: leftHours[currentDay.value].value,
-                    bound: 0,
-                    onValueChanged: (value) {},
-                    label: "Leisure Time",
-                    width: 0.20),
-                CustomDayWidget(),
+                TextButton(
+                  child: Text("Start",
+                      style: KTextSytle(
+                              context: context,
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white)
+                          .getStyle()),
+                  onPressed: () {
+                    showTimePicker(
+                      context: context,
+                      initialTime: _time,
+                    );
+                  },
+                ),
+                TextButton(
+                  child: Text("End",
+                      style: KTextSytle(
+                              context: context,
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white)
+                          .getStyle()),
+                  onPressed: () {
+                    showTimePicker(
+                      context: context,
+                      initialTime: _time,
+                    );
+                  },
+                ),
               ],
             )),
       ],
