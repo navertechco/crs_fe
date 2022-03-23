@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'index.dart';
+import 'package:interval_time_picker/interval_time_picker.dart'
+    as interval_time_picker;
 
 ////
 Rx<int> leftAccumulated = 0.obs;
@@ -329,6 +331,6 @@ var accumulatedHours = {}.obs;
 var totalHours = {}.obs;
 var compareTr = "soft";
 var currentTravelRhythm = "1".obs;
-
-
-
+final TimeOfDay time = TimeOfDay(hour: 7, minute: 15); 
+Rx<TimeOfDay?> startTime = Rx(TimeOfDay(hour: 7, minute: 15));
+Rx<TimeOfDay?> endTime = Rx(TimeOfDay(hour: 7, minute: 15));

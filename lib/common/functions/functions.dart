@@ -233,42 +233,16 @@ Function getCountryNameById = (id) {
   var name = country["description"];
   return name;
 };
-Future<void> showMyDialog(context, String title, String errorText,
-    String question, String button) async {
-  return showDialog<void>(
-    context: context,
-    barrierDismissible: false, // user must tap button!
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: Text(title),
-        content: SingleChildScrollView(
-          child: ListBody(
-            children: <Widget>[
-              Text(errorText),
-              Text(question),
-            ],
-          ),
-        ),
-        actions: <Widget>[
-          TextButton(
-            child: Text(button),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
-      );
-    },
-  );
-}
 
-Future<void> showCustomDialog(context, Widget child, String button) async {
+Future<void> showCustomDialog(context, Widget child, String button,
+    {Color backgroundColor = Colors.black54,
+    Color buttonColor = Colors.black54}) async {
   return showDialog<void>(
     context: context,
     barrierDismissible: false, // user must tap button!
     builder: (BuildContext context) {
       return AlertDialog(
-        backgroundColor: Colors.black54,
+        backgroundColor: backgroundColor,
         content: SizedBox(
             width: MediaQuery.of(context).size.width * 0.5, child: child),
         actions: <Widget>[
@@ -278,7 +252,7 @@ Future<void> showCustomDialog(context, Widget child, String button) async {
                         context: context,
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white)
+                        color: buttonColor)
                     .getStyle()),
             onPressed: () {
               Navigator.of(context).pop();

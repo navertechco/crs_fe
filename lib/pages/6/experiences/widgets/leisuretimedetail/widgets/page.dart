@@ -20,8 +20,6 @@ class LeisureTimeDetailWidget extends GetView<LeisureTimeDetailController> {
             child: Column(
               children: [
                 TitleWidget(experience: experience),
-                CarouselWidget(experience: experience),
-                DescriptionWidget(experience: experience),
                 CustomLeisureTimeDetailForm(experience: experience),
                 KeypadWidget(experience: experience),
               ],
