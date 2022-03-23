@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_week_view/flutter_week_view.dart';
+import 'package:get/get.dart';
+
+import '../../../../../index.dart';
 
 class CustomDayWidget extends StatelessWidget {
   const CustomDayWidget({Key? key}) : super(key: key);
@@ -8,21 +11,37 @@ class CustomDayWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     DateTime now = DateTime.now();
     DateTime date = DateTime(now.year, now.month, now.day);
-    return DayView(
-      initialTime: const HourMinute(hour: 7),
-      date: now,
-      events: [
-        FlutterWeekViewEvent(
-          title: 'Leisure Time',
-          description: '',
-          start: date.add(const Duration(hours: 10)),
-          end: date.add(const Duration(hours: 11, minutes: 30)),
+
+    return Obx(() {
+      Rx<TimeOfDay?> leisureTimeStart = Rx(getFormValue(
+              globalctx.memory["days"],
+              currentDay.value,
+              "leisureTimeStart",
+              time) ??
+          time);
+      Rx<TimeOfDay?> leisureTimeEnd = Rx(getFormValue(globalctx.memory["days"],
+              currentDay.value, "leisureTimeEnd", time) ??
+          time);
+      return DayView(
+        initialTime: const HourMinute(hour: 7),
+        date: now,
+        events: [
+          FlutterWeekViewEvent(
+            title: 'Leisure Time',
+            description: '',
+            start: date.add(Duration(
+                hours: leisureTimeStart.value!.hour,
+                minutes: leisureTimeStart.value!.minute)),
+            end: date.add(Duration(
+                hours: leisureTimeEnd.value!.hour,
+                minutes: leisureTimeEnd.value!.minute)),
+          ),
+        ],
+        style: DayViewStyle.fromDate(
+          date: date,
+          currentTimeCircleColor: Colors.pink,
         ),
-      ],
-      style: DayViewStyle.fromDate(
-        date: date,
-        currentTimeCircleColor: Colors.pink,
-      ),
-    );
+      );
+    });
   }
 }

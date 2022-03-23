@@ -28,7 +28,8 @@ class CustomFooterWidget extends StatelessWidget {
                           color: Colors.white)
                       .getStyle()),
               onPressed: () {
-                showCustomDialog(context, CustomDayWidget(), "Close");
+                showCustomDialog(context, CustomDayWidget(), "Close",
+                    buttonColor: Colors.white);
               },
             ),
           ],
