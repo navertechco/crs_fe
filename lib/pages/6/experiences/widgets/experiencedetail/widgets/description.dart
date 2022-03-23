@@ -10,8 +10,7 @@ class DescriptionWidget extends StatelessWidget {
   final experience;
 
   @override
-  Widget build(BuildContext context) {
-    var experiences = processCatalog("experiences");
+  Widget build(BuildContext context) { 
     var expData = experiences
         .toList()
         .firstWhere((exp) => exp["description"] == experience)["value"];

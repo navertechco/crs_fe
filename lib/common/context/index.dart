@@ -16,7 +16,8 @@ class Context with PropertyChangeNotifier<String> {
     "icons": {}.obs,
     "session": {"avatar": "".obs},
     "destinationdata": {}.obs,
-    "experiencedata": {}.obs
+    "experiencedata": {}.obs,
+    "catalogs": {}.obs
   }.obs);
   Rx<List<Widget>> destinationDragData = Rx(<Widget>[]);
   RxMap destinationState = {}.obs;

@@ -10,11 +10,7 @@ class TitleWidget extends StatelessWidget {
   final experience;
 
   @override
-  Widget build(BuildContext context) {
-    // var experiences = processCatalog("experiences");
-    // var expData = experiences
-    //     .toList()
-    //     .firstWhere((exp) => exp["description"] == experience)["value"];
+  Widget build(BuildContext context) { 
     return Text(experience.toString().split("-")[0],
         style: KTextSytle(
                 context: context,

@@ -8,8 +8,7 @@ class ExperienceFrontOptionWidget extends StatelessWidget {
       : super(key: key);
   final String experience;
   @override
-  Widget build(BuildContext context) {
-    var experiences = processCatalog("experiences");
+  Widget build(BuildContext context) { 
     List filteredByDestination = [];
 
     for (Map item in experiences) {

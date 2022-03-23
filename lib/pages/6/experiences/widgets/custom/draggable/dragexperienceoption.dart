@@ -26,7 +26,6 @@ class DragExperienceOptionWidget extends StatelessWidget {
                     ? GestureDetector(
                         onTap: () {
                           removeExperience(experience);
-                         
                         },
                         child: Image.asset("assets/custom/img/redmark.png",
                             width: Get.width * 0.02),
@@ -34,7 +33,6 @@ class DragExperienceOptionWidget extends StatelessWidget {
                     : GestureDetector(
                         onTap: () {
                           removeExperience(experience);
-                          
                         },
                         child: Image.asset("assets/custom/img/greencheck.png",
                             width: Get.width * 0.02),

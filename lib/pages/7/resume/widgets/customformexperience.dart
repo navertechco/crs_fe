@@ -20,15 +20,15 @@ class CustomFormExperienceRowWidget extends StatelessWidget {
     var daysData = destination["daysData"];
     var days = daysData.entries.toList();
     var day = days[dayindex].value;
-    var experiences = day['experiences'];
-    var expList = experiences.keys.toList();
+    var dayexps = day['experiences'];
+    var expList = dayexps.keys.toList();
     var expName = expList[experienceindex];
-    var nextIndex = experienceindex + 1 < experiences.length
+    var nextIndex = experienceindex + 1 < dayexps.length
         ? experienceindex + 1
         : experienceindex;
     var nextExpName = expList[nextIndex];
-    var experience = experiences[expName];
-    var nextexperience = experiences[nextExpName];
+    var experience = dayexps[expName];
+    var nextexperience = dayexps[nextExpName];
     var title = expName.toString();
     var description = experience['description'].toString();
     var next = experience['next'].toString() != ""

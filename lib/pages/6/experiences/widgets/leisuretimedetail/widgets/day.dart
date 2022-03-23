@@ -22,11 +22,13 @@ class CustomDayWidget extends StatelessWidget {
       Rx<TimeOfDay?> leisureTimeEnd = Rx(getFormValue(globalctx.memory["days"],
               currentDay.value, "leisureTimeEnd", time) ??
           time);
-      return DayView(
-        initialTime: const HourMinute(hour: 7),
-        date: now,
-        events: [
-          FlutterWeekViewEvent(
+      var eventList = <FlutterWeekViewEvent>[];
+
+      if (globalctx.memory["days"][currentDay.value.toString()] != null) {
+        if (globalctx.memory["days"][currentDay.value.toString()]
+                ["leisureTimeEnd"] !=
+            null) {
+          eventList.add(FlutterWeekViewEvent(
             title: 'Leisure Time',
             description: '',
             start: date.add(Duration(
@@ -35,8 +37,14 @@ class CustomDayWidget extends StatelessWidget {
             end: date.add(Duration(
                 hours: leisureTimeEnd.value!.hour,
                 minutes: leisureTimeEnd.value!.minute)),
-          ),
-        ],
+          ));
+        }
+      }
+
+      return DayView(
+        initialTime: const HourMinute(hour: 7),
+        date: now,
+        events: eventList,
         style: DayViewStyle.fromDate(
           date: date,
           currentTimeCircleColor: Colors.pink,

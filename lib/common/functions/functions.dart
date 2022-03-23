@@ -302,6 +302,18 @@ Function log = (e) {
   print(e);
 };
 
-Function promoteLeisureTime = (String experience, int value) {
-  promoteExperience(experience);
+Function promoteLeisureTime = () {
+  var value = getFormValue(
+      globalctx.memory["days"], currentDay.value, "leisureTime", 0);
+  processHour(value);
+  promoteExperience("Leisure Time");
+};
+
+Function setLT = (value) {
+  int ltindex =
+      expList.indexWhere((element) => element["description"] == "Leisure Time");
+  globalctx.context.value["catalogs"]["experiences"][ltindex]["value"]
+          ["exptime"] ==
+      value;
+  experiences = processCatalog("experiences");
 };

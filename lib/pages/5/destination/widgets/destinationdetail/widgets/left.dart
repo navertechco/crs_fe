@@ -14,8 +14,7 @@ class LeftWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Rx<List> galleryData = Rx([]);
-    List experiences = processCatalog("experiences");
+    Rx<List> galleryData = Rx([]); 
     galleryData.value = experiences.where((experience) {
       var value = experience["value"];
       var dest = value["destination"].toString().toUpperCase();

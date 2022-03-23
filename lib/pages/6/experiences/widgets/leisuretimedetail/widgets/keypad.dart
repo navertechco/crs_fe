@@ -27,7 +27,7 @@ class KeypadWidget extends StatelessWidget {
                       color: Colors.white)
                   .getStyle()),
           onPressed: () {
-            promoteLeisureTime(experience, 2);
+            promoteLeisureTime();
             Get.close(1);
           },
         ),

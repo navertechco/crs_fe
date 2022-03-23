@@ -16,8 +16,6 @@ Function filterSuggestedExperiences = () {
 };
 Function getFilteredExperiences = () {
   processDays();
-  // var airport = getDestinationAirport().toString().toUpperCase();
-  var experiences = processCatalog("experiences");
   List filtered = [];
   for (Map item in experiences) {
     List itemList = item.values.toList();
@@ -36,11 +34,9 @@ Function getFilteredExperiences = () {
       return true;
     }
     var tr = getExperienceTravelRhythmByName(e.description)["description"];
-
     if (currentTravelRhythm.value == "0") {
       return true;
     }
-
     compareTr = currentDestinationTr["description"];
     if (compareTr == "HARD") {
       return true;
@@ -110,7 +106,6 @@ Function getFilteredExperiences = () {
   List filteredByMaxCapacity = filteredByBudget.where((e) {
     return true;
   }).toList();
-
   List filteredByExpMode = filteredByMaxCapacity.where((e) {
     if (globalDestinationName.value.toString().toUpperCase() !=
             "galapagos".toString().toUpperCase() &&
@@ -118,7 +113,6 @@ Function getFilteredExperiences = () {
             "amazon".toString().toUpperCase()) {
       return true;
     }
-
     return true;
   }).toList();
   List filteredByAirport = filteredByExpMode;
@@ -128,25 +122,30 @@ Function getFilteredExperiences = () {
     }
     return getExperienceState(e.description) == "suggested";
   }).toList();
-
   Iterable result = filteredBySuggested;
-
   return result;
 };
-
 Function resetExperiences = () {
+  initializeHours();
   expDraggable.value = 1;
+  for (Map experience in experiences) {
+    CatalogDto expCatalog = toCatalog(experience);
+    removeExperience(expCatalog.description);
+  }
+  resetLeisureTime();
+  accumulatedHours[currentDay.value] = 0.0.obs;
+  updateDayLeftHours();
+};
+Function resetLeisureTime = () {
+  initializeHours();
+  var value = getFormValue(
+      globalctx.memory["days"], currentDay.value, "leisureTime", 0);
   setFormValue(globalctx.memory["days"], currentDay.value, "leisureTime", 0);
   setFormValue(
       globalctx.memory["days"], currentDay.value, "leisureTimeStart", time);
   setFormValue(
       globalctx.memory["days"], currentDay.value, "leisureTimeEnd", time);
-  accumulatedHours[currentDay.value] = 0.0.obs;
-  updateDayLeftHours();
-  for (Map experience in experiences) {
-    CatalogDto expCatalog = toCatalog(experience);
-    setExperienceState(expCatalog.description, "suggested");
-  }
+  processHour(value);
 };
 Function deleteExperience = (experience) {
   if (globalctx.experiences[currentDay.value].contains(experience)) {
@@ -156,16 +155,12 @@ Function deleteExperience = (experience) {
     globalctx.experienceDragData.value[currentDay.value]!.removeAt(index);
   }
 };
-
 Function removeExperience = (experience) {
-  setExperienceState(experience, "suggested");
   downgradeExperienceDays(experience);
 };
-
 Function promoteExperience = (experience) {
   upgradeExperienceDays(experience);
-  setExperienceState(experience, "promoted");
-  var experiences = processCatalog("experiences");
+
   List<CatalogDto> filtered = [];
   for (Map item in experiences) {
     List itemList = item.values.toList();
@@ -180,7 +175,6 @@ Function promoteExperience = (experience) {
   globalctx.memory["promoted"]["day"][currentDay.value][experience] =
       experienceData.toJson();
 };
-
 Function setExperienceState = (experience, state) {
   globalctx.states["experiences"][currentDay.value] ??= {}.obs;
   globalctx.states["experiences"][currentDay.value][experience] ??= {}.obs;
@@ -200,7 +194,6 @@ Function getExperienceState = (experience) {
   state ??= "suggested";
   return state;
 };
-
 Function moveExperience = (String experience) {
   globalctx.experiences[currentDay.value] ??= [];
   globalctx.experienceDragData.value[currentDay.value] ??= [];
@@ -210,34 +203,54 @@ Function moveExperience = (String experience) {
         .add(DragExperienceOptionWidget(experience: experience));
   }
 };
-
 Function upgradeExperienceDays = (String experience) {
-  accumulatedHours[currentDay.value].value +=
-      calculateExperienceDays(experience);
-  updateDayLeftHours();
+  var state = getExperienceState(experience);
+  if (state == "selected") {
+    var value = calculateExperienceDays(experience);
+    processHour(value);
+  }
+  setExperienceState(experience, "promoted");
 };
-
 Function downgradeExperienceDays = (String experience) {
-  accumulatedHours[currentDay.value].value -=
-      calculateExperienceDays(experience);
-  updateDayLeftHours();
+  var state = getExperienceState(experience);
+  if (state == "promoted") {
+    var value = calculateExperienceDays(experience);
+    if (experience == "Leisure Time") {
+      value = getFormValue(
+          globalctx.memory["days"], currentDay.value, "leisureTime", 0);
+    }
+    processHour(-value);
+  }
+  setExperienceState(experience, "suggested");
 };
-
-Function calculateExperienceDays = (String experience) {
-  var expData = getExperienceByName(experience).value;
-  var exptime = (parseInt(expData['exptime']) * 1.0) as double;
-  accumulatedHours[currentDay.value] ??= 0.0.obs;
-  return exptime / 60;
+Function processHour = (value) {
+  if (leftHours[currentDay.value].value > 0) {
+    if (leftHours[currentDay.value].value <=
+        totalHours[currentDay.value].value) {
+      if (value < 0) {
+        accumulatedHours[currentDay.value].value -= -value;
+      } else {
+        accumulatedHours[currentDay.value].value += value;
+      }
+      updateDayLeftHours();
+    }
+  }
 };
-
-Function updateDayLeftHours = () {
+Function initializeHours = () {
   leftHours[currentDay.value] ??= 0.0.obs;
   accumulatedHours[currentDay.value] ??= 0.0.obs;
   totalHours[currentDay.value] ??= 6.0.obs;
+};
+Function calculateExperienceDays = (String experience) {
+  var expData = getExperienceByName(experience).value;
+  var exptime = (parseInt(expData['exptime']) * 1.0) as double;
+  return exptime / 60;
+};
+Function updateDayLeftHours = () {
+  initializeHours();
   leftHours[currentDay.value].value = totalHours[currentDay.value].value -
       accumulatedHours[currentDay.value].value;
 };
-
 Function getExperienceTravelRhythmByName = (String experience) {
   var expData = getExperienceValueByName(experience);
   var trData = processCatalog("travel_rhythm").toList();
@@ -258,15 +271,13 @@ Function getExperienceValueByName = (String experience) {
 Function getExperienceByName = (String experience) {
   var result;
   try {
-    var experiences = processCatalog("experiences").toList();
-    result = toCatalog(experiences.firstWhere(
+    result = toCatalog(expList.firstWhere(
         (element) => element["description"].toString() == experience));
   } catch (e) {
     log(e);
   }
   return result;
 };
-
 Function updateDraggableExperiences = () {
   if (globalctx.promotedExperiences.keys.contains("Leisure Time")) {
     destDraggable.value = 0;
