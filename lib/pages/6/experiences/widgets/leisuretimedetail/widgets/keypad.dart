@@ -40,6 +40,7 @@ class KeypadWidget extends StatelessWidget {
                       color: Colors.white)
                   .getStyle()),
           onPressed: () {
+            resetLeisureTime();
             Get.close(1);
           },
         ),

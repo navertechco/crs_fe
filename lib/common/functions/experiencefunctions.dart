@@ -140,12 +140,17 @@ Function resetLeisureTime = () {
   initializeHours();
   var value = getFormValue(
       globalctx.memory["days"], currentDay.value, "leisureTime", 0);
+
+  var state = getExperienceState("Leisure Time");
   setFormValue(globalctx.memory["days"], currentDay.value, "leisureTime", 0);
   setFormValue(
       globalctx.memory["days"], currentDay.value, "leisureTimeStart", time);
   setFormValue(
       globalctx.memory["days"], currentDay.value, "leisureTimeEnd", time);
-  processHour(value);
+
+  if (state=="promoted") {
+    processHour(value);
+  }
 };
 Function deleteExperience = (experience) {
   if (globalctx.experiences[currentDay.value].contains(experience)) {
