@@ -136,6 +136,11 @@ Function getFilteredExperiences = () {
 
 Function resetExperiences = () {
   expDraggable.value = 1;
+  setFormValue(globalctx.memory["days"], currentDay.value, "leisureTime", 0);
+  setFormValue(
+      globalctx.memory["days"], currentDay.value, "leisureTimeStart", time);
+  setFormValue(
+      globalctx.memory["days"], currentDay.value, "leisureTimeEnd", time);
   accumulatedHours[currentDay.value] = 0.0.obs;
   updateDayLeftHours();
   for (Map experience in experiences) {
