@@ -346,3 +346,20 @@ Function resetDestinations = () {
   arrivalState.value = "selected";
   departureState.value = "selected";
 };
+
+Function getSubs = (String destination) {
+  var res = <Map<String, dynamic>>[];
+  try {
+    var destData = getDestinationValueByName(destination);
+    var subs = destData[9]["subs"];
+    if (subs.length > 0) {
+      for (var sub in subs) {
+        res.add(sub);
+      }
+    }
+  } catch (e) {
+    log(e);
+  }
+
+  return res;
+};

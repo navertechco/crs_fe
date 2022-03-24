@@ -38,7 +38,8 @@ class CustomStarDestinationForm extends StatelessWidget {
 
     List<String> keyActivities = getFormValue(
         globalctx.memory["destinations"], index, "keyActivities", <String>[]);
-
+    List<String> subs = getFormValue(
+        globalctx.memory["destinations"], index, "subs", <String>[]);
     List<Map<String, dynamic>> explorationdDays =
         processCatalog("exploration_days");
 
@@ -139,6 +140,38 @@ class CustomStarDestinationForm extends StatelessWidget {
                         },
                         label: "Exploration Days    ",
                         width: 0.20);
+                  }
+                  return Text("");
+                }),
+                Obx(() {
+                  var expDay = explorationDay.value;
+                  if (getSubs(destination).length > 0) {
+                    return CustomFormMultiDropDownFieldWidget(
+                      validator: (value) =>
+                          CustomMultiDropdownRequiredValidator(value,
+                              errorText: "Subs are required ",
+                              context: context),
+                      value: subs,
+                      onSaved: (value) {
+                        setFormValue(globalctx.memory["destinations"], index,
+                            "subs", []);
+                        setFormValue(
+                            globalctx.memory["destinations"],
+                            index,
+                            "subs",
+                            value!
+                                .map((e) => e["description"])
+                                .toSet()
+                                .toList());
+                      },
+                      onChanged: (value) {
+                        setFormValue(globalctx.memory["destinations"], index,
+                            "subs", value);
+                      },
+                      hintText: " ",
+                      label: "${destination.capitalize} Subs      ",
+                      data: getSubs(destination),
+                    );
                   }
                   return Text("");
                 }),
