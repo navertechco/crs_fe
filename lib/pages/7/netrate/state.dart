@@ -2,7 +2,12 @@ import 'package:get/get.dart';
 
 class NetRateState extends GetXState {
   // title
-  final _title = '''asd'''.obs;
+  bool isLoading = false;
+  String? error = "";
+  String username = "";
+  String password = "";
+
+  final _title = "SIGNIN".obs;
   set title(value) => _title.value = value;
   get title => _title.value;
 }

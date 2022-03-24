@@ -1,20 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/get.dart';
-import '../../index.dart';
+import 'widgets/index.dart';
 import 'index.dart';
+import '../../index.dart';
 
 class NetRatePage extends GetView<NetRateController> {
   const NetRatePage({Key? key}) : super(key: key);
 
-  Widget _buildView(BuildContext _context) {
-    return InAppWebView(
-      initialUrlRequest: URLRequest(url: Uri.parse("https://www.google.com/")),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    return _buildView(context);
+    return Scaffold(
+      body: _buildNetRateFormPage(context),
+    );
   }
+}
+
+GetBuilder<NetRateController> _buildNetRateFormPage(
+  BuildContext context,
+) {
+  return GetBuilder<NetRateController>(
+    id: 'signin_form_page',
+    builder: (controller) => ContentLayoutWidget(
+        background: "assets/custom/img/home.png",
+        child: NetRateFormPage(ctrl: controller),
+        text: "<  NetRate"),
+  );
 }

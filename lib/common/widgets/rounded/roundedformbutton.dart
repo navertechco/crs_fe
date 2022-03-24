@@ -10,7 +10,7 @@ class RoundedFormButton extends StatelessWidget {
   final double height;
   final double fontSize;
   final String label;
-  final Color color;
+  final  color;
   final Color textColor;
   final void Function()? onTap;
   final fontWeight;
