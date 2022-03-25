@@ -335,6 +335,12 @@ Rx<TimeOfDay?> startTime = Rx(TimeOfDay(hour: 7, minute: 15));
 Rx<TimeOfDay?> endTime = Rx(TimeOfDay(hour: 7, minute: 15));
 var searcherHeader = Rx(<DataColumn>[]);
 var searcherDetail = Rx(<DataRow>[]);
+var netRateHeader = Rx(<DataColumn>[]);
+var netRateDetail = Rx(<DataRow>[]);
+List netRateData = [
+  {"room_type": "single", "quantity": "16", "passengers": "16", "roh": "3000"},
+  {"room_type": "double", "quantity": "2", "passengers": "2", "roh": "2000"},
+];
 List data = [
   {"date": "10-10-2022", "name": "Name1", "quote": "1111"},
   {"date": "11-10-2022", "name": "Name2", "quote": "2222"},

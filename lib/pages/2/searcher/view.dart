@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'index.dart'; 
+import 'index.dart';
 import 'widgets/index.dart';
 
 class SearcherPage extends GetView<SearcherController> {
@@ -9,7 +9,10 @@ class SearcherPage extends GetView<SearcherController> {
   // 内容页
   Widget _buildView() {
     return WillPopScope(
-      onWillPop: () async => false,
+      onWillPop: () async {
+        Get.back();
+        return true;
+      },
       child: SearcherWidget(
         ctrl: controller,
       ),

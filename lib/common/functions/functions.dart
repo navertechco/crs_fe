@@ -2,6 +2,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:naver_crs/pages/2/searcher/widgets/index.dart';
 import 'package:naver_crs/pages/7/netrate/widgets/index.dart';
 import 'package:sweetalert/sweetalert.dart';
 import '../constants.dart';
@@ -352,7 +353,7 @@ Function setLT = (value) {
   }
   Function filterData = (context, value) {
       searchResult!.value = value;
-      filteredData.value = data!
+      filteredData.value = data
           .where((quote) =>
               quote["date"].contains(searchResult!.value) ||
               quote["name"].contains(searchResult!.value) ||
@@ -361,6 +362,11 @@ Function setLT = (value) {
       var detail = getDetail(context, filteredData);
       searcherDetail.value = (detail);
     };
+Function processNetRateData = (context, data) {
+  var header = getNetRateHeader(context, data);
+  var detail = getNetRateDetail(context, data);
+  return [header, detail];
+};
 
     
 Function processData = (context, data) {
@@ -369,6 +375,28 @@ Function processData = (context, data) {
   return [header, detail];
 };
 
+Function getNetRateHeader = (context, data) {
+  var header = <DataColumn>[];
+  if (data.length > 0) {
+    for (var key in data[0].keys) {
+      String title = key ?? "";
+      header.add(DataColumn(
+        label: Text(
+          '${title.capitalize}',
+          style: KTextSytle(
+            context: context,
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
+            color: Color.fromARGB(255, 204, 164, 61),
+          ).getStyle(),
+        ),
+      ));
+    }
+ 
+  }
+
+  return header;
+};
 Function getHeader = (context, data) {
   var header = <DataColumn>[];
   if (data.length > 0) {
@@ -436,7 +464,7 @@ Function getDetail = (context, data) {
               icon: const Icon(Icons.money),
               tooltip: 'Net Rate',
               onPressed: () {
-                showCustomDialog(context, Text("NetRate"), "Close",
+                showCustomDialog(context, TotalNetRateWidget(), "Close",
                     buttonColor: Colors.white);
               },
             ),
@@ -450,6 +478,29 @@ Function getDetail = (context, data) {
           ],
         )),
       );
+      detail.add(DataRow(cells: cells));
+    }
+  }
+
+  return detail;
+};
+
+
+Function getNetRateDetail = (context, data) {
+  var detail = <DataRow>[];
+  if (data.length > 0) {
+    for (var row in data) {
+      var cells = <DataCell>[];
+      for (var key in row.keys) {
+        cells.add(DataCell(Text('${row[key]}',
+            style: KTextSytle(
+                    context: context,
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black)
+                .getStyle())));
+      }
+
       detail.add(DataRow(cells: cells));
     }
   }

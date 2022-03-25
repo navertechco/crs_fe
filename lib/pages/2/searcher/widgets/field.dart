@@ -1,4 +1,3 @@
-
 // ignore: must_be_immutable
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,8 +13,6 @@ class SearcherField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextEditingController? controller = TextEditingController();
-
-    
 
     return Obx(() {
       var t = searchResult!.value;
