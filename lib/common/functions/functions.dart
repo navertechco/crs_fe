@@ -2,6 +2,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:naver_crs/pages/7/netrate/widgets/index.dart';
 import 'package:sweetalert/sweetalert.dart';
 import '../constants.dart';
 import '../index.dart';
@@ -349,3 +350,109 @@ Function setLT = (value) {
       Get.toNamed("/Tour");
     }
   }
+  Function filterData = (context, value) {
+      searchResult!.value = value;
+      filteredData.value = data!
+          .where((quote) =>
+              quote["date"].contains(searchResult!.value) ||
+              quote["name"].contains(searchResult!.value) ||
+              quote["quote"].contains(searchResult!.value))
+          .toList();
+      var detail = getDetail(context, filteredData);
+      searcherDetail.value = (detail);
+    };
+
+    
+Function processData = (context, data) {
+  var header = getHeader(context, data);
+  var detail = getDetail(context, data);
+  return [header, detail];
+};
+
+Function getHeader = (context, data) {
+  var header = <DataColumn>[];
+  if (data.length > 0) {
+    for (var key in data[0].keys) {
+      String title = key ?? "";
+      header.add(DataColumn(
+        label: Text(
+          '${title.capitalize}',
+          style: KTextSytle(
+            context: context,
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
+            color: Color.fromARGB(255, 204, 164, 61),
+          ).getStyle(),
+        ),
+      ));
+    }
+    header.add(DataColumn(
+      label: Text(
+        'Actions',
+        style: KTextSytle(
+          context: context,
+          fontSize: 15,
+          fontWeight: FontWeight.bold,
+          color: Color.fromARGB(255, 204, 164, 61),
+        ).getStyle(),
+      ),
+    ));
+  }
+
+  return header;
+};
+
+Function getDetail = (context, data) {
+  var detail = <DataRow>[];
+  if (data.length > 0) {
+    for (var row in data) {
+      var cells = <DataCell>[];
+      for (var key in row.keys) {
+        cells.add(DataCell(Text('${row[key]}',
+            style: KTextSytle(
+                    context: context,
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black)
+                .getStyle())));
+      }
+      cells.add(
+        DataCell(Row(
+          children: [
+            IconButton(
+              icon: const Icon(Icons.picture_as_pdf),
+              tooltip: 'PDF',
+              onPressed: () {
+                showCustomDialog(
+                    context,
+                    WebView(
+                        url:
+                            "$kDefaultSchema://$kDefaultServer:$kDefaultServerPort/pdf.html"),
+                    "Close",
+                    buttonColor: Colors.white);
+              },
+            ),
+            IconButton(
+              icon: const Icon(Icons.money),
+              tooltip: 'Net Rate',
+              onPressed: () {
+                showCustomDialog(context, Text("NetRate"), "Close",
+                    buttonColor: Colors.white);
+              },
+            ),
+            IconButton(
+              icon: const Icon(Icons.mode_edit),
+              tooltip: 'Edit',
+              onPressed: () {
+                getTour(context, tourId: 0);
+              },
+            ),
+          ],
+        )),
+      );
+      detail.add(DataRow(cells: cells));
+    }
+  }
+
+  return detail;
+};

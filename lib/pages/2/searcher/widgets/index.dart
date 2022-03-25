@@ -1,3 +1,4 @@
 library widgets;
 
-export 'searcher.dart';
+export 'widget.dart';
+export 'field.dart';
