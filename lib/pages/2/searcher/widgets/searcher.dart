@@ -36,7 +36,7 @@ class SearcherWidget extends GetView<SearcherController> {
               Padding(
                 padding: EdgeInsets.only(
                     left: MediaQuery.of(context).size.width * 0.4,
-                    top: MediaQuery.of(context).size.height * 0.2),
+                    top: MediaQuery.of(context).size.height * 0.25),
                 child: Text(
                   'Quote History',
                   style: KTextSytle(
