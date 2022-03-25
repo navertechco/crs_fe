@@ -333,3 +333,18 @@ var currentTravelRhythm = "1".obs;
 final TimeOfDay time = TimeOfDay(hour: 7, minute: 15);
 Rx<TimeOfDay?> startTime = Rx(TimeOfDay(hour: 7, minute: 15));
 Rx<TimeOfDay?> endTime = Rx(TimeOfDay(hour: 7, minute: 15));
+var searcherHeader = Rx(<DataColumn>[]);
+var searcherDetail = Rx(<DataRow>[]);
+List data = [
+  {"date": "10-10-2022", "name": "Name1", "quote": "1111"},
+  {"date": "11-10-2022", "name": "Name2", "quote": "2222"},
+  {"date": "12-10-2022", "name": "Name3", "quote": "3333"},
+  {"date": "13-10-2022", "name": "Name4", "quote": "4444"},
+  {"date": "13-10-2022", "name": "Name4", "quote": "5555"},
+  {"date": "13-10-2022", "name": "Name4", "quote": "6666"},
+  {"date": "13-10-2022", "name": "Name4", "quote": "7777"},
+  {"date": "13-10-2022", "name": "Name4", "quote": "8888"},
+  {"date": "13-10-2022", "name": "Name4", "quote": "9999"},
+];
+RxString? searchResult = ''.obs;
+var filteredData = [].obs;
