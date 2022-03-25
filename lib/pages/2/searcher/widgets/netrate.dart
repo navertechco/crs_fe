@@ -9,8 +9,8 @@ import 'index.dart';
 /// Searcher
 // ignore: must_be_immutable
 class TotalNetRateWidget extends GetView<SearcherController> {
-  TotalNetRateWidget({Key? key}) : super(key: key);
-
+  TotalNetRateWidget({Key? key, this.row}) : super(key: key);
+  final row;
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class TotalNetRateWidget extends GetView<SearcherController> {
                     left: MediaQuery.of(context).size.width * 0.0,
                   ),
                   child: Text(
-                    'Quote History',
+                    'Net Rate: Quote ${row["quote"]}',
                     style: KTextSytle(
                       context: context,
                       fontSize: 25,

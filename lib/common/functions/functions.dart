@@ -464,7 +464,7 @@ Function getDetail = (context, data) {
               icon: const Icon(Icons.money),
               tooltip: 'Net Rate',
               onPressed: () {
-                showCustomDialog(context, TotalNetRateWidget(), "Close",
+                showCustomDialog(context, TotalNetRateWidget(row:row), "Close",
                     buttonColor: Colors.white);
               },
             ),
