@@ -104,7 +104,10 @@ class CustomTourInformationForm extends StatelessWidget {
               child: CustomKeypadWidget(
                   width: 0.265,
                   onPrevious: () {
-                    selectedIndex.value = selectedIndex.value - 1;
+                    if (selectedIndex.value > 0) {
+                      selectedIndex.value = selectedIndex.value - 1;
+                    }
+
                     Get.back();
                   },
                   onNext: () {

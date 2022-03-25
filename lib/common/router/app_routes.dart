@@ -64,4 +64,9 @@ List<dynamic> routes = [
       page: () => NetRatePage(),
       transition: Transition.rightToLeftWithFade,
       binding: NetRateBinding()),
+  PRegistry(
+      name: '/Searcher',
+      page: () => SearcherPage(),
+      transition: Transition.rightToLeftWithFade,
+      binding: SearcherBinding()),
 ];

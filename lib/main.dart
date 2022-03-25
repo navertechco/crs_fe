@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:naver_crs/common/index.dart'; 
+import 'package:naver_crs/common/index.dart';
 
 class ScrollBehavior extends MaterialScrollBehavior {
   // Override behavior methods and getters like dragDevices
@@ -15,8 +15,8 @@ void main() {
 
   var pages = AppPages.pages;
   PRegistry registry =
-      routes.toList().firstWhere((element) => element.name == "/NetRate");
-  
+      routes.toList().firstWhere((element) => element.name == "/Splash");
+
   runApp(GetMaterialApp(
       scrollBehavior: ScrollBehavior(),
       debugShowCheckedModeBanner: false,

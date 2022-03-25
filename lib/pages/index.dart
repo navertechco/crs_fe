@@ -5,6 +5,7 @@ export './0/splash/index.dart';
 export './1/signin/index.dart';
 export './1/forgot/index.dart';
 export './2/loading/index.dart';
+export './2/searcher/index.dart';
 export './3/tour/index.dart';
 export './3/logistic/index.dart';
 export './4/customer/index.dart';

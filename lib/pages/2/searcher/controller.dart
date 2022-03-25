@@ -6,10 +6,10 @@ import 'package:sweetalert/sweetalert.dart';
 import '../../index.dart';
 import 'index.dart';
 
-class LoadingController extends GetxController {
-  LoadingController();
+class SearcherController extends GetxController {
+  SearcherController();
 
-  final state = LoadingState();
+  final state = SearcherState();
 
   Future<void> getTour(ctx, {int tourId = 0}) async {
     if (tourId > 0) {
@@ -26,7 +26,7 @@ class LoadingController extends GetxController {
           setContext("tour", data);
           setContext("customer", data["customer"]);
           setContext("readonly", true);
-          Get.toNamed("/Searcher");
+          Get.toNamed("/Tour");
         }
       } else {
         SweetAlert.show(ctx,
@@ -38,7 +38,7 @@ class LoadingController extends GetxController {
         });
       }
     } else {
-      Get.toNamed("/Searcher");
+      Get.toNamed("/Tour");
     }
   }
 }

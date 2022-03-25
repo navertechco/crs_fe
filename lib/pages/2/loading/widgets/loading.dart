@@ -48,23 +48,23 @@ class LoadingWidget extends GetView<LoadingController> {
                               ),
                             ),
                           ),
-                        if (!newtour.value)
-                          RoundedFormTextField(
-                              onChanged: (value) => ctrl.state.tourId = value!,
-                              hintText: 'Find Tour',
-                              keyboardType: TextInputType.number),
-                        if (!newtour.value)
-                          SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.01,
-                          ),
+                        // if (!newtour.value)
+                        //   RoundedFormTextField(
+                        //       onChanged: (value) => ctrl.state.tourId = value!,
+                        //       hintText: 'Find Tour',
+                        //       keyboardType: TextInputType.number),
+                        // if (!newtour.value)
+                        //   SizedBox(
+                        //     height: MediaQuery.of(context).size.height * 0.01,
+                        //   ),
                         if (!newtour.value)
                           RoundedFormButton(
                               label: "Find Tour",
                               height: 0.07,
                               fontSize: 5,
                               onTap: () {
-                                ctrl.getTour(context,
-                                    tourId: int.parse(ctrl.state.tourId));
+                                setContext("readonly", false);
+                                Get.toNamed("/Searcher");
                               }),
                         if (!newtour.value)
                           SizedBox(
