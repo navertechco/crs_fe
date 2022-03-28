@@ -50,6 +50,10 @@ class CustomStarDestinationForm extends StatelessWidget {
             globalctx.memory["destinations"], index, "explorationMode", "0")
         .toString()
         .obs;
+    RxString cruiseOptions = getFormValue(
+            globalctx.memory["destinations"], index, "cruiseOptions", "0")
+        .toString()
+        .obs;
     RxInt minExpDay = (explorationMode.value == "1"
             ? 2
             : explorationMode.value == "2"
@@ -193,7 +197,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                                 index, "explorationMode", value);
                             explorationMode.value = value!;
                           },
-                          label: "Exploration Mode   ",
+                          label: "Exploration Mode    ",
                           data: processCatalog("exploration_mode"),
                         );
                       });

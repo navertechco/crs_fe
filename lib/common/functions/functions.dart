@@ -49,6 +49,7 @@ Function processCatalog = (name) {
   }
   return catalog;
 };
+
 Function getDateValue = (data, key, {def}) {
   try {
     if (data ?? true) {
@@ -128,9 +129,19 @@ Function getItems = (data, value) {
     items = <DropdownMenuItem<String>>[].obs;
     data2.addAll(data);
     data2.asMap().forEach((index, item) {
+      var description = item["description"];
+
+      if (description.contains("-")) {
+        description = item["description"].split("-").toList()[0].toString() +
+            " " +
+            item["description"].split("-").toList()[1].toString() +
+            " " +
+            item["description"].split("-").toList()[2].toString();
+      }
+
       items.add(DropdownMenuItem(
         value: item["code"].toString(),
-        child: Text(item["description"]),
+        child: Text(description),
       ));
     });
   }
@@ -321,54 +332,54 @@ Function setLT = (value) {
   experiences = processCatalog("experiences");
 };
 
- Future<void> getTour(ctx, {int tourId = 0}) async {
-    if (tourId > 0) {
-      var res = await fetchhandler(kDefaultSchema, kDefaultServer,
-          kDefaultServerPort, kDefaultFindTour, 'POST', {
-        "data": {"tour_id": "$tourId"}
-      });
-      // ignore: avoid_print
-      log(res);
-      if (res['state'] == true) {
-        var data = res['data'];
-        if (data.length > 0) {
-          globalctx.memory.value = {...globalctx.memory.value, ...data};
-          setContext("tour", data);
-          setContext("customer", data["customer"]);
-          setContext("readonly", true);
-          Get.toNamed("/Tour");
-        }
-      } else {
-        SweetAlert.show(ctx,
-            curve: ElasticInCurve(),
-            title: res['message'],
-            style: SweetAlertStyle.error, onPress: (bool isConfirm) {
-          Get.close(1);
-          return false;
-        });
+Future<void> getTour(ctx, {int tourId = 0}) async {
+  if (tourId > 0) {
+    var res = await fetchhandler(kDefaultSchema, kDefaultServer,
+        kDefaultServerPort, kDefaultFindTour, 'POST', {
+      "data": {"tour_id": "$tourId"}
+    });
+    // ignore: avoid_print
+    log(res);
+    if (res['state'] == true) {
+      var data = res['data'];
+      if (data.length > 0) {
+        globalctx.memory.value = {...globalctx.memory.value, ...data};
+        setContext("tour", data);
+        setContext("customer", data["customer"]);
+        setContext("readonly", true);
+        Get.toNamed("/Tour");
       }
     } else {
-      Get.toNamed("/Tour");
+      SweetAlert.show(ctx,
+          curve: ElasticInCurve(),
+          title: res['message'],
+          style: SweetAlertStyle.error, onPress: (bool isConfirm) {
+        Get.close(1);
+        return false;
+      });
     }
+  } else {
+    Get.toNamed("/Tour");
   }
-  Function filterData = (context, value) {
-      searchResult!.value = value;
-      filteredData.value = data
-          .where((quote) =>
-              quote["date"].contains(searchResult!.value) ||
-              quote["name"].contains(searchResult!.value) ||
-              quote["quote"].contains(searchResult!.value))
-          .toList();
-      var detail = getDetail(context, filteredData);
-      searcherDetail.value = (detail);
-    };
+}
+
+Function filterData = (context, value) {
+  searchResult!.value = value;
+  filteredData.value = data
+      .where((quote) =>
+          quote["date"].contains(searchResult!.value) ||
+          quote["name"].contains(searchResult!.value) ||
+          quote["quote"].contains(searchResult!.value))
+      .toList();
+  var detail = getDetail(context, filteredData);
+  searcherDetail.value = (detail);
+};
 Function processNetRateData = (context, data) {
   var header = getNetRateHeader(context, data);
   var detail = getNetRateDetail(context, data);
   return [header, detail];
 };
 
-    
 Function processData = (context, data) {
   var header = getHeader(context, data);
   var detail = getDetail(context, data);
@@ -392,7 +403,6 @@ Function getNetRateHeader = (context, data) {
         ),
       ));
     }
- 
   }
 
   return header;
@@ -464,7 +474,7 @@ Function getDetail = (context, data) {
               icon: const Icon(Icons.money),
               tooltip: 'Net Rate',
               onPressed: () {
-                showCustomDialog(context, TotalNetRateWidget(row:row), "Close",
+                showCustomDialog(context, TotalNetRateWidget(row: row), "Close",
                     buttonColor: Colors.white);
               },
             ),
@@ -484,7 +494,6 @@ Function getDetail = (context, data) {
 
   return detail;
 };
-
 
 Function getNetRateDetail = (context, data) {
   var detail = <DataRow>[];

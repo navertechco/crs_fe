@@ -11,7 +11,7 @@ class LoadingWidget extends GetView<LoadingController> {
     required this.ctrl,
   }) : super(key: key);
   LoadingController ctrl;
-  RxBool newtour = false.obs;
+  RxBool newtour = true.obs;
   @override
   Widget build(BuildContext context) {
     return Align(
