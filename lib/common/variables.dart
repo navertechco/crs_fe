@@ -23,7 +23,16 @@ Map<dynamic, dynamic> destinations = globalctx.memory["destinations"] ?? {};
 Rx<DateTime> birthDate =
     Rx(DateTime.parse(globalctx.memory["customer"]["birth_date"]));
 Rx<DateTime> arrivalDate = Rx(DateTime(2022, 12, 10));
-Rx<DateTime> departureDate = Rx(DateTime(2022, 12, 15));
+Rx<DateTime> firstDayDate = Rx(arrivalDate.value.add(const Duration(days: 1)));
+Rx<DateTime> penultimateDayDate =
+    Rx(departureDate.value.subtract(const Duration(days: 1)));
+Rx<DateTime> departureDate = Rx(DateTime(2022, 12, 16));
+
+Rx<DateTime> iHStartDate = Rx(firstDayDate.value);
+Rx<DateTime> iHEndDate = Rx(penultimateDayDate.value);
+Rx<DateTime> cruiseStartDate = Rx(firstDayDate.value);
+Rx<DateTime> cruiseEndDate = Rx(penultimateDayDate.value);
+
 Rx<DateTime> sinceDate = Rx(DateTime.now());
 Rx<DateTime> untilDate = Rx(DateTime.now());
 RxList<String> ocDays = <String>[].obs;

@@ -61,6 +61,13 @@ class CustomStarDestinationForm extends StatelessWidget {
                 : 0)
         .obs;
 
+    Function validateMixedDate = (memoryDate, compareDate, currentDate) {
+      if (compareDate == memoryDate) {
+        return currentDate;
+      }
+      return compareDate;
+    };
+
     return Form(
       key: formKey,
       child: Column(
@@ -209,27 +216,50 @@ class CustomStarDestinationForm extends StatelessWidget {
                   if (destination == "galapagos" &&
                       (explorationMode.value == "3" ||
                           explorationMode.value == "1")) {
-                    return CustomFormCounterFieldWidget(
-                        initial: int.parse(getFormValue(
-                            globalctx.memory["destinations"],
-                            index,
-                            "ihExplorationDay",
-                            "2")),
-                        min: 2,
-                        max: totalDays.value,
-                        bound: 2,
-                        onValueChanged: (value) {
-                          saveExplorationDays(
-                              index,
-                              int.parse(getFormValue(
-                                  globalctx.memory["destinations"],
+                    return Column(
+                      children: [
+                        CustomFormCounterFieldWidget(
+                            initial: int.parse(getFormValue(
+                                globalctx.memory["destinations"],
+                                index,
+                                "ihExplorationDay",
+                                "2")),
+                            min: 2,
+                            max: totalDays.value,
+                            bound: 2,
+                            onValueChanged: (value) {
+                              saveExplorationDays(
                                   index,
-                                  "ihExplorationDay",
-                                  "2")),
-                              value as int);
-                        },
-                        label: "IH Exploration Days",
-                        width: 0.20);
+                                  int.parse(getFormValue(
+                                      globalctx.memory["destinations"],
+                                      index,
+                                      "ihExplorationDay",
+                                      "2")),
+                                  value as int);
+                            },
+                            label: "IH Exploration Days",
+                            width: 0.20),
+                        Obx(() {
+                          return CustomFormCalendarFieldWidget(
+                            label: "IH Range                    ",
+                            initialStartDate: validateMixedDate(
+                                penultimateDayDate.value,
+                                cruiseEndDate.value,
+                                iHStartDate.value),
+                            initialEndDate: iHEndDate.value,
+                            minimumDate: validateMixedDate(
+                                penultimateDayDate.value,
+                                cruiseEndDate.value,
+                                iHStartDate.value),
+                            maximumDate: iHEndDate.value,
+                            startEndDateChange: (start, end) {
+                              iHStartDate.value = start;
+                              iHEndDate.value = end;
+                            },
+                          );
+                        }),
+                      ],
+                    );
                   }
                   return Text("");
                 })),
@@ -261,18 +291,24 @@ class CustomStarDestinationForm extends StatelessWidget {
                             },
                             label: "Cruise Exp. Days      ",
                             width: 0.20),
-                        TextButton(
-                          child: Text("Range"),
-                          onPressed: () {
-                            showCustomDialog(
-                              context,
-                              CustomCalendarView(
-                                  initialStartDate: arrivalDate.value,
-                                  initialEndDate: departureDate.value,
-                                  minimumDate: arrivalDate.value,
-                                  maximumDate: departureDate.value),
-                              "Close",
-                              backgroundColor: Colors.white,
+                        Obx(
+                          () {
+                            return CustomFormCalendarFieldWidget(
+                              label: "Cruise Range           ",
+                              initialStartDate: validateMixedDate(
+                                  penultimateDayDate.value,
+                                  iHEndDate.value,
+                                  cruiseStartDate.value),
+                              initialEndDate: cruiseEndDate.value,
+                              minimumDate: validateMixedDate(
+                                  penultimateDayDate.value,
+                                  iHEndDate.value,
+                                  cruiseStartDate.value),
+                              maximumDate: cruiseEndDate.value,
+                              startEndDateChange: (start, end) {
+                                cruiseStartDate.value = start;
+                                cruiseEndDate.value = end;
+                              },
                             );
                           },
                         )
