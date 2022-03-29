@@ -166,7 +166,7 @@ Function resetDays = () {
   accumulated.value = 0;
 };
 Function saveExplorationDays =
-    (int index, int init0, int value, {String? key}) {
+    (int index, int mem, int value, {String? key}) {
   try {
     int acc0 = accumulated.value;
     int td1 = totalDays.value;
@@ -175,8 +175,8 @@ Function saveExplorationDays =
         value;
 
     if (acc0 < td1) {
-      int val1 = value - init0;
-      // int init1 = init0 + val1;
+      int val1 = value - mem;
+      // int init1 = mem + val1;
       int acc1 = acc0 + val1;
       int dl1 = td1 - acc1;
 

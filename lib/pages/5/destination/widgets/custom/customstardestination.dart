@@ -253,12 +253,12 @@ class CustomStarDestinationForm extends StatelessWidget {
                                       .difference(iHStartDate.value)
                                       .inDays +
                                   1;
-                              var acc = int.parse(getFormValue(
+                              var mem = int.parse(getFormValue(
                                   globalctx.memory["destinations"],
                                   index,
                                   "iHExpDays",
                                   "0"));
-                              saveExplorationDays(index, acc, value,
+                              saveExplorationDays(index, mem, value,
                                   key: "iHExpDays");
                             },
                           );
@@ -318,12 +318,12 @@ class CustomStarDestinationForm extends StatelessWidget {
                                         .inDays +
                                     1;
 
-                                var acc = int.parse(getFormValue(
+                                var mem = int.parse(getFormValue(
                                     globalctx.memory["destinations"],
                                     index,
                                     "cruiseExpDays",
                                     "0"));
-                                saveExplorationDays(index, acc, value,
+                                saveExplorationDays(index, mem, value,
                                     key: "cruiseExpDays");
                               },
                             );
