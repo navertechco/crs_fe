@@ -238,27 +238,46 @@ class CustomStarDestinationForm extends StatelessWidget {
                   if (destination == "galapagos" &&
                       (explorationMode.value == "3" ||
                           explorationMode.value == "2")) {
-                    return CustomFormCounterFieldWidget(
-                        initial: int.parse(getFormValue(
-                            globalctx.memory["destinations"],
-                            index,
-                            "cExplorationDay",
-                            "4")),
-                        min: 4,
-                        max: totalDays.value,
-                        bound: 4,
-                        onValueChanged: (value) {
-                          saveExplorationDays(
-                              index,
-                              int.parse(getFormValue(
-                                  globalctx.memory["destinations"],
+                    return Column(
+                      children: [
+                        CustomFormCounterFieldWidget(
+                            initial: int.parse(getFormValue(
+                                globalctx.memory["destinations"],
+                                index,
+                                "cExplorationDay",
+                                "4")),
+                            min: 4,
+                            max: totalDays.value,
+                            bound: 4,
+                            onValueChanged: (value) {
+                              saveExplorationDays(
                                   index,
-                                  "cExplorationDay",
-                                  "4")),
-                              value as int);
-                        },
-                        label: "Cruise Exp. Days      ",
-                        width: 0.20);
+                                  int.parse(getFormValue(
+                                      globalctx.memory["destinations"],
+                                      index,
+                                      "cExplorationDay",
+                                      "4")),
+                                  value as int);
+                            },
+                            label: "Cruise Exp. Days      ",
+                            width: 0.20),
+                        TextButton(
+                          child: Text("Range"),
+                          onPressed: () {
+                            showCustomDialog(
+                              context,
+                              CustomCalendarView(
+                                  initialStartDate: arrivalDate.value,
+                                  initialEndDate: departureDate.value,
+                                  minimumDate: arrivalDate.value,
+                                  maximumDate: departureDate.value),
+                              "Close",
+                              backgroundColor: Colors.white,
+                            );
+                          },
+                        )
+                      ],
+                    );
                   }
                   return Text("");
                 })),

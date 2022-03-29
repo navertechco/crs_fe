@@ -33,7 +33,7 @@ class KTextSytle {
 }
 
 const kDefaultSchema = "http";
-const kDefaultServer = "uiodesign.fortiddns.com";
+const kDefaultServer = "192.168.101.222";
 const kDefaultServerPort = 9999;
 const kDefaultCatalogPath = "/System/FindCatalog";
 const kDefaultQueryPath = "/Agent/Query";
