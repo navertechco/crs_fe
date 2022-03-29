@@ -164,10 +164,16 @@ Function deleteDestination = (String destination) {
     globalctx.selectedDestinations.removeAt(index);
     globalctx.destinationDragData.value.removeAt(index);
     if (globalctx.memory["destinations"].keys.contains(index.toString())) {
-      accumulated -= int.parse(
-          globalctx.memory["destinations"][index.toString()]["explorationDay"]);
-      dayleft += int.parse(
-          globalctx.memory["destinations"][index.toString()]["explorationDay"]);
+      accumulated -= int.parse(getFormValue(globalctx.memory["destinations"],
+          index.toString(), "explorationDay", "0"));
+      dayleft += int.parse(getFormValue(globalctx.memory["destinations"],
+          index.toString(), "explorationDay", "0"));
+    }
+    if (destination == "galapagos") {
+      iHStartDate = Rx(firstDayDate.value);
+      iHEndDate = Rx(penultimateDayDate.value);
+      cruiseStartDate = Rx(firstDayDate.value);
+      cruiseEndDate = Rx(penultimateDayDate.value);
     }
 
     setDestinationState(destination, index, "suggested", type);

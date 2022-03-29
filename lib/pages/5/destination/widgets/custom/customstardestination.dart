@@ -38,8 +38,8 @@ class CustomStarDestinationForm extends StatelessWidget {
 
     List<String> keyActivities = getFormValue(
         globalctx.memory["destinations"], index, "keyActivities", <String>[]);
-    List<String> subs = getFormValue(
-        globalctx.memory["destinations"], index, "subs", <String>[]);
+    Rx<String> subs =
+        Rx(getFormValue(globalctx.memory["destinations"], index, "subs", "0"));
     List<Map<String, dynamic>> explorationdDays =
         processCatalog("exploration_days");
 
@@ -61,8 +61,11 @@ class CustomStarDestinationForm extends StatelessWidget {
                 : 0)
         .obs;
 
-    Function validateMixedDate = (memoryDate, compareDate, currentDate) {
-      if (compareDate == memoryDate) {
+    Function validateMixedDate =
+        (DateTime memoryDate, DateTime compareDate, DateTime currentDate) {
+      if (compareDate == memoryDate ||
+          currentDate.isBefore(compareDate) ||
+          currentDate.isAfter(compareDate)) {
         return currentDate;
       }
       return compareDate;
@@ -157,27 +160,18 @@ class CustomStarDestinationForm extends StatelessWidget {
                 Obx(() {
                   var expDay = explorationDay.value;
                   if (getSubs(destination).length > 0) {
-                    return CustomFormMultiDropDownFieldWidget(
-                      validator: (value) =>
-                          CustomMultiDropdownRequiredValidator(value,
-                              errorText: "Subs are required ",
-                              context: context),
-                      value: subs,
+                    return CustomFormDropDownFieldWidget(
+                      validator: CustomRequiredValidator(
+                          errorText: "subs is required ", ctx: context),
+                      value: subs.value,
                       onSaved: (value) {
                         setFormValue(globalctx.memory["destinations"], index,
-                            "subs", []);
-                        setFormValue(
-                            globalctx.memory["destinations"],
-                            index,
-                            "subs",
-                            value!
-                                .map((e) => e["description"])
-                                .toSet()
-                                .toList());
+                            "subs", value);
                       },
                       onChanged: (value) {
                         setFormValue(globalctx.memory["destinations"], index,
                             "subs", value);
+                        explorationMode.value = value!;
                       },
                       hintText: " ",
                       label: "${destination.capitalize} Subs      ",
@@ -218,27 +212,27 @@ class CustomStarDestinationForm extends StatelessWidget {
                           explorationMode.value == "1")) {
                     return Column(
                       children: [
-                        CustomFormCounterFieldWidget(
-                            initial: int.parse(getFormValue(
-                                globalctx.memory["destinations"],
-                                index,
-                                "ihExplorationDay",
-                                "2")),
-                            min: 2,
-                            max: totalDays.value,
-                            bound: 2,
-                            onValueChanged: (value) {
-                              saveExplorationDays(
-                                  index,
-                                  int.parse(getFormValue(
-                                      globalctx.memory["destinations"],
-                                      index,
-                                      "ihExplorationDay",
-                                      "2")),
-                                  value as int);
-                            },
-                            label: "IH Exploration Days",
-                            width: 0.20),
+                        // CustomFormCounterFieldWidget(
+                        //     initial: int.parse(getFormValue(
+                        //         globalctx.memory["destinations"],
+                        //         index,
+                        //         "ihExplorationDay",
+                        //         "2")),
+                        //     min: 2,
+                        //     max: totalDays.value,
+                        //     bound: 2,
+                        //     onValueChanged: (value) {
+                        //       saveExplorationDays(
+                        //           index,
+                        //           int.parse(getFormValue(
+                        //               globalctx.memory["destinations"],
+                        //               index,
+                        //               "ihExplorationDay",
+                        //               "2")),
+                        //           value as int);
+                        //     },
+                        //     label: "IH Exploration Days",
+                        //     width: 0.20),
                         Obx(() {
                           return CustomFormCalendarFieldWidget(
                             label: "IH Range                    ",
@@ -255,6 +249,17 @@ class CustomStarDestinationForm extends StatelessWidget {
                             startEndDateChange: (start, end) {
                               iHStartDate.value = start;
                               iHEndDate.value = end;
+                              var value = iHEndDate.value
+                                      .difference(iHStartDate.value)
+                                      .inDays +
+                                  1;
+                              var acc = int.parse(getFormValue(
+                                  globalctx.memory["destinations"],
+                                  index,
+                                  "iHExpDays",
+                                  "0"));
+                              saveExplorationDays(index, acc, value,
+                                  key: "iHExpDays");
                             },
                           );
                         }),
@@ -270,27 +275,27 @@ class CustomStarDestinationForm extends StatelessWidget {
                           explorationMode.value == "2")) {
                     return Column(
                       children: [
-                        CustomFormCounterFieldWidget(
-                            initial: int.parse(getFormValue(
-                                globalctx.memory["destinations"],
-                                index,
-                                "cExplorationDay",
-                                "4")),
-                            min: 4,
-                            max: totalDays.value,
-                            bound: 4,
-                            onValueChanged: (value) {
-                              saveExplorationDays(
-                                  index,
-                                  int.parse(getFormValue(
-                                      globalctx.memory["destinations"],
-                                      index,
-                                      "cExplorationDay",
-                                      "4")),
-                                  value as int);
-                            },
-                            label: "Cruise Exp. Days      ",
-                            width: 0.20),
+                        // CustomFormCounterFieldWidget(
+                        //     initial: int.parse(getFormValue(
+                        //         globalctx.memory["destinations"],
+                        //         index,
+                        //         "cExplorationDay",
+                        //         "4")),
+                        //     min: 4,
+                        //     max: totalDays.value,
+                        //     bound: 4,
+                        //     onValueChanged: (value) {
+                        //       saveExplorationDays(
+                        //           index,
+                        //           int.parse(getFormValue(
+                        //               globalctx.memory["destinations"],
+                        //               index,
+                        //               "cExplorationDay",
+                        //               "4")),
+                        //           value as int);
+                        //     },
+                        //     label: "Cruise Exp. Days      ",
+                        //     width: 0.20),
                         Obx(
                           () {
                             return CustomFormCalendarFieldWidget(
@@ -308,6 +313,18 @@ class CustomStarDestinationForm extends StatelessWidget {
                               startEndDateChange: (start, end) {
                                 cruiseStartDate.value = start;
                                 cruiseEndDate.value = end;
+                                var value = cruiseEndDate.value
+                                        .difference(cruiseStartDate.value)
+                                        .inDays +
+                                    1;
+
+                                var acc = int.parse(getFormValue(
+                                    globalctx.memory["destinations"],
+                                    index,
+                                    "cruiseExpDays",
+                                    "0"));
+                                saveExplorationDays(index, acc, value,
+                                    key: "cruiseExpDays");
                               },
                             );
                           },

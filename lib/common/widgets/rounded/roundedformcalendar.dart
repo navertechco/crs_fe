@@ -64,7 +64,7 @@ class RoundedFormCalendar extends StatelessWidget {
                   maximumDate: maximumDate,
                   startEndDateChange: startEndDateChange,
                 ),
-                "Close",
+                "Save",
                 backgroundColor: Colors.white,
               );
             },

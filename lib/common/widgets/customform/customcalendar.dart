@@ -214,8 +214,8 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
                                       ? Theme.of(context)
                                           .primaryColor
                                           .withOpacity(0.4)
-                                      : Colors.transparent
-                                  : Colors.transparent,
+                                      : Colors.grey.shade300
+                                  : Colors.grey.shade300,
                               borderRadius: BorderRadius.only(
                                 bottomLeft: isStartDateRadius(date)
                                     ? const Radius.circular(24.0)

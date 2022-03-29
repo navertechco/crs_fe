@@ -60,7 +60,8 @@ class CustomFormCalendarFieldWidget extends StatelessWidget {
           CustomFormLabelWidget(
               label: label, color: color, fontWeight: fontWeight),
           RoundedFormCalendar(
-            label: "Click Here",
+            label:
+                "${initialEndDate.difference(initialStartDate).inDays + 1} days",
             initialStartDate: initialStartDate,
             initialEndDate: initialEndDate,
             minimumDate: minimumDate,
