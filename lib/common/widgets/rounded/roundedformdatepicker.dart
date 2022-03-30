@@ -57,7 +57,7 @@ class RoundedFormDatepicker extends StatelessWidget {
           final date = await showDatePicker(
             context: context,
             firstDate: DateTime(1900),
-            initialDate: DateTime.now(),
+            initialDate: initialValue ?? DateTime.now(),
             lastDate: DateTime(2100),
           );
           if (date != null) {

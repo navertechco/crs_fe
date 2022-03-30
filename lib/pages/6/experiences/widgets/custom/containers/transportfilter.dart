@@ -35,8 +35,10 @@ class BodyWidget extends StatelessWidget {
 
     Rx<dynamic> travelRhythm = Rx(getFormValue(
         globalctx.memory["destinations"], index, "travelRhythm", "0"));
-    
-     
+
+    RxDouble acc = accumulatedHours[currentDay.value] ?? 0.0.obs;
+    RxDouble lft = leftHours[currentDay.value] ?? 0.0.obs;
+
     return Obx(() {
       return Padding(
         padding: EdgeInsets.only(
@@ -60,12 +62,13 @@ class BodyWidget extends StatelessWidget {
                     CustomTitleWidget(
                         fontWeight: FontWeight.bold,
                         label:
-                            "Accumulated Hours: ${accumulatedHours[currentDay.value] ?? 0}",
+                            "Accumulated Hours: ${getTimeStringFromDouble(acc.value)}",
                         color: Colors.white,
                         fontSize: 15),
                     CustomTitleWidget(
                         fontWeight: FontWeight.bold,
-                        label: "Left Hours: ${leftHours[currentDay.value] ?? 0}",
+                        label:
+                            "Left Hours: ${getTimeStringFromDouble(lft.value)}",
                         color: Colors.white,
                         fontSize: 15),
                     SizedBox(height: MediaQuery.of(context).size.height * 0.05),
