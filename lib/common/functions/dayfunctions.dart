@@ -31,8 +31,25 @@ Function paginateNextDay = () {
   }
 };
 
+Function byPassGalapagosCruise = () {
+  var index = getDestinationIndex(globalDestinationName.value, "tour");
+  var explorationMode = 0;
+  var explorationDay = 0;
+  if (index > 0) {
+    explorationMode =
+        int.parse(globalctx.memory["destinations"][index]["explorationMode"]);
+    if (explorationMode > 1) {
+      explorationDay =
+          int.parse(globalctx.memory["destinations"][index]["cruiseExpDays"]);
+    }
+    currentDay.value += explorationDay - 1;
+    nextDay();
+  }
+};
+
 Function nextDay = () {
   expDraggable.value = 1;
+
   currentDay.value++;
   updateDestinationType();
   processDays();
