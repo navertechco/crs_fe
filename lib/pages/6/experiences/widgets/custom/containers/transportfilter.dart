@@ -36,10 +36,9 @@ class BodyWidget extends StatelessWidget {
     Rx<dynamic> travelRhythm = Rx(getFormValue(
         globalctx.memory["destinations"], index, "travelRhythm", "0"));
 
-    RxDouble acc = accumulatedHours[currentDay.value] ?? 0.0.obs;
-    RxDouble lft = leftHours[currentDay.value] ?? 0.0.obs;
-
     return Obx(() {
+      RxDouble acc = accumulatedHours[currentDay.value] ?? 0.0.obs;
+      RxDouble lft = leftHours[currentDay.value] ?? 0.0.obs;
       return Padding(
         padding: EdgeInsets.only(
           top: MediaQuery.of(context).size.height * 0.05,
