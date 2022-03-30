@@ -175,12 +175,12 @@ Function saveExplorationDays = (int index, int val0, int val1, {String? key}) {
     if (total0 == 0 || nei0 < 0) {
       nei0 = 0;
     }
-    
+
     if (acc0 < td) {
       int nei1 = nei0;
       int total1 = nei1 + val1;
       int acc1 = total1 - nei0 - val0 + acc0;
-      int dl1 = td - acc1 - 1;
+      int dl1 = td - acc1;
 
       dayleft.value = dl1;
       accumulated.value = acc1;
