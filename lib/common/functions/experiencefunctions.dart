@@ -29,7 +29,7 @@ Function getFilteredExperiences = () {
     }
   }
   List filteredByTravelRhytm = filtered.where((e) {
-    // return true;
+    return true;
     if (currentDay.value == 0) {
       return true;
     }
