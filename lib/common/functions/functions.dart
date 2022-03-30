@@ -179,6 +179,15 @@ Function isMobileDevice = () {
 Function setData = (data, key, value) {
   data[key] = value;
 };
+
+Function getRXValue = (data, key, def) {
+  try {
+    return data[key].value;
+  } catch (e) {
+    return def;
+  }
+};
+
 Function getFormValue = (data, formKey, key, def) {
   formKey = formKey.toString();
   if (data != null) {

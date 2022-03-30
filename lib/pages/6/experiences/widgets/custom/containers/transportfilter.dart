@@ -37,8 +37,6 @@ class BodyWidget extends StatelessWidget {
         globalctx.memory["destinations"], index, "travelRhythm", "0"));
 
     return Obx(() {
-      RxDouble acc = accumulatedHours[currentDay.value] ?? 0.0.obs;
-      RxDouble lft = leftHours[currentDay.value] ?? 0.0.obs;
       return Padding(
         padding: EdgeInsets.only(
           top: MediaQuery.of(context).size.height * 0.05,
@@ -61,13 +59,13 @@ class BodyWidget extends StatelessWidget {
                     CustomTitleWidget(
                         fontWeight: FontWeight.bold,
                         label:
-                            "Accumulated Hours: ${getTimeStringFromDouble(acc.value)}",
+                            "Accumulated Hours: ${getTimeStringFromDouble(getRXValue(accumulatedHours, currentDay.value, 0.0))}",
                         color: Colors.white,
                         fontSize: 15),
                     CustomTitleWidget(
                         fontWeight: FontWeight.bold,
                         label:
-                            "Left Hours: ${getTimeStringFromDouble(lft.value)}",
+                            "Left Hours: ${getTimeStringFromDouble(getRXValue(leftHours, currentDay.value, 6.0))}",
                         color: Colors.white,
                         fontSize: 15),
                     SizedBox(height: MediaQuery.of(context).size.height * 0.05),
