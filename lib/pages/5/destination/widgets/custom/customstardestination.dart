@@ -101,7 +101,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                 Obx(() {
                   return Row(
                     children: [
-                      Text("   Selected Days: $accumulated",
+                      Text("Selected Days: $accumulated",
                           style: GoogleFonts.poppins(
                               textStyle: TextStyle(
                             color: (accumulated.value) == 0
@@ -235,33 +235,29 @@ class CustomStarDestinationForm extends StatelessWidget {
                         //     width: 0.20),
                         Obx(() {
                           return CustomFormCalendarFieldWidget(
-                            label: "IH Range                    ",
-                            initialStartDate: validateMixedDate(
-                                penultimateDayDate.value,
-                                cruiseEndDate.value,
-                                iHStartDate.value),
-                            initialEndDate: iHEndDate.value,
-                            minimumDate: validateMixedDate(
-                                penultimateDayDate.value,
-                                cruiseEndDate.value,
-                                iHStartDate.value),
-                            maximumDate: iHEndDate.value,
-                            startEndDateChange: (start, end) {
-                              iHStartDate.value = start;
-                              iHEndDate.value = end;
-                              var value = iHEndDate.value
-                                      .difference(iHStartDate.value)
-                                      .inDays +
-                                  1;
-                              var mem = int.parse(getFormValue(
-                                  globalctx.memory["destinations"],
-                                  index,
-                                  "iHExpDays",
-                                  "0"));
-                              saveExplorationDays(index, mem, value,
-                                  key: "iHExpDays");
-                            },
-                          );
+                              label: "IH Range                    ",
+                              initialStartDate: iHStartDate.value,
+                              initialEndDate: iHEndDate.value,
+                              minimumDate: firstDayDate.value,
+                              maximumDate: iHEndDate.value,
+                              startEndDateChange: (start, end) {
+                                iHStartDate.value = start;
+                                iHEndDate.value = end;
+                              },
+                              onSaved: () {
+                                var val1 = iHEndDate.value
+                                        .difference(iHStartDate.value)
+                                        .inDays +
+                                    1;
+                                var val0 = int.parse(getFormValue(
+                                    globalctx.memory["destinations"],
+                                    index,
+                                    "iHExpDays",
+                                    "0"));
+
+                                saveExplorationDays(index, val0, val1,
+                                    key: "iHExpDays");
+                              });
                         }),
                       ],
                     );
@@ -299,34 +295,29 @@ class CustomStarDestinationForm extends StatelessWidget {
                         Obx(
                           () {
                             return CustomFormCalendarFieldWidget(
-                              label: "Cruise Range           ",
-                              initialStartDate: validateMixedDate(
-                                  penultimateDayDate.value,
-                                  iHEndDate.value,
-                                  cruiseStartDate.value),
-                              initialEndDate: cruiseEndDate.value,
-                              minimumDate: validateMixedDate(
-                                  penultimateDayDate.value,
-                                  iHEndDate.value,
-                                  cruiseStartDate.value),
-                              maximumDate: cruiseEndDate.value,
-                              startEndDateChange: (start, end) {
-                                cruiseStartDate.value = start;
-                                cruiseEndDate.value = end;
-                                var value = cruiseEndDate.value
-                                        .difference(cruiseStartDate.value)
-                                        .inDays +
-                                    1;
+                                label: "Cruise Range           ",
+                                initialStartDate: cruiseStartDate.value,
+                                initialEndDate: cruiseEndDate.value,
+                                minimumDate: firstDayDate.value,
+                                maximumDate: cruiseEndDate.value,
+                                startEndDateChange: (start, end) {
+                                  cruiseStartDate.value = start;
+                                  cruiseEndDate.value = end;
+                                },
+                                onSaved: () {
+                                  var val1 = cruiseEndDate.value
+                                          .difference(cruiseStartDate.value)
+                                          .inDays +
+                                      1;
+                                  var val0 = int.parse(getFormValue(
+                                      globalctx.memory["destinations"],
+                                      index,
+                                      "cruiseExpDays",
+                                      "0"));
 
-                                var mem = int.parse(getFormValue(
-                                    globalctx.memory["destinations"],
-                                    index,
-                                    "cruiseExpDays",
-                                    "0"));
-                                saveExplorationDays(index, mem, value,
-                                    key: "cruiseExpDays");
-                              },
-                            );
+                                  saveExplorationDays(index, val0, val1,
+                                      key: "cruiseExpDays");
+                                });
                           },
                         )
                       ],

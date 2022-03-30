@@ -250,7 +250,8 @@ Function getCountryNameById = (id) {
 
 Future<void> showCustomDialog(context, Widget child, String button,
     {Color backgroundColor = Colors.black54,
-    Color buttonColor = Colors.black54}) async {
+    Color buttonColor = Colors.black54,
+    onSaved}) async {
   return showDialog<void>(
     context: context,
     barrierDismissible: false, // user must tap button!
@@ -269,6 +270,7 @@ Future<void> showCustomDialog(context, Widget child, String button,
                         color: buttonColor)
                     .getStyle()),
             onPressed: () {
+              onSaved();
               Navigator.of(context).pop();
             },
           ),

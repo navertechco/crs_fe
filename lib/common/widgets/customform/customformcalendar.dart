@@ -28,12 +28,14 @@ class CustomFormCalendarFieldWidget extends StatelessWidget {
     this.minimumDate,
     this.maximumDate,
     this.startEndDateChange,
+    required this.onSaved,
   }) : super(key: key);
   final initialStartDate;
   final initialEndDate;
   final minimumDate;
   final maximumDate;
   final startEndDateChange;
+  final void Function() onSaved;
   final label;
   final bool disabled;
   final double left;
@@ -67,6 +69,7 @@ class CustomFormCalendarFieldWidget extends StatelessWidget {
             minimumDate: minimumDate,
             maximumDate: maximumDate,
             startEndDateChange: startEndDateChange,
+            onSaved: onSaved,
           ),
         ],
       ),

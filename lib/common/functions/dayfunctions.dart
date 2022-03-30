@@ -165,32 +165,32 @@ Function resetDays = () {
   dayleft.value = totalDays.value;
   accumulated.value = 0;
 };
-Function saveExplorationDays =
-    (int index, int mem, int value, {String? key}) {
+Function saveExplorationDays = (int index, int val0, int val1, {String? key}) {
   try {
     int acc0 = accumulated.value;
-    int td1 = totalDays.value;
-    int res = int.parse(getFormValue(
-            globalctx.memory["destinations"], index, "explorationDay", "0")) -
-        value;
-
-    if (acc0 < td1) {
-      int val1 = value - mem;
-      // int init1 = mem + val1;
-      int acc1 = acc0 + val1;
-      int dl1 = td1 - acc1;
+    int td = totalDays.value;
+    int total0 = int.parse(getFormValue(
+        globalctx.memory["destinations"], index, "explorationDay", "0"));
+    int nei0 = total0 - val0;
+    if (total0 == 0 || nei0 < 0) {
+      nei0 = 0;
+    }
+    
+    if (acc0 < td) {
+      int nei1 = nei0;
+      int total1 = nei1 + val1;
+      int acc1 = total1 - nei0 - val0 + acc0;
+      int dl1 = td - acc1 - 1;
 
       dayleft.value = dl1;
       accumulated.value = acc1;
-      if (key == null) {
-        res = 0;
-      } else {
+      if (key != null) {
         setFormValue(
-            globalctx.memory["destinations"], index, key, value.toString());
+            globalctx.memory["destinations"], index, key, val1.toString());
       }
 
       setFormValue(globalctx.memory["destinations"], index, "explorationDay",
-          (value + res).toString());
+          (total1).toString());
       if (index == 0) {
         firstDayDate = Rx(arrivalDate.value.add(Duration(days: acc1)));
       }

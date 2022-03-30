@@ -14,6 +14,7 @@ class RoundedFormCalendar extends StatelessWidget {
   final minimumDate;
   final maximumDate;
   final startEndDateChange;
+  final void Function() onSaved;
   final label;
 
   const RoundedFormCalendar({
@@ -29,6 +30,7 @@ class RoundedFormCalendar extends StatelessWidget {
     this.minimumDate,
     this.maximumDate,
     this.startEndDateChange,
+    required this.onSaved
   }) : super(key: key);
 
   @override
@@ -66,6 +68,7 @@ class RoundedFormCalendar extends StatelessWidget {
                 ),
                 "Save",
                 backgroundColor: Colors.white,
+                onSaved: onSaved,
               );
             },
           ),
