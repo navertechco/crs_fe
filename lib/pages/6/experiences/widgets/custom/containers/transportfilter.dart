@@ -73,7 +73,7 @@ class BodyWidget extends StatelessWidget {
                     CustomTitleWidget(
                         fontWeight: FontWeight.bold,
                         label:
-                            "Left Hours: ${getTimeStringFromDouble(getRXValue(leftHours, currentDay.value, 6.0))}",
+                            "Left Hours: ${getTimeStringFromDouble(getRXValue(leftHours, currentDay.value, globalDestinationName.value == "galapagos" ? 12.0 : 6.0))}",
                         color: Colors.white,
                         fontSize: 15),
                     SizedBox(height: MediaQuery.of(context).size.height * 0.05),

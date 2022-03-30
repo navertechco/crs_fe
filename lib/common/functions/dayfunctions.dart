@@ -55,22 +55,11 @@ Function nextDay = () {
   updateDestinationType();
   processDays();
   filterSuggestedExperiences();
-  updateDayTotalHours();
-};
-
-Function updateDayTotalHours = () {
-  if (currentTravelRhythm.value == "1") {
-    totalHours[currentDay.value] ??= 6.0.obs;
-  }
-  if (currentTravelRhythm.value == "2") {
-    totalHours[currentDay.value] ??= 8.0.obs;
-  }
-  if (currentTravelRhythm.value == "3") {
-    totalHours[currentDay.value] ??= 10.0.obs;
-  }
   updateDayLeftHours();
+  
 };
 
+ 
 Function getDtos = () {
   var day = {
     "date": "",

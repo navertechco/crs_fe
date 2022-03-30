@@ -356,7 +356,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                             globalctx.memory["destinations"],
                             index,
                             "travelRhythm",
-                            destination == "galapagos" ? "3" : "0"),
+                            destination == "galapagos" ? "3" : "1"),
                         onSaved: (value) {
                           setFormValue(
                               globalctx.memory["destinations"],

@@ -93,7 +93,7 @@ Function processDestinations = (context) {
     globalDestinationIndex.value = "0";
     resetExperiences();
     selectedIndex.value = pageList.indexOf("Experiences");
-    updateDayTotalHours();
+    updateDayLeftHours();
     Get.toNamed("/Experiences");
   } else {
     if (context != null) {
