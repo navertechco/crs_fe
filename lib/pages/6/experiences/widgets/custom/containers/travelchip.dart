@@ -26,7 +26,10 @@ class TravelChips extends HookWidget {
         globalctx.memory["destinations"], index, "destinationOption", "0"));
 
     Rx<dynamic> travelRhythm = Rx(getFormValue(
-        globalctx.memory["destinations"], index, "travelRhythm", "1"));
+        globalctx.memory["destinations"],
+        index,
+        "travelRhythm",
+        globalDestinationName.value == "galapagos" ? "3" : "1"));
 
     return SizedBox(
         width: MediaQuery.of(context).size.width * 0.25,
@@ -66,9 +69,11 @@ class TravelChips extends HookWidget {
                           "Travel Rhythm: ${findTravelRhythmDescription(parseInt(travelRhythm.value))}"),
                       onSelected: (bool value) {},
                       onDeleted: () {
-                        travelRhythm.value = "0";
-                        currentTravelRhythm.value = "0";
-                        filterSuggestedExperiences();
+                        if (globalDestinationName.value != "galapagos") {
+                          travelRhythm.value = "0";
+                          currentTravelRhythm.value = "0";
+                          filterSuggestedExperiences();
+                        }
                       },
                     ),
                 ],

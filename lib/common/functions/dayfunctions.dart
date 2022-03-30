@@ -51,6 +51,7 @@ Function nextDay = () {
   expDraggable.value = 1;
 
   currentDay.value++;
+  currentDate.value = arrivalDate.value.add(Duration(days: currentDay.value));
   updateDestinationType();
   processDays();
   filterSuggestedExperiences();
@@ -155,6 +156,7 @@ Function updateCurrentDestinationTravelRhythm = () {
 Function previousDay = () {
   if (currentDay.value > 0) {
     currentDay.value--;
+    currentDate.value = arrivalDate.value.add(Duration(days: currentDay.value));
     updateDestinationType();
     processDays();
     filterSuggestedExperiences();

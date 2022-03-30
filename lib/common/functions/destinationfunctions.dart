@@ -7,6 +7,8 @@ import 'package:sweetalert/sweetalert.dart';
 import '../index.dart';
 
 Function promoteDestination = (ctrl, _formKey, destination, index, type) {
+  
+
   if (_formKey.currentState!.validate()) {
     _formKey.currentState!.save();
     if (!globalctx.promotedDestinations.contains(index)) {
@@ -304,15 +306,13 @@ Function filterDestinations = () {
 
 Function getDestinationDay = (index) {
   index = index.toString();
-  if (globalctx.memory != null) {
-    if (destinations != null) {
+
       if (destinations[index] != null) {
         if (destinations[index]["explorationDay"] != null) {
           return int.parse(destinations[index]["explorationDay"]);
         }
       }
-    }
-  }
+
 
   return 0;
 };

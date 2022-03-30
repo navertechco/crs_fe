@@ -30,13 +30,15 @@ class BodyWidget extends StatelessWidget {
   final counter;
   @override
   Widget build(BuildContext context) {
-    var index = getDestinationIndex(
-        globalDestinationName.value, globalDestinationType.value);
-
-    Rx<dynamic> travelRhythm = Rx(getFormValue(
-        globalctx.memory["destinations"], index, "travelRhythm", "0"));
-
     return Obx(() {
+      var index = getDestinationIndex(
+          globalDestinationName.value, globalDestinationType.value);
+
+      Rx<dynamic> travelRhythm = Rx(getFormValue(
+          globalctx.memory["destinations"],
+          index,
+          "travelRhythm",
+          globalDestinationName.value == "galapagos" ? "3" : "1"));
       return Padding(
         padding: EdgeInsets.only(
           top: MediaQuery.of(context).size.height * 0.05,
@@ -50,6 +52,12 @@ class BodyWidget extends StatelessWidget {
                 LeftHeader(ctrl: ctrl, counter: counter),
                 Column(
                   children: [
+                    CustomTitleWidget(
+                        fontWeight: FontWeight.bold,
+                        label:
+                            "Current Day: ${dayFormat.format(currentDate.value).replaceAll(" ", "-")}",
+                        color: Colors.white,
+                        fontSize: 15),
                     CustomTitleWidget(
                         fontWeight: FontWeight.bold,
                         label:

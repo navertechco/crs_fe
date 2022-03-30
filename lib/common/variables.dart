@@ -24,6 +24,7 @@ Rx<DateTime> birthDate =
     Rx(DateTime.parse(globalctx.memory["customer"]["birth_date"]));
 Rx<DateTime> arrivalDate = Rx(DateTime(2022, 12, 10));
 Rx<DateTime> departureDate = Rx(DateTime(2022, 12, 20));
+Rx<DateTime> currentDate = Rx(arrivalDate.value.add(Duration(days: currentDay.value)));
 
 Rx<DateTime> firstDayDate = Rx(arrivalDate.value.add(const Duration(days: 1)));
 Rx<DateTime> penultimateDayDate =

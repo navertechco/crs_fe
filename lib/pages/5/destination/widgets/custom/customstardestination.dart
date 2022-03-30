@@ -71,6 +71,13 @@ class CustomStarDestinationForm extends StatelessWidget {
       return compareDate;
     };
 
+    Function validateGalapagosTR = () {
+      if (destination == "galapagos") {
+        setFormValue(
+            globalctx.memory["destinations"], index, "travelRhythm", "3");
+      }
+    };
+
     return Form(
       key: formKey,
       child: Column(
@@ -243,6 +250,10 @@ class CustomStarDestinationForm extends StatelessWidget {
                               startEndDateChange: (start, end) {
                                 iHStartDate.value = start;
                                 iHEndDate.value = end;
+                                setFormValue(globalctx.memory["destinations"],
+                                    index, "iHStartDate", start);
+                                setFormValue(globalctx.memory["destinations"],
+                                    index, "iHEndDate", end);
                               },
                               onSaved: () {
                                 var val1 = iHEndDate.value
@@ -257,6 +268,7 @@ class CustomStarDestinationForm extends StatelessWidget {
 
                                 saveExplorationDays(index, val0, val1,
                                     key: "iHExpDays");
+                                validateGalapagosTR();
                               });
                         }),
                       ],
@@ -303,6 +315,10 @@ class CustomStarDestinationForm extends StatelessWidget {
                                 startEndDateChange: (start, end) {
                                   cruiseStartDate.value = start;
                                   cruiseEndDate.value = end;
+                                  setFormValue(globalctx.memory["destinations"],
+                                      index, "cruiseStartDate", start);
+                                  setFormValue(globalctx.memory["destinations"],
+                                      index, "cruiseEndDate", end);
                                 },
                                 onSaved: () {
                                   var val1 = cruiseEndDate.value
@@ -317,6 +333,7 @@ class CustomStarDestinationForm extends StatelessWidget {
 
                                   saveExplorationDays(index, val0, val1,
                                       key: "cruiseExpDays");
+                                  validateGalapagosTR();
                                 });
                           },
                         )
@@ -329,8 +346,9 @@ class CustomStarDestinationForm extends StatelessWidget {
                   var expMode = explorationMode.value;
                   if (explorationMode.value != "2") {
                     return CustomFormDropDownFieldWidget(
-                        disabled:
-                            type == "arrival" || explorationMode.value != "0",
+                        disabled: type == "arrival" ||
+                            explorationMode.value != "0" ||
+                            destination == "galapagos",
                         validator: CustomRequiredValidator(
                             errorText: "Travel Rhythm is required ",
                             ctx: context),
@@ -338,10 +356,13 @@ class CustomStarDestinationForm extends StatelessWidget {
                             globalctx.memory["destinations"],
                             index,
                             "travelRhythm",
-                            explorationMode.value == "0" ? "1" : "3"),
+                            destination == "galapagos" ? "3" : "0"),
                         onSaved: (value) {
-                          setFormValue(globalctx.memory["destinations"], index,
-                              "travelRhythm", value);
+                          setFormValue(
+                              globalctx.memory["destinations"],
+                              index,
+                              "travelRhythm",
+                              destination == "galapagos" ? "3" : value);
                           setFormValue(globalctx.memory["destinations"], index,
                               "type", type);
                           setFormValue(globalctx.memory["destinations"], index,
@@ -350,8 +371,11 @@ class CustomStarDestinationForm extends StatelessWidget {
                               "destination", destination);
                         },
                         onChanged: (value) {
-                          setFormValue(globalctx.memory["destinations"], index,
-                              "travelRhythm", value);
+                          setFormValue(
+                              globalctx.memory["destinations"],
+                              index,
+                              "travelRhythm",
+                              destination == "galapagos" ? "3" : value);
                         },
                         label: "Travel Rhythm         ",
                         data: multiDropDownKaAgeFilter(
