@@ -174,13 +174,9 @@ Function previousDay = () {
     updateCurrentDestination();
     processDays();
     filterSuggestedExperiences();
+  } else {
+    goto("Destination");
   }
-
-  // else {
-  //   dayleft.value = 0;
-  //   selectedIndex.value = pageList.indexOf("Destination");
-  //   Get.toNamed("/Destination");
-  // }
 };
 Function processDaysCatalog = () {
   int total = departureDate.value.difference(arrivalDate.value).inDays;
@@ -195,7 +191,6 @@ Function processDaysCatalog = () {
   }
 };
 Function resetLeftDays = () {
-  
   leftAccumulated.value = 0;
   dayleft.value = totalDays.value;
   accumulated.value = 0;

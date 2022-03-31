@@ -47,11 +47,13 @@ class SwitcherWidget extends StatelessWidget {
         _changeRotationAxis();
       } else {
         if (experience == "Leisure Time") {
-          showCustomDialog(context,
-              LeisureTimeDetailWidget(experience: experience), "Close");
+          showCustomDialog(
+              context, LeisureTimeDetailWidget(experience: experience), "Close",
+              buttonColor: Colors.white);
         } else {
           showCustomDialog(
-              context, ExperienceDetailWidget(experience: experience), "Close");
+              context, ExperienceDetailWidget(experience: experience), "Close",
+              buttonColor: Colors.white);
         }
       }
     }
