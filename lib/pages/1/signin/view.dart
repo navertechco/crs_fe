@@ -9,9 +9,11 @@ class SigninPage extends GetView<SigninController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _buildSigninFormPage(context),
-    );
+    return WillPopScope(
+        onWillPop: () async => false,
+        child: Scaffold(
+          body: _buildSigninFormPage(context),
+        ));
   }
 }
 
