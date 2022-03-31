@@ -33,21 +33,28 @@ Function paginateNextDay = () {
 };
 
 Function byPassGalapagosCruise = () {
-  var index = getDestinationIndex(globalDestinationName.value, "tour");
-  var explorationMode = int.parse(getFormValue(
-      globalctx.memory["destinations"], index, "explorationMode", "0"));
-  var explorationDay = 0;
-  var cruiseExpDays = int.parse(getFormValue(
-      globalctx.memory["destinations"], index, "cruiseExpDays", "0"));
-  if (cruiseExpDays > 0) {
-    if (explorationMode > 1) {
-      var cruiseStartDate = getFormValue(globalctx.memory["destinations"],
-          index, "cruiseStartDate", DateTime(2010, 10, 10));
-      if (currentDate == cruiseStartDate) {
-        explorationDay = cruiseExpDays;
-        currentDay.value += explorationDay - 1;
+  try {
+    int index = getDestinationIndex("galapagos", "tour");
+    int explorationMode = int.parse(getFormValue(
+        globalctx.memory["destinations"], index, "explorationMode", "0"));
+    int explorationDay = 0;
+    int cruiseExpDays = int.parse(getFormValue(
+        globalctx.memory["destinations"], index, "cruiseExpDays", "0"));
+    if (cruiseExpDays > 0) {
+      if (explorationMode > 1) {
+        DateTime cruiseStartDate = getFormValue(
+            globalctx.memory["destinations"],
+            index,
+            "cruiseStartDate",
+            DateTime(2010, 10, 10));
+        if (currentDate.value == cruiseStartDate.subtract(Duration(days: 1))) {
+          explorationDay = cruiseExpDays;
+          currentDay.value += explorationDay;
+        }
       }
     }
+  } catch (e) {
+    log(e);
   }
 };
 
@@ -56,7 +63,7 @@ Function nextDay = () {
 
   currentDay.value++;
   currentDate.value = arrivalDate.value.add(Duration(days: currentDay.value));
-  updateDestinationType();
+  updateCurrentDestination();
   processDays();
   filterSuggestedExperiences();
   updateDayLeftHours();
@@ -148,7 +155,7 @@ Function previousDay = () {
   if (currentDay.value > 0) {
     currentDay.value--;
     currentDate.value = arrivalDate.value.add(Duration(days: currentDay.value));
-    updateDestinationType();
+    updateCurrentDestination();
     processDays();
     filterSuggestedExperiences();
   } else {

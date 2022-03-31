@@ -7,8 +7,6 @@ import 'package:sweetalert/sweetalert.dart';
 import '../index.dart';
 
 Function promoteDestination = (ctrl, _formKey, destination, index, type) {
-  
-
   if (_formKey.currentState!.validate()) {
     _formKey.currentState!.save();
     if (!globalctx.promotedDestinations.contains(index)) {
@@ -273,7 +271,14 @@ Function getLeftAccumulated = (destination, id) {
 
 Function getDestinationIndex = (String destination, String type) {
   int destIndex = 0;
-  destIndex = globalctx.destinations.indexOf((e) => e == destination);
+  var destinations = globalctx.states["destinations"].entries;
+
+  for (var e in destinations) {
+    if(e.value["destination"] == destination && e.value["type"] == type){
+      destIndex = e.value["index"];
+    }
+  }
+ 
 
   if (type == "arrival") {
     destIndex = 0;
@@ -307,12 +312,11 @@ Function filterDestinations = () {
 Function getDestinationDay = (index) {
   index = index.toString();
 
-      if (destinations[index] != null) {
-        if (destinations[index]["explorationDay"] != null) {
-          return int.parse(destinations[index]["explorationDay"]);
-        }
-      }
-
+  if (destinations[index] != null) {
+    if (destinations[index]["explorationDay"] != null) {
+      return int.parse(destinations[index]["explorationDay"]);
+    }
+  }
 
   return 0;
 };
@@ -328,7 +332,7 @@ Function updateDestinationsCatalog = () {
       countryName.toString().toLowerCase());
 };
 
-Function updateDestinationType = () {
+Function updateCurrentDestination = () {
   var type = "tour";
   if (currentDay.value == 0) {
     type = "arrival";
