@@ -2,6 +2,7 @@ export './com/index.dart';
 export './widgets/index.dart';
 export './context/index.dart';
 export './functions/index.dart';
+export './extensions/index.dart';
 export './theme/index.dart';
 export './router/index.dart';
 export './variables.dart';
