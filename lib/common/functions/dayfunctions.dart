@@ -46,9 +46,9 @@ Function byPassGalapagosCruise = (String direction) {
             globalctx.memory["destinations"],
             index,
             "cruiseStartDate",
-            DateTime(2010, 10, 10));
+            DateTime(5555, 02, 02));
         DateTime cruiseEndDate = getFormValue(globalctx.memory["destinations"],
-            index, "cruiseEndDate", DateTime(2010, 10, 10));
+            index, "cruiseEndDate", DateTime(5555, 02, 02));
 
         if (direction == "forward") {
           if (currentDate.value ==
@@ -195,7 +195,7 @@ Function processDaysCatalog = () {
   }
 };
 Function resetLeftDays = () {
-  totalDays.value = departureDate.value.difference(arrivalDate.value).inDays;
+  
   leftAccumulated.value = 0;
   dayleft.value = totalDays.value;
   accumulated.value = 0;

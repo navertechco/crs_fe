@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_function_declarations_over_variables
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -189,6 +191,35 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
       final List<Widget> listUI = <Widget>[];
       for (int i = 0; i < 7; i++) {
         final DateTime date = dateList[count];
+        Function saveDate = (date) {
+          if (currentMonthDate!.month == date.month) {
+            if (widget.minimumDate != null && widget.maximumDate != null) {
+              final DateTime newminimumDate = DateTime(widget.minimumDate!.year,
+                  widget.minimumDate!.month, widget.minimumDate!.day - 1);
+              final DateTime newmaximumDate = DateTime(widget.maximumDate!.year,
+                  widget.maximumDate!.month, widget.maximumDate!.day + 1);
+              if (date.isAfter(newminimumDate) &&
+                  date.isBefore(newmaximumDate)) {
+                onDateClick(date);
+              }
+            } else if (widget.minimumDate != null) {
+              final DateTime newminimumDate = DateTime(widget.minimumDate!.year,
+                  widget.minimumDate!.month, widget.minimumDate!.day - 1);
+              if (date.isAfter(newminimumDate)) {
+                onDateClick(date);
+              }
+            } else if (widget.maximumDate != null) {
+              final DateTime newmaximumDate = DateTime(widget.maximumDate!.year,
+                  widget.maximumDate!.month, widget.maximumDate!.day + 1);
+              if (date.isBefore(newmaximumDate)) {
+                onDateClick(date);
+              }
+            } else {
+              onDateClick(date);
+            }
+          }
+        };
+
         listUI.add(
           Expanded(
             child: AspectRatio(
@@ -241,41 +272,10 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
                         borderRadius:
                             const BorderRadius.all(Radius.circular(32.0)),
                         onTap: () {
-                          if (currentMonthDate!.month == date.month) {
-                            if (widget.minimumDate != null &&
-                                widget.maximumDate != null) {
-                              final DateTime newminimumDate = DateTime(
-                                  widget.minimumDate!.year,
-                                  widget.minimumDate!.month,
-                                  widget.minimumDate!.day - 1);
-                              final DateTime newmaximumDate = DateTime(
-                                  widget.maximumDate!.year,
-                                  widget.maximumDate!.month,
-                                  widget.maximumDate!.day + 1);
-                              if (date.isAfter(newminimumDate) &&
-                                  date.isBefore(newmaximumDate)) {
-                                onDateClick(date);
-                              }
-                            } else if (widget.minimumDate != null) {
-                              final DateTime newminimumDate = DateTime(
-                                  widget.minimumDate!.year,
-                                  widget.minimumDate!.month,
-                                  widget.minimumDate!.day - 1);
-                              if (date.isAfter(newminimumDate)) {
-                                onDateClick(date);
-                              }
-                            } else if (widget.maximumDate != null) {
-                              final DateTime newmaximumDate = DateTime(
-                                  widget.maximumDate!.year,
-                                  widget.maximumDate!.month,
-                                  widget.maximumDate!.day + 1);
-                              if (date.isBefore(newmaximumDate)) {
-                                onDateClick(date);
-                              }
-                            } else {
-                              onDateClick(date);
-                            }
-                          }
+                          saveDate(date);
+                        },
+                        onFocusChange: (b) {
+                          saveDate(date);
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(2),

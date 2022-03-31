@@ -39,14 +39,13 @@ RxList<String> ocDays = <String>[].obs;
 RxString tourOption = "1".obs;
 RxString openCredit = "0".obs;
 Rx<int> totalDays =
-    Rx(departureDate.value.difference(arrivalDate.value).inDays);
-RxInt accumulated = 1.obs;
+    Rx(departureDate.value.difference(arrivalDate.value).inDays + 1);
+RxInt accumulated = 0.obs;
 RxInt selected = 0.obs;
 RxInt dayleft = 0.obs;
 Rx<double> customerAge =
     Rx(DateTime.now().difference(birthDate.value).inDays / 365);
-Rx<int> memoryDayLeft = Rx(globalctx.memory["days_left"]);
-// Rx<int> daysLeft = Rx(-memoryDayLeft.value + totalDays.value);
+Rx<int> memoryDayLeft = Rx(globalctx.memory["days_left"]); 
 final currentDayFormat = DateFormat('EEEE MMMM d yyyy');
 final dayFormat = DateFormat('d-MM-yyyy');
 var experiences = processCatalog("experiences");

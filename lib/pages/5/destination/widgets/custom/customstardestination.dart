@@ -315,12 +315,15 @@ class CustomStarDestinationForm extends StatelessWidget {
                                 startEndDateChange: (start, end) {
                                   cruiseStartDate.value = start;
                                   cruiseEndDate.value = end;
+                                },
+                                onSaved: () {
+                                  var start = cruiseStartDate.value;
+                                  var end = cruiseEndDate.value;
                                   setFormValue(globalctx.memory["destinations"],
                                       index, "cruiseStartDate", start);
                                   setFormValue(globalctx.memory["destinations"],
                                       index, "cruiseEndDate", end);
-                                },
-                                onSaved: () {
+
                                   var val1 = cruiseEndDate.value
                                           .difference(cruiseStartDate.value)
                                           .inDays +
