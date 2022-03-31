@@ -248,8 +248,7 @@ class CustomLogisticInformationForm extends StatelessWidget {
           child: CustomKeypadWidget(
               width: 0.265,
               onPrevious: () {
-                selectedIndex.value = pageList.indexOf("Tour");
-                Get.toNamed("/Tour");
+                goto("Tour");
               },
               onNext: () {
                 if (_formKey.currentState!.validate()) {

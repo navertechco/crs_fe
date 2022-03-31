@@ -89,10 +89,10 @@ Function processDestinations = (context) {
     globalDestinationName.value = arrival["description"];
     globalDestinationType.value = "arrival";
     globalDestinationIndex.value = "0";
-    resetExperiences();
-    selectedIndex.value = pageList.indexOf("Experiences");
+    // resetExperiences();
+     
     updateDayLeftHours();
-    Get.toNamed("/Experiences");
+    goto("Experiences");
   } else {
     if (context != null) {
       SweetAlert.show(context,

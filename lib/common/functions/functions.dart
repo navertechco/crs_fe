@@ -111,14 +111,12 @@ Function cityData = (Rx<List<Map<String, dynamic>>> citylist, cities) {
   }
 };
 Function globalctxReset = () {
-  globalctx.experiences.value = {};
-  globalctx.experienceDragData.value = {};
   globalctx.reset.value = true;
-  resetDays();
+  resetLeftDays();
   resetDestinations();
   updateDraggableDestinations();
   filterDestinations();
-  resetExperiences();
+  // resetExperiences();
 };
 
 Function getItems = (data, value) {
@@ -547,3 +545,8 @@ String getMinuteString(double decimalValue) {
 String getHourString(int flooredValue) {
   return '${flooredValue % 24}'.padLeft(2, '0');
 }
+
+Function goto = (page) {
+  selectedIndex.value = pageList.indexOf(page);
+  Get.toNamed("/$page");
+};

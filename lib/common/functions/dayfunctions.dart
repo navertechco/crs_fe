@@ -141,8 +141,7 @@ Function prepareDaysToResume = () {
 
   log(globalctx.memory);
   // sendTour(globalctx.memory);
-  selectedIndex.value = pageList.indexOf("EndServices");
-  Get.toNamed("/EndServices");
+  goto("EndServices");
 };
 
 Function processDays = () {
@@ -175,11 +174,13 @@ Function previousDay = () {
     updateCurrentDestination();
     processDays();
     filterSuggestedExperiences();
-  } else {
-    dayleft.value = 0;
-    selectedIndex.value = pageList.indexOf("Destination");
-    Get.toNamed("/Destination");
   }
+
+  // else {
+  //   dayleft.value = 0;
+  //   selectedIndex.value = pageList.indexOf("Destination");
+  //   Get.toNamed("/Destination");
+  // }
 };
 Function processDaysCatalog = () {
   int total = departureDate.value.difference(arrivalDate.value).inDays;
@@ -193,7 +194,7 @@ Function processDaysCatalog = () {
     }
   }
 };
-Function resetDays = () {
+Function resetLeftDays = () {
   totalDays.value = departureDate.value.difference(arrivalDate.value).inDays;
   leftAccumulated.value = 0;
   dayleft.value = totalDays.value;

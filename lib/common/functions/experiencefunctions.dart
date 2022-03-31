@@ -126,6 +126,8 @@ Function getFilteredExperiences = () {
   return result;
 };
 Function resetExperiences = () {
+  globalctx.experiences.value = {};
+  globalctx.experienceDragData.value = {};
   expDraggable.value = 1;
   for (Map experience in experiences) {
     CatalogDto expCatalog = toCatalog(experience);

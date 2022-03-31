@@ -14,9 +14,8 @@ class CustomerController extends GetxController {
       Map mem = {...globalctx.memory["customer"], ...state.toMap()};
       globalctx.memory["customer"] = mem;
       filterDestinations();
-      selectedIndex.value = pageList.indexOf("Destination");
       globalctxReset();
-      Get.toNamed("/Destination");
+      goto("Destination");
     };
   }
 }

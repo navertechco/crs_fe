@@ -53,7 +53,13 @@ class KeyPadWidget extends StatelessWidget {
                             color: Colors.white)
                         .getStyle()),
                 onPressed: () {
-                  processDestinations(context);
+                  if (globalctx.experienceDragData.value.keys
+                      .toList()
+                      .isEmpty) {
+                    processDestinations(context);
+                  } else {
+                    goto("Experiences");
+                  }
                 },
               ),
             ],
