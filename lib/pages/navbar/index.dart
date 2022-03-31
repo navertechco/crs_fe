@@ -13,7 +13,7 @@ class NavBarWidget extends StatelessWidget {
       Get.toNamed("/${pageList[index]}");
     } catch (e) {
       selectedIndex.value = 0;
-      Get.back();
+      Get.toNamed("/Signin");
     }
   }
 
@@ -27,6 +27,10 @@ class NavBarWidget extends StatelessWidget {
           label: page,
         ));
       }
+      itemList.add(BottomNavigationBarItem(
+        icon: Icon(Icons.pages),
+        label: "Exit",
+      ));
       return BottomNavigationBar(
         backgroundColor: Colors.black,
         unselectedItemColor: Colors.black,

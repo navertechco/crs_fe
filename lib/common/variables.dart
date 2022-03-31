@@ -2,9 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'index.dart';
-import 'package:interval_time_picker/interval_time_picker.dart'
-    as interval_time_picker;
+import 'index.dart'; 
 
 ////
 Rx<int> leftAccumulated = 0.obs;
