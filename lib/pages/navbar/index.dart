@@ -23,12 +23,12 @@ class NavBarWidget extends StatelessWidget {
       List<BottomNavigationBarItem> itemList = [];
       for (var page in pageList) {
         itemList.add(BottomNavigationBarItem(
-          icon: Icon(Icons.pages),
+          icon: Icon(Icons.dashboard_customize),
           label: page,
         ));
       }
       itemList.add(BottomNavigationBarItem(
-        icon: Icon(Icons.pages),
+        icon: Icon(Icons.exit_to_app),
         label: "Exit",
       ));
       return BottomNavigationBar(
