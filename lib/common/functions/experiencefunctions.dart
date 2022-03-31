@@ -134,7 +134,7 @@ Function resetCurrentDay = () {
   accumulatedHours[currentDay.value].value = 0.0;
   leftHours[currentDay.value].value = totalHours[currentDay.value].value;
   initializeHours();
-  // resetLeisureTime();
+  resetLeisureTime();
 };
 
 Function resetExperiences = () {
@@ -161,7 +161,7 @@ Function resetLeisureTime = () {
       globalctx.memory["days"], currentDay.value, "leisureTimeEnd", time);
 
   if (state == "promoted") {
-    processHour(value);
+    processHour(-value);
   }
 };
 Function deleteExperience = (experience) {
@@ -241,15 +241,11 @@ Function downgradeExperienceDays = (String experience) {
   setExperienceState(experience, "suggested");
 };
 Function processHour = (value) {
-  if (leftHours[currentDay.value].value > 0) {
-    if (leftHours[currentDay.value].value <=
-        totalHours[currentDay.value].value) {
       accumulatedHours[currentDay.value].value =
           accumulatedHours[currentDay.value].value + value;
       initializeHours();
-    }
-  }
 };
+
 Function initializeHours = () {
   leftHours[currentDay.value] ??= 0.0.obs;
   accumulatedHours[currentDay.value] ??= 0.0.obs;
