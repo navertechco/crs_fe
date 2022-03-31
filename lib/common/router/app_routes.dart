@@ -60,10 +60,10 @@ List<dynamic> routes = [
       transition: Transition.rightToLeftWithFade,
       binding: ResumeBinding()),
   PRegistry(
-      name: '/NetRate',
-      page: () => NetRatePage(),
+      name: '/EndServices',
+      page: () => EndServicesPage(),
       transition: Transition.rightToLeftWithFade,
-      binding: NetRateBinding()),
+      binding: EndServicesBinding()),
   PRegistry(
       name: '/Searcher',
       page: () => SearcherPage(),

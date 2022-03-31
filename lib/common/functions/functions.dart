@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/pages/2/searcher/widgets/index.dart';
-import 'package:naver_crs/pages/7/netrate/widgets/index.dart';
+import 'package:naver_crs/pages/7/endservices/widgets/index.dart';
 import 'package:sweetalert/sweetalert.dart';
 import '../constants.dart';
 import '../index.dart';

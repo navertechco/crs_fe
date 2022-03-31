@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-class NetRateState extends GetXState {
+class EndServicesState extends GetXState {
   // title
   bool isLoading = false;
   String? error = "";

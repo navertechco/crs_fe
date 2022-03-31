@@ -12,5 +12,5 @@ export './4/customer/index.dart';
 export './5/destination/index.dart';
 export './6/experiences/index.dart';
 export './7/resume/index.dart';
-export './7/netrate/index.dart';
+export './7/endservices/index.dart';
 export './navbar/index.dart';

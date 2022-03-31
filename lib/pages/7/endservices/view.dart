@@ -4,26 +4,26 @@ import 'widgets/index.dart';
 import 'index.dart';
 import '../../index.dart';
 
-class NetRatePage extends GetView<NetRateController> {
-  const NetRatePage({Key? key}) : super(key: key);
+class EndServicesPage extends GetView<EndServicesController> {
+  const EndServicesPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _buildNetRateFormPage(context),
+      body: _buildEndServicesFormPage(context),
       bottomNavigationBar: NavBarWidget(),
     );
   }
 }
 
-GetBuilder<NetRateController> _buildNetRateFormPage(
+GetBuilder<EndServicesController> _buildEndServicesFormPage(
   BuildContext context,
 ) {
-  return GetBuilder<NetRateController>(
+  return GetBuilder<EndServicesController>(
     id: 'signin_form_page',
     builder: (controller) => ContentLayoutWidget(
         background: "assets/custom/img/home.png",
-        child: NetRateFormPage(ctrl: controller),
-        text: "<  NetRate"),
+        child: EndServicesFormPage(ctrl: controller),
+        text: "<  EndServices"),
   );
 }

@@ -84,12 +84,19 @@ List<dynamic> customDestinationData = [
 ];
 var promotedDestinations = globalctx.promotedDestinations;
 RxInt selectedIndex = 0.obs;
-RxString travelCode = (leadPassenger.value.toString() +
-        "-" +
-        globalctx.memory["tour"]["passengers"] +
-        "-" +
-        dayFormat.format(arrivalDate.value).replaceAll(" ", "-"))
-    .obs;
+RxString travelCode = (() {
+  try {
+    return (leadPassenger.value.toString() +
+            "-" +
+            globalctx.memory["tour"]["passengers"] +
+            "-" +
+            dayFormat.format(arrivalDate.value).replaceAll(" ", "-"))
+        .obs;
+  } catch (e) {
+    return (leadPassenger.value.toString()).obs;
+  }
+})();
+
 RxString leadPassenger = "pp".obs;
 RxString arrivalPort = "6".obs;
 RxString departurePort = "6".obs;
@@ -111,7 +118,7 @@ List pageList = [
   "Customer",
   "Destination",
   "Experiences",
-  "NetRate"
+  "EndServices"
 ];
 
 RxString arrivalState = getDestinationState("", 0).toString().obs;

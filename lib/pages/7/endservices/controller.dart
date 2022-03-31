@@ -5,13 +5,13 @@ import 'package:sweetalert/sweetalert.dart';
 import '../../index.dart';
 import 'index.dart';
 
-class NetRateController extends GetxController {
-  NetRateController();
+class EndServicesController extends GetxController {
+  EndServicesController();
 
-  var state = NetRateState();
+  var state = EndServicesState();
   var isLoading = false;
 
-  Future<void> onNetRate(ctx, String username, String password) async {
+  Future<void> onEndServices(ctx, String username, String password) async {
     // Get.toNamed('/Loading');
 
     state.error = null;

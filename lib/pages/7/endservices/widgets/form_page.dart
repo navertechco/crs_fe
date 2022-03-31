@@ -6,13 +6,13 @@ import 'package:get/get.dart';
 import '../../../index.dart';
 import '../controller.dart';
 
-class NetRateFormPage extends GetView<StatelessWidget> {
-  NetRateFormPage({
+class EndServicesFormPage extends GetView<StatelessWidget> {
+  EndServicesFormPage({
     Key? key,
     this.ctrl,
   }) : super(key: key);
   final _formKey = GlobalKey<FormState>();
-  final NetRateController? ctrl;
+  final EndServicesController? ctrl;
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +65,7 @@ class WebButton extends StatelessWidget {
     required this.label,
     required this.url,
   }) : super(key: key);
-  final  color;
+  final color;
   final String label;
   final String url;
   @override

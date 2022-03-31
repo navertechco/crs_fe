@@ -6,7 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'context/index.dart';
 import 'index.dart';
 
-
 /*
  * DATOS DE SERVIDOR
  */
@@ -33,7 +32,7 @@ class KTextSytle {
 }
 
 const kDefaultSchema = "http";
-const kDefaultServer = "192.168.101.222";
+const kDefaultServer = "uiodesign.fortiddns.com";
 const kDefaultServerPort = 9999;
 const kDefaultCatalogPath = "/System/FindCatalog";
 const kDefaultQueryPath = "/Agent/Query";

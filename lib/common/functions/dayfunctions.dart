@@ -118,8 +118,8 @@ Function prepareDaysToResume = () {
   }
   log(globalctx.memory);
   // sendTour(globalctx.memory);
-  selectedIndex.value = pageList.indexOf("NetRate");
-  Get.toNamed("/NetRate");
+  selectedIndex.value = pageList.indexOf("EndServices");
+  Get.toNamed("/EndServices");
 };
 
 Function processDays = () {
