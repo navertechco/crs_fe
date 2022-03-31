@@ -11,6 +11,7 @@ class NetRatePage extends GetView<NetRateController> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _buildNetRateFormPage(context),
+      bottomNavigationBar: NavBarWidget(),
     );
   }
 }

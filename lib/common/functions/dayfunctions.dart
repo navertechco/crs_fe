@@ -25,6 +25,7 @@ Function paginateDay = (context) {
 };
 Function paginateNextDay = () {
   if (currentDay.value < totalDays.value - 1) {
+    byPassGalapagosCruise();
     nextDay();
   } else {
     prepareDaysToResume();
@@ -33,17 +34,20 @@ Function paginateNextDay = () {
 
 Function byPassGalapagosCruise = () {
   var index = getDestinationIndex(globalDestinationName.value, "tour");
-  var explorationMode = 0;
+  var explorationMode = int.parse(getFormValue(
+      globalctx.memory["destinations"], index, "explorationMode", "0"));
   var explorationDay = 0;
-  if (index > 0) {
-    explorationMode =
-        int.parse(globalctx.memory["destinations"][index]["explorationMode"]);
+  var cruiseExpDays = int.parse(getFormValue(
+      globalctx.memory["destinations"], index, "cruiseExpDays", "0"));
+  if (cruiseExpDays > 0) {
     if (explorationMode > 1) {
-      explorationDay =
-          int.parse(globalctx.memory["destinations"][index]["cruiseExpDays"]);
+      var cruiseStartDate = getFormValue(globalctx.memory["destinations"],
+          index, "cruiseStartDate", DateTime(2010, 10, 10));
+      if (currentDate == cruiseStartDate) {
+        explorationDay = cruiseExpDays;
+        currentDay.value += explorationDay - 1;
+      }
     }
-    currentDay.value += explorationDay - 1;
-    nextDay();
   }
 };
 
@@ -56,10 +60,8 @@ Function nextDay = () {
   processDays();
   filterSuggestedExperiences();
   updateDayLeftHours();
-  
 };
 
- 
 Function getDtos = () {
   var day = {
     "date": "",
@@ -116,8 +118,8 @@ Function prepareDaysToResume = () {
   }
   log(globalctx.memory);
   // sendTour(globalctx.memory);
-  selectedIndex.value = pageList.indexOf("Resume");
-  Get.toNamed("/Resume");
+  selectedIndex.value = pageList.indexOf("NetRate");
+  Get.toNamed("/NetRate");
 };
 
 Function processDays = () {
