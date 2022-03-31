@@ -64,7 +64,7 @@ Function getCombinedDestinations = () {
 Function processDestinations = (context) {
   // ignore: unrelated_type_equality_checks
   if (globalctx.promotedDestinations.isNotEmpty & (dayleft == 0)) {
-    var destinationDay = []; 
+    var destinationDay = [];
     globalctx.experienceDragData.value = {};
     for (var i = 0; i < totalDays.value; i++) {
       globalctx.experienceDragData.value[i] ??= <Widget>[];
@@ -79,7 +79,7 @@ Function processDestinations = (context) {
       destinationDay.add({...dest, "destination": destination, "days": days});
       destDays.value += days;
       idx++;
-    } 
+    }
     globalctx.memory["destinationDay"] = destinationDay;
     globalctx.memory["totalDays"] = totalDays.value;
     arrival.value = getDestinationById(arrivalPort.value);
@@ -88,8 +88,8 @@ Function processDestinations = (context) {
     globalDestinationType.value = "arrival";
     globalDestinationIndex.value = "0";
     // resetExperiences();
-     
-    updateDayLeftHours();
+
+    initializeHours();
     goto("Experiences");
   } else {
     if (context != null) {
@@ -256,7 +256,7 @@ Function setDestinationDay = (String destination, index, value) {
 };
 
 Function getLeftAccumulated = (destination, id) {
-  leftAccumulated.value = 0; 
+  leftAccumulated.value = 0;
   for (String item in destinations.keys) {
     bool exists = item != destination;
     if (exists) {
@@ -271,11 +271,10 @@ Function getDestinationIndex = (String destination, String type) {
   var destinations = globalctx.states["destinations"].entries;
 
   for (var e in destinations) {
-    if(e.value["destination"] == destination && e.value["type"] == type){
+    if (e.value["destination"] == destination && e.value["type"] == type) {
       destIndex = e.value["index"];
     }
   }
- 
 
   if (type == "arrival") {
     destIndex = 0;

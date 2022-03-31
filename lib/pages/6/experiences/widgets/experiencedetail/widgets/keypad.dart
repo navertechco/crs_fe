@@ -27,7 +27,10 @@ class KeypadWidget extends StatelessWidget {
                       color: Colors.white)
                   .getStyle()),
           onPressed: () {
-            promoteExperience(experience);            
+            var expData = getExperienceValueByName(experience);
+            if (expData["exptime"] <= leftHours[currentDay.value].value * 60) {
+              promoteExperience(experience);
+            }
             Get.close(1);
           },
         ),

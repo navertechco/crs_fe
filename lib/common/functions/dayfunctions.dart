@@ -77,7 +77,7 @@ Function nextDay = () {
   updateCurrentDestination();
   processDays();
   filterSuggestedExperiences();
-  updateDayLeftHours();
+  initializeHours();
 };
 
 Function getDtos = () {
