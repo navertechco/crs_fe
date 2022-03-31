@@ -25,14 +25,14 @@ Function paginateDay = (context) {
 };
 Function paginateNextDay = () {
   if (currentDay.value < totalDays.value - 1) {
-    byPassGalapagosCruise();
+    byPassGalapagosCruise("forward");
     nextDay();
   } else {
     prepareDaysToResume();
   }
 };
 
-Function byPassGalapagosCruise = () {
+Function byPassGalapagosCruise = (String direction) {
   try {
     int index = getDestinationIndex("galapagos", "tour");
     int explorationMode = int.parse(getFormValue(
@@ -47,9 +47,20 @@ Function byPassGalapagosCruise = () {
             index,
             "cruiseStartDate",
             DateTime(2010, 10, 10));
-        if (currentDate.value == cruiseStartDate.subtract(Duration(days: 1))) {
-          explorationDay = cruiseExpDays;
-          currentDay.value += explorationDay;
+        DateTime cruiseEndDate = getFormValue(globalctx.memory["destinations"],
+            index, "cruiseEndDate", DateTime(2010, 10, 10));
+
+        if (direction == "forward") {
+          if (currentDate.value ==
+              cruiseStartDate.subtract(Duration(days: 1))) {
+            explorationDay = cruiseExpDays;
+            currentDay.value += explorationDay;
+          }
+        } else {
+          if (currentDate.value == cruiseEndDate.add(Duration(days: 1))) {
+            explorationDay = cruiseExpDays;
+            currentDay.value -= explorationDay;
+          }
         }
       }
     }
@@ -99,30 +110,35 @@ Function getDtos = () {
 };
 
 Function prepareDaysToResume = () {
-  var dayIndex = 0;
-  var destinations = getCombinedDestinations();
-  for (String dest in destinations.keys.toList()) {
-    var destination = destinations[dest];
-    destination["daysData"] ??= {};
-    destination["daysData"] = {};
-    destinations[dest] = destination;
-    var explorationDay = destination["explorationDay"];
+  try {
+    var dayIndex = 0;
+    var destinations = getCombinedDestinations();
+    for (String dest in destinations.keys.toList()) {
+      var destination = destinations[dest];
+      destination["daysData"] ??= {};
+      destination["daysData"] = {};
+      destinations[dest] = destination;
+      var explorationDay = destination["explorationDay"];
 
-    for (var i = 0; i < int.parse(explorationDay); i++) {
-      var dayDto = getDtos()[0];
-      var expDto = getDtos()[1];
-      // Prepare Frame to send to Resume Page
-      var exps = globalctx.memory["promoted"]["day"][dayIndex];
-      for (var exp in exps.keys) {
-        Map newExp = {};
-        Map newEntry = exps[exp];
-        newExp = {...expDto, ...newEntry};
-        dayDto["experiences"][exp] = newExp;
+      for (var i = 0; i < int.parse(explorationDay); i++) {
+        var dayDto = getDtos()[0];
+        var expDto = getDtos()[1];
+        // Prepare Frame to send to Resume Page
+        var exps = globalctx.memory["promoted"]["day"][dayIndex];
+        for (var exp in exps.keys) {
+          Map newExp = {};
+          Map newEntry = exps[exp];
+          newExp = {...expDto, ...newEntry};
+          dayDto["experiences"][exp] = newExp;
+        }
+        destinations[dest]["daysData"][dayIndex] = dayDto;
+        dayIndex++;
       }
-      destinations[dest]["daysData"][dayIndex] = dayDto;
-      dayIndex++;
     }
+  } catch (e) {
+    log(e);
   }
+
   log(globalctx.memory);
   // sendTour(globalctx.memory);
   selectedIndex.value = pageList.indexOf("EndServices");
@@ -153,6 +169,7 @@ Function updateCurrentDestinationTravelRhythm = () {
 
 Function previousDay = () {
   if (currentDay.value > 0) {
+    byPassGalapagosCruise("backward");
     currentDay.value--;
     currentDate.value = arrivalDate.value.add(Duration(days: currentDay.value));
     updateCurrentDestination();
