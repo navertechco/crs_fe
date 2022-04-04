@@ -7,7 +7,7 @@ class CustomFooterWidget extends StatelessWidget {
   final ExperiencesController ctrl;
   final ValueNotifier<int> counter;
   GlobalKey<FormState> formKey;
-    CustomFooterWidget({
+  CustomFooterWidget({
     Key? key,
     required this.ctrl,
     required this.counter,
@@ -59,8 +59,26 @@ class CustomFooterWidget extends StatelessWidget {
                           color: Colors.white)
                       .getStyle()),
               onPressed: () {
-                if (formKey.currentState!.validate()) {
-                  paginateDay(context);
+                if (accumulatedHours[currentDay.value] ==
+                    totalHours[currentDay.value]) {
+                  if (formKey.currentState!.validate()) {
+                    paginateDay(context);
+                  }
+                } else {
+                  showCustomDialog(
+                    context,
+                    Text(
+                        "You have ${leftHours[currentDay.value]} left, would you like to assign another experience?",
+                        style: KTextSytle(
+                                context: context,
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black)
+                            .getStyle()),
+                    "Close",
+                    backgroundColor: Colors.white,
+                    buttonColor: Colors.black87,
+                  );
                 }
               },
             ),

@@ -53,12 +53,29 @@ class KeyPadWidget extends StatelessWidget {
                             color: Colors.white)
                         .getStyle()),
                 onPressed: () {
-                  if (globalctx.experienceDragData.value.keys
-                      .toList()
-                      .isEmpty) {
-                    processDestinations(context);
+                  if (dayleft.value == 0) {
+                    if (globalctx.experienceDragData.value.keys
+                        .toList()
+                        .isEmpty) {
+                      processDestinations(context);
+                    } else {
+                      goto("Experiences");
+                    }
                   } else {
-                    goto("Experiences");
+                    showCustomDialog(
+                      context,
+                      Text(
+                          "You have $dayleft left, would you like to assign to another destination?",
+                          style: KTextSytle(
+                                  context: context,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black)
+                              .getStyle()),
+                      "Close",
+                      backgroundColor: Colors.white,
+                      buttonColor: Colors.black87,
+                    );
                   }
                 },
               ),
