@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../../index.dart';
-import 'package:time_range_picker/time_range_picker.dart';
 import 'package:interval_time_picker/interval_time_picker.dart'
     as interval_time_picker;
 

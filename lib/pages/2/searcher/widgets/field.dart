@@ -15,7 +15,8 @@ class SearcherField extends StatelessWidget {
     TextEditingController? controller = TextEditingController();
 
     return Obx(() {
-      var t = searchResult!.value;
+      var srt = searchResult!.value;
+      srt = searchResult!.value;
       return Card(
         child: ListTile(
           leading: Icon(Icons.search),

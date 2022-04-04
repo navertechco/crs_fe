@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../index.dart';
 import '../../../index.dart';
-import 'index.dart';
 
 /// Searcher
 // ignore: must_be_immutable
@@ -59,6 +58,7 @@ class TotalNetRateWidget extends GetView<SearcherController> {
                       child: SingleChildScrollView(
                         child: Obx(() {
                           var t = netRateHeader.value;
+                          t = netRateHeader.value;
                           return Column(
                             children: [
                               // SearcherField(data: data, formKey: _formKey),

@@ -44,7 +44,7 @@ Future<dynamic> fetchhandler(scheme, host, port, path, method, body) async {
     return {
       'state': false,
       'data': null,
-      'message': e.toString(),
+      'message': "Service is temporarily unavailable, please try again later",
       'code': response.statusCode
     };
   }
