@@ -25,16 +25,16 @@ Function paginateDay = (context) {
 };
 Function paginateNextDay = () {
   if (currentDay.value < totalDays.value - 1) {
-    byPassGalapagosCruise("forward");
+    byPassCruise("forward");
     nextDay();
   } else {
     prepareDaysToResume();
   }
 };
 
-Function byPassGalapagosCruise = (String direction) {
+Function byPassCruise = (String direction) {
   try {
-    int index = getDestinationIndex("galapagos", "tour");
+    int index = getDestinationIndex(globalDestinationName.value, "tour");
     int explorationMode = int.parse(getFormValue(
         globalctx.memory["destinations"], index, "explorationMode", "0"));
     int explorationDay = 0;
@@ -168,7 +168,7 @@ Function updateCurrentDestinationTravelRhythm = () {
 
 Function previousDay = () {
   if (currentDay.value > 0) {
-    byPassGalapagosCruise("backward");
+    byPassCruise("backward");
     currentDay.value--;
     currentDate.value = arrivalDate.value.add(Duration(days: currentDay.value));
     updateCurrentDestination();

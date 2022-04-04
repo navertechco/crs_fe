@@ -27,7 +27,6 @@ class SwitcherWidget extends StatelessWidget {
     RxBool _flipXAxis = true.obs;
 
     void _changeRotationAxis() {
- 
       _showFrontSide.value = !_showFrontSide.value;
       _flipXAxis.value = !_flipXAxis.value;
     }
@@ -45,6 +44,7 @@ class SwitcherWidget extends StatelessWidget {
         _changeRotationAxis();
       } else {
         if (validateDestinationDialog(destination, type).value) {
+          globalDestinationName.value = destination;
           showDialog(
               context: context,
               builder: (context) {
