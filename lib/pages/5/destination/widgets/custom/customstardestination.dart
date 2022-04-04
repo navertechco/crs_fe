@@ -8,7 +8,7 @@ import '../../../../index.dart';
 import '../index.dart';
 
 class CustomStarDestinationForm extends StatelessWidget {
-    CustomStarDestinationForm({
+  CustomStarDestinationForm({
     Key? key,
     required this.index,
     required this.destination,
@@ -206,7 +206,12 @@ class CustomStarDestinationForm extends StatelessWidget {
                             explorationMode.value = value!;
                           },
                           label: "Exploration Mode    ",
-                          data: processCatalog("exploration_mode"),
+                          data: processCatalog("exploration_mode")
+                              .where((element) =>
+                                  element["relation"]["destination"] == null ||
+                                  element["relation"]["destination"] ==
+                                      destination)
+                              .toList(),
                         );
                       });
                     }
