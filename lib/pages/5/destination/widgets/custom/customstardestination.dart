@@ -8,7 +8,7 @@ import '../../../../index.dart';
 import '../index.dart';
 
 class CustomStarDestinationForm extends StatelessWidget {
-  const CustomStarDestinationForm({
+    CustomStarDestinationForm({
     Key? key,
     required this.index,
     required this.destination,
@@ -17,7 +17,7 @@ class CustomStarDestinationForm extends StatelessWidget {
   }) : super(key: key);
   final String destination;
   final DestinationDetailController ctrl;
-  final GlobalKey<FormState> formKey;
+  GlobalKey<FormState> formKey;
   final index;
 
   @override

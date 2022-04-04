@@ -9,17 +9,18 @@ import 'index.dart';
 /// hello
 class ExperiencesWidget extends HookWidget {
   final ExperiencesController ctrl;
-  const ExperiencesWidget({Key? key, required this.ctrl}) : super(key: key);
+  final formKey = GlobalKey<FormState>();
+
+  ExperiencesWidget({Key? key, required this.ctrl}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final counter = useState(0);
-
     useEffect(() {}, [stream, counter.value]);
 
     return Stack(children: [
-      CustomTopDayWidget(ctrl: ctrl, counter: counter),
-      CustomBodyDaysWidget(ctrl: ctrl, counter: counter),
+      CustomTopDayWidget(ctrl: ctrl, counter: counter, formKey: formKey),
+      CustomBodyDaysWidget(ctrl: ctrl, counter: counter, formKey: formKey),
     ]);
   }
 }

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../index.dart';
 
 class RightWidget extends StatelessWidget {
-  const RightWidget({
+    RightWidget({
     Key? key,
     required this.destination,
     required this.index,
@@ -14,7 +14,7 @@ class RightWidget extends StatelessWidget {
   final destination;
   final index;
   final DestinationDetailController ctrl;
-  final GlobalKey<FormState> formKey;
+  GlobalKey<FormState> formKey;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -26,8 +26,11 @@ class RightWidget extends StatelessWidget {
         width: MediaQuery.of(context).size.width * 0.45,
         // color: Colors.red[50],
         child: SingleChildScrollView(
-          child:
-              CustomStarDestinationForm(destination: destination, index:index, ctrl: ctrl, formKey:formKey),
+          child: CustomStarDestinationForm(
+              destination: destination,
+              index: index,
+              ctrl: ctrl,
+              formKey: formKey),
         ),
       ),
     );

@@ -6,14 +6,16 @@ import 'package:naver_crs/pages/6/experiences/widgets/custom/containers/transpor
 class CustomTopDayWidget extends HookWidget {
   final ExperiencesController ctrl;
   final ValueNotifier<int> counter;
-  const CustomTopDayWidget({
+  GlobalKey<FormState> formKey;
+  CustomTopDayWidget({
     Key? key,
     required this.ctrl,
     required this.counter,
+    required this.formKey,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return TransportFilter(ctrl: ctrl, counter: counter);
+    return TransportFilter(ctrl: ctrl, counter: counter, formKey: formKey);
   }
 }

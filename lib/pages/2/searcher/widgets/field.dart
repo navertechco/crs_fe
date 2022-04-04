@@ -5,11 +5,11 @@ import 'package:get/get.dart';
 import '../../../index.dart';
 
 class SearcherField extends StatelessWidget {
-  const SearcherField({Key? key, this.data, required this.formKey})
+    SearcherField({Key? key, this.data, required this.formKey})
       : super(key: key);
 
   final List? data;
-  final GlobalKey<FormState> formKey;
+  GlobalKey<FormState> formKey;
   @override
   Widget build(BuildContext context) {
     TextEditingController? controller = TextEditingController();
