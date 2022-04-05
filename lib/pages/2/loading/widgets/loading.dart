@@ -63,8 +63,9 @@ class LoadingWidget extends GetView<LoadingController> {
                               height: 0.07,
                               fontSize: 5,
                               onTap: () {
-                                setContext("readonly", false);
-                                Get.toNamed("/Searcher");
+                                getTour(context, tourId: 0);
+                                // setContext("readonly", false);
+                                // Get.toNamed("/Searcher");
                               }),
                         if (!newtour.value)
                           SizedBox(
