@@ -2,8 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'index.dart'; 
+import 'index.dart';
 
+var session = {};
 ////
 Rx<int> leftAccumulated = 0.obs;
 var airports = {"1": "quito", "2": "guayaquil"};
@@ -45,7 +46,7 @@ RxInt selected = 0.obs;
 RxInt dayleft = 0.obs;
 Rx<double> customerAge =
     Rx(DateTime.now().difference(birthDate.value).inDays / 365);
-Rx<int> memoryDayLeft = Rx(globalctx.memory["days_left"]); 
+Rx<int> memoryDayLeft = Rx(globalctx.memory["days_left"]);
 final currentDayFormat = DateFormat('EEEE MMMM d yyyy');
 final dayFormat = DateFormat('d-MM-yyyy');
 var experiences = processCatalog("experiences");

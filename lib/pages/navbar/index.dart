@@ -7,13 +7,12 @@ import '../index.dart';
 class NavBarWidget extends StatelessWidget {
   const NavBarWidget({Key? key}) : super(key: key);
 
-  void _onItemTapped(int index) {
+  void _onItemTapped(int index) async {
     try {
       selectedIndex.value = index;
       Get.toNamed("/${pageList[index]}");
     } catch (e) {
-      selectedIndex.value = 0;
-      Get.toNamed("/Signin");
+     await logout(11111111);
     }
   }
 

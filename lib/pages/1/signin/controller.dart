@@ -13,7 +13,8 @@ class SigninController extends GetxController {
 
   Future<void> onSignin(ctx, String username, String password) async {
     // Get.toNamed('/Loading');
-
+    session["username"] = username;
+    
     state.error = null;
     state.username = username;
     state.password = password;

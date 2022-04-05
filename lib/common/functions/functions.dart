@@ -550,3 +550,20 @@ Function goto = (page) {
   selectedIndex.value = pageList.indexOf(page);
   Get.toNamed("/$page");
 };
+
+Future<void> logout(
+  id,
+) async {
+  var res = await fetchhandler(kDefaultSchema, kDefaultServer,
+      kDefaultServerPort, kDefaultConnectPath, 'POST', {
+    "state": "logout",
+    "data": {"username": session["username"]}
+  });
+
+  if (res['state'] == true) {
+    selectedIndex.value = 0;
+    Get.toNamed("/Splash");
+  } else {
+    log(res["message"]);
+  }
+}
