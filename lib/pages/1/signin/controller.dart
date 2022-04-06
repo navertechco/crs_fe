@@ -14,7 +14,7 @@ class SigninController extends GetxController {
   Future<void> onSignin(ctx, String username, String password) async {
     // Get.toNamed('/Loading');
     session["username"] = username;
-    
+
     state.error = null;
     state.username = username;
     state.password = password;
@@ -38,6 +38,7 @@ class SigninController extends GetxController {
               curve: ElasticInCurve(),
               title: res['message'],
               style: SweetAlertStyle.error, onPress: (bool isConfirm) {
+            logout(session["username"]);
             Get.close(1);
             return false;
           });

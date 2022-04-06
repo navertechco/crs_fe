@@ -12,7 +12,7 @@ class NavBarWidget extends StatelessWidget {
       selectedIndex.value = index;
       Get.toNamed("/${pageList[index]}");
     } catch (e) {
-     await logout(11111111);
+     await logout(session["username"]);
     }
   }
 

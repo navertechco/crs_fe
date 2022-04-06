@@ -10,7 +10,7 @@ class ForgotController extends GetxController {
   ForgotController();
 
   final state = ForgotState();
-  void onEnd(ctx, msg, success) {
+  void getConfirmation(ctx, msg, success) {
     return SweetAlert.show(ctx,
         curve: ElasticInCurve(),
         title: msg,
@@ -33,10 +33,34 @@ class ForgotController extends GetxController {
       "data": {"email": state.email}
     });
 
-    if (res['state'] == true) {
-      onEnd(ctx, res['data'], true);
+    if (res['state']) {
+      showCustomDialog(
+        ctx,
+        Text("A confirmation email was sent !!!!",
+            style: KTextSytle(
+                    context: ctx,
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black54)
+                .getStyle()),
+        "Close",
+        backgroundColor: Colors.grey,
+        buttonColor: Colors.black,
+      );
     } else {
-      onEnd(ctx, res['message'], false);
+      showCustomDialog(
+        ctx,
+        Text("The system had a technical problem, try again later",
+            style: KTextSytle(
+                    context: ctx,
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black54)
+                .getStyle()),
+        "Close",
+        backgroundColor: Colors.grey,
+        buttonColor: Colors.black,
+      );
     }
   }
 }

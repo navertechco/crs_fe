@@ -97,6 +97,19 @@ class WebView extends StatelessWidget {
         child: Stack(children: [
       InAppWebView(
           key: webViewKey,
+          initialOptions: InAppWebViewGroupOptions(
+            android: AndroidInAppWebViewOptions(
+              useShouldInterceptRequest: true,
+              useHybridComposition: true,
+            ),
+            crossPlatform: InAppWebViewOptions(
+              useShouldOverrideUrlLoading: true,
+              javaScriptCanOpenWindowsAutomatically: true,
+              javaScriptEnabled: true,
+              mediaPlaybackRequiresUserGesture: false,
+              preferredContentMode: UserPreferredContentMode.MOBILE,
+            ),
+          ),
           initialUrlRequest: URLRequest(
             url: Uri.parse(url),
           ))

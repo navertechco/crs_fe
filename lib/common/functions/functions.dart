@@ -474,7 +474,9 @@ Function getDetail = (context, data) {
                     context,
                     WebView(
                         url:
-                            "$kDefaultSchema://$kDefaultServer:$kDefaultServerPort/pdf.html"),
+                            "$kDefaultSchema://$kDefaultServer:$kDefaultServerPort/pdf.html",
+                            
+                            ),
                     "Close",
                     buttonColor: Colors.white);
               },
@@ -550,12 +552,12 @@ Function goto = (page) {
 };
 
 Future<void> logout(
-  id,
+  username,
 ) async {
   var res = await fetchhandler(kDefaultSchema, kDefaultServer,
       kDefaultServerPort, kDefaultConnectPath, 'POST', {
     "state": "logout",
-    "data": {"username": session["username"]}
+    "data": {"username": username}
   });
 
   if (res['state'] == true) {

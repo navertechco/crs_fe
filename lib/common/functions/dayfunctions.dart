@@ -137,11 +137,11 @@ Function prepareDaysToResume = () {
     }
   } catch (e) {
     log(e);
+  } finally {
+    log(globalctx.memory);
+    // sendTour(globalctx.memory);
+    goto("EndServices");
   }
-
-  log(globalctx.memory);
-  // sendTour(globalctx.memory);
-  goto("EndServices");
 };
 
 Function processDays = () {

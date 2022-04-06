@@ -28,23 +28,31 @@ Function getFilteredExperiences = () {
       filtered.add(experience);
     }
   }
-  List filteredByTravelRhytm = filtered.where((e) {
-    return true;
+  List filteredByTravelRhytm = filtered.where((element) {
     if (currentDay.value == 0) {
       return true;
     }
-    var tr = getExperienceTravelRhythmByName(e.description)["description"];
+    if (currentDay.value == totalDays.value - 1) {
+      return true;
+    }
+
     if (currentTravelRhythm.value == "0") {
       return true;
     }
-    compareTr = currentDestinationTr["description"];
-    if (compareTr == "HARD") {
+
+    var destTr = getDestinationTravelRhythm(globalDestinationName.value,
+        globalDestinationType.value)["description"];
+    var elementTr = element.value["travel_rhythm"].toString().toUpperCase();
+
+    if (destTr == "HARD") {
       return true;
     }
-    if (compareTr == "MEDIUM" && tr == "SOFT") {
+
+    if (elementTr == "SOFT" && destTr == "MEDIUM") {
       return true;
     }
-    var rule = tr == compareTr;
+
+    var rule = destTr == elementTr;
     return rule;
   }).toList();
   List filteredByType = filteredByTravelRhytm.where((e) {
@@ -241,9 +249,9 @@ Function downgradeExperienceDays = (String experience) {
   setExperienceState(experience, "suggested");
 };
 Function processHour = (value) {
-      accumulatedHours[currentDay.value].value =
-          accumulatedHours[currentDay.value].value + value;
-      initializeHours();
+  accumulatedHours[currentDay.value].value =
+      accumulatedHours[currentDay.value].value + value;
+  initializeHours();
 };
 
 Function initializeHours = () {

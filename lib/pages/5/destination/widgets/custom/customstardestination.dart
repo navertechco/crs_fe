@@ -181,7 +181,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                         explorationMode.value = value!;
                       },
                       hintText: " ",
-                      label: "${destination.capitalize} Subs      ",
+                      label: "${destination.capitalize} Subs           ",
                       data: getSubs(destination),
                     );
                   }
