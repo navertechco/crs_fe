@@ -301,6 +301,15 @@ Function getDestinationKa = (destination, type) {
   return destData["keyActivities"];
 };
 
+Function getTourPurpose = () {
+  var pCode = globalctx.memory["tour"]["purpose"];
+  var purposes = processCatalog("purpose").toList();
+  var compare = toCatalog(
+          purposes.firstWhere((e) => e["code"].toString() == pCode.toString()))
+      .description;
+  return compare;
+};
+
 Function filterDestinations = () {
   var arr = getDestinationById(arrivalPort.value);
   var dep = getDestinationById(departurePort.value);

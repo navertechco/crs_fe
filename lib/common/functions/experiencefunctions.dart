@@ -71,7 +71,9 @@ Function getFilteredExperiences = () {
     if (currentDay.value == 0) {
       return true;
     }
-
+    if (e.description == "Leisure Time") {
+      return true;
+    }
     var destKa = getDestinationKa(
         globalDestinationName.value, globalDestinationType.value);
     String ka1 = getExperienceByName(e.description)
@@ -88,23 +90,12 @@ Function getFilteredExperiences = () {
     if (currentDay.value == 0) {
       return true;
     }
-    return true;
-    try {
-      var pCode = globalctx.memory["tour"]["purpose"];
-      var purposes = processCatalog("purpose").toList();
-      var compare = toCatalog(purposes.firstWhere(
-          (e) => e["code"].toString() == pCode.toString())).description;
-      String p1 = getExperienceByName(e.description).value["purpose_fk"];
-      String p2 = getExperienceByName(e.description).value["purpose_fk2"];
-      var rule1 =
-          compare.toString().toUpperCase() == p1.toString().toUpperCase();
-      var rule2 =
-          compare.toString().toUpperCase() == p2.toString().toUpperCase();
-      return rule1 || rule2;
-    } catch (e) {
-      log(e);
-    }
-    return true;
+    var compare = getTourPurpose();
+    String p1 = getExperienceByName(e.description).value["purpose_fk"];
+    String p2 = getExperienceByName(e.description).value["purpose_fk2"];
+    var rule1 = compare.toString().toUpperCase() == p1.toString().toUpperCase();
+    var rule2 = compare.toString().toUpperCase() == p2.toString().toUpperCase();
+    return rule1 || rule2;
   }).toList();
   List filteredByBudget = filteredByPurpose.where((e) {
     return true;
