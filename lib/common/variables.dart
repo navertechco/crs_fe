@@ -25,7 +25,15 @@ Rx<DateTime> arrivalDate = Rx(DateTime(2022, 12, 10));
 Rx<DateTime> departureDate = Rx(DateTime(2022, 12, 20));
 Rx<DateTime> currentDate =
     Rx(arrivalDate.value.add(Duration(days: currentDay.value)));
-
+var openDays = {
+  "Mon": "M",
+  "Tue": "T",
+  "Wed": "W",
+  "Thu": "Th",
+  "Fri": "F",
+  "Sat": "S",
+  "Sun": "Su"
+};
 Rx<DateTime> firstDayDate = Rx(arrivalDate.value.add(const Duration(days: 1)));
 Rx<DateTime> penultimateDayDate =
     Rx(departureDate.value.subtract(const Duration(days: 1)));
@@ -343,7 +351,7 @@ var currentDestinationType = "arrival";
 var currentDestinationKeyActivities = [];
 var leftHours = {}.obs;
 var accumulatedHours = {}.obs;
-var totalHours = {}.obs; 
+var totalHours = {}.obs;
 var currentTravelRhythm = "1".obs;
 final TimeOfDay time = TimeOfDay(hour: 7, minute: 15);
 Rx<TimeOfDay?> startTime = Rx(TimeOfDay(hour: 7, minute: 15));

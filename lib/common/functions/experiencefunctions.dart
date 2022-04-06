@@ -3,6 +3,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:intl/intl.dart';
 import 'package:naver_crs/pages/6/experiences/widgets/custom/index.dart';
 import '../index.dart';
 
@@ -28,8 +29,8 @@ Function getFilteredExperiences = () {
       filtered.add(experience);
     }
   }
-  List filteredByTravelRhytm = filtered.where((element) {
-    if (currentDay.value == 0) {
+  List filteredByTravelRhytm = filtered.where((e) {
+    if (currentDay.value == 0 || e.description == "Leisure Time") {
       return true;
     }
     if (currentDay.value == totalDays.value - 1) {
@@ -42,38 +43,38 @@ Function getFilteredExperiences = () {
 
     var destTr = getDestinationTravelRhythm(globalDestinationName.value,
         globalDestinationType.value)["description"];
-    var elementTr = element.value["travel_rhythm"].toString().toUpperCase();
+    var eTr = e.value["travel_rhythm"].toString().toUpperCase();
 
     if (destTr == "HARD") {
       return true;
     }
 
-    if (elementTr == "SOFT" && destTr == "MEDIUM") {
+    if (eTr == "SOFT" && destTr == "MEDIUM") {
       return true;
     }
 
-    var rule = destTr == elementTr;
+    var rule = destTr == eTr;
     return rule;
   }).toList();
   List filteredByType = filteredByTravelRhytm.where((e) {
+    if (currentDay.value == 0 || e.description == "Leisure Time") {
+      return true;
+    }
     try {
       var compare = currentDestinationType;
       var tr = getExperienceByName(e.description).value["experience_type"];
       var rule = tr == compare;
       return rule;
     } catch (e) {
-      log(e);
+      return true;
     }
-    return true;
     // return rule;
   }).toList();
   List filteredByKA = filteredByType.where((e) {
-    if (currentDay.value == 0) {
+    if (currentDay.value == 0 || e.description == "Leisure Time") {
       return true;
     }
-    if (e.description == "Leisure Time") {
-      return true;
-    }
+
     var destKa = getDestinationKa(
         globalDestinationName.value, globalDestinationType.value);
     String ka1 = getExperienceByName(e.description)
@@ -87,7 +88,7 @@ Function getFilteredExperiences = () {
     return rule1 || rule2;
   }).toList();
   List filteredByPurpose = filteredByKA.where((e) {
-    if (currentDay.value == 0) {
+    if (currentDay.value == 0 || e.description == "Leisure Time") {
       return true;
     }
     var compare = getTourPurpose();
@@ -97,7 +98,23 @@ Function getFilteredExperiences = () {
     var rule2 = compare.toString().toUpperCase() == p2.toString().toUpperCase();
     return rule1 || rule2;
   }).toList();
-  List filteredByBudget = filteredByPurpose.where((e) {
+  List filteredByOpenDays = filteredByPurpose.where((e) {
+    if (currentDay.value == 0 || e.description == "Leisure Time") {
+      return true;
+    }
+    try {
+      var dateName = openDays[DateFormat('E').format(currentDate.value)];
+      var open = getExperienceByName(e.description)
+          .value["openDays"]
+          .toString()
+          .split(",");
+      var rule = open.contains(dateName);
+      return rule;
+    } catch (e) {
+      return true;
+    }
+  }).toList();
+  List filteredByBudget = filteredByOpenDays.where((e) {
     return true;
   }).toList();
   List filteredByMaxCapacity = filteredByBudget.where((e) {
