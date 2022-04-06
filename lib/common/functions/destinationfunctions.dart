@@ -295,6 +295,12 @@ Function getDestinationTravelRhythm = (destination, type) {
   return trRange;
 };
 
+Function getDestinationKa = (destination, type) {
+  int destIndex = getDestinationIndex(destination, type);
+  var destData = globalctx.memory["destinations"][destIndex.toString()];
+  return destData["keyActivities"];
+};
+
 Function filterDestinations = () {
   var arr = getDestinationById(arrivalPort.value);
   var dep = getDestinationById(departurePort.value);

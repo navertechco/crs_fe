@@ -71,20 +71,18 @@ Function getFilteredExperiences = () {
     if (currentDay.value == 0) {
       return true;
     }
-    return true;
-    try {
-      var compare = currentTravelRhythm.value;
-      String ka1 =
-          getExperienceByName(e.description).value["keyActivityType_fk"];
-      String ka2 =
-          getExperienceByName(e.description).value["keyActivityType_fk2"];
-      var rule1 = compare.contains(ka1.toString().toUpperCase());
-      var rule2 = compare.contains(ka2.toString().toUpperCase());
-      return rule1 || rule2;
-    } catch (e) {
-      log(e);
-    }
-    return true;
+
+    var destKa = getDestinationKa(
+        globalDestinationName.value, globalDestinationType.value);
+    String ka1 = getExperienceByName(e.description)
+        .value["keyActivityType_fk"]
+        .toString();
+    String ka2 = getExperienceByName(e.description)
+        .value["keyActivityType_fk2"]
+        .toString();
+    var rule1 = destKa.contains(ka1);
+    var rule2 = destKa.contains(ka2);
+    return rule1 || rule2;
   }).toList();
   List filteredByPurpose = filteredByKA.where((e) {
     if (currentDay.value == 0) {
