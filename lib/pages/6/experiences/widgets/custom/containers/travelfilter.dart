@@ -27,11 +27,7 @@ class TravelFilter extends HookWidget {
     Rx<dynamic> travelRhythm = Rx(getFormValue(
         globalctx.memory["destinations"], index, "travel_rhythm", "0"));
 
-    useEffect(() {
-      destinationOption.value = "0";
-      travelRhythm.value = "0";
-      keyActivities.value = <String>[];
-    }, [stream, counter.value]);
+    
 
     var kaDataCatalog = Rx(processCatalog("key_activity"));
     return Align(

@@ -19,13 +19,11 @@ Function promoteDestination = (ctrl, _formKey, destination, index, type) {
     if (globalctx.promotedDestinations.isNotEmpty) {
       arrivalState.value = "promoted";
     }
-
     updateDraggableDestinations();
     updateTotalLeftAccumulated();
     Get.close(1);
   }
 };
-
 Function updateDraggableDestinations = () {
   if (arrivalState.value == "promoted" &&
       globalctx.promotedDestinations.length >=
@@ -39,7 +37,6 @@ Function updateDraggableDestinations = () {
     destDraggable.value = 0;
   }
 };
-
 // Destination Functions
 Function getDestinationAirport = () {
   var airport = "quito";
@@ -49,7 +46,6 @@ Function getDestinationAirport = () {
     return airport;
   }
 };
-
 Function getCombinedDestinations = () {
   var memoryDestinations = {};
   for (var destination in destinations.entries) {
@@ -60,7 +56,6 @@ Function getCombinedDestinations = () {
   destinations = memoryDestinations;
   return destinations;
 };
-
 Function processDestinations = (context) {
   // ignore: unrelated_type_equality_checks
   if (globalctx.promotedDestinations.isNotEmpty & (dayleft == 0)) {
@@ -69,7 +64,6 @@ Function processDestinations = (context) {
     for (var i = 0; i < totalDays.value; i++) {
       globalctx.experienceDragData.value[i] ??= <Widget>[];
     }
-
     var destinations = getCombinedDestinations();
     int idx = 0;
     for (var destination in destinations.entries.toList()) {
@@ -88,7 +82,6 @@ Function processDestinations = (context) {
     globalDestinationType.value = "arrival";
     globalDestinationIndex.value = "0";
     // resetExperiences();
-
     initializeHours();
     goto("Experiences");
   } else {
@@ -105,7 +98,6 @@ Function processDestinations = (context) {
     }
   }
 };
-
 Function addDestination = (String destination) {
   if (!globalctx.destinations.contains(destination)) {
     globalctx.destinations.add(destination);
@@ -113,7 +105,6 @@ Function addDestination = (String destination) {
 };
 int idx = 0;
 String type = "";
-
 Function filterSelectedDestinations = () {
   if (dayleft.value > 1 &&
       globalctx.promotedDestinations.length >=
@@ -143,14 +134,12 @@ Function filterSelectedDestinations = () {
     }
   }
 };
-
 Function moveDestination = (String destination, int index, String type) {
   setDestinationState(destination, index, "selected", type);
   globalctx.selectedDestinations.add(destination);
   globalctx.destinationDragData.value.add(DragDestinationWidget(
       destination: destination, index: index, type: type, out: false));
 };
-
 Function deleteDestination = (String destination) {
   if (arrivalPort.value != getDestinationIdByName(destination) &&
       departurePort.value != getDestinationIdByName(destination) &&
@@ -173,29 +162,24 @@ Function deleteDestination = (String destination) {
       cruiseStartDate = Rx(firstDayDate.value);
       cruiseEndDate = Rx(penultimateDayDate.value);
     }
-
     setDestinationState(destination, index, "suggested", type);
   }
 };
-
 Function getDestinationById = (destId) {
   try {
     var dest = destinationsCatalog
         .toList()
         .where((element) => element["code"] == int.parse(destId))
         .first;
-
     return dest;
   } catch (e) {
     log(e);
   }
 };
-
 Function getDestinationIdByName = (String destination) {
   var id = getDestinationByName(destination)["code"].toString();
   return id;
 };
-
 Function getDestinationValueByName = (String destination) {
   var result = [];
   try {
@@ -203,7 +187,6 @@ Function getDestinationValueByName = (String destination) {
   } catch (e) {
     log(e);
   }
-
   return result;
 };
 Function getDestinationByName = (String destination) {
@@ -215,10 +198,8 @@ Function getDestinationByName = (String destination) {
   } catch (e) {
     log(e);
   }
-
   return result;
 };
-
 Function setDestinationState = (String dest, index, state, type) {
   globalctx.states["destinations"][index] ??= {}.obs;
   globalctx.states["destinations"][index]["state"] = state;
@@ -226,14 +207,12 @@ Function setDestinationState = (String dest, index, state, type) {
   globalctx.states["destinations"][index]["index"] = index;
   globalctx.states["destinations"][index]["destination"] = dest;
 };
-
 Function getDestinationState = (destination, index) {
   var state = "suggested";
   globalctx.states["destinations"][index] ??= {}.obs;
   state = globalctx.states["destinations"][index]["state"] ?? "suggested";
   return state;
 };
-
 Function updateTotalLeftAccumulated = () {
   accumulated.value = 0;
   if (destinations.isNotEmpty) {
@@ -243,18 +222,15 @@ Function updateTotalLeftAccumulated = () {
   }
   dayleft.value = totalDays.value - accumulated.value;
 };
-
 Function setDestination = (String destination, index) {
   index = index.toString();
   destinations[index] ??= {};
 };
-
 Function setDestinationDay = (String destination, index, value) {
   index = index.toString();
   setDestination(destination, index);
   destinations[index]["explorationDay"] ??= value;
 };
-
 Function getLeftAccumulated = (destination, id) {
   leftAccumulated.value = 0;
   for (String item in destinations.keys) {
@@ -266,41 +242,58 @@ Function getLeftAccumulated = (destination, id) {
   return leftAccumulated.value;
 };
 
+Function getMaxTrValue = (tr) {
+  return trMaxValues[tr];
+};
+
+Function getDestinationIndexByDay = () {
+  var _left = 0;
+  var _accumulated = 0;
+  var _destinations = globalctx.memory["destinations"];
+
+  if (currentDay.value == 0) {
+    return 0;
+  }
+
+  for (var i = 0; i < _destinations.length; i++) {
+    var _dest = _destinations[i.toString()];
+    var _explorationDay = _dest["explorationDay"];
+    _accumulated += int.parse(_explorationDay);
+    _left = totalDays.value - _accumulated;
+    if (_left <= currentDay.value) {
+      return i;
+    }
+  }
+};
 Function getDestinationIndex = (String destination, String type) {
   int destIndex = 0;
   var destinations = globalctx.states["destinations"].entries;
-
   for (var e in destinations) {
     if (e.value["destination"] == destination && e.value["type"] == type) {
       destIndex = e.value["index"];
     }
   }
-
   if (type == "arrival") {
     destIndex = 0;
   }
   if (type == "departure") {
     destIndex = globalctx.promotedDestinations.length - 1;
   }
-
   return destIndex;
 };
-
 Function getDestinationTravelRhythm = (destination, type) {
   int destIndex = getDestinationIndex(destination, type);
   var destData = globalctx.memory["destinations"][destIndex.toString()];
   var trData = processCatalog("travel_rhythm").toList();
   var trRange = trData
-      .firstWhere((e) => e["code"] == int.parse(destData["travelRhythm"]));
+      .firstWhere((e) => e["code"] == int.parse(destData["travel_rhythm"]));
   return trRange;
 };
-
 Function getDestinationKa = (destination, type) {
   int destIndex = getDestinationIndex(destination, type);
   var destData = globalctx.memory["destinations"][destIndex.toString()];
   return destData["keyActivities"];
 };
-
 Function getTourPurpose = () {
   var pCode = globalctx.memory["tour"]["purpose"];
   var purposes = processCatalog("purpose").toList();
@@ -309,40 +302,31 @@ Function getTourPurpose = () {
       .description;
   return compare;
 };
-
 Function filterDestinations = () {
   var arr = getDestinationById(arrivalPort.value);
   var dep = getDestinationById(departurePort.value);
-
   arrival.value = arr;
   departure.value = dep;
-
   filterSelectedDestinations();
 };
-
 Function getDestinationDay = (index) {
   index = index.toString();
-
   if (destinations[index] != null) {
     if (destinations[index]["explorationDay"] != null) {
       return int.parse(destinations[index]["explorationDay"]);
     }
   }
-
   return 0;
 };
-
 Function updateDestinationsCatalog = () {
   var countryName = getCountryNameById(destCountry.value);
   destinationsCatalog = processCatalog("destinations").where((element) =>
       element["relation"]["country"].toString().toLowerCase() ==
       countryName.toString().toLowerCase());
-
   airportCatalog = processCatalog("airport").where((element) =>
       element["relation"]["country"].toString().toLowerCase() ==
       countryName.toString().toLowerCase());
 };
-
 Function updateCurrentDestination = () {
   var type = "tour";
   if (currentDay.value == 0) {
@@ -354,7 +338,6 @@ Function updateCurrentDestination = () {
   currentDestinationType = type;
   globalDestinationType.value = type;
 };
-
 Function resetDestinations = () {
   destDraggable.value = 0;
   allPromotedDestinations.value = [];
@@ -367,7 +350,6 @@ Function resetDestinations = () {
   arrivalState.value = "selected";
   departureState.value = "selected";
 };
-
 Function getSubs = (String destination) {
   var res = <Map<String, dynamic>>[];
   try {
@@ -381,6 +363,5 @@ Function getSubs = (String destination) {
   } catch (e) {
     log(e);
   }
-
   return res;
 };

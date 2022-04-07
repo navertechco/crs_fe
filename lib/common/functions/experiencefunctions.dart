@@ -57,7 +57,7 @@ Function getFilteredExperiences = () {
     return rule;
   }).toList();
   List filteredByType = filteredByTravelRhytm.where((e) {
-    if (currentDay.value == 0 || e.description == "Leisure Time") {
+    if (e.description == "Leisure Time") {
       return true;
     }
     try {
@@ -264,19 +264,7 @@ Function initializeHours = () {
   leftHours[currentDay.value] ??= 0.0.obs;
   accumulatedHours[currentDay.value] ??= 0.0.obs;
   totalHours[currentDay.value] ??= 0.0.obs;
-  var index = getDestinationIndex(
-      globalDestinationName.value, globalDestinationType.value);
-  var travelRhythm = (getFormValue(globalctx.memory["destinations"], index,
-      "travelRhythm", globalDestinationName.value == "galapagos" ? "3" : "1"));
-  if (travelRhythm == "1") {
-    totalHours[currentDay.value].value = 6.0;
-  }
-  if (travelRhythm == "2") {
-    totalHours[currentDay.value].value = 8.0;
-  }
-  if (travelRhythm == "3") {
-    totalHours[currentDay.value].value = 10.0;
-  }
+  totalHours[currentDay.value].value = getMaxTrValue(currentTravelRhythm.value);
   leftHours[currentDay.value].value = totalHours[currentDay.value].value -
       accumulatedHours[currentDay.value].value;
 };

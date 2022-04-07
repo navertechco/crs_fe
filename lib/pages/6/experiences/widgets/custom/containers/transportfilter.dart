@@ -39,11 +39,7 @@ class BodyWidget extends StatelessWidget {
           globalDestinationName.value, globalDestinationType.value);
       Rx<bool> customGuide = Rx(getFormValue(
           globalctx.memory["destinations"], index, "customGuide", false));
-      Rx<dynamic> travelRhythm = Rx(getFormValue(
-          globalctx.memory["destinations"],
-          index,
-          "travelRhythm",
-          globalDestinationName.value == "galapagos" ? "3" : "1"));
+
       return Form(
         key: formKey,
         child: Padding(
@@ -69,7 +65,7 @@ class BodyWidget extends StatelessWidget {
                         CustomTitleWidget(
                             fontWeight: FontWeight.bold,
                             label:
-                                "Travel Rhythm: ${findTravelRhythmDescription(parseInt(travelRhythm.value))}",
+                                "Travel Rhythm: ${findTravelRhythmDescription(parseInt(currentTravelRhythm.value))}",
                             color: Colors.white,
                             fontSize: 15),
                         CustomTitleWidget(
@@ -81,7 +77,7 @@ class BodyWidget extends StatelessWidget {
                         CustomTitleWidget(
                             fontWeight: FontWeight.bold,
                             label:
-                                "Left Hours: ${getTimeStringFromDouble(getRXValue(leftHours, currentDay.value, globalDestinationName.value == "galapagos" ? 12.0 : 6.0))}",
+                                "Left Hours: ${getTimeStringFromDouble(getRXValue(leftHours, currentDay.value, getMaxTrValue(currentTravelRhythm.value)))}",
                             color: Colors.white,
                             fontSize: 15),
                         if (globalDestinationName.value == "galapagos")

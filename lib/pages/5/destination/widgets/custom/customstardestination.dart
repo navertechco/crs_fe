@@ -74,7 +74,7 @@ class CustomStarDestinationForm extends StatelessWidget {
     Function validateGalapagosTR = () {
       if (destination == "galapagos") {
         setFormValue(
-            globalctx.memory["destinations"], index, "travelRhythm", "3");
+            globalctx.memory["destinations"], index, "travel_rhythm", "3");
       }
     };
 
@@ -363,13 +363,13 @@ class CustomStarDestinationForm extends StatelessWidget {
                         value: getFormValue(
                             globalctx.memory["destinations"],
                             index,
-                            "travelRhythm",
+                            "travel_rhythm",
                             destination == "galapagos" ? "3" : "1"),
                         onSaved: (value) {
                           setFormValue(
                               globalctx.memory["destinations"],
                               index,
-                              "travelRhythm",
+                              "travel_rhythm",
                               destination == "galapagos" ? "3" : value);
                           setFormValue(globalctx.memory["destinations"], index,
                               "type", type);
@@ -382,7 +382,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                           setFormValue(
                               globalctx.memory["destinations"],
                               index,
-                              "travelRhythm",
+                              "travel_rhythm",
                               destination == "galapagos" ? "3" : value);
                         },
                         label: "Travel Rhythm         ",

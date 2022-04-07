@@ -155,14 +155,14 @@ Function processDays = () {
 
   if (result.isNotEmpty) {
     globalDestinationName.value = result[currentDay.value]["destination"];
+    updateCurrentDestinationTravelRhythm();
   }
 };
 
 Function updateCurrentDestinationTravelRhythm = () {
-  var index = getDestinationIndex(
-      globalDestinationName.value, globalDestinationType.value);
-  var travelRhythm = (getFormValue(
-      globalctx.memory["destinations"], index, "travelRhythm", "1"));
+  var index = getDestinationIndexByDay();
+  var travelRhythm = getFormValue(
+      globalctx.memory["destinations"], index, "travel_rhythm", "1");
   currentTravelRhythm.value = travelRhythm;
 };
 

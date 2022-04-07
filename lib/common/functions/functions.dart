@@ -473,10 +473,9 @@ Function getDetail = (context, data) {
                 showCustomDialog(
                     context,
                     WebView(
-                        url:
-                            "$kDefaultSchema://$kDefaultServer:$kDefaultServerPort/pdf.html",
-                            
-                            ),
+                      url:
+                          "$kDefaultSchema://$kDefaultServer:$kDefaultServerPort/pdf.html",
+                    ),
                     "Close",
                     buttonColor: Colors.white);
               },
@@ -567,3 +566,14 @@ Future<void> logout(
     log(res["message"]);
   }
 }
+
+Function getTrColor = (tr) {
+  
+  var color = {
+    "SOFT": Colors.green,
+    "MEDIUM": Colors.yellow,
+    "HARD": Colors.red
+  };
+
+  return color[tr.toString().toUpperCase()];
+};

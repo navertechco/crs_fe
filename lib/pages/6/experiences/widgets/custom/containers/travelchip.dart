@@ -11,11 +11,7 @@ class TravelChips extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    // useEffect(() {
-    //   destinationOption.value = "0";
-    //   travelRhythm.value = "0";
-    //   keyActivities.value = <String>[];
-    // }, [stream, counter.value]);
+ 
 
     var index = getDestinationIndex(
         globalDestinationName.value, globalDestinationType.value);
@@ -25,11 +21,7 @@ class TravelChips extends HookWidget {
     Rx<dynamic> destinationOption = Rx(getFormValue(
         globalctx.memory["destinations"], index, "destinationOption", "0"));
 
-    Rx<dynamic> travelRhythm = Rx(getFormValue(
-        globalctx.memory["destinations"],
-        index,
-        "travelRhythm",
-        globalDestinationName.value == "galapagos" ? "3" : "1"));
+    
 
     return SizedBox(
         width: MediaQuery.of(context).size.width * 0.25,
@@ -62,16 +54,16 @@ class TravelChips extends HookWidget {
                         destinationOption.value = "0";
                       },
                     ),
-                  if (travelRhythm.value != "0")
+                  if (currentTravelRhythm.value != "0")
                     InputChip(
                       deleteIcon: Icon(Icons.cancel),
                       label: Text(
-                          "Travel Rhythm: ${findTravelRhythmDescription(parseInt(travelRhythm.value))}"),
+                          "Travel Rhythm: ${findTravelRhythmDescription(parseInt(currentTravelRhythm.value))}"),
                       onSelected: (bool value) {},
                       onDeleted: () {
                         if (globalDestinationName.value != "galapagos") {
-                          travelRhythm.value = "0";
-                          currentTravelRhythm.value = "0";
+                          currentTravelRhythm.value = "3";
+                          currentTravelRhythm.value = "3";
                           filterSuggestedExperiences();
                         }
                       },
