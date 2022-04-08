@@ -37,7 +37,7 @@ class CustomStarDestinationForm extends StatelessWidget {
     }
 
     List<String> keyActivities = getFormValue(
-        globalctx.memory["destinations"], index, "keyActivities", <String>[]);
+        globalctx.memory["destinations"], index, "key_activities", <String>[]);
     Rx<String> subs =
         Rx(getFormValue(globalctx.memory["destinations"], index, "subs", "0"));
     List<Map<String, dynamic>> explorationdDays =
@@ -401,11 +401,11 @@ class CustomStarDestinationForm extends StatelessWidget {
                       value: keyActivities,
                       onSaved: (value) {
                         setFormValue(globalctx.memory["destinations"], index,
-                            "keyActivities", ["CULTURE"]);
+                            "key_activities", ["CULTURE"]);
                         setFormValue(
                             globalctx.memory["destinations"],
                             index,
-                            "keyActivities",
+                            "key_activities",
                             value!
                                 .map((e) => e["description"])
                                 .toSet()
@@ -413,7 +413,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                       },
                       onChanged: (value) {
                         setFormValue(globalctx.memory["destinations"], index,
-                            "keyActivities", value);
+                            "key_activities", value);
                       },
                       hintText: " ",
                       label: "Key Activities            ",

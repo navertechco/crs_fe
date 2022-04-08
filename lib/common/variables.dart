@@ -348,15 +348,17 @@ var currentDestinationTrRange = currentDestinationTr["value"];
 var currentDestinationTrMinRange = Rx(currentDestinationTrRange["min"]);
 var currentDestinationTrMaxRange = Rx(currentDestinationTrRange["max"]);
 var currentDestinationType = "arrival";
-var currentDestinationKeyActivities = [];
+var currentDestinationKeyActivities = [].obs;
 var leftHours = {}.obs;
 var trMaxValues = {
   "SOFT": 6.0,
   "MEDIUM": 8.0,
   "HARD": 10.0,
+  "0": 6.0,
   "1": 6.0,
   "2": 8.0,
   "3": 10.0,
+  0: 6.0,
   1: 6.0,
   2: 8.0,
   3: 10.0
@@ -364,6 +366,7 @@ var trMaxValues = {
 var accumulatedHours = {}.obs;
 var totalHours = {}.obs;
 var currentTravelRhythm = "1".obs;
+var currentDestinationOption = "0".obs;
 final TimeOfDay time = TimeOfDay(hour: 7, minute: 15);
 Rx<TimeOfDay?> startTime = Rx(TimeOfDay(hour: 7, minute: 15));
 Rx<TimeOfDay?> endTime = Rx(TimeOfDay(hour: 7, minute: 15));

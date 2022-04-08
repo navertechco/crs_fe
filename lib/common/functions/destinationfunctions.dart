@@ -281,6 +281,14 @@ Function getDestinationIndex = (String destination, String type) {
   }
   return destIndex;
 };
+Function getDestinationDestOption = (destination, type) {
+  int destIndex = getDestinationIndex(destination, type);
+  var destData = globalctx.memory["destinations"][destIndex.toString()];
+  var trData = processCatalog("detination_option").toList();
+  var trRange = trData
+      .firstWhere((e) => e["code"] == int.parse(destData["detination_option"]));
+  return trRange;
+};
 Function getDestinationTravelRhythm = (destination, type) {
   int destIndex = getDestinationIndex(destination, type);
   var destData = globalctx.memory["destinations"][destIndex.toString()];
@@ -292,7 +300,7 @@ Function getDestinationTravelRhythm = (destination, type) {
 Function getDestinationKa = (destination, type) {
   int destIndex = getDestinationIndex(destination, type);
   var destData = globalctx.memory["destinations"][destIndex.toString()];
-  return destData["keyActivities"];
+  return destData["key_activities"];
 };
 Function getTourPurpose = () {
   var pCode = globalctx.memory["tour"]["purpose"];

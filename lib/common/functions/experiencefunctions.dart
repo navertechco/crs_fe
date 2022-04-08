@@ -8,36 +8,45 @@ import 'package:naver_crs/pages/6/experiences/widgets/custom/index.dart';
 import '../index.dart';
 
 Function filterSuggestedExperiences = () {
-  // Get airport from current destination
+  processDays();
+  filterExperiences();
+};
+
+Function filterExperiences = () {
   var filteredExperiences = getFilteredExperiences();
+  updateDragExperiences(filteredExperiences);
+};
+
+Function updateDragExperiences = (filteredExperiences) {
   explist.value = <Widget>[];
   for (var exp in filteredExperiences) {
     explist.add(CustomDragableExperience(experience: exp, suggested: true));
   }
 };
+
+
 Function getFilteredExperiences = () {
-  processDays();
-  List filtered = [];
-  for (Map item in experiences) {
-    List itemList = item.values.toList();
-    CatalogDto experience = CatalogDto(itemList);
-    if (experience.value["destination"].toString().toLowerCase() == "all") {
-      filtered.add(experience);
-    }
-    if (experience.value["destination"].toString().toLowerCase() ==
-        globalDestinationName.value) {
-      filtered.add(experience);
-    }
-  }
+  List filtered = getFiltered();
+  // List filteredByDestinationOption = filtered.where((e) {
+  //   if (currentDestinationOption.value == "0") {
+  //     return true;
+  //   }
+  //   var destDo = getDestinationDestOption(globalDestinationName.value,
+  //       globalDestinationType.value)["description"];
+  //   var eDo = e.value["destination_option"].toString().toUpperCase();
+
+  //   var rule = destDo == eDo;
+  //   return rule;
+  // }).toList();
+
   List filteredByTravelRhytm = filtered.where((e) {
+    if (currentTravelRhythm.value == "0") {
+      return true;
+    }
     if (currentDay.value == 0 || e.description == "Leisure Time") {
       return true;
     }
     if (currentDay.value == totalDays.value - 1) {
-      return true;
-    }
-
-    if (currentTravelRhythm.value == "0") {
       return true;
     }
 
@@ -71,6 +80,9 @@ Function getFilteredExperiences = () {
     // return rule;
   }).toList();
   List filteredByKA = filteredByType.where((e) {
+    if (currentDestinationKeyActivities.value.isEmpty) {
+      return true;
+    }
     if (currentDay.value == 0 || e.description == "Leisure Time") {
       return true;
     }
@@ -139,7 +151,21 @@ Function getFilteredExperiences = () {
   Iterable result = filteredBySuggested;
   return result;
 };
-
+Function getFiltered = () {
+  List filtered = [];
+  for (Map item in experiences) {
+    List itemList = item.values.toList();
+    CatalogDto experience = CatalogDto(itemList);
+    if (experience.value["destination"].toString().toLowerCase() == "all") {
+      filtered.add(experience);
+    }
+    if (experience.value["destination"].toString().toLowerCase() ==
+        globalDestinationName.value) {
+      filtered.add(experience);
+    }
+  }
+  return filtered;
+};
 Function resetCurrentDay = () {
   var experiences = globalctx.states["experiences"][currentDay.value].entries;
   for (var experience in experiences) {

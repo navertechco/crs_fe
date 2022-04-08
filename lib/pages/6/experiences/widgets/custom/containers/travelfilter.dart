@@ -19,15 +19,13 @@ class TravelFilter extends HookWidget {
     var index = 0;
 
     Rx<dynamic> keyActivities = Rx(getFormValue(
-        globalctx.memory["destinations"], index, "keyActivities", <String>[]));
+        globalctx.memory["destinations"], index, "key_activities", <String>[]));
 
     Rx<dynamic> destinationOption = Rx(getFormValue(
-        globalctx.memory["destinations"], index, "destinationOption", "0"));
+        globalctx.memory["destinations"], index, "destination_option", "0"));
 
     Rx<dynamic> travelRhythm = Rx(getFormValue(
         globalctx.memory["destinations"], index, "travel_rhythm", "0"));
-
-    
 
     var kaDataCatalog = Rx(processCatalog("key_activity"));
     return Align(
@@ -54,11 +52,11 @@ class TravelFilter extends HookWidget {
                         value: destinationOption.value,
                         onSaved: (value) {
                           setFormValue(globalctx.memory["destinations"], index,
-                              "destinationOption", value);
+                              "destination_option", value);
                         },
                         onChanged: (value) {
                           setFormValue(globalctx.memory["destinations"], index,
-                              "destinationOption", value);
+                              "destination_option", value);
                         },
                         hintText: "Travel Options",
                         data: processCatalog("destination_option"),
@@ -84,11 +82,11 @@ class TravelFilter extends HookWidget {
                         value: keyActivities.value,
                         onSaved: (value) {
                           setFormValue(globalctx.memory["destinations"], index,
-                              "keyActivities", null);
+                              "key_activities", null);
                           setFormValue(
                               globalctx.memory["destinations"],
                               index,
-                              "keyActivities",
+                              "key_activities",
                               value!
                                   .map((e) => e["description"])
                                   .toSet()
@@ -96,7 +94,7 @@ class TravelFilter extends HookWidget {
                         },
                         onChanged: (value) {
                           setFormValue(globalctx.memory["destinations"], index,
-                              "keyActivities", value);
+                              "key_activities", value);
                         },
                         hintText:
                             "\t\t\t\t\t\t\t\t\t\t\t\tKey Activities            \n",

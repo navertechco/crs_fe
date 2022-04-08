@@ -156,9 +156,23 @@ Function processDays = () {
   if (result.isNotEmpty) {
     globalDestinationName.value = result[currentDay.value]["destination"];
     updateCurrentDestinationTravelRhythm();
+    updateCurrentDestinationOption();
+    updateCurrentKeyActivities();
   }
 };
+Function updateCurrentKeyActivities = () {
+  var index = getDestinationIndexByDay();
+  var ka = getFormValue(
+      globalctx.memory["destinations"], index, "key_activities", []);
+  currentDestinationKeyActivities.value = ka;
+};
 
+Function updateCurrentDestinationOption = () {
+  var index = getDestinationIndexByDay();
+  var destinationOption = getFormValue(
+      globalctx.memory["destinations"], index, "destination_option", "1");
+  currentDestinationOption.value = destinationOption;
+};
 Function updateCurrentDestinationTravelRhythm = () {
   var index = getDestinationIndexByDay();
   var travelRhythm = getFormValue(
