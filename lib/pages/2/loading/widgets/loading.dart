@@ -24,64 +24,30 @@ class LoadingWidget extends GetView<LoadingController> {
                   padding: EdgeInsets.only(
                       left: MediaQuery.of(context).size.width * 0.4,
                       top: MediaQuery.of(context).size.height * 0.7),
-                  child: Obx(() {
-                    return Column(
-                      children: [
-                        if (newtour.value)
-                          RoundedFormButton(
-                              label: "New Tour",
-                              height: 0.07,
-                              fontSize: 5,
-                              onTap: () {
-                                setContext("readonly", false);
-                                Get.toNamed("/Tour");
-                              }),
-                        if (newtour.value)
-                          SizedBox(
-                            child: TextButton(
-                              onPressed: () => newtour.value = !newtour.value,
-                              child: const Text(
-                                "Find tour?",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black),
-                              ),
-                            ),
-                          ),
-                        // if (!newtour.value)
-                        //   RoundedFormTextField(
-                        //       onChanged: (value) => ctrl.state.tourId = value!,
-                        //       hintText: 'Find Tour',
-                        //       keyboardType: TextInputType.number),
-                        // if (!newtour.value)
-                        //   SizedBox(
-                        //     height: MediaQuery.of(context).size.height * 0.01,
-                        //   ),
-                        if (!newtour.value)
-                          RoundedFormButton(
-                              label: "Find Tour",
-                              height: 0.07,
-                              fontSize: 5,
-                              onTap: () {
-                                getTour(context, tourId: 0);
-                                // setContext("readonly", false);
-                                // Get.toNamed("/Searcher");
-                              }),
-                        if (!newtour.value)
-                          SizedBox(
-                            child: TextButton(
-                              onPressed: () => newtour.value = !newtour.value,
-                              child: const Text(
-                                "New tour?",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black),
-                              ),
-                            ),
-                          ),
-                      ],
-                    );
-                  })),
+                  child: Column(
+                    children: [
+                      RoundedFormButton(
+                          label: "New Tour",
+                          height: 0.07,
+                          fontSize: 5,
+                          onTap: () {
+                            setContext("readonly", false);
+                            Get.toNamed("/Tour");
+                          }),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.02,
+                      ),
+                      RoundedFormButton(
+                          label: "Find Tour",
+                          height: 0.07,
+                          fontSize: 5,
+                          onTap: () {
+                            getTour(context, tourId: 0);
+                            // setContext("readonly", false);
+                            // Get.toNamed("/Searcher");
+                          }),
+                    ],
+                  )),
             ],
           )),
     );
