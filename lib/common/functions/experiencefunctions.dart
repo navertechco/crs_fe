@@ -37,20 +37,6 @@ Function getFilteredExperiences = () {
   //   var rule = destDo == eDo;
   //   return rule;
   // }).toList();
-  // List filteredByLeft = filtered.where((e) {
-  //   try {
-  //     if (e.description == "Leisure Time") {
-  //       return true;
-  //     }
-  //     var currentLeft = leftHours[currentDay.value].value;
-  //     var expTime = getExperienceByName(e.description).value["exptime"];
-  //     var rule = expTime <= currentLeft;
-  //     return rule;
-  //   } catch (e) {
-  //     log(e);
-  //     return true;
-  //   }
-  // }).toList();
 
   List filteredByTravelRhytm = filtered.where((e) {
     if (currentTravelRhythm.value == "0") {
@@ -161,7 +147,23 @@ Function getFilteredExperiences = () {
     }
     return getExperienceState(e.description) == "suggested";
   }).toList();
-  Iterable result = filteredBySuggested;
+  List filteredByLeft = filteredBySuggested.where((e) {
+    return true;
+    try {
+      if (e.description == "Leisure Time") {
+        return true;
+      }
+      var left = leftHours[currentDay.value] ?? 0.0.obs;
+      var currentLeft = left.value * 60;
+      var expTime = getExperienceByName(e.description).value["exptime"] ?? 600;
+      var rule = expTime <= currentLeft;
+      return rule;
+    } catch (e) {
+      log(e);
+      return true;
+    }
+  }).toList();
+  Iterable result = filteredByLeft;
   return result;
 };
 Function getFiltered = () {
@@ -180,14 +182,18 @@ Function getFiltered = () {
   return filtered;
 };
 Function resetCurrentDay = () {
-  var experiences = globalctx.states["experiences"][currentDay.value].entries;
-  for (var experience in experiences) {
-    removeExperience(experience.key);
+  try {
+    var experiences = globalctx.states["experiences"][currentDay.value].entries;
+    for (var experience in experiences) {
+      removeExperience(experience.key);
+    }
+    accumulatedHours[currentDay.value].value = 0.0;
+    leftHours[currentDay.value].value = totalHours[currentDay.value].value;
+    initializeHours();
+    resetLeisureTime();
+  } catch (e) {
+    log(e);
   }
-  accumulatedHours[currentDay.value].value = 0.0;
-  leftHours[currentDay.value].value = totalHours[currentDay.value].value;
-  initializeHours();
-  resetLeisureTime();
 };
 
 Function resetExperiences = () {
