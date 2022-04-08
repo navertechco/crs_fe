@@ -24,7 +24,6 @@ Function updateDragExperiences = (filteredExperiences) {
   }
 };
 
-
 Function getFilteredExperiences = () {
   List filtered = getFiltered();
   // List filteredByDestinationOption = filtered.where((e) {
@@ -37,6 +36,20 @@ Function getFilteredExperiences = () {
 
   //   var rule = destDo == eDo;
   //   return rule;
+  // }).toList();
+  // List filteredByLeft = filtered.where((e) {
+  //   try {
+  //     if (e.description == "Leisure Time") {
+  //       return true;
+  //     }
+  //     var currentLeft = leftHours[currentDay.value].value;
+  //     var expTime = getExperienceByName(e.description).value["exptime"];
+  //     var rule = expTime <= currentLeft;
+  //     return rule;
+  //   } catch (e) {
+  //     log(e);
+  //     return true;
+  //   }
   // }).toList();
 
   List filteredByTravelRhytm = filtered.where((e) {
