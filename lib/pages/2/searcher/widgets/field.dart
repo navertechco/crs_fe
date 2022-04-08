@@ -5,8 +5,7 @@ import 'package:get/get.dart';
 import '../../../index.dart';
 
 class SearcherField extends StatelessWidget {
-    SearcherField({Key? key, this.data, required this.formKey})
-      : super(key: key);
+  SearcherField({Key? key, this.data, required this.formKey}) : super(key: key);
 
   final List? data;
   GlobalKey<FormState> formKey;
@@ -38,13 +37,7 @@ class SearcherField extends StatelessWidget {
           trailing: IconButton(
             icon: Icon(Icons.cancel),
             onPressed: () {
-              if (searchResult!.value.isNotEmpty) {
-                controller.clear();
-                searchResult!.value = '';
-                filteredData.value = data!;
-                var detail = getDetail(context, filteredData);
-                searcherDetail.value = (detail);
-              }
+              resetData(context, controller);
             },
           ),
         ),

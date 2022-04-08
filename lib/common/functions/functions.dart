@@ -372,16 +372,33 @@ Future<void> getTour(ctx, {int tourId = 0}) async {
   }
 }
 
+Function resetData = (context, controller) {
+  var data = globalctx.memory["tours"];
+  if (searchResult!.value.isNotEmpty) {
+    controller.clear();
+    searchResult!.value = "";
+    filteredData.value = data;
+    var detail = getDetail(context, filteredData);
+    searcherDetail.value = (detail);
+  }
+};
 Function filterData = (context, value) {
-  searchResult!.value = value;
-  filteredData.value = data
-      .where((quote) =>
-          quote["date"].contains(searchResult!.value) ||
-          quote["name"].contains(searchResult!.value) ||
-          quote["quote"].contains(searchResult!.value))
-      .toList();
-  var detail = getDetail(context, filteredData);
-  searcherDetail.value = (detail);
+  var data = globalctx.memory["tours"];
+  try {
+    searchResult!.value = value.toString();
+    if (searchResult!.value.isNotEmpty) {
+      filteredData.value = data
+          .where((quote) =>
+              quote["date"].toString().contains(searchResult!.value) ||
+              quote["name"].toString().contains(searchResult!.value) ||
+              quote["quote"].toString().contains(searchResult!.value))
+          .toList();
+      var detail = getDetail(context, filteredData);
+      searcherDetail.value = (detail);
+    }
+  } catch (e) {
+    log(e);
+  }
 };
 Function processNetRateData = (context, data) {
   var header = getNetRateHeader(context, data);
@@ -568,7 +585,6 @@ Future<void> logout(
 }
 
 Function getTrColor = (tr) {
-  
   var color = {
     "SOFT": Colors.green,
     "MEDIUM": Colors.yellow,

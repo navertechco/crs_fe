@@ -68,7 +68,7 @@ class CustomFooterWidget extends StatelessWidget {
                   showCustomDialog(
                     context,
                     Text(
-                        "You have ${leftHours[currentDay.value]} left, would you like to assign another experience?",
+                        "You have ${leftHours[currentDay.value]} hours left, would you like to assign another experience?",
                         style: KTextSytle(
                                 context: context,
                                 fontSize: 15,

@@ -375,16 +375,6 @@ List netRateData = [
   {"room_type": "single", "quantity": "16", "passengers": "16", "roh": "3000"},
   {"room_type": "double", "quantity": "2", "passengers": "2", "roh": "2000"},
 ];
-List data = [
-  {"created": "10-10-2022", "contact_name": "Name1", "tour_id": "1111"},
-  {"created": "11-10-2022", "contact_name": "Name2", "tour_id": "2222"},
-  {"created": "12-10-2022", "contact_name": "Name3", "tour_id": "3333"},
-  {"created": "13-10-2022", "contact_name": "Name4", "tour_id": "4444"},
-  {"created": "13-10-2022", "contact_name": "Name4", "tour_id": "5555"},
-  {"created": "13-10-2022", "contact_name": "Name4", "tour_id": "6666"},
-  {"created": "13-10-2022", "contact_name": "Name4", "tour_id": "7777"},
-  {"created": "13-10-2022", "contact_name": "Name4", "tour_id": "8888"},
-  {"created": "13-10-2022", "contact_name": "Name4", "tour_id": "9999"},
-];
+List data = [];
 RxString? searchResult = ''.obs;
 var filteredData = [].obs;

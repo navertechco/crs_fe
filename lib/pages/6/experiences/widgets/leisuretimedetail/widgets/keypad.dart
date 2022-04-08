@@ -27,7 +27,10 @@ class KeypadWidget extends StatelessWidget {
                       color: Colors.white)
                   .getStyle()),
           onPressed: () {
-            promoteLeisureTime();
+            var state = getExperienceState("Leisure Time");
+            if (state == "selected") {
+              promoteLeisureTime();
+            }
             Get.close(1);
           },
         ),
@@ -40,7 +43,11 @@ class KeypadWidget extends StatelessWidget {
                       color: Colors.white)
                   .getStyle()),
           onPressed: () {
-            resetLeisureTime();
+            var state = getExperienceState("Leisure Time");
+            if (state == "promoted") {
+              resetLeisureTime();
+              setExperienceState("Leisure Time", "selected");
+            }
             Get.close(1);
           },
         ),

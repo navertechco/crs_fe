@@ -67,7 +67,6 @@ class CustomLeisureTimeDetailForm extends StatelessWidget {
             buttonColor: Colors.black,
           );
         } else {
-        
           setLT(lt.value);
           setFormValue(
               globalctx.memory["days"], currentDay.value, "$save", value);
@@ -106,7 +105,8 @@ class CustomLeisureTimeDetailForm extends StatelessWidget {
               key: _formKey,
               child: Column(
                 children: [
-                  Text("Total Leisure Time: $leisureTime hours",
+                  Text(
+                      "Total Leisure Time: ${getTimeStringFromDouble(leisureTime.value!)} hours",
                       style: KTextSytle(
                               context: context,
                               fontSize: 15,

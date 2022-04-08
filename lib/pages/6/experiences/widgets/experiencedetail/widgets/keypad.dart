@@ -27,24 +27,28 @@ class KeypadWidget extends StatelessWidget {
                       color: Colors.white)
                   .getStyle()),
           onPressed: () {
-            var expData = getExperienceValueByName(experience);
-            if (expData["exptime"] <= leftHours[currentDay.value].value * 60) {
-              promoteExperience(experience);
-              Get.close(1);
-            } else {
-              showCustomDialog(
-                context,
-                Text("Too Many Selected Hours !!!!",
-                    style: KTextSytle(
-                            context: context,
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black)
-                        .getStyle()),
-                "Close",
-                backgroundColor: Colors.white,
-                buttonColor: Colors.black,
-              );
+            var state = getExperienceState(experience);
+            if (state == "selected") {
+              var expData = getExperienceValueByName(experience);
+              if (expData["exptime"] <=
+                  leftHours[currentDay.value].value * 60) {
+                promoteExperience(experience);
+                Get.close(1);
+              } else {
+                showCustomDialog(
+                  context,
+                  Text("Too Many Selected Hours !!!!",
+                      style: KTextSytle(
+                              context: context,
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black)
+                          .getStyle()),
+                  "Close",
+                  backgroundColor: Colors.white,
+                  buttonColor: Colors.black,
+                );
+              }
             }
           },
         ),
@@ -57,6 +61,10 @@ class KeypadWidget extends StatelessWidget {
                       color: Colors.white)
                   .getStyle()),
           onPressed: () {
+            var state = getExperienceState(experience);
+            if (state == "promoted") {
+              downgradeExperienceDays(experience);
+            }
             Get.close(1);
           },
         ),
