@@ -71,11 +71,9 @@ Function byPassCruise = (String direction) {
 
 Function nextDay = () {
   expDraggable.value = 1;
-
   currentDay.value++;
   currentDate.value = arrivalDate.value.add(Duration(days: currentDay.value));
   updateCurrentDestination();
-  processDays();
   filterSuggestedExperiences();
   initializeHours();
 };
@@ -155,9 +153,14 @@ Function processDays = () {
 
   if (result.isNotEmpty) {
     globalDestinationName.value = result[currentDay.value]["destination"];
-    updateCurrentDestinationTravelRhythm();
-    updateCurrentDestinationOption();
-    updateCurrentKeyActivities();
+    clearedHours[currentDay.value] ??= false;
+    clearedKA[currentDay.value] ??= false;
+    if (!clearedHours[currentDay.value]) {
+      updateCurrentDestinationTravelRhythm();
+    }
+    if (!clearedKA[currentDay.value]) {
+      updateCurrentKeyActivities();
+    }
   }
 };
 Function updateCurrentKeyActivities = () {

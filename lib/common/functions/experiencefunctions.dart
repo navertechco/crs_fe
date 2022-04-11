@@ -10,6 +10,8 @@ import '../index.dart';
 Function filterSuggestedExperiences = () {
   processDays();
   filterExperiences();
+  clearHours();
+  clearKA();
 };
 
 Function filterExperiences = () {
@@ -27,33 +29,33 @@ Function updateDragExperiences = (filteredExperiences) {
 Function getFilteredExperiences = () {
   List filtered = getFiltered();
 
-  List filteredByTravelRhytm = filtered.where((e) {
-    if (currentTravelRhythm.value == "0") {
-      return true;
-    }
-    if (currentDay.value == 0 || e.description == "Leisure Time") {
-      return true;
-    }
-    if (currentDay.value == totalDays.value - 1) {
-      return true;
-    }
+  // List filteredByTravelRhytm = filtered.where((e) {
+  //   if (currentTravelRhythm.value == "0") {
+  //     return true;
+  //   }
+  //   if (currentDay.value == 0 || e.description == "Leisure Time") {
+  //     return true;
+  //   }
+  //   if (currentDay.value == totalDays.value - 1) {
+  //     return true;
+  //   }
 
-    var destTr = getDestinationTravelRhythm(globalDestinationName.value,
-        globalDestinationType.value)["description"];
-    var eTr = e.value["travel_rhythm"].toString().toUpperCase();
+  //   var destTr = getDestinationTravelRhythm(globalDestinationName.value,
+  //       globalDestinationType.value)["description"];
+  //   var eTr = e.value["travel_rhythm"].toString().toUpperCase();
 
-    if (destTr == "HARD") {
-      return true;
-    }
+  //   if (destTr == "HARD") {
+  //     return true;
+  //   }
 
-    if (eTr == "SOFT" && destTr == "MEDIUM") {
-      return true;
-    }
+  //   if (eTr == "SOFT" && destTr == "MEDIUM") {
+  //     return true;
+  //   }
 
-    var rule = destTr == eTr;
-    return rule;
-  }).toList();
-  List filteredByType = filteredByTravelRhytm.where((e) {
+  //   var rule = destTr == eTr;
+  //   return rule;
+  // }).toList();
+  List filteredByType = filtered.where((e) {
     if (e.description == "Leisure Time") {
       return true;
     }
@@ -298,6 +300,8 @@ Function initializeHours = () {
   totalHours[currentDay.value].value = getMaxTrValue(currentTravelRhythm.value);
   leftHours[currentDay.value].value = totalHours[currentDay.value].value -
       accumulatedHours[currentDay.value].value;
+  clearHours();
+  clearKA();
 };
 Function calculateExperienceDays = (String experience) {
   var expData = getExperienceByName(experience).value;
@@ -337,3 +341,20 @@ Function updateDraggableExperiences = () {
     destDraggable.value = 0;
   }
 };
+
+Function clearHours = () {
+  clearedHours[currentDay.value] ??= false;
+  if (clearedHours[currentDay.value]) {
+    currentTravelRhythm.value = "0";
+    totalHours[currentDay.value].value = 10.0;
+    leftHours[currentDay.value].value = totalHours[currentDay.value].value -
+        accumulatedHours[currentDay.value].value;
+  }
+};
+Function clearKA = () {
+  clearedKA[currentDay.value] ??= false;
+  if (clearedKA[currentDay.value]) {
+    currentDestinationKeyActivities.value = [];
+  }
+};
+

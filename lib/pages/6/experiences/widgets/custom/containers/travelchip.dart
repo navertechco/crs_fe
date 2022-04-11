@@ -29,7 +29,8 @@ class TravelChips extends HookWidget {
                           " Key Activities: ${currentDestinationKeyActivities.value.toString().replaceAll("[", "").replaceAll("]", "")}"),
                       onSelected: (bool value) {},
                       onDeleted: () {
-                        currentDestinationKeyActivities.value = [];
+                        clearedKA[currentDay.value] = true;
+                        clearKA();
                         filterExperiences();
                       },
                     ),
@@ -51,11 +52,8 @@ class TravelChips extends HookWidget {
                           "Travel Rhythm: ${findTravelRhythmDescription(parseInt(currentTravelRhythm.value))}"),
                       onSelected: (bool value) {},
                       onDeleted: () {
-                        currentTravelRhythm.value = "0";
-                        totalHours[currentDay.value].value = 10.0;
-                        leftHours[currentDay.value].value =
-                            totalHours[currentDay.value].value -
-                                accumulatedHours[currentDay.value].value;
+                        clearedHours[currentDay.value] = true;
+                        clearHours();
                         filterExperiences();
                       },
                     ),

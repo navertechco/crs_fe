@@ -364,6 +364,8 @@ var trMaxValues = {
   3: 10.0
 };
 var accumulatedHours = {}.obs;
+var clearedHours = {}.obs;
+var clearedKA = {}.obs;
 var totalHours = {}.obs;
 var currentTravelRhythm = "1".obs;
 var currentDestinationOption = "0".obs;
