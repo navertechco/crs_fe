@@ -246,6 +246,10 @@ Function getMaxTrValue = (tr) {
   return trMaxValues[tr];
 };
 
+Function getAgeMaxTrValue = (tr) {
+  return trAgeMaxValues[tr];
+};
+
 Function getDestinationIndexByDay = () {
   var _left = 0;
   var _accumulated = 0;
@@ -372,4 +376,21 @@ Function getSubs = (String destination) {
     log(e);
   }
   return res;
+};
+
+Function filterTrByAge = () {
+  var tr = processCatalog("travel_rhythm");
+  var filtered = tr.toList();
+  var birthDate = globalctx.memory["customer"]["birth_date"];
+  var age = DateTime.now().difference(DateTime.parse(birthDate)).inDays / 365;
+  filtered = tr.toList().where((e) {
+    var range = getAgeMaxTrValue(e["description"].toString().toUpperCase());
+    // var min = range[0];
+    var max = range[1];
+    var rule2 = age <= max;
+    var rule = rule2;
+    return rule;
+  }).toList();
+  Iterable result = filtered;
+  return result;
 };

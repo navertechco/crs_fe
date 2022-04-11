@@ -72,7 +72,7 @@ class TravelFilter extends HookWidget {
                               "travel_rhythm", value);
                         },
                         hintText: "Travel Rhythm",
-                        data: processCatalog("travel_rhythm"),
+                        data: filterTrByAge(),
                       ),
                       CustomFormMultiDropDownFieldWidget(
                         validator: (value) =>

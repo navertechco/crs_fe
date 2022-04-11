@@ -363,6 +363,19 @@ var trMaxValues = {
   2: 8.0,
   3: 10.0
 };
+var trAgeMaxValues = {
+  "SOFT": [60, 99],
+  "MEDIUM": [40, 59],
+  "HARD": [0, 39],
+  "0": [60, 99],
+  "1": [0, 39],
+  "2": [40, 59],
+  "3": [60, 99],
+  0: [60, 99],
+  1: [0, 39],
+  2: [40, 59],
+  3: [60, 99]
+};
 var accumulatedHours = {}.obs;
 var clearedHours = {}.obs;
 var clearedKA = {}.obs;

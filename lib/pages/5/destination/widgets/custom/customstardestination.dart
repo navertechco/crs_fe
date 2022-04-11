@@ -386,8 +386,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                               destination == "galapagos" ? "3" : value);
                         },
                         label: "Travel Rhythm         ",
-                        data: multiDropDownKaAgeFilter(
-                            trCatalog, travelRhytmAges));
+                        data: filterTrByAge());
                   }
                   return Text("");
                 }),
