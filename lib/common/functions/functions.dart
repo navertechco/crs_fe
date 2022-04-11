@@ -291,7 +291,7 @@ Future<void> showCustomDialog(context, Widget child, String button,
 
 Function findTravelRhythmDescription = (int code) {
   if (code == 0) {
-    return "ALL";
+    return "HARD";
   }
   var travelData = processCatalog("travel_rhythm").toList();
   var description = travelData

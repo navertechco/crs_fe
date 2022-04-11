@@ -25,10 +25,40 @@ Function paginateDay = (context) {
 };
 Function paginateNextDay = () {
   if (currentDay.value < totalDays.value - 1) {
-    byPassCruise("forward");
+    int index = getDestinationIndex(globalDestinationName.value, "tour");
+    int explorationMode = int.parse(getFormValue(
+        globalctx.memory["destinations"], index, "explorationMode", "0"));
+    if (explorationMode > 1) {
+      byPassCruise("forward");
+    } else {
+      byPassSurprise("forward");
+    }
+
     nextDay();
   } else {
     prepareDaysToResume();
+  }
+};
+
+Function byPassSurprise = (String direction) {
+  return;
+  try {
+    int index = getDestinationIndex(globalDestinationName.value, "tour");
+    List keyActivities = (getFormValue(
+        globalctx.memory["destinations"], index, "keyActivities", []));
+
+    int explorationDay = int.parse(getFormValue(
+        globalctx.memory["destinations"], index, "explorationDay", "0"));
+
+    if (keyActivities.contains("Surprise")) {
+      if (direction == "forward") {
+        currentDay.value += explorationDay;
+      } else {
+        currentDay.value -= explorationDay;
+      }
+    }
+  } catch (e) {
+    log(e);
   }
 };
 
@@ -185,7 +215,15 @@ Function updateCurrentDestinationTravelRhythm = () {
 
 Function previousDay = () {
   if (currentDay.value > 0) {
-    byPassCruise("backward");
+    int index = getDestinationIndex(globalDestinationName.value, "tour");
+    int explorationMode = int.parse(getFormValue(
+        globalctx.memory["destinations"], index, "explorationMode", "0"));
+    if (explorationMode > 1) {
+      byPassCruise("backward");
+    } else {
+      byPassSurprise("backward");
+    }
+
     currentDay.value--;
     currentDate.value = arrivalDate.value.add(Duration(days: currentDay.value));
     updateCurrentDestination();

@@ -68,8 +68,8 @@ Function processDestinations = (context) {
     int idx = 0;
     for (var destination in destinations.entries.toList()) {
       var dest = destinations[idx.toString()];
-      var explorationDays = dest["explorationDay"];
-      var days = int.parse(explorationDays);
+      var explorationDay = dest["explorationDay"];
+      var days = int.parse(explorationDay);
       destinationDay.add({...dest, "destination": destination, "days": days});
       destDays.value += days;
       idx++;
