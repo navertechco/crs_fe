@@ -52,6 +52,10 @@ class TravelChips extends HookWidget {
                       onSelected: (bool value) {},
                       onDeleted: () {
                         currentTravelRhythm.value = "0";
+                        totalHours[currentDay.value].value = 10.0;
+                        leftHours[currentDay.value].value =
+                            totalHours[currentDay.value].value -
+                                accumulatedHours[currentDay.value].value;
                         filterExperiences();
                       },
                     ),

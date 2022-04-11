@@ -26,17 +26,6 @@ Function updateDragExperiences = (filteredExperiences) {
 
 Function getFilteredExperiences = () {
   List filtered = getFiltered();
-  // List filteredByDestinationOption = filtered.where((e) {
-  //   if (currentDestinationOption.value == "0") {
-  //     return true;
-  //   }
-  //   var destDo = getDestinationDestOption(globalDestinationName.value,
-  //       globalDestinationType.value)["description"];
-  //   var eDo = e.value["destination_option"].toString().toUpperCase();
-
-  //   var rule = destDo == eDo;
-  //   return rule;
-  // }).toList();
 
   List filteredByTravelRhytm = filtered.where((e) {
     if (currentTravelRhythm.value == "0") {
@@ -148,20 +137,17 @@ Function getFilteredExperiences = () {
     return getExperienceState(e.description) == "suggested";
   }).toList();
   List filteredByLeft = filteredBySuggested.where((e) {
-    return true;
-    try {
-      if (e.description == "Leisure Time") {
-        return true;
-      }
-      var left = leftHours[currentDay.value] ?? 0.0.obs;
-      var currentLeft = left.value * 60;
-      var expTime = getExperienceByName(e.description).value["exptime"] ?? 600;
-      var rule = expTime <= currentLeft;
-      return rule;
-    } catch (e) {
-      log(e);
+    // return true;
+
+    if (e.description == "Leisure Time") {
       return true;
     }
+    var total = totalHours[currentDay.value] ?? 0.0.obs;
+    var acc = accumulatedHours[currentDay.value] ?? 0.0.obs;
+    var currentLeft = (total.value - acc.value) * 60;
+    var expTime = getExperienceByName(e.description).value["exptime"] ?? 600;
+    var rule = expTime <= currentLeft;
+    return rule;
   }).toList();
   Iterable result = filteredByLeft;
   return result;
