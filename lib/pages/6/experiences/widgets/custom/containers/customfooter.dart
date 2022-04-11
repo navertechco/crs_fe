@@ -59,8 +59,7 @@ class CustomFooterWidget extends StatelessWidget {
                           color: Colors.white)
                       .getStyle()),
               onPressed: () {
-                if (accumulatedHours[currentDay.value] ==
-                    totalHours[currentDay.value]) {
+                if ((leftHours[currentDay.value].value * 60) <= 5) {
                   if (formKey.currentState!.validate()) {
                     paginateDay(context);
                   }
@@ -68,7 +67,7 @@ class CustomFooterWidget extends StatelessWidget {
                   showCustomDialog(
                     context,
                     Text(
-                        "You have ${leftHours[currentDay.value]} hours left, would you like to assign another experience?",
+                        "You have ${getTimeStringFromDouble(leftHours[currentDay.value].value)} hours left, would you like to assign another experience?",
                         style: KTextSytle(
                                 context: context,
                                 fontSize: 15,
