@@ -1,17 +1,12 @@
 // ignore_for_file: prefer_function_declarations_over_variables
+import 'dart:convert';
+import 'package:yaml/yaml.dart';
 import '../index.dart';
 
 Function sendTour = () async {
-  var memory = globalctx.memory;
+  var payload = globalctx.payload.toString();
+  var yaml = loadYaml(payload);
+  var data = (yaml.toString());
   await fetchhandler(kDefaultSchema, kDefaultServer, kDefaultServerPort,
-      kDefaultTourEdit, 'POST', {
-    "state": "www",
-    "data": {
-       "tour":memory["tour"],
-       "customer":memory["customer"],
-       "logistics":memory["logistics"],
-       "destinations": memory["destinations"],
-       "days": memory["days"]
-    }
-  });
+      kDefaultTourEdit, 'POST', {"state": "www", "data": data});
 };

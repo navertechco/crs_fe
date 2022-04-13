@@ -163,6 +163,27 @@ Function prepareDaysToResume = () {
         dayIndex++;
       }
     }
+    globalctx.memory["resume"] = destinations;
+
+    for (var dest in globalctx.memory["resume"].keys) {
+      globalctx.memory["resume"][dest] = globalctx.memory["resume"][dest].value;
+    }
+
+    globalctx.payload["tour"] = globalctx.memory["tour"];
+    globalctx.payload["logistic"] = globalctx.memory["logistic"];
+    globalctx.payload["customer"] = globalctx.memory["customer"];
+    globalctx.payload["destinations"] = globalctx.memory["resume"];
+    globalctx.payload["days"] = globalctx.memory["days"];
+    globalctx.payload["totalDays"] = globalctx.memory["totalDays"];
+    globalctx.payload["promoted"] = globalctx.memory["promoted"];
+
+    for (var day in globalctx.payload["days"].keys) {
+      globalctx.payload["days"][day] = globalctx.payload["days"][day].value;
+    }
+    globalctx.payload["logistic"]["arrival_date"]=globalctx.payload["logistic"]["arrival_date"].toString();
+    globalctx.payload["logistic"]["since_date"]=globalctx.payload["logistic"]["since_date"].toString();
+    globalctx.payload["logistic"]["departure_date"]=globalctx.payload["logistic"]["departure_date"].toString();
+    globalctx.payload["logistic"]["until_date"]=globalctx.payload["logistic"]["until_date"].toString();
   } catch (e) {
     log(e);
   } finally {

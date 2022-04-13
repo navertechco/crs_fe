@@ -188,7 +188,7 @@ class CustomCustomerDataForm extends StatelessWidget {
                                       errorText: "Birth date is Required");
                                 },
                                 initialValue: getDateValue(client, "birth_date",
-                                    def: DateTime(1981, 02, 20)),
+                                    def: DateTime(1981, 02, 12)),
                                 onSaved: (value) {
                                   ctrl!.state.birthDate =
                                       value.toString().split(" ")[0];
