@@ -166,8 +166,7 @@ Function prepareDaysToResume = () {
   } catch (e) {
     log(e);
   } finally {
-    log(globalctx.memory);
-    // sendTour(globalctx.memory);
+    sendTour();
     goto("EndServices");
   }
 };
