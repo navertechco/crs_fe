@@ -30,13 +30,13 @@ class EndServicesFormPage extends GetView<StatelessWidget> {
                     label: "PDF Resume",
                     color: Color.fromARGB(255, 204, 164, 61),
                     url:
-                        "$kDefaultSchema://$kDefaultServer:$kDefaultServerPort/pdf.html"),
+                        "$kDefaultSchema://$kDefaultServer:$kDefaultServerPort/pdf.html?doc=${globalctx.memory['customer']['travel_code']}"),
                 SizedBox(height: kDefaultPadding),
                 WebButton(
                     label: "WORD Resume",
                     color: Color.fromARGB(255, 204, 164, 61),
                     url:
-                        "$kDefaultSchema://$kDefaultServer:$kDefaultServerPort/docx.html"),
+                        "$kDefaultSchema://$kDefaultServer:$kDefaultServerPort/docx.html?doc=${globalctx.memory['customer']['travel_code']}"),
                 SizedBox(height: kDefaultPadding),
                 WebButton(
                     label: "Video Gallery",

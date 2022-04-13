@@ -45,6 +45,7 @@ const kDefaultBuyCreditsPath = "/Gamer/BuyCredit";
 const kDefaultJoinTournmanetPath = "/Gamer/JoinTournament";
 const kDefaultFindTour = "/Tour/FindTour";
 const kDefaultTourEdit = "/Tour/Edit";
+const kDefaultNewTourEdit = "/Tour/NewId";
 const kDefaultCreateCatalog = "/Admin/CreateCatalog";
 
 //DIMENSIONES

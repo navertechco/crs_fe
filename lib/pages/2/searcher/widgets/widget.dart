@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_function_declarations_over_variables
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart'; 
+import 'package:get/get.dart';
 import '../index.dart';
 import '../../../index.dart';
 import 'index.dart';
@@ -18,7 +18,7 @@ class SearcherWidget extends GetView<SearcherController> {
   @override
   Widget build(BuildContext context) {
     var processedData = processData(context, globalctx.memory["tours"]);
-      searcherHeader = Rx(processedData[0]);
+    searcherHeader = Rx(processedData[0]);
     if (searchResult!.value.isEmpty) {
       searcherDetail = Rx(processedData[1]);
     }
@@ -49,7 +49,7 @@ class SearcherWidget extends GetView<SearcherController> {
                 Padding(
                     padding: EdgeInsets.only(
                       top: MediaQuery.of(context).size.height * 0.3,
-                      left: MediaQuery.of(context).size.width * 0.2,
+                      left: MediaQuery.of(context).size.width * 0.1,
                     ),
                     child: Container(
                       decoration: BoxDecoration(
@@ -58,7 +58,7 @@ class SearcherWidget extends GetView<SearcherController> {
                             color: Color.fromARGB(255, 204, 164, 61),
                           ),
                           borderRadius: BorderRadius.all(Radius.circular(20))),
-                      width: MediaQuery.of(context).size.width * 0.6,
+                      width: MediaQuery.of(context).size.width * 0.8,
                       height: MediaQuery.of(context).size.height * 0.6,
                       // color: Colors.white,
                       child: SingleChildScrollView(

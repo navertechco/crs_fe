@@ -422,7 +422,7 @@ Function getNetRateHeader = (context, data) {
       String title = key ?? "";
       header.add(DataColumn(
         label: Text(
-          '${title.capitalize}',
+          title.capitalize!.replaceAll("_", " "),
           style: KTextSytle(
             context: context,
             fontSize: 15,
@@ -443,7 +443,7 @@ Function getHeader = (context, data) {
       String title = key ?? "";
       header.add(DataColumn(
         label: Text(
-          '${title.capitalize}',
+          title.capitalize!.replaceAll("_", " "),
           style: KTextSytle(
             context: context,
             fontSize: 15,
@@ -494,7 +494,7 @@ Function getDetail = (context, data) {
                     context,
                     WebView(
                       url:
-                          "$kDefaultSchema://$kDefaultServer:$kDefaultServerPort/pdf.html",
+                          "$kDefaultSchema://$kDefaultServer:$kDefaultServerPort/pdf.html?doc=${row['travel_code']}",
                     ),
                     "Close",
                     buttonColor: Colors.white);
@@ -581,7 +581,7 @@ Future<void> logout(
 
   if (res['state'] == true) {
     selectedIndex.value = 0;
-    Get.toNamed("/Splash");
+    Get.toNamed("/Signin");
   } else {
     log(res["message"]);
   }
@@ -595,4 +595,17 @@ Function getTrColor = (tr) {
   };
 
   return color[tr.toString().toUpperCase()];
+};
+
+Function newTour = () async {
+  var res = await fetchhandler(kDefaultSchema, kDefaultServer,
+      kDefaultServerPort, kDefaultNewTourEdit, 'POST', {});
+  if (res['state'] == true) {
+    var data = res['data'];
+    globalctx.memory["tour"]["code"] = data.toString();
+    selectedIndex.value = 0;
+    Get.toNamed("/Tour");
+  } else {
+    log(res["message"]);
+  }
 };

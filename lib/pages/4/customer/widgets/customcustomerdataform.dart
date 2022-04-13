@@ -303,7 +303,20 @@ class CustomCustomerDataForm extends StatelessWidget {
                                       "-" +
                                       dayFormat
                                           .format(arrivalDate.value)
-                                          .replaceAll(" ", "-");
+                                          .replaceAll(" ", "-") +
+                                      "-" +
+                                      globalctx.memory["tour"]["code"]
+                                          .toString();
+                                  travelCode.value = value.toString() +
+                                      "-" +
+                                      tour["passengers"] +
+                                      "-" +
+                                      dayFormat
+                                          .format(arrivalDate.value)
+                                          .replaceAll(" ", "-") +
+                                      "-" +
+                                      globalctx.memory["tour"]["code"]
+                                          .toString();
                                 },
                                 onChanged: (value) {
                                   leadPassenger.value = value!;
@@ -313,7 +326,10 @@ class CustomCustomerDataForm extends StatelessWidget {
                                       "-" +
                                       dayFormat
                                           .format(arrivalDate.value)
-                                          .replaceAll(" ", "-");
+                                          .replaceAll(" ", "-") +
+                                      "-" +
+                                      globalctx.memory["tour"]["code"]
+                                          .toString();
                                 },
                                 keyboardType: TextInputType.name,
                                 label: "Lead Passenger",

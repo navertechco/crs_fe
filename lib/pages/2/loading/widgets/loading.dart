@@ -32,7 +32,8 @@ class LoadingWidget extends GetView<LoadingController> {
                           fontSize: 5,
                           onTap: () {
                             setContext("readonly", false);
-                            Get.toNamed("/Tour");
+                            newTour();
+
                           }),
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.02,
