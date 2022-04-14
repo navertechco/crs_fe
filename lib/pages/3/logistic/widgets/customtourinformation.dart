@@ -28,6 +28,37 @@ class CustomLogisticInformationForm extends StatelessWidget {
               children: [
                 SingleChildScrollView(
                   child: Column(children: [
+                    Row(
+                      children: [
+                        const CustomTitleWidget(
+                            width: 0.225,
+                            fontWeight: FontWeight.bold,
+                            label: "  Cruise information     "),
+                        RoundedFormButton(
+                          color: Colors.grey,
+                          label: "View Cruise Calendar",
+                          height: 0.05,
+                          fontSize: 3,
+                          fontWeight: FontWeight.bold,
+                          textColor: Colors.black,
+                          onTap: () async {
+                            showCustomDialog(
+                              context,
+                              Text("A confirmation email was sent !!!!",
+                                  style: KTextSytle(
+                                          context: context,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white)
+                                      .getStyle()),
+                              "Close",
+                              backgroundColor: Colors.grey,
+                              buttonColor: Colors.black,
+                            );
+                          },
+                        ),
+                      ],
+                    ),
                     const CustomTitleWidget(
                         width: 0.225,
                         fontWeight: FontWeight.bold,
