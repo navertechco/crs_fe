@@ -1,5 +1,4 @@
 // ignore_for_file: prefer_function_declarations_over_variables
-import 'dart:convert';
 import 'package:yaml/yaml.dart';
 import '../index.dart';
 
@@ -8,5 +7,5 @@ Function sendTour = () async {
   var yaml = loadYaml(payload);
   var data = (yaml.toString());
   await fetchhandler(kDefaultSchema, kDefaultServer, kDefaultServerPort,
-      kDefaultTourEdit, 'POST', {"state": "www", "data": data});
+      kDefaultTourEdit, 'POST', {"state": "new", "id":globalctx.memory["tour"]["code"], "data": data});
 };
