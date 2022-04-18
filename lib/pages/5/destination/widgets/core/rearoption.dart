@@ -96,8 +96,12 @@ class DescriptionWidget extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  showCustomDialog(context,
-                      LeftWidget(destination: "quito", index: 0), "Close");
+                  showCustomDialog(
+                    context,
+                    LeftWidget(destination: "quito", index: 0),
+                    "Close",
+                    buttonColor: Colors.white,
+                  );
                 },
                 child: Text(
                   description,

@@ -74,7 +74,7 @@ class KeyPadWidget extends StatelessWidget {
                               .getStyle()),
                       "Close",
                       backgroundColor: Colors.white,
-                      buttonColor: Colors.black87,
+                      buttonColor: Colors.white,
                     );
                   }
                 },

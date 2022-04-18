@@ -364,6 +364,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                   if (explorationMode.value != "2") {
                     return CustomFormDropDownFieldWidget(
                         disabled: type == "arrival" ||
+                            type == "departure" ||
                             explorationMode.value != "0" ||
                             destination == "galapagos",
                         validator: CustomRequiredValidator(
