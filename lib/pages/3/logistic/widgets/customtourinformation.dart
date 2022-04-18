@@ -17,257 +17,245 @@ class CustomLogisticInformationForm extends StatelessWidget {
     var readonly = getContext("readonly") ?? false;
     return Stack(
       children: [
-        Form(
-          key: _formKey,
-          child: Padding(
-            padding: EdgeInsets.only(
-              top: MediaQuery.of(context).size.height * 0.16,
-              left: MediaQuery.of(context).size.width * 0.54,
-            ),
-            child: Column(
-              children: [
-                SingleChildScrollView(
-                  child: Column(children: [
-                    Row(
-                      children: [
-                        const CustomTitleWidget(
-                            width: 0.225,
-                            fontWeight: FontWeight.bold,
-                            label: "  Cruise information     "),
-                        RoundedFormButton(
-                          color: Colors.grey,
-                          label: "View Cruise Calendar",
-                          height: 0.05,
-                          fontSize: 3,
-                          fontWeight: FontWeight.bold,
-                          textColor: Colors.black,
-                          onTap: () async {
-                            showCustomDialog(
-                              context,
-                              Text("A confirmation email was sent !!!!",
-                                  style: KTextSytle(
-                                          context: context,
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white)
-                                      .getStyle()),
-                              "Close",
-                              backgroundColor: Colors.grey,
-                              buttonColor: Colors.black,
-                            );
-                          },
-                        ),
-                      ],
-                    ),
-                    const CustomTitleWidget(
-                        width: 0.225,
-                        fontWeight: FontWeight.bold,
-                        label: "  Arrival information"),
-                    CustomFormDropDownFieldWidget(
-                      value: arrivalPort.value,
-                      disabled: readonly,
-                      onSaved: (value) {
-                        ctrl!.state.arrival_port = value!;
-                        setFormValue(globalctx.memory, "logistic",
-                            "arrival_port", value);
-                        arrivalPort.value = value;
-                        globalctxReset();
-                      },
-                      onChanged: (value) {
-                        ctrl!.state.arrival_port = value!;
-                      },
-                      validator: CustomRequiredValidator(
-                          errorText: "Arrival Port is required ", ctx: context),
-                      label: "Arrival Port\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t",
-                      data: airportCatalog.toList(),
-                    ),
-                    Obx(() {
-                      return CustomFormDateFieldWidget(
-                        disabled: readonly,
-                        initialValue: arrivalDate.value,
-                        validator: CustomDatetimeGreaterValidator(
-                            context: context,
-                            compare: departureDate.value,
-                            errorText:
-                                "There is a problem with the Departure Date"),
-                        label: "Arrival Date               ",
-                        onSaved: (value) {
-                          ctrl!.state.arrivalDate = value!;
-                          arrivalDate.value = value;
-                        },
-                        onChanged: (value) {
-                          value ??= DateTime.now();
-                          ctrl!.state.arrivalDate = value;
-                          arrivalDate.value = value;
-                          processDaysCatalog();
-                        },
-                      );
-                    }),
-                    const CustomTitleWidget(
-                        width: 0.225,
-                        fontWeight: FontWeight.bold,
-                        label: "  Departure information"),
-                    CustomFormDropDownFieldWidget(
-                      value: departurePort.value,
-                      disabled: readonly,
-                      onSaved: (value) {
-                        ctrl!.state.departure_port = value!;
-                        setFormValue(globalctx.memory, "logistic",
-                            "departure_port", value);
-                        departurePort.value = value;
-                      },
-                      onChanged: (value) {
-                        ctrl!.state.departure_port = value!;
-                        departurePort.value = value;
-                        globalctxReset();
-                      },
-                      validator: CustomRequiredValidator(
-                          errorText: "Departure Port is required ",
-                          ctx: context),
-                      label: "Departure Port            ",
-                      data: airportCatalog.toList(),
-                    ),
-                    Obx(() {
-                      return CustomFormDateFieldWidget(
-                        disabled: readonly,
-                        initialValue: departureDate.value,
-                        validator: CustomDatetimeGreaterValidator(
-                            context: context,
-                            compare: arrivalDate.value,
-                            errorText:
-                                "There is a problem with the Arrival Date",
-                            invert: true),
-                        label: "Departure Date       ",
-                        onSaved: (value) {
-                          ctrl!.state.departureDate = value!;
-                          departureDate.value = value;
-                          processDaysCatalog();
-                        },
-                        onChanged: (value) {
-                          value ??= DateTime.now();
-                          ctrl!.state.departureDate = value;
-                          departureDate.value = value;
-                        },
-                      );
-                    }),
-                    Obx(() {
-                      return Column(
+        SingleChildScrollView(
+          child: Form(
+            key: _formKey,
+            child: Padding(
+              padding: EdgeInsets.only(
+                top: MediaQuery.of(context).size.height * 0.16,
+                left: MediaQuery.of(context).size.width * 0.54,
+              ),
+              child: Column(
+                children: [
+                  SingleChildScrollView(
+                    child: Column(children: [
+                      Row(
                         children: [
                           const CustomTitleWidget(
-                            width: 0.3,
+                              width: 0.225,
+                              fontWeight: FontWeight.bold,
+                              label: "  Cruise information     "),
+                          RoundedFormButton(
+                            color: Colors.grey,
+                            label: "View Cruise Calendar",
+                            height: 0.05,
+                            fontSize: 3,
                             fontWeight: FontWeight.bold,
-                            label: "  Logistic Information",
-                          ),
-                          CustomFormDropDownFieldWidget(
-                            validator: CustomRequiredValidator(
-                                errorText: "Destination option is required ",
-                                ctx: context),
-                            value: tourOption.value,
-                            onSaved: (value) {
-                              setFormValue(globalctx.memory, "logistic",
-                                  "tour_option", value);
+                            textColor: Colors.black,
+                            onTap: () async {
+                              showCustomDialog(
+                                context,
+                                Text("A confirmation email was sent !!!!",
+                                    style: KTextSytle(
+                                            context: context,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white)
+                                        .getStyle()),
+                                "Close",
+                                backgroundColor: Colors.grey,
+                                buttonColor: Colors.black,
+                              );
                             },
-                            onChanged: (value) {
-                              setFormValue(globalctx.memory, "logistic",
-                                  "tour_option", value);
-                              tourOption.value = value!;
-                            },
-                            label: "Tour Options\t\t\t\t\t\t\t\t\t\t\t\t\t",
-                            data: processCatalog("destination_option"),
                           ),
-                          if (tourOption.value == "4")
+                        ],
+                      ),
+                      const CustomTitleWidget(
+                          width: 0.225,
+                          fontWeight: FontWeight.bold,
+                          label: "  Arrival information"),
+                      CustomFormDropDownFieldWidget(
+                        value: arrivalPort.value,
+                        disabled: readonly,
+                        onSaved: (value) {
+                          ctrl!.state.arrival_port = value!;
+                          setFormValue(globalctx.memory, "logistic",
+                              "arrival_port", value);
+                          arrivalPort.value = value;
+                          globalctxReset();
+                        },
+                        onChanged: (value) {
+                          ctrl!.state.arrival_port = value!;
+                        },
+                        validator: CustomRequiredValidator(
+                            errorText: "Arrival Port is required ",
+                            ctx: context),
+                        label: "Arrival Port\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t",
+                        data: airportCatalog.toList(),
+                      ),
+                      Obx(() {
+                        return CustomFormDateFieldWidget(
+                          disabled: readonly,
+                          initialValue: arrivalDate.value,
+                          validator: CustomDatetimeGreaterValidator(
+                              context: context,
+                              compare: departureDate.value,
+                              errorText:
+                                  "There is a problem with the Departure Date"),
+                          label: "Arrival Date               ",
+                          onSaved: (value) {
+                            ctrl!.state.arrivalDate = value!;
+                            arrivalDate.value = value;
+                          },
+                          onChanged: (value) {
+                            value ??= DateTime.now();
+                            ctrl!.state.arrivalDate = value;
+                            arrivalDate.value = value;
+                            processDaysCatalog();
+                          },
+                        );
+                      }),
+                      const CustomTitleWidget(
+                          width: 0.225,
+                          fontWeight: FontWeight.bold,
+                          label: "  Departure information"),
+                      CustomFormDropDownFieldWidget(
+                        value: departurePort.value,
+                        disabled: readonly,
+                        onSaved: (value) {
+                          ctrl!.state.departure_port = value!;
+                          setFormValue(globalctx.memory, "logistic",
+                              "departure_port", value);
+                          departurePort.value = value;
+                        },
+                        onChanged: (value) {
+                          ctrl!.state.departure_port = value!;
+                          departurePort.value = value;
+                          globalctxReset();
+                        },
+                        validator: CustomRequiredValidator(
+                            errorText: "Departure Port is required ",
+                            ctx: context),
+                        label: "Departure Port            ",
+                        data: airportCatalog.toList(),
+                      ),
+                      Obx(() {
+                        return CustomFormDateFieldWidget(
+                          disabled: readonly,
+                          initialValue: departureDate.value,
+                          validator: CustomDatetimeGreaterValidator(
+                              context: context,
+                              compare: arrivalDate.value,
+                              errorText:
+                                  "There is a problem with the Arrival Date",
+                              invert: true),
+                          label: "Departure Date       ",
+                          onSaved: (value) {
+                            ctrl!.state.departureDate = value!;
+                            departureDate.value = value;
+                            processDaysCatalog();
+                          },
+                          onChanged: (value) {
+                            value ??= DateTime.now();
+                            ctrl!.state.departureDate = value;
+                            departureDate.value = value;
+                          },
+                        );
+                      }),
+                      Obx(() {
+                        return Column(
+                          children: [
+                            const CustomTitleWidget(
+                              width: 0.3,
+                              fontWeight: FontWeight.bold,
+                              label: "  Logistic Information",
+                            ),
                             CustomFormDropDownFieldWidget(
                               validator: CustomRequiredValidator(
-                                  errorText: "Open Credit is required ",
+                                  errorText: "Destination option is required ",
                                   ctx: context),
-                              value: openCredit.value,
+                              value: tourOption.value,
                               onSaved: (value) {
                                 setFormValue(globalctx.memory, "logistic",
-                                    "open_credit", value);
+                                    "tour_option", value);
                               },
                               onChanged: (value) {
                                 setFormValue(globalctx.memory, "logistic",
-                                    "open_credit", value);
-                                openCredit.value = value!;
-                                processDaysCatalog();
+                                    "tour_option", value);
+                                tourOption.value = value!;
                               },
-                              label: "Open Credit Options ",
-                              data: processCatalog("open_credit"),
+                              label: "Tour Options\t\t\t\t\t\t\t\t\t\t\t\t\t",
+                              data: processCatalog("tour_option"),
                             ),
-                          if (openCredit.value == "2" && daysCatalog.isNotEmpty)
-                            CustomFormMultiDropDownFieldWidget(
-                              validator: (value) =>
-                                  CustomMultiDropdownRequiredValidator(value,
-                                      errorText: "OC Days are required ",
-                                      context: context),
-                              value: getFormValue(globalctx.memory, "logistic",
-                                      "oc_days", <String>[]) ??
-                                  <String>[],
-                              onSaved: (value) {
-                                setFormValue(globalctx.memory, "logistic",
-                                    "oc_days", value);
-                              },
-                              onChanged: (value) {
-                                setFormValue(globalctx.memory, "logistic",
-                                    "oc_days", value);
-                                ocDays.value = value!;
-                              },
-                              hintText: " ",
-                              label: "Open Credit Days      ",
-                              data: daysCatalog,
-                            ),
-                          if (tourOption.value == "2")
-                            Column(
+                            Row(
                               children: [
-                                CustomFormDateFieldWidget(
-                                  disabled: readonly,
-                                  initialValue: sinceDate.value,
-                                  validator: CustomDatetimeGreaterValidator(
-                                      context: context,
-                                      compare: sinceDate.value,
-                                      errorText:
-                                          "There is a problem with the Range Date",
-                                      invert: false),
-                                  label: "Since Date\t\t\t\t\t\t\t\t\t\t\t\t\t",
-                                  onSaved: (value) {
-                                    ctrl!.state.sinceDate = value!;
-                                    sinceDate.value = value;
-                                  },
+                                CustomFormCheckboxWidget(
+                                  label: "Open Credit                 ",
+                                  value: 1,
+                                  groupValue: openBoolCredit,
                                   onChanged: (value) {
-                                    value ??= DateTime.now();
-                                    ctrl!.state.sinceDate = value;
-                                    sinceDate.value = value;
+                                    openBoolCredit.value = value;
+                                    setFormValue(globalctx.memory, "logistic",
+                                        "open_credit", value);
                                   },
                                 ),
-                                CustomFormDateFieldWidget(
-                                  disabled: readonly,
-                                  initialValue: untilDate.value,
-                                  validator: CustomDatetimeGreaterValidator(
-                                      context: context,
-                                      compare: untilDate.value,
-                                      errorText:
-                                          "There is a problem with the Range Date",
-                                      invert: true),
-                                  label:
-                                      "Until Date\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t",
-                                  onSaved: (value) {
-                                    ctrl!.state.untilDate = value!;
-                                    untilDate.value = value;
-                                  },
-                                  onChanged: (value) {
-                                    value ??= DateTime.now();
-                                    ctrl!.state.untilDate = value;
-                                    untilDate.value = value;
-                                  },
-                                )
                               ],
                             ),
-                        ],
-                      );
-                    }),
-                  ]),
-                ),
-              ],
+                            if (openBoolCredit.value == 1)
+                              RoundedFormTextField(
+                                initialValue: openCredit.value,
+                                onSaved: (value) => openCredit.value = value!,
+                                onFieldSubmitted: (value) {
+                                  openCredit.value = value!;
+                                  setFormValue(globalctx.memory, "logistic",
+                                      "open_credit_value", value);
+                                },
+                                hintText: 'Open Credit Amount',
+                              ),
+                            if (tourOption.value == "2")
+                              Column(
+                                children: [
+                                  CustomFormDateFieldWidget(
+                                    disabled: readonly,
+                                    initialValue: sinceDate.value,
+                                    validator: CustomDatetimeGreaterValidator(
+                                        context: context,
+                                        compare: sinceDate.value,
+                                        errorText:
+                                            "There is a problem with the Range Date",
+                                        invert: false),
+                                    label:
+                                        "Since Date\t\t\t\t\t\t\t\t\t\t\t\t\t",
+                                    onSaved: (value) {
+                                      ctrl!.state.sinceDate = value!;
+                                      sinceDate.value = value;
+                                    },
+                                    onChanged: (value) {
+                                      value ??= DateTime.now();
+                                      ctrl!.state.sinceDate = value;
+                                      sinceDate.value = value;
+                                    },
+                                  ),
+                                  CustomFormDateFieldWidget(
+                                    disabled: readonly,
+                                    initialValue: untilDate.value,
+                                    validator: CustomDatetimeGreaterValidator(
+                                        context: context,
+                                        compare: untilDate.value,
+                                        errorText:
+                                            "There is a problem with the Range Date",
+                                        invert: true),
+                                    label:
+                                        "Until Date\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t",
+                                    onSaved: (value) {
+                                      ctrl!.state.untilDate = value!;
+                                      untilDate.value = value;
+                                    },
+                                    onChanged: (value) {
+                                      value ??= DateTime.now();
+                                      ctrl!.state.untilDate = value;
+                                      untilDate.value = value;
+                                    },
+                                  )
+                                ],
+                              ),
+                          ],
+                        );
+                      }),
+                    ]),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

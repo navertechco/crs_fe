@@ -3,7 +3,7 @@
 //VALIDADORES
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-import 'package:get/get.dart'; 
+import 'package:get/get.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:sweetalert/sweetalert.dart';
 

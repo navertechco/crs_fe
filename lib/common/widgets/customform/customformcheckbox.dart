@@ -33,6 +33,7 @@ class CustomFormCheckboxWidget extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Row(
         children: [
+          CustomFormLabelWidget(label: label, fontWeight: FontWeight.normal),
           RoundedFormCheckbox(
             onChanged: _onChanged,
             width: width,

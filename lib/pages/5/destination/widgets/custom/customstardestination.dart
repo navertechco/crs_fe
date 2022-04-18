@@ -139,6 +139,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                 ),
                 Obx(() {
                   var expDay = explorationDay.value;
+
                   if (destination != "galapagos") {
                     return CustomFormCounterFieldWidget(
                         initial: int.parse(getFormValue(
@@ -164,33 +165,11 @@ class CustomStarDestinationForm extends StatelessWidget {
                   }
                   return Text("");
                 }),
-                Obx(() {
-                  var expDay = explorationDay.value;
-                  if (getSubs(destination).length > 0) {
-                    return CustomFormDropDownFieldWidget(
-                      validator: CustomRequiredValidator(
-                          errorText: "subs is required ", ctx: context),
-                      value: subs.value,
-                      onSaved: (value) {
-                        setFormValue(globalctx.memory["destinations"], index,
-                            "subs", value);
-                      },
-                      onChanged: (value) {
-                        setFormValue(globalctx.memory["destinations"], index,
-                            "subs", value);
-                        explorationMode.value = value!;
-                      },
-                      hintText: " ",
-                      label: "${destination.capitalize} Subs           ",
-                      data: getSubs(destination),
-                    );
-                  }
-                  return Text("");
-                }),
                 SizedBox(
                   child: (() {
                     if (destination == "galapagos" || destination == "amazon") {
                       return Obx(() {
+                        var expDay = explorationDay.value;
                         return CustomFormDropDownFieldWidget(
                           validator: CustomRequiredValidator(
                               errorText: "Exploration mode is required ",
@@ -217,6 +196,36 @@ class CustomStarDestinationForm extends StatelessWidget {
                     }
                   })(),
                 ),
+                Obx(() {
+                  var expDay = explorationDay.value;
+                  if ((destination == "galapagos" &&
+                          (explorationMode.value == "3" ||
+                              explorationMode.value == "1")) ||
+                      (destination != "galapagos" &&
+                          (getSubs(destination).length > 0))) {
+                    {
+                      return CustomFormDropDownFieldWidget(
+                        validator: CustomRequiredValidator(
+                            errorText: "subs is required ", ctx: context),
+                        value: subs.value,
+                        onSaved: (value) {
+                          setFormValue(globalctx.memory["destinations"], index,
+                              "subs", value);
+                        },
+                        onChanged: (value) {
+                          setFormValue(globalctx.memory["destinations"], index,
+                              "subs", value);
+                          explorationMode.value = value!;
+                        },
+                        hintText: " ",
+                        label: "${destination.capitalize} Subs     ",
+                        data: getSubs(destination),
+                      );
+                    }
+                  } else {
+                    return Text("");
+                  }
+                }),
                 SizedBox(child: Obx(() {
                   var expMode = explorationMode.value;
                   if (destination == "galapagos" &&
@@ -398,17 +407,31 @@ class CustomStarDestinationForm extends StatelessWidget {
                               errorText: "Key Activities are required ",
                               context: context),
                       value: keyActivities,
-                      onSaved: (value) {
-                        setFormValue(globalctx.memory["destinations"], index,
-                            "key_activities", ["CULTURE"]);
-                        setFormValue(
-                            globalctx.memory["destinations"],
-                            index,
-                            "key_activities",
-                            value!
-                                .map((e) => e["description"])
-                                .toSet()
-                                .toList());
+                      onSaved: (values) {
+                        if (values == null) return;
+                        if (values.length > 3) {
+                          Get.snackbar("Error", "You can select maximum 3 ka",
+                              snackPosition: SnackPosition.BOTTOM,
+                              backgroundColor: Colors.red,
+                              colorText: Colors.white,
+                              borderRadius: 10,
+                              margin: EdgeInsets.all(10),
+                              duration: Duration(seconds: 3));
+                          return;
+                        }
+                        if (values.length <= 3) {
+                          kaMemory.value = [];
+                          var length = values.length;
+
+                          for (var i = 0; i < length; i++) {
+                            kaMemory.value.add(processCatalog("key_activity")
+                                .toList()
+                                .where((e) => e["code"] == values[i])
+                                .toList()[0]["description"]);
+                          }
+                          setFormValue(globalctx.memory["destinations"], index,
+                              "key_activities", kaMemory.value);
+                        }
                       },
                       onChanged: (value) {
                         setFormValue(globalctx.memory["destinations"], index,
@@ -421,6 +444,23 @@ class CustomStarDestinationForm extends StatelessWidget {
                   }
                   return Text("");
                 }),
+                Obx(() {
+                  var expMode = explorationMode.value;
+                  if (index == 0) {
+                    return CustomFormCheckboxWidget(
+                      label: "Arrival Dinner          ",
+                      value: 1,
+                      groupValue: arrivalDinner,
+                      onChanged: (value) {
+                        arrivalDinner.value = value;
+                        setFormValue(
+                            globalctx.memory, "logistic", "dinner", value);
+                      },
+                    );
+                  } else {
+                    return Text("");
+                  }
+                })
               ]),
             ),
           ),

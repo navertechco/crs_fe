@@ -1,7 +1,6 @@
 // ignore_for_file: must_be_immutable, unnecessary_null_comparison
 import 'package:flutter/material.dart';
-import 'package:multiselect/multiselect.dart';
-import '../../index.dart';
+import 'package:multiselect_formfield/multiselect_formfield.dart';
 
 class RoundedFormMultiDropdown extends StatelessWidget {
   final double left;
@@ -11,69 +10,90 @@ class RoundedFormMultiDropdown extends StatelessWidget {
   final double fontSize;
   final String? hintText;
   final String? label;
-  final void Function(List<Map<String, dynamic>>?) onSaved;
-  final void Function(List<String>?) onChanged;
+  final onSaved;
+  final onChanged;
   final List<Map<String, dynamic>> data;
   final List<String> value;
   final String? Function(List<Map<String, dynamic>>?)? validator;
 
   RoundedFormMultiDropdown(
       {Key? key,
-      required this.data,
-      this.hintText,
-      this.label,
+      this.data = const [],
+      this.hintText = '',
+      this.label = '',
       this.left = 0,
-      this.top = 8,
+      this.top = 0,
       this.width = 0.2,
-      this.height = 0.025,
-      this.fontSize = 10,
-      required this.onSaved,
-      this.password = false,
+      this.height = 0.0,
+      this.fontSize = 5,
+      this.onSaved,
       this.value = const [],
-      required this.onChanged,
+      this.onChanged,
       this.validator})
       : super(key: key);
-
-  bool password;
+  var dataSource = [];
+  var dataValue = [];
   @override
   Widget build(BuildContext context) {
+    if (data != null) {
+      if (data.isNotEmpty) {
+        dataSource = data.map((e) {
+          return {"display": e["description"], "value": e["code"]};
+        }).toList();
+      } else {
+        dataSource = [
+          {
+            'display': "No data from Service",
+            'value': 0,
+          }
+        ];
+      }
+    }
+
+    if (value != null) {
+      if (value.isNotEmpty) {
+        dataValue = [];
+        for (var item in value) {
+          dataValue.add(data
+              .firstWhere((element) => element["description"] == item)["code"]);
+        }
+      } else {
+        dataValue = [];
+      }
+    }
+
     return Container(
-      width: MediaQuery.of(context).size.width * width,
-      padding: EdgeInsets.only(left: left, top: top),
-      child: Container(
-        height: MediaQuery.of(context).size.height * 0.05,
-        decoration: BoxDecoration(
-            color: Colors.grey, borderRadius: BorderRadius.circular(50)),
-        child: DropDownMultiSelect(
-            onChanged: onChanged,
-            options: data.map((e) => e["description"].toString()).toList(),
-            selectedValues: value,
-            whenEmpty: value == null ? hintText : '',
-            childBuilder: (value) {
-              return Padding(
-                padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height * 0.015,
-                  left: MediaQuery.of(context).size.width * 0.03,
-                ),
-                child: Text(
-                    value == null
-                        ? hintText!
-                        : value
-                            .toString()
-                            .replaceAll("[", "")
-                            .replaceAll("]", ""),
-                    style: KTextSytle(
-                            context: context,
-                            fontSize: (value == null ? 10 : 8),
-                            fontWeight: (value == null
-                                ? FontWeight.normal
-                                : FontWeight.bold))
-                        .getStyle()),
-              );
-            },
-            decoration: InputDecoration.collapsed(
-                fillColor: Colors.grey, hintText: "")),
-      ),
-    );
+        width: MediaQuery.of(context).size.width * width,
+        padding: EdgeInsets.only(left: left, top: top),
+        child: MultiSelectFormField(
+          autovalidate: AutovalidateMode.disabled,
+          chipBackGroundColor: Colors.grey,
+          chipLabelStyle:
+              TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+          dialogTextStyle: TextStyle(fontWeight: FontWeight.bold),
+          checkBoxActiveColor: Colors.grey,
+          checkBoxCheckColor: Colors.black,
+          dialogShapeBorder: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(12.0))),
+          title: Text(
+            hintText!,
+            style: TextStyle(fontSize: 16),
+          ),
+          validator: (value) {
+            if (value == null || value.length == 0) {
+              return 'Please select one or more options';
+            }
+            return null;
+          },
+          dataSource: dataSource,
+          textField: 'display',
+          valueField: 'value',
+          okButtonLabel: 'OK',
+          cancelButtonLabel: 'CANCEL',
+          hintWidget: Text(hintText!),
+          initialValue: dataValue,
+          onSaved: onSaved,
+          // change: onChanged,
+        ));
   }
 }

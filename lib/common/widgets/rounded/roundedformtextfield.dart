@@ -24,8 +24,8 @@ class RoundedFormTextField extends StatelessWidget {
   RoundedFormTextField(
       {Key? key,
       required this.hintText,
-      this.left = 45,
-      this.top = 10,
+      this.left = 35,
+      this.top = 9,
       this.width = 0.2,
       this.height = 0.05,
       this.fontSize = 0.1,

@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/shims/dart_ui_real.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'context/index.dart'; 
+import 'context/index.dart';
 import 'index.dart';
 
 /*
@@ -32,7 +32,7 @@ class KTextSytle {
 }
 
 const kDefaultSchema = "http";
-const kDefaultServer = "uiodesign.fortiddns.com";
+const kDefaultServer = "192.168.101.4"; //"uiodesign.fortiddns.com";
 const kDefaultServerPort = 9999;
 const kDefaultLogoutPath = "/User/Logout";
 const kDefaultCatalogPath = "/System/FindCatalog";

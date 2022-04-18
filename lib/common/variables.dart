@@ -46,7 +46,6 @@ Rx<DateTime> sinceDate = Rx(DateTime.now());
 Rx<DateTime> untilDate = Rx(DateTime.now());
 RxList<String> ocDays = <String>[].obs;
 RxString tourOption = "1".obs;
-RxString openCredit = "0".obs;
 Rx<int> totalDays =
     Rx(departureDate.value.difference(arrivalDate.value).inDays + 1);
 RxInt accumulated = 0.obs;
@@ -156,7 +155,7 @@ Function validateDestinationDialog = (destination, type) {
           rule6)
       .obs;
 };
- 
+
 Rx<dynamic> transportService = Rx(getFormValue(globalctx.memory["destinations"],
         globalDestinationIndex.value, "service_type", <String>[]) ??
     <String>[]);
@@ -166,7 +165,12 @@ Rx<dynamic> translatingService = Rx(getFormValue(
     "translating_service", <String>[]));
 Rx<int> guide = Rx(getFormValue(globalctx.memory["destinations"],
     globalDestinationIndex.value, "guide_type", 1));
-
+Rx<int> openBoolCredit =
+    Rx(getFormValue(globalctx.memory, "logistic", "open_credit", 0));
+Rx<int> arrivalDinner =
+    Rx(getFormValue(globalctx.memory, "logistic", "dinner", 0));
+Rx<String> openCredit =
+    Rx(getFormValue(globalctx.memory, "logistic", "open_credit_value", "0"));
 Rx<int> guideIndex = Rx(
     transportService.value.indexWhere((element) => element == "GUIDING") ?? 0);
 Rx<int> translateIndex = Rx(
@@ -230,3 +234,5 @@ List netRateData = [
 List data = [];
 RxString? searchResult = ''.obs;
 var filteredData = [].obs;
+var purposeMemory = <String>[].obs;
+var kaMemory = <String>[].obs;

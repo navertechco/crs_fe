@@ -65,16 +65,13 @@ Function getDateValue = (data, key, {def}) {
 };
 Function getValue = (data, key, {def}) {
   try {
-    if (data ?? true) {
-      if (data[key] ?? true) {
-        return data[key].toString();
-      }
-    } else {
-      return def;
-    }
+        return data[key] ?? def;
   } catch (e) {
     return def;
   }
+};
+Function setValue = (data, key, value) {
+  data[key] = value;
 };
 Function validateData = (data) {
   return data != null ? data.length > 0 : false;
