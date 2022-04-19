@@ -118,15 +118,13 @@ class BodyWidget extends StatelessWidget {
                           value: getFormValue(
                               globalctx.memory["destinations"],
                               globalDestinationIndex.value,
-                              "service_type",
-                              ['DRIVING']),
+                              "service_type", <String>[]),
                           onSaved: (values) {
                             transportService.value = values;
-                            guideIndex.value = transportService.value
-                                .indexWhere((element) => element == "GUIDING");
-                            translateIndex.value = transportService.value
-                                .indexWhere(
-                                    (element) => element == "TRANSLATING");
+                            openGuide.value =
+                                transportService.value.contains(3);
+                            openTranslate.value =
+                                transportService.value.contains(2);
                             multiSaving(
                                 values,
                                 "service_type",
@@ -137,11 +135,10 @@ class BodyWidget extends StatelessWidget {
                           },
                           onChanged: (value) {
                             transportService.value = value;
-                            guideIndex.value = transportService.value
-                                .indexWhere((element) => element == "GUIDING");
-                            translateIndex.value = transportService.value
-                                .indexWhere(
-                                    (element) => element == "TRANSLATING");
+                            openGuide.value =
+                                transportService.value.contains(3);
+                            openTranslate.value =
+                                transportService.value.contains(2);
                             setFormValue(
                                 globalctx.memory["destinations"],
                                 globalDestinationIndex.value,
@@ -151,7 +148,7 @@ class BodyWidget extends StatelessWidget {
                           hintText: "                  Services\n",
                           data: serviceTypeCatalog.value,
                         ),
-                        if (translateIndex.value != -1)
+                        if (openTranslate.value)
                           CustomFormMultiDropDownFieldWidget(
                             validator: (value) =>
                                 CustomMultiDropdownRequiredValidator(value,
@@ -167,7 +164,7 @@ class BodyWidget extends StatelessWidget {
                                   value);
                             },
                             onChanged: (value) {
-                              translateIndex.value = value!.isNotEmpty ? 0 : -1;
+                              openTranslate.value = false;
                               translatingService.value = value;
                               setFormValue(
                                   globalctx.memory["destinations"],
@@ -178,7 +175,7 @@ class BodyWidget extends StatelessWidget {
                             hintText: "          Translating Services",
                             data: translatingCatalog.value,
                           ),
-                        if (guideIndex.value != -1)
+                        if (openGuide.value)
                           Column(
                             children: [
                               CustomFormCheckboxWidget(

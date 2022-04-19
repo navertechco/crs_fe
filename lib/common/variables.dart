@@ -171,11 +171,8 @@ Rx<int> arrivalDinner =
     Rx(getFormValue(globalctx.memory, "logistic", "dinner", 0));
 Rx<String> openCredit =
     Rx(getFormValue(globalctx.memory, "logistic", "open_credit_value", "0"));
-Rx<int> guideIndex = Rx(
-    transportService.value.indexWhere((element) => element == "GUIDING") ?? 0);
-Rx<int> translateIndex = Rx(
-    transportService.value.indexWhere((element) => element == "TRANSLATING") ??
-        0);
+RxBool openGuide = false.obs;
+RxBool openTranslate = false.obs;
 
 var serviceTypeCatalog = Rx(processCatalog("service_type"));
 var translatingCatalog = Rx(processCatalog("translating_service"));
