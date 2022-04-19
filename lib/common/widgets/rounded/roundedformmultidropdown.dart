@@ -93,7 +93,7 @@ class RoundedFormMultiDropdown extends StatelessWidget {
           okButtonLabel: 'OK',
           cancelButtonLabel: 'CANCEL',
           hintWidget: Text(
-            hintText!,
+            "Select a Option",
             style: TextStyle(fontSize: 16, color: Colors.grey),
           ),
           initialValue: dataValue,
