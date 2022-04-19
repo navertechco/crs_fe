@@ -116,22 +116,24 @@ class BodyWidget extends StatelessWidget {
                                       "Day Transport Options are required ",
                                   context: context),
                           value: getFormValue(
-                                  globalctx.memory["destinations"],
-                                  globalDestinationIndex.value,
-                                  "service_type", <String>[]) ??
-                              <String>[],
-                          onSaved: (value) {
-                            transportService.value = value;
+                              globalctx.memory["destinations"],
+                              globalDestinationIndex.value,
+                              "service_type",
+                              ['DRIVING']),
+                          onSaved: (values) {
+                            transportService.value = values;
                             guideIndex.value = transportService.value
                                 .indexWhere((element) => element == "GUIDING");
                             translateIndex.value = transportService.value
                                 .indexWhere(
                                     (element) => element == "TRANSLATING");
-                            setFormValue(
-                                globalctx.memory["destinations"],
-                                globalDestinationIndex.value,
+                            multiSaving(
+                                values,
                                 "service_type",
-                                value);
+                                globalctx.memory["destinations"],
+                                index,
+                                "service_type",
+                                transportService);
                           },
                           onChanged: (value) {
                             transportService.value = value;

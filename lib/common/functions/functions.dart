@@ -65,7 +65,7 @@ Function getDateValue = (data, key, {def}) {
 };
 Function getValue = (data, key, {def}) {
   try {
-        return data[key] ?? def;
+    return data[key] ?? def;
   } catch (e) {
     return def;
   }
@@ -605,4 +605,17 @@ Function newTour = () async {
   } else {
     log(res["message"]);
   }
+};
+
+Function multiSaving = (values,  catalog, context, index, field,memory) {
+  memory.value = [];
+  var length = values.length;
+
+  for (var i = 0; i < length; i++) {
+    memory.value.add(processCatalog(catalog)
+        .toList()
+        .where((e) => e["code"] == values[i])
+        .toList()[0]["description"]);
+  }
+  setFormValue(context, index, field, memory.value);
 };
