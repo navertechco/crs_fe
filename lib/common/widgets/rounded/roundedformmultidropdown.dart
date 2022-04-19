@@ -68,16 +68,18 @@ class RoundedFormMultiDropdown extends StatelessWidget {
         child: MultiSelectFormField(
           autovalidate: AutovalidateMode.disabled,
           chipBackGroundColor: Colors.grey,
+          fillColor: Color.fromARGB(0, 255, 255, 255),
           chipLabelStyle:
               TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-          dialogTextStyle: TextStyle(fontWeight: FontWeight.bold),
+          dialogTextStyle:
+              TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
           checkBoxActiveColor: Colors.grey,
           checkBoxCheckColor: Colors.black,
           dialogShapeBorder: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(12.0))),
           title: Text(
             hintText!,
-            style: TextStyle(fontSize: 16),
+            style: TextStyle(fontSize: 16, color: Colors.grey),
           ),
           validator: (value) {
             if (value == null || value.length == 0) {
@@ -90,7 +92,10 @@ class RoundedFormMultiDropdown extends StatelessWidget {
           valueField: 'value',
           okButtonLabel: 'OK',
           cancelButtonLabel: 'CANCEL',
-          hintWidget: Text(hintText!),
+          hintWidget: Text(
+            hintText!,
+            style: TextStyle(fontSize: 16, color: Colors.grey),
+          ),
           initialValue: dataValue,
           onSaved: onSaved,
           // change: onChanged,
