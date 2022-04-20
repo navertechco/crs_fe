@@ -290,7 +290,7 @@ Function calculateExperienceDays = (String experience) {
 
 Function getExperienceTravelRhythmByName = (String experience) {
   var expData = getExperienceValueByName(experience);
-  var trData = processCatalog("travel_rhythm").toList();
+  var trData = findCatalog("travel_rhythm").toList();
   var trObject = trData.firstWhere((e) =>
       e["description"].toString().toUpperCase() ==
       expData["travel_rhythm"].toString().toUpperCase());

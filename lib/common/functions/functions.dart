@@ -31,9 +31,9 @@ Future<bool> getCatalog(
 
 RxList<Map<String, dynamic>> daysCatalog = <Map<String, dynamic>>[].obs;
 
-Function processCatalog = (name) {
+Function findCatalog = (name) {
   var catalogs = getContext("catalogs");
-  List<Map<String, dynamic>> catalog = [];
+  List<Map<String, dynamic>> catalog = <Map<String, dynamic>>[];
   if (catalogs != null) {
     var items = catalogs[name];
     if (items != null) {
@@ -91,7 +91,7 @@ Function getDataList = (data, sub, key) {
       : <Map<String, dynamic>>[];
 };
 Function getParam = (key) {
-  var params = processCatalog("params");
+  var params = findCatalog("params");
   var child =
       params.toList().firstWhere((element) => element["description"] == key);
   return child;
@@ -290,7 +290,7 @@ Function findTravelRhythmDescription = (int code) {
   if (code == 0) {
     return "HARD";
   }
-  var travelData = processCatalog("travel_rhythm").toList();
+  var travelData = findCatalog("travel_rhythm").toList();
   var description = travelData
       .firstWhere((element) => element["code"] == code)["description"];
   return description;
@@ -340,7 +340,7 @@ Function setLT = (value) {
   globalctx.context.value["catalogs"]["experiences"][ltindex]["value"]
           ["exptime"] ==
       value;
-  experiences = processCatalog("experiences");
+  experiences = findCatalog("experiences");
 };
 
 Future<void> getTour(ctx, {int tourId = 0}) async {
@@ -607,12 +607,12 @@ Function newTour = () async {
   }
 };
 
-Function multiSaving = (values,  catalog, context, index, field,memory) {
+Function multiSaving = (values, catalog, context, index, field, memory) {
   memory.value = [];
   var length = values.length;
 
   for (var i = 0; i < length; i++) {
-    memory.value.add(processCatalog(catalog)
+    memory.value.add(findCatalog(catalog)
         .toList()
         .where((e) => e["code"] == values[i])
         .toList()[0]["description"]);

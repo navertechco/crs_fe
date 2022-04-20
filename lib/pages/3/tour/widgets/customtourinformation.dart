@@ -19,8 +19,8 @@ class CustomTourInformationForm extends StatelessWidget {
     var tourdata = globalctx.memory;
     var tour = getValue(tourdata, "tour");
     var readonly = getContext("readonly") ?? false;
-    var purpose = processCatalog("purpose");
-    var accomodationType = processCatalog("budget");
+    var purpose = findCatalog("purpose");
+    var accomodationType = findCatalog("budget");
 
     return Form(
       key: _formKey,

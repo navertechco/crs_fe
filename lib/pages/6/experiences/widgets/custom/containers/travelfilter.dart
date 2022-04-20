@@ -27,7 +27,7 @@ class TravelFilter extends HookWidget {
     Rx<dynamic> travelRhythm = Rx(getFormValue(
         globalctx.memory["destinations"], index, "travel_rhythm", "0"));
 
-    var kaDataCatalog = Rx(processCatalog("key_activity"));
+    var kaDataCatalog = Rx(findCatalog("key_activity"));
     return Align(
         alignment: Alignment.centerLeft,
         child: SizedBox(
@@ -59,7 +59,7 @@ class TravelFilter extends HookWidget {
                               "destination_option", value);
                         },
                         hintText: "Travel Options",
-                        data: processCatalog("destination_option"),
+                        data: findCatalog("destination_option"),
                       ),
                       CustomFormDropDownFieldWidget(
                         value: travelRhythm.value,

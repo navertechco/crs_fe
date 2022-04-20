@@ -15,7 +15,7 @@ class CustomCustomerDataForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var customerTypeCatalog = processCatalog("legal_client_type");
+    var customerTypeCatalog = findCatalog("legal_client_type");
 
     var client = globalctx.memory["customer"];
     var tour = globalctx.memory["tour"];

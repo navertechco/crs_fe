@@ -56,8 +56,8 @@ Rx<double> customerAge =
 Rx<int> memoryDayLeft = Rx(globalctx.memory["days_left"]);
 final currentDayFormat = DateFormat('EEEE MMMM d yyyy');
 final dayFormat = DateFormat('d-MM-yyyy');
-var experiences = processCatalog("experiences");
-List expList = processCatalog("experiences").toList();
+var experiences = findCatalog("experiences");
+List expList = findCatalog("experiences").toList();
 RxList<Widget> explist = <Widget>[].obs;
 RxList<Widget> destlist = <Widget>[].obs;
 Map<String, dynamic> states = {
@@ -110,12 +110,12 @@ RxString arrivalPort = "6".obs;
 RxString departurePort = "6".obs;
 RxString destCountry = "1".obs;
 var selectedDestinations = globalctx.destinations;
-var destinationsCatalog = processCatalog("destinations");
-var destinationCountry = processCatalog("destination_country");
+var destinationsCatalog = findCatalog("destinations");
+var destinationCountry = findCatalog("destination_country");
 var arrival = {}.obs;
 var departure = {}.obs;
 
-var airportCatalog = processCatalog("airport");
+var airportCatalog = findCatalog("airport");
 
 RxInt destDraggable = 0.obs;
 RxInt expDraggable = 1.obs;
@@ -174,8 +174,8 @@ Rx<String> openCredit =
 RxBool openGuide = false.obs;
 RxBool openTranslate = false.obs;
 
-var serviceTypeCatalog = Rx(processCatalog("service_type"));
-var translatingCatalog = Rx(processCatalog("translating_service"));
+var serviceTypeCatalog = Rx(findCatalog("service_type"));
+var translatingCatalog = Rx(findCatalog("translating_service"));
 
 var currentDestinationTr =
     getDestinationTravelRhythm(globalDestinationName.value, "arrival");

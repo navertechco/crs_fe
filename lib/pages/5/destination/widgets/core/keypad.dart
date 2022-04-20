@@ -54,13 +54,7 @@ class KeyPadWidget extends StatelessWidget {
                         .getStyle()),
                 onPressed: () {
                   if (dayleft.value == 0) {
-                    if (globalctx.experienceDragData.value.keys
-                        .toList()
-                        .isEmpty) {
-                      processDestinations(context);
-                    } else {
-                      goto("Experiences");
-                    }
+                    processDestinations(context);
                   } else {
                     showCustomDialog(
                       context,
@@ -74,7 +68,7 @@ class KeyPadWidget extends StatelessWidget {
                               .getStyle()),
                       "Close",
                       backgroundColor: Colors.white,
-                      buttonColor: Colors.white,
+                      buttonColor: Colors.black,
                     );
                   }
                 },

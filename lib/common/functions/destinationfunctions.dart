@@ -288,7 +288,7 @@ Function getDestinationIndex = (String destination, String type) {
 Function getDestinationDestOption = (destination, type) {
   int destIndex = getDestinationIndex(destination, type);
   var destData = globalctx.memory["destinations"][destIndex.toString()];
-  var trData = processCatalog("detination_option").toList();
+  var trData = findCatalog("detination_option").toList();
   var trRange = trData
       .firstWhere((e) => e["code"] == int.parse(destData["detination_option"]));
   return trRange;
@@ -296,7 +296,7 @@ Function getDestinationDestOption = (destination, type) {
 Function getDestinationTravelRhythm = (destination, type) {
   int destIndex = getDestinationIndex(destination, type);
   var destData = globalctx.memory["destinations"][destIndex.toString()];
-  var trData = processCatalog("travel_rhythm").toList();
+  var trData = findCatalog("travel_rhythm").toList();
   var trRange = trData
       .firstWhere((e) => e["code"] == int.parse(destData["travel_rhythm"]));
   return trRange;
@@ -308,7 +308,7 @@ Function getDestinationKa = (destination, type) {
 };
 Function getTourPurpose = () {
   var pCode = globalctx.memory["tour"]["purpose"];
-  var purposes = processCatalog("purpose").toList();
+  var purposes = findCatalog("purpose").toList();
   var compare = toCatalog(
           purposes.firstWhere((e) => e["code"].toString() == pCode.toString()))
       .description;
@@ -332,10 +332,10 @@ Function getDestinationDay = (index) {
 };
 Function updateDestinationsCatalog = () {
   var countryName = getCountryNameById(destCountry.value);
-  destinationsCatalog = processCatalog("destinations").where((element) =>
+  destinationsCatalog = findCatalog("destinations").where((element) =>
       element["relation"]["country"].toString().toLowerCase() ==
       countryName.toString().toLowerCase());
-  airportCatalog = processCatalog("airport").where((element) =>
+  airportCatalog = findCatalog("airport").where((element) =>
       element["relation"]["country"].toString().toLowerCase() ==
       countryName.toString().toLowerCase());
 };
@@ -379,7 +379,7 @@ Function getSubs = (String destination) {
 };
 
 Function filterTrByAge = () {
-  var tr = processCatalog("travel_rhythm");
+  var tr = findCatalog("travel_rhythm");
   var filtered = tr.toList();
   var birthDate = globalctx.memory["customer"]["birth_date"];
   var age = DateTime.now().difference(DateTime.parse(birthDate)).inDays / 365;

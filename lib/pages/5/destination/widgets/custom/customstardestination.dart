@@ -24,7 +24,7 @@ class CustomStarDestinationForm extends StatelessWidget {
   Widget build(BuildContext context) {
     var tour = getContext("tour");
     var ctx = globalctx.context.value;
-
+    var arrival_hour = findCatalog("arrival_hour");
     Rx<int> explorationDay = Rx(int.parse(getFormValue(
             globalctx.memory["destinations"], index, "explorationDay", "0") ??
         "0"));
@@ -41,9 +41,9 @@ class CustomStarDestinationForm extends StatelessWidget {
     Rx<String> subs =
         Rx(getFormValue(globalctx.memory["destinations"], index, "subs", "0"));
     List<Map<String, dynamic>> explorationdDays =
-        processCatalog("exploration_days");
+        findCatalog("exploration_days");
 
-    Rx<List> trCatalog = Rx(processCatalog("travel_rhythm"));
+    Rx<List> trCatalog = Rx(findCatalog("travel_rhythm"));
     var destData = globalctx.memory["destinations"][index.toString()];
     var type = globalctx.states["destinations"][index]["type"];
     RxString explorationMode = getFormValue(
@@ -185,7 +185,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                             explorationMode.value = value!;
                           },
                           label: "Exploration Mode    ",
-                          data: processCatalog("exploration_mode")
+                          data: findCatalog("exploration_mode")
                               .where((element) =>
                                   element["relation"]["destination"] == null ||
                                   element["relation"]["destination"] ==
@@ -233,27 +233,6 @@ class CustomStarDestinationForm extends StatelessWidget {
                           explorationMode.value == "1")) {
                     return Column(
                       children: [
-                        // CustomFormCounterFieldWidget(
-                        //     initial: int.parse(getFormValue(
-                        //         globalctx.memory["destinations"],
-                        //         index,
-                        //         "ihExplorationDay",
-                        //         "2")),
-                        //     min: 2,
-                        //     max: totalDays.value,
-                        //     bound: 2,
-                        //     onValueChanged: (value) {
-                        //       saveExplorationDays(
-                        //           index,
-                        //           int.parse(getFormValue(
-                        //               globalctx.memory["destinations"],
-                        //               index,
-                        //               "ihExplorationDay",
-                        //               "2")),
-                        //           value as int);
-                        //     },
-                        //     label: "IH Exploration Days",
-                        //     width: 0.20),
                         Obx(() {
                           return CustomFormCalendarFieldWidget(
                               label: "IH Range                    ",
@@ -297,27 +276,6 @@ class CustomStarDestinationForm extends StatelessWidget {
                           explorationMode.value == "2")) {
                     return Column(
                       children: [
-                        // CustomFormCounterFieldWidget(
-                        //     initial: int.parse(getFormValue(
-                        //         globalctx.memory["destinations"],
-                        //         index,
-                        //         "cExplorationDay",
-                        //         "4")),
-                        //     min: 4,
-                        //     max: totalDays.value,
-                        //     bound: 4,
-                        //     onValueChanged: (value) {
-                        //       saveExplorationDays(
-                        //           index,
-                        //           int.parse(getFormValue(
-                        //               globalctx.memory["destinations"],
-                        //               index,
-                        //               "cExplorationDay",
-                        //               "4")),
-                        //           value as int);
-                        //     },
-                        //     label: "Cruise Exp. Days      ",
-                        //     width: 0.20),
                         Obx(
                           () {
                             return CustomFormCalendarFieldWidget(
@@ -376,8 +334,8 @@ class CustomStarDestinationForm extends StatelessWidget {
                           setFormValue(globalctx.memory["destinations"], index,
                               "arrival_hour", value);
                         },
-                        label: "Arrival Hour         ",
-                        data: processCatalog("hours"));
+                        label: "Arrival Hour              ",
+                        data: arrival_hour);
                   }
                   return Text("");
                 }),
@@ -418,7 +376,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                               destination == "galapagos" ? "3" : value);
                         },
                         label: "Travel Rhythm         ",
-                        data: processCatalog("travel_rhythm"));
+                        data: findCatalog("travel_rhythm"));
                   }
                   return Text("");
                 }),
@@ -447,7 +405,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                           var length = values.length;
 
                           for (var i = 0; i < length; i++) {
-                            kaMemory.value.add(processCatalog("key_activity")
+                            kaMemory.value.add(findCatalog("key_activity")
                                 .toList()
                                 .where((e) => e["code"] == values[i])
                                 .toList()[0]["description"]);
@@ -462,7 +420,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                       },
                       hintText: " ",
                       label: "Key Activities            ",
-                      data: processCatalog("key_activity"),
+                      data: findCatalog("key_activity"),
                     );
                   }
                   return Text("");

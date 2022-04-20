@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../../../index.dart';
 import '../index.dart';
 import 'index.dart';
 
@@ -22,7 +23,8 @@ class ExperienceDetailWidget extends GetView<ExperienceDetailController> {
                 TitleWidget(experience: experience),
                 CarouselWidget(experience: experience),
                 DescriptionWidget(experience: experience),
-                KeypadWidget(experience: experience),
+                if (getExperienceState(experience) != "suggested")
+                  KeypadWidget(experience: experience),
               ],
             ),
           ),

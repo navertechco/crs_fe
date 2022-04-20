@@ -175,7 +175,7 @@ class CustomLogisticInformationForm extends StatelessWidget {
                                 tourOption.value = value!;
                               },
                               label: "Tour Options\t\t\t\t\t\t\t\t\t\t\t\t\t",
-                              data: processCatalog("tour_option"),
+                              data: findCatalog("tour_option"),
                             ),
                             Row(
                               children: [
