@@ -29,33 +29,11 @@ Function updateDragExperiences = (filteredExperiences) {
 Function getFilteredExperiences = () {
   List filtered = getFiltered();
 
-  // List filteredByTravelRhytm = filtered.where((e) {
-  //   if (currentTravelRhythm.value == "0") {
-  //     return true;
-  //   }
-  //   if (currentDay.value == 0 || e.description == "Leisure Time") {
-  //     return true;
-  //   }
-  //   if (currentDay.value == totalDays.value - 1) {
-  //     return true;
-  //   }
-
-  //   var destTr = getDestinationTravelRhythm(globalDestinationName.value,
-  //       globalDestinationType.value)["description"];
-  //   var eTr = e.value["travel_rhythm"].toString().toUpperCase();
-
-  //   if (destTr == "HARD") {
-  //     return true;
-  //   }
-
-  //   if (eTr == "SOFT" && destTr == "MEDIUM") {
-  //     return true;
-  //   }
-
-  //   var rule = destTr == eTr;
-  //   return rule;
-  // }).toList();
   List filteredByType = filtered.where((e) {
+    if (e.value["experience_type"] == "meal") {
+      return true;
+    }
+
     if (e.description == "Leisure Time") {
       return true;
     }
@@ -149,7 +127,8 @@ Function getFilteredExperiences = () {
     var currentLeft = (total.value - acc.value) * 60;
     var expTime = getExperienceByName(e.description).value["exptime"] ?? 600;
     var rule = expTime <= currentLeft;
-    return rule;
+    var rule2 = (expTime - currentLeft) <= 30;
+    return rule || rule2;
   }).toList();
   Iterable result = filteredByLeft;
   return result;
@@ -357,4 +336,3 @@ Function clearKA = () {
     currentDestinationKeyActivities.value = [];
   }
 };
-

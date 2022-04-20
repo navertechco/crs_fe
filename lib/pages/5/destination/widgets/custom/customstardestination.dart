@@ -361,6 +361,28 @@ class CustomStarDestinationForm extends StatelessWidget {
                 })),
                 Obx(() {
                   var expMode = explorationMode.value;
+                  if (type == "arrival") {
+                    return CustomFormDropDownFieldWidget(
+                        validator: CustomRequiredValidator(
+                            errorText: "Arrival Hour is required ",
+                            ctx: context),
+                        value: getFormValue(globalctx.memory["destinations"],
+                            index, "arrival_hour", "0"),
+                        onSaved: (value) {
+                          setFormValue(globalctx.memory["destinations"], index,
+                              "arrival_hour", value);
+                        },
+                        onChanged: (value) {
+                          setFormValue(globalctx.memory["destinations"], index,
+                              "arrival_hour", value);
+                        },
+                        label: "Arrival Hour         ",
+                        data: processCatalog("hours"));
+                  }
+                  return Text("");
+                }),
+                Obx(() {
+                  var expMode = explorationMode.value;
                   if (explorationMode.value != "2") {
                     return CustomFormDropDownFieldWidget(
                         disabled: type == "arrival" ||
