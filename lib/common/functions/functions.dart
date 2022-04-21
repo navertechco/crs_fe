@@ -1,4 +1,6 @@
 // ignore_for_file: prefer_function_declarations_over_variables
+import 'dart:math';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -652,4 +654,12 @@ Function savePurposes = (values) {
     }
     setFormValue(globalctx.memory, "tour", "purpose", purposeMemory.value);
   }
+};
+
+Function getDistance = (a, b, c, d) {
+  return acos(sin(double.parse(a) * sin(double.parse(c)) +
+          cos(double.parse(a)) *
+              cos(double.parse(c)) *
+              cos(double.parse(b) - double.parse(d)))) *
+      6371;
 };

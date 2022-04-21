@@ -146,7 +146,14 @@ Function getFilteredExperiences = () {
     return true;
   }).toList();
 
+  filterByArrivalHour.sort((a, b) {
+    var aTime = a.value["exptime"];
+    var bTime = b.value["exptime"];
+    return aTime.compareTo(bTime);
+  });
+
   Iterable result = filterByArrivalHour;
+
   return result;
 };
 //////////////////////////////////////////////////////////////////////////////////////
@@ -206,6 +213,7 @@ Function resetLeisureTime = () {
   if (state == "promoted") {
     processHour(-value);
   }
+  setExperienceState("Leisure Time", "suggested");
 };
 Function deleteExperience = (experience) {
   if (globalctx.experiences[currentDay.value].contains(experience)) {

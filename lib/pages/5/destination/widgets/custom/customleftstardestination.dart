@@ -14,7 +14,21 @@ class CustomLeftStarDestinationForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> destinationlist = [];
-    for (Map item in destinationsCatalog) {
+    List destinations = destinationsCatalog.toList();
+    destinations.sort((a, b) {
+      var arrivalData = toCatalog(filterCatalog(
+          "destinations", "description", arrival.value["description"])[0]);
+      var arrivalLat = arrivalData.relation["latitude"];
+      var arrivalLong = arrivalData.relation["longitude"];
+      var aLat = toCatalog(a).relation["latitude"];
+      var bLat = toCatalog(b).relation["latitude"];
+      var aLong = toCatalog(a).relation["longitude"];
+      var bLong = toCatalog(b).relation["longitude"];
+      var aDistance = getDistance(aLat, aLong, arrivalLat, arrivalLong).toInt();
+      var bDistance = getDistance(bLat, bLong, arrivalLat, arrivalLong).toInt();
+      return aDistance.compareTo(bDistance);
+    });
+    for (Map item in destinations) {
       List itemList = item.values.toList();
       CatalogDto destination = CatalogDto(itemList);
 
