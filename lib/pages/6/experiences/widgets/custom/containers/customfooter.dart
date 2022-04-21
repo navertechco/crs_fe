@@ -60,8 +60,10 @@ class CustomFooterWidget extends StatelessWidget {
                       .getStyle()),
               onPressed: () {
                 if ((leftHours[currentDay.value].value * 60) <= 5) {
-                  if (formKey.currentState!.validate()) {
-                    paginateDay(context);
+                  if (formKey.currentState != null) {
+                    if (formKey.currentState!.validate()) {
+                      paginateDay(context);
+                    }
                   }
                 } else {
                   showCustomDialog(

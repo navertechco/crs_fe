@@ -71,11 +71,11 @@ Function getFilteredExperiences = () {
     if (currentDay.value == 0 || e.description == "Leisure Time") {
       return true;
     }
-    var compare = getTourPurpose();
+    var purposes = globalctx.memory["tour"]["purpose"];
     String p1 = getExperienceByName(e.description).value["purpose_fk"];
     String p2 = getExperienceByName(e.description).value["purpose_fk2"];
-    var rule1 = compare.toString().toUpperCase() == p1.toString().toUpperCase();
-    var rule2 = compare.toString().toUpperCase() == p2.toString().toUpperCase();
+    var rule1 = purposes.contains(p1.toString().toUpperCase());
+    var rule2 = purposes.contains(p2.toString().toUpperCase());
     return rule1 || rule2;
   }).toList();
   List filteredByOpenDays = filteredByPurpose.where((e) {
@@ -141,6 +141,7 @@ Function getFilteredExperiences = () {
       }
       return false;
     }
+    var endHour = endHours[currentDay.value].toString();
 
     return true;
   }).toList();
@@ -148,6 +149,7 @@ Function getFilteredExperiences = () {
   Iterable result = filterByArrivalHour;
   return result;
 };
+//////////////////////////////////////////////////////////////////////////////////////
 Function getFiltered = () {
   List filtered = [];
   for (Map item in experiences) {
@@ -291,9 +293,12 @@ Function initializeHours = () {
   leftHours[currentDay.value] ??= 0.0.obs;
   accumulatedHours[currentDay.value] ??= 0.0.obs;
   totalHours[currentDay.value] ??= 0.0.obs;
+  endHours[currentDay.value] ??= time.obs;
   totalHours[currentDay.value].value = getMaxTrValue(currentTravelRhythm.value);
   leftHours[currentDay.value].value = totalHours[currentDay.value].value -
       accumulatedHours[currentDay.value].value;
+  endHours[currentDay.value].value =
+      time.addHour(totalHours[currentDay.value].value.round() as int);
   clearHours();
   clearKA();
 };

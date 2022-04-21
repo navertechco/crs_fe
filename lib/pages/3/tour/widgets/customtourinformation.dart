@@ -90,32 +90,10 @@ class CustomTourInformationForm extends StatelessWidget {
                     context: context),
                 value: purposeMemory.value,
                 onSaved: (values) {
-                  if (values == null) return;
-                  if (values.length > 3) {
-                    Get.snackbar("Error", "You can select maximum 3 purposes",
-                        snackPosition: SnackPosition.BOTTOM,
-                        backgroundColor: Colors.red,
-                        colorText: Colors.white,
-                        borderRadius: 10,
-                        margin: EdgeInsets.all(10),
-                        duration: Duration(seconds: 3));
-                    return;
-                  }
-                  if (values.length <= 3) {
-                    purposeMemory.value = [];
-                    var length = values.length;
-
-                    for (var i = 0; i < length; i++) {
-                      purposeMemory.value.add(purpose
-                          .toList()
-                          .where((e) => e["code"] == values[i])
-                          .toList()[0]["description"]);
-                    }
-                  }
+                  savePurposes(values);
                 },
                 onChanged: (values) {
-                  if (values == null) return;
-                  purposeMemory.value = values;
+                  savePurposes(values);
                 },
                 hintText: " ",
                 label: "Purposes                      ",

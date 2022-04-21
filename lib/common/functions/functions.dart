@@ -608,15 +608,14 @@ Function newTour = () async {
 };
 
 Function multiSaving = (values, catalog, context, index, field, memory) {
-  memory.value = [];
+  memory.value = <String>[];
   var length = values.length;
 
   for (var i = 0; i < length; i++) {
-    memory.value.add(findCatalog(catalog)
-        .toList()
-        .where((e) => e["code"] == values[i])
-        .toList()[0]["description"]);
+    memory.value.add(
+        filterCatalog(catalog, "code", values[i])[0]["description"].toString());
   }
+
   setFormValue(context, index, field, memory.value);
 };
 
@@ -628,5 +627,29 @@ Function filterCatalog = (catalog, key, value) {
   } catch (e) {
     log(e.toString());
     return [];
+  }
+};
+
+Function savePurposes = (values) {
+  if (values == null) return;
+  if (values.length > 3) {
+    Get.snackbar("Error", "You can select maximum 3 purposes",
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        borderRadius: 10,
+        margin: EdgeInsets.all(10),
+        duration: Duration(seconds: 3));
+    return;
+  }
+  if (values.length <= 3) {
+    purposeMemory.value = <String>[];
+    var length = values.length;
+    for (var i = 0; i < length; i++) {
+      purposeMemory.value.add(filterCatalog("purpose", "code", values[i])[0]
+              ["description"]
+          .toString());
+    }
+    setFormValue(globalctx.memory, "tour", "purpose", purposeMemory.value);
   }
 };

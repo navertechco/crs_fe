@@ -118,7 +118,8 @@ class BodyWidget extends StatelessWidget {
                           value: getFormValue(
                               globalctx.memory["destinations"],
                               globalDestinationIndex.value,
-                              "service_type", <String>[]),
+                              "service_type",
+                              ["GUIDING"]),
                           onSaved: (values) {
                             transportService.value = values;
                             openGuide.value =

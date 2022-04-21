@@ -187,6 +187,7 @@ var currentDestinationTrMaxRange = Rx(currentDestinationTrRange["max"]);
 var currentDestinationType = "arrival";
 var currentDestinationKeyActivities = [].obs;
 var leftHours = {}.obs;
+var endHours = {}.obs;
 var trMaxValues = {
   "SOFT": 6.0,
   "MEDIUM": 8.0,
@@ -220,8 +221,9 @@ var totalHours = {}.obs;
 var currentTravelRhythm = "1".obs;
 var currentDestinationOption = "0".obs;
 final TimeOfDay time = TimeOfDay(hour: 7, minute: 15);
-Rx<TimeOfDay?> startTime = Rx(TimeOfDay(hour: 7, minute: 15));
-Rx<TimeOfDay?> endTime = Rx(TimeOfDay(hour: 7, minute: 15));
+Rx<TimeOfDay?> startTime = Rx(time);
+Rx<TimeOfDay?> endTime = Rx(time);
+
 var searcherHeader = Rx(<DataColumn>[]);
 var searcherDetail = Rx(<DataRow>[]);
 var netRateHeader = Rx(<DataColumn>[]);
