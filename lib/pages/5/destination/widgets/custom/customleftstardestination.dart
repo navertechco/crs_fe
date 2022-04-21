@@ -24,10 +24,11 @@ class CustomLeftStarDestinationForm extends StatelessWidget {
       var bLat = toCatalog(b).relation["latitude"];
       var aLong = toCatalog(a).relation["longitude"];
       var bLong = toCatalog(b).relation["longitude"];
-      var aDistance = getDistance(aLat, aLong, arrivalLat, arrivalLong).toInt();
-      var bDistance = getDistance(bLat, bLong, arrivalLat, arrivalLong).toInt();
+      var bDistance = (getDistance(bLat, bLong, arrivalLat, arrivalLong));
+      var aDistance = (getDistance(aLat, aLong, arrivalLat, arrivalLong));
       return aDistance.compareTo(bDistance);
     });
+
     for (Map item in destinations) {
       List itemList = item.values.toList();
       CatalogDto destination = CatalogDto(itemList);

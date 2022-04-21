@@ -657,9 +657,9 @@ Function savePurposes = (values) {
 };
 
 Function getDistance = (a, b, c, d) {
-  return acos(sin(double.parse(a) * sin(double.parse(c)) +
+  return acos(sin(double.parse(c) * sin(double.parse(a)) +
           cos(double.parse(a)) *
               cos(double.parse(c)) *
-              cos(double.parse(b) - double.parse(d)))) *
+              cos(double.parse(d) - double.parse(b)))) *
       6371;
 };
