@@ -38,8 +38,8 @@ class CustomStarDestinationForm extends StatelessWidget {
 
     List<String> keyActivities = getFormValue(
         globalctx.memory["destinations"], index, "key_activities", <String>[]);
-    Rx<String> subs =
-        Rx(getFormValue(globalctx.memory["destinations"], index, "subs", "0"));
+    Rx<String> subDestination =
+        Rx(getFormValue(globalctx.memory["destinations"], index, "sub", "0"));
     List<Map<String, dynamic>> explorationdDays =
         findCatalog("exploration_days");
 
@@ -206,16 +206,15 @@ class CustomStarDestinationForm extends StatelessWidget {
                     {
                       return CustomFormDropDownFieldWidget(
                         validator: CustomRequiredValidator(
-                            errorText: "subs is required ", ctx: context),
-                        value: subs.value,
+                            errorText: "Sub Destination is required ", ctx: context),
+                        value: subDestination.value,
                         onSaved: (value) {
                           setFormValue(globalctx.memory["destinations"], index,
-                              "subs", value);
+                              "sub", value);
                         },
                         onChanged: (value) {
                           setFormValue(globalctx.memory["destinations"], index,
-                              "subs", value);
-                          explorationMode.value = value!;
+                              "sub", value);
                         },
                         hintText: " ",
                         label: "${destination.capitalize} Subs     ",
@@ -330,13 +329,15 @@ class CustomStarDestinationForm extends StatelessWidget {
                           setFormValue(globalctx.memory["destinations"], index,
                               "arrival_hour", value);
                           arrivalHour.value = filterCatalog(
-                              "arrival_hour", "code", int.parse(value!))[0]["description"];
+                                  "arrival_hour", "code", int.parse(value!))[0]
+                              ["description"];
                         },
                         onChanged: (value) {
                           setFormValue(globalctx.memory["destinations"], index,
                               "arrival_hour", value);
                           arrivalHour.value = filterCatalog(
-                              "arrival_hour", "code", int.parse(value!))[0]["description"];
+                                  "arrival_hour", "code", int.parse(value!))[0]
+                              ["description"];
                         },
                         label: "Arrival Hour              ",
                         data: arrival_hour);

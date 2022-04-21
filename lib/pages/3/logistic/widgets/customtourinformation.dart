@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/common/index.dart';
 import '../../../index.dart';
@@ -45,15 +46,18 @@ class CustomLogisticInformationForm extends StatelessWidget {
                             onTap: () async {
                               showCustomDialog(
                                 context,
-                                Text("A confirmation email was sent !!!!",
-                                    style: KTextSytle(
-                                            context: context,
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white)
-                                        .getStyle()),
+                                SfCalendar(
+                                  minDate:
+                                      arrivalDate.value.add(Duration(days: 1)),
+                                  maxDate: departureDate.value,
+                                  view: CalendarView.week,
+                                  timeSlotViewSettings: TimeSlotViewSettings(
+                                    startHour: 6,
+                                    endHour: 18,
+                                  ),
+                                ),
                                 "Close",
-                                backgroundColor: Colors.grey,
+                                backgroundColor: Colors.white,
                                 buttonColor: Colors.black,
                               );
                             },

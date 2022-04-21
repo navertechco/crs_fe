@@ -28,8 +28,25 @@ Function updateDragExperiences = (filteredExperiences) {
 
 Function getFilteredExperiences = () {
   List filtered = getFiltered();
+  var idx = getDestinationIndexByDay();
+  var sub = getFormValue(globalctx.memory["destinations"], idx, "sub", null);
+  var destination =
+      getFormValue(globalctx.memory["destinations"], idx, "destination", null);
+  var destData = getDestinationValueByName(destination);
+  List filteredBySubs = filtered.where((e) {
+    if (sub != null && sub != "0") {
+      var subs = destData.value[9]["subs"];
+      if (e.value["sub"] != null) {
+        var subName =
+            filterCatalog(subs, "code", int.parse(sub))[0]["description"];
+        var rule = subName == e.value["sub"];
+        return rule;
+      }
+    }
+    return true;
+  }).toList();
 
-  List filteredByType = filtered.where((e) {
+  List filteredByType = filteredBySubs.where((e) {
     if (e.value["experience_type"] == "meal") {
       return true;
     }
