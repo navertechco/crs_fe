@@ -619,3 +619,14 @@ Function multiSaving = (values, catalog, context, index, field, memory) {
   }
   setFormValue(context, index, field, memory.value);
 };
+
+Function filterCatalog = (catalog, key, value) {
+  try {
+    var res =
+        findCatalog(catalog).toList().where((e) => e[key] == value).toList();
+    return res;
+  } catch (e) {
+    log(e.toString());
+    return [];
+  }
+};

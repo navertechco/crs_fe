@@ -173,6 +173,8 @@ Rx<String> openCredit =
     Rx(getFormValue(globalctx.memory, "logistic", "open_credit_value", "0"));
 RxBool openGuide = false.obs;
 RxBool openTranslate = false.obs;
+Rx<String> arrivalHour = Rx(getFormValue(
+    globalctx.memory["destinations"], 0, "arrival_value", "00:00"));
 
 var serviceTypeCatalog = Rx(findCatalog("service_type"));
 var translatingCatalog = Rx(findCatalog("translating_service"));

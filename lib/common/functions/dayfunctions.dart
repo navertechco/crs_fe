@@ -180,10 +180,14 @@ Function prepareDaysToResume = () {
     for (var day in globalctx.payload["days"].keys) {
       globalctx.payload["days"][day] = globalctx.payload["days"][day].value;
     }
-    globalctx.payload["logistic"]["arrival_date"]=globalctx.payload["logistic"]["arrival_date"].toString();
-    globalctx.payload["logistic"]["since_date"]=globalctx.payload["logistic"]["since_date"].toString();
-    globalctx.payload["logistic"]["departure_date"]=globalctx.payload["logistic"]["departure_date"].toString();
-    globalctx.payload["logistic"]["until_date"]=globalctx.payload["logistic"]["until_date"].toString();
+    globalctx.payload["logistic"]["arrival_date"] =
+        globalctx.payload["logistic"]["arrival_date"].toString();
+    globalctx.payload["logistic"]["since_date"] =
+        globalctx.payload["logistic"]["since_date"].toString();
+    globalctx.payload["logistic"]["departure_date"] =
+        globalctx.payload["logistic"]["departure_date"].toString();
+    globalctx.payload["logistic"]["until_date"] =
+        globalctx.payload["logistic"]["until_date"].toString();
   } catch (e) {
     log(e);
   } finally {
@@ -303,5 +307,17 @@ Function saveExplorationDays = (int index, int val0, int val1, {String? key}) {
     }
   } catch (e) {
     log(e);
+  }
+};
+
+Function parseHour = (str) {
+  if (str.contains("h")) {
+    var parts = str.split("h");
+    return int.parse(parts[0]) * 60 + int.parse(parts[1]);
+  } else if (str.contains(":")) {
+    var parts = str.split(":");
+    return int.parse(parts[0]) * 60 + int.parse(parts[1]);
+  } else {
+    return int.parse(str);
   }
 };

@@ -130,7 +130,22 @@ Function getFilteredExperiences = () {
     var rule2 = (expTime - currentLeft) <= 30;
     return rule || rule2;
   }).toList();
-  Iterable result = filteredByLeft;
+
+  List filterByArrivalHour = filteredByLeft.where((e) {
+    if (currentDay.value == 0) {
+      if (e.description == "Leisure Time") {
+        return true;
+      }
+      if (parseHour(e.value["openTime"]) >= parseHour(arrivalHour.value)) {
+        return true;
+      }
+      return false;
+    }
+
+    return true;
+  }).toList();
+
+  Iterable result = filterByArrivalHour;
   return result;
 };
 Function getFiltered = () {

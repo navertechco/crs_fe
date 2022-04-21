@@ -329,10 +329,14 @@ class CustomStarDestinationForm extends StatelessWidget {
                         onSaved: (value) {
                           setFormValue(globalctx.memory["destinations"], index,
                               "arrival_hour", value);
+                          arrivalHour.value = filterCatalog(
+                              "arrival_hour", "code", int.parse(value!))[0]["description"];
                         },
                         onChanged: (value) {
                           setFormValue(globalctx.memory["destinations"], index,
                               "arrival_hour", value);
+                          arrivalHour.value = filterCatalog(
+                              "arrival_hour", "code", int.parse(value!))[0]["description"];
                         },
                         label: "Arrival Hour              ",
                         data: arrival_hour);
