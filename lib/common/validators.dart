@@ -74,6 +74,38 @@ class CustomRequiredValidator extends TextFieldValidator {
   }
 }
 
+class CustomCatalogRequiredValidator extends TextFieldValidator {
+  final ctx;
+  final catalog;
+  CustomCatalogRequiredValidator(
+      {required String errorText, required this.ctx, required this.catalog})
+      : super(errorText);
+
+  @override
+  bool get ignoreEmptyValues => false;
+
+  @override
+  bool isValid(String? value) {
+    return value != null && value != "" && value != "0" && catalog.isNotEmpty;
+  }
+
+  @override
+  String? call(String? value) {
+    if (isValid(value)) {
+      return null;
+    } else {
+      SweetAlert.show(ctx,
+          curve: ElasticInCurve(),
+          title: errorText,
+          style: SweetAlertStyle.error, onPress: (bool isConfirm) {
+        Get.close(1);
+        return false;
+      });
+      return errorText;
+    }
+  }
+}
+
 final CustomDatetimeRequiredValidator =
     (DateTime? date, {BuildContext? context, required String errorText}) {
   if (date != null) {

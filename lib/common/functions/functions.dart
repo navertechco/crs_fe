@@ -99,7 +99,7 @@ Function getParam = (key) {
   return child;
 };
 Function cityData = (Rx<List<Map<String, dynamic>>> citylist, cities) {
-  var index = 0;
+  var index = 1;
   citylist.value = [];
   for (var city in cities) {
     citylist.value.add({
@@ -129,11 +129,9 @@ Function getItems = (data, value) {
       var description = item["description"];
 
       if (description.contains("-")) {
-        description = item["description"].split("-").toList()[0].toString() +
-            " " +
-            item["description"].split("-").toList()[1].toString() +
-            " " +
-            item["description"].split("-").toList()[2].toString();
+        for (var item in item["description"].split("-").toList()) {
+          description += item + " ";
+        }
       }
 
       items.add(DropdownMenuItem(

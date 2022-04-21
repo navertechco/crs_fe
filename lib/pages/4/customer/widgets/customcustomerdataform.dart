@@ -21,12 +21,9 @@ class CustomCustomerDataForm extends StatelessWidget {
     var tour = globalctx.memory["tour"];
     Rx<List<Map<String, dynamic>>> citylist = Rx([]);
     RxString customerType = client["client_type_id"].toString().obs;
-    RxString country = getValue(client, "origin_id", def: "148").toString().obs;
-    RxString city = client["city_id"].toString().obs;
+    RxString country = getValue(client, "origin_id", def: "1").toString().obs;
+    RxString city = getValue(client, "city_id", def: "0").toString().obs;
     List<Map<String, dynamic>> countrylist = [];
-    // ignore: prefer_function_declarations_over_variables
-
-    // var countryParam = getParam("COUNTRIES");
     Map<dynamic, dynamic> countries = getContext("countries");
     Rx<List<Map<String, dynamic>>> countrydata = Rx((() {
       log("Countries: $countries\n\n");
@@ -241,10 +238,11 @@ class CustomCustomerDataForm extends StatelessWidget {
                               ),
                               // if (country.value != "")
                               CustomFormDropDownFieldWidget(
-                                validator: CustomRequiredValidator(
+                                validator: CustomCatalogRequiredValidator(
                                     errorText: "City is required ",
-                                    ctx: context),
-                                value: getValue(client, "city_id", def: "1"),
+                                    ctx: context,
+                                    catalog: citylist.value),
+                                value: city.value,
                                 width: 0.1,
                                 label: "City          ",
                                 onChanged: (value) {
