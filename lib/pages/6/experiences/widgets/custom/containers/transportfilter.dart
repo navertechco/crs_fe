@@ -119,7 +119,7 @@ class BodyWidget extends StatelessWidget {
                               globalctx.memory["destinations"],
                               globalDestinationIndex.value,
                               "service_type",
-                              ["GUIDING"]),
+                              ["DRIVING"]),
                           onSaved: (values) {
                             transportService.value = values;
                             openGuide.value =
