@@ -231,6 +231,7 @@ Function resetLeisureTime = () {
     processHour(-value);
   }
   setExperienceState("Leisure Time", "suggested");
+  deleteExperience("Leisure Time");
 };
 Function deleteExperience = (experience) {
   if (globalctx.experiences[currentDay.value].contains(experience)) {
@@ -242,6 +243,7 @@ Function deleteExperience = (experience) {
 };
 Function removeExperience = (experience) {
   downgradeExperienceDays(experience);
+  deleteExperience(experience);
 };
 Function promoteExperience = (experience) {
   upgradeExperienceDays(experience);
