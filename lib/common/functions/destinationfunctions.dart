@@ -81,7 +81,6 @@ Function processDestinations = (context) {
     globalDestinationName.value = arrival["description"];
     globalDestinationType.value = "arrival";
     globalDestinationIndex.value = "0";
-
     currentDay.value = -1;
     nextDay();
    
