@@ -83,6 +83,7 @@ Function processDestinations = (context) {
     globalDestinationIndex.value = "0";
     // resetExperiences();
     initializeHours();
+    resetCurrentDay();
     goto("Experiences");
   } else {
     if (context != null) {

@@ -254,6 +254,7 @@ Function previousDay = () {
     processDays();
     filterSuggestedExperiences();
   } else {
+    resetCurrentDay();
     goto("Destination");
   }
 };
