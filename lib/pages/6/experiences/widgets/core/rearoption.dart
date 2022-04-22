@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart'; 
+import 'package:google_fonts/google_fonts.dart';
 import 'package:naver_crs/pages/6/experiences/widgets/experiencedetail/widgets/index.dart';
 
 import '../../../../index.dart';
@@ -25,7 +25,8 @@ class ExperienceRearOptionWidget extends StatelessWidget {
         GestureDetector(
           onTap: () {
             showCustomDialog(context,
-                ExperienceDetailWidget(experience: experience), "Close");
+                ExperienceDetailWidget(experience: experience), "Close",
+                buttonColor: Colors.white);
           },
           child: Text(
             "click here for details...\n",
