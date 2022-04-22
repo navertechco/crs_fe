@@ -81,10 +81,10 @@ Function processDestinations = (context) {
     globalDestinationName.value = arrival["description"];
     globalDestinationType.value = "arrival";
     globalDestinationIndex.value = "0";
-    // resetExperiences();
-    initializeHours();
-    resetCurrentDay();
-    goto("Experiences");
+
+    currentDay.value = -1;
+    nextDay();
+   
   } else {
     if (context != null) {
       SweetAlert.show(context,
@@ -256,7 +256,7 @@ Function getDestinationIndexByDay = () {
   var _accumulated = 0;
   var _destinations = globalctx.memory["destinations"];
 
-  if (currentDay.value == 0) {
+  if (currentDay.value <= 0) {
     return 0;
   }
 

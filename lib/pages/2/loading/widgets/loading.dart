@@ -44,8 +44,6 @@ class LoadingWidget extends GetView<LoadingController> {
                           fontSize: 5,
                           onTap: () {
                             getTour(context, tourId: 0);
-                            // setContext("readonly", false);
-                            // Get.toNamed("/Searcher");
                           }),
                     ],
                   )),

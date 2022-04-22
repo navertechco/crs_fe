@@ -563,8 +563,11 @@ String getHourString(int flooredValue) {
 }
 
 Function goto = (page) {
-  selectedIndex.value = pageList.indexOf(page);
-  Get.toNamed("/$page");
+  var index = pageList.indexOf(page);
+  if (selectedIndex.value != index) {
+    selectedIndex.value = index;
+    Get.toNamed("/$page");
+  }
 };
 
 Future<void> logout(

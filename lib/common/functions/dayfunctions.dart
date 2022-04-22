@@ -9,46 +9,36 @@ import '../index.dart';
 import 'functions.dart';
 
 Function paginateDay = (context) {
-  // Get promoted experiences by day and KA
-  // var promotedExperiencesByDayAndKA =
-  //     getPromotedExperiencesByDayAndKA(currentDay.value);
-
-  //Decide if experiences are 2 almost to paginate
   if (globalctx.memory["promoted"] != null &&
       globalctx.memory["promoted"]["day"] != null &&
       globalctx.memory["promoted"]["day"][currentDay.value] != null) {
-    paginateNextDay();
+    nextDay();
   } else {
     showCustomDialog(
         context, LeftWidget(destination: "quito", index: 0), "Close");
   }
 };
-Function paginateNextDay = () {
-  if (currentDay.value < totalDays.value - 1) {
-    int index = getDestinationIndex(globalDestinationName.value, "tour");
-    int explorationMode = int.parse(getFormValue(
-        globalctx.memory["destinations"], index, "explorationMode", "0"));
-    if (explorationMode > 1) {
-      byPassCruise("forward");
-    } else {
-      byPassSurprise("forward");
-    }
 
-    nextDay();
+Function decideBypass = (direction) {
+  int index = getDestinationIndexByDay();
+  int explorationMode = int.parse(getFormValue(
+      globalctx.memory["destinations"], index, "explorationMode", "0"));
+  if (explorationMode > 1) {
+    bypassCruise(direction);
   } else {
-    prepareDaysToResume();
+    bypassSurprise(direction);
   }
 };
 
-Function byPassSurprise = (String direction) {
-  return;
+Function bypassSurprise = (String direction) {
   try {
-    int index = getDestinationIndex(globalDestinationName.value, "tour");
+    int index = getDestinationIndexByDay();
     List keyActivities = (getFormValue(
-        globalctx.memory["destinations"], index, "keyActivities", []));
+        globalctx.memory["destinations"], index, "key_activities", []));
 
     int explorationDay = int.parse(getFormValue(
         globalctx.memory["destinations"], index, "explorationDay", "0"));
+    // return;
 
     if (keyActivities.contains("Surprise")) {
       if (direction == "forward") {
@@ -56,13 +46,15 @@ Function byPassSurprise = (String direction) {
       } else {
         currentDay.value -= explorationDay;
       }
+    } else {
+      updateCurrentDay(direction);
     }
   } catch (e) {
     log(e);
   }
 };
 
-Function byPassCruise = (String direction) {
+Function bypassCruise = (String direction) {
   try {
     int index = getDestinationIndex(globalDestinationName.value, "tour");
     int explorationMode = int.parse(getFormValue(
@@ -93,19 +85,55 @@ Function byPassCruise = (String direction) {
           }
         }
       }
+    } else {
+      updateCurrentDay(direction);
     }
   } catch (e) {
     log(e);
   }
 };
 
-Function nextDay = () {
+Function adjustCurrentDay = () {
+  if (currentDay.value < 0) {
+    currentDay.value = 0;
+    resetCurrentDay();
+  }
+};
+
+Function updateCurrentDay = (direction) {
+  if (direction == "forward") {
+    currentDay.value += 1;
+  } else {
+    currentDay.value -= 1;
+  }
+};
+
+Function jumpDay = (direction) {
+  decideBypass(direction);
   expDraggable.value = 1;
-  currentDay.value++;
   currentDate.value = arrivalDate.value.add(Duration(days: currentDay.value));
   updateCurrentDestination();
   filterSuggestedExperiences();
   initializeHours();
+  goto("Experiences");
+};
+
+Function nextDay = () {
+  adjustCurrentDay();
+  if (currentDay.value < totalDays.value - 1) {
+    jumpDay("forward");
+  } else {
+    prepareDaysToResume();
+  }
+};
+
+Function previousDay = () {
+  if (currentDay.value > 0) {
+    jumpDay("backward");
+  } else {
+    resetCurrentDay();
+    goto("Destination");
+  }
 };
 
 Function getDtos = () {
@@ -237,27 +265,6 @@ Function updateCurrentDestinationTravelRhythm = () {
   currentTravelRhythm.value = travelRhythm;
 };
 
-Function previousDay = () {
-  if (currentDay.value > 0) {
-    int index = getDestinationIndex(globalDestinationName.value, "tour");
-    int explorationMode = int.parse(getFormValue(
-        globalctx.memory["destinations"], index, "explorationMode", "0"));
-    if (explorationMode > 1) {
-      byPassCruise("backward");
-    } else {
-      byPassSurprise("backward");
-    }
-
-    currentDay.value--;
-    currentDate.value = arrivalDate.value.add(Duration(days: currentDay.value));
-    updateCurrentDestination();
-    processDays();
-    filterSuggestedExperiences();
-  } else {
-    resetCurrentDay();
-    goto("Destination");
-  }
-};
 Function processDaysCatalog = () {
   totalDays.value =
       departureDate.value.difference(arrivalDate.value).inDays + 1;

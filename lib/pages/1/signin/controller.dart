@@ -12,7 +12,6 @@ class SigninController extends GetxController {
   var isLoading = false;
 
   Future<void> onSignin(ctx, String username, String password) async {
-    // Get.toNamed('/Loading');
     session["username"] = username;
 
     state.error = null;

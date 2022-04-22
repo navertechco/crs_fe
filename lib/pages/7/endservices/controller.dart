@@ -12,7 +12,6 @@ class EndServicesController extends GetxController {
   var isLoading = false;
 
   Future<void> onEndServices(ctx, String username, String password) async {
-    // Get.toNamed('/Loading');
 
     state.error = null;
     state.username = username;
