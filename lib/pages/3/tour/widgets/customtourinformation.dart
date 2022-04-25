@@ -19,7 +19,7 @@ class CustomTourInformationForm extends StatelessWidget {
     var tourdata = globalctx.memory;
     var tour = getValue(tourdata, "tour");
     var readonly = getContext("readonly") ?? false;
-    var purpose = findCatalog("purpose");
+    var purposes = findCatalog("purposes");
     var accomodationType = findCatalog("budget");
 
     return Form(
@@ -97,7 +97,7 @@ class CustomTourInformationForm extends StatelessWidget {
                 },
                 hintText: " ",
                 label: "Purposes                      ",
-                data: purpose,
+                data: purposes,
               );
             }),
             Padding(

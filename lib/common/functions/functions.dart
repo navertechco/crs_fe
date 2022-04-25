@@ -649,11 +649,11 @@ Function savePurposes = (values) {
     purposeMemory.value = <String>[];
     var length = values.length;
     for (var i = 0; i < length; i++) {
-      purposeMemory.value.add(filterCatalog("purpose", "code", values[i])[0]
+      purposeMemory.value.add(filterCatalog("purposes", "code", values[i])[0]
               ["description"]
           .toString());
     }
-    setFormValue(globalctx.memory, "tour", "purpose", purposeMemory.value);
+    setFormValue(globalctx.memory, "tour", "purposes", purposeMemory.value);
   }
 };
 

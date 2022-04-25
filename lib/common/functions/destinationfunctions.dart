@@ -83,7 +83,6 @@ Function processDestinations = (context) async {
     globalDestinationIndex.value = "0";
     currentDay.value = -1;
     await nextDay();
-   
   } else {
     if (context != null) {
       SweetAlert.show(context,
@@ -307,7 +306,7 @@ Function getDestinationKa = (destination, type) {
   return destData["key_activities"];
 };
 Function getTourPurpose = () {
-  var purposes = globalctx.memory["tour"]["purpose"];
+  var purposes = globalctx.memory["tour"]["purposes"];
   return purposes;
 };
 Function filterDestinations = () {

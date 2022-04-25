@@ -9,8 +9,7 @@ class TourState extends GetXState {
       return {
         "country": country,
         "accomodation_type": accomodation_type,
-        "purpose": purpose,
-        "passengers": passengers, 
+        "passengers": passengers,
       };
     };
   }
@@ -19,6 +18,5 @@ class TourState extends GetXState {
   String country = "";
   // ignore: non_constant_identifier_names
   String accomodation_type = "";
-  String purpose = "";
-  String passengers = ""; 
+  String passengers = "";
 }

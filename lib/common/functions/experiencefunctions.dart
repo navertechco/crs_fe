@@ -35,7 +35,7 @@ Function getFilteredExperiences = () {
   var destData = getDestinationValueByName(destination);
   List filteredBySubs = filtered.where((e) {
     if (sub != null && sub != "0") {
-      var subs = destData.value[9]["subs"];
+      var subs = destData[9]["subs"];
       if (e.value["sub"] != null) {
         var subName =
             filterCatalog(subs, "code", int.parse(sub))[0]["description"];
@@ -88,7 +88,7 @@ Function getFilteredExperiences = () {
     if (currentDay.value == 0 || e.description == "Leisure Time") {
       return true;
     }
-    var purposes = globalctx.memory["tour"]["purpose"];
+    var purposes = globalctx.memory["tour"]["purposes"];
     String p1 = getExperienceByName(e.description).value["purpose_fk"];
     String p2 = getExperienceByName(e.description).value["purpose_fk2"];
     var rule1 = purposes.contains(p1.toString().toUpperCase());
