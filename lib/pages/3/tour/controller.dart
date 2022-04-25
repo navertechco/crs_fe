@@ -6,11 +6,11 @@ import '../../index.dart';
 class TourController extends GetxController {
   final state = TourState();
   // ignore: prefer_function_declarations_over_variables
-  Function saveTour = () {};
+  Function sendTour = () {};
 
   TourController() {
 // ignore: prefer_function_declarations_over_variables
-    saveTour = () {
+    sendTour = () {
       Map tour = globalctx.memory["tour"];
       Map formData = state.toMap();
       Map mem = {...tour, ...formData};

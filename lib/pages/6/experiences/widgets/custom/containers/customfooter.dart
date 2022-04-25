@@ -58,11 +58,11 @@ class CustomFooterWidget extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           color: Colors.white)
                       .getStyle()),
-              onPressed: () {
+              onPressed: () async {
                 if ((leftHours[currentDay.value].value * 60) <= 5) {
                   if (formKey.currentState != null) {
                     if (formKey.currentState!.validate()) {
-                      paginateDay(context);
+                      await paginateDay(context);
                     }
                   }
                 } else {

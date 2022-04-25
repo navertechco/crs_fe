@@ -2,7 +2,7 @@
 import 'package:yaml/yaml.dart';
 import '../index.dart';
 
-Function sendTour = () async {
+Function saveTour = () async {
   try {
     if (!generated) {
       var payload = globalctx.payload.toString();

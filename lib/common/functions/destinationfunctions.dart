@@ -56,7 +56,7 @@ Function getCombinedDestinations = () {
   destinations = memoryDestinations;
   return destinations;
 };
-Function processDestinations = (context) {
+Function processDestinations = (context) async {
   // ignore: unrelated_type_equality_checks
   if (globalctx.promotedDestinations.isNotEmpty & (dayleft == 0)) {
     var destinationDay = [];
@@ -82,7 +82,7 @@ Function processDestinations = (context) {
     globalDestinationType.value = "arrival";
     globalDestinationIndex.value = "0";
     currentDay.value = -1;
-    nextDay();
+    await nextDay();
    
   } else {
     if (context != null) {

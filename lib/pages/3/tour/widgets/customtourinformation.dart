@@ -117,7 +117,7 @@ class CustomTourInformationForm extends StatelessWidget {
                   onNext: () {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
-                      ctrl!.saveTour();
+                      ctrl!.sendTour();
                       selectedIndex.value = selectedIndex.value + 1;
                     }
                   }),

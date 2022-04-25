@@ -52,9 +52,9 @@ class KeyPadWidget extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             color: Colors.white)
                         .getStyle()),
-                onPressed: () {
+                onPressed: () async {
                   if (dayleft.value == 0) {
-                    processDestinations(context);
+                    await processDestinations(context);
                   } else {
                     showCustomDialog(
                       context,

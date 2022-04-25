@@ -8,11 +8,11 @@ import 'package:naver_crs/pages/5/destination/widgets/destinationdetail/widgets/
 import '../index.dart';
 import 'functions.dart';
 
-Function paginateDay = (context) {
+Function paginateDay = (context) async {
   if (globalctx.memory["promoted"] != null &&
       globalctx.memory["promoted"]["day"] != null &&
       globalctx.memory["promoted"]["day"][currentDay.value] != null) {
-    nextDay();
+    await nextDay();
   } else {
     showCustomDialog(
         context, LeftWidget(destination: "quito", index: 0), "Close");
@@ -118,11 +118,11 @@ Function jumpDay = (direction) {
   goto("Experiences");
 };
 
-Function nextDay = () {
+Function nextDay = () async {
   if (currentDay.value < totalDays.value - 1) {
     jumpDay("forward");
   } else {
-    prepareDaysToResume();
+   await prepareDaysToResume();
   }
 };
 
@@ -164,7 +164,7 @@ Function getDtos = () {
   return [day, experience];
 };
 
-Function prepareDaysToResume = () {
+Function prepareDaysToResume = () async {
   try {
     var dayIndex = 0;
     var destinations = getCombinedDestinations();
@@ -215,10 +215,10 @@ Function prepareDaysToResume = () {
         globalctx.payload["logistic"]["departure_date"].toString();
     globalctx.payload["logistic"]["until_date"] =
         globalctx.payload["logistic"]["until_date"].toString();
+    await saveTour();
   } catch (e) {
     log(e);
   } finally {
-    sendTour();
     goto("EndServices");
   }
 };
