@@ -119,7 +119,7 @@ Function jumpDay = (direction) {
 };
 
 Function nextDay = () {
-   if (currentDay.value < totalDays.value - 1) {
+  if (currentDay.value < totalDays.value - 1) {
     jumpDay("forward");
   } else {
     prepareDaysToResume();

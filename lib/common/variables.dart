@@ -237,3 +237,4 @@ RxString? searchResult = ''.obs;
 var filteredData = [].obs;
 var purposeMemory = <String>[].obs;
 var kaMemory = <String>[].obs;
+var generated = false;
