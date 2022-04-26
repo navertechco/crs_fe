@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:naver_crs/pages/2/searcher/widgets/index.dart';
 import 'package:naver_crs/pages/7/endservices/widgets/index.dart';
 import 'package:sweetalert/sweetalert.dart';
+import 'package:syncfusion_flutter_calendar/calendar.dart';
 import '../constants.dart';
 import '../index.dart';
 export 'dayfunctions.dart';
@@ -32,6 +33,24 @@ Future<bool> getCatalog(
 }
 
 RxList<Map<String, dynamic>> daysCatalog = <Map<String, dynamic>>[].obs;
+
+Function findMemoryCatalog = (name, description) {
+  var memory = globalctx.memory[name];
+  List<Map<String, dynamic>> output = <Map<String, dynamic>>[];
+  if (memory != null) {
+    var idx = 1;
+    List items = memory.map((e) => e[description]).toSet().toList();
+    items.sort();
+    for (var item in items) {
+      Map<String, dynamic> row = {};
+      row["code"] = idx;
+      row["description"] = item;
+      output.add(row);
+      idx++;
+    }
+  }
+  return output;
+};
 
 Function findCatalog = (name) {
   var catalogs = getContext("catalogs");
@@ -343,6 +362,47 @@ Function setLT = (value) {
   experiences = findCatalog("experiences");
 };
 
+Future<void> getCruise(ctx, {int cruiseId = 0}) async {
+  if (globalctx.memory["cruises"] == null) {
+    var frame = {
+      "data": {"cruise_id": cruiseId}
+    };
+    var res = await fetchhandler(kDefaultSchema, kDefaultServer,
+        kDefaultServerPort, kDefaultFindCruise, 'POST', frame);
+    // ignore: avoid_print
+    log(res);
+    if (res['state'] == true) {
+      var data = res['data'];
+      if (data.length > 0) {
+        globalctx.memory["cruises"] = data;
+        showCustomDialog(
+          ctx,
+          CruiseCalendarWidget(ctx: ctx),
+          "Close",
+          backgroundColor: Colors.white,
+          buttonColor: Colors.black,
+        );
+      }
+    } else {
+      SweetAlert.show(ctx,
+          curve: ElasticInCurve(),
+          title: res['message'],
+          style: SweetAlertStyle.error, onPress: (bool isConfirm) {
+        Get.close(1);
+        return false;
+      });
+    }
+  } else {
+    showCustomDialog(
+      ctx,
+      CruiseCalendarWidget(ctx: ctx),
+      "Close",
+      backgroundColor: Colors.white,
+      buttonColor: Colors.black,
+    );
+  }
+}
+
 Future<void> getTour(ctx, {int tourId = 0}) async {
   var frame = {
     "data": {"tour_id": tourId}
@@ -406,9 +466,15 @@ Function processNetRateData = (context, data) {
   return [header, detail];
 };
 
-Function processData = (context, data) {
-  var header = getHeader(context, data);
-  var detail = getDetail(context, data);
+Function processCruiseData = (context, data, columns) {
+  var header = getHeader(context, data, columns);
+  var detail = getCruiseDetail(context, data, columns);
+  return [header, detail];
+};
+
+Function processData = (context, data, columns) {
+  var header = getHeader(context, data, columns);
+  var detail = getDetail(context, data, columns);
   return [header, detail];
 };
 
@@ -433,10 +499,16 @@ Function getNetRateHeader = (context, data) {
 
   return header;
 };
-Function getHeader = (context, data) {
+Function getHeader = (context, data, columns) {
   var header = <DataColumn>[];
+  List cols = data[0].keys.toList();
+
+  if (columns != null) {
+    cols = columns;
+  }
+
   if (data.length > 0) {
-    for (var key in data[0].keys) {
+    for (var key in cols) {
       String title = key ?? "";
       header.add(DataColumn(
         label: Text(
@@ -466,12 +538,102 @@ Function getHeader = (context, data) {
   return header;
 };
 
-Function getDetail = (context, data) {
+Function getCruiseDetail = (context, data, columns) {
   var detail = <DataRow>[];
   if (data.length > 0) {
     for (var row in data) {
       var cells = <DataCell>[];
-      for (var key in row.keys) {
+      var keys = row.keys.toList();
+
+      if (columns != null) {
+        keys = columns;
+      }
+
+      for (var key in keys) {
+        cells.add(DataCell(Text('${row[key]}',
+            style: KTextSytle(
+                    context: context,
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black)
+                .getStyle())));
+      }
+      cells.add(
+        DataCell(Row(
+          children: [
+            IconButton(
+              icon: const Icon(Icons.event_note_rounded),
+              tooltip: 'Itinerary',
+              onPressed: () {
+                showCustomDialog(
+                  context,
+                  SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Text(
+                          "${row['cruise_name']}",
+                          style: KTextSytle(
+                            context: context,
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(255, 204, 164, 61),
+                          ).getStyle(),
+                        ),
+                        Text(
+                          "${row['cruise_itinerary']}"
+                              .replaceAll("[", " ")
+                              .replaceAll("]", " "),
+                          style: KTextSytle(
+                            context: context,
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ).getStyle(),
+                        ),
+                        Image.network(
+                          "${row['image']}",
+                          width: MediaQuery.of(context).size.width * 0.5,
+                          height: MediaQuery.of(context).size.height * 0.5,
+                        ),
+                        SfCalendar(
+                          backgroundColor: Colors.white,
+                          minDate: arrivalDate.value.add(Duration(days: 1)),
+                          maxDate: departureDate.value,
+                          view: CalendarView.week,
+                          timeSlotViewSettings: TimeSlotViewSettings(
+                            startHour: 6,
+                            endHour: 18,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  "Close",
+                  backgroundColor: Color.fromARGB(100, 0, 0, 0),
+                );
+              },
+            ),
+          ],
+        )),
+      );
+      detail.add(DataRow(cells: cells));
+    }
+  }
+
+  return detail;
+};
+Function getDetail = (context, data, columns) {
+  var detail = <DataRow>[];
+  if (data.length > 0) {
+    for (var row in data) {
+      var cells = <DataCell>[];
+      var keys = row.keys.toList();
+
+      if (columns != null) {
+        keys = columns;
+      }
+
+      for (var key in keys) {
         cells.add(DataCell(Text('${row[key]}',
             style: KTextSytle(
                     context: context,

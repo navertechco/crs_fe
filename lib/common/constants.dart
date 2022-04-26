@@ -44,6 +44,7 @@ const kDefaultSendPollPath = "/Gamer/SendPoll";
 const kDefaultBuyCreditsPath = "/Gamer/BuyCredit";
 const kDefaultJoinTournmanetPath = "/Gamer/JoinTournament";
 const kDefaultFindTour = "/Tour/FindTour";
+const kDefaultFindCruise = "/Tour/FindCruise";
 const kDefaultTourEdit = "/Tour/Edit";
 const kDefaultNewTourEdit = "/Tour/NewId";
 const kDefaultCreateCatalog = "/Admin/CreateCatalog";

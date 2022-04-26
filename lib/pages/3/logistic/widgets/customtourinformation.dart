@@ -44,22 +44,8 @@ class CustomLogisticInformationForm extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             textColor: Colors.black,
                             onTap: () async {
-                              showCustomDialog(
-                                context,
-                                SfCalendar(
-                                  minDate:
-                                      arrivalDate.value.add(Duration(days: 1)),
-                                  maxDate: departureDate.value,
-                                  view: CalendarView.week,
-                                  timeSlotViewSettings: TimeSlotViewSettings(
-                                    startHour: 6,
-                                    endHour: 18,
-                                  ),
-                                ),
-                                "Close",
-                                backgroundColor: Colors.white,
-                                buttonColor: Colors.black,
-                              );
+                              getCruise(context, cruiseId: 0);
+                              
                             },
                           ),
                         ],
