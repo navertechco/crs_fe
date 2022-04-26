@@ -13,6 +13,7 @@ import '../index.dart';
 export 'dayfunctions.dart';
 export './destinationfunctions.dart';
 export './experiencefunctions.dart';
+import 'package:intl/intl.dart';
 
 // Other Functions
 Future<bool> getCatalog(
@@ -538,6 +539,36 @@ Function getHeader = (context, data, columns) {
   return header;
 };
 
+List<Meeting> getDataSource(data) {
+  List dataList = [];
+  final List<Meeting> meetings = <Meeting>[];
+
+  for (var i = 0; i < 3; i++) {
+    dataList = [...dataList, ...data.split(',').toList()];
+  }
+  var count = 0;
+  var now = arrivalDate.value;
+  var firstOfMonth = DateTime(now.year, now.month, 1);
+  var firstMonday = firstOfMonth
+      .add(Duration(days: (7 - (firstOfMonth.weekday - DateTime.monday)) % 7));
+  var currentDay = firstMonday;
+  for (var day in dataList) {
+    if (day == "" || day == " ") {
+      count++;
+      continue;
+    }
+
+    if (currentDay.month == now.month) {
+      var nextDay = currentDay.add(Duration(days: count));
+      meetings
+          .add(Meeting(day, nextDay, nextDay, const Color(0xFF0F8644), true));
+      currentDay = nextDay;
+    }
+    count++;
+  }
+  return meetings;
+}
+
 Function getCruiseDetail = (context, data, columns) {
   var detail = <DataRow>[];
   if (data.length > 0) {
@@ -596,14 +627,18 @@ Function getCruiseDetail = (context, data, columns) {
                           height: MediaQuery.of(context).size.height * 0.5,
                         ),
                         SfCalendar(
+                          firstDayOfWeek: 1,
                           backgroundColor: Colors.white,
                           minDate: arrivalDate.value.add(Duration(days: 1)),
-                          maxDate: departureDate.value,
-                          view: CalendarView.week,
-                          timeSlotViewSettings: TimeSlotViewSettings(
-                            startHour: 6,
-                            endHour: 18,
-                          ),
+                          maxDate: departureDate.value.add(Duration(days: -1)),
+                          view: CalendarView.month,
+                          dataSource: MeetingDataSource(getDataSource(
+                              "${row['cruise_itinerary']}"
+                                  .replaceAll("[", " ")
+                                  .replaceAll("]", " "))),
+                          monthViewSettings: MonthViewSettings(
+                              appointmentDisplayMode:
+                                  MonthAppointmentDisplayMode.appointment),
                         ),
                       ],
                     ),
