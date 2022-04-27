@@ -28,7 +28,7 @@ class CruiseCalendarWidget extends StatelessWidget {
                       value: "0",
                       onSaved: (value) {},
                       onChanged: (value) {
-                        cruiseType.value = setMemoryDescription(
+                        cruiseType.value = getCatalogDescription(
                             findMemoryCatalog("cruises", "cruise_type"), value);
                         filterCruises(context);
                       },
@@ -42,7 +42,7 @@ class CruiseCalendarWidget extends StatelessWidget {
                       value: "0",
                       onSaved: (value) {},
                       onChanged: (value) {
-                        cruiseCategory.value = setMemoryDescription(
+                        cruiseCategory.value = getCatalogDescription(
                             findMemoryCatalog("cruises", "cruise_category"),
                             value);
                         filterCruises(context);
@@ -61,12 +61,26 @@ class CruiseCalendarWidget extends StatelessWidget {
                       value: "0",
                       onSaved: (value) {},
                       onChanged: (value) {
-                        cruiseModality.value = setMemoryDescription(
+                        cruiseModality.value = getCatalogDescription(
                             findMemoryCatalog("cruises", "modality"), value);
                         filterCruises(context);
                       },
                       label: "Modality     ",
                       data: findMemoryCatalog("cruises", "modality")),
+                  CustomFormDropDownFieldWidget(
+                      width: 0.15,
+                      height: 0.05,
+                      validator: CustomRequiredValidator(
+                          errorText: "Cruise Islet is required ", ctx: ctx),
+                      value: "0",
+                      onSaved: (value) {},
+                      onChanged: (value) {
+                        cruiseIslet.value = getCatalogDescription(
+                            findCatalog("galapagos"), value);
+                        filterCruises(context);
+                      },
+                      label: "Islet     ",
+                      data: findCatalog("galapagos")),
                 ],
               ),
               Row(
@@ -78,12 +92,12 @@ class CruiseCalendarWidget extends StatelessWidget {
                           errorText: "Arrival is required ", ctx: ctx),
                       value: "0",
                       onSaved: (value) {
-                        cruiseArrival.value = setMemoryDescription(
+                        cruiseArrival.value = getCatalogDescription(
                             findCatalog("week_day"), value);
                         filterCruises(context);
                       },
                       onChanged: (value) {
-                        cruiseArrival.value = setMemoryDescription(
+                        cruiseArrival.value = getCatalogDescription(
                             findCatalog("week_day"), value);
                         filterCruises(context);
                       },
@@ -97,7 +111,7 @@ class CruiseCalendarWidget extends StatelessWidget {
                       value: "0",
                       onSaved: (value) {},
                       onChanged: (value) {
-                        cruiseDeparture.value = setMemoryDescription(
+                        cruiseDeparture.value = getCatalogDescription(
                             findCatalog("week_day"), value);
                         filterCruises(context);
                       },
@@ -113,7 +127,7 @@ class CruiseCalendarWidget extends StatelessWidget {
               //     value: "0",
               //     onSaved: (value) {},
               //     onChanged: (value) {
-              //       cruiseFormat.value = setMemoryDescription(
+              //       cruiseFormat.value = getCatalogDescription(
               //           findMemoryCatalog("cruises", "cruise_format"), value);
               //       filterCruises(context);
               //     },

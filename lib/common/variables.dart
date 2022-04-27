@@ -263,3 +263,4 @@ var cruisePax = "".obs;
 var cruiseTriple = "".obs;
 var cruiseArrival = "".obs;
 var cruiseDeparture = "".obs;
+var cruiseIslet = "".obs;

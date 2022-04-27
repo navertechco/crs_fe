@@ -610,10 +610,13 @@ Function getCruiseDetail = (context, data, columns) {
                             color: Color.fromARGB(255, 204, 164, 61),
                           ).getStyle(),
                         ),
+                        Image.network(
+                          "${row['image']}",
+                          width: MediaQuery.of(context).size.width * 0.5,
+                          height: MediaQuery.of(context).size.height * 0.5,
+                        ),
                         Text(
-                          "${row['cruise_itinerary']}"
-                              .replaceAll("[", " ")
-                              .replaceAll("]", " "),
+                          "${processCruiseItinerary(row)}",
                           style: KTextSytle(
                             context: context,
                             fontSize: 10,
@@ -621,25 +624,25 @@ Function getCruiseDetail = (context, data, columns) {
                             color: Colors.white,
                           ).getStyle(),
                         ),
-                        Image.network(
-                          "${row['image']}",
-                          width: MediaQuery.of(context).size.width * 0.5,
-                          height: MediaQuery.of(context).size.height * 0.5,
-                        ),
-                        SfCalendar(
-                          firstDayOfWeek: 1,
-                          backgroundColor: Colors.white,
-                          minDate: arrivalDate.value.add(Duration(days: 1)),
-                          maxDate: departureDate.value.add(Duration(days: -1)),
-                          view: CalendarView.month,
-                          dataSource: MeetingDataSource(getDataSource(
-                              "${row['cruise_itinerary']}"
-                                  .replaceAll("[", " ")
-                                  .replaceAll("]", " "))),
-                          monthViewSettings: MonthViewSettings(
-                              appointmentDisplayMode:
-                                  MonthAppointmentDisplayMode.appointment),
-                        ),
+                        if (lastDayDate.value
+                                .difference(firstDayDate.value)
+                                .inDays >
+                            0)
+                          Obx(() => SfCalendar(
+                                firstDayOfWeek: 1,
+                                backgroundColor: Colors.white,
+                                minDate: firstDayDate.value,
+                                maxDate: lastDayDate.value,
+                                view: CalendarView.month,
+                                dataSource: MeetingDataSource(getDataSource(
+                                    "${row['cruise_itinerary']}"
+                                        .replaceAll("[", " ")
+                                        .replaceAll("]", " "))),
+                                monthViewSettings: MonthViewSettings(
+                                    appointmentDisplayMode:
+                                        MonthAppointmentDisplayMode
+                                            .appointment),
+                              )),
                       ],
                     ),
                   ),
@@ -863,65 +866,71 @@ Function getDistance = (a, b, c, d) {
 };
 
 Function filterCruises = (ctx) {
-  List filtered = globalctx.memory["cruises"];
+  if (globalctx.memory["cruises"] != null) {
+    List filtered = globalctx.memory["cruises"];
 
-  List filterByCategory = filtered
-      .where((element) => element["cruise_category"]
-          .toString()
-          .toUpperCase()
-          .contains(cruiseCategory.value))
-      .toList();
-  List filterByKey = filterByCategory
-      .where((element) => element["cruise_itinerary"]
-          .toString()
-          .toUpperCase()
-          .contains(cruiseKey.value))
-      .toList();
-  List filterByType = filterByKey
-      .where((element) => element["cruise_type"]
-          .toString()
-          .toUpperCase()
-          .contains(cruiseType.value))
-      .toList();
-  List filterByModality = filterByType
-      .where((element) => element["modality"]
-          .toString()
-          .toUpperCase()
-          .contains(cruiseModality.value))
-      .toList();
-  List filterByArrival = filterByModality
-      .where((element) => element["cruise_format"]
-          .toString()
-          .toUpperCase()
-          .contains(cruiseArrival.value.toString().toUpperCase()))
-      .toList();
-  List filterByDeparture = filterByArrival
-      .where((element) => element["cruise_format"]
-          .toString()
-          .toUpperCase()
-          .contains(cruiseDeparture.value.toString().toUpperCase()))
-      .toList();
-  List filterByPax = filterByDeparture.where((element) => true).toList();
-  List filterByDays = filterByPax.where((element) => true).toList();
-  List filterByDay = filterByDays.where((element) => true).toList();
-  List filterByCruise = filterByDay.where((element) => true).toList();
-  List filterByDateRange = filterByCruise.where((element) => true).toList();
-  List filterByCabine = filterByDateRange.where((element) => true).toList();
-  List filterByTriple = filterByCabine.where((element) => true).toList();
+    List filterByCategory = filtered
+        .where((element) => element["cruise_category"]
+            .toString()
+            .toUpperCase()
+            .contains(cruiseCategory.value))
+        .toList();
+    List filterByKey = filterByCategory
+        .where((element) => element["cruise_itinerary"]
+            .toString()
+            .toUpperCase()
+            .contains(cruiseKey.value))
+        .toList();
+    List filterByType = filterByKey
+        .where((element) => element["cruise_type"]
+            .toString()
+            .toUpperCase()
+            .contains(cruiseType.value))
+        .toList();
+    List filterByModality = filterByType
+        .where((element) => element["modality"]
+            .toString()
+            .toUpperCase()
+            .contains(cruiseModality.value))
+        .toList();
+    List filterByArrival = filterByModality
+        .where((element) => element["cruise_format"]
+            .toString()
+            .toUpperCase()
+            .contains(cruiseArrival.value.toString().toUpperCase()))
+        .toList();
+    List filterByDeparture = filterByArrival
+        .where((element) => element["cruise_format"]
+            .toString()
+            .toUpperCase()
+            .contains(cruiseDeparture.value.toString().toUpperCase()))
+        .toList();
+    List filterByIslet = filterByDeparture.where((element) => element["cruise_itinerary"]
+            .toString()
+            .toUpperCase()
+            .contains(cruiseIslet.value.toString().toUpperCase()))
+        .toList();
+    List filterByDays = filterByIslet.where((element) => true).toList();
+    List filterByDay = filterByDays.where((element) => true).toList();
+    List filterByCruise = filterByDay.where((element) => true).toList();
+    List filterByDateRange = filterByCruise.where((element) => true).toList();
+    List filterByCabine = filterByDateRange.where((element) => true).toList();
+    List filterByTriple = filterByCabine.where((element) => true).toList();
 
-  cruiseResults.value = filterByTriple.toList();
+    cruiseResults.value = filterByTriple.toList();
 
-  var processedData = processCruiseData(ctx, cruiseResults.value, columns);
-  searcherHeader.value = processedData[0];
-  searcherDetail.value = processedData[1];
+    var processedData = processCruiseData(ctx, cruiseResults.value, columns);
+    searcherHeader.value = processedData[0];
+    searcherDetail.value = processedData[1];
 
-  cruiseTable.value = DataTable(
-    columns: searcherHeader.value,
-    rows: searcherDetail.value,
-  );
+    cruiseTable.value = DataTable(
+      columns: searcherHeader.value,
+      rows: searcherDetail.value,
+    );
+  }
 };
 
-Function setMemoryDescription = (catalog, value) {
+Function getCatalogDescription = (catalog, value) {
   log(value);
   if (value == "0") {
     return "";
@@ -937,3 +946,26 @@ var cruiseTable = Rx(DataTable(
   columns: searcherHeader.value,
   rows: searcherDetail.value,
 ));
+
+Function processCruiseItinerary = (row) {
+  var itinerary = row["cruise_itinerary"]
+      .toString()
+      .replaceAll("[", "")
+      .replaceAll("]", "");
+  var itineraryList = itinerary.split(",");
+  var result = "";
+  var i = 1;
+  for (var item in itineraryList) {
+    if (item.toString() != "") {
+      result +=
+          "${getCatalogDescription(findCatalog("week_day"), i)}: ${item.toString()} \n";
+    }
+
+    if (i == 7) {
+      i = 1;
+    } else {
+      i++;
+    }
+  }
+  return result;
+};
