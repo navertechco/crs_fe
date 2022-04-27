@@ -119,33 +119,23 @@ class CruiseCalendarWidget extends StatelessWidget {
                       data: findCatalog("week_day")),
                 ],
               ),
-              // CustomFormDropDownFieldWidget(
-              //     width: 0.3,
-              //     height: 0.05,
-              //     validator: CustomRequiredValidator(
-              //         errorText: "Cruise Format is required ", ctx: ctx),
-              //     value: "0",
-              //     onSaved: (value) {},
-              //     onChanged: (value) {
-              //       cruiseFormat.value = getCatalogDescription(
-              //           findMemoryCatalog("cruises", "cruise_format"), value);
-              //       filterCruises(context);
-              //     },
-              //     label: "Format        ",
-              //     data: findMemoryCatalog("cruises", "cruise_format")),
+              SizedBox(
+                height: 10,
+              ),
               Container(
-                  width: MediaQuery.of(context).size.width * 0.5,
-                  height: MediaQuery.of(context).size.height * 0.45,
+                  width: MediaQuery.of(context).size.width * 0.6,
+                  height: MediaQuery.of(context).size.height * 0.55,
                   child: SingleChildScrollView(
-                      scrollDirection: Axis.vertical,
-                      child: Column(
-                        children: [
-                          if (cruiseResults.value.isNotEmpty)
-                            cruiseTable.value
-                          else
-                            Text("No Cruises Found"),
-                        ],
-                      )))
+                    scrollDirection: Axis.vertical,
+                    child: Column(
+                      children: [
+                        if (cruiseResults.value.isNotEmpty)
+                          cruiseTable.value
+                        else
+                          Text("No Cruises Found"),
+                      ],
+                    ),
+                  ))
             ],
           );
         }));

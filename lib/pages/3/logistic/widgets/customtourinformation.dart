@@ -85,6 +85,7 @@ class CustomLogisticInformationForm extends StatelessWidget {
                           onSaved: (value) {
                             ctrl!.state.arrivalDate = value!;
                             arrivalDate.value = value;
+                            clearCruiseFilter();
                             filterCruises(context);
                           },
                           onChanged: (value) {
@@ -135,6 +136,7 @@ class CustomLogisticInformationForm extends StatelessWidget {
                             ctrl!.state.departureDate = value!;
                             departureDate.value = value;
                             processDaysCatalog();
+                            clearCruiseFilter();
                             filterCruises(context);
                           },
                           onChanged: (value) {

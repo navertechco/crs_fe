@@ -264,3 +264,20 @@ var cruiseTriple = "".obs;
 var cruiseArrival = "".obs;
 var cruiseDeparture = "".obs;
 var cruiseIslet = "".obs;
+
+Function clearCruiseFilter = () {
+  cruiseFormat.value = "";
+  cruiseDay.value = "";
+  cruiseShip.value = "";
+  cruiseRange.value = "";
+  cruiseCategory.value = "";
+  cruiseKey.value = "";
+  cruiseType.value = "";
+  cruiseCabine.value = "";
+  cruiseModality.value = "";
+  cruisePax.value = "";
+  cruiseTriple.value = "";
+  cruiseArrival.value = "";
+  cruiseDeparture.value = "";
+  cruiseIslet.value = "";
+};

@@ -514,9 +514,10 @@ Function getHeader = (context, data, columns) {
       header.add(DataColumn(
         label: Text(
           title.capitalize!.replaceAll("_", " "),
+          textAlign: TextAlign.left,
           style: KTextSytle(
             context: context,
-            fontSize: 15,
+            fontSize: 10,
             fontWeight: FontWeight.bold,
             color: Color.fromARGB(255, 204, 164, 61),
           ).getStyle(),
@@ -528,7 +529,7 @@ Function getHeader = (context, data, columns) {
         'Actions',
         style: KTextSytle(
           context: context,
-          fontSize: 15,
+          fontSize: 10,
           fontWeight: FontWeight.bold,
           color: Color.fromARGB(255, 204, 164, 61),
         ).getStyle(),
@@ -582,77 +583,80 @@ Function getCruiseDetail = (context, data, columns) {
 
       for (var key in keys) {
         cells.add(DataCell(Text('${row[key]}',
+            textAlign: TextAlign.left,
             style: KTextSytle(
                     context: context,
-                    fontSize: 10,
+                    fontSize: row[key].length > 20 ? 6 : 8,
                     fontWeight: FontWeight.bold,
                     color: Colors.black)
                 .getStyle())));
       }
       cells.add(
-        DataCell(Row(
-          children: [
-            IconButton(
-              icon: const Icon(Icons.event_note_rounded),
-              tooltip: 'Itinerary',
-              onPressed: () {
-                showCustomDialog(
-                  context,
-                  SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        Text(
-                          "${row['cruise_name']}",
-                          style: KTextSytle(
-                            context: context,
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 204, 164, 61),
-                          ).getStyle(),
-                        ),
-                        Image.network(
-                          "${row['image']}",
-                          width: MediaQuery.of(context).size.width * 0.5,
-                          height: MediaQuery.of(context).size.height * 0.5,
-                        ),
-                        Text(
-                          "${processCruiseItinerary(row)}",
-                          style: KTextSytle(
-                            context: context,
-                            fontSize: 10,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ).getStyle(),
-                        ),
-                        if (lastDayDate.value
-                                .difference(firstDayDate.value)
-                                .inDays >
-                            0)
-                          Obx(() => SfCalendar(
-                                firstDayOfWeek: 1,
-                                backgroundColor: Colors.white,
-                                minDate: firstDayDate.value,
-                                maxDate: lastDayDate.value,
-                                view: CalendarView.month,
-                                dataSource: MeetingDataSource(getDataSource(
-                                    "${row['cruise_itinerary']}"
-                                        .replaceAll("[", " ")
-                                        .replaceAll("]", " "))),
-                                monthViewSettings: MonthViewSettings(
-                                    appointmentDisplayMode:
-                                        MonthAppointmentDisplayMode
-                                            .appointment),
-                              )),
-                      ],
-                    ),
+        DataCell(
+          IconButton(
+            padding: EdgeInsets.all(0),
+            icon: const Icon(Icons.event_note_rounded, size: 20),
+            tooltip: 'Show Cruise Itinerary',
+            onPressed: () {
+              showCustomDialog(
+                context,
+                SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Text(
+                        "${row['cruise_name']}",
+                        style: KTextSytle(
+                          context: context,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 204, 164, 61),
+                        ).getStyle(),
+                      ),
+                      Image.network(
+                        "${row['image']}",
+                        width: MediaQuery.of(context).size.width * 0.5,
+                        height: MediaQuery.of(context).size.height * 0.5,
+                      ),
+                      Text(
+                        "${processCruiseItinerary(row)}",
+                        style: KTextSytle(
+                          context: context,
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ).getStyle(),
+                      ),
+                      Obx(() {
+                        try {
+                          return SfCalendar(
+                            firstDayOfWeek: 1,
+                            backgroundColor: Colors.white,
+                            minDate: arrivalDate.value.add(Duration(days: 1)),
+                            maxDate:
+                                departureDate.value.add(Duration(days: -1)),
+                            view: CalendarView.month,
+                            dataSource: MeetingDataSource(getDataSource(
+                                "${row['cruise_itinerary']}"
+                                    .replaceAll("[", " ")
+                                    .replaceAll("]", " "))),
+                            monthViewSettings: MonthViewSettings(
+                                appointmentDisplayMode:
+                                    MonthAppointmentDisplayMode.appointment),
+                          );
+                        } catch (e) {
+                          log(e);
+                          return Text("");
+                        }
+                      })
+                    ],
                   ),
-                  "Close",
-                  backgroundColor: Color.fromARGB(100, 0, 0, 0),
-                );
-              },
-            ),
-          ],
-        )),
+                ),
+                "Close",
+                backgroundColor: Color.fromARGB(100, 0, 0, 0),
+              );
+            },
+          ),
+        ),
       );
       detail.add(DataRow(cells: cells));
     }
@@ -905,7 +909,8 @@ Function filterCruises = (ctx) {
             .toUpperCase()
             .contains(cruiseDeparture.value.toString().toUpperCase()))
         .toList();
-    List filterByIslet = filterByDeparture.where((element) => element["cruise_itinerary"]
+    List filterByIslet = filterByDeparture
+        .where((element) => element["cruise_itinerary"]
             .toString()
             .toUpperCase()
             .contains(cruiseIslet.value.toString().toUpperCase()))
@@ -939,13 +944,15 @@ Function getCatalogDescription = (catalog, value) {
       element["code"].toString() == (value.toString()))["description"];
 };
 
-List columns = ["cruise_name", "modality"];
+List columns = ["cruise_name", "cruise_format"];
 
 Rx<Iterable> cruiseResults = Rx([]);
-var cruiseTable = Rx(DataTable(
-  columns: searcherHeader.value,
-  rows: searcherDetail.value,
-));
+var cruiseTable = Rx(
+  DataTable(
+    columns: searcherHeader.value,
+    rows: searcherDetail.value,
+  ),
+);
 
 Function processCruiseItinerary = (row) {
   var itinerary = row["cruise_itinerary"]
