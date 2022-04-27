@@ -132,7 +132,15 @@ class CruiseCalendarWidget extends StatelessWidget {
                         if (cruiseResults.value.isNotEmpty)
                           cruiseTable.value
                         else
-                          Text("No Cruises Found"),
+                          Text(
+                            "No Cruises Found",
+                            style: KTextSytle(
+                              context: context,
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromARGB(255, 204, 164, 61),
+                            ).getStyle(),
+                          )
                       ],
                     ),
                   ))

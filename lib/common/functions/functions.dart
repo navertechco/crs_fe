@@ -586,7 +586,7 @@ Function getCruiseDetail = (context, data, columns) {
             textAlign: TextAlign.left,
             style: KTextSytle(
                     context: context,
-                    fontSize: row[key].length > 20 ? 6 : 8,
+                    fontSize: 8,
                     fontWeight: FontWeight.bold,
                     color: Colors.black)
                 .getStyle())));
@@ -645,7 +645,15 @@ Function getCruiseDetail = (context, data, columns) {
                           );
                         } catch (e) {
                           log(e);
-                          return Text("");
+                          return Text(
+                            "No Calendar Aivable",
+                            style: KTextSytle(
+                              context: context,
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromARGB(255, 204, 164, 61),
+                            ).getStyle(),
+                          );
                         }
                       })
                     ],
