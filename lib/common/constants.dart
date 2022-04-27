@@ -32,7 +32,7 @@ class KTextSytle {
 }
 
 const kDefaultSchema = "https";
-const kDefaultServer = "192.168.101.4"; //"uiodesign.fortiddns.com";
+const kDefaultServer = "uiodesign.fortiddns.com"; //"uiodesign.fortiddns.com";
 const kDefaultServerPort = 9999;
 const kDefaultLogoutPath = "/User/Logout";
 const kDefaultCatalogPath = "/System/FindCatalog";
