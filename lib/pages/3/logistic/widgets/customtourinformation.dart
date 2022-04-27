@@ -45,7 +45,6 @@ class CustomLogisticInformationForm extends StatelessWidget {
                             textColor: Colors.black,
                             onTap: () async {
                               getCruise(context, cruiseId: 0);
-                              
                             },
                           ),
                         ],
@@ -86,12 +85,14 @@ class CustomLogisticInformationForm extends StatelessWidget {
                           onSaved: (value) {
                             ctrl!.state.arrivalDate = value!;
                             arrivalDate.value = value;
+                            filterCruises(context);
                           },
                           onChanged: (value) {
                             value ??= DateTime.now();
                             ctrl!.state.arrivalDate = value;
                             arrivalDate.value = value;
                             processDaysCatalog();
+                            filterCruises(context);
                           },
                         );
                       }),
@@ -134,11 +135,13 @@ class CustomLogisticInformationForm extends StatelessWidget {
                             ctrl!.state.departureDate = value!;
                             departureDate.value = value;
                             processDaysCatalog();
+                            filterCruises(context);
                           },
                           onChanged: (value) {
                             value ??= DateTime.now();
                             ctrl!.state.departureDate = value;
                             departureDate.value = value;
+                            filterCruises(context);
                           },
                         );
                       }),

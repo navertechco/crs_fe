@@ -142,7 +142,7 @@ Function getItems = (data, value) {
   RxList<DropdownMenuItem<String>> items = <DropdownMenuItem<String>>[].obs;
   List<Map<String, dynamic>> data2 = [];
   data2.add({"code": "0", "description": "Choose a Option"});
-  if (data.isNotEmpty) {
+  if (data.length > 0) {
     items = <DropdownMenuItem<String>>[].obs;
     data2.addAll(data);
     data2.asMap().forEach((index, item) {
@@ -502,13 +502,13 @@ Function getNetRateHeader = (context, data) {
 };
 Function getHeader = (context, data, columns) {
   var header = <DataColumn>[];
-  List cols = data[0].keys.toList();
-
-  if (columns != null) {
-    cols = columns;
-  }
+  List cols = [];
 
   if (data.length > 0) {
+    cols = data[0].keys.toList();
+    if (columns != null) {
+      cols = columns;
+    }
     for (var key in cols) {
       String title = key ?? "";
       header.add(DataColumn(
@@ -861,3 +861,79 @@ Function getDistance = (a, b, c, d) {
               cos(double.parse(d) - double.parse(b)))) *
       6371;
 };
+
+Function filterCruises = (ctx) {
+  List filtered = globalctx.memory["cruises"];
+
+  List filterByCategory = filtered
+      .where((element) => element["cruise_category"]
+          .toString()
+          .toUpperCase()
+          .contains(cruiseCategory.value))
+      .toList();
+  List filterByKey = filterByCategory
+      .where((element) => element["cruise_itinerary"]
+          .toString()
+          .toUpperCase()
+          .contains(cruiseKey.value))
+      .toList();
+  List filterByType = filterByKey
+      .where((element) => element["cruise_type"]
+          .toString()
+          .toUpperCase()
+          .contains(cruiseType.value))
+      .toList();
+  List filterByModality = filterByType
+      .where((element) => element["modality"]
+          .toString()
+          .toUpperCase()
+          .contains(cruiseModality.value))
+      .toList();
+  List filterByArrival = filterByModality
+      .where((element) => element["cruise_format"]
+          .toString()
+          .toUpperCase()
+          .contains(cruiseArrival.value.toString().toUpperCase()))
+      .toList();
+  List filterByDeparture = filterByArrival
+      .where((element) => element["cruise_format"]
+          .toString()
+          .toUpperCase()
+          .contains(cruiseDeparture.value.toString().toUpperCase()))
+      .toList();
+  List filterByPax = filterByDeparture.where((element) => true).toList();
+  List filterByDays = filterByPax.where((element) => true).toList();
+  List filterByDay = filterByDays.where((element) => true).toList();
+  List filterByCruise = filterByDay.where((element) => true).toList();
+  List filterByDateRange = filterByCruise.where((element) => true).toList();
+  List filterByCabine = filterByDateRange.where((element) => true).toList();
+  List filterByTriple = filterByCabine.where((element) => true).toList();
+
+  cruiseResults.value = filterByTriple.toList();
+
+  var processedData = processCruiseData(ctx, cruiseResults.value, columns);
+  searcherHeader.value = processedData[0];
+  searcherDetail.value = processedData[1];
+
+  cruiseTable.value = DataTable(
+    columns: searcherHeader.value,
+    rows: searcherDetail.value,
+  );
+};
+
+Function setMemoryDescription = (catalog, value) {
+  log(value);
+  if (value == "0") {
+    return "";
+  }
+  return catalog.firstWhere((element) =>
+      element["code"].toString() == (value.toString()))["description"];
+};
+
+List columns = ["cruise_name", "modality"];
+
+Rx<Iterable> cruiseResults = Rx([]);
+var cruiseTable = Rx(DataTable(
+  columns: searcherHeader.value,
+  rows: searcherDetail.value,
+));

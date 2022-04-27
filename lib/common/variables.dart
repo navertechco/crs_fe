@@ -22,9 +22,22 @@ Map<dynamic, dynamic> destinations = globalctx.memory["destinations"] ?? {};
 Rx<DateTime> birthDate =
     Rx(DateTime.parse(globalctx.memory["customer"]["birth_date"]));
 Rx<DateTime> arrivalDate = Rx(DateTime(2022, 12, 10));
+RxString arrivalDateName =
+    DateFormat('EEEE').format(arrivalDate.value).toString().obs;
 Rx<DateTime> departureDate = Rx(DateTime(2022, 12, 12));
+RxString departureDateName =
+    DateFormat('EEEE').format(departureDate.value).toString().obs;
 Rx<DateTime> currentDate =
     Rx(arrivalDate.value.add(Duration(days: currentDay.value)));
+RxString currentDateName =
+    DateFormat('EEEE').format(currentDate.value).toString().obs;
+Rx<DateTime> firstDayDate = Rx(arrivalDate.value.add(const Duration(days: 1)));
+RxString firstDayDateName =
+    DateFormat('EEEE').format(firstDayDate.value).toString().obs;
+Rx<DateTime> lastDayDate =
+    Rx(departureDate.value.add(const Duration(days: -1)));
+RxString lastDayDateName =
+    DateFormat('EEEE').format(lastDayDate.value).toString().obs;
 var openDays = {
   "Mon": "M",
   "Tue": "T",
@@ -34,7 +47,6 @@ var openDays = {
   "Sat": "S",
   "Sun": "Su"
 };
-Rx<DateTime> firstDayDate = Rx(arrivalDate.value.add(const Duration(days: 1)));
 Rx<DateTime> penultimateDayDate =
     Rx(departureDate.value.subtract(const Duration(days: 1)));
 Rx<DateTime> iHStartDate = Rx(firstDayDate.value);
@@ -238,3 +250,16 @@ var filteredData = [].obs;
 var purposeMemory = <String>[].obs;
 var kaMemory = <String>[].obs;
 var generated = false;
+var cruiseFormat = "".obs;
+var cruiseDay = "".obs;
+var cruiseShip = "".obs;
+var cruiseRange = "".obs;
+var cruiseCategory = "".obs;
+var cruiseKey = "".obs;
+var cruiseType = "".obs;
+var cruiseCabine = "".obs;
+var cruiseModality = "".obs;
+var cruisePax = "".obs;
+var cruiseTriple = "".obs;
+var cruiseArrival = "".obs;
+var cruiseDeparture = "".obs;
