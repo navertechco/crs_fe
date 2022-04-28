@@ -15,6 +15,7 @@ Function saveTour = () async {
         "data": data
       });
       if (res.statusCode == 200 && res["state"]) {
+        globalctx.memory["tour"]["playlist_slug"] = res["data"]["playlist_slug"];
         generated = true;
       }
     }

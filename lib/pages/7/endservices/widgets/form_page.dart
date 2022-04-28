@@ -42,7 +42,7 @@ class EndServicesFormPage extends GetView<StatelessWidget> {
                     label: "Video Gallery",
                     color: Color.fromARGB(255, 204, 164, 61),
                     url:
-                        "$kDefaultSchema://$kDefaultServer:$kDefaultServerPort/Client/PlayTour/6ba7b811-9dad-11d1-80b4-00c04fd430c8"),
+                        "$kDefaultSchema://$kDefaultServer:$kDefaultServerPort/Client/PlayTour/${globalctx.memory["tour"]["playlist_slug"]}"),
                 SizedBox(height: kDefaultPadding),
                 WebButton(
                     label: "Photo Gallery",
@@ -101,6 +101,7 @@ class WebView extends StatelessWidget {
             android: AndroidInAppWebViewOptions(
               useShouldInterceptRequest: true,
               useHybridComposition: true,
+              safeBrowsingEnabled: false,
             ),
             crossPlatform: InAppWebViewOptions(
               useShouldOverrideUrlLoading: true,
@@ -110,6 +111,10 @@ class WebView extends StatelessWidget {
               preferredContentMode: UserPreferredContentMode.MOBILE,
             ),
           ),
+          onReceivedServerTrustAuthRequest: (controller, challenge) async {
+            return ServerTrustAuthResponse(
+                action: ServerTrustAuthResponseAction.PROCEED);
+          },
           initialUrlRequest: URLRequest(
             url: Uri.parse(url),
           ))
