@@ -14,6 +14,7 @@ class Context with PropertyChangeNotifier<String> {
     "dayleft": 9999,
     "index": 0.obs,
     "icons": {}.obs,
+    "countries": {},
     "session": {"avatar": "".obs},
     "destinationdata": {}.obs,
     "experiencedata": {}.obs,
@@ -51,15 +52,12 @@ class Context with PropertyChangeNotifier<String> {
   int counter = 0;
   Map<String, GlobalKey<State<StatefulWidget>>> keys = {};
   Context() {
-    // load("catalogs");
-    // load("data");
     load("countries");
   }
 
-  void load(file) {
-    rootBundle.loadString("assets/data/$file.json").then((value) {
-      context.value[file] = json.decode(value);
-    });
+  void load(key) async {
+    var result = await rootBundle.loadString("assets/data/$key.json");
+    context.value[key] = json.decode(result);
   }
 
   void set_context(key, value) {
@@ -72,7 +70,6 @@ class Context with PropertyChangeNotifier<String> {
   }
 }
 
-Context globalctx = Context();
 setContext(key, value) {
   globalctx.set_context(key, value);
   log(globalctx.context.value);

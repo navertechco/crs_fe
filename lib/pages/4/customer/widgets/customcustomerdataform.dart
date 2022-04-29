@@ -15,34 +15,6 @@ class CustomCustomerDataForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var customerTypeCatalog = findCatalog("legal_client_type");
-
-    var client = globalctx.memory["customer"];
-    var tour = globalctx.memory["tour"];
-    Rx<List<Map<String, dynamic>>> citylist = Rx([]);
-    RxString customerType = client["client_type_id"].toString().obs;
-    RxString country = getValue(client, "origin_id", def: "1").toString().obs;
-    RxString city = getValue(client, "city_id", def: "0").toString().obs;
-    List<Map<String, dynamic>> countrylist = [];
-    Map<dynamic, dynamic> countries = getContext("countries");
-    Rx<List<Map<String, dynamic>>> countrydata = Rx((() {
-      log("Countries: $countries\n\n");
-      countrylist = [];
-      var index = 0;
-      if (countries != null) {
-        for (var country in countries.keys) {
-          countrylist.add({
-            "code": "$index",
-            "description": country,
-          });
-          index++;
-        }
-      }
-
-      log("CountryList: $countrylist");
-      return countrylist;
-    })());
-
     return Form(
       key: _formKey,
       child: SingleChildScrollView(
@@ -153,8 +125,7 @@ class CustomCustomerDataForm extends StatelessWidget {
                                 validator: CustomRequiredValidator(
                                     errorText: "Names is required ",
                                     ctx: context),
-                                value: getValue(client, "contact_name",
-                                    def: "Jose"),
+                                value: getValue(client, "names", def: "Jose"),
                                 onSaved: (value) {
                                   ctrl!.state.names = value!;
                                 },
@@ -165,7 +136,7 @@ class CustomCustomerDataForm extends StatelessWidget {
                                 validator: CustomRequiredValidator(
                                     errorText: "Last Names is required ",
                                     ctx: context),
-                                value: getValue(client, "contact_name_2",
+                                value: getValue(client, "last_names",
                                     def: "Cuevas"),
                                 onSaved: (value) {
                                   ctrl!.state.lastNames = value!;
@@ -212,13 +183,11 @@ class CustomCustomerDataForm extends StatelessWidget {
                                 validator: CustomRequiredValidator(
                                     errorText: "Country is required ",
                                     ctx: context),
-                                value:
-                                    getValue(client, "origin_id", def: "148"),
+                                value: country.value,
                                 width: country.value == "" ? 0.3 : 0.15,
                                 label: "Country",
                                 onChanged: (value) {
                                   country.value = value!;
-
                                   cityData(
                                       citylist,
                                       countries[countrylist[int.parse(value)]

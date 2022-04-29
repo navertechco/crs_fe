@@ -703,7 +703,7 @@ Function getDetail = (context, data, columns) {
                     context,
                     WebView(
                       url:
-                          "$kDefaultSchema://$kDefaultServer:$kDefaultServerPort/pdf.html?doc=${row['travel_code']}",
+                          "$kDefaultSchema://$kDefaultServer:$kDefaultServerPort/docx.html?doc=${row['travel_code']}",
                     ),
                     "Close",
                     buttonColor: Colors.white);

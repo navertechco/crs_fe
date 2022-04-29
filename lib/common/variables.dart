@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'index.dart';
 
+Context globalctx = Context();
 var session = {};
 ////
 Rx<int> leftAccumulated = 0.obs;
@@ -281,3 +282,32 @@ Function clearCruiseFilter = () {
   cruiseDeparture.value = "";
   cruiseIslet.value = "";
 };
+
+var customerTypeCatalog = findCatalog("legal_client_type");
+
+var client = globalctx.memory["customer"];
+var tour = globalctx.memory["tour"];
+Rx<List<Map<String, dynamic>>> citylist = Rx([]);
+RxString customerType = client["client_type_id"].toString().obs;
+RxString country = getValue(client, "origin_id", def: "1").toString().obs;
+RxString city = getValue(client, "city_id", def: "0").toString().obs;
+
+List<Map<String, dynamic>> countrylist = [];
+Map<dynamic, dynamic> countries = getContext("countries");
+Rx<List<Map<String, dynamic>>> countrydata = Rx((() {
+  log("Countries: $countries\n\n");
+  countrylist = [];
+  var index = 0;
+  if (countries != null) {
+    for (var country in countries.keys) {
+      countrylist.add({
+        "code": "$index",
+        "description": country,
+      });
+      index++;
+    }
+  }
+
+  log("CountryList: $countrylist");
+  return countrylist;
+})());
