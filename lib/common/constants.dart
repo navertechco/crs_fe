@@ -31,8 +31,8 @@ class KTextSytle {
   }
 }
 
-const kDefaultSchema = "http";
-const kDefaultServer = "192.168.101.4"; //"uiodesign.fortiddns.com";
+const kDefaultSchema = "https";
+const kDefaultServer = "naverdeveloper.tk"; //"uiodesign.fortiddns.com";
 const kDefaultServerPort = 9999;
 const kDefaultLogoutPath = "/User/Logout";
 const kDefaultCatalogPath = "/System/FindCatalog";
