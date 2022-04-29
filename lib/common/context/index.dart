@@ -55,11 +55,7 @@ class Context with PropertyChangeNotifier<String> {
     load("countries");
   }
 
-  void load(key) async {
-    var result = await rootBundle.loadString("assets/data/$key.json");
-    context.value[key] = json.decode(result);
-  }
-
+ 
   void set_context(key, value) {
     context.value[key] = value;
     notifyListeners(key);

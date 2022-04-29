@@ -12,8 +12,8 @@ class SigninController extends GetxController {
   var isLoading = false;
 
   Future<void> onSignin(ctx, String username, String password) async {
+    await load("countries");
     session["username"] = username;
-
     state.error = null;
     state.username = username;
     state.password = password;

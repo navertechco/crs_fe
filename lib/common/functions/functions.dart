@@ -1,8 +1,10 @@
 // ignore_for_file: prefer_function_declarations_over_variables
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/pages/2/searcher/widgets/index.dart';
 import 'package:naver_crs/pages/7/endservices/widgets/index.dart';
@@ -14,6 +16,15 @@ export 'dayfunctions.dart';
 export './destinationfunctions.dart';
 export './experiencefunctions.dart';
 import 'package:intl/intl.dart';
+
+Future<void> load(key) async {
+  try {
+    var result = await rootBundle.loadString("assets/data/$key.json");
+    setContext(key, json.decode(result));
+  } catch (e) {
+    log(e);
+  }
+}
 
 // Other Functions
 Future<bool> getCatalog(
@@ -983,4 +994,8 @@ Function processCruiseItinerary = (row) {
     }
   }
   return result;
+};
+
+Function toMinutes = (TimeOfDay time) {
+  return time.hour * 60 + time.minute;
 };

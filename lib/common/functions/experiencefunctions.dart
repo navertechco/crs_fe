@@ -85,17 +85,23 @@ Function getFilteredExperiences = () {
     return rule1 || rule2;
   }).toList();
   List filteredByPurpose = filteredByKA.where((e) {
+    if (e.value["experience_type"] == "meal") {
+      return true;
+    }
     if (currentDay.value == 0 || e.description == "Leisure Time") {
       return true;
     }
     var purposes = globalctx.memory["tour"]["purposes"];
     String p1 = getExperienceByName(e.description).value["purpose_fk"];
     String p2 = getExperienceByName(e.description).value["purpose_fk2"];
-    var rule1 = purposes.contains(p1.toString().toUpperCase());
-    var rule2 = purposes.contains(p2.toString().toUpperCase());
+    var rule1 = purposes.contains(p1);
+    var rule2 = purposes.contains(p2);
     return rule1 || rule2;
   }).toList();
   List filteredByOpenDays = filteredByPurpose.where((e) {
+    if (e.value["experience_type"] == "meal") {
+      return true;
+    }
     if (currentDay.value == 0 || e.description == "Leisure Time") {
       return true;
     }
@@ -133,6 +139,7 @@ Function getFilteredExperiences = () {
     }
     return getExperienceState(e.description) == "suggested";
   }).toList();
+  initializeHours();
   List filteredByLeft = filteredBySuggested.where((e) {
     // return true;
 
@@ -148,28 +155,34 @@ Function getFilteredExperiences = () {
     return rule || rule2;
   }).toList();
 
-  List filterByArrivalHour = filteredByLeft.where((e) {
+  List filterByOpenTime = filteredByLeft.where((e) {
+    var closeTime = parseHour(e.value["closeTime"]);
+    if (e.description == "Leisure Time") {
+      return true;
+    }
     if (currentDay.value == 0) {
-      if (e.description == "Leisure Time") {
-        return true;
-      }
-      if (parseHour(e.value["openTime"]) >= parseHour(arrivalHour.value)) {
+      if (closeTime - parseHour(arrivalHour.value) > 30) {
         return true;
       }
       return false;
+    } else {
+      if (e.value["experience_type"] == "meal") {
+        return true;
+      }
+      endHours[currentDay.value].value =
+          time.addHour(totalHours[currentDay.value].value.round() as int);
+      var rule = closeTime - toMinutes(endHours[currentDay.value].value) > 30;
+      return rule;
     }
-    var endHour = endHours[currentDay.value].toString();
-
-    return true;
   }).toList();
 
-  filterByArrivalHour.sort((a, b) {
+  filterByOpenTime.sort((a, b) {
     var aTime = a.value["exptime"];
     var bTime = b.value["exptime"];
     return aTime.compareTo(bTime);
   });
 
-  Iterable result = filterByArrivalHour;
+  Iterable result = filterByOpenTime;
 
   return result;
 };
