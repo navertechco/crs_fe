@@ -710,11 +710,12 @@ Function getDetail = (context, data, columns) {
               icon: const Icon(Icons.picture_as_pdf),
               tooltip: 'PDF',
               onPressed: () {
+                var url =
+                    "$kDefaultSchema://$kDefaultServer:$kDefaultServerPort/docx.html?doc=${row['travel_code']}";
                 showCustomDialog(
                     context,
                     WebView(
-                      url:
-                          "$kDefaultSchema://$kDefaultServer:$kDefaultServerPort/docx.html?doc=${row['travel_code']}",
+                      url: url,
                     ),
                     "Close",
                     buttonColor: Colors.white);

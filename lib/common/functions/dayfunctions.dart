@@ -122,7 +122,7 @@ Function nextDay = () async {
   if (currentDay.value < totalDays.value - 1) {
     jumpDay("forward");
   } else {
-   await prepareDaysToResume();
+    await prepareDaysToResume();
   }
 };
 
@@ -192,8 +192,14 @@ Function prepareDaysToResume = () async {
     }
     globalctx.memory["resume"] = destinations;
 
-    for (var dest in globalctx.memory["resume"].keys) {
-      globalctx.memory["resume"][dest] = globalctx.memory["resume"][dest].value;
+    try {
+      for (var dest in globalctx.memory["resume"].keys) {
+        if (globalctx.memory["resume"][dest])
+          globalctx.memory["resume"][dest] =
+              globalctx.memory["resume"][dest].value;
+      }
+    } catch (e) {
+      log(e);
     }
 
     globalctx.payload["tour"] = globalctx.memory["tour"];
@@ -204,9 +210,14 @@ Function prepareDaysToResume = () async {
     globalctx.payload["totalDays"] = globalctx.memory["totalDays"];
     globalctx.payload["promoted"] = globalctx.memory["promoted"];
 
-    for (var day in globalctx.payload["days"].keys) {
-      globalctx.payload["days"][day] = globalctx.payload["days"][day].value;
+    try {
+      for (var day in globalctx.payload["days"].keys) {
+        globalctx.payload["days"][day] = globalctx.payload["days"][day].value;
+      }
+    } catch (e) {
+      log(e);
     }
+
     globalctx.payload["logistic"]["arrival_date"] =
         globalctx.payload["logistic"]["arrival_date"].toString();
     globalctx.payload["logistic"]["since_date"] =
