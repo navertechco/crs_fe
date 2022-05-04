@@ -19,7 +19,7 @@ class CustomCustomerDataForm extends StatelessWidget {
       key: _formKey,
       child: SingleChildScrollView(
         child: Expanded(
-          child: Column(
+          child: Stack(
             children: [
               Row(
                 children: [
@@ -42,8 +42,8 @@ class CustomCustomerDataForm extends StatelessWidget {
                                   errorText: "Legal Client Type is required ",
                                   ctx: context),
                               value: client["legal_client_type_id"] ?? "2",
-                              width: 0.2,
-                              label: "Customer Type          ",
+                              width: 0.1,
+                              hintText: "Customer Type",
                               onChanged: (value) {
                                 customerType.value = value!;
                                 log(value);
@@ -55,6 +55,20 @@ class CustomCustomerDataForm extends StatelessWidget {
                               },
                               data: customerTypeCatalog,
                             ),
+                            CustomFormDateFieldWidget(
+                                validator: (date) {
+                                  CustomDatetimeRequiredValidator(date,
+                                      context: context,
+                                      errorText: "Birth date is Required");
+                                },
+                                initialValue: getDateValue(client, "birth_date",
+                                    def: DateTime(1981, 02, 12)),
+                                onSaved: (value) {
+                                  ctrl!.state.birthDate =
+                                      value.toString().split(" ")[0];
+                                },
+                                width: 0.22,
+                                hintText: "Birth Day               "),
                           ],
                         ),
                         Row(
@@ -111,7 +125,7 @@ class CustomCustomerDataForm extends StatelessWidget {
                                       FilteringTextInputFormatter.digitsOnly
                                     ],
                                     keyboardType: TextInputType.number,
-                                    label: "DNI/PASSPORT         ",
+                                    hintText: "DNI/PASSPORT         ",
                                     width: 0.24);
                               } else {
                                 return Text("");
@@ -146,24 +160,8 @@ class CustomCustomerDataForm extends StatelessWidget {
                                 width: 0.17),
                           ],
                         ),
-
-                        Row(
-                          children: [
-                            CustomFormDateFieldWidget(
-                                validator: (date) {
-                                  CustomDatetimeRequiredValidator(date,
-                                      context: context,
-                                      errorText: "Birth date is Required");
-                                },
-                                initialValue: getDateValue(client, "birth_date",
-                                    def: DateTime(1981, 02, 12)),
-                                onSaved: (value) {
-                                  ctrl!.state.birthDate =
-                                      value.toString().split(" ")[0];
-                                },
-                                width: 0.35,
-                                hintText: "Birth Day               "),
-                          ],
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.15,
                         ),
                         // CustomKeypadWidget(),
                       ]),
@@ -176,6 +174,10 @@ class CustomCustomerDataForm extends StatelessWidget {
                     ),
                     child: SizedBox(
                       child: Column(children: [
+                        const CustomTitleWidget(
+                            width: 0.225,
+                            fontWeight: FontWeight.bold,
+                            label: " Address information"),
                         Obx(() {
                           return Row(
                             children: [
@@ -185,7 +187,7 @@ class CustomCustomerDataForm extends StatelessWidget {
                                     ctx: context),
                                 value: country.value,
                                 width: country.value == "" ? 0.3 : 0.15,
-                                label: "Country",
+                                hintText: "Country",
                                 onChanged: (value) {
                                   country.value = value!;
                                   cityData(
@@ -213,7 +215,7 @@ class CustomCustomerDataForm extends StatelessWidget {
                                     catalog: citylist.value),
                                 value: city.value,
                                 width: 0.1,
-                                label: "City          ",
+                                hintText: "City",
                                 onChanged: (value) {
                                   city.value = value!;
                                   log(value);
@@ -250,6 +252,10 @@ class CustomCustomerDataForm extends StatelessWidget {
                             keyboardType: TextInputType.emailAddress,
                             hintText: "e-Mail                          ",
                             width: 0.36),
+                        const CustomTitleWidget(
+                            width: 0.225,
+                            fontWeight: FontWeight.bold,
+                            label: " Tour information"),
                         Row(
                           children: [
                             CustomFormTextFieldWidget(
@@ -299,7 +305,7 @@ class CustomCustomerDataForm extends StatelessWidget {
                                           .toString();
                                 },
                                 keyboardType: TextInputType.name,
-                                label: "Lead Passenger",
+                                hintText: "Lead Passenger",
                                 width: 0.2)
                           ],
                         ),
@@ -316,6 +322,7 @@ class CustomCustomerDataForm extends StatelessWidget {
               ),
               Padding(
                 padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height * 0.78,
                     left: MediaQuery.of(context).size.width * 0.7),
                 child: GestureDetector(
                   onTap: () {
