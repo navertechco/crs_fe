@@ -28,7 +28,7 @@ class SigninController extends GetxController {
         });
 
         if (res['state'] == true) {
-          setContext("catalogs", res['data']["catalogs"]);
+          // setContext("catalogs", res['data']["catalogs"]);
           isLoading = !isLoading;
           Get.toNamed('/Loading');
         } else {

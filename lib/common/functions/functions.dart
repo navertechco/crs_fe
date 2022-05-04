@@ -825,8 +825,8 @@ Function newTour = () async {
   var res = await fetchhandler(kDefaultSchema, kDefaultServer,
       kDefaultServerPort, kDefaultNewTourEdit, 'POST', {});
   if (res['state'] == true) {
-    var data = res['data'];
-    globalctx.memory["tour"]["code"] = data.toString();
+    globalctx.memory["tour"]["code"] = res['data']["id"];
+    setContext("catalogs", res['data']["catalogs"]);
     selectedIndex.value = 0;
     Get.toNamed("/Tour");
   } else {
