@@ -29,7 +29,8 @@ class FormCatalogueWidget extends StatelessWidget {
     var items = getItems(data, value, hintText);
 
     return Obx(() {
-      return DropdownButtonHideUnderline(
+      try {
+        return DropdownButtonHideUnderline(
         child: DropdownButtonFormField(
           style: KTextSytle(
                   context: context,
@@ -65,6 +66,11 @@ class FormCatalogueWidget extends StatelessWidget {
           items: items,
         ),
       );
+      } catch (e) {
+        log(e);
+        return Text("");
+      }
+      
     });
   }
 }
