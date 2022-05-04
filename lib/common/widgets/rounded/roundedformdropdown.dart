@@ -51,7 +51,7 @@ class RoundedFormDropdown extends StatelessWidget {
           onChanged: onChanged,
           onSaved: onSaved,
           data: data,
-          hintText: hintText),
+          hintText: label),
     );
   }
 }

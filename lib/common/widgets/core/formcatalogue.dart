@@ -11,10 +11,11 @@ class FormCatalogueWidget extends StatelessWidget {
       this.disabled = false,
       required this.value,
       required this.data,
-      this.hintText = "Choose a Option",
+      this.hintText = "",
       required this.onChanged,
       required this.onSaved,
-      this.validator})
+      this.validator,
+      String? label})
       : super(key: key);
 
   List<Map<String, dynamic>> data;
@@ -26,45 +27,50 @@ class FormCatalogueWidget extends StatelessWidget {
   final String? Function(String?)? validator;
   @override
   Widget build(BuildContext context) {
-    var items = getItems(data, value);
+    var items = getItems(data, value, hintText);
 
     return Obx(() {
-      return DropdownButtonHideUnderline(
-        child: DropdownButtonFormField(
-          style: KTextSytle(
-                  context: context,
-                  fontSize: value == null ? 10 : 8,
-                  fontWeight:
-                      value == null ? FontWeight.normal : FontWeight.bold)
-              .getStyle(),
-          alignment: Alignment.centerLeft,
-          isExpanded: true,
-          value: value,
-          disabledHint: Text(
-            "data",
+      try {
+        return DropdownButtonHideUnderline(
+          child: DropdownButtonFormField(
             style: KTextSytle(
                     context: context,
                     fontSize: value == null ? 10 : 8,
                     fontWeight:
                         value == null ? FontWeight.normal : FontWeight.bold)
                 .getStyle(),
+            alignment: Alignment.centerLeft,
+            isExpanded: true,
+            value: value,
+            disabledHint: Text(
+              "data",
+              style: KTextSytle(
+                      context: context,
+                      fontSize: value == null ? 10 : 8,
+                      fontWeight:
+                          value == null ? FontWeight.normal : FontWeight.bold)
+                  .getStyle(),
+            ),
+            validator: validator,
+            decoration: InputDecoration.collapsed(
+              filled: false,
+              hintText: hintText,
+              hintStyle: KTextSytle(
+                      context: context,
+                      fontSize: value == null ? 10 : 8,
+                      fontWeight:
+                          value == null ? FontWeight.normal : FontWeight.bold)
+                  .getStyle(),
+            ),
+            onSaved: onSaved,
+            onChanged: disabled ? null : onChanged,
+            items: items,
           ),
-          validator: validator,
-          decoration: InputDecoration.collapsed(
-            filled: false,
-            hintText: hintText,
-            hintStyle: KTextSytle(
-                    context: context,
-                    fontSize: value == null ? 10 : 8,
-                    fontWeight:
-                        value == null ? FontWeight.normal : FontWeight.bold)
-                .getStyle(),
-          ),
-          onSaved: onSaved,
-          onChanged: disabled ? null : onChanged,
-          items: items,
-        ),
-      );
+        );
+      } catch (e) {
+        print(e);
+        return Text("");
+      }
     });
   }
 }

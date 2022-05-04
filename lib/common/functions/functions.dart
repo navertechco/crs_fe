@@ -149,27 +149,31 @@ Function globalctxReset = () {
   // resetExperiences();
 };
 
-Function getItems = (data, value) {
+Function getItems = (data, value, hintText) {
   RxList<DropdownMenuItem<String>> items = <DropdownMenuItem<String>>[].obs;
   List<Map<String, dynamic>> data2 = [];
-  data2.add({"code": "0", "description": "Choose a Option"});
-  if (data.length > 0) {
-    items = <DropdownMenuItem<String>>[].obs;
-    data2.addAll(data);
-    data2.asMap().forEach((index, item) {
-      var description = item["description"];
+  try {
+    data2.add({"code": "0", "description": hintText});
+    if (data.length > 0) {
+      items = <DropdownMenuItem<String>>[].obs;
+      data2.addAll(data);
+      data2.asMap().forEach((index, item) {
+        var description = item["description"];
 
-      if (description.contains("-")) {
-        for (var item in item["description"].split("-").toList()) {
-          description += item + " ";
+        if (description.contains("-")) {
+          for (var item in item["description"].split("-").toList()) {
+            description += item + " ";
+          }
         }
-      }
 
-      items.add(DropdownMenuItem(
-        value: item["code"].toString(),
-        child: Text(description),
-      ));
-    });
+        items.add(DropdownMenuItem(
+          value: item["code"].toString(),
+          child: Text(description),
+        ));
+      });
+    }
+  } catch (e) {
+    log(e);
   }
   return items;
 };
