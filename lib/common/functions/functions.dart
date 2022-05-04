@@ -149,10 +149,10 @@ Function globalctxReset = () {
   // resetExperiences();
 };
 
-Function getItems = (data, value) {
+Function getItems = (data, value, hintText) {
   RxList<DropdownMenuItem<String>> items = <DropdownMenuItem<String>>[].obs;
   List<Map<String, dynamic>> data2 = [];
-  data2.add({"code": "0", "description": "Choose a Option"});
+  data2.add({"code": "0", "description": hintText ?? "Choose a Option"});
   if (data.length > 0) {
     items = <DropdownMenuItem<String>>[].obs;
     data2.addAll(data);

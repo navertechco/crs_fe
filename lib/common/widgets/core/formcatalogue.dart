@@ -26,7 +26,7 @@ class FormCatalogueWidget extends StatelessWidget {
   final String? Function(String?)? validator;
   @override
   Widget build(BuildContext context) {
-    var items = getItems(data, value);
+    var items = getItems(data, value, hintText);
 
     return Obx(() {
       return DropdownButtonHideUnderline(
