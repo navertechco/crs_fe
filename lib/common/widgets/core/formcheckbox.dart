@@ -9,7 +9,7 @@ class FormCheckboxWidget extends StatelessWidget {
       {Key? key,
       required this.value,
       required this.data,
-      this.hintText = "",
+      this.hintText = "Choose a Option",
       required this.onChanged,
       required this.onSaved})
       : super(key: key);
