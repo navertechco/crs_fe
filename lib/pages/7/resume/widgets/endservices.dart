@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../../index.dart';
 import 'customdescription.dart';
-import 'netrates.dart';
 
 class EndServices extends StatelessWidget {
   const EndServices({Key? key, required this.data}) : super(key: key);
@@ -12,7 +10,6 @@ class EndServices extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     
     var end = getValue(memory, "end", def: []);
     var netrates = getValue(end, "net_rates", def: []);
     var included = getValue(end, "included", def: []);
@@ -99,24 +96,6 @@ class EndServices extends StatelessWidget {
             D = Dinner
             O = Overnight
             """, width: 0.5, fontSize: 0.012, fontWeight: FontWeight.bold),
-        const CustomDescriptionWidget(
-            text: "Net Rate",
-            width: 0.5,
-            fontSize: 0.014,
-            fontWeight: FontWeight.bold),
-        NetRates(nrlist: nrlist),
-        const CustomDescriptionWidget(
-            text: "Included",
-            width: 0.5,
-            fontSize: 0.014,
-            fontWeight: FontWeight.bold),
-        Column(children: includedlist),
-        const CustomDescriptionWidget(
-            text: "Not Included",
-            width: 0.5,
-            fontSize: 0.014,
-            fontWeight: FontWeight.bold),
-        Column(children: notincludedlist)
       ],
     );
   }

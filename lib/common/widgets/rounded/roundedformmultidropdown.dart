@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:multiselect_formfield/multiselect_formfield.dart';
 
+import '../../index.dart';
+
 class RoundedFormMultiDropdown extends StatelessWidget {
   final double left;
   final double top;
@@ -35,31 +37,35 @@ class RoundedFormMultiDropdown extends StatelessWidget {
   var dataValue = [];
   @override
   Widget build(BuildContext context) {
-    if (data != null) {
-      if (data.isNotEmpty) {
-        dataSource = data.map((e) {
-          return {"display": e["description"], "value": e["code"]};
-        }).toList();
-      } else {
-        dataSource = [
-          {
-            'display': "No data from Service",
-            'value': 0,
-          }
-        ];
-      }
-    }
-
-    if (value != null) {
-      if (value.isNotEmpty) {
-        dataValue = [];
-        for (var item in value) {
-          dataValue.add(data
-              .firstWhere((element) => element["description"] == item)["code"]);
+    try {
+      if (data != null) {
+        if (data.isNotEmpty) {
+          dataSource = data.map((e) {
+            return {"display": e["description"], "value": e["code"]};
+          }).toList();
+        } else {
+          dataSource = [
+            {
+              'display': "No data from Service",
+              'value': 0,
+            }
+          ];
         }
-      } else {
-        dataValue = [];
       }
+
+      if (value != null) {
+        if (value.isNotEmpty) {
+          dataValue = [];
+          for (var item in value) {
+            dataValue.add(data.firstWhere(
+                (element) => element["description"] == item)["code"]);
+          }
+        } else {
+          dataValue = [];
+        }
+      }
+    } catch (e) {
+      log(e);
     }
 
     return Container(

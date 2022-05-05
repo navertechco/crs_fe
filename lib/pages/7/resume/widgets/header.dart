@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../../index.dart';
-import 'customformheader.dart';
 import 'customformtitle.dart';
 
 class Header extends StatelessWidget {
@@ -13,9 +12,6 @@ class Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var customer = memory["customer"] ?? {};
-    var tour = memory["tour"] ?? {};
-    var logistic = memory["logistic"] ?? {};
 
     return Column(
       children: [

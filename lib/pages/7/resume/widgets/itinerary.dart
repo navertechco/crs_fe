@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'cover.dart';
 import 'destinations.dart';
-import 'endservices.dart';
 import 'header.dart';
 
 class Itinerary extends StatelessWidget {
@@ -39,11 +38,6 @@ class Itinerary extends StatelessWidget {
                         ),
                       ),
                       Destinations(data: data),
-                      if (pkeys["end"] != null)
-                        RepaintBoundary(
-                          key: pkeys["end"],
-                          child: EndServices(data: data),
-                        ),
                     ]),
                   ),
                 ),

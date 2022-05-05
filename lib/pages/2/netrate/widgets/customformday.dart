@@ -24,8 +24,6 @@ class CustomFormDayWidget extends StatelessWidget {
       var daysData = destination["daysData"] ?? {};
       var days = daysData.entries.toList();
       var day = days[dayindex];
-      var meals = day['meals'];
-      var observation = day['observation'];
       var daydescription = day['day_description'];
       var dayLabel =
           (destinationindex != 0 ? destinationindex + 1 : destinationindex) +
@@ -40,18 +38,6 @@ class CustomFormDayWidget extends StatelessWidget {
                   text: daydescription, width: 0.55, fontSize: 0.016),
               CustomFormExperiencesDetailWidget(data: data, indexes: indexes),
               SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-              if (observation != null)
-                CustomDescriptionWidget(
-                  text: "Observation: $observation",
-                  width: 0.55,
-                  fontSize: 0.016,
-                  fontWeight: FontWeight.bold,
-                ),
-              CustomDescriptionWidget(
-                  text: "Meals: $meals",
-                  width: 0.55,
-                  fontSize: 0.016,
-                  fontWeight: FontWeight.bold),
             ],
           ));
     } catch (e) {

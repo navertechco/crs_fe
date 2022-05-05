@@ -1,11 +1,8 @@
 // ignore_for_file: non_constant_identifier_names
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:property_change_notifier/property_change_notifier.dart';
-import 'package:flutter/services.dart' show rootBundle;
-
 import '../index.dart';
 
 // ignore: mixin_inherits_from_not_object

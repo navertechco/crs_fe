@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:naver_crs/pages/6/experiences/controller.dart';
-
 import '../../../controller.dart';
 import '../../index.dart';
 

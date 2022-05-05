@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
-
 import 'package:pdf/pdf.dart';
 import '../../index.dart';
 import 'widgets/index.dart';
 import 'package:pdf/widgets.dart ' as pw;
 import 'index.dart';
-import 'package:flutter/rendering.dart';
 import 'package:printing/printing.dart';
 
 class NetRatePage extends GetView<NetRateController> {
@@ -51,15 +48,6 @@ class NetRatePage extends GetView<NetRateController> {
         child: Stack(
           children: [
             NetRateWidget(pkeys: keys),
-            Positioned(
-              left: MediaQuery.of(_context).size.width * 0.4,
-              top: MediaQuery.of(_context).size.height * 1.85,
-              child: RoundedFormButton(
-                  label: " Print",
-                  onTap: () {
-                    _printScreen();
-                  }),
-            ),
           ],
         ),
         text: "");

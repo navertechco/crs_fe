@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_function_declarations_over_variables
+// ignore_for_file: prefer_function_declarations_over_variables, import_of_legacy_library_into_null_safe
 import 'dart:convert';
 import 'dart:math';
 
@@ -15,7 +15,6 @@ import '../index.dart';
 export 'dayfunctions.dart';
 export './destinationfunctions.dart';
 export './experiencefunctions.dart';
-import 'package:intl/intl.dart';
 
 Future<void> load(key) async {
   try {
@@ -318,13 +317,17 @@ Future<void> showCustomDialog(context, Widget child, String button,
 }
 
 Function findTravelRhythmDescription = (int code) {
-  if (code == 0) {
-    return "HARD";
+  try {
+    if (code == 0) {
+      return "HARD";
+    }
+    var travelData = findCatalog("travel_rhythm").toList();
+    var description = travelData
+        .firstWhere((element) => element["code"] == code)["description"];
+    return description;
+  } catch (e) {
+    log(e);
   }
-  var travelData = findCatalog("travel_rhythm").toList();
-  var description = travelData
-      .firstWhere((element) => element["code"] == code)["description"];
-  return description;
 };
 Function parseInt = (value) {
   if (value is String) {
