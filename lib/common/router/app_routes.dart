@@ -60,6 +60,16 @@ List<dynamic> routes = [
       transition: Transition.zoom,
       binding: ResumeBinding()),
   PRegistry(
+      name: '/PrintResume',
+      page: () => PrintResumePage(),
+      transition: Transition.zoom,
+      binding: PrintResumeBinding()),
+  PRegistry(
+      name: '/NetRate',
+      page: () => NetRatePage(),
+      transition: Transition.zoom,
+      binding: NetRateBinding()),
+  PRegistry(
       name: '/EndServices',
       page: () => EndServicesPage(),
       transition: Transition.zoom,

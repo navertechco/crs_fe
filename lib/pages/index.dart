@@ -12,6 +12,7 @@ export './3/logistic/index.dart';
 export './4/customer/index.dart';
 export './5/destination/index.dart';
 export './6/experiences/index.dart';
+export './6/services/index.dart';
 export './7/resume/index.dart';
 export './7/printresume/index.dart';
 export './7/endservices/index.dart';
