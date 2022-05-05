@@ -75,6 +75,11 @@ List<dynamic> routes = [
       transition: Transition.zoom,
       binding: EndServicesBinding()),
   PRegistry(
+      name: '/Services',
+      page: () => ServicesPage(),
+      transition: Transition.zoom,
+      binding: ServicesBinding()),
+  PRegistry(
       name: '/Searcher',
       page: () => SearcherPage(),
       transition: Transition.zoom,
