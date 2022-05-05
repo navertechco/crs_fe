@@ -11,15 +11,8 @@ class Cover extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Map tour = globalctx.memory["tour"];
-    Map customer = globalctx.memory["customer"];
-    var title = tour["title"] ?? "Enchanting Ecuador";
-    var passengers = tour["passengers"] ?? "1";
-    var days = totalDays.value;
-    var nights = days - 1;
-    var valid = getValue(tour, "valid_until", def: "31-12-2022");
-    var description = tour["description"] ??
-        "We present below this proposal document of our excellent travel experience services, unique in Ecuador";
-
+    var title = tour["title"] ?? "Net Rates";
+    var description = "";
     return Column(
       children: [
         CustomDescriptionWidget(
@@ -28,23 +21,8 @@ class Cover extends StatelessWidget {
             fontSize: 0.020,
             fontWeight: FontWeight.bold),
         CustomDescriptionWidget(
-            text: "${customer["lead_passenger"]} x $passengers",
-            width: 0.18,
-            fontSize: 0.018,
-            fontWeight: FontWeight.bold),
-        CustomDescriptionWidget(
-            text: "$days Days / $nights Nights",
-            width: 0.18,
-            fontSize: 0.016,
-            fontWeight: FontWeight.bold),
-        CustomDescriptionWidget(
             text: description,
             width: 0.55,
-            fontSize: 0.012,
-            fontWeight: FontWeight.bold),
-        CustomDescriptionWidget(
-            text: "Valid until: $valid",
-            width: 0.15,
             fontSize: 0.012,
             fontWeight: FontWeight.bold),
       ],

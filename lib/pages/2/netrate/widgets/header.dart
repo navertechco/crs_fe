@@ -12,19 +12,12 @@ class Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Column(
       children: [
-        const CustomFormTitleWidget(level: 1, label: "Client Information"),
-        // CustomFormHeaderWidget(data: chunkMap(customer, 3, customerTemplate)),
-        const CustomFormTitleWidget(level: 1, label: "Tour Information"),
-        // CustomFormHeaderWidget(data: chunkMap(tour, 3, tourTemplate)),
-        const CustomFormTitleWidget(level: 1, label: "Logistic Information"),
-        // CustomFormHeaderWidget(data: chunkMap(logistic, 3, logisticTemplate)),
         CustomFormTitleWidget(
             level: 2,
             label:
-                "Itinerary #(Between: ${currentDayFormat.format(arrivalDate.value)} and ${currentDayFormat.format(departureDate.value)})"),
+                "Data report #(Between: ${currentDayFormat.format(arrivalDate.value)} and ${currentDayFormat.format(departureDate.value)})"),
       ],
     );
   }

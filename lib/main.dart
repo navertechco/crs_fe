@@ -12,15 +12,14 @@ class ScrollBehavior extends MaterialScrollBehavior {
   Set<PointerDeviceKind> get dragDevices;
 }
 
- class MyHttpOverrides extends HttpOverrides{
+class MyHttpOverrides extends HttpOverrides {
   @override
-  HttpClient createHttpClient(SecurityContext? context){
+  HttpClient createHttpClient(SecurityContext? context) {
     return super.createHttpClient(context)
-      ..badCertificateCallback = (X509Certificate cert, String host, int port)=> true;
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
 }
-
-
 
 void main() {
   try {
@@ -31,7 +30,7 @@ void main() {
 
     var pages = AppPages.pages;
     PRegistry registry =
-        routes.toList().firstWhere((element) => element.name == "/Services");
+        routes.toList().firstWhere((element) => element.name == "/NetRate");
 
     runApp(GetMaterialApp(
         scrollBehavior: ScrollBehavior(),
