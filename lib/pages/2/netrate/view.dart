@@ -10,8 +10,8 @@ import 'index.dart';
 import 'package:flutter/rendering.dart';
 import 'package:printing/printing.dart';
 
-class ResumePage extends GetView<ResumeController> {
-  ResumePage({Key? key}) : super(key: key);
+class NetRatePage extends GetView<NetRateController> {
+  NetRatePage({Key? key}) : super(key: key);
 
   final Map<String, GlobalKey<State<StatefulWidget>>> keys = {
     "cover": GlobalKey(),
@@ -50,7 +50,7 @@ class ResumePage extends GetView<ResumeController> {
         background: "assets/custom/img/resume.png",
         child: Stack(
           children: [
-            ResumeWidget(pkeys: keys),
+            NetRateWidget(pkeys: keys),
             Positioned(
               left: MediaQuery.of(_context).size.width * 0.4,
               top: MediaQuery.of(_context).size.height * 1.85,
@@ -93,5 +93,3 @@ class ResumePage extends GetView<ResumeController> {
     );
   }
 }
-
- 
