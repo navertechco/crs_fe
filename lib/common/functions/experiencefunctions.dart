@@ -27,7 +27,7 @@ Function updateDragExperiences = (filteredExperiences) {
 };
 
 Function getFilteredExperiences = () {
-  List filtered = getFiltered();
+  List filtered = getExpFiltered();
   var idx = getDestinationIndexByDay();
   var sub = getFormValue(globalctx.memory["destinations"], idx, "sub", null);
   var destination =
@@ -187,7 +187,7 @@ Function getFilteredExperiences = () {
   return result;
 };
 //////////////////////////////////////////////////////////////////////////////////////
-Function getFiltered = () {
+Function getExpFiltered = () {
   List filtered = [];
   for (Map item in experiences) {
     List itemList = item.values.toList();

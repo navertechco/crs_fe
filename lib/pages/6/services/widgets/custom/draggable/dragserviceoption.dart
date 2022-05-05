@@ -4,35 +4,35 @@ import 'package:get/get.dart';
 import '../../../../../index.dart';
 import '../../index.dart';
 
-class DragExperienceOptionWidget extends StatelessWidget {
-  final String experience;
-  const DragExperienceOptionWidget({
+class DragServiceOptionWidget extends StatelessWidget {
+  final String service;
+  const DragServiceOptionWidget({
     Key? key,
-    required this.experience,
+    required this.service,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      var state = Rx(getExperienceState(experience));
+      var state = Rx(getServiceState(service));
       return state.value != "suggested"
           ? Row(
               children: [
-                ExperienceOptionWidget(
+                ServiceOptionWidget(
                     height: Get.height * 0.075,
                     width: Get.width * 0.2,
-                    experience: experience),
+                    service: service),
                 state.value != "promoted"
                     ? GestureDetector(
                         onTap: () {
-                          removeExperience(experience);
+                          removeService(service);
                         },
                         child: Image.asset("assets/custom/img/redmark.png",
                             width: Get.width * 0.02),
                       )
                     : GestureDetector(
                         onTap: () {
-                          removeExperience(experience);
+                          removeService(service);
                         },
                         child: Image.asset("assets/custom/img/greencheck.png",
                             width: Get.width * 0.02),

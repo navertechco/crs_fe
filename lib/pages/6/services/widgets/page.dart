@@ -19,8 +19,10 @@ class ServicesWidget extends HookWidget {
     useEffect(() {}, [stream, counter.value]);
 
     return Stack(children: [
-      CustomTopDayWidget(ctrl: ctrl, counter: counter, formKey: formKey),
-      CustomBodyDaysWidget(ctrl: ctrl, counter: counter, formKey: formKey),
+      CustomTopDestinationWidget(
+          ctrl: ctrl, counter: counter, formKey: formKey),
+      CustomBodyDestinationsWidget(
+          ctrl: ctrl, counter: counter, formKey: formKey),
     ]);
   }
 }

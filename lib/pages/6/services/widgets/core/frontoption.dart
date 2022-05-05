@@ -3,19 +3,19 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../index.dart';
 
-class ExperienceFrontOptionWidget extends StatelessWidget {
-  const ExperienceFrontOptionWidget({Key? key, required this.experience})
+class ServiceFrontOptionWidget extends StatelessWidget {
+  const ServiceFrontOptionWidget({Key? key, required this.service})
       : super(key: key);
-  final String experience;
+  final String service;
   @override
-  Widget build(BuildContext context) { 
+  Widget build(BuildContext context) {
     List filteredByDestination = [];
 
-    for (Map item in experiences) {
+    for (Map item in findCatalog("Services").toList()) {
       List itemList = item.values.toList();
       CatalogDto exp = CatalogDto(itemList);
       if (exp.description.toString().toUpperCase() ==
-          experience.toString().toUpperCase()) {
+          service.toString().toUpperCase()) {
         filteredByDestination.add(exp);
       }
     }
@@ -23,10 +23,10 @@ class ExperienceFrontOptionWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(15.0),
       child: Text(
-        experience.toString().split("-")[0],
+        service.toString().split("-")[0],
         style: GoogleFonts.poppins(
             textStyle: TextStyle(
-          color: getTrColor(getExperienceValueByName(experience)["travel_rhythm"]),
+          color: Color.fromARGB(255, 128, 128, 128),
           fontSize: MediaQuery.of(context).size.width * 0.010,
           fontWeight: FontWeight.bold,
         )),

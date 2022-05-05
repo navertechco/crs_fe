@@ -4,16 +4,16 @@ import '../../../../../index.dart';
 class DescriptionWidget extends StatelessWidget {
   const DescriptionWidget({
     Key? key,
-    required this.experience,
+    required this.service,
   }) : super(key: key);
 
-  final experience;
+  final service;
 
   @override
-  Widget build(BuildContext context) { 
-    var expData = experiences
+  Widget build(BuildContext context) {
+    var expData = findCatalog("Services")
         .toList()
-        .firstWhere((exp) => exp["description"] == experience)["value"];
+        .firstWhere((exp) => exp["description"] == service)["value"];
     return Text("${expData["description"]}",
         style: KTextSytle(
                 context: context,

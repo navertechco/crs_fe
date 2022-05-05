@@ -10,6 +10,7 @@ var session = {};
 Rx<int> leftAccumulated = 0.obs;
 var airports = {"1": "quito", "2": "guayaquil"};
 Rx<int> currentDay = 0.obs;
+Rx<int> currentDestination = 0.obs;
 var result = [];
 var allPromotedDestinations = globalctx.promotedDestinations;
 var globalDestinationName = Rx("");
@@ -69,9 +70,12 @@ Rx<double> customerAge =
 Rx<int> memoryDayLeft = Rx(globalctx.memory["days_left"]);
 final currentDayFormat = DateFormat('EEEE MMMM d yyyy');
 final dayFormat = DateFormat('d-MM-yyyy');
+var services = findCatalog("Services");
 var experiences = findCatalog("experiences");
 List expList = findCatalog("experiences").toList();
+List srvList = findCatalog("Services").toList();
 RxList<Widget> explist = <Widget>[].obs;
+RxList<Widget> srvlist = <Widget>[].obs;
 RxList<Widget> destlist = <Widget>[].obs;
 Map<String, dynamic> states = {
   "selected": globalctx.selectedExperiences,
@@ -132,6 +136,7 @@ var airportCatalog = findCatalog("airport");
 
 RxInt destDraggable = 0.obs;
 RxInt expDraggable = 1.obs;
+RxInt srvDraggable = 1.obs;
 
 List pageList = [
   "Tour",

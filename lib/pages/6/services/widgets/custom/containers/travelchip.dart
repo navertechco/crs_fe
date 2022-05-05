@@ -31,18 +31,18 @@ class TravelChips extends HookWidget {
                       onDeleted: () {
                         clearedKA[currentDay.value] = true;
                         clearKA();
-                        // filterServices();
+                        filterServices();
                       },
                     ),
-                  // if (currentDestinationOption.value != "0")
+                  // if (currentDayOption.value != "0")
                   //   InputChip(
                   //     deleteIcon: Icon(Icons.cancel),
                   //     label: Text(
-                  //         "Destination Options: ${currentDestinationOption.value}"),
+                  //         "Destination Options: ${currentDayOption.value}"),
                   //     onSelected: (bool value) {},
                   //     onDeleted: () {
-                  //       currentDestinationOption.value = "0";
-                  //       filterServices();
+                  //  currentDayOption.value = "0";
+                  //  filterServices();
                   //     },
                   //   ),
                   if (currentTravelRhythm.value != "0")
@@ -54,7 +54,7 @@ class TravelChips extends HookWidget {
                       onDeleted: () {
                         clearedHours[currentDay.value] = true;
                         clearHours();
-                        // filterServices();
+                        filterServices();
                       },
                     ),
                 ],

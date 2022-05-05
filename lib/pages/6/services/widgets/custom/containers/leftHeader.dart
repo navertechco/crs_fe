@@ -32,7 +32,7 @@ class LeftHeader extends HookWidget {
       ),
       child: Obx(() {
         return Text(
-            "Day  ${currentDay.value + 1}:  ${globalDestinationName.value.toString().capitalize} $type ",
+            "Destination:  ${globalDestinationName.value.toString().capitalize} $type ",
             style: KTextSytle(
                     context: context,
                     fontSize: 25,

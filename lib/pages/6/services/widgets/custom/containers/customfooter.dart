@@ -1,7 +1,9 @@
+ 
+
 import 'package:flutter/material.dart';
-import 'package:naver_crs/common/index.dart';
-// ignore: import_of_legacy_library_into_null_safe
+
 import '../../../../../index.dart';
+import '../../../controller.dart';
 
 class CustomFooterWidget extends StatelessWidget {
   final ServicesController ctrl;
@@ -35,7 +37,7 @@ class CustomFooterWidget extends StatelessWidget {
                           color: Colors.white)
                       .getStyle()),
               onPressed: () {
-                previousDay();
+                previousDestination();
               },
             ),
             TextButton(
@@ -47,7 +49,7 @@ class CustomFooterWidget extends StatelessWidget {
                           color: Colors.white)
                       .getStyle()),
               onPressed: () {
-                resetCurrentDay();
+                resetCurrentDestinationServices();
               },
             ),
             TextButton(
@@ -62,14 +64,14 @@ class CustomFooterWidget extends StatelessWidget {
                 if ((leftHours[currentDay.value].value * 60) <= 5) {
                   if (formKey.currentState != null) {
                     if (formKey.currentState!.validate()) {
-                      await paginateDay(context);
+                      await paginateDestination(context);
                     }
                   }
                 } else {
                   showCustomDialog(
                     context,
                     Text(
-                        "You have ${getTimeStringFromDouble(leftHours[currentDay.value].value)} hours left, would you like to assign another experience?",
+                        "You have ${getTimeStringFromDouble(leftHours[currentDay.value].value)} hours left, would you like to assign another service?",
                         style: KTextSytle(
                                 context: context,
                                 fontSize: 15,

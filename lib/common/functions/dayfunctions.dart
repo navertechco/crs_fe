@@ -118,9 +118,27 @@ Function jumpDay = (direction) {
   goto("Experiences");
 };
 
+Function jumpDestination = (direction) {
+  decideBypass(direction);
+  expDraggable.value = 1;
+  currentDate.value = arrivalDate.value.add(Duration(days: currentDay.value));
+  updateCurrentDestination();
+  filterSuggestedExperiences();
+  initializeHours();
+  goto("Services");
+};
+
 Function nextDay = () async {
   if (currentDay.value < totalDays.value - 1) {
     jumpDay("forward");
+  } else {
+    await prepareDaysToResume();
+  }
+};
+
+Function nextDestination = () async {
+  if (currentDestination.value < globalctx.destinations.length - 1) {
+    jumpDestination("forward");
   } else {
     await prepareDaysToResume();
   }
@@ -134,6 +152,12 @@ Function previousDay = () {
     goto("Destination");
   }
 };
+
+Function previousDestination = () {
+    resetCurrentDestinationServices();
+    goto("Experience");
+};
+
 
 Function getDtos = () {
   var day = {

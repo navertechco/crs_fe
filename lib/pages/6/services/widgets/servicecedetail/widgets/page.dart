@@ -2,12 +2,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../../../index.dart';
 import '../index.dart';
 import 'index.dart';
 
-class LeisureTimeDetailWidget extends GetView<LeisureTimeDetailController> {
-  const LeisureTimeDetailWidget({Key? key, this.experience}) : super(key: key);
-  final experience;
+class ServiceDetailWidget extends GetView<ServiceDetailController> {
+  const ServiceDetailWidget({Key? key, this.service}) : super(key: key);
+  final service;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -19,9 +20,11 @@ class LeisureTimeDetailWidget extends GetView<LeisureTimeDetailController> {
                 top: MediaQuery.of(context).size.height * 0.0),
             child: Column(
               children: [
-                TitleWidget(experience: experience),
-                CustomLeisureTimeDetailForm(experience: experience),
-                KeypadWidget(experience: experience),
+                TitleWidget(service: service),
+                CarouselWidget(service: service),
+                DescriptionWidget(service: service),
+                // if (getServiceState(service) != "suggested")
+                //   KeypadWidget(service: service),
               ],
             ),
           ),

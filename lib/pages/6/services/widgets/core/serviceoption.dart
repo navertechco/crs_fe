@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import '../index.dart';
 
-class ExperienceOptionWidget extends StatelessWidget {
-  const ExperienceOptionWidget(
+class ServiceOptionWidget extends StatelessWidget {
+  const ServiceOptionWidget(
       {Key? key,
-      required this.experience,
+      required this.service,
       this.height = 80,
       this.width = 250,
       this.suggested = false})
       : super(key: key);
-  final String experience;
+  final String service;
   final double height;
   final double width;
   final bool suggested;
@@ -21,8 +21,8 @@ class ExperienceOptionWidget extends StatelessWidget {
         child: GoldBorderWidget(
             child: SwitcherWidget(
                 suggested: suggested,
-                experience: experience,
-                firstchild: ExperienceFrontOptionWidget(experience: experience),
-                seccondchild: ExperienceRearOptionWidget(experience: experience))));
+                service: service,
+                firstchild: ServiceFrontOptionWidget(service: service),
+                seccondchild: ServiceRearOptionWidget(service: service))));
   }
 }

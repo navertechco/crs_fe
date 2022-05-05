@@ -9,24 +9,24 @@ import 'package:interval_time_picker/interval_time_picker.dart'
 class TitleWidget extends StatelessWidget {
   const TitleWidget({
     Key? key,
-    required this.experience,
+    required this.service,
   }) : super(key: key);
 
-  final experience;
+  final service;
 
   @override
   Widget build(BuildContext context) {
-    var expData = getExperienceByName(experience).value;
+    var expData = getServiceByName(service).value;
     Rx<TimeOfDay?> timeStart = Rx(getFormValue(
             globalctx.memory["days"][currentDay.value],
-            experience,
+            service,
             "timeStart",
             time) ??
         time);
 
     return Column(
       children: [
-        Text(experience.toString().split("-")[0],
+        Text(service.toString().split("-")[0],
             style: KTextSytle(
                     context: context,
                     fontSize: 20,
@@ -35,14 +35,14 @@ class TitleWidget extends StatelessWidget {
                 .getStyle()),
         Row(
           children: [
-            Text("Open Days: ",
+            Text("Open Destinations: ",
                 style: KTextSytle(
                         context: context,
                         fontSize: 10,
                         fontWeight: FontWeight.bold,
                         color: Color.fromARGB(255, 204, 164, 61))
                     .getStyle()),
-            Text("${expData["openDays"]}",
+            Text("${expData["openDestinations"]}",
                 style: KTextSytle(
                         context: context,
                         fontSize: 10,
@@ -124,9 +124,9 @@ class TitleWidget extends StatelessWidget {
               )
                   .then((value) {
                 globalctx.memory["days"][currentDay.value] ??= {};
-                globalctx.memory["days"][currentDay.value][experience] ??= {};
+                globalctx.memory["days"][currentDay.value][service] ??= {};
                 setFormValue(globalctx.memory["days"][currentDay.value],
-                    experience, "timeStart", value);
+                    service, "timeStart", value);
                 return value;
               });
             }),

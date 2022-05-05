@@ -2,8 +2,8 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:naver_crs/pages/6/experiences/widgets/experiencedetail/widgets/index.dart';
 import 'package:naver_crs/pages/6/experiences/widgets/leisuretimedetail/widgets/index.dart';
+import 'package:naver_crs/pages/6/services/widgets/servicecedetail/widgets/index.dart';
 
 import '../../../../index.dart';
 
@@ -13,13 +13,13 @@ class SwitcherWidget extends StatelessWidget {
       {Key? key,
       required this.firstchild,
       required this.seccondchild,
-      required this.experience,
+      required this.service,
       this.suggested = false})
       : super(key: key);
 
   final Widget firstchild;
   final Widget seccondchild;
-  final String experience;
+  final String service;
   bool suggested;
 
   @override
@@ -34,27 +34,21 @@ class SwitcherWidget extends StatelessWidget {
 
     void _switchCard() {
       globalctx.value.value = globalctx.value.value;
-      RxList exps = globalctx.experiencelist;
+      RxList exps = globalctx.servicelist;
 
-      exps.contains(experience) && _showFrontSide.value
-          ? exps.add(experience)
-          : exps.remove(experience);
+      exps.contains(service) && _showFrontSide.value
+          ? exps.add(service)
+          : exps.remove(service);
 
-      globalctx.experiencelist = exps;
-      suggested = getExperienceState(experience) == "suggested";
+      globalctx.servicelist = exps;
+      suggested = getServiceState(service) == "suggested";
 
       if (suggested) {
         _changeRotationAxis();
       } else {
-        if (experience == "Leisure Time") {
-          showCustomDialog(
-              context, LeisureTimeDetailWidget(experience: experience), "Close",
-              buttonColor: Colors.white);
-        } else {
-          showCustomDialog(
-              context, ExperienceDetailWidget(experience: experience), "Close",
-              buttonColor: Colors.white);
-        }
+        showCustomDialog(
+            context, ServiceDetailWidget(service: service), "Close",
+            buttonColor: Colors.white);
       }
     }
 

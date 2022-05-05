@@ -1,33 +1,33 @@
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 import '../../../../../index.dart';
 import '../../index.dart';
 
-class CustomDragableExperience extends StatelessWidget {
-  const CustomDragableExperience({
+class CustomDragableService extends StatelessWidget {
+  const CustomDragableService({
     Key? key,
-    required this.experience,
+    required this.service,
     required this.suggested,
   }) : super(key: key);
 
-  final experience;
+  final service;
   final bool suggested;
   @override
   Widget build(BuildContext context) {
-    var experienceOptionWidget = ExperienceOptionWidget(
-      experience: experience.description,
+    var serviceOptionWidget = ServiceOptionWidget(
+      service: service.description,
       suggested: suggested,
       height: MediaQuery.of(context).size.height * 0.08,
       width: MediaQuery.of(context).size.width * 0.2,
     );
 
-    String title = experience.description;
-   
+    String title = service.description;
+
     return Draggable<String>(
       maxSimultaneousDrags: expDraggable.value,
       data: title,
-      feedback: experienceOptionWidget,
-      childWhenDragging: experienceOptionWidget,
-      child: experienceOptionWidget,
+      feedback: serviceOptionWidget,
+      childWhenDragging: serviceOptionWidget,
+      child: serviceOptionWidget,
     );
   }
 }

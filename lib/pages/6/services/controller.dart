@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:naver_crs/common/functions/servicefunctions.dart';
 import 'package:naver_crs/pages/5/destination/widgets/index.dart';
 
 class ServicesController extends GetxController {
@@ -9,12 +10,12 @@ class ServicesController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    // filterSuggestedServices();
+    filterSuggestedServices();
   }
 
   @override
   void refresh() {
     super.refresh();
-    // filterSuggestedServices();
+    filterSuggestedServices();
   }
 }

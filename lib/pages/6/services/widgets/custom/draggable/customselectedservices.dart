@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:naver_crs/pages/6/experiences/widgets/custom/draggable/experiencedragtarget.dart';
+import 'package:naver_crs/pages/6/services/widgets/custom/draggable/servicedragtarget.dart';
 import '../../../../../index.dart';
 
 class CustomSelectedServicesWidget extends StatelessWidget {
@@ -26,9 +26,9 @@ class CustomSelectedServicesWidget extends StatelessWidget {
         ),
         Scrollbar(
           child: SingleChildScrollView(
-            child: ExperienceDragTargetWidget(
-              onAccept: (String experience) {
-                setExperienceState(experience, "selected");
+            child: ServiceDragTargetWidget(
+              onAccept: (String service) {
+                setServiceState(service, "selected");
               },
             ),
           ),

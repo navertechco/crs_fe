@@ -58,62 +58,13 @@ class BodyWidget extends StatelessWidget {
                       children: [
                         CustomTitleWidget(
                             fontWeight: FontWeight.bold,
-                            label:
-                                "Current Day: ${dayFormat.format(currentDate.value).replaceAll(" ", "-")}",
-                            color: Colors.white,
-                            fontSize: 15),
-                        CustomTitleWidget(
-                            fontWeight: FontWeight.bold,
-                            label:
-                                "Travel Rhythm: ${findTravelRhythmDescription(parseInt(currentTravelRhythm.value))}",
-                            color: Colors.white,
-                            fontSize: 15),
-                        CustomTitleWidget(
-                            fontWeight: FontWeight.bold,
-                            label:
-                                "Accumulated Hours: ${getTimeStringFromDouble(getRXValue(accumulatedHours, currentDay.value, 0.0))}",
-                            color: Colors.white,
-                            fontSize: 15),
-                        CustomTitleWidget(
-                            fontWeight: FontWeight.bold,
-                            label:
-                                "Left Hours: ${getTimeStringFromDouble(getRXValue(leftHours, currentDay.value, getMaxTrValue(currentTravelRhythm.value)))}",
-                            color: Colors.white,
-                            fontSize: 15),
-                        if (globalDestinationName.value == "galapagos")
-                          Row(
-                            children: [
-                              CustomTitleWidget(
-                                  fontWeight: FontWeight.bold,
-                                  label: "Custom Additional guide:",
-                                  color: Colors.white),
-                              CheckboxIconFormField(
-                                context: context,
-                                initialValue: customGuide.value,
-                                enabled: true,
-                                iconSize: 32,
-                                onSaved: (value) {
-                                  setFormValue(globalctx.memory["destinations"],
-                                      index, "customGuide", value);
-                                },
-                                onChanged: (value) {
-                                  customGuide.value = value;
-                                  setFormValue(globalctx.memory["destinations"],
-                                      index, "customGuide", value);
-                                },
-                              ),
-                            ],
-                          ),
-                        TravelChips(ctrl: ctrl, counter: counter),
-                        CustomTitleWidget(
-                            fontWeight: FontWeight.bold,
-                            label: "Day Transport Options:",
+                            label: "Destination Transport Options:",
                             color: Colors.white),
                         CustomFormMultiDropDownFieldWidget(
                           validator: (value) =>
                               CustomMultiDropdownRequiredValidator(value,
                                   errorText:
-                                      "Day Transport Options are required ",
+                                      "Destination Transport Options are required ",
                                   context: context),
                           value: getFormValue(
                               globalctx.memory["destinations"],

@@ -3,21 +3,21 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../../index.dart';
 
-class CustomExperienceForm extends StatelessWidget {
-  const CustomExperienceForm({
+class CustomServiceForm extends StatelessWidget {
+  const CustomServiceForm({
     Key? key,
-    required this.experience,
+    required this.service,
   }) : super(key: key);
-  final String experience;
+  final String service;
   @override
   Widget build(BuildContext context) {
-    var props = {}.obs; 
+    var props = {}.obs;
     List filteredByDestination = [];
-    for (Map item in experiences) {
+    for (Map item in findCatalog("Services").toList()) {
       List itemList = item.values.toList();
       CatalogDto exp = CatalogDto(itemList);
       if (exp.description.toString().toUpperCase() ==
-          experience.toString().toUpperCase()) {
+          service.toString().toUpperCase()) {
         filteredByDestination.add(exp);
       }
     }

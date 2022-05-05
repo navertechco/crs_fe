@@ -3,11 +3,11 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import '../../../../../index.dart';
 import '../../index.dart';
 
-class CustomBodyDaysWidget extends HookWidget {
+class CustomBodyDestinationsWidget extends HookWidget {
   final ServicesController ctrl;
   final ValueNotifier<int> counter;
   GlobalKey<FormState> formKey;
-  CustomBodyDaysWidget({
+  CustomBodyDestinationsWidget({
     Key? key,
     required this.ctrl,
     required this.counter,

@@ -6,10 +6,10 @@ import '../../../../../index.dart';
 class KeypadWidget extends StatelessWidget {
   const KeypadWidget({
     Key? key,
-    required this.experience,
+    required this.service,
   }) : super(key: key);
 
-  final experience;
+  final service;
 
   @override
   Widget build(BuildContext context) {
@@ -27,11 +27,29 @@ class KeypadWidget extends StatelessWidget {
                       color: Colors.white)
                   .getStyle()),
           onPressed: () {
-            var state = getExperienceState("Leisure Time");
+            var state = getServiceState(service);
             if (state == "selected") {
-              promoteLeisureTime();
+              var expData = getServiceValueByName(service);
+              if (expData["exptime"] <=
+                  leftHours[currentDay.value].value * 60) {
+                promoteService(service);
+                Get.close(1);
+              } else {
+                showCustomDialog(
+                  context,
+                  Text("Too Many Selected Hours !!!!",
+                      style: KTextSytle(
+                              context: context,
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black)
+                          .getStyle()),
+                  "Close",
+                  backgroundColor: Colors.white,
+                  buttonColor: Colors.black,
+                );
+              }
             }
-            Get.close(1);
           },
         ),
         TextButton(
@@ -43,10 +61,9 @@ class KeypadWidget extends StatelessWidget {
                       color: Colors.white)
                   .getStyle()),
           onPressed: () {
-            var state = getExperienceState("Leisure Time");
+            var state = getServiceState(service);
             if (state == "promoted") {
-              resetLeisureTime();
-              setExperienceState("Leisure Time", "selected");
+              downgradeServiceDestinations(service);
             }
             Get.close(1);
           },

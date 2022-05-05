@@ -6,14 +6,14 @@ import '../../../../../index.dart';
 class CarouselWidget extends StatelessWidget {
   const CarouselWidget({
     Key? key,
-    this.experience,
+    this.service,
   }) : super(key: key);
-  final experience;
+  final service;
   @override
-  Widget build(BuildContext context) { 
-    var expData = experiences
+  Widget build(BuildContext context) {
+    var expData = findCatalog("Services")
         .toList()
-        .firstWhere((element) => element["description"] == experience)["value"];
+        .firstWhere((element) => element["description"] == service)["value"];
     var images = [];
     var datas = [];
 
