@@ -149,13 +149,14 @@ Function getServiceState = (service) {
   return state;
 };
 Function moveService = (String service) {
+  setServiceState(service, "promoted");
   globalctx.services[currentDestination.value] ??= [];
   globalctx.serviceDragData.value[currentDestination.value] ??= [];
   if (!globalctx.services[currentDestination.value].contains(service)) {
     globalctx.services[currentDestination.value].add(service);
     globalctx.serviceDragData.value[currentDestination.value]!
         .add(DragServiceOptionWidget(service: service));
-    setServiceState(service, "promoted");
+    
   }
 };
 Function upgradeServiceDestinations = (String service) {

@@ -295,13 +295,14 @@ Function getExperienceState = (experience) {
   return state;
 };
 Function moveExperience = (String experience) {
+  setExperienceState(experience, "promoted");
   globalctx.experiences[currentDay.value] ??= [];
   globalctx.experienceDragData.value[currentDay.value] ??= [];
   if (!globalctx.experiences[currentDay.value].contains(experience)) {
     globalctx.experiences[currentDay.value].add(experience);
     globalctx.experienceDragData.value[currentDay.value]!
         .add(DragExperienceOptionWidget(experience: experience));
-    setExperienceState(experience, "promoted");
+    
   }
 };
 Function upgradeExperienceDays = (String experience) {
