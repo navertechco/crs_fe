@@ -11,16 +11,13 @@ class CarouselWidget extends StatelessWidget {
   final service;
   @override
   Widget build(BuildContext context) {
-    var expData = findCatalog("Services")
+    var srvData = filteredsrv
         .toList()
-        .firstWhere((element) => element["description"] == service)["value"];
+        .firstWhere((element) => element.description == service)
+        .value;
     var images = [];
     var datas = [];
-
-    for (var data in expData["activities"]) {
-      images.add(data["image"]);
-      datas.add(data);
-    }
+ 
 
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.3,
@@ -36,16 +33,12 @@ class CarouselWidget extends StatelessWidget {
                       SizedBox(
                           height: MediaQuery.of(context).size.height * 0.5,
                           width: MediaQuery.of(context).size.width * 0.5,
-                          child: YoutubeWidget(
-                            videoId: datas[index]["video"],
-                          )),
+                          child:  Text("Video")),
                     ],
                   ),
                   "Close");
             },
-            child: Image.asset(images[index],
-                // fit: BoxFit.fill,
-                width: MediaQuery.of(context).size.width * 0.05),
+            child: Text("Image"),
           );
         },
         autoplay: false,

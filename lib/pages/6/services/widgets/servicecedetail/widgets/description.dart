@@ -11,10 +11,10 @@ class DescriptionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var expData = findCatalog("Services")
+    var srvData = filteredsrv
         .toList()
-        .firstWhere((exp) => exp["description"] == service)["value"];
-    return Text("${expData["description"]}",
+        .firstWhere((srv) => srv.description == service).value;
+    return Text("$service",
         style: KTextSytle(
                 context: context,
                 fontSize: 15,

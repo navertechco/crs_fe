@@ -47,6 +47,7 @@ const kDefaultFindTour = "/Tour/FindTour";
 const kDefaultFindCruise = "/Tour/FindCruise";
 const kDefaultTourEdit = "/Tour/Edit";
 const kDefaultNewTourEdit = "/Tour/NewId";
+const kDefaultFindCatalog = "/System/FindCatalog";
 const kDefaultCreateCatalog = "/Admin/CreateCatalog";
 
 //DIMENSIONES

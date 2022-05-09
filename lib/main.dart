@@ -30,7 +30,7 @@ void main() {
 
     var pages = AppPages.pages;
     PRegistry registry =
-        routes.toList().firstWhere((element) => element.name == "/NetRate");
+        routes.toList().firstWhere((element) => element.name == "/Services");
 
     runApp(GetMaterialApp(
         scrollBehavior: ScrollBehavior(),

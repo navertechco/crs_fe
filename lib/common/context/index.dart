@@ -37,11 +37,13 @@ class Context with PropertyChangeNotifier<String> {
   var selectedExperiences = {}.obs;
   var suggestedExperiences = {}.obs;
   RxMap<String, dynamic> states = {
+    "services":{},
     "experiences": {},
     "destinations": {},
   }.obs;
   var payload = {};
   RxMap<String, dynamic> memory = {
+    "services":{},
     "tour": {},
     "logistic": {},
     "customer": {},

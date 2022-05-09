@@ -18,9 +18,9 @@ Function filterServices = () {
   updateDragServices(filteredServices);
 };
 
-Function updateDragServices = (filteredServices) {
+Function updateDragServices = (filteredServices) async {
   srvlist.value = <Widget>[];
-  for (var srv in filteredServices) {
+  for (var srv in await filteredServices as Iterable) {
     srvlist.add(CustomDragableService(service: srv, suggested: true));
   }
 };
@@ -33,180 +33,29 @@ Function paginateDestination = (context) async {
   }
 };
 
-Function getFilteredServices = () {
-  List filtered = getSrvFiltered();
-  var idx = "getDestinationIndex()";
-  var sub = getFormValue(globalctx.memory["destinations"], idx, "sub", null);
-  var destination =
-      getFormValue(globalctx.memory["destinations"], idx, "destination", null);
-  var destData = getDestinationValueByName(destination);
-  List filteredBySubs = filtered.where((e) {
-    if (sub != null && sub != "0") {
-      var subs = destData[9]["subs"];
-      if (e.value["sub"] != null) {
-        var subName =
-            filterCatalog(subs, "code", int.parse(sub))[0]["description"];
-        var rule = subName == e.value["sub"];
-        return rule;
-      }
-    }
-    return true;
-  }).toList();
+Function getFilteredServices = () async {
+  List filtered = await getSrvFiltered();
 
-  List filteredByType = filteredBySubs.where((e) {
-    if (e.value["service_type"] == "meal") {
-      return true;
-    }
-
-    if (e.description == "Leisure Time") {
-      return true;
-    }
-    try {
-      var compare = currentDestinationType;
-      var tr = getServiceByName(e.description).value["service_type"];
-      var rule = tr == compare;
-      return rule;
-    } catch (e) {
-      return true;
-    }
-    // return rule;
-  }).toList();
-  List filteredByKA = filteredByType.where((e) {
-    if (currentDestinationKeyActivities.value.isEmpty) {
-      return true;
-    }
-    if (currentDestination.value == 0 || e.description == "Leisure Time") {
-      return true;
-    }
-
-    var destKa = getDestinationKa(
-        globalDestinationName.value, globalDestinationType.value);
-    String ka1 =
-        getServiceByName(e.description).value["keyActivityType_fk"].toString();
-    String ka2 =
-        getServiceByName(e.description).value["keyActivityType_fk2"].toString();
-    var rule1 = destKa.contains(ka1);
-    var rule2 = destKa.contains(ka2);
-    return rule1 || rule2;
-  }).toList();
-  List filteredByPurpose = filteredByKA.where((e) {
-    if (e.value["service_type"] == "meal") {
-      return true;
-    }
-    if (currentDestination.value == 0 || e.description == "Leisure Time") {
-      return true;
-    }
-    var purposes = globalctx.memory["tour"]["purposes"];
-    String p1 = getServiceByName(e.description).value["purpose_fk"];
-    String p2 = getServiceByName(e.description).value["purpose_fk2"];
-    var rule1 = purposes.contains(p1);
-    var rule2 = purposes.contains(p2);
-    return rule1 || rule2;
-  }).toList();
-  List filteredByOpenDestinations = filteredByPurpose.where((e) {
-    if (e.value["service_type"] == "meal") {
-      return true;
-    }
-    if (currentDestination.value == 0 || e.description == "Leisure Time") {
-      return true;
-    }
-    try {
-      var dateName = "";
-      var open = getServiceByName(e.description)
-          .value["openDestinations"]
-          .toString()
-          .split(",");
-      var rule = open.contains(dateName);
-      return rule;
-    } catch (e) {
-      return true;
-    }
-  }).toList();
-  List filteredByBudget = filteredByOpenDestinations.where((e) {
-    return true;
-  }).toList();
-  List filteredByMaxCapacity = filteredByBudget.where((e) {
-    return true;
-  }).toList();
-  List filteredByExpMode = filteredByMaxCapacity.where((e) {
-    if (globalDestinationName.value.toString().toUpperCase() !=
-            "galapagos".toString().toUpperCase() &&
-        globalDestinationName.value.toString().toUpperCase() !=
-            "amazon".toString().toUpperCase()) {
-      return true;
-    }
-    return true;
-  }).toList();
-  List filteredByAirport = filteredByExpMode;
-  List filteredBySuggested = filteredByAirport.where((e) {
-    if (e.description == "Leisure Time") {
-      return true;
-    }
-    return getServiceState(e.description) == "suggested";
-  }).toList();
-  initializeCosts();
-  List filteredByLeft = filteredBySuggested.where((e) {
-    // return true;
-
-    if (e.description == "Leisure Time") {
-      return true;
-    }
-    var total = totalHours[currentDestination.value] ?? 0.0.obs;
-    var acc = accumulatedHours[currentDestination.value] ?? 0.0.obs;
-    var currentLeft = (total.value - acc.value) * 60;
-    var srvTime = getServiceByName(e.description).value["srvtime"] ?? 600;
-    var rule = srvTime <= currentLeft;
-    var rule2 = (srvTime - currentLeft) <= 30;
-    return rule || rule2;
-  }).toList();
-
-  List filterByOpenTime = filteredByLeft.where((e) {
-    var closeTime = parseHour(e.value["closeTime"]);
-    if (e.description == "Leisure Time") {
-      return true;
-    }
-    if (currentDestination.value == 0) {
-      if (closeTime - parseHour(arrivalHour.value) > 30) {
-        return true;
-      }
-      return false;
-    } else {
-      if (e.value["service_type"] == "meal") {
-        return true;
-      }
-      endHours[currentDestination.value].value = time
-          .addHour(totalHours[currentDestination.value].value.round() as int);
-      var rule =
-          closeTime - toMinutes(endHours[currentDestination.value].value) > 30;
-      return rule;
-    }
-  }).toList();
-
-  filterByOpenTime.sort((a, b) {
-    var aTime = a.value["srvtime"];
-    var bTime = b.value["srvtime"];
-    return aTime.compareTo(bTime);
-  });
-
-  Iterable result = filterByOpenTime;
+  Iterable result = filtered;
 
   return result;
 };
 //////////////////////////////////////////////////////////////////////////////////////
-Function getSrvFiltered = () {
-  List filtered = [];
-  for (Map item in services) {
-    List itemList = item.values.toList();
-    CatalogDto service = CatalogDto(itemList);
-    if (service.value["destination"].toString().toLowerCase() == "all") {
-      filtered.add(service);
-    }
-    if (service.value["destination"].toString().toLowerCase() ==
-        globalDestinationName.value) {
-      filtered.add(service);
+Function getSrvFiltered = () async {
+  
+  Iterable srvs = await services;
+  for (var item in srvs) {
+    List itemList = item;
+    for (var catalog in itemList) {
+      catalog = catalog.values.toList();
+      catalog.removeAt(0);
+      catalog.removeAt(2);
+      CatalogDto service = CatalogDto(catalog);
+      filteredsrv.add(service);
     }
   }
-  return filtered;
+
+  return filteredsrv;
 };
 Function resetCurrentDestinationServices = () {
   try {
@@ -333,8 +182,8 @@ Function initializeCosts = () {
 };
 Function calculateServiceDestinations = (String service) {
   var srvData = getServiceByName(service).value;
-  var srvtime = (parseInt(srvData['srvtime']) * 1.0) as double;
-  return srvtime / 60;
+  // var srvtime = (parseInt(srvData['srvtime']) * 1.0) as double;
+  return 0 / 60;
 };
 
 Function getServiceTravelRhythmByName = (String service) {
@@ -357,8 +206,8 @@ Function getServiceValueByName = (String service) {
 Function getServiceByName = (String service) {
   var result;
   try {
-    result = toCatalog(srvList
-        .firstWhere((element) => element["description"].toString() == service));
+    result = (filteredsrv
+        .firstWhere((element) => element.description == service));
   } catch (e) {
     log(e);
   }

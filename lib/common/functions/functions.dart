@@ -79,6 +79,7 @@ Function findCatalog = (name) {
       }
     }
   }
+
   return catalog;
 };
 
@@ -822,6 +823,19 @@ Function getTrColor = (tr) {
   };
 
   return color[tr.toString().toUpperCase()];
+};
+
+Function getCatalogs = (catalogs) async {
+  Map res = await fetchhandler(kDefaultSchema, kDefaultServer,
+      kDefaultServerPort, kDefaultFindCatalog, 'POST', {
+    "data": {"catalogs": catalogs}
+  });
+  if (res['state'] == true) {
+    var entries = res['data']["catalogs"].values.toList();
+    return entries;
+  } else {
+    log(res["message"]);
+  }
 };
 
 Function newTour = () async {

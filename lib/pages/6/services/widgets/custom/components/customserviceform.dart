@@ -13,12 +13,12 @@ class CustomServiceForm extends StatelessWidget {
   Widget build(BuildContext context) {
     var props = {}.obs;
     List filteredByDestination = [];
-    for (Map item in findCatalog("Services").toList()) {
+    for (Map item in findCatalog("services").toList()) {
       List itemList = item.values.toList();
-      CatalogDto exp = CatalogDto(itemList);
-      if (exp.description.toString().toUpperCase() ==
+      CatalogDto srv = CatalogDto(itemList);
+      if (srv.description.toString().toUpperCase() ==
           service.toString().toUpperCase()) {
-        filteredByDestination.add(exp);
+        filteredByDestination.add(srv);
       }
     }
 
