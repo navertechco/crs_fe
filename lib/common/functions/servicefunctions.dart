@@ -8,21 +8,28 @@ import 'package:naver_crs/pages/6/services/widgets/custom/index.dart';
 import '../index.dart';
 
 Function filterSuggestedServices = () {
-  // processDestinations();
   filterServices();
   clearCosts();
 };
 
 Function filterServices = () {
-  var filteredServices = getFilteredServices();
-  updateDragServices(filteredServices);
+  getFilteredServices().then((value) {
+    updateDragServices(value);
+  });
 };
 
 Function updateDragServices = (filteredServices) async {
   srvlist.value = <Widget>[];
-  for (var srv in await filteredServices as Iterable) {
-    srvlist.add(CustomDragableService(service: srv, suggested: true));
+  srvlistmem.value = [];
+  var filtered = await filteredServices as Iterable;
+  for (var srv in filtered) {
+    var obj = CustomDragableService(service: srv, suggested: true);
+    if (!srvlistmem.contains(srv.description)) {
+      srvlist.add(obj);
+      srvlistmem.add(srv.description);
+    }
   }
+  return;
 };
 
 Function paginateDestination = (context) async {
@@ -35,6 +42,17 @@ Function paginateDestination = (context) async {
 
 Function getFilteredServices = () async {
   List filtered = await getSrvFiltered();
+  filtered = filtered
+      .where((service) => getServiceState(service.description) != "promoted")
+      .toList()
+      .toSet()
+      .toList();
+  filtered = filtered
+      .where((service) =>
+          service.relation["destination"] == globalDestinationName.value)
+      .toList()
+      .toSet()
+      .toList();
 
   Iterable result = filtered;
 
@@ -42,7 +60,8 @@ Function getFilteredServices = () async {
 };
 //////////////////////////////////////////////////////////////////////////////////////
 Function getSrvFiltered = () async {
-  
+  filteredsrv = [];
+
   Iterable srvs = await services;
   for (var item in srvs) {
     List itemList = item;
@@ -68,6 +87,7 @@ Function resetCurrentDestinationServices = () {
     leftHours[currentDestination.value].value =
         totalHours[currentDestination.value].value;
     initializeCosts();
+    filterSuggestedServices();
   } catch (e) {
     log(e);
   }
@@ -138,6 +158,7 @@ Function moveService = (String service) {
     globalctx.services[currentDestination.value].add(service);
     globalctx.serviceDragData.value[currentDestination.value]!
         .add(DragServiceOptionWidget(service: service));
+    setServiceState(service, "promoted");
   }
 };
 Function upgradeServiceDestinations = (String service) {
@@ -161,8 +182,8 @@ Function downgradeServiceDestinations = (String service) {
   setServiceState(service, "suggested");
 };
 Function processCost = (value) {
-  accumulatedHours[currentDestination.value].value =
-      accumulatedHours[currentDestination.value].value + value;
+  // accumulatedHours[currentDestination.value].value =
+  //     accumulatedHours[currentDestination.value].value + value;
   initializeCosts();
 };
 
@@ -206,8 +227,8 @@ Function getServiceValueByName = (String service) {
 Function getServiceByName = (String service) {
   var result;
   try {
-    result = (filteredsrv
-        .firstWhere((element) => element.description == service));
+    result =
+        (filteredsrv.firstWhere((element) => element.description == service));
   } catch (e) {
     log(e);
   }

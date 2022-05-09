@@ -301,6 +301,7 @@ Function moveExperience = (String experience) {
     globalctx.experiences[currentDay.value].add(experience);
     globalctx.experienceDragData.value[currentDay.value]!
         .add(DragExperienceOptionWidget(experience: experience));
+    setExperienceState(experience, "promoted");
   }
 };
 Function upgradeExperienceDays = (String experience) {

@@ -9,27 +9,29 @@ class ServiceFrontOptionWidget extends StatelessWidget {
   final String service;
   @override
   Widget build(BuildContext context) {
-    List filteredByDestination = [];
+    var title = "";
 
-    for (Map item in findCatalog("services").toList()) {
-      List itemList = item.values.toList();
-      CatalogDto srv = CatalogDto(itemList);
-      if (srv.description.toString().toUpperCase() ==
-          service.toString().toUpperCase()) {
-        filteredByDestination.add(srv);
+    if (service.contains("-")) {
+      for (var item in service.toString().split("-")) {
+        title += item.toString() + "\n";
       }
+    } else {
+      title += service;
     }
 
     return Padding(
       padding: const EdgeInsets.all(15.0),
-      child: Text(
-        service.toString().split("-")[0],
-        style: GoogleFonts.poppins(
-            textStyle: TextStyle(
-          color: Color.fromARGB(255, 128, 128, 128),
-          fontSize: MediaQuery.of(context).size.width * 0.010,
-          fontWeight: FontWeight.bold,
-        )),
+      child: Center(
+        child: Text(
+          title,
+          textAlign: TextAlign.center,
+          style: GoogleFonts.poppins(
+              textStyle: TextStyle(
+            color: Color.fromARGB(255, 128, 128, 128),
+            fontSize: MediaQuery.of(context).size.width * 0.010,
+            fontWeight: FontWeight.bold,
+          )),
+        ),
       ),
     );
   }
