@@ -25,14 +25,14 @@ class DragServiceOptionWidget extends StatelessWidget {
                 state.value != "promoted"
                     ? GestureDetector(
                         onTap: () {
-                          removeService(service);
+                          setServiceState(service, "suggested");
                         },
                         child: Image.asset("assets/custom/img/redmark.png",
                             width: Get.width * 0.02),
                       )
                     : GestureDetector(
                         onTap: () {
-                          removeService(service);
+                          setServiceState(service, "suggested");
                         },
                         child: Image.asset("assets/custom/img/greencheck.png",
                             width: Get.width * 0.02),

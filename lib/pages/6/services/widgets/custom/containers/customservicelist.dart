@@ -35,7 +35,8 @@ class CustomServicesListWidget extends StatelessWidget {
                   child: Obx(() {
                     return Scrollbar(
                         child: SingleChildScrollView(
-                            child: Column(children: srvlist)));
+                            child: Column(
+                                children: serviceSuggestedDragData.value)));
                   }))))
     ]));
   }

@@ -14,7 +14,7 @@ class TitleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var expData = getServiceByName(service).value;
+    var srvData = getServiceByName(service).value;
     Rx<TimeOfDay?> timeStart = Rx(getFormValue(
             globalctx.memory["days"][currentDay.value],
             service,
@@ -40,7 +40,7 @@ class TitleWidget extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                         color: Color.fromARGB(255, 204, 164, 61))
                     .getStyle()),
-            Text("${expData["openDestinations"]}",
+            Text("${srvData["openDestinations"]}",
                 style: KTextSytle(
                         context: context,
                         fontSize: 10,

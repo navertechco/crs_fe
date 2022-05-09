@@ -154,7 +154,6 @@ Function previousDay = () {
 };
 
 Function previousDestination = () {
-    resetCurrentDestinationServices();
     goto("Experience");
 };
 

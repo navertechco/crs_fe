@@ -29,10 +29,10 @@ class KeypadWidget extends StatelessWidget {
           onPressed: () {
             var state = getServiceState(service);
             if (state == "selected") {
-              var expData = getServiceValueByName(service);
-              if (expData["exptime"] <=
+              var srvData = getServiceValueByName(service);
+              if (srvData["exptime"] <=
                   leftHours[currentDay.value].value * 60) {
-                promoteService(service);
+                setServiceState(service, "promoted");
                 Get.close(1);
               } else {
                 showCustomDialog(
@@ -62,9 +62,7 @@ class KeypadWidget extends StatelessWidget {
                   .getStyle()),
           onPressed: () {
             var state = getServiceState(service);
-            if (state == "promoted") {
-              downgradeServiceDestinations(service);
-            }
+           
             Get.close(1);
           },
         ),

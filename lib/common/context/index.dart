@@ -20,7 +20,8 @@ class Context with PropertyChangeNotifier<String> {
   Rx<List<Widget>> destinationDragData = Rx(<Widget>[]);
   RxMap destinationState = {}.obs;
   Rx<Map<dynamic, List<Widget>>> experienceDragData = Rx({});
-  Rx<Map<dynamic, List<Widget>>> serviceDragData = Rx({});
+  Rx<Map<dynamic, List<Widget>>> servicePromotedDragData = Rx({});
+  Rx<Map<dynamic, List<Widget>>> serviceSuggestedDragData = Rx({});
   RxBool value = true.obs;
   RxBool reset = false.obs;
   RxList destinations = [].obs;
@@ -37,13 +38,13 @@ class Context with PropertyChangeNotifier<String> {
   var selectedExperiences = {}.obs;
   var suggestedExperiences = {}.obs;
   RxMap<String, dynamic> states = {
-    "services":{},
+    "services": {},
     "experiences": {},
     "destinations": {},
   }.obs;
   var payload = {};
   RxMap<String, dynamic> memory = {
-    "services":{},
+    "services": {},
     "tour": {},
     "logistic": {},
     "customer": {},
@@ -58,7 +59,6 @@ class Context with PropertyChangeNotifier<String> {
     load("countries");
   }
 
- 
   void set_context(key, value) {
     context.value[key] = value;
     notifyListeners(key);

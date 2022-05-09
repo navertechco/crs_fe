@@ -28,7 +28,7 @@ class CustomSelectedServicesWidget extends StatelessWidget {
           child: SingleChildScrollView(
             child: ServiceDragTargetWidget(
               onAccept: (String service) {
-                setServiceState(service, "selected");
+                setServiceState(service, "promoted");
               },
             ),
           ),

@@ -1,5 +1,3 @@
- 
-
 import 'package:flutter/material.dart';
 
 import '../../../../../index.dart';
@@ -37,7 +35,14 @@ class CustomFooterWidget extends StatelessWidget {
                           color: Colors.white)
                       .getStyle()),
               onPressed: () {
-                previousDestination();
+                if (currentDestination.value > 0) {
+                  currentDestination.value--;
+                  globalDestinationIndex.value =
+                      (int.parse(globalDestinationIndex.value) + 1).toString();
+                  globalDestinationName.value = "quito";
+                  globalDestinationType.value = "arrival";
+                  filterSuggestedServices();
+                }
               },
             ),
             TextButton(
@@ -49,7 +54,7 @@ class CustomFooterWidget extends StatelessWidget {
                           color: Colors.white)
                       .getStyle()),
               onPressed: () {
-                resetCurrentDestinationServices();
+                resetServices();
               },
             ),
             TextButton(
@@ -61,28 +66,12 @@ class CustomFooterWidget extends StatelessWidget {
                           color: Colors.white)
                       .getStyle()),
               onPressed: () async {
-                if ((leftHours[currentDay.value].value * 60) <= 5) {
-                  if (formKey.currentState != null) {
-                    if (formKey.currentState!.validate()) {
-                      await paginateDestination(context);
-                    }
-                  }
-                } else {
-                  showCustomDialog(
-                    context,
-                    Text(
-                        "You have ${getTimeStringFromDouble(leftHours[currentDay.value].value)} hours left, would you like to assign another service?",
-                        style: KTextSytle(
-                                context: context,
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black)
-                            .getStyle()),
-                    "Close",
-                    backgroundColor: Colors.white,
-                    buttonColor: Colors.black87,
-                  );
-                }
+                currentDestination.value++;
+                globalDestinationIndex.value =
+                    (int.parse(globalDestinationIndex.value) + 1).toString();
+                globalDestinationName.value = "quito";
+                globalDestinationType.value = "arrival";
+                filterSuggestedServices();
               },
             ),
           ],

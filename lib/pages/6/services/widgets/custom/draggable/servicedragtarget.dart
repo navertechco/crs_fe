@@ -12,9 +12,9 @@ class ServiceDragTargetWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // if (globalctx.serviceDragData.value.isEmpty) {
+    // if (globalctx.servicePromotedDragData.value.isEmpty) {
     // for (var i = 0; i < destDays.value; i++) {
-    //   globalctx.serviceDragData.value[i] = <Widget>[];
+    //   globalctx.servicePromotedDragData.value[i] = <Widget>[];
     //   //   }
     //   // }
 
@@ -31,9 +31,9 @@ class ServiceDragTargetWidget extends StatelessWidget {
               return Scrollbar(
                   child: SingleChildScrollView(
                 child: Column(
-                    children:
-                        globalctx.serviceDragData.value[currentDay.value] ??
-                            []),
+                    children: globalctx
+                            .servicePromotedDragData.value[currentDay.value] ??
+                        []),
               ));
             });
           },
