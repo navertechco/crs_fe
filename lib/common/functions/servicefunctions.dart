@@ -83,6 +83,8 @@ Function resetCurrentDestinationServices = () {
     for (var service in srvs) {
       setServiceState(service, "suggested");
     }
+    globalctx.services[currentDestination.value] = [];
+    globalctx.serviceDragData.value[currentDestination.value] = [];
     initializeCosts();
     filterSuggestedServices();
   } catch (e) {
@@ -156,7 +158,6 @@ Function moveService = (String service) {
     globalctx.services[currentDestination.value].add(service);
     globalctx.serviceDragData.value[currentDestination.value]!
         .add(DragServiceOptionWidget(service: service));
-    
   }
 };
 Function upgradeServiceDestinations = (String service) {
