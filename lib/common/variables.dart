@@ -16,7 +16,10 @@ var allPromotedDestinations = globalctx.promotedDestinations;
 var globalDestinationName = Rx("quito");
 var globalDestinationType = Rx("arrival");
 var globalDestinationIndex = Rx("0");
-
+var serviceSuggestedDragData = Rx(<Widget>[]);
+var servicePromotedDragData = Rx(<Widget>[]);
+var promotedServices = [];
+var suggestedServices = [];
 RxInt destDays = 0.obs;
 List destList = getParam("DESTINATION_DATA").values.toList();
 CatalogDto destinationData = CatalogDto(destList);

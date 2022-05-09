@@ -12,12 +12,6 @@ class ServiceDragTargetWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // if (globalctx.servicePromotedDragData.value.isEmpty) {
-    // for (var i = 0; i < destDays.value; i++) {
-    //   globalctx.servicePromotedDragData.value[i] = <Widget>[];
-    //   //   }
-    //   // }
-
     return SizedBox(
         width: MediaQuery.of(context).size.width * 0.3,
         height: MediaQuery.of(context).size.height * 0.75,
@@ -30,10 +24,7 @@ class ServiceDragTargetWidget extends StatelessWidget {
             return Obx(() {
               return Scrollbar(
                   child: SingleChildScrollView(
-                child: Column(
-                    children: globalctx
-                            .servicePromotedDragData.value[currentDay.value] ??
-                        []),
+                child: Column(children: servicePromotedDragData.value),
               ));
             });
           },

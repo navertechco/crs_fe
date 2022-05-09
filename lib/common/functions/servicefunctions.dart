@@ -13,21 +13,14 @@ Function filterSuggestedServices = () {
   });
 };
 
-var serviceSuggestedDragData = Rx(<Widget>[]);
-var promotedServices = [];
-var suggestedServices = [];
-
-Function initializeDrags = () {
-  globalctx.servicePromotedDragData.value[currentDestination.value] ??= [];
-};
 Function resetDrags = () {
   promotedServices = [];
   suggestedServices = [];
   serviceSuggestedDragData.value = <Widget>[];
-  globalctx.servicePromotedDragData.value[currentDestination.value] = [];
+  servicePromotedDragData.value = <Widget>[];
 };
+
 Function updateSuggestedDragServices = (filteredServices) async {
-  initializeDrags();
   resetDrags();
   var filtered = await filteredServices as Iterable;
   for (var srv in filtered) {
@@ -38,7 +31,7 @@ Function updateSuggestedDragServices = (filteredServices) async {
           .add(CustomDragableService(service: srv, suggested: true));
     } else {
       promotedServices.add(srv.description);
-      globalctx.servicePromotedDragData.value[currentDestination.value]!
+      servicePromotedDragData.value
           .add(DragServiceOptionWidget(service: srv.description));
     }
   }
@@ -82,7 +75,7 @@ Function resetServices = () {
   for (var service in promotedServices) {
     setServiceState(service, "suggested");
   }
- 
+  promotedServices = [];
 };
 
 Function setServiceState = (service, state) {

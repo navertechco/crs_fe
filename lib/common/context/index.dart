@@ -19,9 +19,7 @@ class Context with PropertyChangeNotifier<String> {
   }.obs);
   Rx<List<Widget>> destinationDragData = Rx(<Widget>[]);
   RxMap destinationState = {}.obs;
-  Rx<Map<dynamic, List<Widget>>> experienceDragData = Rx({});
-  Rx<Map<dynamic, List<Widget>>> servicePromotedDragData = Rx({});
-  Rx<Map<dynamic, List<Widget>>> serviceSuggestedDragData = Rx({});
+  Rx<Map<dynamic, List<Widget>>> experienceDragData = Rx({}); 
   RxBool value = true.obs;
   RxBool reset = false.obs;
   RxList destinations = [].obs;
@@ -33,7 +31,6 @@ class Context with PropertyChangeNotifier<String> {
   RxList promotedDestinations = [].obs;
   RxList promotedDays = [].obs;
   RxList selectedDestinations = [].obs;
-  var promotedServices = {}.obs;
   var promotedExperiences = {}.obs;
   var selectedExperiences = {}.obs;
   var suggestedExperiences = {}.obs;
