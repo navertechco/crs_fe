@@ -49,7 +49,8 @@ Function getFilteredServices = () async {
       .toList();
   filtered = filtered
       .where((service) =>
-          service.relation["destination"] == globalDestinationName.value)
+          service.relation["destination"] == globalDestinationName.value ||
+          service.relation["destination"] == "all")
       .toList()
       .toSet()
       .toList();
@@ -78,14 +79,10 @@ Function getSrvFiltered = () async {
 };
 Function resetCurrentDestinationServices = () {
   try {
-    var services =
-        globalctx.states["services"][currentDestination.value].entries;
-    for (var service in services) {
-      removeService(service.key);
+    var srvs = globalctx.services[currentDestination.value];
+    for (var service in srvs) {
+      setServiceState(service, "suggested");
     }
-    accumulatedHours[currentDestination.value].value = 0.0;
-    leftHours[currentDestination.value].value =
-        totalHours[currentDestination.value].value;
     initializeCosts();
     filterSuggestedServices();
   } catch (e) {

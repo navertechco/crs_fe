@@ -74,9 +74,9 @@ List filteredsrv = [];
 var services = getCatalogs([
   "hotel",
   "transport_service",
-  // "translating_service",
-  // "cruises",
-  // "guide"
+  "translating_service",
+  "cruises",
+  "guide"
 ]).then((value) => value);
 var experiences = findCatalog("experiences");
 List expList = findCatalog("experiences").toList();
