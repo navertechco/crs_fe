@@ -14,6 +14,7 @@ Function filterSuggestedServices = () {
     updateDragServices();
   });
 };
+
 Function getFilteredServices = () async {
   filtered = await getSrvFiltered();
   filtered = filtered
@@ -31,6 +32,16 @@ Function getFilteredServices = () async {
         return true;
       }
 
+      if (service.catalog == "hotel") {
+        var room = service.description.split("-")[1];
+        if (promotedServices
+            .where((element) => element.contains(room))
+            .isNotEmpty) {
+          return false;
+        }
+        return true;
+      }
+
       if (service.catalog == "food_services") {
         var meal = service.description.split("-")[1];
         if (promotedServices
@@ -44,6 +55,8 @@ Function getFilteredServices = () async {
       return !catalogs.contains(service.catalog);
     }).toList();
   }
+  filtered.sort((a, b) => a.code.compareTo(b.code));
+  filtered.sort((a, b) => a.order.compareTo(b.order));
 };
 //////////////////////////////////////////////////////////////////////////////////////
 
@@ -83,7 +96,6 @@ Function getSrvFiltered = () async {
     List itemList = item;
     for (var catalog in itemList) {
       catalog = catalog.values.toList();
-      catalog.removeAt(3);
       ServiceDto service = ServiceDto(catalog);
       filteredsrv.add(service);
     }
