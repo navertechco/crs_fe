@@ -146,7 +146,6 @@ Function globalctxReset = () {
   resetDestinations();
   updateDraggableDestinations();
   filterDestinations();
-  // resetExperiences();
 };
 
 Function getItems = (data, value, hintText) {
@@ -363,13 +362,7 @@ Function log = (e) {
   print(e);
 };
 
-Function promoteLeisureTime = () {
-  var value = getFormValue(
-      globalctx.memory["days"], currentDay.value, "leisureTime", 0);
-  processHour(value);
-  promoteExperience("Leisure Time");
-};
-
+ 
 Function setLT = (value) {
   int ltindex =
       expList.indexWhere((element) => element["description"] == "Leisure Time");

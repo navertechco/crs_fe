@@ -96,7 +96,7 @@ Function bypassCruise = (String direction) {
 Function adjustCurrentDay = () {
   if (currentDay.value < 0) {
     currentDay.value = 0;
-    resetCurrentDay();
+    resetExperiences();
   }
 };
 
@@ -148,15 +148,14 @@ Function previousDay = () {
   if (currentDay.value > 0) {
     jumpDay("backward");
   } else {
-    resetCurrentDay();
+    resetExperiences();
     goto("Destination");
   }
 };
 
 Function previousDestination = () {
-    goto("Experience");
+  goto("Experience");
 };
-
 
 Function getDtos = () {
   var day = {

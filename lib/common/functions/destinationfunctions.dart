@@ -60,10 +60,8 @@ Function processDestinations = (context) async {
   // ignore: unrelated_type_equality_checks
   if (globalctx.promotedDestinations.isNotEmpty & (dayleft == 0)) {
     var destinationDay = [];
-    globalctx.experienceDragData.value = {};
-    for (var i = 0; i < totalDays.value; i++) {
-      globalctx.experienceDragData.value[i] ??= <Widget>[];
-    }
+    experiencePromotedDragData.value = <Widget>[];
+
     var destinations = getCombinedDestinations();
     int idx = 0;
     for (var destination in destinations.entries.toList()) {

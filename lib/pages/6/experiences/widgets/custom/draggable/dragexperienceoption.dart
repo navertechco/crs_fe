@@ -4,9 +4,9 @@ import 'package:get/get.dart';
 import '../../../../../index.dart';
 import '../../index.dart';
 
-class DragExperienceOptionWidget extends StatelessWidget {
+class DragExperienceTarget extends StatelessWidget {
   final String experience;
-  const DragExperienceOptionWidget({
+  const DragExperienceTarget({
     Key? key,
     required this.experience,
   }) : super(key: key);
@@ -25,14 +25,14 @@ class DragExperienceOptionWidget extends StatelessWidget {
                 state.value != "promoted"
                     ? GestureDetector(
                         onTap: () {
-                          removeExperience(experience);
+                          promoteExperience(experience, "suggested");
                         },
                         child: Image.asset("assets/custom/img/redmark.png",
                             width: Get.width * 0.02),
                       )
                     : GestureDetector(
                         onTap: () {
-                          removeExperience(experience);
+                          promoteExperience(experience, "suggested");
                         },
                         child: Image.asset("assets/custom/img/greencheck.png",
                             width: Get.width * 0.02),

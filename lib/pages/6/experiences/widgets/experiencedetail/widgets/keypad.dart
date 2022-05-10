@@ -32,7 +32,7 @@ class KeypadWidget extends StatelessWidget {
               var expData = getExperienceValueByName(experience);
               if (expData["exptime"] <=
                   leftHours[currentDay.value].value * 60) {
-                promoteExperience(experience);
+                promoteExperience(experience, "promoted");
                 Get.close(1);
               } else {
                 showCustomDialog(
@@ -61,10 +61,6 @@ class KeypadWidget extends StatelessWidget {
                       color: Colors.white)
                   .getStyle()),
           onPressed: () {
-            var state = getExperienceState(experience);
-            if (state == "promoted") {
-              downgradeExperienceDays(experience);
-            }
             Get.close(1);
           },
         ),

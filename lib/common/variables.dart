@@ -80,7 +80,7 @@ var services =
         .then((value) => value);
 var experiences = findCatalog("experiences");
 List expList = findCatalog("experiences").toList();
-RxList<Widget> explist = <Widget>[].obs;
+var experienceSelectedDragData = Rx(<Widget>[]);
 RxList<Widget> destlist = <Widget>[].obs;
 Map<String, dynamic> states = {
   "selected": globalctx.selectedExperiences,

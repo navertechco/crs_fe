@@ -47,7 +47,7 @@ class CustomFooterWidget extends StatelessWidget {
                           color: Colors.white)
                       .getStyle()),
               onPressed: () {
-                resetCurrentDay();
+                resetExperiences();
               },
             ),
             TextButton(

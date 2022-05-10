@@ -28,7 +28,7 @@ class CustomSelectedExperiencesWidget extends StatelessWidget {
           child: SingleChildScrollView(
             child: ExperienceDragTargetWidget(
               onAccept: (String experience) {
-                setExperienceState(experience, "promoted");
+                promoteExperience(experience, "promoted");
               },
             ),
           ),

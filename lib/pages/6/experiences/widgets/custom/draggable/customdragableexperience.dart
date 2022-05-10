@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 import '../../../../../index.dart';
 import '../../index.dart';
 
-class CustomDragableExperience extends StatelessWidget {
-  const CustomDragableExperience({
+class DragableExperience extends StatelessWidget {
+  const DragableExperience({
     Key? key,
     required this.experience,
     required this.suggested,
@@ -21,7 +21,7 @@ class CustomDragableExperience extends StatelessWidget {
     );
 
     String title = experience.description;
-   
+
     return Draggable<String>(
       maxSimultaneousDrags: expDraggable.value,
       data: title,

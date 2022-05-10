@@ -13,27 +13,42 @@ Function filterSuggestedExperiences = () {
   clearHours();
   clearKA();
 };
+List filteredExperiences = [];
 
 Function filterExperiences = () {
-  var filteredExperiences = getFilteredExperiences();
-  updateDragExperiences(filteredExperiences);
+  getFilteredExperiences();
+  updateSelectedDragExperiences();
 };
 
-Function updateDragExperiences = (filteredExperiences) {
-  explist.value = <Widget>[];
-  for (var exp in filteredExperiences) {
-    explist.add(CustomDragableExperience(experience: exp, suggested: true));
+Function updateSelectedDragExperiences = () {
+  experienceSelectedDragData.value = <Widget>[];
+  for (var experience in filteredExperiences) {
+    experienceSelectedDragData.value
+        .add(DragableExperience(experience: experience, suggested: true));
   }
 };
 
 Function getFilteredExperiences = () {
-  List filtered = getExpFiltered();
+  filteredExperiences = getExpFiltered();
   var idx = getDestinationIndexByDay();
   var sub = getFormValue(globalctx.memory["destinations"], idx, "sub", null);
   var destination =
       getFormValue(globalctx.memory["destinations"], idx, "destination", null);
   var destData = getDestinationValueByName(destination);
-  List filteredBySubs = filtered.where((e) {
+  globalctx.experiences[currentDay.value] ??= [];
+  experiencePromotedDragData.value = <Widget>[];
+  filteredExperiences = filteredExperiences.where((e) {
+    var state = getExperienceState(e.description);
+    if (state == "promoted") {
+      globalctx.experiences[currentDay.value].add(e.description);
+      experiencePromotedDragData.value
+          .add(DragExperienceTarget(experience: e.description));
+      return false;
+    }
+    return true;
+  }).toList();
+  //FILTER BY SUB
+  filteredExperiences = filteredExperiences.where((e) {
     if (sub != null && sub != "0") {
       var subs = destData[9]["subs"];
       if (e.value["sub"] != null) {
@@ -46,7 +61,7 @@ Function getFilteredExperiences = () {
     return true;
   }).toList();
 
-  List filteredByType = filteredBySubs.where((e) {
+  filteredExperiences = filteredExperiences.where((e) {
     if (e.value["experience_type"] == "meal") {
       return true;
     }
@@ -64,7 +79,7 @@ Function getFilteredExperiences = () {
     }
     // return rule;
   }).toList();
-  List filteredByKA = filteredByType.where((e) {
+  filteredExperiences = filteredExperiences.where((e) {
     if (currentDestinationKeyActivities.value.isEmpty) {
       return true;
     }
@@ -84,7 +99,7 @@ Function getFilteredExperiences = () {
     var rule2 = destKa.contains(ka2);
     return rule1 || rule2;
   }).toList();
-  List filteredByPurpose = filteredByKA.where((e) {
+  filteredExperiences = filteredExperiences.where((e) {
     if (e.value["experience_type"] == "meal") {
       return true;
     }
@@ -98,7 +113,7 @@ Function getFilteredExperiences = () {
     var rule2 = purposes.contains(p2);
     return rule1 || rule2;
   }).toList();
-  List filteredByOpenDays = filteredByPurpose.where((e) {
+  filteredExperiences = filteredExperiences.where((e) {
     if (e.value["experience_type"] == "meal") {
       return true;
     }
@@ -117,13 +132,13 @@ Function getFilteredExperiences = () {
       return true;
     }
   }).toList();
-  List filteredByBudget = filteredByOpenDays.where((e) {
+  filteredExperiences = filteredExperiences.where((e) {
     return true;
   }).toList();
-  List filteredByMaxCapacity = filteredByBudget.where((e) {
+  filteredExperiences = filteredExperiences.where((e) {
     return true;
   }).toList();
-  List filteredByExpMode = filteredByMaxCapacity.where((e) {
+  filteredExperiences = filteredExperiences.where((e) {
     if (globalDestinationName.value.toString().toUpperCase() !=
             "galapagos".toString().toUpperCase() &&
         globalDestinationName.value.toString().toUpperCase() !=
@@ -132,15 +147,15 @@ Function getFilteredExperiences = () {
     }
     return true;
   }).toList();
-  List filteredByAirport = filteredByExpMode;
-  List filteredBySuggested = filteredByAirport.where((e) {
+  filteredExperiences = filteredExperiences;
+  filteredExperiences = filteredExperiences.where((e) {
     if (e.description == "Leisure Time") {
       return true;
     }
     return getExperienceState(e.description) == "suggested";
   }).toList();
   initializeHours();
-  List filteredByLeft = filteredBySuggested.where((e) {
+  filteredExperiences = filteredExperiences.where((e) {
     // return true;
 
     if (e.description == "Leisure Time") {
@@ -155,7 +170,7 @@ Function getFilteredExperiences = () {
     return rule || rule2;
   }).toList();
 
-  List filterByOpenTime = filteredByLeft.where((e) {
+  filteredExperiences = filteredExperiences.where((e) {
     var closeTime = parseHour(e.value["closeTime"]);
     if (e.description == "Leisure Time") {
       return true;
@@ -176,15 +191,11 @@ Function getFilteredExperiences = () {
     }
   }).toList();
 
-  filterByOpenTime.sort((a, b) {
+  filteredExperiences.sort((a, b) {
     var aTime = a.value["exptime"];
     var bTime = b.value["exptime"];
     return aTime.compareTo(bTime);
   });
-
-  Iterable result = filterByOpenTime;
-
-  return result;
 };
 //////////////////////////////////////////////////////////////////////////////////////
 Function getExpFiltered = () {
@@ -202,135 +213,6 @@ Function getExpFiltered = () {
   }
   return filtered;
 };
-Function resetCurrentDay = () {
-  try {
-    var experiences = globalctx.states["experiences"][currentDay.value].entries;
-    for (var experience in experiences) {
-      removeExperience(experience.key);
-    }
-    accumulatedHours[currentDay.value].value = 0.0;
-    leftHours[currentDay.value].value = totalHours[currentDay.value].value;
-    initializeHours();
-    resetLeisureTime();
-  } catch (e) {
-    log(e);
-  }
-};
-
-Function resetExperiences = () {
-  globalctx.experiences.value = {};
-  globalctx.experienceDragData.value = {};
-  expDraggable.value = 1;
-
-  for (Map experience in experiences) {
-    CatalogDto expCatalog = toCatalog(experience);
-    removeExperience(expCatalog.description);
-  }
-  resetLeisureTime();
-};
-Function resetLeisureTime = () {
-  initializeHours();
-  var value = getFormValue(
-      globalctx.memory["days"], currentDay.value, "leisureTime", 0);
-
-  var state = getExperienceState("Leisure Time");
-  setFormValue(globalctx.memory["days"], currentDay.value, "leisureTime", 0);
-  setFormValue(
-      globalctx.memory["days"], currentDay.value, "leisureTimeStart", time);
-  setFormValue(
-      globalctx.memory["days"], currentDay.value, "leisureTimeEnd", time);
-
-  if (state == "promoted") {
-    processHour(-value);
-  }
-  setExperienceState("Leisure Time", "suggested");
-  deleteExperience("Leisure Time");
-};
-Function deleteExperience = (experience) {
-  if (globalctx.experiences[currentDay.value].contains(experience)) {
-    var index = globalctx.experiences[currentDay.value]
-        .indexWhere((element) => element == experience);
-    globalctx.experiences[currentDay.value].removeAt(index);
-    globalctx.experienceDragData.value[currentDay.value]!.removeAt(index);
-  }
-};
-Function removeExperience = (experience) {
-  downgradeExperienceDays(experience);
-  deleteExperience(experience);
-};
-Function promoteExperience = (experience) {
-  upgradeExperienceDays(experience);
-
-  List<CatalogDto> filtered = [];
-  for (Map item in experiences) {
-    List itemList = item.values.toList();
-    CatalogDto exp = CatalogDto(itemList);
-    filtered.add(exp);
-  }
-  CatalogDto experienceData =
-      filtered.firstWhere((e) => e.description == experience);
-  globalctx.memory["promoted"] ??= {};
-  globalctx.memory["promoted"]["day"] ??= {};
-  globalctx.memory["promoted"]["day"][currentDay.value] ??= {};
-  globalctx.memory["promoted"]["day"][currentDay.value][experience] =
-      experienceData.toJson();
-};
-Function setExperienceState = (experience, state) {
-  globalctx.states["experiences"][currentDay.value] ??= {}.obs;
-  globalctx.states["experiences"][currentDay.value][experience] ??= {}.obs;
-  globalctx.states["experiences"][currentDay.value][experience]["state"] =
-      state;
-  // proccessExperiences();
-  if (state == "selected") {
-    moveExperience(experience);
-  }
-  filterSuggestedExperiences();
-};
-Function getExperienceState = (experience) {
-  globalctx.states["experiences"][currentDay.value] ??= {}.obs;
-  globalctx.states["experiences"][currentDay.value][experience] ??= {}.obs;
-  var state =
-      globalctx.states["experiences"][currentDay.value][experience]["state"];
-  state ??= "suggested";
-  return state;
-};
-Function moveExperience = (String experience) {
-  setExperienceState(experience, "promoted");
-  globalctx.experiences[currentDay.value] ??= [];
-  globalctx.experienceDragData.value[currentDay.value] ??= [];
-  if (!globalctx.experiences[currentDay.value].contains(experience)) {
-    globalctx.experiences[currentDay.value].add(experience);
-    globalctx.experienceDragData.value[currentDay.value]!
-        .add(DragExperienceOptionWidget(experience: experience));
-    
-  }
-};
-Function upgradeExperienceDays = (String experience) {
-  var state = getExperienceState(experience);
-  if (state == "selected") {
-    var value = calculateExperienceDays(experience);
-    processHour(value);
-  }
-  setExperienceState(experience, "promoted");
-};
-Function downgradeExperienceDays = (String experience) {
-  var state = getExperienceState(experience);
-  if (state == "promoted") {
-    var value = calculateExperienceDays(experience);
-    if (experience == "Leisure Time") {
-      value = getFormValue(
-          globalctx.memory["days"], currentDay.value, "leisureTime", 0);
-    }
-    processHour(-value);
-  }
-  setExperienceState(experience, "suggested");
-};
-Function processHour = (value) {
-  accumulatedHours[currentDay.value].value =
-      accumulatedHours[currentDay.value].value + value;
-  initializeHours();
-};
-
 Function initializeHours = () {
   leftHours[currentDay.value] ??= 0.0.obs;
   accumulatedHours[currentDay.value] ??= 0.0.obs;
@@ -344,6 +226,71 @@ Function initializeHours = () {
   clearHours();
   clearKA();
 };
+Function resetExperiences = () {
+  for (var exp in globalctx.experiences[currentDay.value]) {
+    promoteExperience(exp, "suggested");
+  }
+  resetDayCounters();
+};
+Function promoteExperience = (String experience, String state) {
+  int sign = state == "suggested" ? -1 : 1;
+  var value = calculateExperienceDays(experience);
+  if (experience == "Leisure Time") {
+    value = getFormValue(
+        globalctx.memory["days"], currentDay.value, "leisureTime", 0);
+  }
+  processHour(value * sign);
+  setExperienceState(experience, state);
+  saveExperience(experience, state);
+};
+
+Function processHour = (value) {
+  accumulatedHours[currentDay.value].value =
+      accumulatedHours[currentDay.value].value + value;
+  initializeHours();
+};
+Function saveExperience = (experience, state) {
+  if (state == "promoted") {
+    List<CatalogDto> filtered = [];
+    for (Map item in experiences) {
+      List itemList = item.values.toList();
+      CatalogDto exp = CatalogDto(itemList);
+      filtered.add(exp);
+    }
+    CatalogDto experienceData =
+        filtered.firstWhere((e) => e.description == experience);
+    globalctx.memory["promoted"] ??= {};
+    globalctx.memory["promoted"]["day"] ??= {};
+    globalctx.memory["promoted"]["day"][currentDay.value] ??= {};
+    globalctx.memory["promoted"]["day"][currentDay.value][experience] =
+        experienceData.toJson();
+  }
+};
+Function resetDayCounters = () {
+  accumulatedHours[currentDay.value].value = 0.0;
+  leftHours[currentDay.value].value = totalHours[currentDay.value].value;
+  initializeHours();
+};
+
+Function setExperienceState = (experience, state) {
+  globalctx.states["experiences"][currentDay.value] ??= {}.obs;
+  globalctx.states["experiences"][currentDay.value][experience] ??= {}.obs;
+  globalctx.states["experiences"][currentDay.value][experience]["state"] =
+      state;
+
+  filterSuggestedExperiences();
+};
+Function getExperienceState = (experience) {
+  globalctx.states["experiences"][currentDay.value] ??= {}.obs;
+  globalctx.states["experiences"][currentDay.value][experience] ??= {}.obs;
+  var state =
+      globalctx.states["experiences"][currentDay.value][experience]["state"];
+  state ??= "suggested";
+  return state;
+};
+
+var experiencePromotedDragData = Rx(<Widget>[]);
+
 Function calculateExperienceDays = (String experience) {
   var expData = getExperienceByName(experience).value;
   var exptime = (parseInt(expData['exptime']) * 1.0) as double;
