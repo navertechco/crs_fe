@@ -74,11 +74,11 @@ class CustomLeisureTimeDetailForm extends StatelessWidget {
           setFormValue(globalctx.memory["days"], currentDay.value,
               "leisureTime", lt.value);
 
-          if (leftHours[currentDay.value].value == 0) {
-            expDraggable.value = 0;
-          } else {
-            expDraggable.value = 1;
-          }
+          // if (leftHours[currentDay.value].value == 0) {
+          //   expDraggable.value = 0;
+          // } else {
+          //   expDraggable.value = 1;
+          // }
         }
       } else {
         showCustomDialog(

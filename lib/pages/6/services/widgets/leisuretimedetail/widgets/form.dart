@@ -75,9 +75,9 @@ class CustomLeisureTimeDetailForm extends StatelessWidget {
               "leisureTime", lt.value);
 
           if (leftHours[currentDay.value].value == 0) {
-            expDraggable.value = 0;
+            srvDraggable.value = 0;
           } else {
-            expDraggable.value = 1;
+            srvDraggable.value = 1;
           }
         }
       } else {
