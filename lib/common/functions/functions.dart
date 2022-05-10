@@ -66,7 +66,7 @@ Function findMemoryCatalog = (name, description) {
 Function findCatalog = (name) {
   var catalogs = getContext("catalogs");
   List<Map<String, dynamic>> catalog = <Map<String, dynamic>>[];
-  if (catalogs != null) {
+  if (catalogs.isNotEmpty) {
     var items = catalogs[name];
     if (items != null) {
       for (var item in items) {
