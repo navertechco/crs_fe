@@ -1,4 +1,27 @@
  
+class ServiceDto {
+  int? code;
+  String? description;
+  dynamic value;
+  dynamic relation;
+  dynamic catalog;
+  // ignore: prefer_function_declarations_over_variables
+  Function toJson = () {};
+
+  ServiceDto(List? data, {this.code, this.description, this.value, this.relation, this.catalog}) {
+    if (data != null && data.isNotEmpty) {
+      catalog = data[0];
+      code = data[1];
+      description = data[2];
+      value = data[3];
+      relation = data[4];
+    }
+
+    toJson = () {
+      return  {"code": code, "description": description, "value": value, "relation": relation, "catalog": catalog};
+    };
+  }
+}
 
 class CatalogDto {
   int? code;

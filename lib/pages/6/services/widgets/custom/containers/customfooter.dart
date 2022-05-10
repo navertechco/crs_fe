@@ -70,7 +70,7 @@ class CustomFooterWidget extends StatelessWidget {
                 globalDestinationIndex.value =
                     (int.parse(globalDestinationIndex.value) + 1).toString();
                 globalDestinationName.value = "quito";
-                globalDestinationType.value = "arrival";
+                globalDestinationType.value = "tour";
                 filterSuggestedServices();
               },
             ),

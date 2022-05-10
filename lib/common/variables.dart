@@ -18,6 +18,7 @@ var globalDestinationType = Rx("arrival");
 var globalDestinationIndex = Rx("0");
 var serviceSuggestedDragData = Rx(<Widget>[]);
 var servicePromotedDragData = Rx(<Widget>[]);
+var promotedCatalogs = [];
 var promotedServices = [];
 var suggestedServices = [];
 RxInt destDays = 0.obs;

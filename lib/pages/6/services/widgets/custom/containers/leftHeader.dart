@@ -14,15 +14,7 @@ class LeftHeader extends HookWidget {
   }) : super(key: key);
   final ValueNotifier<int> counter;
   final ServicesController ctrl;
-  final type = (() {
-    if (currentDay.value == 0) {
-      return "Arrival";
-    }
-    if (currentDay.value == totalDays.value - 1) {
-      return "Departure";
-    }
-    return "Tour";
-  })();
+ 
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -32,7 +24,7 @@ class LeftHeader extends HookWidget {
       ),
       child: Obx(() {
         return Text(
-            "Destination:  ${globalDestinationName.value.toString().capitalize} $type ",
+            "Destination:  ${globalDestinationName.value.toString().capitalize} ${globalDestinationType.value.toString().capitalize} ",
             style: KTextSytle(
                     context: context,
                     fontSize: 25,

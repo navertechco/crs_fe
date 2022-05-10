@@ -14,6 +14,7 @@ Function filterSuggestedServices = () {
 };
 
 Function resetDrags = () {
+  promotedCatalogs = [];
   promotedServices = [];
   suggestedServices = [];
   serviceSuggestedDragData.value = <Widget>[];
@@ -30,11 +31,14 @@ Function updateSuggestedDragServices = (filteredServices) async {
       serviceSuggestedDragData.value
           .add(CustomDragableService(service: srv, suggested: true));
     } else {
+      promotedCatalogs.add(srv.catalog);
       promotedServices.add(srv.description);
       servicePromotedDragData.value
           .add(DragServiceOptionWidget(service: srv.description));
     }
   }
+  globalctx.memory["services"][currentDestination.value] = promotedServices;
+  globalctx.memory["catalogs"][currentDestination.value] = promotedCatalogs;
   return;
 };
 
@@ -44,9 +48,8 @@ Function getFilteredServices = () async {
       .where((service) =>
           service.relation["destination"] == globalDestinationName.value ||
           service.relation["destination"] == "all")
-      .toList()
-      .toSet()
       .toList();
+ 
 
   Iterable result = filtered;
 
@@ -61,9 +64,8 @@ Function getSrvFiltered = () async {
     List itemList = item;
     for (var catalog in itemList) {
       catalog = catalog.values.toList();
-      catalog.removeAt(0);
-      catalog.removeAt(2);
-      CatalogDto service = CatalogDto(catalog);
+      catalog.removeAt(3);
+      ServiceDto service = ServiceDto(catalog);
       filteredsrv.add(service);
     }
   }
@@ -76,6 +78,7 @@ Function resetServices = () {
     setServiceState(service, "suggested");
   }
   promotedServices = [];
+  promotedCatalogs = [];
 };
 
 Function setServiceState = (service, state) {

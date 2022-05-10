@@ -41,6 +41,7 @@ class Context with PropertyChangeNotifier<String> {
   }.obs;
   var payload = {};
   RxMap<String, dynamic> memory = {
+    "catalogs": {},
     "services": {},
     "tour": {},
     "logistic": {},
