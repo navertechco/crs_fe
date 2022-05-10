@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../../../index.dart'; 
+import '../../../../../index.dart';
 
 class TitleWidget extends StatelessWidget {
   const TitleWidget({
@@ -33,14 +33,32 @@ class TitleWidget extends StatelessWidget {
                 .getStyle()),
         Row(
           children: [
-            Text("Open Destinations: ",
+            Text("Service Name: ",
                 style: KTextSytle(
                         context: context,
                         fontSize: 10,
                         fontWeight: FontWeight.bold,
                         color: Color.fromARGB(255, 204, 164, 61))
                     .getStyle()),
-            Text("${srvData["openDestinations"]}",
+            Text("${findProp(srvData, ["servicename", "hotelname"])}",
+                style: KTextSytle(
+                        context: context,
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.grey)
+                    .getStyle()),
+          ],
+        ),
+        Row(
+          children: [
+            Text("Description: ",
+                style: KTextSytle(
+                        context: context,
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 204, 164, 61))
+                    .getStyle()),
+            Text("${findProp(srvData, ["roomcategory", "observations"])}",
                 style: KTextSytle(
                         context: context,
                         fontSize: 10,

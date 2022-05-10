@@ -29,9 +29,19 @@ Function getFilteredServices = () async {
       var state = getServiceState(service.description);
       if (state == "promoted") {
         return true;
-      } else {
-        return !catalogs.contains(service.catalog);
       }
+
+      if (service.catalog == "food_services") {
+        var meal = service.description.split("-")[1];
+        if (promotedServices
+            .where((element) => element.contains(meal))
+            .isNotEmpty) {
+          return false;
+        }
+        return true;
+      }
+
+      return !catalogs.contains(service.catalog);
     }).toList();
   }
 };
@@ -81,7 +91,35 @@ Function getSrvFiltered = () async {
 
   return filteredsrv;
 };
+Function paginateDestination = (direction) {
+  if (direction != "next") {
+    if (currentDestination.value > 0) {
+      currentDestination.value--;
+      globalDestinationIndex.value =
+          (int.parse(globalDestinationIndex.value) - 1).toString();
+    }
+  } else {
+    currentDestination.value++;
+    globalDestinationIndex.value =
+        (int.parse(globalDestinationIndex.value) + 1).toString();
+  }
+  globalDestinationName.value = "quito";
 
+  if (currentDestination.value > 0) {
+    globalDestinationType.value = "tour";
+  } else {
+    globalDestinationType.value = "arrival";
+  }
+  filterSuggestedServices();
+};
+
+Function findProp = (data, props) {
+  for (var prop in props) {
+    if (data.containsKey(prop)) {
+      return data[prop];
+    }
+  }
+};
 Function resetServices = () {
   for (var service in promotedServices) {
     setServiceState(service, "suggested");

@@ -16,6 +16,7 @@ class CustomFooterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return Column(
       children: [
         Row(
@@ -35,14 +36,7 @@ class CustomFooterWidget extends StatelessWidget {
                           color: Colors.white)
                       .getStyle()),
               onPressed: () {
-                if (currentDestination.value > 0) {
-                  currentDestination.value--;
-                  globalDestinationIndex.value =
-                      (int.parse(globalDestinationIndex.value) + 1).toString();
-                  globalDestinationName.value = "quito";
-                  globalDestinationType.value = "arrival";
-                  filterSuggestedServices();
-                }
+                paginateDestination("prev");
               },
             ),
             TextButton(
@@ -66,12 +60,7 @@ class CustomFooterWidget extends StatelessWidget {
                           color: Colors.white)
                       .getStyle()),
               onPressed: () async {
-                currentDestination.value++;
-                globalDestinationIndex.value =
-                    (int.parse(globalDestinationIndex.value) + 1).toString();
-                globalDestinationName.value = "quito";
-                globalDestinationType.value = "tour";
-                filterSuggestedServices();
+                paginateDestination("next");
               },
             ),
           ],

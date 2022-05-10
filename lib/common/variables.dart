@@ -75,16 +75,12 @@ Rx<int> memoryDayLeft = Rx(globalctx.memory["days_left"]);
 final currentDayFormat = DateFormat('EEEE MMMM d yyyy');
 final dayFormat = DateFormat('d-MM-yyyy');
 List filteredsrv = [];
-var services = getCatalogs([
-  "hotel",
-  "transport_service",
-  "translating_service",
-  "cruises",
-  "guide"
-]).then((value) => value);
+var services =
+    getCatalogs(["hotel", "transport_service", "cruises", "food_services"])
+        .then((value) => value);
 var experiences = findCatalog("experiences");
 List expList = findCatalog("experiences").toList();
-RxList<Widget> explist = <Widget>[].obs; 
+RxList<Widget> explist = <Widget>[].obs;
 RxList<Widget> destlist = <Widget>[].obs;
 Map<String, dynamic> states = {
   "selected": globalctx.selectedExperiences,
