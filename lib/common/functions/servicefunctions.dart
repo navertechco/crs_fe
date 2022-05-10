@@ -7,23 +7,35 @@ import 'package:intl/intl.dart';
 import 'package:naver_crs/pages/6/services/widgets/custom/index.dart';
 import '../index.dart';
 
+List filtered = [];
+
 Function filterSuggestedServices = () {
   getFilteredServices().then((value) {
-    updateSuggestedDragServices(value);
+    updateDragServices();
   });
 };
+Function getFilteredServices = () async {
+  filtered = await getSrvFiltered();
+  filtered = filtered
+      .where((service) =>
+          service.relation["destination"] == globalDestinationName.value ||
+          service.relation["destination"] == "all")
+      .toList();
 
-Function resetDrags = () {
-  promotedCatalogs = [];
-  promotedServices = [];
-  suggestedServices = [];
-  serviceSuggestedDragData.value = <Widget>[];
-  servicePromotedDragData.value = <Widget>[];
+  if (promotedCatalogs.isNotEmpty) {
+    filtered = filtered.where((service) {
+      if (getServiceState(service.description) == "promoted") {
+        return true;
+      } else {
+        return !promotedCatalogs.contains(service.catalog);
+      }
+    }).toList();
+  }
 };
+//////////////////////////////////////////////////////////////////////////////////////
 
-Function updateSuggestedDragServices = (filteredServices) async {
+Function updateDragServices = () {
   resetDrags();
-  var filtered = await filteredServices as Iterable;
   for (var srv in filtered) {
     var state = getServiceState(srv.description);
     if (state == "suggested") {
@@ -42,20 +54,14 @@ Function updateSuggestedDragServices = (filteredServices) async {
   return;
 };
 
-Function getFilteredServices = () async {
-  List filtered = await getSrvFiltered();
-  filtered = filtered
-      .where((service) =>
-          service.relation["destination"] == globalDestinationName.value ||
-          service.relation["destination"] == "all")
-      .toList();
- 
-
-  Iterable result = filtered;
-
-  return result;
+Function resetDrags = () {
+  promotedCatalogs = [];
+  promotedServices = [];
+  suggestedServices = [];
+  serviceSuggestedDragData.value = <Widget>[];
+  servicePromotedDragData.value = <Widget>[];
 };
-//////////////////////////////////////////////////////////////////////////////////////
+
 Function getSrvFiltered = () async {
   filteredsrv = [];
 
@@ -77,8 +83,7 @@ Function resetServices = () {
   for (var service in promotedServices) {
     setServiceState(service, "suggested");
   }
-  promotedServices = [];
-  promotedCatalogs = [];
+  updateDragServices();
 };
 
 Function setServiceState = (service, state) {

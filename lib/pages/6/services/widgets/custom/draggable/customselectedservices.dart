@@ -29,6 +29,7 @@ class CustomSelectedServicesWidget extends StatelessWidget {
             child: ServiceDragTargetWidget(
               onAccept: (String service) {
                 setServiceState(service, "promoted");
+                updateDragServices();
               },
             ),
           ),
