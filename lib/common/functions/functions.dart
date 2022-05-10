@@ -70,12 +70,7 @@ Function findCatalog = (name) {
     var items = catalogs[name];
     if (items != null) {
       for (var item in items) {
-        Map<String, dynamic> row = {};
-        row["code"] = item["code"];
-        row["description"] = item["description"];
-        row["value"] = item["value"];
-        row["relation"] = item["relation"];
-        catalog.add(row);
+        catalog.add(item);
       }
     }
   }

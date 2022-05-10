@@ -1,7 +1,7 @@
 class CatalogDto {
-  int? code;
-  int? order;
-  String? description;
+  dynamic code;
+  dynamic order;
+  dynamic description;
   dynamic value;
   dynamic relation;
   dynamic catalog;
@@ -17,22 +17,22 @@ class CatalogDto {
       this.catalog}) {
     if (data != null && data.isNotEmpty) {
       catalog = data[0];
-      code = data[1];
+      order = data[1];
       description = data[2];
-      order = data[3];
+      code = data[3];
       value = data[4];
       relation = data[5];
     }
 
     toJson = () {
       return {
-        "code": code,
+        "catalog": catalog,
         "order": order,
         "description": description,
+        "code": code,
         "value": value,
         "relation": relation,
-        "catalog": catalog
       };
     };
   }
-} 
+}

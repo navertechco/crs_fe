@@ -253,7 +253,7 @@ Function prepareDaysToResume = () async {
   } catch (e) {
     log(e);
   } finally {
-    goto("EndServices");
+    goto("Services");
   }
 };
 

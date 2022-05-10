@@ -149,7 +149,9 @@ List pageList = [
   "Customer",
   "Destination",
   "Experiences",
-  "EndServices"
+  "Services",
+  "Resume",
+  "EndServices",
 ];
 
 RxString arrivalState = getDestinationState("", 0).toString().obs;
