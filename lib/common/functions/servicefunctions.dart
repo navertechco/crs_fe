@@ -21,13 +21,16 @@ Function getFilteredServices = () async {
           service.relation["destination"] == globalDestinationName.value ||
           service.relation["destination"] == "all")
       .toList();
-
-  if (promotedCatalogs.isNotEmpty) {
+  globalctx.memory["catalogs"][currentDestination.value] ??= [];
+  var catalogs = globalctx.memory["catalogs"][currentDestination.value];
+  var rule = catalogs.isNotEmpty;
+  if (rule) {
     filtered = filtered.where((service) {
-      if (getServiceState(service.description) == "promoted") {
+      var state = getServiceState(service.description);
+      if (state == "promoted") {
         return true;
       } else {
-        return !promotedCatalogs.contains(service.catalog);
+        return !catalogs.contains(service.catalog);
       }
     }).toList();
   }
