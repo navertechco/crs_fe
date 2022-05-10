@@ -10,7 +10,12 @@ class LeftWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var destinationData = getParam("DESTINATION_DATA")["value"];
+    var destinationData;
+    try {
+      destinationData = getParam("DESTINATION_DATA")["value"];
+    } catch (e) {
+      destinationData = {};
+    }
     var images = [];
 
     for (var destination in destinationData.keys) {

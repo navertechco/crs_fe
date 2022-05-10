@@ -103,26 +103,35 @@ Function getSrvFiltered = () async {
 
   return filteredsrv;
 };
-Function paginateDestination = (direction) {
-  if (direction != "next") {
-    if (currentDestination.value > 0) {
-      currentDestination.value--;
-      globalDestinationIndex.value =
-          (int.parse(globalDestinationIndex.value) - 1).toString();
-    }
-  } else {
-    currentDestination.value++;
-    globalDestinationIndex.value =
-        (int.parse(globalDestinationIndex.value) + 1).toString();
-  }
-  globalDestinationName.value = "quito";
+Function paginateDestination = (String direction) {
+  Map<String, int> sense = {
+    "next": 1,
+    "prev": -1,
+  };
+  int sum = sense[direction] ?? 1;
 
-  if (currentDestination.value > 0) {
-    globalDestinationType.value = "tour";
-  } else {
-    globalDestinationType.value = "arrival";
-  }
-  filterSuggestedServices();
+  if (currentDestination.value + sum >= 0 &&
+      currentDestination.value + sum <
+          globalctx.memory["destinations"].length - 1) {
+    currentDestination.value = currentDestination.value + sum;
+    globalDestinationIndex.value = currentDestination.value.toString();
+    globalDestinationName.value = globalctx.memory["destinations"]
+            [globalDestinationIndex.value] ??
+        "quito";
+    if (currentDestination.value == 0) {
+      globalDestinationType.value = "arrival";
+    } else if (currentDestination.value <
+        globalctx.memory["destinations"].length - 1) {
+      globalDestinationType.value = "tour";
+    } else {
+      globalDestinationType.value = "departure";
+    }
+    log("currentDestination.value: ${currentDestination.value}");
+    filterSuggestedServices();
+  } else if (currentDestination.value + sum >
+      globalctx.memory["destinations"].length -1) {
+        goto("Resume");
+      }
 };
 
 Function findProp = (data, props) {

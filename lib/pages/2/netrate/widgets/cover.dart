@@ -4,26 +4,17 @@ import '../../../index.dart';
 import 'customdescription.dart';
 
 class Cover extends StatelessWidget {
-  const Cover({Key? key, required this.data}) : super(key: key);
-
-  final Map<String, dynamic> data;
+  const Cover({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Map tour = globalctx.memory["tour"];
-    var title = tour["title"] ?? "Net Rates";
-    var description = "";
     return Column(
       children: [
         CustomDescriptionWidget(
-            text: title,
-            width: 0.25,
+            text: "Net Rate: ${tour["description"]}",
+            width: 0.5,
             fontSize: 0.020,
-            fontWeight: FontWeight.bold),
-        CustomDescriptionWidget(
-            text: description,
-            width: 0.55,
-            fontSize: 0.012,
             fontWeight: FontWeight.bold),
       ],
     );

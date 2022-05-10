@@ -5,12 +5,10 @@ import 'customformdestination.dart';
 
 // ignore: must_be_immutable
 class Destinations extends StatelessWidget {
-  Destinations({
-    Key? key,
-    required this.data,
+  const Destinations({
+    Key? key 
   }) : super(key: key);
-
-  var data;
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +21,7 @@ class Destinations extends StatelessWidget {
         var key = GlobalKey();
         globalctx.keys["destination-$i"] = key;
         destinations.add(
-            CustomFormDestination(data: data, index: i, destination: dest));
+            CustomFormDestination( index: i, destination: dest));
         i++;
       }
     }

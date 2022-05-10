@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/pages/2/searcher/widgets/index.dart';
 import 'package:naver_crs/pages/7/endservices/widgets/index.dart';
+import 'package:naver_crs/pages/index.dart';
 import 'package:sweetalert/sweetalert.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import '../constants.dart';
@@ -119,10 +120,14 @@ Function getDataList = (data, sub, key) {
       : <Map<String, dynamic>>[];
 };
 Function getParam = (key) {
-  var params = findCatalog("params");
-  var child =
-      params.toList().firstWhere((element) => element["description"] == key);
-  return child;
+  try {
+    var params = findCatalog("params");
+    var child =
+        params.toList().firstWhere((element) => element["description"] == key);
+    return child;
+  } catch (e) {
+    log(e);
+  }
 };
 Function cityData = (Rx<List<Map<String, dynamic>>> citylist, cities) {
   var index = 1;
@@ -281,6 +286,7 @@ Function getCountryNameById = (id) {
 Future<void> showCustomDialog(context, Widget child, String button,
     {Color backgroundColor = Colors.black54,
     Color buttonColor = Colors.black54,
+    double width = 0.5,
     onSaved}) async {
   return showDialog<void>(
     context: context,
@@ -289,7 +295,7 @@ Future<void> showCustomDialog(context, Widget child, String button,
       return AlertDialog(
         backgroundColor: backgroundColor,
         content: SizedBox(
-            width: MediaQuery.of(context).size.width * 0.5, child: child),
+            width: MediaQuery.of(context).size.width * width, child: child),
         actions: <Widget>[
           TextButton(
             child: Text(button,
@@ -414,9 +420,9 @@ Future<void> getCruise(ctx, {int cruiseId = 0}) async {
   }
 }
 
-Future<void> getTour(ctx, {int tourId = 0}) async {
+Future<void> getTour(ctx, {int tourId = 0, detail = false, cb}) async {
   var frame = {
-    "data": {"tour_id": tourId}
+    "data": {"tour_id": tourId, "detail": detail}
   };
   var res = await fetchhandler(kDefaultSchema, kDefaultServer,
       kDefaultServerPort, kDefaultFindTour, 'POST', frame);
@@ -424,14 +430,7 @@ Future<void> getTour(ctx, {int tourId = 0}) async {
   log(res);
   if (res['state'] == true) {
     var data = res['data'];
-    if (data.length > 0) {
-      globalctx.memory["tours"] = data;
-      if (tourId == 0) {
-        Get.toNamed("/Searcher");
-      } else {
-        Get.toNamed("/Tour");
-      }
-    }
+    cb(data);
   } else {
     SweetAlert.show(ctx,
         curve: ElasticInCurve(),
@@ -514,7 +513,7 @@ Function getHeader = (context, data, columns) {
   var header = <DataColumn>[];
   List cols = [];
 
-  if (data.length > 0) {
+  if (data.isNotEmpty) {
     cols = data[0].keys.toList();
     if (columns != null) {
       cols = columns;
@@ -724,15 +723,31 @@ Function getDetail = (context, data, columns) {
               icon: const Icon(Icons.money),
               tooltip: 'Net Rate',
               onPressed: () {
-                showCustomDialog(context, TotalNetRateWidget(row: row), "Close",
-                    buttonColor: Colors.white);
+                getTour(context, tourId: row['quote'], detail: true,
+                    cb: (data) {
+                  if (data.length > 0) {
+                    globalctx.memory["tour"] = data[0];
+                    showCustomDialog(context, NetRatePage(), "Close",
+                        buttonColor: Colors.white, width: 1.0);
+                  }
+                });
               },
             ),
             IconButton(
               icon: const Icon(Icons.mode_edit),
               tooltip: 'Edit',
               onPressed: () {
-                getTour(context, tourId: row["quote"]);
+                getTour(context, tourId: row["quote"], detail: true,
+                    cb: (data) {
+                  if (data.length > 0) {
+                    globalctx.memory["tour"] = data[0];
+                    if (row["quote"] == 0) {
+                      Get.toNamed("/Searcher");
+                    } else {
+                      Get.toNamed("/Tour");
+                    }
+                  }
+                });
               },
             ),
           ],

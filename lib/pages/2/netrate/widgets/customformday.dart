@@ -7,12 +7,10 @@ import 'customformtitle.dart';
 
 class CustomFormDayWidget extends StatelessWidget {
   const CustomFormDayWidget({
-    Key? key,
-    required this.data,
+    Key? key, 
     required this.indexes,
   }) : super(key: key);
-
-  final Map<String, dynamic> data;
+ 
   final List<int> indexes;
   @override
   Widget build(BuildContext context) {
@@ -36,7 +34,7 @@ class CustomFormDayWidget extends StatelessWidget {
               CustomFormTitleWidget(level: 4, label: "Day: $dayLabel#####"),
               CustomDescriptionWidget(
                   text: daydescription, width: 0.55, fontSize: 0.016),
-              CustomFormExperiencesDetailWidget(data: data, indexes: indexes),
+              CustomFormExperiencesDetailWidget(  indexes: indexes),
               SizedBox(height: MediaQuery.of(context).size.height * 0.01),
             ],
           ));

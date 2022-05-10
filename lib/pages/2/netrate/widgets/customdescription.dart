@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -20,18 +19,14 @@ class CustomDescriptionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: MediaQuery.of(context).size.width * width,
-      child: RichText(
-        softWrap: true,
-        textAlign: TextAlign.justify,
-        text: TextSpan(
-            text: text,
-            style: GoogleFonts.poppins(
-                textStyle: TextStyle(
-              color: const Color.fromARGB(255, 0, 0, 0),
-              fontSize: MediaQuery.of(context).size.width * fontSize,
-              fontWeight: fontWeight,
-            ))),
-      ),
+      child: Text(text,
+          textAlign: TextAlign.center,
+          style: GoogleFonts.poppins(
+              textStyle: TextStyle(
+            color: const Color.fromARGB(255, 0, 0, 0),
+            fontSize: MediaQuery.of(context).size.width * fontSize,
+            fontWeight: fontWeight,
+          ))),
     );
   }
 }

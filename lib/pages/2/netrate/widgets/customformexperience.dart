@@ -4,11 +4,9 @@ import 'customdescription.dart';
 
 class CustomFormExperienceRowWidget extends StatelessWidget {
   const CustomFormExperienceRowWidget({
-    Key? key,
-    required this.data,
+    Key? key, 
     required this.indexes,
-  }) : super(key: key);
-  final Map<String, dynamic> data;
+  }) : super(key: key); 
   final List<int> indexes;
   @override
   Widget build(BuildContext context) {

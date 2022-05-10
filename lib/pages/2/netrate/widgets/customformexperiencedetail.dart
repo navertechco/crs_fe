@@ -5,11 +5,9 @@ import 'customformexperience.dart';
 
 class CustomFormExperiencesDetailWidget extends StatelessWidget {
   const CustomFormExperiencesDetailWidget({
-    Key? key,
-    required this.data,
+    Key? key, 
     required this.indexes,
-  }) : super(key: key);
-  final Map<String, dynamic> data;
+  }) : super(key: key); 
   final List<int> indexes;
   @override
   Widget build(BuildContext context) {
@@ -25,7 +23,7 @@ class CustomFormExperiencesDetailWidget extends StatelessWidget {
 
     for (var i = 0; i < dayexps.length; i++) {
       list.add(CustomFormExperienceRowWidget(
-          data: data, indexes: [destinationindex, dayindex, i]));
+          indexes: [destinationindex, dayindex, i]));
     }
 
     return Padding(

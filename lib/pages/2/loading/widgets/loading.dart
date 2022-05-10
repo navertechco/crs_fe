@@ -33,7 +33,6 @@ class LoadingWidget extends GetView<LoadingController> {
                           onTap: () {
                             setContext("readonly", false);
                             newTour();
-
                           }),
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.02,
@@ -43,7 +42,16 @@ class LoadingWidget extends GetView<LoadingController> {
                           height: 0.07,
                           fontSize: 5,
                           onTap: () {
-                            getTour(context, tourId: 0);
+                            getTour(context, tourId: 0, cb: (data) {
+                              if (data.length > 0) {
+                                globalctx.memory["tours"] = data;
+                                if (0 == 0) {
+                                  Get.toNamed("/Searcher");
+                                } else {
+                                  Get.toNamed("/Tour");
+                                }
+                              }
+                            });
                           }),
                     ],
                   )),

@@ -8,8 +8,8 @@ import 'index.dart';
 import 'package:printing/printing.dart';
 
 class NetRatePage extends GetView<NetRateController> {
-  NetRatePage({Key? key}) : super(key: key);
-
+  NetRatePage({Key? key }) : super(key: key);
+ 
   final Map<String, GlobalKey<State<StatefulWidget>>> keys = {
     "cover": GlobalKey(),
     "header": GlobalKey(),
@@ -17,30 +17,6 @@ class NetRatePage extends GetView<NetRateController> {
     "end": GlobalKey()
   };
 
-  void _printScreen() {
-    Printing.layoutPdf(
-        // dynamicLayout: false,
-        format: PdfPageFormat.a4,
-        onLayout: (PdfPageFormat format) async {
-          final doc = pw.Document(version: PdfVersion.pdf_1_5, compress: true);
-
-          for (var key in globalctx.keys.keys) {
-            final image = await WidgetWraper.fromKey(key: globalctx.keys[key]!);
-
-            doc.addPage(pw.Page(
-                pageFormat: PdfPageFormat.a4,
-                build: (pw.Context context) {
-                  return pw.Expanded(
-                      child: pw.Center(
-                    child: pw.Flexible(
-                        child: pw.Image(image, width: 500, height: 700)),
-                  ));
-                }));
-          }
-
-          return doc.save();
-        });
-  }
 
   Widget _buildView(BuildContext _context) {
     return ContentLayoutWidget(
@@ -76,7 +52,6 @@ class NetRatePage extends GetView<NetRateController> {
               height: MediaQuery.of(context).size.height * 2,
               child: _buildView(context)),
         )),
-        bottomNavigationBar: NavBarWidget(),
       ),
     );
   }

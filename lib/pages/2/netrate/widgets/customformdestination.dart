@@ -7,13 +7,11 @@ import 'customformtitle.dart';
 
 class CustomFormDestination extends StatelessWidget {
   const CustomFormDestination({
-    Key? key,
-    required this.data,
+    Key? key, 
     required this.index,
     required this.destination,
   }) : super(key: key);
-
-  final Map<String, dynamic> data;
+ 
   final int index;
   final destination;
   @override
@@ -32,7 +30,7 @@ class CustomFormDestination extends StatelessWidget {
           RepaintBoundary(
               // key: globalctx.keys["day-$index-$day"],
               child: CustomFormTitleWidget(level: 3, label: "$title")),
-          CustomFormDayWidget(data: data, indexes: [destindex, day]),
+          CustomFormDayWidget(  indexes: [destindex, day]),
         ],
       ));
     }
