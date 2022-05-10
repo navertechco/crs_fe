@@ -96,7 +96,7 @@ Function getSrvFiltered = () async {
     List itemList = item;
     for (var catalog in itemList) {
       catalog = catalog.values.toList();
-      ServiceDto service = ServiceDto(catalog);
+      CatalogDto service = CatalogDto(catalog);
       filteredsrv.add(service);
     }
   }
