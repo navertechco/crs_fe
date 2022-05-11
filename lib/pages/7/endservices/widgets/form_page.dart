@@ -6,13 +6,13 @@ import 'package:get/get.dart';
 import '../../../index.dart';
 import '../controller.dart';
 
-class EndServicesFormPage extends GetView<StatelessWidget> {
-  EndServicesFormPage({
+class PrintDocsFormPage extends GetView<StatelessWidget> {
+  PrintDocsFormPage({
     Key? key,
     this.ctrl,
   }) : super(key: key);
   final _formKey = GlobalKey<FormState>();
-  final EndServicesController? ctrl;
+  final PrintDocsController? ctrl;
 
   @override
   Widget build(BuildContext context) {

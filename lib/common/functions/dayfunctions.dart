@@ -136,8 +136,6 @@ Function nextDay = () async {
   }
 };
 
- 
-
 Function previousDay = () {
   if (currentDay.value > 0) {
     jumpDay("backward");
@@ -246,7 +244,7 @@ Function prepareAllToResume = () async {
   } catch (e) {
     log(e);
   } finally {
-    goto("EndServices");
+    goto("PrintDocs");
   }
 };
 

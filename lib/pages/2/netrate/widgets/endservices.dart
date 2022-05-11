@@ -3,8 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../index.dart';
 import 'customdescription.dart';
 
-class EndServices extends StatelessWidget {
-  const EndServices({Key? key, required this.data}) : super(key: key);
+class PrintDocs extends StatelessWidget {
+  const PrintDocs({Key? key, required this.data}) : super(key: key);
 
   final Map<String, dynamic> data;
 

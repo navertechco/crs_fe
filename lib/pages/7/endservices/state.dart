@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-class EndServicesState extends GetXState {
+class PrintDocsState extends GetXState {
   // title
   bool isLoading = false;
   String? error = "";

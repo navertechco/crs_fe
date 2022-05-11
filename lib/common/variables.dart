@@ -151,7 +151,7 @@ List pageList = [
   {"label": "Experiences", "icon": Icons.access_time},
   {"label": "Services", "icon": Icons.hotel},
   {"label": "Resume", "icon": Icons.shopping_cart},
-  {"label": "EndServices", "icon": Icons.print},
+  {"label": "PrintDocs", "icon": Icons.print},
 ];
 
 RxString arrivalState = getDestinationState("", 0).toString().obs;

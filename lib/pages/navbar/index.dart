@@ -10,7 +10,7 @@ class NavBarWidget extends StatelessWidget {
   void _onItemTapped(int index) async {
     try {
       selectedIndex.value = index;
-      Get.toNamed("/${pageList[index]}");
+      Get.toNamed("/${pageList[index]["label"]}");
     } catch (e) {
       await logout(session["username"]);
     }

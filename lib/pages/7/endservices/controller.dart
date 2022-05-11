@@ -5,14 +5,13 @@ import 'package:sweetalert/sweetalert.dart';
 import '../../index.dart';
 import 'index.dart';
 
-class EndServicesController extends GetxController {
-  EndServicesController();
+class PrintDocsController extends GetxController {
+  PrintDocsController();
 
-  var state = EndServicesState();
+  var state = PrintDocsState();
   var isLoading = false;
 
-  Future<void> onEndServices(ctx, String username, String password) async {
-
+  Future<void> onPrintDocs(ctx, String username, String password) async {
     state.error = null;
     state.username = username;
     state.password = password;

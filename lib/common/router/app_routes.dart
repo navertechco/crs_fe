@@ -70,10 +70,10 @@ List<dynamic> routes = [
       transition: Transition.zoom,
       binding: NetRateBinding()),
   PRegistry(
-      name: '/EndServices',
-      page: () => EndServicesPage(),
+      name: '/PrintDocs',
+      page: () => PrintDocsPage(),
       transition: Transition.zoom,
-      binding: EndServicesBinding()),
+      binding: PrintDocsBinding()),
   PRegistry(
       name: '/Services',
       page: () => ServicesPage(),
