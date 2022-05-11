@@ -119,30 +119,74 @@ class CruiseCalendarWidget extends StatelessWidget {
                       data: findCatalog("week_day")),
                 ],
               ),
-              SizedBox(
-                height: 10,
+              Padding(
+                padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height * 0.03,
+                  left: MediaQuery.of(context).size.width * 0.0,
+                ),
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.43,
+                  decoration: BoxDecoration(color: Colors.grey),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          "Cruise Name",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Expanded(
+                        child: Text(
+                          "Itinerary",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Expanded(
+                          child: Text(
+                        "Actions",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.bold),
+                      )),
+                    ],
+                  ),
+                ),
               ),
               Container(
                   width: MediaQuery.of(context).size.width * 0.6,
-                  height: MediaQuery.of(context).size.height * 0.55,
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.vertical,
-                    child: Column(
-                      children: [
-                        if (cruiseResults.value.isNotEmpty)
-                          cruiseTable.value
-                        else
-                          Text(
-                            "No Cruises Found",
-                            style: KTextSytle(
-                              context: context,
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                              color: Color.fromARGB(255, 204, 164, 61),
-                            ).getStyle(),
-                          )
-                      ],
-                    ),
+                  height: MediaQuery.of(context).size.height * 0.5,
+                  child: Stack(
+                    children: [
+                      SingleChildScrollView(
+                        scrollDirection: Axis.vertical,
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                            top: MediaQuery.of(context).size.height * 0.0,
+                            left: MediaQuery.of(context).size.width * 0.03,
+                          ),
+                          child: Column(
+                            children: [
+                              if (cruiseResults.value.isNotEmpty)
+                                cruiseTable.value
+                              else
+                                Text(
+                                  "No Cruises Found",
+                                  style: KTextSytle(
+                                    context: context,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color.fromARGB(255, 204, 164, 61),
+                                  ).getStyle(),
+                                )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ))
             ],
           );

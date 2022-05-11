@@ -469,7 +469,7 @@ Function processNetRateData = (context, data) {
 };
 
 Function processCruiseData = (context, data, columns) {
-  var header = getHeader(context, data, columns);
+  var header = getCruiseHeader(context, data, columns);
   var detail = getCruiseDetail(context, data, columns);
   return [header, detail];
 };
@@ -501,6 +501,46 @@ Function getNetRateHeader = (context, data) {
 
   return header;
 };
+Function getCruiseHeader = (context, data, columns) {
+  var header = <DataColumn>[];
+  List cols = [];
+
+  if (data.isNotEmpty) {
+    cols = data[0].keys.toList();
+    if (columns != null) {
+      cols = columns;
+    }
+    for (var key in cols) {
+      String title = key ?? "";
+      header.add(DataColumn(
+        label: Text(
+          "",
+          textAlign: TextAlign.left,
+          style: KTextSytle(
+            context: context,
+            fontSize: 10,
+            fontWeight: FontWeight.bold,
+            color: Color.fromARGB(255, 204, 164, 61),
+          ).getStyle(),
+        ),
+      ));
+    }
+    header.add(DataColumn(
+      label: Text(
+        '',
+        style: KTextSytle(
+          context: context,
+          fontSize: 10,
+          fontWeight: FontWeight.bold,
+          color: Color.fromARGB(255, 204, 164, 61),
+        ).getStyle(),
+      ),
+    ));
+  }
+
+  return header;
+};
+
 Function getHeader = (context, data, columns) {
   var header = <DataColumn>[];
   List cols = [];
@@ -674,6 +714,16 @@ Function getCruiseDetail = (context, data, columns) {
   return detail;
 };
 Function getDetail = (context, data, columns) {
+  var states = [
+    "Error",
+    "New",
+    "Created",
+    "Rejected",
+    "Cancelled",
+    "Expired",
+    "Pending",
+    "Approved",
+  ];
   var detail = <DataRow>[];
   if (data.length > 0) {
     for (var row in data) {
@@ -685,6 +735,10 @@ Function getDetail = (context, data, columns) {
       }
 
       for (var key in keys) {
+        if (key == "state") {
+          row[key] = states[row[key]];
+        }
+
         cells.add(DataCell(Text('${row[key]}',
             style: KTextSytle(
                     context: context,
