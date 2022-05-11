@@ -362,7 +362,6 @@ Function log = (e) {
   print(e);
 };
 
- 
 Function setLT = (value) {
   int ltindex =
       expList.indexWhere((element) => element["description"] == "Leisure Time");
@@ -794,10 +793,12 @@ String getHourString(int flooredValue) {
 }
 
 Function goto = (page) {
-  var index = pageList.indexOf(page);
-  if (selectedIndex.value != index) {
-    selectedIndex.value = index;
-    Get.toNamed("/$page");
+  var index = pageList.indexWhere((element) => element["label"] == page);
+  if (index != -1) {
+    if (selectedIndex.value != index) {
+      selectedIndex.value = index;
+      Get.toNamed("/$page");
+    }
   }
 };
 

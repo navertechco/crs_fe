@@ -144,14 +144,14 @@ RxInt expDraggable = 1.obs;
 RxInt srvDraggable = 1.obs;
 
 List pageList = [
-  {"label": "Tour", "icon": Icons.travel_explore},
-  {"label": "Logistic", "icon": Icons.cases_sharp},
-  {"label": "Customer", "icon": Icons.person},
-  {"label": "Destination", "icon": Icons.place},
-  {"label": "Experiences", "icon": Icons.access_time},
-  {"label": "Services", "icon": Icons.hotel},
-  {"label": "Resume", "icon": Icons.shopping_cart},
-  {"label": "PrintDocs", "icon": Icons.print},
+  {"label": "Tour", "icon": Icons.travel_explore, "color": Colors.green},
+  {"label": "Logistic", "icon": Icons.cases_sharp, "color": Colors.green},
+  {"label": "Customer", "icon": Icons.person, "color": Colors.green},
+  {"label": "Destination", "icon": Icons.place, "color": Colors.green},
+  {"label": "Experiences", "icon": Icons.access_time, "color": Colors.green},
+  {"label": "Services", "icon": Icons.hotel, "color": Colors.green},
+  {"label": "Resume", "icon": Icons.shopping_cart, "color": Colors.green},
+  {"label": "PrintDocs", "icon": Icons.print, "color": Colors.green},
 ];
 
 RxString arrivalState = getDestinationState("", 0).toString().obs;

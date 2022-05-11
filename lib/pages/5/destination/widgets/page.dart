@@ -23,23 +23,21 @@ class DestinationWidget extends GetView<DestinationController> {
                 Text("Remaining Days: $dayleft",
                     style: GoogleFonts.poppins(
                         textStyle: TextStyle(
-                      color: (dayleft.value) < 1
-                          ? Color.fromARGB(255, 255, 0, 0)
-                          : Color.fromARGB(255, 0, 0, 0),
+                      color: (dayleft.value) < 1 ? Colors.yellow : Colors.green,
                       fontSize: MediaQuery.of(context).size.width /
                           MediaQuery.of(context).size.height *
-                          10,
+                          15,
                       fontWeight: FontWeight.bold,
                     ))),
                 Text("    Selected Days: $accumulated",
                     style: GoogleFonts.poppins(
                         textStyle: TextStyle(
                       color: (accumulated.value) == 0
-                          ? Color.fromARGB(255, 255, 0, 0)
+                          ? Colors.yellow
                           : Color.fromARGB(255, 0, 255, 0),
                       fontSize: MediaQuery.of(context).size.width /
                           MediaQuery.of(context).size.height *
-                          10,
+                          15,
                       fontWeight: FontWeight.bold,
                     ))),
               ],
