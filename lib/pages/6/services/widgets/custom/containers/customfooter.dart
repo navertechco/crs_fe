@@ -16,7 +16,6 @@ class CustomFooterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return Column(
       children: [
         Row(
@@ -35,8 +34,8 @@ class CustomFooterWidget extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           color: Colors.white)
                       .getStyle()),
-              onPressed: () {
-                paginateDestination("prev");
+              onPressed: () async {
+               await paginateDestination("prev");
               },
             ),
             TextButton(
@@ -60,7 +59,7 @@ class CustomFooterWidget extends StatelessWidget {
                           color: Colors.white)
                       .getStyle()),
               onPressed: () async {
-                paginateDestination("next");
+               await paginateDestination("next");
               },
             ),
           ],

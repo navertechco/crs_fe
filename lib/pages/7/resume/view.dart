@@ -66,6 +66,13 @@ class ResumePage extends GetView<ResumeController> {
               top: MediaQuery.of(context).size.height * 0.5,
               child: ScrollTopDownArrows(controller: _controller),
             ),
+            FloatingActionButton(
+              onPressed: () async {
+                await prepareAllToResume();
+              },
+              child: Icon(Icons.save),
+              backgroundColor: Colors.green,
+            ),
           ],
         ),
         body: Scrollbar(

@@ -132,17 +132,11 @@ Function nextDay = () async {
   if (currentDay.value < totalDays.value - 1) {
     jumpDay("forward");
   } else {
-    await prepareDaysToResume();
+    goto("Services");
   }
 };
 
-Function nextDestination = () async {
-  if (currentDestination.value < globalctx.destinations.length - 1) {
-    jumpDestination("forward");
-  } else {
-    await prepareDaysToResume();
-  }
-};
+ 
 
 Function previousDay = () {
   if (currentDay.value > 0) {
@@ -186,7 +180,7 @@ Function getDtos = () {
   return [day, experience];
 };
 
-Function prepareDaysToResume = () async {
+Function prepareAllToResume = () async {
   try {
     var dayIndex = 0;
     var destinations = getCombinedDestinations();
@@ -252,7 +246,7 @@ Function prepareDaysToResume = () async {
   } catch (e) {
     log(e);
   } finally {
-    goto("Services");
+    goto("EndServices");
   }
 };
 

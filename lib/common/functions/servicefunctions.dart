@@ -103,7 +103,7 @@ Function getSrvFiltered = () async {
 
   return filteredsrv;
 };
-Function paginateDestination = (String direction) {
+Function paginateDestination = (String direction) async {
   int sum = direction == "next" ? 1 : -1;
   if (currentDestination.value + sum >= 0 &&
       currentDestination.value + sum <
@@ -118,19 +118,23 @@ Function paginateDestination = (String direction) {
       globalDestinationName.value = "quito";
     }
 
+    globalDestinationType.value = "tour";
+
     if (currentDestination.value == 0) {
       globalDestinationType.value = "arrival";
-    } else if (currentDestination.value <
+    }
+    if (currentDestination.value ==
         globalctx.memory["destinations"].length - 1) {
-      globalDestinationType.value = "tour";
-    } else {
       globalDestinationType.value = "departure";
     }
+
     log("currentDestination.value: ${currentDestination.value}");
     filterSuggestedServices();
   } else if (currentDestination.value + sum >
       globalctx.memory["destinations"].length - 1) {
     goto("Resume");
+  } else {
+    goto("Experiences");
   }
 };
 
