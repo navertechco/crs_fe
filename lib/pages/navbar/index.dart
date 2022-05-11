@@ -12,7 +12,7 @@ class NavBarWidget extends StatelessWidget {
       selectedIndex.value = index;
       Get.toNamed("/${pageList[index]}");
     } catch (e) {
-     await logout(session["username"]);
+      await logout(session["username"]);
     }
   }
 
@@ -22,8 +22,8 @@ class NavBarWidget extends StatelessWidget {
       List<BottomNavigationBarItem> itemList = [];
       for (var page in pageList) {
         itemList.add(BottomNavigationBarItem(
-          icon: Icon(Icons.dashboard_customize),
-          label: page,
+          icon: Icon(page["icon"]),
+          label: page["label"],
         ));
       }
       itemList.add(BottomNavigationBarItem(
