@@ -1,19 +1,43 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:naver_crs/common/index.dart';
 
-Future<http.Response> fetch(method, body, uri) async {
+Future<http.Response> head() async {
   var headers = {
-    'token':
-        'AAABhjtSOlFafpsgJ70Sx11gM7Iv_6RuTpnOs1UWf4ELEnYC1gsvx7E2OZjRAUkkflPMXqR7ua7MtC7Y3LCWoB8uo5lmBV-Sns1lIpIy0YPuPXhdPx96We9xqbRcEylp8Fz91PAQf',
     'Content-Type': 'application/json',
     'Keep-Alive': 'timeout=5, max=1000',
     'Access-Control-Allow-Origin': '*',
     'Accept': 'application/json',
   };
-  if (method == 'GET') {
-    return await http.get(uri, headers: headers);
+  var uri = Uri(
+      scheme: kDefaultSchema,
+      host: kDefaultServer,
+      port: kDefaultServerPort,
+      path: kDefaultConnectPath);
+  var res = await http.head(uri, headers: headers);
+
+  return res;
+}
+
+Future<http.Response> fetch(method, body, uri) async {
+  if (defaultToken == null) {
+    var res = await head();
+    defaultToken = res.headers['token'];
   }
-  return await http.post(uri, headers: headers, body: json.encode(body));
+  Map<String, String> headers = {
+    'token': defaultToken ?? '',
+    'Content-Type': 'application/json',
+    'Keep-Alive': 'timeout=5, max=1000',
+    'Access-Control-Allow-Origin': '*',
+    'Accept': 'application/json',
+  };
+  if (defaultToken != null) {
+    if (method == 'GET') {
+      return await http.get(uri, headers: headers);
+    }
+    return await http.post(uri, headers: headers, body: json.encode(body));
+  }
+  return http.Response('', 500);
 }
 
 Future<dynamic> fetchhandler(scheme, host, port, path, method, body) async {

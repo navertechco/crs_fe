@@ -31,6 +31,7 @@ class KTextSytle {
   }
 }
 
+
 const kDefaultSchema = "http";
 const kDefaultServer = "192.168.101.4"; //"uiodesign.fortiddns.com";
 const kDefaultServerPort = 9999;

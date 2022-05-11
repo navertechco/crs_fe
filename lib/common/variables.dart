@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'index.dart';
 
+var defaultToken;
 Context globalctx = Context();
 var session = {};
 ////
