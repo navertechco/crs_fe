@@ -125,7 +125,8 @@ class CruiseCalendarWidget extends StatelessWidget {
                   left: MediaQuery.of(context).size.width * 0.0,
                 ),
                 child: Container(
-                  width: MediaQuery.of(context).size.width * 0.43,
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  height: MediaQuery.of(context).size.height * 0.03,
                   decoration: BoxDecoration(color: Colors.grey),
                   child: Row(
                     children: [
@@ -168,21 +169,24 @@ class CruiseCalendarWidget extends StatelessWidget {
                             top: MediaQuery.of(context).size.height * 0.0,
                             left: MediaQuery.of(context).size.width * 0.03,
                           ),
-                          child: Column(
-                            children: [
-                              if (cruiseResults.value.isNotEmpty)
-                                cruiseTable.value
-                              else
-                                Text(
-                                  "No Cruises Found",
-                                  style: KTextSytle(
-                                    context: context,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color.fromARGB(255, 204, 164, 61),
-                                  ).getStyle(),
-                                )
-                            ],
+                          child: Align(
+                            alignment: Alignment.topCenter,
+                            child: Column(
+                              children: [
+                                if (cruiseResults.value.isNotEmpty)
+                                  cruiseTable.value
+                                else
+                                  Text(
+                                    "No Cruises Found",
+                                    style: KTextSytle(
+                                      context: context,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color.fromARGB(255, 204, 164, 61),
+                                    ).getStyle(),
+                                  )
+                              ],
+                            ),
                           ),
                         ),
                       ),
