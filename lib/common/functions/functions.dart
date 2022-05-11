@@ -872,7 +872,7 @@ Function filterCatalog = (catalog, key, value) {
         findCatalog(catalog).toList().where((e) => e[key] == value).toList();
     return res;
   } catch (e) {
-    log(e.toString());
+    log(e);
     return [];
   }
 };

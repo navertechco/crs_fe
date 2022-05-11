@@ -104,20 +104,20 @@ Function getSrvFiltered = () async {
   return filteredsrv;
 };
 Function paginateDestination = (String direction) {
-  Map<String, int> sense = {
-    "next": 1,
-    "prev": -1,
-  };
-  int sum = sense[direction] ?? 1;
-
+  int sum = direction == "next" ? 1 : -1;
   if (currentDestination.value + sum >= 0 &&
       currentDestination.value + sum <
-          globalctx.memory["destinations"].length - 1) {
+          globalctx.memory["destinations"].length) {
     currentDestination.value = currentDestination.value + sum;
     globalDestinationIndex.value = currentDestination.value.toString();
-    globalDestinationName.value = globalctx.memory["destinations"]
-            [globalDestinationIndex.value] ??
-        "quito";
+    try {
+      globalDestinationName.value = globalctx
+          .memory["destinations"][globalDestinationIndex.value]
+          .value["destination"];
+    } catch (e) {
+      globalDestinationName.value = "quito";
+    }
+
     if (currentDestination.value == 0) {
       globalDestinationType.value = "arrival";
     } else if (currentDestination.value <
@@ -129,9 +129,9 @@ Function paginateDestination = (String direction) {
     log("currentDestination.value: ${currentDestination.value}");
     filterSuggestedServices();
   } else if (currentDestination.value + sum >
-      globalctx.memory["destinations"].length -1) {
-        goto("Resume");
-      }
+      globalctx.memory["destinations"].length - 1) {
+    goto("Resume");
+  }
 };
 
 Function findProp = (data, props) {

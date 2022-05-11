@@ -216,7 +216,7 @@ Function prepareDaysToResume = () async {
 
     try {
       for (var dest in globalctx.memory["resume"].keys) {
-        if (globalctx.memory["resume"][dest])
+        if (globalctx.memory["resume"][dest] != null)
           globalctx.memory["resume"][dest] =
               globalctx.memory["resume"][dest].value;
       }

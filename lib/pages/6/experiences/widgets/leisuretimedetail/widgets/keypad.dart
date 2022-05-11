@@ -27,9 +27,7 @@ class KeypadWidget extends StatelessWidget {
                       color: Colors.white)
                   .getStyle()),
           onPressed: () {
-            var value = getFormValue(
-                globalctx.memory["days"], currentDay.value, "leisureTime", 0);
-            if (value == 0.0) {
+            if (leftHours[currentDay.value].value > 0) {
               promoteExperience("Leisure Time", "promoted");
             }
             Get.close(1);

@@ -36,6 +36,7 @@ Function getFilteredExperiences = () {
       getFormValue(globalctx.memory["destinations"], idx, "destination", null);
   var destData = getDestinationValueByName(destination);
   globalctx.experiences[currentDay.value] ??= [];
+  globalctx.experiences[currentDay.value] = [];
   experiencePromotedDragData.value = <Widget>[];
   filteredExperiences = filteredExperiences.where((e) {
     var state = getExperienceState(e.description);
@@ -196,6 +197,11 @@ Function getFilteredExperiences = () {
     var bTime = b.value["exptime"];
     return aTime.compareTo(bTime);
   });
+  filteredExperiences.sort((a, b) {
+    var aTime = a.code;
+    var bTime = b.code;
+    return bTime.compareTo(aTime);
+  });
 };
 //////////////////////////////////////////////////////////////////////////////////////
 Function getExpFiltered = () {
@@ -227,7 +233,7 @@ Function initializeHours = () {
   clearKA();
 };
 Function resetExperiences = () {
-  for (var exp in globalctx.experiences[currentDay.value]) {
+  for (var exp in globalctx.experiences[currentDay.value] as Iterable) {
     promoteExperience(exp, "suggested");
   }
   resetDayCounters();
