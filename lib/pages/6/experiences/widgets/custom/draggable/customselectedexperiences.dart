@@ -29,7 +29,7 @@ class CustomSelectedExperiencesWidget extends StatelessWidget {
             child: ExperienceDragTargetWidget(
               onAccept: (String experience) {
                 if (experience == "Leisure Time" &&
-                    leftHours[currentDay.value].value == 0) {
+                    leftHours[currentDay.value].value <= 0) {
                   return;
                 } else {
                   promoteExperience(experience, "promoted");
