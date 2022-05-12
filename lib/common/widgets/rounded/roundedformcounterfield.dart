@@ -47,7 +47,7 @@ class RoundedFormCounterField extends StatelessWidget {
           borderRadius: BorderRadius.circular(50)),
       child: Counter(
         initial: initial < min ? min : initial,
-        min: min,
+        min:  initial > min ? min : initial,
         max: initial <= max ? max : initial,
         bound: bound < initial ? initial : bound,
         step: step ?? 1,
