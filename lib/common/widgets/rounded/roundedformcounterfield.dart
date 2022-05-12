@@ -48,7 +48,7 @@ class RoundedFormCounterField extends StatelessWidget {
       child: Counter(
         initial: initial < min ? min : initial,
         min: min,
-        max: max,
+        max: initial <= max ? max : initial,
         bound: bound < initial ? initial : bound,
         step: step ?? 1,
         onValueChanged: onValueChanged ?? (value) {},

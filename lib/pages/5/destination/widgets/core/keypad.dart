@@ -29,7 +29,7 @@ class KeyPadWidget extends StatelessWidget {
                         .getStyle()),
                 onPressed: () {
                   selectedIndex.value = pageList.indexOf("Customer");
-                  Get.toNamed("/Customer");
+                  goto("Customer");
                 },
               ),
               TextButton(

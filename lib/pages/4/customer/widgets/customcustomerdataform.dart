@@ -182,9 +182,16 @@ class CustomCustomerDataForm extends StatelessWidget {
                           return Row(
                             children: [
                               CustomFormDropDownFieldWidget(
-                                validator: CustomRequiredValidator(
-                                    errorText: "Country is required ",
-                                    ctx: context),
+                                validator: (value) {
+                                  CustomRequiredValidator(
+                                          errorText: "Country is required ",
+                                          ctx: context)
+                                      .call(value);
+                                  CustomRequiredValidator(
+                                          errorText: "City is required ",
+                                          ctx: context)
+                                      .call(city.value);
+                                },
                                 value: country.value,
                                 width: country.value == "" ? 0.3 : 0.15,
                                 hintText: "Country",
