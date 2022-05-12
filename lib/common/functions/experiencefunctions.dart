@@ -192,16 +192,13 @@ Function getFilteredExperiences = () {
     }
   }).toList();
 
-  filteredExperiences.sort((a, b) {
-    var aTime = a.value["exptime"];
-    var bTime = b.value["exptime"];
-    return aTime.compareTo(bTime);
-  });
-  filteredExperiences.sort((a, b) {
-    var aTime = a.code;
-    var bTime = b.code;
-    return bTime.compareTo(aTime);
-  });
+  // filteredExperiences.sort((a, b) {
+  //   var aTime = a.value["exptime"];
+  //   var bTime = b.value["exptime"];
+  //   return aTime.compareTo(bTime);
+  // });
+  filteredExperiences.sort((a, b) => a.code.compareTo(b.code));
+  filteredExperiences.sort((a, b) => a.order.compareTo(b.order));
 };
 //////////////////////////////////////////////////////////////////////////////////////
 Function getExpFiltered = () {
