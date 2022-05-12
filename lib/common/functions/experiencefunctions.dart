@@ -236,6 +236,7 @@ Function resetExperiences = () {
   resetDayCounters();
 };
 Function promoteExperience = (String experience, String state) {
+  
   int sign = state == "suggested" ? -1 : 1;
   var value = calculateExperienceDays(experience);
   if (experience == "Leisure Time") {

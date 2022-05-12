@@ -28,7 +28,12 @@ class CustomSelectedExperiencesWidget extends StatelessWidget {
           child: SingleChildScrollView(
             child: ExperienceDragTargetWidget(
               onAccept: (String experience) {
-                promoteExperience(experience, "promoted");
+                if (experience == "Leisure Time" &&
+                    leftHours[currentDay.value].value == 0) {
+                  return;
+                } else {
+                  promoteExperience(experience, "promoted");
+                }
               },
             ),
           ),

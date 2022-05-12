@@ -113,32 +113,23 @@ class CustomLeisureTimeDetailForm extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                               color: Colors.white)
                           .getStyle()),
-                  TextButton(child: Obx(() {
-                    return Text(
-                        "Starts at: ${leisureTimeStart.value.toString().replaceAll("TimeOfDay", "").replaceAll("(", "").replaceAll(")", "")}",
-                        style: KTextSytle(
-                                context: context,
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white)
-                            .getStyle());
-                  }), onPressed: () async {
-                    await saveTimePicker(leisureTimeStart, leisureTimeEnd,
-                        leisureTime, "leisureTimeStart");
+                  Obx(() {
+                    var expDay = totalDays.value;
+
+                    return CustomFormCounterFieldWidget(
+                        initial: getFormValue(globalctx.memory["days"],
+                            currentDay.value, "leisureTime", 0),
+                        min: 0,
+                        max: leftHours[currentDay.value].value + 1,
+                        bound: 0,
+                        onValueChanged: (value) {
+                          setFormValue(globalctx.memory["days"],
+                              currentDay.value, "leisureTime", value);
+                          // promoteExperience(experience, "promoted");
+                        },
+                        label: "Leisure Time    ",
+                        width: 0.20);
                   }),
-                  TextButton(
-                      child: Text(
-                          "Ends at: ${leisureTimeEnd.value.toString().replaceAll("TimeOfDay", "").replaceAll("(", "").replaceAll(")", "")}",
-                          style: KTextSytle(
-                                  context: context,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white)
-                              .getStyle()),
-                      onPressed: () async {
-                        await saveTimePicker(leisureTimeStart, leisureTimeEnd,
-                            leisureTime, "leisureTimeEnd");
-                      }),
                 ],
               )),
         ],
