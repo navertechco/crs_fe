@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable, unnecessary_null_comparison
 import 'package:flutter/material.dart';
 import 'package:multiselect_formfield/multiselect_formfield.dart';
+import 'package:sweetalert/sweetalert.dart';
 
 import '../../index.dart';
 
@@ -16,7 +17,7 @@ class RoundedFormMultiDropdown extends StatelessWidget {
   final onChanged;
   final List<Map<String, dynamic>> data;
   final List<String> value;
-  final String? Function(List<Map<String, dynamic>>?)? validator;
+  final String? Function(dynamic)? validator;
 
   RoundedFormMultiDropdown(
       {Key? key,
@@ -72,7 +73,7 @@ class RoundedFormMultiDropdown extends StatelessWidget {
         width: MediaQuery.of(context).size.width * width,
         padding: EdgeInsets.only(left: left, top: top),
         child: MultiSelectFormField(
-          autovalidate: AutovalidateMode.disabled,
+          autovalidate: AutovalidateMode.onUserInteraction,
           chipBackGroundColor: Colors.grey,
           fillColor: Color.fromARGB(0, 255, 255, 255),
           chipLabelStyle:
@@ -91,6 +92,7 @@ class RoundedFormMultiDropdown extends StatelessWidget {
             if (value == null || value.length == 0) {
               return 'Please select one or more options';
             }
+            validator!(value);
             return null;
           },
           dataSource: dataSource,

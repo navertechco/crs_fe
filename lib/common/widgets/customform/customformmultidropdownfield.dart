@@ -12,7 +12,7 @@ class CustomFormMultiDropDownFieldWidget extends StatelessWidget {
     required this.onChanged,
     this.validator,
   }) : super(key: key);
-  final String? Function(List<Map<String, dynamic>>?)? validator;
+  final String? Function(dynamic)? validator;
   final List<String> value;
   final onSaved;
   final onChanged;

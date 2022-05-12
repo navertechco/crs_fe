@@ -24,20 +24,6 @@ class CruiseCalendarWidget extends StatelessWidget {
                       width: 0.15,
                       height: 0.05,
                       validator: CustomRequiredValidator(
-                          errorText: "Cruise Type is required ", ctx: ctx),
-                      value: "0",
-                      onSaved: (value) {},
-                      onChanged: (value) {
-                        cruiseType.value = getCatalogDescription(
-                            findMemoryCatalog("cruises", "cruise_type"), value);
-                        filterCruises(context);
-                      },
-                      label: "Type             ",
-                      data: findMemoryCatalog("cruises", "cruise_type")),
-                  CustomFormDropDownFieldWidget(
-                      width: 0.15,
-                      height: 0.05,
-                      validator: CustomRequiredValidator(
                           errorText: "Cruise Category is required ", ctx: ctx),
                       value: "0",
                       onSaved: (value) {},
@@ -49,74 +35,106 @@ class CruiseCalendarWidget extends StatelessWidget {
                       },
                       label: "Category             ",
                       data: findMemoryCatalog("cruises", "cruise_category")),
+                  if (cruiseCategory.value.isNotEmpty)
+                    CustomFormDropDownFieldWidget(
+                        width: 0.15,
+                        height: 0.05,
+                        validator: CustomRequiredValidator(
+                            errorText: "Cruise Type is required ", ctx: ctx),
+                        value: "0",
+                        onSaved: (value) {},
+                        onChanged: (value) {
+                          cruiseType.value = getCatalogDescription(
+                              findMemoryCatalog("cruises", "cruise_type"),
+                              value);
+                          filterCruises(context);
+                        },
+                        label: "Type             ",
+                        data: findMemoryCatalog("cruises", "cruise_type")),
                 ],
               ),
               Row(
                 children: [
-                  CustomFormDropDownFieldWidget(
-                      width: 0.15,
-                      height: 0.05,
-                      validator: CustomRequiredValidator(
-                          errorText: "Cruise Modality is required ", ctx: ctx),
-                      value: "0",
-                      onSaved: (value) {},
-                      onChanged: (value) {
-                        cruiseModality.value = getCatalogDescription(
-                            findMemoryCatalog("cruises", "modality"), value);
-                        filterCruises(context);
-                      },
-                      label: "Modality     ",
-                      data: findMemoryCatalog("cruises", "modality")),
-                  CustomFormDropDownFieldWidget(
-                      width: 0.15,
-                      height: 0.05,
-                      validator: CustomRequiredValidator(
-                          errorText: "Cruise Islet is required ", ctx: ctx),
-                      value: "0",
-                      onSaved: (value) {},
-                      onChanged: (value) {
-                        cruiseIslet.value = getCatalogDescription(
-                            findCatalog("galapagos"), value);
-                        filterCruises(context);
-                      },
-                      label: "Islet     ",
-                      data: findCatalog("galapagos")),
+                  if (cruiseCategory.value.isNotEmpty)
+                    if (cruiseType.value.isNotEmpty)
+                      CustomFormDropDownFieldWidget(
+                          width: 0.15,
+                          height: 0.05,
+                          validator: CustomRequiredValidator(
+                              errorText: "Cruise Modality is required ",
+                              ctx: ctx),
+                          value: "0",
+                          onSaved: (value) {},
+                          onChanged: (value) {
+                            cruiseModality.value = getCatalogDescription(
+                                findMemoryCatalog("cruises", "modality"),
+                                value);
+                            filterCruises(context);
+                          },
+                          label: "Modality     ",
+                          data: findMemoryCatalog("cruises", "modality")),
+                  if (cruiseCategory.value.isNotEmpty)
+                    if (cruiseType.value.isNotEmpty)
+                      if (cruiseModality.value.isNotEmpty)
+                        CustomFormDropDownFieldWidget(
+                            width: 0.15,
+                            height: 0.05,
+                            validator: CustomRequiredValidator(
+                                errorText: "Cruise Islet is required ",
+                                ctx: ctx),
+                            value: "0",
+                            onSaved: (value) {},
+                            onChanged: (value) {
+                              cruiseIslet.value = getCatalogDescription(
+                                  findCatalog("galapagos"), value);
+                              filterCruises(context);
+                            },
+                            label: "Islet     ",
+                            data: findCatalog("galapagos")),
                 ],
               ),
               Row(
                 children: [
-                  CustomFormDropDownFieldWidget(
-                      width: 0.15,
-                      height: 0.05,
-                      validator: CustomRequiredValidator(
-                          errorText: "Arrival is required ", ctx: ctx),
-                      value: "0",
-                      onSaved: (value) {
-                        cruiseArrival.value = getCatalogDescription(
-                            findCatalog("week_day"), value);
-                        filterCruises(context);
-                      },
-                      onChanged: (value) {
-                        cruiseArrival.value = getCatalogDescription(
-                            findCatalog("week_day"), value);
-                        filterCruises(context);
-                      },
-                      label: "Arrival\t\t\t\t\t\t\t",
-                      data: findCatalog("week_day")),
-                  CustomFormDropDownFieldWidget(
-                      width: 0.15,
-                      height: 0.05,
-                      validator: CustomRequiredValidator(
-                          errorText: "Departure is required ", ctx: ctx),
-                      value: "0",
-                      onSaved: (value) {},
-                      onChanged: (value) {
-                        cruiseDeparture.value = getCatalogDescription(
-                            findCatalog("week_day"), value);
-                        filterCruises(context);
-                      },
-                      label: "Departure",
-                      data: findCatalog("week_day")),
+                  if (cruiseCategory.value.isNotEmpty)
+                    if (cruiseType.value.isNotEmpty)
+                      if (cruiseModality.value.isNotEmpty)
+                        if (cruiseIslet.value.isNotEmpty)
+                          CustomFormDropDownFieldWidget(
+                              width: 0.15,
+                              height: 0.05,
+                              validator: CustomRequiredValidator(
+                                  errorText: "Starts is required ", ctx: ctx),
+                              value: "0",
+                              onSaved: (value) {
+                                cruiseStarts.value = getCatalogDescription(
+                                    findCatalog("week_day"), value);
+                                filterCruises(context);
+                              },
+                              onChanged: (value) {
+                                cruiseStarts.value = getCatalogDescription(
+                                    findCatalog("week_day"), value);
+                                filterCruises(context);
+                              },
+                              label: "Starts\t\t\t\t\t\t\t",
+                              data: findCatalog("week_day")),
+                  if (cruiseCategory.value.isNotEmpty)
+                    if (cruiseType.value.isNotEmpty)
+                      if (cruiseModality.value.isNotEmpty)
+                        if (cruiseIslet.value.isNotEmpty)
+                          CustomFormDropDownFieldWidget(
+                              width: 0.15,
+                              height: 0.05,
+                              validator: CustomRequiredValidator(
+                                  errorText: "End is required ", ctx: ctx),
+                              value: "0",
+                              onSaved: (value) {},
+                              onChanged: (value) {
+                                cruiseEnds.value = getCatalogDescription(
+                                    findCatalog("week_day"), value);
+                                filterCruises(context);
+                              },
+                              label: "End",
+                              data: findCatalog("week_day")),
                 ],
               ),
               Padding(

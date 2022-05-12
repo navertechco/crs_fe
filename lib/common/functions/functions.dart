@@ -687,7 +687,7 @@ Function getCruiseDetail = (context, data, columns) {
                         } catch (e) {
                           log(e);
                           return Text(
-                            "No Calendar Aivable",
+                            "No Calendar Aivalable",
                             style: KTextSytle(
                               context: context,
                               fontSize: 15,
@@ -996,13 +996,13 @@ Function filterCruises = (ctx) {
         .where((element) => element["cruise_format"]
             .toString()
             .toUpperCase()
-            .contains(cruiseArrival.value.toString().toUpperCase()))
+            .contains(cruiseStarts.value.toString().toUpperCase()))
         .toList();
     List filterByDeparture = filterByArrival
         .where((element) => element["cruise_format"]
             .toString()
             .toUpperCase()
-            .contains(cruiseDeparture.value.toString().toUpperCase()))
+            .contains(cruiseEnds.value.toString().toUpperCase()))
         .toList();
     List filterByIslet = filterByDeparture
         .where((element) => element["cruise_itinerary"]

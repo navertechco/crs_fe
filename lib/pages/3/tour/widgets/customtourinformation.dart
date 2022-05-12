@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/common/index.dart';
+import 'package:sweetalert/sweetalert.dart';
 import '../../../index.dart';
 
 class CustomTourInformationForm extends StatelessWidget {
@@ -87,16 +88,28 @@ class CustomTourInformationForm extends StatelessWidget {
                     width: 0.20),
                 Obx(() {
                   return CustomFormMultiDropDownFieldWidget(
-                    validator: (value) => CustomMultiDropdownRequiredValidator(
-                        value,
-                        errorText: "Purposes are required ",
-                        context: context),
+                    validator: (value) {
+                      CustomMultiDropdownRequiredValidator(value,
+                          errorText: "Purposes are required ",
+                          context: context);
+                    },
                     value: purposeMemory.value,
                     onSaved: (values) {
                       savePurposes(values);
                     },
                     onChanged: (values) {
-                      savePurposes(values);
+                      if (values!.length > 3) {
+                        Get.snackbar(
+                            "Error", "You can select maximum 3 purposes",
+                            snackPosition: SnackPosition.BOTTOM,
+                            backgroundColor: Colors.red,
+                            colorText: Colors.white,
+                            borderRadius: 10,
+                            margin: EdgeInsets.all(10),
+                            duration: Duration(seconds: 3));
+                      } else {
+                        savePurposes(values);
+                      }
                     },
                     hintText: " ",
                     label: "Purposes                      ",

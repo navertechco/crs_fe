@@ -162,8 +162,8 @@ class CustomDatetimeGreaterValidator extends FieldValidator<DateTime?> {
   }
 }
 
-final CustomMultiDropdownRequiredValidator = (List<Map<String, dynamic>>? value,
-    {BuildContext? context, required String errorText}) {
+final CustomMultiDropdownRequiredValidator =
+    (value, {BuildContext? context, required String errorText}) {
   if (value == null) {
     SweetAlert.show(context,
         curve: ElasticInCurve(),

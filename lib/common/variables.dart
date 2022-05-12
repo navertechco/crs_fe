@@ -275,8 +275,8 @@ var cruiseCabine = "".obs;
 var cruiseModality = "".obs;
 var cruisePax = "".obs;
 var cruiseTriple = "".obs;
-var cruiseArrival = "".obs;
-var cruiseDeparture = "".obs;
+var cruiseStarts = "".obs;
+var cruiseEnds = "".obs;
 var cruiseIslet = "".obs;
 
 Function clearCruiseFilter = () {
@@ -291,8 +291,8 @@ Function clearCruiseFilter = () {
   cruiseModality.value = "";
   cruisePax.value = "";
   cruiseTriple.value = "";
-  cruiseArrival.value = "";
-  cruiseDeparture.value = "";
+  cruiseStarts.value = "";
+  cruiseEnds.value = "";
   cruiseIslet.value = "";
 };
 
