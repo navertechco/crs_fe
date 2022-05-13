@@ -69,7 +69,7 @@ Function processDestinations = (context) async {
       var explorationDay = dest["explorationDay"];
       var days = int.parse(explorationDay);
       destinationDay.add({...dest, "destination": destination, "days": days});
-      destDays.value += days;
+      accDays += days;
       idx++;
     }
     globalctx.memory["destinationDay"] = destinationDay;

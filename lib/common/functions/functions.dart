@@ -1077,3 +1077,38 @@ Function processCruiseItinerary = (row) {
 Function toMinutes = (TimeOfDay time) {
   return time.hour * 60 + time.minute;
 };
+
+Function getDayId = (int destId, int destDay) {
+  var maxDestDays = getMaxDestDays();
+  var currenDestDays = getDestDays(destId);
+  var currenDestDaysOff = maxDestDays - currenDestDays;
+  pushList(daysOff, destId, currenDestDaysOff);
+  var accOff = getAccOff(destId);
+  var destMatrixIndex = maxDestDays * destId + destDay;
+  var dayId = destMatrixIndex - accOff;
+  return dayId;
+};
+
+getDestDays(int destId) {
+  return destDays[destId];
+}
+
+pushList(List list, int id, dynamic value) {
+  if (list[id] == null) {
+    list.add(value);
+  } else {
+    list[id] = value;
+  }
+}
+
+getAccOff(destId) {
+  var accOff = 0;
+  for (var i = 0; i < destId; i++) {
+    accOff += daysOff[i] as int;
+  }
+  return accOff;
+}
+
+getMaxDestDays() {
+  return destDays.reduce((a, b) => max);
+}
