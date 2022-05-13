@@ -10,11 +10,9 @@ import 'customformtitle.dart';
 class CustomFormDayWidget extends StatelessWidget {
   const CustomFormDayWidget({
     Key? key,
-    required this.data,
     required this.indexes,
   }) : super(key: key);
 
-  final Map<String, dynamic> data;
   final List<int> indexes;
   @override
   Widget build(BuildContext context) {
@@ -25,17 +23,24 @@ class CustomFormDayWidget extends StatelessWidget {
       var destinations = getCombinedDestinations();
       var destination = destinations[destId.toString()];
       var memory = globalctx.memory;
-      var daysData = memory["destinationDay"][destId] ?? {};
+      var daysData = destination["destinationDay"];
       var promoted = memory["promoted"]["day"][destDay] ?? {};
-
+      var destData = getDestinationValueByName(destination["destination"]);
+      var daydescription = destData[8];
       return RepaintBoundary(
-          key: globalctx.keys["day-$destId-$destDay"],
+          key: Key("day-$destId-$destDay"),
           child: Column(
             children: [
-              // CustomFormTitleWidget(level: 4, label: "Day: $dayLabel#####"),
-              // CustomDescriptionWidget(
-              //     text: daydescription, width: 0.55, fontSize: 0.016),
-              // CustomFormExperiencesDetailWidget(data: data, indexes: indexes),
+              CustomFormTitleWidget(
+                  level: 4,
+                  label: dayId == 0
+                      ? "Arrival"
+                      : dayId == destDays.length - 1
+                          ? "Departure"
+                          : "Day: $dayId#####"),
+              CustomDescriptionWidget(
+                  text: daydescription, width: 0.55, fontSize: 0.016),
+              CustomFormExperiencesDetailWidget(indexes: indexes),
               // SizedBox(height: MediaQuery.of(context).size.height * 0.01),
               // if (observation != null)
               //   CustomDescriptionWidget(

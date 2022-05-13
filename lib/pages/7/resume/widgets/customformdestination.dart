@@ -32,7 +32,7 @@ class CustomFormDestination extends StatelessWidget {
           RepaintBoundary(
               // key: globalctx.keys["day-$index-$day"],
               child: CustomFormTitleWidget(level: 3, label: "$title")),
-          CustomFormDayWidget(data: data, indexes: [destindex, day]),
+          CustomFormDayWidget(  indexes: [destindex, day]),
         ],
       ));
     }

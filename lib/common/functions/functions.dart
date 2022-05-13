@@ -1089,15 +1089,24 @@ Function getDayId = (int destId, int destDay) {
   return dayId;
 };
 
+updateDestDays() {
+  destDays = [];
+  for (var dest in globalctx.memory["destinations"].entries) {
+    var destDay = dest.value;
+    destDays.add(int.parse(destDay["explorationDay"]));
+  }
+}
+
 getDestDays(int destId) {
+  updateDestDays();
   return destDays[destId];
 }
 
 pushList(List list, int id, dynamic value) {
-  if (list[id] == null) {
-    list.add(value);
-  } else {
+  try {
     list[id] = value;
+  } catch (e) {
+    list.add(value);
   }
 }
 
@@ -1110,5 +1119,17 @@ getAccOff(destId) {
 }
 
 getMaxDestDays() {
-  return destDays.reduce((a, b) => max);
+  updateDestDays();
+  var maxValue = getMax(destDays);
+  return maxValue;
+}
+
+getMax(list) {
+  var result = list[0];
+  for (var i = 0; i < list.length; i++) {
+    if (list[i] > result) {
+      result = list[i];
+    }
+  }
+  return result;
 }
