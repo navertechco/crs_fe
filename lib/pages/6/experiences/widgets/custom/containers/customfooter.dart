@@ -76,7 +76,8 @@ class CustomFooterWidget extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black)
                             .getStyle()),
-                    "Close",
+                    "",
+                    customChild: LeisureTimeBypassKeyPad(),
                     backgroundColor: Colors.white,
                     buttonColor: Colors.black87,
                   );
@@ -85,6 +86,53 @@ class CustomFooterWidget extends StatelessWidget {
             ),
           ],
         ),
+      ],
+    );
+  }
+}
+
+class LeisureTimeBypassKeyPad extends StatelessWidget {
+  const LeisureTimeBypassKeyPad({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        TextButton(
+            child: Text("   Yes",
+                style: KTextSytle(
+                        context: context,
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blue)
+                    .getStyle()),
+            onPressed: () {
+              Navigator.pop(context);
+            }),
+        Text("/",
+            style: KTextSytle(
+                    context: context,
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87)
+                .getStyle()),
+        TextButton(
+            child: Text("Next Day",
+                style: KTextSytle(
+                        context: context,
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.red)
+                    .getStyle()),
+            onPressed: () async {
+              Navigator.pop(context);
+              setFormValue(globalctx.memory["days"], currentDay.value,
+                  "leisureTime", leftHours[currentDay.value].value);
+              promoteExperience("Leisure Time", "promoted");
+              await paginateDay(context);
+            }),
       ],
     );
   }

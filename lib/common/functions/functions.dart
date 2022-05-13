@@ -283,7 +283,8 @@ Function getCountryNameById = (id) {
 };
 
 Future<void> showCustomDialog(context, Widget child, String button,
-    {Color backgroundColor = Colors.black54,
+    {Widget? customChild,
+    Color backgroundColor = Colors.black54,
     Color buttonColor = Colors.black54,
     double width = 0.5,
     onSaved}) async {
@@ -296,6 +297,7 @@ Future<void> showCustomDialog(context, Widget child, String button,
         content: SizedBox(
             width: MediaQuery.of(context).size.width * width, child: child),
         actions: <Widget>[
+          customChild ?? SizedBox(),
           TextButton(
             child: Text(button,
                 style: KTextSytle(
