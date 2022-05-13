@@ -35,7 +35,9 @@ class CustomFormExperiencesDetailWidget extends StatelessWidget {
         ),
       );
     } catch (e) {
+      return Text("");
       return Text("Error of CustomFormExperiencesDetailWidget: $e");
     }
   }
 }
+

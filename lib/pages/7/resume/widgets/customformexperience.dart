@@ -64,6 +64,7 @@ class CustomFormExperienceRowWidget extends StatelessWidget {
         ],
       );
     } catch (e) {
+      return Text("");
       return Text("Error of CustomFormExperienceRowWidget: $e");
     }
   }
