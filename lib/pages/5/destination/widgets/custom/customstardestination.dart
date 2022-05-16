@@ -431,23 +431,23 @@ class CustomStarDestinationForm extends StatelessWidget {
                   }
                   return Text("");
                 }),
-                Obx(() {
-                  var expMode = explorationMode.value;
-                  if (index == 0) {
-                    return CustomFormCheckboxWidget(
-                      label: "Arrival Dinner          ",
-                      value: 1,
-                      groupValue: arrivalDinner,
-                      onChanged: (value) {
-                        arrivalDinner.value = value;
-                        setFormValue(
-                            globalctx.memory, "logistic", "dinner", value);
-                      },
-                    );
-                  } else {
-                    return Text("");
-                  }
-                })
+                // Obx(() {
+                //   var expMode = explorationMode.value;
+                //   if (index == 0) {
+                //     return CustomFormCheckboxWidget(
+                //       label: "Arrival Dinner          ",
+                //       value: 1,
+                //       groupValue: arrivalDinner,
+                //       onChanged: (value) {
+                //         arrivalDinner.value = value;
+                //         setFormValue(
+                //             globalctx.memory, "logistic", "dinner", value);
+                //       },
+                //     );
+                //   } else {
+                //     return Text("");
+                //   }
+                // })
               ]),
             ),
           ),

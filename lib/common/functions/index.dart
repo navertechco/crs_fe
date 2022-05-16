@@ -5,3 +5,4 @@ export './experiencefunctions.dart';
 export './servicefunctions.dart';
 export './functions.dart';
 export './tourfunctions.dart';
+export './cruisefunctions.dart';
