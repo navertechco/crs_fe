@@ -1,5 +1,6 @@
 // ignore_for_file: invalid_use_of_protected_member
 
+import 'package:checkbox_formfield/checkbox_icon_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -116,6 +117,30 @@ class CustomTourInformationForm extends StatelessWidget {
                     data: purposes,
                   );
                 }),
+                Row(
+                  children: [
+                    CustomTitleWidget(
+                        fontWeight: FontWeight.bold,
+                        label: "  Would you like to take a Galapagos Cruise?",
+                        color: Colors.black),
+                    CheckboxIconFormField(
+                      context: context,
+                      trueIconColor: Colors.green,
+                      initialValue: getFormValue(
+                          globalctx.memory, "tour", "galapagos", false),
+                      enabled: true,
+                      iconSize: 32,
+                      onSaved: (value) {
+                        setFormValue(
+                            globalctx.memory, "tour", "galapagos", value);
+                      },
+                      onChanged: (value) {
+                        setFormValue(
+                            globalctx.memory, "tour", "galapagos", value);
+                      },
+                    ),
+                  ],
+                ),
               ]),
               Padding(
                 padding: EdgeInsets.only(

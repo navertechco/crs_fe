@@ -15,6 +15,8 @@ class CustomLogisticInformationForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var readonly = getContext("readonly") ?? false;
+    var galapagos =
+        Rx(getFormValue(globalctx.memory, "tour", "galapagos", false));
     return Stack(
       children: [
         SingleChildScrollView(
@@ -29,25 +31,31 @@ class CustomLogisticInformationForm extends StatelessWidget {
                 children: [
                   SingleChildScrollView(
                     child: Column(children: [
-                      Row(
-                        children: [
-                          const CustomTitleWidget(
-                              width: 0.225,
-                              fontWeight: FontWeight.bold,
-                              label: "  Cruise information     "),
-                          RoundedFormButton(
-                            color: Colors.grey,
-                            label: "View Cruise Calendar",
-                            height: 0.05,
-                            fontSize: 3,
-                            fontWeight: FontWeight.bold,
-                            textColor: Colors.black,
-                            onTap: () async {
-                              getCruise(context, cruiseId: 0);
-                            },
-                          ),
-                        ],
-                      ),
+                      Obx(() {
+                        if (galapagos.value) {
+                          return Row(
+                            children: [
+                              const CustomTitleWidget(
+                                  width: 0.225,
+                                  fontWeight: FontWeight.bold,
+                                  label: "  Cruise information     "),
+                              RoundedFormButton(
+                                color: Colors.grey,
+                                label: "View Cruise Calendar",
+                                height: 0.05,
+                                fontSize: 3,
+                                fontWeight: FontWeight.bold,
+                                textColor: Colors.black,
+                                onTap: () async {
+                                  getCruise(context, cruiseId: 0);
+                                },
+                              ),
+                            ],
+                          );
+                        } else {
+                          return const SizedBox();
+                        }
+                      }),
                       const CustomTitleWidget(
                           width: 0.225,
                           fontWeight: FontWeight.bold,
