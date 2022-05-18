@@ -167,7 +167,8 @@ Function getFilteredExperiences = () {
     var currentLeft = (total.value - acc.value) * 60;
     var expTime = getExperienceByName(e.description).value["exptime"] ?? 600;
     var rule = expTime <= currentLeft;
-    var rule2 = (expTime - currentLeft) <= 30;
+    var rule2 =
+        (expTime - currentLeft) <= getTrLimit(currentTravelRhythm.value);
     return rule || rule2;
   }).toList();
 
@@ -177,7 +178,8 @@ Function getFilteredExperiences = () {
       return true;
     }
     if (currentDay.value == 0) {
-      if (closeTime - parseHour(arrivalHour.value) > 30) {
+      if (closeTime - parseHour(arrivalHour.value) >
+          getTrLimit(currentTravelRhythm.value)) {
         return true;
       }
       return false;
@@ -187,7 +189,8 @@ Function getFilteredExperiences = () {
       }
       endHours[currentDay.value].value =
           time.addHour(totalHours[currentDay.value].value.round() as int);
-      var rule = closeTime - toMinutes(endHours[currentDay.value].value) > 30;
+      var rule = closeTime - toMinutes(endHours[currentDay.value].value) >
+          getTrLimit(currentTravelRhythm.value);
       return rule;
     }
   }).toList();
@@ -236,7 +239,6 @@ Function resetExperiences = () {
   resetDayCounters();
 };
 Function promoteExperience = (String experience, String state) {
-  
   int sign = state == "suggested" ? -1 : 1;
   var value = calculateExperienceDays(experience);
   if (experience == "Leisure Time") {

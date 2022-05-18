@@ -944,3 +944,9 @@ getMax(list) {
   }
   return result;
 }
+
+getTrLimit(value) {
+  var trLimits = {"soft": 60, "medium": 60, "hard": 180};
+  var result = trLimits[value.toString().toLowerCase()];
+  return result;
+}

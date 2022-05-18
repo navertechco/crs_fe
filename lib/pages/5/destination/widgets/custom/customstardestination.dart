@@ -138,6 +138,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                   label: "Type: ${type.toString().capitalize}",
                 ),
                 Obx(() {
+                  var t = arrivalDate.value;
                   return Row(
                     children: [
                       const CustomTitleWidget(
