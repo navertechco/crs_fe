@@ -469,7 +469,8 @@ Function processNetRateData = (context, data) {
   return [header, detail];
 };
 
-Function processCruiseData = (context, data, columns) {
+Function processCruiseData = (context, data) {
+  var columns = ["cruise_name", "cruise_format"];
   var header = getCruiseHeader(context, data, columns);
   var detail = getCruiseDetail(context, data, columns);
   return [header, detail];
@@ -611,7 +612,6 @@ List<Meeting> getDataSource(data) {
   }
   return meetings;
 }
-
 
 Function getDetail = (context, data, columns) {
   var states = [
@@ -864,7 +864,6 @@ Function getDistance = (a, b, c, d) {
       6371;
 };
 
-
 Function getCatalogDescription = (catalog, value) {
   log(value);
   if (value == "0") {
@@ -873,18 +872,6 @@ Function getCatalogDescription = (catalog, value) {
   return catalog.firstWhere((element) =>
       element["code"].toString() == (value.toString()))["description"];
 };
-
-List columns = ["cruise_name", "cruise_format"];
-
-
-var cruiseTable = Rx(
-  DataTable(
-    columns: searcherHeader.value,
-    rows: searcherDetail.value,
-  ),
-);
-
-
 
 Function toMinutes = (TimeOfDay time) {
   return time.hour * 60 + time.minute;

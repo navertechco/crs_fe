@@ -266,20 +266,20 @@ var filteredData = [].obs;
 var purposeMemory = <String>[].obs;
 var kaMemory = <String>[].obs;
 var generated = false;
-var cruiseFormat = "0".obs;
-var cruiseDay = "0".obs;
-var cruiseShip = "0".obs;
-var cruiseRange = "0".obs;
-var cruiseCategory = "0".obs;
-var cruiseKey = "0".obs;
-var cruiseType = "0".obs;
-var cruiseCabine = "0".obs;
-var cruiseModality = "0".obs;
-var cruisePax = "0".obs;
-var cruiseTriple = "0".obs;
-var cruiseStarts = "0".obs;
-var cruiseEnds = "0".obs;
-var cruiseIslet = "0".obs;
+var cruiseFormat = "".obs;
+var cruiseDay = "".obs;
+var cruiseShip = "".obs;
+var cruiseRange = "".obs;
+var cruiseCategory = "".obs;
+var cruiseKey = "".obs;
+var cruiseType = "".obs;
+var cruiseCabine = "".obs;
+var cruiseModality = "".obs;
+var cruisePax = "".obs;
+var cruiseTriple = "".obs;
+var cruiseStarts = "".obs;
+var cruiseEnds = "".obs;
+var cruiseIslet = "".obs;
 
 Function clearCruiseFilter = () {
   cruiseFormat.value = "";
@@ -326,3 +326,12 @@ Rx<List<Map<String, dynamic>>> countrydata = Rx((() {
   log("CountryList: $countrylist");
   return countrylist;
 })());
+
+var cruiseTable = Rx(
+  DataTable(
+    columns: searcherHeader.value,
+    rows: searcherDetail.value,
+  ),
+);
+
+var moreFilters = false.obs;

@@ -18,9 +18,9 @@ class SearcherWidget extends GetView<SearcherController> {
   @override
   Widget build(BuildContext context) {
     var processedData = processData(context, globalctx.memory["tours"], null);
-    searcherHeader = Rx(processedData[0]);
+    searcherHeader.value = processedData[0];
     if (searchResult!.value.isEmpty) {
-      searcherDetail = Rx(processedData[1]);
+      searcherDetail.value = processedData[1];
     }
 
     return Form(

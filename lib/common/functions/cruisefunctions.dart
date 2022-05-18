@@ -85,14 +85,15 @@ Function filterCruises = (ctx) {
 
     cruiseResults.value = filterByTriple.toList();
 
-    var processedData = processCruiseData(ctx, cruiseResults.value, columns);
+    var processedData = processCruiseData(ctx, cruiseResults.value);
     searcherHeader.value = processedData[0];
     searcherDetail.value = processedData[1];
-
-    cruiseTable.value = DataTable(
-      columns: searcherHeader.value,
-      rows: searcherDetail.value,
-    );
+    if (searcherHeader.value.isNotEmpty) {
+      cruiseTable.value = (DataTable(
+        columns: searcherHeader.value,
+        rows: searcherDetail.value,
+      ));
+    }
   }
 };
 
