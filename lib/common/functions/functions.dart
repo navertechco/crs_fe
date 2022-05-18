@@ -286,17 +286,21 @@ Future<void> showCustomDialog(context, Widget child, String button,
     Color backgroundColor = Colors.black54,
     Color buttonColor = Colors.black54,
     double width = 0.5,
+    double height = 1,
     onSaved}) async {
   return showDialog<void>(
     context: context,
     barrierDismissible: false, // user must tap button!
     builder: (BuildContext context) {
       return AlertDialog(
+        // contentPadding: EdgeInsets.all(1000),
         backgroundColor: backgroundColor,
         content: SizedBox(
-            width: MediaQuery.of(context).size.width * width, child: child),
+            width: MediaQuery.of(context).size.width * width,
+            height: MediaQuery.of(context).size.height * height,
+            child: child),
         actions: <Widget>[
-          customChild ?? SizedBox(),
+          customChild ?? Text(""),
           TextButton(
             child: Text(button,
                 style: KTextSytle(
@@ -385,13 +389,11 @@ Future<void> getCruise(ctx, {int cruiseId = 0}) async {
       var data = res['data'];
       if (data.length > 0) {
         globalctx.memory["cruises"] = data;
-        showCustomDialog(
-          ctx,
-          CruiseCalendarWidget(ctx: ctx),
-          "Close",
-          backgroundColor: Colors.white,
-          buttonColor: Colors.black,
-        );
+        showCustomDialog(ctx, CruiseCalendarWidget(ctx: ctx), "Close",
+            backgroundColor: Colors.white,
+            buttonColor: Colors.black,
+            height: 0.2,
+            width: 0.75);
       }
     } else {
       SweetAlert.show(ctx,
@@ -403,13 +405,11 @@ Future<void> getCruise(ctx, {int cruiseId = 0}) async {
       });
     }
   } else {
-    showCustomDialog(
-      ctx,
-      CruiseCalendarWidget(ctx: ctx),
-      "Close",
-      backgroundColor: Colors.white,
-      buttonColor: Colors.black,
-    );
+    showCustomDialog(ctx, CruiseCalendarWidget(ctx: ctx), "Close",
+        backgroundColor: Colors.white,
+        buttonColor: Colors.black,
+        height: 0.2,
+        width: 0.75);
   }
 }
 
