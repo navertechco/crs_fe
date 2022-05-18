@@ -385,7 +385,44 @@ Function setLT = (value) {
       value;
   experiences = findCatalog("experiences");
 };
-
+Future<void> getHotel(ctx, {int cruiseId = 0}) async {
+  if (globalctx.memory["cruises"] == null) {
+    var frame = {
+      "data": {"cruise_id": cruiseId}
+    };
+    var res = await fetchhandler(kDefaultSchema, kDefaultServer,
+        kDefaultServerPort, kDefaultFindCruise, 'POST', frame);
+    // ignore: avoid_print
+    log(res);
+    if (res['state'] == true) {
+      var data = res['data'];
+      if (data.length > 0) {
+        globalctx.memory["cruises"] = data;
+        showCustomDialog(ctx, CruiseCalendarWidget(ctx: ctx), "Close",
+            customChild: CruiseKeyPadWidget(),
+            backgroundColor: Colors.white,
+            buttonColor: Colors.black,
+            height: 0.25,
+            width: 0.2);
+      }
+    } else {
+      SweetAlert.show(ctx,
+          curve: ElasticInCurve(),
+          title: res['message'],
+          style: SweetAlertStyle.error, onPress: (bool isConfirm) {
+        Get.close(1);
+        return false;
+      });
+    }
+  } else {
+    showCustomDialog(ctx, CruiseCalendarWidget(ctx: ctx), "Close",
+        customChild: CruiseKeyPadWidget(),
+        backgroundColor: Colors.white,
+        buttonColor: Colors.black,
+        height: 0.25,
+        width: 0.2);
+  }
+}
 Future<void> getCruise(ctx, {int cruiseId = 0}) async {
   if (globalctx.memory["cruises"] == null) {
     var frame = {
