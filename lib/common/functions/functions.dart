@@ -286,42 +286,47 @@ Future<void> showCustomDialog(context, Widget child, String button,
     Color backgroundColor = Colors.black54,
     Color buttonColor = Colors.black54,
     double width = 0.5,
-    double height = 1,
+    double height = 0.75,
     onSaved}) async {
   return showDialog<void>(
     context: context,
     barrierDismissible: false, // user must tap button!
     builder: (BuildContext context) {
-      return AlertDialog(
-        contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-        backgroundColor: backgroundColor,
-        content: Container(
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(50)),
-            width: MediaQuery.of(context).size.width * width,
-            height: MediaQuery.of(context).size.height * height,
-            child: child),
-        actions: <Widget>[
-          Row(
-            children: [
-              customChild ?? Text(""),
-              TextButton(
-                child: Text(button,
-                    style: KTextSytle(
-                            context: context,
-                            fontSize: 10,
-                            fontWeight: FontWeight.bold,
-                            color: buttonColor)
-                        .getStyle()),
-                onPressed: () {
-                  if (onSaved != null) {
-                    onSaved();
-                  }
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          ),
-        ],
+      return Align(
+        alignment: Alignment.topRight,
+        child: AlertDialog(
+          contentPadding: EdgeInsets.fromLTRB(8, 8, 8, 8),
+          backgroundColor: backgroundColor,
+          content: Container(
+              decoration:
+                  BoxDecoration(borderRadius: BorderRadius.circular(50)),
+              width: MediaQuery.of(context).size.width * width,
+              height: MediaQuery.of(context).size.height * height,
+              child: child),
+          actions: <Widget>[
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                customChild ?? Spacer(),
+                TextButton(
+                  child: Text(button,
+                      style: KTextSytle(
+                              context: context,
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                              color: buttonColor)
+                          .getStyle()),
+                  onPressed: () {
+                    if (onSaved != null) {
+                      onSaved();
+                    }
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ),
+          ],
+        ),
       );
     },
   );

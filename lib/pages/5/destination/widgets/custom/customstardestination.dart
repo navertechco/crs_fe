@@ -138,6 +138,27 @@ class CustomStarDestinationForm extends StatelessWidget {
                   label: "Type: ${type.toString().capitalize}",
                 ),
                 Obx(() {
+                  return Row(
+                    children: [
+                      const CustomTitleWidget(
+                          width: 0.225,
+                          fontWeight: FontWeight.bold,
+                          label: "  Hotel information  "),
+                      RoundedFormButton(
+                        color: Colors.grey,
+                        label: "Select Hotel",
+                        height: 0.05,
+                        fontSize: 3,
+                        fontWeight: FontWeight.bold,
+                        textColor: Colors.black,
+                        onTap: () async {
+                          getCruise(context, cruiseId: 0);
+                        },
+                      ),
+                    ],
+                  );
+                }),
+                Obx(() {
                   var expDay = explorationDay.value;
 
                   if (destination != "galapagos") {
@@ -431,23 +452,6 @@ class CustomStarDestinationForm extends StatelessWidget {
                   }
                   return Text("");
                 }),
-                // Obx(() {
-                //   var expMode = explorationMode.value;
-                //   if (index == 0) {
-                //     return CustomFormCheckboxWidget(
-                //       label: "Arrival Dinner          ",
-                //       value: 1,
-                //       groupValue: arrivalDinner,
-                //       onChanged: (value) {
-                //         arrivalDinner.value = value;
-                //         setFormValue(
-                //             globalctx.memory, "logistic", "dinner", value);
-                //       },
-                //     );
-                //   } else {
-                //     return Text("");
-                //   }
-                // })
               ]),
             ),
           ),

@@ -77,6 +77,8 @@ class CustomFooterWidget extends StatelessWidget {
                                 color: Colors.black)
                             .getStyle()),
                     "",
+                    width: 0.3,
+                    height: 0.2,
                     customChild: LeisureTimeBypassKeyPad(),
                     backgroundColor: Colors.white,
                     buttonColor: Colors.black87,
