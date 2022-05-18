@@ -147,7 +147,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                           label: "  Hotel information  "),
                       RoundedFormButton(
                         color: Colors.grey,
-                        label: "Select Hotel",
+                        label: "Select",
                         height: 0.05,
                         fontSize: 3,
                         fontWeight: FontWeight.bold,
@@ -226,22 +226,24 @@ class CustomStarDestinationForm extends StatelessWidget {
                       (destination != "galapagos" &&
                           (getSubs(destination).length > 0))) {
                     {
-                      return CustomFormDropDownFieldWidget(
-                        validator: CustomRequiredValidator(
-                            errorText: "Sub Destination is required ",
-                            ctx: context),
-                        value: subDestination.value,
-                        onSaved: (value) {
-                          setFormValue(globalctx.memory["destinations"], index,
-                              "sub", value);
-                        },
-                        onChanged: (value) {
-                          setFormValue(globalctx.memory["destinations"], index,
-                              "sub", value);
-                        },
-                        hintText: " ",
-                        label: "${destination.capitalize} Routes   ",
-                        data: getSubs(destination),
+                      return Row(
+                        children: [
+                          const CustomTitleWidget(
+                              width: 0.225,
+                              fontWeight: FontWeight.bold,
+                              label: "Routes Information"),
+                          RoundedFormButton(
+                            color: Colors.grey,
+                            label: "Select",
+                            height: 0.05,
+                            fontSize: 3,
+                            fontWeight: FontWeight.bold,
+                            textColor: Colors.black,
+                            onTap: () async {
+                              getHotel(context, cruiseId: 0);
+                            },
+                          ),
+                        ],
                       );
                     }
                   } else {
