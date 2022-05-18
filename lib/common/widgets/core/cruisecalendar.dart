@@ -14,13 +14,9 @@ class CruiseCalendarWidget extends StatelessWidget {
     filterCruises(context);
 
     return Form(
-        key: formKey,
-        child: Stack(
-          children: [
-            CruiseFiltersWidget(ctx: ctx),
-            CruiseKeyPadWidget(),
-          ],
-        ));
+      key: formKey,
+      child: CruiseFiltersWidget(ctx: ctx),
+    );
   }
 }
 
@@ -34,221 +30,185 @@ class CruiseFiltersWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => Column(
-          children: [
-            Row(
-              children: [
+    return Obx(
+      () => Column(
+        children: [
+          Row(
+            children: [
+              CustomFormDropDownFieldWidget(
+                  width: 0.15,
+                  height: 0.05,
+                  validator: CustomRequiredValidator(
+                      errorText: "Cruise Category is required ", ctx: ctx),
+                  value: "0",
+                  onSaved: (value) {},
+                  onChanged: (value) {
+                    cruiseCategory.value = getCatalogDescription(
+                        findMemoryCatalog("cruises", "cruise_category"), value);
+                    filterCruises(context);
+                  },
+                  hintText: "Category             ",
+                  data: findMemoryCatalog("cruises", "cruise_category")),
+              if (cruiseCategory.value.isNotEmpty)
                 CustomFormDropDownFieldWidget(
                     width: 0.15,
                     height: 0.05,
                     validator: CustomRequiredValidator(
-                        errorText: "Cruise Category is required ", ctx: ctx),
+                        errorText: "Cruise Modality is required ", ctx: ctx),
                     value: "0",
                     onSaved: (value) {},
                     onChanged: (value) {
-                      cruiseCategory.value = getCatalogDescription(
-                          findMemoryCatalog("cruises", "cruise_category"),
-                          value);
+                      cruiseModality.value = getCatalogDescription(
+                          findMemoryCatalog("cruises", "modality"), value);
                       filterCruises(context);
                     },
-                    hintText: "Category             ",
-                    data: findMemoryCatalog("cruises", "cruise_category")),
-                if (cruiseCategory.value.isNotEmpty)
+                    hintText: "Modality     ",
+                    data: findMemoryCatalog("cruises", "modality")),
+              if (cruiseCategory.value.isNotEmpty)
+                if (cruiseModality.value.isNotEmpty)
                   CustomFormDropDownFieldWidget(
                       width: 0.15,
                       height: 0.05,
                       validator: CustomRequiredValidator(
-                          errorText: "Cruise Modality is required ", ctx: ctx),
+                          errorText: "Cruise Islet is required ", ctx: ctx),
                       value: "0",
                       onSaved: (value) {},
                       onChanged: (value) {
-                        cruiseModality.value = getCatalogDescription(
-                            findMemoryCatalog("cruises", "modality"), value);
+                        cruiseIslet.value = getCatalogDescription(
+                            findCatalog("galapagos"), value);
                         filterCruises(context);
                       },
-                      hintText: "Modality     ",
-                      data: findMemoryCatalog("cruises", "modality")),
-              ],
-            ),
-            if (cruiseCategory.value.isNotEmpty)
-              if (cruiseModality.value.isNotEmpty)
-                CustomFormDropDownFieldWidget(
-                    width: 0.15,
-                    height: 0.05,
-                    validator: CustomRequiredValidator(
-                        errorText: "Cruise Islet is required ", ctx: ctx),
-                    value: "0",
-                    onSaved: (value) {},
-                    onChanged: (value) {
-                      cruiseIslet.value = getCatalogDescription(
-                          findCatalog("galapagos"), value);
-                      filterCruises(context);
-                    },
-                    hintText: "Islet     ",
-                    data: findCatalog("galapagos")),
-            if (cruiseCategory.value.isNotEmpty)
-              if (cruiseModality.value.isNotEmpty)
-                if (cruiseIslet.value.isNotEmpty)
-                  CustomFormDropDownFieldWidget(
-                      width: 0.15,
-                      height: 0.05,
-                      validator: CustomRequiredValidator(
-                          errorText: "Cruise Type is required ", ctx: ctx),
-                      value: "0",
-                      onSaved: (value) {},
-                      onChanged: (value) {
-                        cruiseType.value = getCatalogDescription(
-                            findMemoryCatalog("cruises", "cruise_type"), value);
-                        filterCruises(context);
-                      },
-                      hintText: "Type             ",
-                      data: findMemoryCatalog("cruises", "cruise_type")),
-            Row(
-              children: [
-                if (cruiseCategory.value.isNotEmpty)
-                  if (cruiseModality.value.isNotEmpty)
-                    if (cruiseIslet.value.isNotEmpty)
-                      if (cruiseType.value.isNotEmpty)
+                      hintText: "Islet     ",
+                      data: findCatalog("galapagos")),
+            ],
+          ),
+          Row(
+            children: [
+              if (cruiseCategory.value.isNotEmpty)
+                if (cruiseModality.value.isNotEmpty)
+                  if (cruiseIslet.value.isNotEmpty)
+                    CustomFormDropDownFieldWidget(
+                        width: 0.15,
+                        height: 0.05,
+                        validator: CustomRequiredValidator(
+                            errorText: "Cruise Type is required ", ctx: ctx),
+                        value: "0",
+                        onSaved: (value) {},
+                        onChanged: (value) {
+                          cruiseType.value = getCatalogDescription(
+                              findMemoryCatalog("cruises", "cruise_type"),
+                              value);
+                          filterCruises(context);
+                        },
+                        hintText: "Type             ",
+                        data: findMemoryCatalog("cruises", "cruise_type")),
+              if (cruiseCategory.value.isNotEmpty)
+                if (cruiseModality.value.isNotEmpty)
+                  if (cruiseIslet.value.isNotEmpty)
+                    if (cruiseType.value.isNotEmpty)
+                      CustomFormDropDownFieldWidget(
+                          width: 0.15,
+                          height: 0.05,
+                          validator: CustomRequiredValidator(
+                              errorText: "Starts is required ", ctx: ctx),
+                          value: "0",
+                          onSaved: (value) {
+                            cruiseStarts.value = getCatalogDescription(
+                                findCatalog("week_day"), value);
+                            filterCruises(context);
+                          },
+                          onChanged: (value) {
+                            cruiseStarts.value = getCatalogDescription(
+                                findCatalog("week_day"), value);
+                            filterCruises(context);
+                          },
+                          hintText: "Starts\t\t\t\t\t\t\t",
+                          data: findCatalog("week_day")),
+              if (cruiseCategory.value.isNotEmpty)
+                if (cruiseModality.value.isNotEmpty)
+                  if (cruiseIslet.value.isNotEmpty)
+                    if (cruiseType.value.isNotEmpty)
+                      if (cruiseStarts.value.isNotEmpty)
                         CustomFormDropDownFieldWidget(
                             width: 0.15,
                             height: 0.05,
                             validator: CustomRequiredValidator(
-                                errorText: "Starts is required ", ctx: ctx),
+                                errorText: "End is required ", ctx: ctx),
                             value: "0",
-                            onSaved: (value) {
-                              cruiseStarts.value = getCatalogDescription(
-                                  findCatalog("week_day"), value);
-                              filterCruises(context);
-                            },
+                            onSaved: (value) {},
                             onChanged: (value) {
-                              cruiseStarts.value = getCatalogDescription(
+                              cruiseEnds.value = getCatalogDescription(
                                   findCatalog("week_day"), value);
                               filterCruises(context);
                             },
-                            hintText: "Starts\t\t\t\t\t\t\t",
+                            hintText: "End",
                             data: findCatalog("week_day")),
-                if (cruiseCategory.value.isNotEmpty)
-                  if (cruiseModality.value.isNotEmpty)
-                    if (cruiseIslet.value.isNotEmpty)
-                      if (cruiseType.value.isNotEmpty)
-                        if (cruiseStarts.value.isNotEmpty)
-                          CustomFormDropDownFieldWidget(
-                              width: 0.15,
-                              height: 0.05,
-                              validator: CustomRequiredValidator(
-                                  errorText: "End is required ", ctx: ctx),
-                              value: "0",
-                              onSaved: (value) {},
-                              onChanged: (value) {
-                                cruiseEnds.value = getCatalogDescription(
-                                    findCatalog("week_day"), value);
-                                filterCruises(context);
-                              },
-                              hintText: "End",
-                              data: findCatalog("week_day")),
+            ],
+          ),
+          if (moreFilters.value)
+            Row(
+              children: [
+                CustomFormDropDownFieldWidget(
+                    width: 0.15,
+                    height: 0.05,
+                    validator: CustomRequiredValidator(
+                        errorText: "End is required ", ctx: ctx),
+                    value: "0",
+                    onSaved: (value) {},
+                    onChanged: (value) {
+                      cruiseEnds.value =
+                          getCatalogDescription(findCatalog("week_day"), value);
+                      filterCruises(context);
+                    },
+                    hintText: "End",
+                    data: findCatalog("week_day")),
+                CustomFormDropDownFieldWidget(
+                    width: 0.15,
+                    height: 0.05,
+                    validator: CustomRequiredValidator(
+                        errorText: "End is required ", ctx: ctx),
+                    value: "0",
+                    onSaved: (value) {},
+                    onChanged: (value) {
+                      cruiseEnds.value =
+                          getCatalogDescription(findCatalog("week_day"), value);
+                      filterCruises(context);
+                    },
+                    hintText: "End",
+                    data: findCatalog("week_day")),
+                CustomFormDropDownFieldWidget(
+                    width: 0.15,
+                    height: 0.05,
+                    validator: CustomRequiredValidator(
+                        errorText: "End is required ", ctx: ctx),
+                    value: "0",
+                    onSaved: (value) {},
+                    onChanged: (value) {
+                      cruiseEnds.value =
+                          getCatalogDescription(findCatalog("week_day"), value);
+                      filterCruises(context);
+                    },
+                    hintText: "End",
+                    data: findCatalog("week_day")),
+                CustomFormDropDownFieldWidget(
+                    width: 0.15,
+                    height: 0.05,
+                    validator: CustomRequiredValidator(
+                        errorText: "End is required ", ctx: ctx),
+                    value: "0",
+                    onSaved: (value) {},
+                    onChanged: (value) {
+                      cruiseEnds.value =
+                          getCatalogDescription(findCatalog("week_day"), value);
+                      filterCruises(context);
+                    },
+                    hintText: "End",
+                    data: findCatalog("week_day")),
               ],
             ),
-            if (moreFilters.value)
-              Row(
-                children: [
-                  CustomFormDropDownFieldWidget(
-                      width: 0.15,
-                      height: 0.05,
-                      validator: CustomRequiredValidator(
-                          errorText: "End is required ", ctx: ctx),
-                      value: "0",
-                      onSaved: (value) {},
-                      onChanged: (value) {
-                        cruiseEnds.value = getCatalogDescription(
-                            findCatalog("week_day"), value);
-                        filterCruises(context);
-                      },
-                      hintText: "End",
-                      data: findCatalog("week_day")),
-                  CustomFormDropDownFieldWidget(
-                      width: 0.15,
-                      height: 0.05,
-                      validator: CustomRequiredValidator(
-                          errorText: "End is required ", ctx: ctx),
-                      value: "0",
-                      onSaved: (value) {},
-                      onChanged: (value) {
-                        cruiseEnds.value = getCatalogDescription(
-                            findCatalog("week_day"), value);
-                        filterCruises(context);
-                      },
-                      hintText: "End",
-                      data: findCatalog("week_day")),
-                ],
-              ),
-            if (moreFilters.value)
-              Row(
-                children: [
-                  CustomFormDropDownFieldWidget(
-                      width: 0.15,
-                      height: 0.05,
-                      validator: CustomRequiredValidator(
-                          errorText: "End is required ", ctx: ctx),
-                      value: "0",
-                      onSaved: (value) {},
-                      onChanged: (value) {
-                        cruiseEnds.value = getCatalogDescription(
-                            findCatalog("week_day"), value);
-                        filterCruises(context);
-                      },
-                      hintText: "End",
-                      data: findCatalog("week_day")),
-                  CustomFormDropDownFieldWidget(
-                      width: 0.15,
-                      height: 0.05,
-                      validator: CustomRequiredValidator(
-                          errorText: "End is required ", ctx: ctx),
-                      value: "0",
-                      onSaved: (value) {},
-                      onChanged: (value) {
-                        cruiseEnds.value = getCatalogDescription(
-                            findCatalog("week_day"), value);
-                        filterCruises(context);
-                      },
-                      hintText: "End",
-                      data: findCatalog("week_day")),
-                ],
-              ),
-            if (moreFilters.value)
-              Row(
-                children: [
-                  CustomFormDropDownFieldWidget(
-                      width: 0.15,
-                      height: 0.05,
-                      validator: CustomRequiredValidator(
-                          errorText: "End is required ", ctx: ctx),
-                      value: "0",
-                      onSaved: (value) {},
-                      onChanged: (value) {
-                        cruiseEnds.value = getCatalogDescription(
-                            findCatalog("week_day"), value);
-                        filterCruises(context);
-                      },
-                      hintText: "End",
-                      data: findCatalog("week_day")),
-                  CustomFormDropDownFieldWidget(
-                      width: 0.15,
-                      height: 0.05,
-                      validator: CustomRequiredValidator(
-                          errorText: "End is required ", ctx: ctx),
-                      value: "0",
-                      onSaved: (value) {},
-                      onChanged: (value) {
-                        cruiseEnds.value = getCatalogDescription(
-                            findCatalog("week_day"), value);
-                        filterCruises(context);
-                      },
-                      hintText: "End",
-                      data: findCatalog("week_day")),
-                ],
-              ),
-          ],
-        ));
+        ],
+      ),
+    );
   }
 }
 
@@ -261,8 +221,8 @@ class CruiseKeyPadWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() => Padding(
           padding: EdgeInsets.only(
-              top: MediaQuery.of(context).size.height * 0.0,
-              left: MediaQuery.of(context).size.width * 0.55),
+              top: MediaQuery.of(context).size.height * 0,
+              left: MediaQuery.of(context).size.width * 0.5),
           child: Row(
             children: [
               TextButton(
@@ -273,6 +233,7 @@ class CruiseKeyPadWidget extends StatelessWidget {
                   cruiseType.value = "";
                   cruiseStarts.value = "";
                   cruiseEnds.value = "";
+                  moreFilters.value = false;
                 },
                 child: Text('Reset',
                     style: KTextSytle(
@@ -282,32 +243,34 @@ class CruiseKeyPadWidget extends StatelessWidget {
                             color: Colors.black)
                         .getStyle()),
               ),
-              TextButton(
-                onPressed: () {
-                  showCustomDialog(context, CruiseResultWidget(), "Close",
-                      backgroundColor: Colors.white);
-                },
-                child: Text('Process',
-                    style: KTextSytle(
-                            context: context,
-                            fontSize: 10,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black)
-                        .getStyle()),
-              ),
-              TextButton(
-                onPressed: () {
-                  moreFilters.value = !moreFilters.value;
-                },
-                child: Text(
-                    !moreFilters.value ? 'More Filters' : 'Less Filters',
-                    style: KTextSytle(
-                            context: context,
-                            fontSize: 10,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black)
-                        .getStyle()),
-              ),
+              if (cruiseStarts.value.isNotEmpty)
+                TextButton(
+                  onPressed: () {
+                    showCustomDialog(context, CruiseResultWidget(), "Close",
+                        backgroundColor: Colors.white);
+                  },
+                  child: Text('Process',
+                      style: KTextSytle(
+                              context: context,
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black)
+                          .getStyle()),
+                ),
+              if (cruiseStarts.value.isNotEmpty)
+                TextButton(
+                  onPressed: () {
+                    moreFilters.value = !moreFilters.value;
+                  },
+                  child: Text(
+                      !moreFilters.value ? 'More Filters' : 'Less Filters',
+                      style: KTextSytle(
+                              context: context,
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black)
+                          .getStyle()),
+                ),
             ],
           ),
         ));

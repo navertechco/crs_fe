@@ -293,28 +293,33 @@ Future<void> showCustomDialog(context, Widget child, String button,
     barrierDismissible: false, // user must tap button!
     builder: (BuildContext context) {
       return AlertDialog(
-        // contentPadding: EdgeInsets.all(1000),
+        contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 0),
         backgroundColor: backgroundColor,
-        content: SizedBox(
+        content: Container(
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(50)),
             width: MediaQuery.of(context).size.width * width,
             height: MediaQuery.of(context).size.height * height,
             child: child),
         actions: <Widget>[
-          customChild ?? Text(""),
-          TextButton(
-            child: Text(button,
-                style: KTextSytle(
-                        context: context,
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color: buttonColor)
-                    .getStyle()),
-            onPressed: () {
-              if (onSaved != null) {
-                onSaved();
-              }
-              Navigator.of(context).pop();
-            },
+          Row(
+            children: [
+              customChild ?? Text(""),
+              TextButton(
+                child: Text(button,
+                    style: KTextSytle(
+                            context: context,
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                            color: buttonColor)
+                        .getStyle()),
+                onPressed: () {
+                  if (onSaved != null) {
+                    onSaved();
+                  }
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
           ),
         ],
       );
@@ -390,10 +395,11 @@ Future<void> getCruise(ctx, {int cruiseId = 0}) async {
       if (data.length > 0) {
         globalctx.memory["cruises"] = data;
         showCustomDialog(ctx, CruiseCalendarWidget(ctx: ctx), "Close",
+            customChild: CruiseKeyPadWidget(),
             backgroundColor: Colors.white,
             buttonColor: Colors.black,
-            height: 0.2,
-            width: 0.75);
+            height: 0.25,
+            width: 0.2);
       }
     } else {
       SweetAlert.show(ctx,
@@ -406,10 +412,11 @@ Future<void> getCruise(ctx, {int cruiseId = 0}) async {
     }
   } else {
     showCustomDialog(ctx, CruiseCalendarWidget(ctx: ctx), "Close",
+        customChild: CruiseKeyPadWidget(),
         backgroundColor: Colors.white,
         buttonColor: Colors.black,
-        height: 0.2,
-        width: 0.75);
+        height: 0.25,
+        width: 0.2);
   }
 }
 
