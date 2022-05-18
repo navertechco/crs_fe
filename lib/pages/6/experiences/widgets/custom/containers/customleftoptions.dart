@@ -33,6 +33,20 @@ class CustomBodyDaysWidget extends HookWidget {
               left: MediaQuery.of(context).size.width * 0.0),
           child: CustomContentWidget(ctrl: ctrl),
         ),
+        Padding(
+          padding: EdgeInsets.only(
+              top: MediaQuery.of(context).size.height * 0.875,
+              left: MediaQuery.of(context).size.width * 0.05),
+          child: Text(
+            "You have exceeded the maximum hours planned for this day !!!",
+            style: KTextSytle(
+              context: context,
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+              color: Color.fromARGB(255, 204, 164, 61),
+            ).getStyle(),
+          ),
+        ),
       ],
     );
   }
