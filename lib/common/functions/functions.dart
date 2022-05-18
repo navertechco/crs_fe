@@ -423,6 +423,7 @@ Future<void> getHotel(ctx, {int cruiseId = 0}) async {
         width: 0.2);
   }
 }
+
 Future<void> getCruise(ctx, {int cruiseId = 0}) async {
   if (globalctx.memory["cruises"] == null) {
     var frame = {
@@ -778,7 +779,7 @@ Function getNetRateDetail = (context, data) {
 };
 
 String getTimeStringFromDouble(double value) {
-  if (value < 0) return 'Invalid Value';
+  if (value < 0) return '00:00';
   int flooredValue = value.floor();
   double decimalValue = value - flooredValue;
   String hourValue = getHourString(flooredValue);
