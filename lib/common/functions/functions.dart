@@ -43,7 +43,6 @@ Future<bool> getCatalog(
   }
 }
 
-
 findMemoryCatalog(name, description) {
   var memory = globalctx.memory[name];
   List<Map<String, dynamic>> output = <Map<String, dynamic>>[];
@@ -904,33 +903,21 @@ filterCatalog(catalog, key, value) {
 }
 
 purposeValidate(values) {
-  if (values.length <= 3) {
-    savePurposes(values);
-  }
-  if (purposeMemory.value.length > 3) {
+  if (values.length > 3) {
     var mem = [
-      purposeMemory.value[0],
-      purposeMemory.value[1],
-      purposeMemory.value[2]
+      values[0],
+      values[1],
+      values[2]
     ];
-    purposeMemory.value = mem;
     absorvedPurpose.value = true;
+    savePurposes(mem);
+  } else {
     savePurposes(values);
   }
 }
 
 savePurposes(values) {
   if (values == null) return;
-  if (values.length > 3) {
-    Get.snackbar("Error", "You can select maximum 3 purposes",
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-        borderRadius: 10,
-        margin: EdgeInsets.all(10),
-        duration: Duration(seconds: 3));
-    return;
-  }
   if (values.length <= 3) {
     purposeMemory.value = <String>[];
     var length = values.length;

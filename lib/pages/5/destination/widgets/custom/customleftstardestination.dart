@@ -13,34 +13,8 @@ class CustomLeftStarDestinationForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> destinationlist = [];
-    List destinations = destinationsCatalog.toList();
-    if (arrival.isNotEmpty) {
-      destinations.sort((a, b) {
-        var arrivalData = toCatalog(filterCatalog(
-            "destinations", "description", arrival.value["description"])[0]);
-        var arrivalLat = arrivalData.relation["latitude"];
-        var arrivalLong = arrivalData.relation["longitude"];
-        var aLat = toCatalog(a).relation["latitude"];
-        var bLat = toCatalog(b).relation["latitude"];
-        var aLong = toCatalog(a).relation["longitude"];
-        var bLong = toCatalog(b).relation["longitude"];
-        var bDistance = (getDistance(bLat, bLong, arrivalLat, arrivalLong));
-        var aDistance = (getDistance(aLat, aLong, arrivalLat, arrivalLong));
-        return aDistance.compareTo(bDistance);
-      });
-    }
-
-    for (Map item in destinations) {
-      List itemList = item.values.toList();
-      CatalogDto destination = CatalogDto(itemList);
-
-      destinationlist.add(
-        CustomDragableDestination(destination: destination.description!),
-      );
-    }
     return DestinationListWidget(
-      children: destinationlist,
+      children: getDestinationList(),
     );
   }
 }
