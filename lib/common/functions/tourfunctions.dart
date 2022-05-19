@@ -2,7 +2,7 @@
 import 'package:yaml/yaml.dart';
 import '../index.dart';
 
-Function saveTour = () async {
+saveTour() async {
   try {
     var payload = globalctx.payload.toString();
     var yaml = loadYaml(payload);
@@ -21,4 +21,4 @@ Function saveTour = () async {
   } catch (e) {
     generated = false;
   }
-};
+}

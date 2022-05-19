@@ -126,10 +126,12 @@ class CustomTourInformationForm extends StatelessWidget {
                       onSaved: (value) {
                         setFormValue(
                             globalctx.memory, "tour", "galapagos", value);
+                        dragDestination("galapagos");
                       },
                       onChanged: (value) {
                         setFormValue(
                             globalctx.memory, "tour", "galapagos", value);
+                        dragDestination("galapagos");
                       },
                     ),
                   ],

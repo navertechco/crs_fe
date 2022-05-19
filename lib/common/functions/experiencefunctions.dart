@@ -7,28 +7,27 @@ import 'package:intl/intl.dart';
 import 'package:naver_crs/pages/6/experiences/widgets/custom/index.dart';
 import '../index.dart';
 
-Function filterSuggestedExperiences = () {
+filterSuggestedExperiences() {
   processDays();
   filterExperiences();
   clearHours();
   clearKA();
-};
-List filteredExperiences = [];
+}
 
-Function filterExperiences = () {
+filterExperiences() {
   getFilteredExperiences();
   updateSelectedDragExperiences();
-};
+}
 
-Function updateSelectedDragExperiences = () {
+updateSelectedDragExperiences() {
   experienceSelectedDragData.value = <Widget>[];
   for (var experience in filteredExperiences) {
     experienceSelectedDragData.value
         .add(DragableExperience(experience: experience, suggested: true));
   }
-};
+}
 
-Function getFilteredExperiences = () {
+getFilteredExperiences() {
   filteredExperiences = getExpFiltered();
   var idx = getDestinationIndexByDay();
   var sub = getFormValue(globalctx.memory["destinations"], idx, "sub", null);
@@ -202,9 +201,10 @@ Function getFilteredExperiences = () {
   // });
   filteredExperiences.sort((a, b) => a.code.compareTo(b.code));
   filteredExperiences.sort((a, b) => a.order.compareTo(b.order));
-};
+}
+
 //////////////////////////////////////////////////////////////////////////////////////
-Function getExpFiltered = () {
+getExpFiltered() {
   List filtered = [];
   for (Map item in experiences) {
     List itemList = item.values.toList();
@@ -218,8 +218,9 @@ Function getExpFiltered = () {
     }
   }
   return filtered;
-};
-Function initializeHours = () {
+}
+
+initializeHours() {
   leftHours[currentDay.value] ??= 0.0.obs;
   accumulatedHours[currentDay.value] ??= 0.0.obs;
   totalHours[currentDay.value] ??= 0.0.obs;
@@ -231,14 +232,16 @@ Function initializeHours = () {
       time.addHour(totalHours[currentDay.value].value.round() as int);
   clearHours();
   clearKA();
-};
-Function resetExperiences = () {
+}
+
+resetExperiences() {
   for (var exp in globalctx.experiences[currentDay.value] as Iterable) {
     promoteExperience(exp, "suggested");
   }
   resetDayCounters();
-};
-Function promoteExperience = (String experience, String state) {
+}
+
+promoteExperience(String experience, String state) {
   int sign = state == "suggested" ? -1 : 1;
   var value = calculateExperienceDays(experience);
   if (experience == "Leisure Time") {
@@ -248,14 +251,15 @@ Function promoteExperience = (String experience, String state) {
   processHour(value * sign);
   setExperienceState(experience, state);
   saveExperience(experience, state);
-};
+}
 
-Function processHour = (value) {
+processHour(value) {
   accumulatedHours[currentDay.value].value =
       accumulatedHours[currentDay.value].value + value;
   initializeHours();
-};
-Function saveExperience = (experience, state) {
+}
+
+saveExperience(experience, state) {
   if (state == "promoted") {
     List<CatalogDto> filtered = [];
     for (Map item in experiences) {
@@ -271,47 +275,50 @@ Function saveExperience = (experience, state) {
     globalctx.memory["promoted"]["day"][currentDay.value][experience] =
         experienceData.toJson();
   }
-};
-Function resetDayCounters = () {
+}
+
+resetDayCounters() {
   accumulatedHours[currentDay.value].value = 0.0;
   leftHours[currentDay.value].value = totalHours[currentDay.value].value;
   initializeHours();
-};
+}
 
-Function setExperienceState = (experience, state) {
+setExperienceState(experience, state) {
   globalctx.states["experiences"][currentDay.value] ??= {}.obs;
   globalctx.states["experiences"][currentDay.value][experience] ??= {}.obs;
   globalctx.states["experiences"][currentDay.value][experience]["state"] =
       state;
 
   filterSuggestedExperiences();
-};
-Function getExperienceState = (experience) {
+}
+
+getExperienceState(experience) {
   globalctx.states["experiences"][currentDay.value] ??= {}.obs;
   globalctx.states["experiences"][currentDay.value][experience] ??= {}.obs;
   var state =
       globalctx.states["experiences"][currentDay.value][experience]["state"];
   state ??= "suggested";
   return state;
-};
+}
 
 var experiencePromotedDragData = Rx(<Widget>[]);
 
-Function calculateExperienceDays = (String experience) {
+calculateExperienceDays(String experience) {
   var expData = getExperienceByName(experience).value;
   var exptime = (parseInt(expData['exptime']) * 1.0) as double;
   return exptime / 60;
-};
+}
 
-Function getExperienceTravelRhythmByName = (String experience) {
+getExperienceTravelRhythmByName(String experience) {
   var expData = getExperienceValueByName(experience);
   var trData = findCatalog("travel_rhythm").toList();
   var trObject = trData.firstWhere((e) =>
       e["description"].toString().toUpperCase() ==
       expData["travel_rhythm"].toString().toUpperCase());
   return trObject;
-};
-Function getExperienceValueByName = (String experience) {
+}
+
+getExperienceValueByName(String experience) {
   var result;
   try {
     result = getExperienceByName(experience).value;
@@ -319,8 +326,9 @@ Function getExperienceValueByName = (String experience) {
     log(e);
   }
   return result;
-};
-Function getExperienceByName = (String experience) {
+}
+
+getExperienceByName(String experience) {
   var result;
   try {
     result = toCatalog(expList.firstWhere(
@@ -329,14 +337,15 @@ Function getExperienceByName = (String experience) {
     log(e);
   }
   return result;
-};
-Function updateDraggableExperiences = () {
+}
+
+updateDraggableExperiences() {
   if (globalctx.promotedExperiences.keys.contains("Leisure Time")) {
     destDraggable.value = 0;
   }
-};
+}
 
-Function clearHours = () {
+clearHours() {
   clearedHours[currentDay.value] ??= false;
   if (clearedHours[currentDay.value]) {
     currentTravelRhythm.value = "0";
@@ -344,10 +353,11 @@ Function clearHours = () {
     leftHours[currentDay.value].value = totalHours[currentDay.value].value -
         accumulatedHours[currentDay.value].value;
   }
-};
-Function clearKA = () {
+}
+
+clearKA() {
   clearedKA[currentDay.value] ??= false;
   if (clearedKA[currentDay.value]) {
     currentDestinationKeyActivities.value = [];
   }
-};
+}

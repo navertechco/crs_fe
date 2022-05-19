@@ -25,7 +25,7 @@ Future<void> load(key) async {
   }
 }
 
-// Other Functions
+// Other s
 Future<bool> getCatalog(
   List<String> catalogs,
 ) async {
@@ -43,9 +43,8 @@ Future<bool> getCatalog(
   }
 }
 
-RxList<Map<String, dynamic>> daysCatalog = <Map<String, dynamic>>[].obs;
 
-Function findMemoryCatalog = (name, description) {
+findMemoryCatalog(name, description) {
   var memory = globalctx.memory[name];
   List<Map<String, dynamic>> output = <Map<String, dynamic>>[];
   if (memory != null) {
@@ -61,9 +60,9 @@ Function findMemoryCatalog = (name, description) {
     }
   }
   return output;
-};
+}
 
-Function findCatalog = (name) {
+findCatalog(name) {
   var catalogs = getContext("catalogs");
   List<Map<String, dynamic>> catalog = <Map<String, dynamic>>[];
   if (catalogs.isNotEmpty) {
@@ -76,9 +75,9 @@ Function findCatalog = (name) {
   }
 
   return catalog;
-};
+}
 
-Function getDateValue = (data, key, {def}) {
+getDateValue(data, key, {def}) {
   try {
     if (data ?? true) {
       if (data[key] ?? true) {
@@ -90,35 +89,41 @@ Function getDateValue = (data, key, {def}) {
   } catch (e) {
     return def;
   }
-};
-Function getValue = (data, key, {def}) {
+}
+
+getValue(data, key, {def}) {
   try {
     return data[key] ?? def;
   } catch (e) {
     return def;
   }
-};
-Function setValue = (data, key, value) {
+}
+
+setValue(data, key, value) {
   data[key] = value;
-};
-Function validateData = (data) {
+}
+
+validateData(data) {
   return data != null ? data.length > 0 : false;
-};
-Function getData = (data, sub, key) {
+}
+
+getData(data, sub, key) {
   // ignore: invalid_use_of_protected_member
   return data != null && data[sub] != null
       // ignore: invalid_use_of_protected_member
       ? data[sub][key]
       : "0";
-};
-Function getDataList = (data, sub, key) {
+}
+
+getDataList(data, sub, key) {
   // ignore: invalid_use_of_protected_member
   return data != null && data[sub] != null
       // ignore: invalid_use_of_protected_member
       ? data[sub][key]
       : <Map<String, dynamic>>[];
-};
-Function getParam = (key) {
+}
+
+getParam(key) {
   try {
     var params = findCatalog("params");
     var child =
@@ -127,8 +132,9 @@ Function getParam = (key) {
   } catch (e) {
     log(e);
   }
-};
-Function cityData = (Rx<List<Map<String, dynamic>>> citylist, cities) {
+}
+
+cityData(Rx<List<Map<String, dynamic>>> citylist, cities) {
   var index = 1;
   citylist.value = [];
   for (var city in cities) {
@@ -138,16 +144,17 @@ Function cityData = (Rx<List<Map<String, dynamic>>> citylist, cities) {
     });
     index++;
   }
-};
-Function globalctxReset = () {
+}
+
+globalctxReset() {
   globalctx.reset.value = true;
   resetLeftDays();
   resetDestinations();
   updateDraggableDestinations();
   filterDestinations();
-};
+}
 
-Function getItems = (data, value, hintText) {
+getItems(data, value, hintText) {
   RxList<DropdownMenuItem<String>> items = <DropdownMenuItem<String>>[].obs;
   List<Map<String, dynamic>> data2 = [];
   data2.add({"code": "0", "description": hintText ?? "Choose a Option"});
@@ -170,8 +177,9 @@ Function getItems = (data, value, hintText) {
     });
   }
   return items;
-};
-Function chunkMap = (data, int portion, List<Map<String, dynamic>> list) {
+}
+
+chunkMap(data, int portion, List<Map<String, dynamic>> list) {
   List<List<Map<String, dynamic>>> chunks = [];
   int aprox = (list.length / portion).round() * portion;
   int module = aprox > list.length
@@ -191,28 +199,30 @@ Function chunkMap = (data, int portion, List<Map<String, dynamic>> list) {
     }
   }
   return chunks;
-};
-Function isMobileDevice = () {
+}
+
+isMobileDevice() {
   if ((defaultTargetPlatform == TargetPlatform.iOS) ||
       (defaultTargetPlatform == TargetPlatform.android)) {
     // Some android/ios specific code
     return true;
   }
   return false;
-};
-Function setData = (data, key, value) {
-  data[key] = value;
-};
+}
 
-Function getRXValue = (data, key, def) {
+setData(data, key, value) {
+  data[key] = value;
+}
+
+getRXValue(data, key, def) {
   try {
     return data[key].value;
   } catch (e) {
     return def;
   }
-};
+}
 
-Function getFormValue = (data, formKey, key, def) {
+getFormValue(data, formKey, key, def) {
   formKey = formKey.toString();
   if (data != null) {
     if (data[formKey] != null) {
@@ -225,8 +235,9 @@ Function getFormValue = (data, formKey, key, def) {
     }
   }
   return def;
-};
-Function getFormDateValue = (data, formKey, key, def) {
+}
+
+getFormDateValue(data, formKey, key, def) {
   if (data != null) {
     if (data[formKey] != null) {
       if (data[formKey][key] != null) {
@@ -238,13 +249,15 @@ Function getFormDateValue = (data, formKey, key, def) {
     }
   }
   return DateTime.parse(def);
-};
-Function toCatalog = (item) {
+}
+
+toCatalog(item) {
   List list = item.values.toList();
   CatalogDto ctlg = CatalogDto(list);
   return ctlg;
-};
-Function parseIntValue = (value) {
+}
+
+parseIntValue(value) {
   if (value is int) {
     return value;
   }
@@ -254,8 +267,9 @@ Function parseIntValue = (value) {
   }
   value = value.replaceAll(RegExp(r'[^0-9]'), '').replaceAll("-", "");
   return int.parse(value);
-};
-Function setFormValue = (data, formKey, key, value) {
+}
+
+setFormValue(data, formKey, key, value) {
   try {
     data ??= {}.obs;
     formKey = formKey.toString();
@@ -266,7 +280,8 @@ Function setFormValue = (data, formKey, key, value) {
   } catch (e) {
     log(e);
   }
-};
+}
+
 dynamic myEncode(dynamic item) {
   if (item is DateTime || item is Map) {
     return item.toIso8601String();
@@ -274,12 +289,12 @@ dynamic myEncode(dynamic item) {
   return item;
 }
 
-Function getCountryNameById = (id) {
+getCountryNameById(id) {
   var country = destinationCountry
       .firstWhere((element) => element["code"] == int.parse(id));
   var name = country["description"];
   return name;
-};
+}
 
 Future<void> showCustomDialog(context, Widget child, String button,
     {Widget? customChild,
@@ -332,7 +347,7 @@ Future<void> showCustomDialog(context, Widget child, String button,
   );
 }
 
-Function findTravelRhythmDescription = (int code) {
+findTravelRhythmDescription(int code) {
   try {
     if (code == 0) {
       return "HARD";
@@ -344,14 +359,16 @@ Function findTravelRhythmDescription = (int code) {
   } catch (e) {
     log(e);
   }
-};
-Function parseInt = (value) {
+}
+
+parseInt(value) {
   if (value is String) {
     return int.parse(value);
   }
   return value;
-};
-Function multiDropDownKaAgeFilter = (trCatalog, travelRhytmAges) {
+}
+
+multiDropDownKaAgeFilter(trCatalog, travelRhytmAges) {
   return trCatalog.value.where((value) {
     var code = value["code"];
     for (var i = 0; i < travelRhytmAges.keys.length; i++) {
@@ -371,20 +388,21 @@ Function multiDropDownKaAgeFilter = (trCatalog, travelRhytmAges) {
     }
     return false;
   }).toList() as List<Map<String, dynamic>>;
-};
+}
 
-Function log = (e) {
+log(e) {
   print(e);
-};
+}
 
-Function setLT = (value) {
+setLT(value) {
   int ltindex =
       expList.indexWhere((element) => element["description"] == "Leisure Time");
   globalctx.context.value["catalogs"]["experiences"][ltindex]["value"]
           ["exptime"] ==
       value;
   experiences = findCatalog("experiences");
-};
+}
+
 Future<void> getHotel(ctx, {int cruiseId = 0}) async {
   if (globalctx.memory["cruises"] == null) {
     var frame = {
@@ -485,17 +503,18 @@ Future<void> getTour(ctx, {int tourId = 0, detail = false, cb}) async {
   }
 }
 
-Function resetData = (context, controller) {
+resetData(context, controller) {
   var data = globalctx.memory["tours"];
   if (searchResult!.value.isNotEmpty) {
     controller.clear();
     searchResult!.value = "";
     filteredData.value = data;
-    var detail = getDetail(context, filteredData);
+    var detail = getDetail(context, filteredData, null);
     searcherDetail.value = (detail);
   }
-};
-Function filterData = (context, value) {
+}
+
+filterData(context, value) {
   var data = globalctx.memory["tours"];
   try {
     searchResult!.value = value.toString();
@@ -506,33 +525,34 @@ Function filterData = (context, value) {
               quote["name"].toString().contains(searchResult!.value) ||
               quote["quote"].toString().contains(searchResult!.value))
           .toList();
-      var detail = getDetail(context, filteredData);
+      var detail = getDetail(context, filteredData, null);
       searcherDetail.value = (detail);
     }
   } catch (e) {
     log(e);
   }
-};
-Function processNetRateData = (context, data) {
+}
+
+processNetRateData(context, data) {
   var header = getNetRateHeader(context, data);
   var detail = getNetRateDetail(context, data);
   return [header, detail];
-};
+}
 
-Function processCruiseData = (context, data) {
+processCruiseData(context, data) {
   var columns = ["cruise_name", "cruise_format"];
   var header = getCruiseHeader(context, data, columns);
   var detail = getCruiseDetail(context, data, columns);
   return [header, detail];
-};
+}
 
-Function processData = (context, data, columns) {
+processData(context, data, columns) {
   var header = getHeader(context, data, columns);
   var detail = getDetail(context, data, columns);
   return [header, detail];
-};
+}
 
-Function getNetRateHeader = (context, data) {
+getNetRateHeader(context, data) {
   var header = <DataColumn>[];
   if (data.length > 0) {
     for (var key in data[0].keys) {
@@ -552,8 +572,9 @@ Function getNetRateHeader = (context, data) {
   }
 
   return header;
-};
-Function getCruiseHeader = (context, data, columns) {
+}
+
+getCruiseHeader(context, data, columns) {
   var header = <DataColumn>[];
   List cols = [];
 
@@ -591,9 +612,9 @@ Function getCruiseHeader = (context, data, columns) {
   }
 
   return header;
-};
+}
 
-Function getHeader = (context, data, columns) {
+getHeader(context, data, columns) {
   var header = <DataColumn>[];
   List cols = [];
 
@@ -631,7 +652,7 @@ Function getHeader = (context, data, columns) {
   }
 
   return header;
-};
+}
 
 List<Meeting> getDataSource(data) {
   List dataList = [];
@@ -663,7 +684,7 @@ List<Meeting> getDataSource(data) {
   return meetings;
 }
 
-Function getDetail = (context, data, columns) {
+getDetail(context, data, columns) {
   var states = [
     "Error",
     "New",
@@ -754,9 +775,9 @@ Function getDetail = (context, data, columns) {
   }
 
   return detail;
-};
+}
 
-Function getNetRateDetail = (context, data) {
+getNetRateDetail(context, data) {
   var detail = <DataRow>[];
   if (data.length > 0) {
     for (var row in data) {
@@ -776,7 +797,7 @@ Function getNetRateDetail = (context, data) {
   }
 
   return detail;
-};
+}
 
 String getTimeStringFromDouble(double value) {
   if (value < 0) return '00:00';
@@ -796,7 +817,7 @@ String getHourString(int flooredValue) {
   return '${flooredValue % 24}'.padLeft(2, '0');
 }
 
-Function goto = (page) {
+goto(page) {
   var index = pageList.indexWhere((element) => element["label"] == page);
   if (index != -1) {
     if (selectedIndex.value != index) {
@@ -804,7 +825,7 @@ Function goto = (page) {
       Get.toNamed("/$page");
     }
   }
-};
+}
 
 Future<void> logout(
   username,
@@ -823,7 +844,7 @@ Future<void> logout(
   }
 }
 
-Function getTrColor = (tr) {
+getTrColor(tr) {
   var color = {
     "SOFT": Colors.green,
     "MEDIUM": Colors.yellow,
@@ -831,9 +852,9 @@ Function getTrColor = (tr) {
   };
 
   return color[tr.toString().toUpperCase()];
-};
+}
 
-Function getCatalogs = (catalogs) async {
+getCatalogs(catalogs) async {
   Map res = await fetchhandler(kDefaultSchema, kDefaultServer,
       kDefaultServerPort, kDefaultFindCatalog, 'POST', {
     "data": {"catalogs": catalogs}
@@ -844,9 +865,9 @@ Function getCatalogs = (catalogs) async {
   } else {
     log(res["message"]);
   }
-};
+}
 
-Function newTour = () async {
+newTour() async {
   var res = await fetchhandler(kDefaultSchema, kDefaultServer,
       kDefaultServerPort, kDefaultNewTourEdit, 'POST', {});
   if (res['state'] == true) {
@@ -857,9 +878,9 @@ Function newTour = () async {
   } else {
     log(res["message"]);
   }
-};
+}
 
-Function multiSaving = (values, catalog, context, index, field, memory) {
+multiSaving(values, catalog, context, index, field, memory) {
   memory.value = <String>[];
   var length = values.length;
 
@@ -869,9 +890,9 @@ Function multiSaving = (values, catalog, context, index, field, memory) {
   }
 
   setFormValue(context, index, field, memory.value);
-};
+}
 
-Function filterCatalog = (catalog, key, value) {
+filterCatalog(catalog, key, value) {
   try {
     var res =
         findCatalog(catalog).toList().where((e) => e[key] == value).toList();
@@ -880,7 +901,7 @@ Function filterCatalog = (catalog, key, value) {
     log(e);
     return [];
   }
-};
+}
 
 purposeValidate(values) {
   if (values.length <= 3) {
@@ -898,7 +919,7 @@ purposeValidate(values) {
   }
 }
 
-Function savePurposes = (values) {
+savePurposes(values) {
   if (values == null) return;
   if (values.length > 3) {
     Get.snackbar("Error", "You can select maximum 3 purposes",
@@ -920,30 +941,30 @@ Function savePurposes = (values) {
     }
     setFormValue(globalctx.memory, "tour", "purposes", purposeMemory.value);
   }
-};
+}
 
-Function getDistance = (a, b, c, d) {
+getDistance(a, b, c, d) {
   return acos(sin(double.parse(c) * sin(double.parse(a)) +
           cos(double.parse(a)) *
               cos(double.parse(c)) *
               cos(double.parse(d) - double.parse(b)))) *
       6371;
-};
+}
 
-Function getCatalogDescription = (catalog, value) {
+getCatalogDescription(catalog, value) {
   log(value);
   if (value == "0") {
     return "";
   }
   return catalog.firstWhere((element) =>
       element["code"].toString() == (value.toString()))["description"];
-};
+}
 
-Function toMinutes = (TimeOfDay time) {
+toMinutes(TimeOfDay time) {
   return time.hour * 60 + time.minute;
-};
+}
 
-Function getDayId = (int destId, int destDay) {
+getDayId(int destId, int destDay) {
   var maxDestDays = getMaxDestDays();
   var currenDestDays = getDestDays(destId);
   var currenDestDaysOff = maxDestDays - currenDestDays;
@@ -952,7 +973,7 @@ Function getDayId = (int destId, int destDay) {
   var destMatrixIndex = maxDestDays * destId + destDay;
   var dayId = destMatrixIndex - accOff;
   return dayId;
-};
+}
 
 updateDestDays() {
   destDays = [];

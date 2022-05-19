@@ -262,6 +262,8 @@ List netRateData = [
 ];
 List data = [];
 RxString? searchResult = ''.obs;
+RxList<Map<String, dynamic>> daysCatalog = <Map<String, dynamic>>[].obs;
+
 var filteredData = [].obs;
 var absorvedPurpose = false.obs;
 var purposeMemory = <String>[].obs;
@@ -281,7 +283,7 @@ var cruiseTriple = "".obs;
 var cruiseStarts = "".obs;
 var cruiseEnds = "".obs;
 var cruiseIslet = "".obs;
-
+List filteredExperiences = [];
 Function clearCruiseFilter = () {
   cruiseFormat.value = "";
   cruiseDay.value = "";

@@ -7,7 +7,7 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 import '../index.dart';
 
 Rx<Iterable> cruiseResults = Rx([]);
-Function processCruiseItinerary = (row) {
+processCruiseItinerary(row) {
   var itinerary = row["cruise_itinerary"]
       .toString()
       .replaceAll("[", "")
@@ -28,9 +28,9 @@ Function processCruiseItinerary = (row) {
     }
   }
   return result;
-};
+}
 
-Function filterCruises = (ctx) {
+filterCruises(ctx) {
   if (globalctx.memory["cruises"] != null) {
     List filtered = globalctx.memory["cruises"];
 
@@ -95,9 +95,9 @@ Function filterCruises = (ctx) {
       ));
     }
   }
-};
+}
 
-Function getCruiseDetail = (context, data, columns) {
+getCruiseDetail(context, data, columns) {
   var detail = <DataRow>[];
   if (data.length > 0) {
     for (var row in data) {
@@ -127,7 +127,7 @@ Function getCruiseDetail = (context, data, columns) {
   }
 
   return detail;
-};
+}
 
 getCruisDataCell(context, row) {
   var dataCell = DataCell(

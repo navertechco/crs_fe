@@ -204,13 +204,14 @@ class CustomLogisticInformationForm extends StatelessWidget {
                                 },
                                 hintText: 'Open Credit Amount',
                               ),
-                            const CustomTitleWidget(
-                              width: 0.3,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.red,
-                              label:
-                                  "  Remember you have selected Galapagos Cruise !!!!",
-                            ),
+                            if (galapagos.value)
+                              const CustomTitleWidget(
+                                width: 0.3,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.red,
+                                label:
+                                    "  Remember you have selected Galapagos Cruise !!!!",
+                              ),
                           ],
                         );
                       }),

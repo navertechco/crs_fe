@@ -1,5 +1,4 @@
-// Day Functions
-
+//  Functions
 // ignore_for_file: prefer_function_declarations_over_variables
 
 import 'package:get/get.dart';
@@ -8,7 +7,7 @@ import 'package:naver_crs/pages/5/destination/widgets/destinationdetail/widgets/
 import '../index.dart';
 import 'functions.dart';
 
-Function paginateDay = (context) async {
+paginateDay(context) async {
   if (globalctx.memory["promoted"] != null &&
       globalctx.memory["promoted"]["day"] != null &&
       globalctx.memory["promoted"]["day"][currentDay.value] != null) {
@@ -17,9 +16,9 @@ Function paginateDay = (context) async {
     showCustomDialog(
         context, LeftWidget(destination: "quito", index: 0), "Close");
   }
-};
+}
 
-Function decideBypass = (direction) {
+decideBypass(direction) {
   int index = getDestinationIndexByDay();
   int explorationMode = int.parse(getFormValue(
       globalctx.memory["destinations"], index, "explorationMode", "0"));
@@ -28,9 +27,9 @@ Function decideBypass = (direction) {
   } else {
     bypassSurprise(direction);
   }
-};
+}
 
-Function bypassSurprise = (String direction) {
+bypassSurprise(String direction) {
   try {
     int index = getDestinationIndexByDay();
     List keyActivities = (getFormValue(
@@ -52,9 +51,9 @@ Function bypassSurprise = (String direction) {
   } catch (e) {
     log(e);
   }
-};
+}
 
-Function bypassCruise = (String direction) {
+bypassCruise(String direction) {
   try {
     int index = getDestinationIndex(globalDestinationName.value, "tour");
     int explorationMode = int.parse(getFormValue(
@@ -91,24 +90,24 @@ Function bypassCruise = (String direction) {
   } catch (e) {
     log(e);
   }
-};
+}
 
-Function adjustCurrentDay = () {
+adjustCurrentDay() {
   if (currentDay.value < 0) {
     currentDay.value = 0;
     resetExperiences();
   }
-};
+}
 
-Function updateCurrentDay = (direction) {
+updateCurrentDay(direction) {
   if (direction == "forward") {
     currentDay.value += 1;
   } else {
     currentDay.value -= 1;
   }
-};
+}
 
-Function jumpDay = (direction) {
+jumpDay(direction) {
   decideBypass(direction);
   expDraggable.value = 1;
   currentDate.value = arrivalDate.value.add(Duration(days: currentDay.value));
@@ -116,9 +115,9 @@ Function jumpDay = (direction) {
   filterSuggestedExperiences();
   initializeHours();
   goto("Experiences");
-};
+}
 
-Function jumpDestination = (direction) {
+jumpDestination(direction) {
   decideBypass(direction);
   expDraggable.value = 1;
   currentDate.value = arrivalDate.value.add(Duration(days: currentDay.value));
@@ -126,30 +125,30 @@ Function jumpDestination = (direction) {
   filterSuggestedExperiences();
   initializeHours();
   goto("Services");
-};
+}
 
-Function nextDay = () async {
+nextDay() async {
   if (currentDay.value < totalDays.value - 1) {
     jumpDay("forward");
   } else {
     goto("Services");
   }
-};
+}
 
-Function previousDay = () {
+previousDay() {
   if (currentDay.value > 0) {
     jumpDay("backward");
   } else {
     resetExperiences();
     goto("Destination");
   }
-};
+}
 
-Function previousDestination = () {
+previousDestination() {
   goto("Experience");
-};
+}
 
-Function getDtos = () {
+getDtos() {
   var day = {
     "date": "",
     "observation": "",
@@ -176,9 +175,9 @@ Function getDtos = () {
   };
 
   return [day, experience];
-};
+}
 
-Function prepareAllToResume = () async {
+prepareAllToResume() async {
   try {
     var dayIndex = 0;
     var destinations = getCombinedDestinations();
@@ -246,9 +245,9 @@ Function prepareAllToResume = () async {
   } finally {
     goto("PrintDocs");
   }
-};
+}
 
-Function processDays = () {
+processDays() {
   result = [];
 
   for (String dest in destinations.keys.toList()) {
@@ -268,28 +267,30 @@ Function processDays = () {
       updateCurrentKeyActivities();
     }
   }
-};
-Function updateCurrentKeyActivities = () {
+}
+
+updateCurrentKeyActivities() {
   var index = getDestinationIndexByDay();
   var ka = getFormValue(
       globalctx.memory["destinations"], index, "key_activities", []);
   currentDestinationKeyActivities.value = ka;
-};
+}
 
-Function updateCurrentDestinationOption = () {
+updateCurrentDestinationOption() {
   var index = getDestinationIndexByDay();
   var destinationOption = getFormValue(
       globalctx.memory["destinations"], index, "destination_option", "1");
   currentDestinationOption.value = destinationOption;
-};
-Function updateCurrentDestinationTravelRhythm = () {
+}
+
+updateCurrentDestinationTravelRhythm() {
   var index = getDestinationIndexByDay();
   var travelRhythm = getFormValue(
       globalctx.memory["destinations"], index, "travel_rhythm", "1");
   currentTravelRhythm.value = travelRhythm;
-};
+}
 
-Function processDaysCatalog = () {
+processDaysCatalog() {
   totalDays.value =
       departureDate.value.difference(arrivalDate.value).inDays + 1;
   if (totalDays.value > 0) {
@@ -301,13 +302,15 @@ Function processDaysCatalog = () {
       daysCatalog.add(row);
     }
   }
-};
-Function resetLeftDays = () {
+}
+
+resetLeftDays() {
   leftAccumulated.value = 0;
   dayleft.value = totalDays.value;
   accumulated.value = 0;
-};
-Function saveExplorationDays = (int index, int val0, int val1, {String? key}) {
+}
+
+saveExplorationDays(int index, int val0, int val1, {String? key}) {
   try {
     int acc0 = accumulated.value;
     int td = totalDays.value;
@@ -340,9 +343,9 @@ Function saveExplorationDays = (int index, int val0, int val1, {String? key}) {
   } catch (e) {
     log(e);
   }
-};
+}
 
-Function parseHour = (str) {
+parseHour(str) {
   if (str.contains("h")) {
     var parts = str.split("h");
     return int.parse(parts[0]) * 60 + int.parse(parts[1]);
@@ -352,4 +355,4 @@ Function parseHour = (str) {
   } else {
     return int.parse(str);
   }
-};
+}

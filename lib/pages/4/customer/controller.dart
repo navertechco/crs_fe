@@ -15,6 +15,11 @@ class CustomerController extends GetxController {
       globalctx.memory["customer"] = mem;
       filterDestinations();
       globalctxReset();
+      var galapagos =
+          Rx(getFormValue(globalctx.memory, "tour", "galapagos", false));
+      if (galapagos.value) {
+        dragDestination("galapagos");
+      }
       goto("Destination");
     };
   }

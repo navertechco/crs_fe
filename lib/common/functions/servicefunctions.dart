@@ -8,13 +8,13 @@ import '../index.dart';
 
 List filtered = [];
 
-Function filterSuggestedServices = () {
+filterSuggestedServices() {
   getFilteredServices().then((value) {
     updateDragServices();
   });
-};
+}
 
-Function getFilteredServices = () async {
+getFilteredServices() async {
   filtered = await getSrvFiltered();
   filtered = filtered
       .where((service) =>
@@ -56,10 +56,10 @@ Function getFilteredServices = () async {
   }
   filtered.sort((a, b) => a.code.compareTo(b.code));
   filtered.sort((a, b) => a.order.compareTo(b.order));
-};
+}
 //////////////////////////////////////////////////////////////////////////////////////
 
-Function updateDragServices = () {
+updateDragServices() {
   resetDrags();
   for (var srv in filtered) {
     var state = getServiceState(srv.description);
@@ -77,17 +77,17 @@ Function updateDragServices = () {
   globalctx.memory["services"][currentDestination.value] = promotedServices;
   globalctx.memory["catalogs"][currentDestination.value] = promotedCatalogs;
   return;
-};
+}
 
-Function resetDrags = () {
+resetDrags() {
   promotedCatalogs = [];
   promotedServices = [];
   suggestedServices = [];
   serviceSuggestedDragData.value = <Widget>[];
   servicePromotedDragData.value = <Widget>[];
-};
+}
 
-Function getSrvFiltered = () async {
+getSrvFiltered() async {
   filteredsrv = [];
 
   Iterable srvs = await services;
@@ -101,8 +101,9 @@ Function getSrvFiltered = () async {
   }
 
   return filteredsrv;
-};
-Function paginateDestination = (String direction) async {
+}
+
+paginateDestination(String direction) async {
   int sum = direction == "next" ? 1 : -1;
   if (currentDestination.value + sum >= 0 &&
       currentDestination.value + sum <
@@ -135,39 +136,41 @@ Function paginateDestination = (String direction) async {
   } else {
     goto("Experiences");
   }
-};
+}
 
-Function findProp = (data, props) {
+findProp(data, props) {
   for (var prop in props) {
     if (data.containsKey(prop)) {
       return data[prop];
     }
   }
-};
-Function resetServices = () {
+}
+
+resetServices() {
   for (var service in promotedServices) {
     setServiceState(service, "suggested");
   }
   updateDragServices();
-};
+}
 
-Function setServiceState = (service, state) {
+setServiceState(service, state) {
   globalctx.states["services"][currentDestination.value] ??= {}.obs;
   globalctx.states["services"][currentDestination.value][service] ??= {}.obs;
   globalctx.states["services"][currentDestination.value][service]["state"] =
       state;
   filterSuggestedServices();
-};
-Function getServiceState = (service) {
+}
+
+getServiceState(service) {
   globalctx.states["services"][currentDestination.value] ??= {}.obs;
   globalctx.states["services"][currentDestination.value][service] ??= {}.obs;
   var state =
       globalctx.states["services"][currentDestination.value][service]["state"];
   state ??= "suggested";
   return state;
-};
+}
 
-Function getServiceValueByName = (String service) {
+getServiceValueByName(String service) {
   var result;
   try {
     result = getServiceByName(service).value;
@@ -175,8 +178,9 @@ Function getServiceValueByName = (String service) {
     log(e);
   }
   return result;
-};
-Function getServiceByName = (String service) {
+}
+
+getServiceByName(String service) {
   var result;
   try {
     result =
@@ -185,4 +189,4 @@ Function getServiceByName = (String service) {
     log(e);
   }
   return result;
-};
+}
