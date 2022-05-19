@@ -290,19 +290,7 @@ updateCurrentDestinationTravelRhythm() {
   currentTravelRhythm.value = travelRhythm;
 }
 
-processDaysCatalog() {
-  totalDays.value =
-      departureDate.value.difference(arrivalDate.value).inDays + 1;
-  if (totalDays.value > 0) {
-    daysCatalog.value = [];
-    for (int i = 0; i < totalDays.value; i++) {
-      Map<String, dynamic> row = {};
-      row["code"] = i + 1;
-      row["description"] = "Day ${i + 1}";
-      daysCatalog.add(row);
-    }
-  }
-}
+
 
 resetLeftDays() {
   leftAccumulated.value = 0;

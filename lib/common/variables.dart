@@ -264,6 +264,8 @@ List data = [];
 RxString? searchResult = ''.obs;
 RxList<Map<String, dynamic>> daysCatalog = <Map<String, dynamic>>[].obs;
 
+List filtered = [];
+
 var filteredData = [].obs;
 var absorvedPurpose = false.obs;
 var purposeMemory = <String>[].obs;

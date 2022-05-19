@@ -16,64 +16,13 @@ export 'dayfunctions.dart';
 export './destinationfunctions.dart';
 export './experiencefunctions.dart';
 
-Future<void> load(key) async {
+load(key) async {
   try {
     var result = await rootBundle.loadString("assets/data/$key.json");
     setContext(key, json.decode(result));
   } catch (e) {
     log(e);
   }
-}
-
-// Other s
-Future<bool> getCatalog(
-  List<String> catalogs,
-) async {
-  var res = await fetchhandler(kDefaultSchema, kDefaultServer,
-      kDefaultServerPort, kDefaultCatalogPath, 'POST', {
-    "data": {"catalogs": catalogs}
-  });
-  // ignore: avoid_print
-  log(res);
-  if (res['state'] == true) {
-    setContext("catalogs", res['data']);
-    return true;
-  } else {
-    return false;
-  }
-}
-
-findMemoryCatalog(name, description) {
-  var memory = globalctx.memory[name];
-  List<Map<String, dynamic>> output = <Map<String, dynamic>>[];
-  if (memory != null) {
-    var idx = 1;
-    List items = memory.map((e) => e[description]).toSet().toList();
-    items.sort();
-    for (var item in items) {
-      Map<String, dynamic> row = {};
-      row["code"] = idx;
-      row["description"] = item;
-      output.add(row);
-      idx++;
-    }
-  }
-  return output;
-}
-
-findCatalog(name) {
-  var catalogs = getContext("catalogs");
-  List<Map<String, dynamic>> catalog = <Map<String, dynamic>>[];
-  if (catalogs.isNotEmpty) {
-    var items = catalogs[name];
-    if (items != null) {
-      for (var item in items) {
-        catalog.add(item);
-      }
-    }
-  }
-
-  return catalog;
 }
 
 getDateValue(data, key, {def}) {
@@ -250,12 +199,6 @@ getFormDateValue(data, formKey, key, def) {
   return DateTime.parse(def);
 }
 
-toCatalog(item) {
-  List list = item.values.toList();
-  CatalogDto ctlg = CatalogDto(list);
-  return ctlg;
-}
-
 parseIntValue(value) {
   if (value is int) {
     return value;
@@ -295,7 +238,7 @@ getCountryNameById(id) {
   return name;
 }
 
-Future<void> showCustomDialog(context, Widget child, String button,
+showCustomDialog(context, Widget child, String button,
     {Widget? customChild,
     Color backgroundColor = Colors.black54,
     Color buttonColor = Colors.black54,
@@ -402,7 +345,7 @@ setLT(value) {
   experiences = findCatalog("experiences");
 }
 
-Future<void> getHotel(ctx, {int cruiseId = 0}) async {
+getHotel(ctx, {int cruiseId = 0}) async {
   if (globalctx.memory["cruises"] == null) {
     var frame = {
       "data": {"cruise_id": cruiseId}
@@ -441,7 +384,7 @@ Future<void> getHotel(ctx, {int cruiseId = 0}) async {
   }
 }
 
-Future<void> getCruise(ctx, {int cruiseId = 0}) async {
+getCruise(ctx, {int cruiseId = 0}) async {
   if (globalctx.memory["cruises"] == null) {
     var frame = {
       "data": {"cruise_id": cruiseId}
@@ -480,27 +423,6 @@ Future<void> getCruise(ctx, {int cruiseId = 0}) async {
   }
 }
 
-Future<void> getTour(ctx, {int tourId = 0, detail = false, cb}) async {
-  var frame = {
-    "data": {"tour_id": tourId, "detail": detail}
-  };
-  var res = await fetchhandler(kDefaultSchema, kDefaultServer,
-      kDefaultServerPort, kDefaultFindTour, 'POST', frame);
-  // ignore: avoid_print
-  log(res);
-  if (res['state'] == true) {
-    var data = res['data'];
-    cb(data);
-  } else {
-    SweetAlert.show(ctx,
-        curve: ElasticInCurve(),
-        title: res['message'],
-        style: SweetAlertStyle.error, onPress: (bool isConfirm) {
-      Get.close(1);
-      return false;
-    });
-  }
-}
 
 resetData(context, controller) {
   var data = globalctx.memory["tours"];
@@ -826,7 +748,7 @@ goto(page) {
   }
 }
 
-Future<void> logout(
+logout(
   username,
 ) async {
   var res = await fetchhandler(kDefaultSchema, kDefaultServer,
@@ -853,31 +775,6 @@ getTrColor(tr) {
   return color[tr.toString().toUpperCase()];
 }
 
-getCatalogs(catalogs) async {
-  Map res = await fetchhandler(kDefaultSchema, kDefaultServer,
-      kDefaultServerPort, kDefaultFindCatalog, 'POST', {
-    "data": {"catalogs": catalogs}
-  });
-  if (res['state'] == true) {
-    var entries = res['data']["catalogs"].values.toList();
-    return entries;
-  } else {
-    log(res["message"]);
-  }
-}
-
-newTour() async {
-  var res = await fetchhandler(kDefaultSchema, kDefaultServer,
-      kDefaultServerPort, kDefaultNewTourEdit, 'POST', {});
-  if (res['state'] == true) {
-    globalctx.memory["tour"]["code"] = res['data']["id"];
-    setContext("catalogs", res['data']["catalogs"]);
-    selectedIndex.value = 0;
-    Get.toNamed("/Tour");
-  } else {
-    log(res["message"]);
-  }
-}
 
 multiSaving(values, catalog, context, index, field, memory) {
   memory.value = <String>[];
@@ -891,24 +788,9 @@ multiSaving(values, catalog, context, index, field, memory) {
   setFormValue(context, index, field, memory.value);
 }
 
-filterCatalog(catalog, key, value) {
-  try {
-    var res =
-        findCatalog(catalog).toList().where((e) => e[key] == value).toList();
-    return res;
-  } catch (e) {
-    log(e);
-    return [];
-  }
-}
-
 purposeValidate(values) {
   if (values.length > 3) {
-    var mem = [
-      values[0],
-      values[1],
-      values[2]
-    ];
+    var mem = [values[0], values[1], values[2]];
     absorvedPurpose.value = true;
     savePurposes(mem);
   } else {
@@ -936,15 +818,6 @@ getDistance(a, b, c, d) {
               cos(double.parse(c)) *
               cos(double.parse(d) - double.parse(b)))) *
       6371;
-}
-
-getCatalogDescription(catalog, value) {
-  log(value);
-  if (value == "0") {
-    return "";
-  }
-  return catalog.firstWhere((element) =>
-      element["code"].toString() == (value.toString()))["description"];
 }
 
 toMinutes(TimeOfDay time) {

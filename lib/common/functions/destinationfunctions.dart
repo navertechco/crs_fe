@@ -365,10 +365,7 @@ getDestinationKa(destination, type) {
   return destData["key_activities"];
 }
 
-getTourPurpose() {
-  var purposes = globalctx.memory["tour"]["purposes"];
-  return purposes;
-}
+
 
 filterDestinations() {
   var arr = getDestinationById(arrivalPort.value);
@@ -388,15 +385,7 @@ getDestinationDay(index) {
   return 0;
 }
 
-updateDestinationsCatalog() {
-  var countryName = getCountryNameById(destCountry.value);
-  destinationsCatalog = findCatalog("destinations").where((element) =>
-      element["relation"]["country"].toString().toLowerCase() ==
-      countryName.toString().toLowerCase());
-  airportCatalog = findCatalog("airport").where((element) =>
-      element["relation"]["country"].toString().toLowerCase() ==
-      countryName.toString().toLowerCase());
-}
+
 
 updateCurrentDestination() {
   var type = "tour";
