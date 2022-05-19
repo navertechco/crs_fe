@@ -29,7 +29,7 @@ class RoundedFormMultiDropdown extends StatelessWidget {
       this.height = 0.0,
       this.fontSize = 5,
       this.onSaved,
-      this.enabled,
+      this.enabled = true,
       this.value = const [],
       this.onChanged,
       this.validator})
@@ -73,8 +73,8 @@ class RoundedFormMultiDropdown extends StatelessWidget {
         width: MediaQuery.of(context).size.width * width,
         padding: EdgeInsets.only(left: left, top: top),
         child: MultiSelectFormField(
-          enabled: enabled,
-          autovalidate: AutovalidateMode.onUserInteraction,
+          enabled: enabled??true,
+          autovalidate: AutovalidateMode.disabled,
           chipBackGroundColor: Colors.grey,
           fillColor: Color.fromARGB(0, 255, 255, 255),
           chipLabelStyle:
@@ -90,7 +90,6 @@ class RoundedFormMultiDropdown extends StatelessWidget {
             style: TextStyle(fontSize: 16, color: Colors.grey),
           ),
           validator: (value) {
-            log("VALIDATE");
             if (value == null || value.length == 0) {
               return 'Please select one or more options';
             }

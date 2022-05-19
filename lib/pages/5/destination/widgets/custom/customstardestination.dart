@@ -240,7 +240,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             textColor: Colors.black,
                             onTap: () async {
-                              getHotel(context, cruiseId: 0);
+                              // getHotel(context, cruiseId: 0);
                             },
                           ),
                         ],
@@ -420,16 +420,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                       value: keyActivities,
                       onSaved: (values) {
                         if (values == null) return;
-                        if (values.length > 3) {
-                          Get.snackbar("Error", "You can select maximum 3 ka",
-                              snackPosition: SnackPosition.BOTTOM,
-                              backgroundColor: Colors.red,
-                              colorText: Colors.white,
-                              borderRadius: 10,
-                              margin: EdgeInsets.all(10),
-                              duration: Duration(seconds: 3));
-                          return;
-                        }
+
                         if (values.length <= 3) {
                           kaMemory.value = [];
                           var length = values.length;
