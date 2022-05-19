@@ -17,7 +17,7 @@ class RoundedFormMultiDropdown extends StatelessWidget {
   final List<Map<String, dynamic>> data;
   final List<String> value;
   final String? Function(dynamic)? validator;
-
+  final enabled;
   RoundedFormMultiDropdown(
       {Key? key,
       this.data = const [],
@@ -29,6 +29,7 @@ class RoundedFormMultiDropdown extends StatelessWidget {
       this.height = 0.0,
       this.fontSize = 5,
       this.onSaved,
+      this.enabled,
       this.value = const [],
       this.onChanged,
       this.validator})
@@ -72,6 +73,7 @@ class RoundedFormMultiDropdown extends StatelessWidget {
         width: MediaQuery.of(context).size.width * width,
         padding: EdgeInsets.only(left: left, top: top),
         child: MultiSelectFormField(
+          enabled: enabled,
           autovalidate: AutovalidateMode.onUserInteraction,
           chipBackGroundColor: Colors.grey,
           fillColor: Color.fromARGB(0, 255, 255, 255),
@@ -88,6 +90,7 @@ class RoundedFormMultiDropdown extends StatelessWidget {
             style: TextStyle(fontSize: 16, color: Colors.grey),
           ),
           validator: (value) {
+            log("VALIDATE");
             if (value == null || value.length == 0) {
               return 'Please select one or more options';
             }
@@ -105,7 +108,9 @@ class RoundedFormMultiDropdown extends StatelessWidget {
           ),
           initialValue: dataValue,
           onSaved: onSaved,
-          // change: onChanged,
+          change: onChanged,
+          open: onChanged,
+          close: onChanged,
         ));
   }
 }

@@ -160,7 +160,7 @@ class CruiseFiltersWidget extends StatelessWidget {
                           getCatalogDescription(findCatalog("week_day"), value);
                       filterCruises(context);
                     },
-                    hintText: "End",
+                    hintText: "Cabine Type",
                     data: findCatalog("week_day")),
                 CustomFormDropDownFieldWidget(
                     width: 0.15,
@@ -174,7 +174,7 @@ class CruiseFiltersWidget extends StatelessWidget {
                           getCatalogDescription(findCatalog("week_day"), value);
                       filterCruises(context);
                     },
-                    hintText: "End",
+                    hintText: "Day format",
                     data: findCatalog("week_day")),
                 CustomFormDropDownFieldWidget(
                     width: 0.15,
@@ -188,7 +188,7 @@ class CruiseFiltersWidget extends StatelessWidget {
                           getCatalogDescription(findCatalog("week_day"), value);
                       filterCruises(context);
                     },
-                    hintText: "End",
+                    hintText: "Pax",
                     data: findCatalog("week_day")),
                 CustomFormDropDownFieldWidget(
                     width: 0.15,
@@ -202,7 +202,7 @@ class CruiseFiltersWidget extends StatelessWidget {
                           getCatalogDescription(findCatalog("week_day"), value);
                       filterCruises(context);
                     },
-                    hintText: "End",
+                    hintText: "Animal",
                     data: findCatalog("week_day")),
               ],
             ),

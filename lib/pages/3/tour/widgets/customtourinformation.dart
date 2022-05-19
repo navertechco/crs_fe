@@ -88,33 +88,26 @@ class CustomTourInformationForm extends StatelessWidget {
                     label: "Passengers                  ",
                     width: 0.20),
                 Obx(() {
-                  return CustomFormMultiDropDownFieldWidget(
-                    validator: (value) {
-                      CustomMultiDropdownRequiredValidator(value,
-                          errorText: "Purposes are required ",
-                          context: context);
-                    },
-                    value: purposeMemory.value,
-                    onSaved: (values) {
-                      savePurposes(values);
-                    },
-                    onChanged: (values) {
-                      if (values!.length > 3) {
-                        Get.snackbar(
-                            "Error", "You can select maximum 3 purposes",
-                            snackPosition: SnackPosition.BOTTOM,
-                            backgroundColor: Colors.red,
-                            colorText: Colors.white,
-                            borderRadius: 10,
-                            margin: EdgeInsets.all(10),
-                            duration: Duration(seconds: 3));
-                      } else {
-                        savePurposes(values);
-                      }
-                    },
-                    hintText: " ",
-                    label: "Purposes                      ",
-                    data: purposes,
+                  return AbsorbPointer(
+                    absorbing: absorvedPurpose.value,
+                    child: CustomFormMultiDropDownFieldWidget(
+                      validator: (value) {
+                        CustomMultiDropdownRequiredValidator(value,
+                            errorText: "Purposes are required ",
+                            context: context);
+                      },
+                      value: purposeMemory.value,
+                      enabled: purposeMemory.value.length < 4,
+                      onSaved: (values) {
+                        purposeValidate(values);
+                      },
+                      onChanged: (values) {
+                        purposeValidate(values);
+                      },
+                      hintText: " ",
+                      label: "Purposes                      ",
+                      data: purposes,
+                    ),
                   );
                 }),
                 Row(

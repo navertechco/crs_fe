@@ -11,6 +11,7 @@ class CustomFormMultiDropDownFieldWidget extends StatelessWidget {
     required this.onSaved,
     required this.onChanged,
     this.validator,
+    this.enabled
   }) : super(key: key);
   final String? Function(dynamic)? validator;
   final List<String> value;
@@ -19,6 +20,7 @@ class CustomFormMultiDropDownFieldWidget extends StatelessWidget {
   final String label;
   final String? hintText;
   final List<Map<String, dynamic>> data;
+  final enabled;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -35,6 +37,7 @@ class CustomFormMultiDropDownFieldWidget extends StatelessWidget {
             label: label,
             onSaved: onSaved,
             onChanged: onChanged,
+            enabled:enabled
           )
         ],
       ),

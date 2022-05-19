@@ -263,6 +263,7 @@ List netRateData = [
 List data = [];
 RxString? searchResult = ''.obs;
 var filteredData = [].obs;
+var absorvedPurpose = false.obs;
 var purposeMemory = <String>[].obs;
 var kaMemory = <String>[].obs;
 var generated = false;

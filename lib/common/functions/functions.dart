@@ -882,6 +882,22 @@ Function filterCatalog = (catalog, key, value) {
   }
 };
 
+purposeValidate(values) {
+  if (values.length <= 3) {
+    savePurposes(values);
+  }
+  if (purposeMemory.value.length > 3) {
+    var mem = [
+      purposeMemory.value[0],
+      purposeMemory.value[1],
+      purposeMemory.value[2]
+    ];
+    purposeMemory.value = mem;
+    absorvedPurpose.value = true;
+    savePurposes(values);
+  }
+}
+
 Function savePurposes = (values) {
   if (values == null) return;
   if (values.length > 3) {
