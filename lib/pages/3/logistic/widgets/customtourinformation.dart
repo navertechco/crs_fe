@@ -204,53 +204,13 @@ class CustomLogisticInformationForm extends StatelessWidget {
                                 },
                                 hintText: 'Open Credit Amount',
                               ),
-                            if (tourOption.value == "2")
-                              Column(
-                                children: [
-                                  CustomFormDateFieldWidget(
-                                    disabled: readonly,
-                                    initialValue: sinceDate.value,
-                                    validator: CustomDatetimeGreaterValidator(
-                                        context: context,
-                                        compare: sinceDate.value,
-                                        errorText:
-                                            "There is a problem with the Range Date",
-                                        invert: false),
-                                    label:
-                                        "Since Date\t\t\t\t\t\t\t\t\t\t\t\t\t",
-                                    onSaved: (value) {
-                                      ctrl!.state.sinceDate = value!;
-                                      sinceDate.value = value;
-                                    },
-                                    onChanged: (value) {
-                                      value ??= DateTime.now();
-                                      ctrl!.state.sinceDate = value;
-                                      sinceDate.value = value;
-                                    },
-                                  ),
-                                  CustomFormDateFieldWidget(
-                                    disabled: readonly,
-                                    initialValue: untilDate.value,
-                                    validator: CustomDatetimeGreaterValidator(
-                                        context: context,
-                                        compare: untilDate.value,
-                                        errorText:
-                                            "There is a problem with the Range Date",
-                                        invert: true),
-                                    label:
-                                        "Until Date\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t",
-                                    onSaved: (value) {
-                                      ctrl!.state.untilDate = value!;
-                                      untilDate.value = value;
-                                    },
-                                    onChanged: (value) {
-                                      value ??= DateTime.now();
-                                      ctrl!.state.untilDate = value;
-                                      untilDate.value = value;
-                                    },
-                                  )
-                                ],
-                              ),
+                            const CustomTitleWidget(
+                              width: 0.3,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.red,
+                              label:
+                                  "  Remember you have selected Galapagos Cruise !!!!",
+                            ),
                           ],
                         );
                       }),

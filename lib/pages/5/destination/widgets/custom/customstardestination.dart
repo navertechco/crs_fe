@@ -187,6 +187,111 @@ class CustomStarDestinationForm extends StatelessWidget {
                   }
                   return Text("");
                 }),
+                Obx(() {
+                  var expMode = explorationMode.value;
+                  if (type == "arrival") {
+                    return CustomFormDropDownFieldWidget(
+                        validator: CustomRequiredValidator(
+                            errorText: "Arrival Hour is required ",
+                            ctx: context),
+                        value: getFormValue(globalctx.memory["destinations"],
+                            index, "arrival_hour", "0"),
+                        onSaved: (value) {
+                          setFormValue(globalctx.memory["destinations"], index,
+                              "arrival_hour", value);
+                          arrivalHour.value = filterCatalog(
+                                  "arrival_hour", "code", int.parse(value!))[0]
+                              ["description"];
+                        },
+                        onChanged: (value) {
+                          setFormValue(globalctx.memory["destinations"], index,
+                              "arrival_hour", value);
+                          arrivalHour.value = filterCatalog(
+                                  "arrival_hour", "code", int.parse(value!))[0]
+                              ["description"];
+                        },
+                        label: "Arrival Hour              ",
+                        data: arrival_hour);
+                  }
+                  return Text("");
+                }),
+                Obx(() {
+                  var expMode = explorationMode.value;
+                  if (explorationMode.value != "2") {
+                    return CustomFormDropDownFieldWidget(
+                        disabled: type == "arrival" ||
+                            type == "departure" ||
+                            explorationMode.value != "0" ||
+                            destination == "galapagos",
+                        validator: CustomRequiredValidator(
+                            errorText: "Travel Rhythm is required ",
+                            ctx: context),
+                        value: getFormValue(
+                            globalctx.memory["destinations"],
+                            index,
+                            "travel_rhythm",
+                            destination == "galapagos" ? "3" : "1"),
+                        onSaved: (value) {
+                          setFormValue(
+                              globalctx.memory["destinations"],
+                              index,
+                              "travel_rhythm",
+                              destination == "galapagos" ? "3" : value);
+                          setFormValue(globalctx.memory["destinations"], index,
+                              "type", type);
+                          setFormValue(globalctx.memory["destinations"], index,
+                              "index", index);
+                          setFormValue(globalctx.memory["destinations"], index,
+                              "destination", destination);
+                        },
+                        onChanged: (value) {
+                          setFormValue(
+                              globalctx.memory["destinations"],
+                              index,
+                              "travel_rhythm",
+                              destination == "galapagos" ? "3" : value);
+                        },
+                        label: "Travel Rhythm         ",
+                        data: findCatalog("travel_rhythm"));
+                  }
+                  return Text("");
+                }),
+                Obx(() {
+                  if (explorationMode.value != "2") {
+                    return CustomFormMultiDropDownFieldWidget(
+                      validator: (value) =>
+                          CustomMultiDropdownRequiredValidator(value,
+                              errorText: "Key Activities are required ",
+                              context: context),
+                      value: keyActivities,
+                      onSaved: (values) {
+                        if (values == null) return;
+
+                        if (values.length <= 3) {
+                          kaMemory.value = [];
+                          var length = values.length;
+
+                          for (var i = 0; i < length; i++) {
+                            kaMemory.value.add(findCatalog("key_activity")
+                                .toList()
+                                .where((e) => e["code"] == values[i])
+                                .toList()[0]["description"]);
+                          }
+                          setFormValue(globalctx.memory["destinations"], index,
+                              "key_activities", kaMemory.value);
+                        }
+                      },
+                      onChanged: (value) {
+                        setFormValue(globalctx.memory["destinations"], index,
+                            "key_activities", value);
+                      },
+                      hintText: " ",
+                      label: "Key Activities            ",
+                      data: findCatalog("key_activity"),
+                    );
+                  }
+                  return Text("");
+                }),
                 SizedBox(
                   child: (() {
                     if (destination == "galapagos" || destination == "amazon") {
@@ -341,111 +446,6 @@ class CustomStarDestinationForm extends StatelessWidget {
                   }
                   return Text("");
                 })),
-                Obx(() {
-                  var expMode = explorationMode.value;
-                  if (type == "arrival") {
-                    return CustomFormDropDownFieldWidget(
-                        validator: CustomRequiredValidator(
-                            errorText: "Arrival Hour is required ",
-                            ctx: context),
-                        value: getFormValue(globalctx.memory["destinations"],
-                            index, "arrival_hour", "0"),
-                        onSaved: (value) {
-                          setFormValue(globalctx.memory["destinations"], index,
-                              "arrival_hour", value);
-                          arrivalHour.value = filterCatalog(
-                                  "arrival_hour", "code", int.parse(value!))[0]
-                              ["description"];
-                        },
-                        onChanged: (value) {
-                          setFormValue(globalctx.memory["destinations"], index,
-                              "arrival_hour", value);
-                          arrivalHour.value = filterCatalog(
-                                  "arrival_hour", "code", int.parse(value!))[0]
-                              ["description"];
-                        },
-                        label: "Arrival Hour              ",
-                        data: arrival_hour);
-                  }
-                  return Text("");
-                }),
-                Obx(() {
-                  var expMode = explorationMode.value;
-                  if (explorationMode.value != "2") {
-                    return CustomFormDropDownFieldWidget(
-                        disabled: type == "arrival" ||
-                            type == "departure" ||
-                            explorationMode.value != "0" ||
-                            destination == "galapagos",
-                        validator: CustomRequiredValidator(
-                            errorText: "Travel Rhythm is required ",
-                            ctx: context),
-                        value: getFormValue(
-                            globalctx.memory["destinations"],
-                            index,
-                            "travel_rhythm",
-                            destination == "galapagos" ? "3" : "1"),
-                        onSaved: (value) {
-                          setFormValue(
-                              globalctx.memory["destinations"],
-                              index,
-                              "travel_rhythm",
-                              destination == "galapagos" ? "3" : value);
-                          setFormValue(globalctx.memory["destinations"], index,
-                              "type", type);
-                          setFormValue(globalctx.memory["destinations"], index,
-                              "index", index);
-                          setFormValue(globalctx.memory["destinations"], index,
-                              "destination", destination);
-                        },
-                        onChanged: (value) {
-                          setFormValue(
-                              globalctx.memory["destinations"],
-                              index,
-                              "travel_rhythm",
-                              destination == "galapagos" ? "3" : value);
-                        },
-                        label: "Travel Rhythm         ",
-                        data: findCatalog("travel_rhythm"));
-                  }
-                  return Text("");
-                }),
-                Obx(() {
-                  if (explorationMode.value != "2") {
-                    return CustomFormMultiDropDownFieldWidget(
-                      validator: (value) =>
-                          CustomMultiDropdownRequiredValidator(value,
-                              errorText: "Key Activities are required ",
-                              context: context),
-                      value: keyActivities,
-                      onSaved: (values) {
-                        if (values == null) return;
-
-                        if (values.length <= 3) {
-                          kaMemory.value = [];
-                          var length = values.length;
-
-                          for (var i = 0; i < length; i++) {
-                            kaMemory.value.add(findCatalog("key_activity")
-                                .toList()
-                                .where((e) => e["code"] == values[i])
-                                .toList()[0]["description"]);
-                          }
-                          setFormValue(globalctx.memory["destinations"], index,
-                              "key_activities", kaMemory.value);
-                        }
-                      },
-                      onChanged: (value) {
-                        setFormValue(globalctx.memory["destinations"], index,
-                            "key_activities", value);
-                      },
-                      hintText: " ",
-                      label: "Key Activities            ",
-                      data: findCatalog("key_activity"),
-                    );
-                  }
-                  return Text("");
-                }),
               ]),
             ),
           ),
