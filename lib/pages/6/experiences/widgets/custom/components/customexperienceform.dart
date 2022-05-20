@@ -11,7 +11,7 @@ class CustomExperienceForm extends StatelessWidget {
   final String experience;
   @override
   Widget build(BuildContext context) {
-    var props = {}.obs; 
+    var props = {}.obs;
     List filteredByDestination = [];
     for (Map item in experiences) {
       List itemList = item.values.toList();

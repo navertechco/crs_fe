@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import '../index.dart';
 
 class CustomFormMultiDropDownFieldWidget extends StatelessWidget {
-  const CustomFormMultiDropDownFieldWidget({
-    Key? key,
-    this.label = "",
-    this.hintText = '',
-    required this.data,
-    required this.value,
-    required this.onSaved,
-    required this.onChanged,
-    this.validator,
-    this.enabled
-  }) : super(key: key);
+  const CustomFormMultiDropDownFieldWidget(
+      {Key? key,
+      this.label = "",
+      this.hintText = '',
+      required this.data,
+      required this.value,
+      required this.onSaved,
+      required this.onChanged,
+      this.validator,
+      this.enabled})
+      : super(key: key);
   final String? Function(dynamic)? validator;
   final List<String> value;
   final onSaved;
@@ -30,15 +30,14 @@ class CustomFormMultiDropDownFieldWidget extends StatelessWidget {
           CustomFormLabelWidget(label: label, fontWeight: FontWeight.normal),
           // SizedBox(width: MediaQuery.of(context).size.width * 0.003),
           RoundedFormMultiDropdown(
-            validator: validator,
-            value: value,
-            data: data,
-            hintText: hintText,
-            label: label,
-            onSaved: onSaved,
-            onChanged: onChanged,
-            enabled:enabled
-          )
+              validator: validator,
+              value: value,
+              data: data,
+              hintText: hintText,
+              label: label,
+              onSaved: onSaved,
+              onChanged: onChanged,
+              enabled: enabled)
         ],
       ),
     );

@@ -253,41 +253,36 @@ showCustomDialog(context, Widget child, String button,
     context: context,
     barrierDismissible: false, // user must tap button!
     builder: (BuildContext context) {
-      return Align(
-        alignment: Alignment.topRight,
-        child: AlertDialog(
-          contentPadding: EdgeInsets.fromLTRB(8, 8, 8, 8),
-          backgroundColor: backgroundColor,
-          content: Container(
-              decoration:
-                  BoxDecoration(borderRadius: BorderRadius.circular(50)),
-              width: MediaQuery.of(context).size.width * width,
-              height: MediaQuery.of(context).size.height * height,
-              child: child),
-          actions: <Widget>[
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                customChild ?? Spacer(),
-                TextButton(
-                  child: Text(button,
-                      style: KTextSytle(
-                              context: context,
-                              fontSize: 10,
-                              fontWeight: FontWeight.bold,
-                              color: buttonColor)
-                          .getStyle()),
-                  onPressed: () {
-                    if (onSaved != null) {
-                      onSaved();
-                    }
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            ),
-          ],
-        ),
+      return AlertDialog(
+        contentPadding: EdgeInsets.fromLTRB(8, 8, 8, 8),
+        backgroundColor: backgroundColor,
+        content: Container(
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(50)),
+            width: MediaQuery.of(context).size.width * width,
+            height: MediaQuery.of(context).size.height * height,
+            child: child),
+        actions: <Widget>[
+          Row(
+            children: [
+              customChild ?? Spacer(),
+              TextButton(
+                child: Text(button,
+                    style: KTextSytle(
+                            context: context,
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                            color: buttonColor)
+                        .getStyle()),
+                onPressed: () {
+                  if (onSaved != null) {
+                    onSaved();
+                  }
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          ),
+        ],
       );
     },
   );
@@ -367,7 +362,7 @@ getHotel(ctx, {int id = 0}) async {
             backgroundColor: Colors.white,
             buttonColor: Colors.black,
             height: 0.25,
-            width: 0.2);
+            width: 0.35);
       }
     } else {
       SweetAlert.show(ctx,
@@ -384,7 +379,7 @@ getHotel(ctx, {int id = 0}) async {
         backgroundColor: Colors.white,
         buttonColor: Colors.black,
         height: 0.25,
-        width: 0.2);
+        width: 0.35);
   }
 }
 

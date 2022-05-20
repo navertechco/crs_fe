@@ -82,61 +82,39 @@ class CustomStarDestinationForm extends StatelessWidget {
       key: formKey,
       child: Column(
         children: [
+          Obx(() {
+            return Wrap(
+              children: [
+                Text("Remaining Days: $dayleft",
+                    style: GoogleFonts.poppins(
+                        textStyle: TextStyle(
+                      color: (dayleft.value) < 1 ? Colors.yellow : Colors.green,
+                      fontSize: MediaQuery.of(context).size.width /
+                          MediaQuery.of(context).size.height *
+                          15,
+                      fontWeight: FontWeight.bold,
+                    ))),
+                Text("Selected Days: $accumulated",
+                    style: GoogleFonts.poppins(
+                        textStyle: TextStyle(
+                      color: (accumulated.value) == 0
+                          ? Colors.yellow
+                          : Color.fromARGB(255, 0, 255, 0),
+                      fontSize: MediaQuery.of(context).size.width /
+                          MediaQuery.of(context).size.height *
+                          15,
+                      fontWeight: FontWeight.bold,
+                    ))),
+              ],
+            );
+          }),
           Padding(
             padding: EdgeInsets.only(
-                left: MediaQuery.of(context).size.width * 0.05,
-                top: MediaQuery.of(context).size.height * 0.1),
+              top: MediaQuery.of(context).size.height * 0.1,
+              left: MediaQuery.of(context).size.width * 0.05,
+            ),
             child: SizedBox(
-              child: Column(children: [
-                Obx(() {
-                  return Row(
-                    children: [
-                      Text("Remaining Days: $dayleft",
-                          style: GoogleFonts.poppins(
-                              textStyle: TextStyle(
-                            color: (dayleft.value) < 1
-                                ? Colors.yellow
-                                : Colors.green,
-                            fontSize: MediaQuery.of(context).size.width /
-                                MediaQuery.of(context).size.height *
-                                15,
-                            fontWeight: FontWeight.bold,
-                          ))),
-                    ],
-                  );
-                }),
-                Obx(() {
-                  return Row(
-                    children: [
-                      Text("Selected Days: $accumulated",
-                          style: GoogleFonts.poppins(
-                              textStyle: TextStyle(
-                            color: (accumulated.value) == 0
-                                ? Colors.yellow
-                                : Color.fromARGB(255, 0, 255, 0),
-                            fontSize: MediaQuery.of(context).size.width /
-                                MediaQuery.of(context).size.height *
-                                15,
-                            fontWeight: FontWeight.bold,
-                          ))),
-                    ],
-                  );
-                }),
-                CustomTitleWidget(
-                  width: 0.2,
-                  fontWeight: FontWeight.bold,
-                  label: "Destination: ${destination.capitalize}",
-                ),
-                CustomTitleWidget(
-                  width: 0.2,
-                  fontWeight: FontWeight.bold,
-                  label: "Index: $index",
-                ),
-                CustomTitleWidget(
-                  width: 0.2,
-                  fontWeight: FontWeight.bold,
-                  label: "Type: ${type.toString().capitalize}",
-                ),
+              child: Wrap(children: [
                 Obx(() {
                   var t = arrivalDate.value;
                   return Row(

@@ -35,7 +35,7 @@ class CustomFooterWidget extends StatelessWidget {
                           color: Colors.white)
                       .getStyle()),
               onPressed: () async {
-               await paginateDestination("prev");
+                await paginateDestination("prev");
               },
             ),
             TextButton(
@@ -59,7 +59,7 @@ class CustomFooterWidget extends StatelessWidget {
                           color: Colors.white)
                       .getStyle()),
               onPressed: () async {
-               await paginateDestination("next");
+                await paginateDestination("next");
               },
             ),
           ],

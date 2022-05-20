@@ -62,7 +62,7 @@ class KeypadWidget extends StatelessWidget {
                   .getStyle()),
           onPressed: () {
             var state = getServiceState(service);
-           
+
             Get.close(1);
           },
         ),

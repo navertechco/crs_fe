@@ -31,12 +31,13 @@ class HotelFiltersWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => Column(
+      () => Wrap(
+        direction: Axis.vertical,
         children: [
-          Row(
+          Wrap(
             children: [
               CustomFormDropDownFieldWidget(
-                  width: 0.15,
+                  width: 0.11,
                   height: 0.05,
                   validator: CustomRequiredValidator(
                       errorText: "Hotel Category is required ", ctx: ctx),
@@ -44,76 +45,76 @@ class HotelFiltersWidget extends StatelessWidget {
                   onSaved: (value) {},
                   onChanged: (value) {
                     hotelCategory.value = getCatalogDescription(
-                        findMemoryChildCatalog("hotels", "value", "hotelname"),
+                        findMemoryChildCatalog("hotels", "value", "budget_fk"),
                         value);
                     filterHotels(context);
                   },
                   hintText: "Category             ",
-                  data: findMemoryChildCatalog("hotels", "value", "hotelname")),
+                  data: findMemoryChildCatalog("hotels", "value", "budget_fk")),
               if (hotelCategory.value.isNotEmpty)
                 CustomFormDropDownFieldWidget(
-                    width: 0.15,
+                    width: 0.11,
                     height: 0.05,
                     validator: CustomRequiredValidator(
-                        errorText: "Hotel Modality is required ", ctx: ctx),
+                        errorText: "Hotel roomCategory is required ", ctx: ctx),
                     value: "0",
                     onSaved: (value) {},
                     onChanged: (value) {
-                      hotelModality.value = getCatalogDescription(
+                      hotelRoomCategory.value = getCatalogDescription(
                           findMemoryChildCatalog(
-                              "hotels", "value", "hotelname"),
+                              "hotels", "value", "roomcategory"),
                           value);
                       filterHotels(context);
                     },
-                    hintText: "Modality     ",
-                    data:
-                        findMemoryChildCatalog("hotels", "value", "hotelname")),
+                    hintText: "roomCategory     ",
+                    data: findMemoryChildCatalog(
+                        "hotels", "value", "roomcategory")),
               if (hotelCategory.value.isNotEmpty)
-                if (hotelModality.value.isNotEmpty)
+                if (hotelRoomCategory.value.isNotEmpty)
                   CustomFormDropDownFieldWidget(
-                      width: 0.15,
+                      width: 0.11,
                       height: 0.05,
                       validator: CustomRequiredValidator(
-                          errorText: "Hotel Islet is required ", ctx: ctx),
+                          errorText: "Hotel Balcony is required ", ctx: ctx),
                       value: "0",
                       onSaved: (value) {},
                       onChanged: (value) {
-                        hotelIslet.value = getCatalogDescription(
-                            findCatalog("galapagos"), value);
+                        hotelBalcony.value = getCatalogDescription(
+                            findMemoryChildCatalog(
+                                "hotels", "value", "Balcony"),
+                            value);
                         filterHotels(context);
                       },
-                      hintText: "Islet     ",
-                      data: findCatalog("galapagos")),
-            ],
-          ),
-          Row(
-            children: [
+                      hintText: "Balcony     ",
+                      data:
+                          findMemoryChildCatalog("hotels", "value", "Balcony")),
               if (hotelCategory.value.isNotEmpty)
-                if (hotelModality.value.isNotEmpty)
-                  if (hotelIslet.value.isNotEmpty)
+                if (hotelRoomCategory.value.isNotEmpty)
+                  if (hotelBalcony.value.isNotEmpty)
                     CustomFormDropDownFieldWidget(
-                        width: 0.15,
+                        width: 0.11,
                         height: 0.05,
                         validator: CustomRequiredValidator(
-                            errorText: "Hotel Type is required ", ctx: ctx),
+                            errorText: "Hotel OutsideWindow is required ",
+                            ctx: ctx),
                         value: "0",
                         onSaved: (value) {},
                         onChanged: (value) {
-                          hotelType.value = getCatalogDescription(
+                          hotelOutsideWindow.value = getCatalogDescription(
                               findMemoryChildCatalog(
-                                  "hotels", "value", "hotelname"),
+                                  "hotels", "value", "OutsideWindow"),
                               value);
                           filterHotels(context);
                         },
-                        hintText: "Type             ",
+                        hintText: "OutsideWindow             ",
                         data: findMemoryChildCatalog(
-                            "hotels", "value", "hotelname")),
+                            "hotels", "value", "OutsideWindow")),
               if (hotelCategory.value.isNotEmpty)
-                if (hotelModality.value.isNotEmpty)
-                  if (hotelIslet.value.isNotEmpty)
-                    if (hotelType.value.isNotEmpty)
+                if (hotelRoomCategory.value.isNotEmpty)
+                  if (hotelBalcony.value.isNotEmpty)
+                    if (hotelOutsideWindow.value.isNotEmpty)
                       CustomFormDropDownFieldWidget(
-                          width: 0.15,
+                          width: 0.11,
                           height: 0.05,
                           validator: CustomRequiredValidator(
                               errorText: "Starts is required ", ctx: ctx),
@@ -131,12 +132,12 @@ class HotelFiltersWidget extends StatelessWidget {
                           hintText: "Starts\t\t\t\t\t\t\t",
                           data: findCatalog("week_day")),
               if (hotelCategory.value.isNotEmpty)
-                if (hotelModality.value.isNotEmpty)
-                  if (hotelIslet.value.isNotEmpty)
-                    if (hotelType.value.isNotEmpty)
+                if (hotelRoomCategory.value.isNotEmpty)
+                  if (hotelBalcony.value.isNotEmpty)
+                    if (hotelOutsideWindow.value.isNotEmpty)
                       if (hotelStarts.value.isNotEmpty)
                         CustomFormDropDownFieldWidget(
-                            width: 0.15,
+                            width: 0.11,
                             height: 0.05,
                             validator: CustomRequiredValidator(
                                 errorText: "End is required ", ctx: ctx),
@@ -155,7 +156,7 @@ class HotelFiltersWidget extends StatelessWidget {
             Row(
               children: [
                 CustomFormDropDownFieldWidget(
-                    width: 0.15,
+                    width: 0.11,
                     height: 0.05,
                     validator: CustomRequiredValidator(
                         errorText: "End is required ", ctx: ctx),
@@ -166,10 +167,10 @@ class HotelFiltersWidget extends StatelessWidget {
                           getCatalogDescription(findCatalog("week_day"), value);
                       filterHotels(context);
                     },
-                    hintText: "Cabine Type",
+                    hintText: "Cabine OutsideWindow",
                     data: findCatalog("week_day")),
                 CustomFormDropDownFieldWidget(
-                    width: 0.15,
+                    width: 0.11,
                     height: 0.05,
                     validator: CustomRequiredValidator(
                         errorText: "End is required ", ctx: ctx),
@@ -183,7 +184,7 @@ class HotelFiltersWidget extends StatelessWidget {
                     hintText: "Day format",
                     data: findCatalog("week_day")),
                 CustomFormDropDownFieldWidget(
-                    width: 0.15,
+                    width: 0.11,
                     height: 0.05,
                     validator: CustomRequiredValidator(
                         errorText: "End is required ", ctx: ctx),
@@ -197,7 +198,7 @@ class HotelFiltersWidget extends StatelessWidget {
                     hintText: "Pax",
                     data: findCatalog("week_day")),
                 CustomFormDropDownFieldWidget(
-                    width: 0.15,
+                    width: 0.11,
                     height: 0.05,
                     validator: CustomRequiredValidator(
                         errorText: "End is required ", ctx: ctx),
@@ -234,9 +235,9 @@ class HotelKeyPadWidget extends StatelessWidget {
               TextButton(
                 onPressed: () {
                   hotelCategory.value = "";
-                  hotelModality.value = "";
-                  hotelIslet.value = "";
-                  hotelType.value = "";
+                  hotelRoomCategory.value = "";
+                  hotelBalcony.value = "";
+                  hotelOutsideWindow.value = "";
                   hotelStarts.value = "";
                   hotelEnds.value = "";
                   moreFilters.value = false;
@@ -293,9 +294,9 @@ class HotelResultWidget extends StatelessWidget {
     return SizedBox(
       child: Stack(children: [
         if (hotelCategory.value.isNotEmpty)
-          if (hotelModality.value.isNotEmpty)
-            if (hotelIslet.value.isNotEmpty)
-              if (hotelType.value.isNotEmpty)
+          if (hotelRoomCategory.value.isNotEmpty)
+            if (hotelBalcony.value.isNotEmpty)
+              if (hotelOutsideWindow.value.isNotEmpty)
                 if (hotelStarts.value.isNotEmpty)
                   if (hotelEnds.value.isNotEmpty)
                     Column(

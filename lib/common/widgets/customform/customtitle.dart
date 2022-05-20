@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import '../index.dart';
 
 class CustomTitleWidget extends StatelessWidget {
-  const CustomTitleWidget({
-    Key? key,
-    required this.label,
-    this.fontWeight = FontWeight.normal,
-    this.width = 0.15,
-    this.color = Colors.black,
-    this.fontSize = 10
-  }) : super(key: key);
+  const CustomTitleWidget(
+      {Key? key,
+      required this.label,
+      this.fontWeight = FontWeight.normal,
+      this.width = 0.15,
+      this.color = Colors.black,
+      this.fontSize = 10})
+      : super(key: key);
   final String label;
   final FontWeight fontWeight;
   final double width;
@@ -21,7 +21,10 @@ class CustomTitleWidget extends StatelessWidget {
     return Row(
       children: [
         CustomFormLabelWidget(
-            label: label, fontWeight: fontWeight, color: color, fontSize:fontSize),
+            label: label,
+            fontWeight: fontWeight,
+            color: color,
+            fontSize: fontSize),
         // SizedBox(width: MediaQuery.of(context).size.width * width)
       ],
     );
