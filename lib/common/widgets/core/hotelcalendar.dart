@@ -259,9 +259,11 @@ class HotelKeyPadWidget extends StatelessWidget {
               TextButton(
                 onPressed: () {
                   hotelTerraceorPatio.value = "";
+                  hotelExtrabed.value = "";
                   hotelMaxCapacity.value = "";
                   hotelBalcony.value = "";
-                  hotelExtrabed.value = "";
+                  hotelTuborJacuzzi.value = "";
+                  hotelRoomCategory.value = "";
                   moreFilters.value = false;
                 },
                 child: Text('Reset',

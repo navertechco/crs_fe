@@ -31,15 +31,32 @@ processHotelItinerary(row) {
 filterHotels(ctx) {
   if (globalctx.memory["hotels"] != null) {
     List filtered = globalctx.memory["hotels"];
+    //Budget
+    filtered = filtered.where((element) => true).toList();
+    //Purpose
+    filtered = filtered.where((element) => true).toList();
+    //Key Activities
+    filtered = filtered.where((element) => true).toList();
+    //Max Capacity
+    filtered = filtered.where((element) => true).toList();
+    //Room Category
+    filtered = filtered.where((element) => true).toList();
+    //Terrace or Patio
+    filtered = filtered.where((element) => true).toList();
+    //Balcony
+    filtered = filtered.where((element) => true).toList();
+    //Extrabed
+    filtered = filtered.where((element) => true).toList();
+    //Pet Friendly
+    filtered = filtered.where((element) => true).toList();
+    //Tub or Jacuzzi
+    filtered = filtered.where((element) => true).toList();
+    //Child Friendly
+    filtered = filtered.where((element) => true).toList();
+    //Infant Friendly
+    filtered = filtered.where((element) => true).toList();
 
-    List filterByDays = filtered.where((element) => true).toList();
-    List filterByDay = filterByDays.where((element) => true).toList();
-    List filterByHotel = filterByDay.where((element) => true).toList();
-    List filterByDateRange = filterByHotel.where((element) => true).toList();
-    List filterByCabine = filterByDateRange.where((element) => true).toList();
-    List filterByTriple = filterByCabine.where((element) => true).toList();
-
-    hotelResults.value = filterByTriple.toList();
+    hotelResults.value = filtered.toList();
 
     var processedData = processHotelData(ctx, hotelResults.value);
     searcherHeader.value = processedData[0];
@@ -145,7 +162,7 @@ getHotelDataCell(context, row) {
             child: Column(
               children: [
                 Text(
-                  "${row['description']}",
+                  "${row["value"]['roomcategory']}",
                   style: KTextSytle(
                     context: context,
                     fontSize: 15,
@@ -153,13 +170,8 @@ getHotelDataCell(context, row) {
                     color: Color.fromARGB(255, 204, 164, 61),
                   ).getStyle(),
                 ),
-                Image.network(
-                  "${row['image']}",
-                  width: MediaQuery.of(context).size.width * 0.5,
-                  height: MediaQuery.of(context).size.height * 0.5,
-                ),
                 Text(
-                  "${processHotelItinerary(row)}",
+                  "${row["value"]['roomdescription']}",
                   style: KTextSytle(
                     context: context,
                     fontSize: 10,
@@ -167,35 +179,49 @@ getHotelDataCell(context, row) {
                     color: Colors.white,
                   ).getStyle(),
                 ),
-                Obx(() {
-                  try {
-                    return SfCalendar(
-                      firstDayOfWeek: 1,
-                      backgroundColor: Colors.white,
-                      minDate: arrivalDate.value.add(Duration(days: 1)),
-                      maxDate: departureDate.value.add(Duration(days: -1)),
-                      view: CalendarView.month,
-                      dataSource: MeetingDataSource(getDataSource(
-                          "${row['hotel_itinerary']}"
-                              .replaceAll("[", " ")
-                              .replaceAll("]", " "))),
-                      monthViewSettings: MonthViewSettings(
-                          appointmentDisplayMode:
-                              MonthAppointmentDisplayMode.appointment),
-                    );
-                  } catch (e) {
-                    log(e);
-                    return Text(
-                      "No Calendar Aivalable",
-                      style: KTextSytle(
-                        context: context,
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(255, 204, 164, 61),
-                      ).getStyle(),
-                    );
-                  }
-                })
+                // Image.network(
+                //   "${row['image']}",
+                //   width: MediaQuery.of(context).size.width * 0.5,
+                //   height: MediaQuery.of(context).size.height * 0.5,
+                // ),
+                // Text(
+                //   "${processHotelItinerary(row)}",
+                //   style: KTextSytle(
+                //     context: context,
+                //     fontSize: 10,
+                //     fontWeight: FontWeight.bold,
+                //     color: Colors.white,
+                //   ).getStyle(),
+                // ),
+                // Obx(() {
+                //   try {
+                //     return SfCalendar(
+                //       firstDayOfWeek: 1,
+                //       backgroundColor: Colors.white,
+                //       minDate: arrivalDate.value.add(Duration(days: 1)),
+                //       maxDate: departureDate.value.add(Duration(days: -1)),
+                //       view: CalendarView.month,
+                //       dataSource: MeetingDataSource(getDataSource(
+                //           "${row['hotel_itinerary']}"
+                //               .replaceAll("[", " ")
+                //               .replaceAll("]", " "))),
+                //       monthViewSettings: MonthViewSettings(
+                //           appointmentDisplayMode:
+                //               MonthAppointmentDisplayMode.appointment),
+                //     );
+                //   } catch (e) {
+                //     log(e);
+                //     return Text(
+                //       "No Calendar Aivalable",
+                //       style: KTextSytle(
+                //         context: context,
+                //         fontSize: 15,
+                //         fontWeight: FontWeight.bold,
+                //         color: Color.fromARGB(255, 204, 164, 61),
+                //       ).getStyle(),
+                //     );
+                //   }
+                // })
               ],
             ),
           ),
