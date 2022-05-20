@@ -40,181 +40,203 @@ class HotelFiltersWidget extends StatelessWidget {
                   width: 0.11,
                   height: 0.05,
                   validator: CustomRequiredValidator(
-                      errorText: "Hotel TerraceorPatio is required ", ctx: ctx),
+                      errorText: "Hotel maxCapacity is required ", ctx: ctx),
                   value: "0",
                   onSaved: (value) {},
                   onChanged: (value) {
-                    hotelCategory.value = getCatalogDescription(
+                    hotelMaxCapacity.value = getCatalogDescription(
                         findMemoryChildCatalog(
-                            "hotels", "value", "TerraceorPatio"),
+                            "hotels", "value", "maxCapacity"),
                         value);
                     filterHotels(context);
                   },
-                  hintText: "TerraceorPatio             ",
-                  data: findMemoryChildCatalog(
-                      "hotels", "value", "TerraceorPatio")),
-              if (hotelCategory.value.isNotEmpty)
-                CustomFormDropDownFieldWidget(
-                    width: 0.11,
-                    height: 0.05,
-                    validator: CustomRequiredValidator(
-                        errorText: "Hotel maxCapacity is required ", ctx: ctx),
-                    value: "0",
-                    onSaved: (value) {},
-                    onChanged: (value) {
-                      hotelRoomCategory.value = getCatalogDescription(
-                          findMemoryChildCatalog(
-                              "hotels", "value", "maxCapacity"),
-                          value);
-                      filterHotels(context);
-                    },
-                    hintText: "maxCapacity     ",
-                    data: findMemoryChildCatalog(
-                        "hotels", "value", "maxCapacity")),
-              if (hotelCategory.value.isNotEmpty)
-                if (hotelRoomCategory.value.isNotEmpty)
-                  CustomFormDropDownFieldWidget(
-                      width: 0.11,
-                      height: 0.05,
-                      validator: CustomRequiredValidator(
-                          errorText: "Hotel Balcony is required ", ctx: ctx),
-                      value: "0",
-                      onSaved: (value) {},
-                      onChanged: (value) {
-                        hotelBalcony.value = getCatalogDescription(
-                            findMemoryChildCatalog(
-                                "hotels", "value", "Balcony"),
-                            value);
-                        filterHotels(context);
-                      },
-                      hintText: "Balcony     ",
-                      data:
-                          findMemoryChildCatalog("hotels", "value", "Balcony")),
-              if (hotelCategory.value.isNotEmpty)
-                if (hotelRoomCategory.value.isNotEmpty)
-                  if (hotelBalcony.value.isNotEmpty)
-                    CustomFormDropDownFieldWidget(
-                        width: 0.11,
-                        height: 0.05,
-                        validator: CustomRequiredValidator(
-                            errorText: "Hotel extrabed is required ", ctx: ctx),
-                        value: "0",
-                        onSaved: (value) {},
-                        onChanged: (value) {
-                          hotelOutsideWindow.value = getCatalogDescription(
-                              findMemoryChildCatalog(
-                                  "hotels", "value", "extrabed"),
-                              value);
-                          filterHotels(context);
-                        },
-                        hintText: "extrabed             ",
-                        data: findMemoryChildCatalog(
-                            "hotels", "value", "extrabed")),
+                  hintText: "maxCapacity     ",
+                  data:
+                      findMemoryChildCatalog("hotels", "value", "maxCapacity")),
+              CustomFormDropDownFieldWidget(
+                width: 0.11,
+                height: 0.05,
+                validator: CustomRequiredValidator(
+                    errorText: "Hotel roomcategory is required ", ctx: ctx),
+                value: "0",
+                onSaved: (value) {},
+                onChanged: (value) {
+                  hotelRoomCategory.value = getCatalogDescription(
+                      findMemoryChildCatalog("hotels", "value", "roomcategory",
+                          filter: {
+                            "key": "maxCapacity",
+                            "value": hotelMaxCapacity.value
+                          }),
+                      value);
+                  filterHotels(context);
+                },
+                hintText: "roomcategory     ",
+                data: findMemoryChildCatalog("hotels", "value", "roomcategory",
+                    filter: {
+                      "key": "maxCapacity",
+                      "value": hotelMaxCapacity.value
+                    }),
+              ),
+              CustomFormDropDownFieldWidget(
+                width: 0.11,
+                height: 0.05,
+                validator: CustomRequiredValidator(
+                    errorText: "Hotel TerraceorPatio is required ", ctx: ctx),
+                value: "0",
+                onSaved: (value) {},
+                onChanged: (value) {
+                  hotelTerraceorPatio.value = getCatalogDescription(
+                      findMemoryChildCatalog(
+                          "hotels", "value", "TerraceorPatio", filter: {
+                        "key": "roomcategory",
+                        "value": hotelRoomCategory.value
+                      }),
+                      value);
+                  filterHotels(context);
+                },
+                hintText: "TerraceorPatio             ",
+                data: findMemoryChildCatalog(
+                    "hotels", "value", "TerraceorPatio", filter: {
+                  "key": "roomcategory",
+                  "value": hotelRoomCategory.value
+                }),
+              ),
+              CustomFormDropDownFieldWidget(
+                width: 0.11,
+                height: 0.05,
+                validator: CustomRequiredValidator(
+                    errorText: "Hotel Balcony is required ", ctx: ctx),
+                value: "0",
+                onSaved: (value) {},
+                onChanged: (value) {
+                  hotelBalcony.value = getCatalogDescription(
+                      findMemoryChildCatalog("hotels", "value", "Balcony",
+                          filter: {
+                            "key": "TerraceorPatio",
+                            "value": hotelTerraceorPatio.value
+                          }),
+                      value);
+                  filterHotels(context);
+                },
+                hintText: "Balcony     ",
+                data: findMemoryChildCatalog("hotels", "value", "Balcony",
+                    filter: {
+                      "key": "TerraceorPatio",
+                      "value": hotelTerraceorPatio.value
+                    }),
+              ),
+              CustomFormDropDownFieldWidget(
+                width: 0.11,
+                height: 0.05,
+                validator: CustomRequiredValidator(
+                    errorText: "Hotel extrabed is required ", ctx: ctx),
+                value: "0",
+                onSaved: (value) {},
+                onChanged: (value) {
+                  hotelExtrabed.value = getCatalogDescription(
+                      findMemoryChildCatalog("hotels", "value", "extrabed",
+                          filter: {
+                            "key": "Balcony",
+                            "value": hotelBalcony.value
+                          }),
+                      value);
+                  filterHotels(context);
+                },
+                hintText: "extrabed             ",
+                data: findMemoryChildCatalog("hotels", "value", "extrabed",
+                    filter: {"key": "Balcony", "value": hotelBalcony.value}),
+              ),
             ],
           ),
-          if (moreFilters.value)
-            Wrap(
-              children: [
-                CustomFormDropDownFieldWidget(
-                    width: 0.11,
-                    height: 0.05,
-                    validator: CustomRequiredValidator(
-                        errorText: "Hotel petFriendly is required ", ctx: ctx),
-                    value: "0",
-                    onSaved: (value) {},
-                    onChanged: (value) {
-                      hotelCategory.value = getCatalogDescription(
-                          findMemoryChildCatalog(
-                              "hotels", "value", "petFriendly"),
-                          value);
-                      filterHotels(context);
-                    },
-                    hintText: "petFriendly             ",
-                    data: findMemoryChildCatalog(
-                        "hotels", "value", "petFriendly")),
-                if (hotelCategory.value.isNotEmpty)
-                  CustomFormDropDownFieldWidget(
-                      width: 0.11,
-                      height: 0.05,
-                      validator: CustomRequiredValidator(
-                          errorText: "Hotel roomcategory is required ",
-                          ctx: ctx),
-                      value: "0",
-                      onSaved: (value) {},
-                      onChanged: (value) {
-                        hotelRoomCategory.value = getCatalogDescription(
-                            findMemoryChildCatalog(
-                                "hotels", "value", "roomcategory"),
-                            value);
-                        filterHotels(context);
-                      },
-                      hintText: "roomcategory     ",
-                      data: findMemoryChildCatalog(
-                          "hotels", "value", "roomcategory")),
-                if (hotelCategory.value.isNotEmpty)
-                  if (hotelRoomCategory.value.isNotEmpty)
-                    CustomFormDropDownFieldWidget(
-                        width: 0.11,
-                        height: 0.05,
-                        validator: CustomRequiredValidator(
-                            errorText: "Hotel TuborJacuzzi is required ",
-                            ctx: ctx),
-                        value: "0",
-                        onSaved: (value) {},
-                        onChanged: (value) {
-                          hotelTuborJacuzzi.value = getCatalogDescription(
-                              findMemoryChildCatalog(
-                                  "hotels", "value", "TuborJacuzzi"),
-                              value);
-                          filterHotels(context);
-                        },
-                        hintText: "TuborJacuzzi     ",
-                        data: findMemoryChildCatalog(
-                            "hotels", "value", "TuborJacuzzi")),
-                if (hotelCategory.value.isNotEmpty)
-                  if (hotelRoomCategory.value.isNotEmpty)
-                    if (hotelBalcony.value.isNotEmpty)
-                      CustomFormDropDownFieldWidget(
-                          width: 0.11,
-                          height: 0.05,
-                          validator: CustomRequiredValidator(
-                              errorText: "Hotel childFriendly is required ",
-                              ctx: ctx),
-                          value: "0",
-                          onSaved: (value) {},
-                          onChanged: (value) {
-                            hotelOutsideWindow.value = getCatalogDescription(
-                                findMemoryChildCatalog(
-                                    "hotels", "value", "childFriendly"),
-                                value);
-                            filterHotels(context);
-                          },
-                          hintText: "childFriendly             ",
-                          data: findMemoryChildCatalog(
-                              "hotels", "value", "childFriendly")),
-                if (hotelCategory.value.isNotEmpty)
-                  if (hotelRoomCategory.value.isNotEmpty)
-                    if (hotelBalcony.value.isNotEmpty)
-                      CustomFormDropDownFieldWidget(
-                          width: 0.11,
-                          height: 0.05,
-                          validator: CustomRequiredValidator(
-                              errorText: "Hotel infantFriendly is required ",
-                              ctx: ctx),
-                          value: "0",
-                          onSaved: (value) {},
-                          onChanged: (value) {
-                            hotelOutsideWindow.value = getCatalogDescription(
-                                findMemoryChildCatalog(
-                                    "hotels", "value", "infantFriendly"),
-                                value);
-                            filterHotels(context);
-                          },
-                          hintText: "infantFriendly             ",
-                          data: findMemoryChildCatalog(
-                              "hotels", "value", "infantFriendly")),
-              ],
-            ),
+          Wrap(
+            children: [
+              CustomFormDropDownFieldWidget(
+                width: 0.11,
+                height: 0.05,
+                validator: CustomRequiredValidator(
+                    errorText: "Hotel petFriendly is required ", ctx: ctx),
+                value: "0",
+                onSaved: (value) {},
+                onChanged: (value) {
+                  hotelTerraceorPatio.value = getCatalogDescription(
+                      findMemoryChildCatalog("hotels", "value", "petFriendly",
+                          filter: {
+                            "key": "Balcony",
+                            "value": hotelBalcony.value
+                          }),
+                      value);
+                  filterHotels(context);
+                },
+                hintText: "petFriendly             ",
+                data: findMemoryChildCatalog("hotels", "value", "petFriendly",
+                    filter: {"key": "Balcony", "value": hotelBalcony.value}),
+              ),
+              CustomFormDropDownFieldWidget(
+                width: 0.11,
+                height: 0.05,
+                validator: CustomRequiredValidator(
+                    errorText: "Hotel TuborJacuzzi is required ", ctx: ctx),
+                value: "0",
+                onSaved: (value) {},
+                onChanged: (value) {
+                  hotelTuborJacuzzi.value = getCatalogDescription(
+                      findMemoryChildCatalog("hotels", "value", "TuborJacuzzi",
+                          filter: {
+                            "key": "Balcony",
+                            "value": hotelBalcony.value
+                          }),
+                      value);
+                  filterHotels(context);
+                },
+                hintText: "TuborJacuzzi     ",
+                data: findMemoryChildCatalog("hotels", "value", "TuborJacuzzi",
+                    filter: {"key": "Balcony", "value": hotelBalcony.value}),
+              ),
+              CustomFormDropDownFieldWidget(
+                width: 0.11,
+                height: 0.05,
+                validator: CustomRequiredValidator(
+                    errorText: "Hotel childFriendly is required ", ctx: ctx),
+                value: "0",
+                onSaved: (value) {},
+                onChanged: (value) {
+                  hotelExtrabed.value = getCatalogDescription(
+                      findMemoryChildCatalog("hotels", "value", "childFriendly",
+                          filter: {
+                            "key": "Balcony",
+                            "value": hotelBalcony.value
+                          }),
+                      value);
+                  filterHotels(context);
+                },
+                hintText: "childFriendly             ",
+                data: findMemoryChildCatalog("hotels", "value", "childFriendly",
+                    filter: {"key": "Balcony", "value": hotelBalcony.value}),
+              ),
+              CustomFormDropDownFieldWidget(
+                width: 0.11,
+                height: 0.05,
+                validator: CustomRequiredValidator(
+                    errorText: "Hotel infantFriendly is required ", ctx: ctx),
+                value: "0",
+                onSaved: (value) {},
+                onChanged: (value) {
+                  hotelExtrabed.value = getCatalogDescription(
+                      findMemoryChildCatalog(
+                          "hotels", "value", "infantFriendly", filter: {
+                        "key": "Balcony",
+                        "value": hotelBalcony.value
+                      }),
+                      value);
+                  filterHotels(context);
+                },
+                hintText: "infantFriendly             ",
+                data: findMemoryChildCatalog(
+                    "hotels", "value", "infantFriendly",
+                    filter: {"key": "Balcony", "value": hotelBalcony.value}),
+              ),
+            ],
+          ),
         ],
       ),
     );
@@ -236,12 +258,10 @@ class HotelKeyPadWidget extends StatelessWidget {
             children: [
               TextButton(
                 onPressed: () {
-                  hotelCategory.value = "";
-                  hotelRoomCategory.value = "";
+                  hotelTerraceorPatio.value = "";
+                  hotelMaxCapacity.value = "";
                   hotelBalcony.value = "";
-                  hotelOutsideWindow.value = "";
-                  hotelStarts.value = "";
-                  hotelEnds.value = "";
+                  hotelExtrabed.value = "";
                   moreFilters.value = false;
                 },
                 child: Text('Reset',
@@ -252,7 +272,7 @@ class HotelKeyPadWidget extends StatelessWidget {
                             color: Colors.black)
                         .getStyle()),
               ),
-              if (hotelStarts.value.isNotEmpty)
+              if (hotelExtrabed.value.isNotEmpty)
                 TextButton(
                   onPressed: () {
                     showCustomDialog(context, HotelResultWidget(), "Close",
@@ -266,7 +286,7 @@ class HotelKeyPadWidget extends StatelessWidget {
                               color: Colors.black)
                           .getStyle()),
                 ),
-              if (hotelStarts.value.isNotEmpty)
+              if (hotelExtrabed.value.isNotEmpty)
                 TextButton(
                   onPressed: () {
                     moreFilters.value = !moreFilters.value;
@@ -295,87 +315,85 @@ class HotelResultWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       child: Stack(children: [
-        if (hotelCategory.value.isNotEmpty)
-          if (hotelRoomCategory.value.isNotEmpty)
+        if (hotelTerraceorPatio.value.isNotEmpty)
+          if (hotelMaxCapacity.value.isNotEmpty)
             if (hotelBalcony.value.isNotEmpty)
-              if (hotelOutsideWindow.value.isNotEmpty)
-                if (hotelStarts.value.isNotEmpty)
-                  if (hotelEnds.value.isNotEmpty)
-                    Column(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(
-                            top: MediaQuery.of(context).size.height * 0.03,
-                            left: MediaQuery.of(context).size.width * 0.0,
-                          ),
-                          child: Container(
-                            width: MediaQuery.of(context).size.width * 0.5,
-                            height: MediaQuery.of(context).size.height * 0.03,
-                            decoration: BoxDecoration(color: Colors.grey),
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    "Hotel Name",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                                Expanded(
-                                    child: Text(
-                                  "Actions",
+              if (hotelExtrabed.value.isNotEmpty)
+                if (hotelExtrabed.value.isNotEmpty)
+                  Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height * 0.03,
+                          left: MediaQuery.of(context).size.width * 0.0,
+                        ),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * 0.5,
+                          height: MediaQuery.of(context).size.height * 0.03,
+                          decoration: BoxDecoration(color: Colors.grey),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  "Hotel Name",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       fontSize: 15,
                                       fontWeight: FontWeight.bold),
-                                )),
-                              ],
-                            ),
+                                ),
+                              ),
+                              Expanded(
+                                  child: Text(
+                                "Actions",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 15, fontWeight: FontWeight.bold),
+                              )),
+                            ],
                           ),
                         ),
-                        Container(
-                            width: MediaQuery.of(context).size.width * 0.6,
-                            height: MediaQuery.of(context).size.height * 0.3,
-                            child: Stack(
-                              children: [
-                                SingleChildScrollView(
-                                  scrollDirection: Axis.vertical,
-                                  child: Padding(
-                                    padding: EdgeInsets.only(
-                                      top: MediaQuery.of(context).size.height *
-                                          0.0,
-                                      left: MediaQuery.of(context).size.width *
-                                          0.03,
-                                    ),
-                                    child: Align(
-                                      alignment: Alignment.topCenter,
-                                      child: Column(
-                                        children: [
-                                          if (hotelResults.value.isNotEmpty &&
-                                              searcherHeader.value.isNotEmpty)
-                                            hotelTable.value
-                                          else
-                                            Text(
-                                              "No Hotels Found",
-                                              style: KTextSytle(
-                                                context: context,
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold,
-                                                color: Color.fromARGB(
-                                                    255, 204, 164, 61),
-                                              ).getStyle(),
-                                            )
-                                        ],
-                                      ),
+                      ),
+                      Container(
+                          width: MediaQuery.of(context).size.width * 0.8,
+                          height: MediaQuery.of(context).size.height * 0.65,
+                          child: Stack(
+                            children: [
+                              SingleChildScrollView(
+                                scrollDirection: Axis.vertical,
+                                child: Padding(
+                                  padding: EdgeInsets.only(
+                                    top: MediaQuery.of(context).size.height *
+                                        0.0,
+                                    left: MediaQuery.of(context).size.width *
+                                        0.03,
+                                  ),
+                                  child: Align(
+                                    alignment: Alignment.topCenter,
+                                    child: Column(
+                                      children: [
+                                        if (hotelResults.value.isNotEmpty &&
+                                            searcherHeader.value.isNotEmpty)
+                                          hotelTable.value
+                                        else
+                                          Text(
+                                            "No Hotels Found",
+                                            style: KTextSytle(
+                                              context: context,
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold,
+                                              color: Color.fromARGB(
+                                                  255, 204, 164, 61),
+                                            ).getStyle(),
+                                          )
+                                      ],
                                     ),
                                   ),
                                 ),
-                              ],
-                            ))
-                      ],
-                    ),
+                              ),
+                            ],
+                          ))
+                    ],
+                  ),
       ]),
     );
   }
