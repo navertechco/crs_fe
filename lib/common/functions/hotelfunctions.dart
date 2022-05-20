@@ -94,7 +94,7 @@ getHotelHeader(context, data, columns) {
 }
 
 processHotelData(context, data) {
-  var columns = ["hotel_name", "hotel_format"];
+  var columns = ["description"];
   var header = getHotelHeader(context, data, columns);
   var detail = getHotelDetail(context, data, columns);
   return [header, detail];
@@ -145,7 +145,7 @@ getHotelDataCell(context, row) {
             child: Column(
               children: [
                 Text(
-                  "${row['hotel_name']}",
+                  "${row['description']}",
                   style: KTextSytle(
                     context: context,
                     fontSize: 15,
