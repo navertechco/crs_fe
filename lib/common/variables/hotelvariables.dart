@@ -14,3 +14,6 @@ var hotelTriple = "".obs;
 var hotelStarts = "".obs;
 var hotelEnds = "".obs;
 var hotelBalcony = "".obs;
+var hotelTuborJacuzzi = "".obs;
+
+
