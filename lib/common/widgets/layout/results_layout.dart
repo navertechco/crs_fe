@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/common/index.dart';
 
-import '../../variables.dart';
+import '../../variables/variables.dart';
 
 class ResultsLayoutWidget extends StatefulWidget {
   const ResultsLayoutWidget({Key? key, this.child, this.text})

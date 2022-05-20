@@ -6,6 +6,11 @@ var hotelMaxCapacity = "".obs;
 var hotelBalcony = "".obs;
 var hotelTuborJacuzzi = "".obs;
 var hotelRoomCategory = "".obs;
+var hotelPetFriendly = "".obs;
+var hotelChildFriendly = "".obs;
+var hotelInfantFriendly = "".obs;
+
+
 
 
 

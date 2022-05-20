@@ -28,33 +28,143 @@ processHotelItinerary(row) {
   return result;
 }
 
+var budgets = {"1": "5 stars", "0": "4 stars"};
+
 filterHotels(ctx) {
   if (globalctx.memory["hotels"] != null) {
     List filtered = globalctx.memory["hotels"];
+    var destData = globalctx.memory["destinations"]
+        [currentDestinationIndex.value.toString()];
+    var destname = destData["destination"];
+    var keyActivity = destData["key_activities"];
+    var tour = globalctx.memory["tour"];
+    var purposes = tour["purposes"];
+    var budget = budgets[tour["accomodation_type"] ?? "1"];
+    //Destination
+    filtered = filtered.where((element) {
+      var rule = true;
+      var dest = element["relation"]["destination"];
+      if (destname.isNotEmpty) {
+        rule = destname == dest;
+      }
+      return rule;
+    }).toList();
     //Budget
-    filtered = filtered.where((element) => true).toList();
+    filtered = filtered.where((element) {
+      var rule = true;
+      var b1 = element["value"]["budget_fk"];
+      if (budget!.isNotEmpty) {
+        rule = budget == b1;
+      }
+      return rule;
+    }).toList();
     //Purpose
-    filtered = filtered.where((element) => true).toList();
+    filtered = filtered.where((element) {
+      var rule = true;
+      var p1 = element["value"]["purpose_fk"];
+      var p2 = element["value"]["purpose_fk.1"];
+      var p3 = element["value"]["purpose_fk.2"];
+      if (purposes.isNotEmpty) {
+        rule = purposes.contains(p1) |
+            purposes.contains(p2) |
+            purposes.contains(p3);
+      }
+      return rule;
+    }).toList();
     //Key Activities
-    filtered = filtered.where((element) => true).toList();
+    filtered = filtered.where((element) {
+      var rule = true;
+      var k1 = element["value"]["keyActivityType_fk"];
+      var k2 = element["value"]["keyActivityType_fk.1"];
+      var k3 = element["value"]["keyActivityType_fk.2"];
+      if (keyActivity.isNotEmpty) {
+        rule = keyActivity.contains(k1) |
+            keyActivity.contains(k2) |
+            keyActivity.contains(k3);
+      }
+      return rule;
+    }).toList();
     //Max Capacity
-    filtered = filtered.where((element) => true).toList();
+    filtered = filtered.where((element) {
+      var rule = true;
+      var max = element["value"]["maxCapacity"];
+      if (hotelMaxCapacity.value.isNotEmpty) {
+        rule = hotelMaxCapacity.value == max;
+      }
+      return rule;
+    }).toList();
     //Room Category
-    filtered = filtered.where((element) => true).toList();
+    filtered = filtered.where((element) {
+      var rule = true;
+      var room = element["value"]["roomcategory"];
+      if (hotelRoomCategory.value.isNotEmpty) {
+        rule = hotelRoomCategory.value == room;
+      }
+      return rule;
+    }).toList();
     //Terrace or Patio
-    filtered = filtered.where((element) => true).toList();
+    filtered = filtered.where((element) {
+      var rule = true;
+      var top = element["value"]["TerraceorPatio"];
+      if (hotelTerraceorPatio.value.isNotEmpty) {
+        rule = hotelTerraceorPatio.value == top;
+      }
+      return rule;
+    }).toList();
     //Balcony
-    filtered = filtered.where((element) => true).toList();
+    filtered = filtered.where((element) {
+      var rule = true;
+      var balcony = element["value"]["Balcony"];
+      if (hotelBalcony.value.isNotEmpty) {
+        rule = hotelBalcony.value == balcony;
+      }
+      return rule;
+    }).toList();
     //Extrabed
-    filtered = filtered.where((element) => true).toList();
+    filtered = filtered.where((element) {
+      var rule = true;
+      var extra = element["value"]["extrabed"];
+      if (hotelExtrabed.value.isNotEmpty) {
+        rule = hotelExtrabed.value == extra;
+      }
+      return rule;
+    }).toList();
     //Pet Friendly
-    filtered = filtered.where((element) => true).toList();
+    filtered = filtered.where((element) {
+      var rule = true;
+      var pet = element["value"]["petFriendly"];
+      if (hotelPetFriendly.value.isNotEmpty) {
+        rule = hotelPetFriendly.value == pet;
+      }
+      return rule;
+    }).toList();
     //Tub or Jacuzzi
-    filtered = filtered.where((element) => true).toList();
+    filtered = filtered.where((element) {
+      var rule = true;
+      var toj = element["value"]["TuborJacuzzi"];
+      if (hotelTuborJacuzzi.value.isNotEmpty) {
+        rule = hotelTuborJacuzzi.value == toj;
+      }
+      return rule;
+    }).toList();
     //Child Friendly
-    filtered = filtered.where((element) => true).toList();
+    filtered = filtered.where((element) {
+      var rule = true;
+      var cf = element["value"]["childFriendly"];
+      if (hotelChildFriendly.value.isNotEmpty) {
+        rule = hotelChildFriendly.value == cf;
+      }
+      return rule;
+    }).toList();
     //Infant Friendly
-    filtered = filtered.where((element) => true).toList();
+    filtered = filtered.where((element) {
+      var rule = true;
+      var infant = element["value"]["infantFriendly"];
+      if (hotelInfantFriendly.value.isNotEmpty) {
+        rule = hotelInfantFriendly.value == infant;
+      }
+      return rule;
+    }).toList();
 
     hotelResults.value = filtered.toList();
 

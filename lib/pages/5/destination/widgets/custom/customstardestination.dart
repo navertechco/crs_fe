@@ -131,7 +131,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                         textColor: Colors.black,
                         onTap: () async {
-                          getHotel(context, id: 0);
+                          getHotel(context, id: 0, index:index);
                         },
                       ),
                     ],

@@ -344,7 +344,8 @@ setLT(value) {
   experiences = findCatalog("experiences");
 }
 
-getHotel(ctx, {int id = 0}) async {
+getHotel(ctx, {int id = 0, int index = 0}) async {
+  currentDestinationIndex.value = index;
   if (globalctx.memory["hotels"] == null) {
     var frame = {
       "data": {"id": id}
@@ -357,7 +358,7 @@ getHotel(ctx, {int id = 0}) async {
       var data = res['data'];
       if (data.length > 0) {
         globalctx.memory["hotels"] = data;
-        showCustomDialog(ctx, HotelCalendarWidget(ctx: ctx), "Close",
+        showCustomDialog(ctx, HotelCalendarWidget(ctx: ctx,), "Close",
             customChild: HotelKeyPadWidget(),
             backgroundColor: Colors.white,
             buttonColor: Colors.black,
@@ -374,7 +375,7 @@ getHotel(ctx, {int id = 0}) async {
       });
     }
   } else {
-    showCustomDialog(ctx, HotelCalendarWidget(ctx: ctx), "Close",
+    showCustomDialog(ctx, HotelCalendarWidget(ctx: ctx,), "Close",
         customChild: HotelKeyPadWidget(),
         backgroundColor: Colors.white,
         buttonColor: Colors.black,

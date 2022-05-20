@@ -2,8 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'index.dart';
+import '../index.dart';
 
+var currentDestinationIndex = 0.obs;
 var defaultToken;
 Context globalctx = Context();
 var session = {};

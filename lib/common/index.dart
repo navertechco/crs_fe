@@ -5,7 +5,7 @@ export './functions/index.dart';
 export './extensions/index.dart';
 export './theme/index.dart';
 export './router/index.dart';
-export './variables.dart';
+export './variables/variables.dart';
 export './validators.dart';
 export './variables/constants.dart';
 export './dto/index.dart';
