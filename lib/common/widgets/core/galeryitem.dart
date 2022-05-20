@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../constants.dart';
+
+import '../../index.dart'; 
 
 class GalleryItem extends StatelessWidget {
   final String image;

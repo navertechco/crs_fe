@@ -10,7 +10,6 @@ import 'package:naver_crs/pages/7/endservices/widgets/index.dart';
 import 'package:naver_crs/pages/index.dart';
 import 'package:sweetalert/sweetalert.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
-import '../constants.dart';
 import '../index.dart';
 export 'dayfunctions.dart';
 export './destinationfunctions.dart';
@@ -105,25 +104,30 @@ globalctxReset() {
 getItems(data, value, hintText) {
   RxList<DropdownMenuItem<String>> items = <DropdownMenuItem<String>>[].obs;
   List<Map<String, dynamic>> data2 = [];
-  data2.add({"code": "0", "description": hintText ?? "Choose a Option"});
-  if (data.length > 0) {
-    items = <DropdownMenuItem<String>>[].obs;
-    data2.addAll(data);
-    data2.asMap().forEach((index, item) {
-      var description = item["description"];
+  try {
+    data2.add({"code": "0", "description": hintText ?? "Choose a Option"});
+    if (data.length > 0) {
+      items = <DropdownMenuItem<String>>[].obs;
+      data2.addAll(data);
+      data2.asMap().forEach((index, item) {
+        var description = item["description"];
 
-      if (description.contains("-")) {
-        for (var item in item["description"].split("-").toList()) {
-          description += item + " ";
+        if (description.contains("-")) {
+          for (var item in item["description"].split("-").toList()) {
+            description += item + " ";
+          }
         }
-      }
 
-      items.add(DropdownMenuItem(
-        value: item["code"].toString(),
-        child: Text(description),
-      ));
-    });
+        items.add(DropdownMenuItem(
+          value: item["code"].toString(),
+          child: Text(description),
+        ));
+      });
+    }
+  } catch (e) {
+    log(e);
   }
+
   return items;
 }
 
@@ -345,21 +349,21 @@ setLT(value) {
   experiences = findCatalog("experiences");
 }
 
-getHotel(ctx, {int cruiseId = 0}) async {
-  if (globalctx.memory["cruises"] == null) {
+getHotel(ctx, {int id = 0}) async {
+  if (globalctx.memory["hotels"] == null) {
     var frame = {
-      "data": {"cruise_id": cruiseId}
+      "data": {"id": id}
     };
     var res = await fetchhandler(kDefaultSchema, kDefaultServer,
-        kDefaultServerPort, kDefaultFindCruise, 'POST', frame);
+        kDefaultServerPort, kDefaultFindHotel, 'POST', frame);
     // ignore: avoid_print
     log(res);
     if (res['state'] == true) {
       var data = res['data'];
       if (data.length > 0) {
-        globalctx.memory["cruises"] = data;
-        showCustomDialog(ctx, CruiseCalendarWidget(ctx: ctx), "Close",
-            customChild: CruiseKeyPadWidget(),
+        globalctx.memory["hotels"] = data;
+        showCustomDialog(ctx, HotelCalendarWidget(ctx: ctx), "Close",
+            customChild: HotelKeyPadWidget(),
             backgroundColor: Colors.white,
             buttonColor: Colors.black,
             height: 0.25,
@@ -375,8 +379,8 @@ getHotel(ctx, {int cruiseId = 0}) async {
       });
     }
   } else {
-    showCustomDialog(ctx, CruiseCalendarWidget(ctx: ctx), "Close",
-        customChild: CruiseKeyPadWidget(),
+    showCustomDialog(ctx, HotelCalendarWidget(ctx: ctx), "Close",
+        customChild: HotelKeyPadWidget(),
         backgroundColor: Colors.white,
         buttonColor: Colors.black,
         height: 0.25,
@@ -423,7 +427,6 @@ getCruise(ctx, {int cruiseId = 0}) async {
   }
 }
 
-
 resetData(context, controller) {
   var data = globalctx.memory["tours"];
   if (searchResult!.value.isNotEmpty) {
@@ -460,13 +463,6 @@ processNetRateData(context, data) {
   return [header, detail];
 }
 
-processCruiseData(context, data) {
-  var columns = ["cruise_name", "cruise_format"];
-  var header = getCruiseHeader(context, data, columns);
-  var detail = getCruiseDetail(context, data, columns);
-  return [header, detail];
-}
-
 processData(context, data, columns) {
   var header = getHeader(context, data, columns);
   var detail = getDetail(context, data, columns);
@@ -490,46 +486,6 @@ getNetRateHeader(context, data) {
         ),
       ));
     }
-  }
-
-  return header;
-}
-
-getCruiseHeader(context, data, columns) {
-  var header = <DataColumn>[];
-  List cols = [];
-
-  if (data.isNotEmpty) {
-    cols = data[0].keys.toList();
-    if (columns != null) {
-      cols = columns;
-    }
-    for (var key in cols) {
-      String title = key ?? "";
-      header.add(DataColumn(
-        label: Text(
-          "",
-          textAlign: TextAlign.left,
-          style: KTextSytle(
-            context: context,
-            fontSize: 10,
-            fontWeight: FontWeight.bold,
-            color: Color.fromARGB(255, 204, 164, 61),
-          ).getStyle(),
-        ),
-      ));
-    }
-    header.add(DataColumn(
-      label: Text(
-        '',
-        style: KTextSytle(
-          context: context,
-          fontSize: 10,
-          fontWeight: FontWeight.bold,
-          color: Color.fromARGB(255, 204, 164, 61),
-        ).getStyle(),
-      ),
-    ));
   }
 
   return header;
@@ -774,7 +730,6 @@ getTrColor(tr) {
 
   return color[tr.toString().toUpperCase()];
 }
-
 
 multiSaving(values, catalog, context, index, field, memory) {
   memory.value = <String>[];

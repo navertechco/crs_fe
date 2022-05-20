@@ -7,5 +7,6 @@ export './galeryitem.dart';
 export 'videoitem.dart';
 export './gallery.dart';
 export './cruisecalendar.dart';
+export './hotelcalendar.dart';
 export './meeting.dart';
 export './scrolltopdownarrow.dart';

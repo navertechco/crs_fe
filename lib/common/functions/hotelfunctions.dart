@@ -6,12 +6,10 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import '../index.dart';
 
-Rx<Iterable> cruiseResults = Rx([]);
-processCruiseItinerary(row) {
-  var itinerary = row["cruise_itinerary"]
-      .toString()
-      .replaceAll("[", "")
-      .replaceAll("]", "");
+Rx<Iterable> hotelResults = Rx([]);
+processHotelItinerary(row) {
+  var itinerary =
+      row["hotel_itinerary"].toString().replaceAll("[", "").replaceAll("]", "");
   var itineraryList = itinerary.split(",");
   var result = "";
   var i = 1;
@@ -30,66 +28,24 @@ processCruiseItinerary(row) {
   return result;
 }
 
-filterCruises(ctx) {
-  if (globalctx.memory["cruises"] != null) {
-    List filtered = globalctx.memory["cruises"];
+filterHotels(ctx) {
+  if (globalctx.memory["hotels"] != null) {
+    List filtered = globalctx.memory["hotels"];
 
-    List filterByCategory = filtered
-        .where((element) => element["cruise_category"]
-            .toString()
-            .toUpperCase()
-            .contains(cruiseCategory.value))
-        .toList();
-    List filterByKey = filterByCategory
-        .where((element) => element["cruise_itinerary"]
-            .toString()
-            .toUpperCase()
-            .contains(cruiseKey.value))
-        .toList();
-    List filterByType = filterByKey
-        .where((element) => element["cruise_type"]
-            .toString()
-            .toUpperCase()
-            .contains(cruiseType.value))
-        .toList();
-    List filterByModality = filterByType
-        .where((element) => element["modality"]
-            .toString()
-            .toUpperCase()
-            .contains(cruiseModality.value))
-        .toList();
-    List filterByArrival = filterByModality
-        .where((element) => element["cruise_format"]
-            .toString()
-            .toUpperCase()
-            .contains(cruiseStarts.value.toString().toUpperCase()))
-        .toList();
-    List filterByDeparture = filterByArrival
-        .where((element) => element["cruise_format"]
-            .toString()
-            .toUpperCase()
-            .contains(cruiseEnds.value.toString().toUpperCase()))
-        .toList();
-    List filterByIslet = filterByDeparture
-        .where((element) => element["cruise_itinerary"]
-            .toString()
-            .toUpperCase()
-            .contains(cruiseIslet.value.toString().toUpperCase()))
-        .toList();
-    List filterByDays = filterByIslet.where((element) => true).toList();
+    List filterByDays = filtered.where((element) => true).toList();
     List filterByDay = filterByDays.where((element) => true).toList();
-    List filterByCruise = filterByDay.where((element) => true).toList();
-    List filterByDateRange = filterByCruise.where((element) => true).toList();
+    List filterByHotel = filterByDay.where((element) => true).toList();
+    List filterByDateRange = filterByHotel.where((element) => true).toList();
     List filterByCabine = filterByDateRange.where((element) => true).toList();
     List filterByTriple = filterByCabine.where((element) => true).toList();
 
-    cruiseResults.value = filterByTriple.toList();
+    hotelResults.value = filterByTriple.toList();
 
-    var processedData = processCruiseData(ctx, cruiseResults.value);
+    var processedData = processHotelData(ctx, hotelResults.value);
     searcherHeader.value = processedData[0];
     searcherDetail.value = processedData[1];
     if (searcherHeader.value.isNotEmpty) {
-      cruiseTable.value = (DataTable(
+      hotelTable.value = (DataTable(
         columns: searcherHeader.value,
         rows: searcherDetail.value,
       ));
@@ -97,7 +53,7 @@ filterCruises(ctx) {
   }
 }
 
-getCruiseHeader(context, data, columns) {
+getHotelHeader(context, data, columns) {
   var header = <DataColumn>[];
   List cols = [];
 
@@ -137,30 +93,14 @@ getCruiseHeader(context, data, columns) {
   return header;
 }
 
-clearCruiseFilter() {
-  cruiseFormat.value = "";
-  cruiseDay.value = "";
-  cruiseShip.value = "";
-  cruiseRange.value = "";
-  cruiseCategory.value = "";
-  cruiseKey.value = "";
-  cruiseType.value = "";
-  cruiseCabine.value = "";
-  cruiseModality.value = "";
-  cruisePax.value = "";
-  cruiseTriple.value = "";
-  cruiseStarts.value = "";
-  cruiseEnds.value = "";
-  cruiseIslet.value = "";
-}
-processCruiseData(context, data) {
-  var columns = ["cruise_name", "cruise_format"];
-  var header = getCruiseHeader(context, data, columns);
-  var detail = getCruiseDetail(context, data, columns);
+processHotelData(context, data) {
+  var columns = ["hotel_name", "hotel_format"];
+  var header = getHotelHeader(context, data, columns);
+  var detail = getHotelDetail(context, data, columns);
   return [header, detail];
 }
 
-getCruiseDetail(context, data, columns) {
+getHotelDetail(context, data, columns) {
   var detail = <DataRow>[];
   if (data.length > 0) {
     for (var row in data) {
@@ -183,7 +123,7 @@ getCruiseDetail(context, data, columns) {
       }
 
       cells.add(
-        getCruisDataCell(context, row),
+        getHotelDataCell(context, row),
       );
       detail.add(DataRow(cells: cells));
     }
@@ -192,12 +132,12 @@ getCruiseDetail(context, data, columns) {
   return detail;
 }
 
-getCruisDataCell(context, row) {
+getHotelDataCell(context, row) {
   var dataCell = DataCell(
     IconButton(
       padding: EdgeInsets.all(0),
       icon: const Icon(Icons.event_note_rounded, size: 20),
-      tooltip: 'Show Cruise Itinerary',
+      tooltip: 'Show Hotel Itinerary',
       onPressed: () {
         showCustomDialog(
           context,
@@ -205,7 +145,7 @@ getCruisDataCell(context, row) {
             child: Column(
               children: [
                 Text(
-                  "${row['cruise_name']}",
+                  "${row['hotel_name']}",
                   style: KTextSytle(
                     context: context,
                     fontSize: 15,
@@ -219,7 +159,7 @@ getCruisDataCell(context, row) {
                   height: MediaQuery.of(context).size.height * 0.5,
                 ),
                 Text(
-                  "${processCruiseItinerary(row)}",
+                  "${processHotelItinerary(row)}",
                   style: KTextSytle(
                     context: context,
                     fontSize: 10,
@@ -236,7 +176,7 @@ getCruisDataCell(context, row) {
                       maxDate: departureDate.value.add(Duration(days: -1)),
                       view: CalendarView.month,
                       dataSource: MeetingDataSource(getDataSource(
-                          "${row['cruise_itinerary']}"
+                          "${row['hotel_itinerary']}"
                               .replaceAll("[", " ")
                               .replaceAll("]", " "))),
                       monthViewSettings: MonthViewSettings(

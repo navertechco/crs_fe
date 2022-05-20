@@ -265,46 +265,15 @@ RxString? searchResult = ''.obs;
 RxList<Map<String, dynamic>> daysCatalog = <Map<String, dynamic>>[].obs;
 
 List filtered = [];
-
+int idx = 0;
+String type = "";
+List filteredExperiences = [];
 var filteredData = [].obs;
 var absorvedPurpose = false.obs;
 var purposeMemory = <String>[].obs;
 var kaMemory = <String>[].obs;
 var generated = false;
-var cruiseFormat = "".obs;
-var cruiseDay = "".obs;
-var cruiseShip = "".obs;
-var cruiseRange = "".obs;
-var cruiseCategory = "".obs;
-var cruiseKey = "".obs;
-var cruiseType = "".obs;
-var cruiseCabine = "".obs;
-var cruiseModality = "".obs;
-var cruisePax = "".obs;
-var cruiseTriple = "".obs;
-var cruiseStarts = "".obs;
-var cruiseEnds = "".obs;
-var cruiseIslet = "".obs;
-List filteredExperiences = [];
-Function clearCruiseFilter = () {
-  cruiseFormat.value = "";
-  cruiseDay.value = "";
-  cruiseShip.value = "";
-  cruiseRange.value = "";
-  cruiseCategory.value = "";
-  cruiseKey.value = "";
-  cruiseType.value = "";
-  cruiseCabine.value = "";
-  cruiseModality.value = "";
-  cruisePax.value = "";
-  cruiseTriple.value = "";
-  cruiseStarts.value = "";
-  cruiseEnds.value = "";
-  cruiseIslet.value = "";
-};
-
 var customerTypeCatalog = findCatalog("legal_client_type");
-
 var client = globalctx.memory["customer"];
 var tour = globalctx.memory["tour"];
 Rx<List<Map<String, dynamic>>> citylist = Rx([]);
@@ -333,6 +302,13 @@ Rx<List<Map<String, dynamic>>> countrydata = Rx((() {
 })());
 
 var cruiseTable = Rx(
+  DataTable(
+    columns: searcherHeader.value,
+    rows: searcherDetail.value,
+  ),
+);
+
+var hotelTable = Rx(
   DataTable(
     columns: searcherHeader.value,
     rows: searcherDetail.value,

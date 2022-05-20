@@ -145,8 +145,6 @@ addDestination(String destination) {
   }
 }
 
-int idx = 0;
-String type = "";
 filterSelectedDestinations() {
   if (dayleft.value > 1 &&
       globalctx.promotedDestinations.length >=
@@ -365,8 +363,6 @@ getDestinationKa(destination, type) {
   return destData["key_activities"];
 }
 
-
-
 filterDestinations() {
   var arr = getDestinationById(arrivalPort.value);
   var dep = getDestinationById(departurePort.value);
@@ -384,8 +380,6 @@ getDestinationDay(index) {
   }
   return 0;
 }
-
-
 
 updateCurrentDestination() {
   var type = "tour";

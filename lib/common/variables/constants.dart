@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/shims/dart_ui_real.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'context/index.dart';
-import 'index.dart';
+import '../context/index.dart';
+import '../index.dart';
 
 /*
  * DATOS DE SERVIDOR
@@ -46,6 +46,7 @@ const kDefaultBuyCreditsPath = "/Gamer/BuyCredit";
 const kDefaultJoinTournmanetPath = "/Gamer/JoinTournament";
 const kDefaultFindTour = "/Tour/FindTour";
 const kDefaultFindCruise = "/Tour/FindCruise";
+const kDefaultFindHotel = "/Tour/FindHotel";
 const kDefaultTourEdit = "/Tour/Edit";
 const kDefaultNewTourEdit = "/Tour/NewId";
 const kDefaultFindCatalog = "/System/FindCatalog";

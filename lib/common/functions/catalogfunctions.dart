@@ -20,12 +20,31 @@ getCatalog(
   }
 }
 
+findMemoryChildCatalog(name, field, description) {
+  var memory = globalctx.memory[name];
+  List<Map<String, dynamic>> output = <Map<String, dynamic>>[];
+  if (memory != null) {
+    var idx = 1;
+    List items =
+        memory.map((e) => e[field][description].toString()).toSet().toList();
+    items.sort();
+    for (var item in items) {
+      Map<String, dynamic> row = {};
+      row["code"] = idx;
+      row["description"] = item;
+      output.add(row);
+      idx++;
+    }
+  }
+  return output;
+}
+
 findMemoryCatalog(name, description) {
   var memory = globalctx.memory[name];
   List<Map<String, dynamic>> output = <Map<String, dynamic>>[];
   if (memory != null) {
     var idx = 1;
-    List items = memory.map((e) => e[description]).toSet().toList();
+    List items = memory.map((e) => e[description].toString()).toSet().toList();
     items.sort();
     for (var item in items) {
       Map<String, dynamic> row = {};

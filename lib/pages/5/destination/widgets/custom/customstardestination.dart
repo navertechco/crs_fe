@@ -144,7 +144,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                       const CustomTitleWidget(
                           width: 0.225,
                           fontWeight: FontWeight.bold,
-                          label: "  Hotel information  "),
+                          label: "  Hotel Information  "),
                       RoundedFormButton(
                         color: Colors.grey,
                         label: "Select",
@@ -153,7 +153,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                         textColor: Colors.black,
                         onTap: () async {
-                          getHotel(context, cruiseId: 0);
+                          getHotel(context, id: 0);
                         },
                       ),
                     ],
