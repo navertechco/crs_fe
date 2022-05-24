@@ -87,7 +87,7 @@ class LeftDayOptions extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-        top: MediaQuery.of(context).size.height * 0.2,
+        top: MediaQuery.of(context).size.height * 0.195,
         left: MediaQuery.of(context).size.width * 0.0,
       ),
       child: SingleChildScrollView(
