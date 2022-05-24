@@ -53,9 +53,9 @@ class BodyWidget extends StatelessWidget {
               child: Stack(
                 children: [
                   LeftInfoHeader(
-                      fontSize: 15,
+                      fontSize: 13,
                       header: LeftHeader(
-                          fontSize: 17, ctrl: ctrl, counter: counter)),
+                          fontSize: 15, ctrl: ctrl, counter: counter)),
                   LeftDayOptions(
                       customGuide: customGuide,
                       index: index,
@@ -87,7 +87,7 @@ class LeftDayOptions extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-        top: MediaQuery.of(context).size.height * 0.25,
+        top: MediaQuery.of(context).size.height * 0.2,
         left: MediaQuery.of(context).size.width * 0.0,
       ),
       child: SingleChildScrollView(
