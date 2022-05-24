@@ -143,7 +143,6 @@ class CustomStarDestinationForm extends StatelessWidget {
                   }
                   return Text("");
                 }),
-               
                 Obx(() {
                   var t = arrivalDate.value;
                   return Row(

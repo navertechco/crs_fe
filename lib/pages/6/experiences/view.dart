@@ -20,17 +20,18 @@ class ExperiencesPage extends GetView<ExperiencesController> {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-          body: _buildView(context),
-          bottomNavigationBar: NavBarWidget(),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              // Add your onPressed code here!
-              showCustomDialog(context, CustomDayWidget(), "Close",
-                  buttonColor: Colors.white);
-            },
-            backgroundColor: Color.fromARGB(255, 204, 164, 61),
-            child: const Icon(Icons.calendar_today_outlined),
-          )),
+        body: _buildView(context),
+        bottomNavigationBar: NavBarWidget(),
+        // floatingActionButton: FloatingActionButton(
+        //   onPressed: () {
+        //     // Add your onPressed code here!
+        //     showCustomDialog(context, CustomDayWidget(), "Close",
+        //         buttonColor: Colors.white);
+        //   },
+        //   backgroundColor: Color.fromARGB(255, 204, 164, 61),
+        //   child: const Icon(Icons.calendar_today_outlined),
+        // )
+      ),
     );
   }
 }
