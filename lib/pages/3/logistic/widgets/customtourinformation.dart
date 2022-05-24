@@ -194,16 +194,28 @@ class CustomLogisticInformationForm extends StatelessWidget {
                               ],
                             ),
                             if (openBoolCredit.value == 1)
-                              RoundedFormTextField(
-                                initialValue: openCredit.value,
-                                onSaved: (value) => openCredit.value = value!,
-                                onFieldSubmitted: (value) {
-                                  openCredit.value = value!;
-                                  setFormValue(globalctx.memory, "logistic",
-                                      "open_credit_value", value);
-                                },
-                                hintText: 'Open Credit Amount',
-                              ),
+                              CustomFormCounterFieldWidget(
+                                  initial: openCredit.value,
+                                  min: 0,
+                                  max: 5000,
+                                  step: 100,
+                                  original: true,
+                                  onValueChanged: (value) {
+                                    try {
+                                      if (value! > 0) {
+                                        openCredit.value = value as int;
+                                        setFormValue(
+                                            globalctx.memory,
+                                            "logistic",
+                                            "open_credit_value",
+                                            value);
+                                      }
+                                    } catch (e) {
+                                      log(e);
+                                    }
+                                  },
+                                  label: '\t\tOpen Credit Amount',
+                                  width: 0.2),
                             if (galapagos.value)
                               const CustomTitleWidget(
                                 width: 0.3,

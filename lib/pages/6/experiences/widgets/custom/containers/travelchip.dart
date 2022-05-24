@@ -34,17 +34,6 @@ class TravelChips extends HookWidget {
                         filterExperiences();
                       },
                     ),
-                  // if (currentDestinationOption.value != "0")
-                  //   InputChip(
-                  //     deleteIcon: Icon(Icons.cancel),
-                  //     label: Text(
-                  //         "Destination Options: ${currentDestinationOption.value}"),
-                  //     onSelected: (bool value) {},
-                  //     onDeleted: () {
-                  //       currentDestinationOption.value = "0";
-                  //       filterExperiences();
-                  //     },
-                  //   ),
                   if (currentTravelRhythm.value != "0")
                     InputChip(
                       deleteIcon: Icon(Icons.cancel),

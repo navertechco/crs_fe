@@ -271,45 +271,10 @@ class CustomCustomerDataForm extends StatelessWidget {
                                     ctx: context),
                                 value: leadPassenger.value,
                                 onSaved: (value) {
-                                  leadPassenger.value = value!;
-                                  ctrl!.state.leadPassenger = value;
-                                  ctrl!.state.travelCode = getValue(
-                                              client, "lead_passenger",
-                                              def: "jose cuevas")
-                                          .toString()
-                                          .replaceAll(" ", "-") +
-                                      "-" +
-                                      tour["passengers"] +
-                                      "-" +
-                                      dayFormat
-                                          .format(arrivalDate.value)
-                                          .replaceAll(" ", "-") +
-                                      "-" +
-                                      globalctx.memory["tour"]["code"]
-                                          .toString();
-                                  travelCode.value = value.toString() +
-                                      "-" +
-                                      tour["passengers"] +
-                                      "-" +
-                                      dayFormat
-                                          .format(arrivalDate.value)
-                                          .replaceAll(" ", "-") +
-                                      "-" +
-                                      globalctx.memory["tour"]["code"]
-                                          .toString();
+                                  saveTravelCode(ctrl, value);
                                 },
                                 onChanged: (value) {
-                                  leadPassenger.value = value!;
-                                  travelCode.value = value.toString() +
-                                      "-" +
-                                      tour["passengers"] +
-                                      "-" +
-                                      dayFormat
-                                          .format(arrivalDate.value)
-                                          .replaceAll(" ", "-") +
-                                      "-" +
-                                      globalctx.memory["tour"]["code"]
-                                          .toString();
+                                  saveTravelCode(ctrl, value);
                                 },
                                 keyboardType: TextInputType.name,
                                 hintText: "Lead Passenger",

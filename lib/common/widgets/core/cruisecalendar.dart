@@ -51,19 +51,29 @@ class CruiseFiltersWidget extends StatelessWidget {
                   data: findMemoryCatalog("cruises", "cruise_category")),
               if (cruiseCategory.value.isNotEmpty)
                 CustomFormDropDownFieldWidget(
-                    width: 0.15,
-                    height: 0.05,
-                    validator: CustomRequiredValidator(
-                        errorText: "Cruise Modality is required ", ctx: ctx),
-                    value: "0",
-                    onSaved: (value) {},
-                    onChanged: (value) {
-                      cruiseModality.value = getCatalogDescription(
-                          findMemoryCatalog("cruises", "modality"), value);
-                      filterCruises(context);
-                    },
-                    hintText: "Modality     ",
-                    data: findMemoryCatalog("cruises", "modality")),
+                  width: 0.11,
+                  height: 0.05,
+                  validator: CustomRequiredValidator(
+                      errorText: "Cruise Modality is required ", ctx: ctx),
+                  value: "0",
+                  onSaved: (value) {},
+                  onChanged: (value) {
+                    cruiseModality.value = getCatalogDescription(
+                        findMemoryChildCatalog("cruises", "", "modality",
+                            filter: {
+                              "key": "cruise_category",
+                              "value": cruiseCategory.value
+                            }),
+                        value);
+                    filterCruises(context);
+                  },
+                  hintText: "roomcategory     ",
+                  data: findMemoryChildCatalog("cruises", "", "modality",
+                      filter: {
+                        "key": "cruise_category",
+                        "value": cruiseCategory.value
+                      }),
+                ),
               if (cruiseCategory.value.isNotEmpty)
                 if (cruiseModality.value.isNotEmpty)
                   CustomFormDropDownFieldWidget(
@@ -96,12 +106,20 @@ class CruiseFiltersWidget extends StatelessWidget {
                         onSaved: (value) {},
                         onChanged: (value) {
                           cruiseType.value = getCatalogDescription(
-                              findMemoryCatalog("cruises", "cruise_type"),
+                              findMemoryChildCatalog(
+                                  "cruises", "", "cruise_type", filter: {
+                                "key": "modality",
+                                "value": cruiseModality.value
+                              },included:true),
                               value);
                           filterCruises(context);
                         },
                         hintText: "Type             ",
-                        data: findMemoryCatalog("cruises", "cruise_type")),
+                        data: findMemoryChildCatalog(
+                            "cruises", "", "cruise_type", filter: {
+                          "key": "modality",
+                          "value": cruiseModality.value
+                        })),
               if (cruiseCategory.value.isNotEmpty)
                 if (cruiseModality.value.isNotEmpty)
                   if (cruiseIslet.value.isNotEmpty)

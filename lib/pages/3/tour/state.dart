@@ -18,5 +18,5 @@ class TourState extends GetXState {
   String country = "";
   // ignore: non_constant_identifier_names
   String accomodation_type = "";
-  String passengers = "";
+  int passengers = 0;
 }

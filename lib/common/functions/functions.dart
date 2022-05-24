@@ -358,7 +358,12 @@ getHotel(ctx, {int id = 0, int index = 0}) async {
       var data = res['data'];
       if (data.length > 0) {
         globalctx.memory["hotels"] = data;
-        showCustomDialog(ctx, HotelCalendarWidget(ctx: ctx,), "Close",
+        showCustomDialog(
+            ctx,
+            HotelCalendarWidget(
+              ctx: ctx,
+            ),
+            "Close",
             customChild: HotelKeyPadWidget(),
             backgroundColor: Colors.white,
             buttonColor: Colors.black,
@@ -375,7 +380,12 @@ getHotel(ctx, {int id = 0, int index = 0}) async {
       });
     }
   } else {
-    showCustomDialog(ctx, HotelCalendarWidget(ctx: ctx,), "Close",
+    showCustomDialog(
+        ctx,
+        HotelCalendarWidget(
+          ctx: ctx,
+        ),
+        "Close",
         customChild: HotelKeyPadWidget(),
         backgroundColor: Colors.white,
         buttonColor: Colors.black,
@@ -832,7 +842,33 @@ getMax(list) {
 }
 
 getTrLimit(value) {
-  var trLimits = {"soft": 60, "medium": 60, "hard": 180};
+  var trLimits = {
+    "soft": 60,
+    "medium": 60,
+    "hard": 180,
+    "1": 60,
+    "2": 60,
+    "3": 180
+  };
   var result = trLimits[value.toString().toLowerCase()];
   return result;
+}
+
+saveTravelCode(ctrl, value) {
+  leadPassenger.value = value!;
+  ctrl!.state.leadPassenger = value;
+  ctrl!.state.travelCode =
+      getTravelCode(getValue(client, "lead_passenger", def: "jose cuevas"));
+  travelCode.value = getTravelCode(value);
+}
+
+getTravelCode(value) {
+  var res = value.toString().replaceAll(" ", "-") +
+      "-" +
+      tour["passengers"].toString() +
+      "-" +
+      dayFormat.format(arrivalDate.value).replaceAll(" ", "-") +
+      "-" +
+      globalctx.memory["tour"]["code"].toString();
+  return res;
 }

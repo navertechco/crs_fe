@@ -11,7 +11,9 @@ class LeftHeader extends HookWidget {
     Key? key,
     required this.ctrl,
     required this.counter,
+    required this.fontSize,
   }) : super(key: key);
+  final int fontSize;
   final ValueNotifier<int> counter;
   final ExperiencesController ctrl;
   final type = (() {
@@ -25,21 +27,18 @@ class LeftHeader extends HookWidget {
   })();
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        top: MediaQuery.of(context).size.height * 0.01,
-        left: MediaQuery.of(context).size.width * 0.0,
-      ),
-      child: Obx(() {
-        return Text(
+    return Obx(() {
+      return Align(
+        alignment: Alignment.centerLeft,
+        child: Text(
             "Day  ${currentDay.value + 1}:  ${globalDestinationName.value.toString().capitalize} $type ",
             style: KTextSytle(
                     context: context,
-                    fontSize: 25,
+                    fontSize: fontSize,
                     fontWeight: FontWeight.bold,
                     color: Colors.white)
-                .getStyle());
-      }),
-    );
+                .getStyle()),
+      );
+    });
   }
 }

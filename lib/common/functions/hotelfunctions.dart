@@ -44,7 +44,7 @@ filterHotels(ctx) {
     filtered = filtered.where((element) {
       var rule = true;
       var dest = element["relation"]["destination"];
-      if (destname.isNotEmpty) {
+      if (destname != null) {
         rule = destname == dest;
       }
       return rule;

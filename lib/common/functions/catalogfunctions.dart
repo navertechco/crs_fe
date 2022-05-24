@@ -21,22 +21,100 @@ getCatalog(
 }
 
 findMemoryChildCatalog(name, field, description,
-    {Map<String, dynamic>? filter}) {
+    {Map<String, dynamic>? filter, bool included = false, Map? catalog}) {
   var memory = globalctx.memory[name];
   List<Map<String, dynamic>> output = <Map<String, dynamic>>[];
+  List items = [];
   if (memory != null) {
     var idx = 1;
     if (filter != null) {
       if (filter["value"].isNotEmpty) {
-        memory = memory
-            .where((e) =>
-                e[field][filter["key"]].toString() ==
-                filter["value"].toString())
-            .toList();
+        if (catalog != null) {
+          var descriptions = catalog.keys
+              .toList()
+              .map((e) => e.toString().toUpperCase())
+              .toList();
+
+          if (included) {
+            if (field.isNotEmpty) {
+              memory = memory
+                  .where((e) => e[field][filter["key"]]
+                      .toString()
+                      .toUpperCase()
+                      .contains(filter["value"].toString().toUpperCase()))
+                  .toList()
+                  .where((e) => descriptions.contains(
+                      [field][filter["key"]].toString().toUpperCase()));
+            } else {
+              memory = memory
+                  .where((e) => e[filter["key"]]
+                      .toString()
+                      .toUpperCase()
+                      .contains(filter["value"].toString().toUpperCase()))
+                  .toList()
+                  .where((e) => descriptions
+                      .contains([filter["key"]].toString().toUpperCase()));
+            }
+          } else {
+            if (field.isNotEmpty) {
+              memory = memory
+                  .where((e) =>
+                      e[field][filter["key"]].toString().toUpperCase() ==
+                      filter["value"].toString().toUpperCase())
+                  .toList()
+                  .where((e) => descriptions.contains(
+                      [field][filter["key"]].toString().toUpperCase()));
+            } else {
+              memory = memory
+                  .where((e) =>
+                      e[filter["key"]].toString().toUpperCase() ==
+                      filter["value"].toString().toUpperCase())
+                  .toList()
+                  .where((e) => descriptions.contains(
+                      [field][filter["key"]].toString().toUpperCase()));
+            }
+          }
+        } else {
+          if (included) {
+            if (field.isNotEmpty) {
+              memory = memory
+                  .where((e) => e[field][filter["key"]]
+                      .toString()
+                      .toUpperCase()
+                      .contains(filter["value"].toString().toUpperCase()))
+                  .toList();
+            } else {
+              memory = memory
+                  .where((e) => e[filter["key"]]
+                      .toString()
+                      .toUpperCase()
+                      .contains(filter["value"].toString().toUpperCase()))
+                  .toList();
+            }
+          } else {
+            if (field.isNotEmpty) {
+              memory = memory
+                  .where((e) =>
+                      e[field][filter["key"]].toString().toUpperCase() ==
+                      filter["value"].toString().toUpperCase())
+                  .toList();
+            } else {
+              memory = memory
+                  .where((e) =>
+                      e[filter["key"]].toString().toUpperCase() ==
+                      filter["value"].toString().toUpperCase())
+                  .toList();
+            }
+          }
+        }
       }
     }
-    List items =
-        memory.map((e) => e[field][description].toString()).toSet().toList();
+    if (field.isNotEmpty) {
+      items =
+          memory.map((e) => e[field][description].toString()).toSet().toList();
+    } else {
+      items = memory.map((e) => e[description].toString()).toSet().toList();
+    }
 
     items.sort();
     for (var item in items) {

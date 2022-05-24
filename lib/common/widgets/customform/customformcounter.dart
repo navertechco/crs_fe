@@ -13,19 +13,21 @@ class CustomFormCounterFieldWidget extends StatelessWidget {
     this.height = 0.05,
     this.disabled = false,
     this.onValueChanged,
-    this.initial,
-    this.min,
-    this.max,
-    this.bound,
-    this.step,
+    this.initial = 0,
+    this.min = 0,
+    this.max = 10,
+    this.bound = 0,
+    this.step = 1,
     this.left = 0,
     this.top = 0,
     this.fontSize = 10,
     this.fontWeight = FontWeight.normal,
     this.color = Colors.black,
+    this.original = false,
   }) : super(key: key);
 
-  final label;
+  final bool original;
+  final String label;
   final bool disabled;
   final double left;
   final double top;
@@ -36,32 +38,37 @@ class CustomFormCounterFieldWidget extends StatelessWidget {
   final FontWeight fontWeight;
   final Color color;
   final void Function(num?)? onValueChanged;
-  final initial;
-  final min;
-  final max;
-  final bound;
-  final step;
+  final int initial;
+  final int min;
+  final int max;
+  final int bound;
+  final int step;
   List<TextInputFormatter>? inputFormatters;
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Row(
-        children: [
-          CustomFormLabelWidget(
-              label: label, color: color, fontWeight: fontWeight),
-          RoundedFormCounterField(
-              disabled: disabled,
-              hintText: hintText,
-              width: width,
-              height: height,
-              initial: initial,
-              min: min,
-              max: max,
-              bound: bound,
-              step: step,
-              onValueChanged: onValueChanged),
-        ],
+      padding: const EdgeInsets.all(0),
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: Wrap(
+          children: [
+            CustomFormLabelWidget(
+                label: label, color: color, fontWeight: fontWeight),
+            RoundedFormCounterField(
+                disabled: disabled,
+                hintText: hintText,
+                width: width,
+                height: height,
+                initial: initial,
+                original: original,
+                min: min,
+                max: max,
+                bound: bound,
+                step: step,
+                onValueChanged: onValueChanged),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.061),
+          ],
+        ),
       ),
     );
   }

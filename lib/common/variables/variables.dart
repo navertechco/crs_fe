@@ -198,8 +198,8 @@ Rx<int> openBoolCredit =
     Rx(getFormValue(globalctx.memory, "logistic", "open_credit", 0));
 Rx<int> arrivalDinner =
     Rx(getFormValue(globalctx.memory, "logistic", "dinner", 0));
-Rx<String> openCredit =
-    Rx(getFormValue(globalctx.memory, "logistic", "open_credit_value", "0"));
+Rx<int>openCredit =
+    Rx(getFormValue(globalctx.memory, "logistic", "open_credit_value", 100));
 RxBool openGuide = false.obs;
 RxBool openTranslate = false.obs;
 Rx<String> arrivalHour = Rx(getFormValue(

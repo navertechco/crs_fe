@@ -73,19 +73,18 @@ class CustomTourInformationForm extends StatelessWidget {
                   label: "Accomodation Type",
                   data: accomodationType,
                 ),
-                CustomFormTextFieldWidget(
-                    disabled: readonly,
-                    value: getValue(tour, "passengers", def: "10"),
-                    validator: CustomRequiredValidator(
-                        errorText: "Passengers is required ", ctx: context),
-                    onSaved: (value) {
-                      ctrl!.state.passengers = value!;
+                CustomFormCounterFieldWidget(
+                    initial:
+                        getFormValue(globalctx.memory, "tour", "passengers", 1),
+                    min: 1,
+                    max: 50,
+                    bound: 0,
+                    onValueChanged: (value) {
+                      ctrl!.state.passengers = value! as int;
+                      setFormValue(
+                          globalctx.memory, "tour", "passengers", value as int);
                     },
-                    keyboardType: TextInputType.number,
-                    inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter.digitsOnly
-                    ],
-                    label: "Passengers                  ",
+                    label: "  Passengers\t\t\t\t\t\t\t\t\t\t\t\t\t\t",
                     width: 0.20),
                 Obx(() {
                   return AbsorbPointer(

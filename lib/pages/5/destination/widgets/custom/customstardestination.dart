@@ -116,28 +116,6 @@ class CustomStarDestinationForm extends StatelessWidget {
             child: SizedBox(
               child: Wrap(children: [
                 Obx(() {
-                  var t = arrivalDate.value;
-                  return Row(
-                    children: [
-                      const CustomTitleWidget(
-                          width: 0.225,
-                          fontWeight: FontWeight.bold,
-                          label: "  Hotel Information  "),
-                      RoundedFormButton(
-                        color: Colors.grey,
-                        label: "Select",
-                        height: 0.05,
-                        fontSize: 3,
-                        fontWeight: FontWeight.bold,
-                        textColor: Colors.black,
-                        onTap: () async {
-                          getHotel(context, id: 0, index:index);
-                        },
-                      ),
-                    ],
-                  );
-                }),
-                Obx(() {
                   var expDay = explorationDay.value;
 
                   if (destination != "galapagos") {
@@ -160,10 +138,33 @@ class CustomStarDestinationForm extends StatelessWidget {
                                   "0")),
                               value as int);
                         },
-                        label: "Exploration Days    ",
+                        label: "\t\tExploration Days    ",
                         width: 0.20);
                   }
                   return Text("");
+                }),
+               
+                Obx(() {
+                  var t = arrivalDate.value;
+                  return Row(
+                    children: [
+                      const CustomTitleWidget(
+                          width: 0.225,
+                          fontWeight: FontWeight.bold,
+                          label: "  Hotel Information  "),
+                      RoundedFormButton(
+                        color: Colors.grey,
+                        label: "Select",
+                        height: 0.05,
+                        fontSize: 3,
+                        fontWeight: FontWeight.bold,
+                        textColor: Colors.black,
+                        onTap: () async {
+                          getHotel(context, id: 0, index: index);
+                        },
+                      ),
+                    ],
+                  );
                 }),
                 Obx(() {
                   var expMode = explorationMode.value;
