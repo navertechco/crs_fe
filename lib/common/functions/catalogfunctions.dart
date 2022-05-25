@@ -21,22 +21,37 @@ getCatalog(
 }
 
 findMemoryChildCatalog(name, field, description,
-    {Map<String, dynamic>? filter, bool included = false, Map? catalog}) {
+    {Map<String, dynamic>? filter,
+    bool included = false,
+    List<Map<String, dynamic>>? catalog,
+    bool reverse = false,
+    Function? condition}) {
   var memory = globalctx.memory[name];
   List<Map<String, dynamic>> output = <Map<String, dynamic>>[];
   List items = [];
+
   if (memory != null) {
     var idx = 1;
     if (filter != null) {
       if (filter["value"].isNotEmpty) {
         if (included) {
           if (field.isNotEmpty) {
-            memory = memory
-                .where((e) => e[field][filter["key"]]
-                    .toString()
-                    .toUpperCase()
-                    .contains(filter["value"].toString().toUpperCase()))
-                .toList();
+            if (reverse) {
+              memory = memory
+                  .where((e) => filter["value"]
+                      .toString()
+                      .toUpperCase()
+                      .contains(
+                          e[field][filter["key"]].toString().toUpperCase()))
+                  .toList();
+            } else {
+              memory = memory
+                  .where((e) => e[field][filter["key"]]
+                      .toString()
+                      .toUpperCase()
+                      .contains(filter["value"].toString().toUpperCase()))
+                  .toList();
+            }
           } else {
             memory = memory
                 .where((e) => e[filter["key"]]
@@ -62,13 +77,51 @@ findMemoryChildCatalog(name, field, description,
         }
       }
     }
-    if (field.isNotEmpty) {
-      items =
-          memory.map((e) => e[field][description].toString()).toSet().toList();
-    } else {
-      items = memory.map((e) => e[description].toString()).toSet().toList();
-    }
 
+    if (catalog != null) {
+      items = [];
+      for (var mem in memory) {
+        for (var item in catalog) {
+          if (field.isNotEmpty) {
+            if (mem[field][description]
+                .toString()
+                .contains(item["description"])) {
+              items.add(item);
+            }
+          } else {
+            if (condition != null) {
+              var rule = condition(mem, item);
+              if (rule) {
+                items.add(item);
+              }
+            } else {
+              if (mem[description].toString().contains(item["description"])) {
+                items.add(item);
+              }
+            }
+          }
+        }
+      }
+      items = items.map((e) => e["description"].toString()).toSet().toList();
+    } else {
+      if (field.isNotEmpty) {
+        items = memory
+            .map((e) {
+              if (e[field] is List) {
+                return e[field]
+                    .map((f) => f[description].toString())
+                    .toSet()
+                    .toList()[0];
+              } else {
+                return e[field][description].toString();
+              }
+            })
+            .toSet()
+            .toList();
+      } else {
+        items = memory.map((e) => e[description].toString()).toSet().toList();
+      }
+    }
     items.sort();
     for (var item in items) {
       Map<String, dynamic> row = {};
