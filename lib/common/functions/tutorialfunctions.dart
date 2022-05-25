@@ -7,7 +7,7 @@ loadTargets() {
   var targets = <TargetFocus>[];
   targets.add(TargetFocus(
       identify: "Target 1",
-      keyTarget: GlobalKey(debugLabel: "NAVBAR"),
+      keyTarget: navBarKey,
       contents: [
         TargetContent(
             align: ContentAlign.bottom,
@@ -37,7 +37,7 @@ loadTargets() {
 
   targets.add(TargetFocus(
       identify: "Target 2",
-      keyTarget: GlobalKey(debugLabel: "NAVBAR"),
+      keyTarget: navBarKey,
       contents: [
         TargetContent(
             align: ContentAlign.left,
@@ -91,7 +91,7 @@ loadTargets() {
 
   targets.add(TargetFocus(
       identify: "Target 3",
-      keyTarget: GlobalKey(debugLabel: "NAVBAR"),
+      keyTarget: navBarKey,
       contents: [
         TargetContent(
             align: ContentAlign.right,

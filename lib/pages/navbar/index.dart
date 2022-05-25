@@ -32,7 +32,7 @@ class NavBarWidget extends StatelessWidget {
         label: "Exit",
       ));
       return BottomNavigationBar(
-        key: GlobalKey(debugLabel: "NAVBAR"),
+        key: navBarKey,
         backgroundColor: Colors.black,
         unselectedItemColor: Colors.black,
         iconSize: 20,
