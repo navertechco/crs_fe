@@ -297,6 +297,9 @@ getLeftAccumulated(destination, id) {
 getMaxTrValue(tr) {
   return trMaxValues[tr];
 }
+getMaxTrHourValue(tr) {
+  return trMaxHourValues[tr];
+}
 
 getAgeMaxTrValue(tr) {
   return trAgeMaxValues[tr];

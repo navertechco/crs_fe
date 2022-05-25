@@ -198,7 +198,7 @@ Rx<int> openBoolCredit =
     Rx(getFormValue(globalctx.memory, "logistic", "open_credit", 0));
 Rx<int> arrivalDinner =
     Rx(getFormValue(globalctx.memory, "logistic", "dinner", 0));
-Rx<int>openCredit =
+Rx<int> openCredit =
     Rx(getFormValue(globalctx.memory, "logistic", "open_credit_value", 100));
 RxBool openGuide = false.obs;
 RxBool openTranslate = false.obs;
@@ -217,6 +217,19 @@ var currentDestinationType = "arrival";
 var currentDestinationKeyActivities = [].obs;
 var leftHours = {}.obs;
 var endHours = {}.obs;
+var trMaxHourValues = {
+  "SOFT": 1,
+  "MEDIUM": 1,
+  "HARD": 3,
+  "0": 3,
+  "1": 1,
+  "2": 1,
+  "3": 3,
+  0: 3,
+  1: 1,
+  2: 1,
+  3: 3
+};
 var trMaxValues = {
   "SOFT": 6.0,
   "MEDIUM": 8.0,

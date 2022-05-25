@@ -59,7 +59,9 @@ class CustomFooterWidget extends StatelessWidget {
                           color: Colors.white)
                       .getStyle()),
               onPressed: () async {
-                if ((leftHours[currentDay.value].value * 60) <= 5) {
+                var max = getMaxTrHourValue(currentTravelRhythm.value);
+                var left = (leftHours[currentDay.value].value);
+                if (left <= max) {
                   if (formKey.currentState != null) {
                     if (formKey.currentState!.validate()) {
                       await paginateDay(context);

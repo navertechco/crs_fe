@@ -118,9 +118,11 @@ class CustomLeisureTimeDetailForm extends StatelessWidget {
 
                     return CustomFormCounterFieldWidget(
                         initial: getFormValue(globalctx.memory["days"],
-                            currentDay.value, "leisureTime", 0),
+                                currentDay.value, "leisureTime", 0)
+                            .round() as int,
                         min: 0,
-                        max: (leftHours[currentDay.value].value + 1) as int,
+                        max: (leftHours[currentDay.value].value + 1).round()
+                            as int,
                         bound: 0,
                         onValueChanged: (value) {
                           setFormValue(globalctx.memory["days"],
