@@ -17,19 +17,13 @@ class SearcherWidget extends GetView<SearcherController> {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    var processedData = processData(context, globalctx.memory["tours"], null);
-    searcherHeader.value = processedData[0];
-    if (searchResult!.value.isEmpty) {
-      searcherDetail.value = processedData[1];
-    }
-
+    updateDatatable(context, quoteFilter.value);
     return Form(
       key: _formKey,
       child: Align(
         alignment: Alignment.bottomCenter,
         child: Stack(
           children: [
-          
             Padding(
                 padding: EdgeInsets.only(
                   top: MediaQuery.of(context).size.height * 0.3,

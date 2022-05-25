@@ -873,3 +873,11 @@ getTravelCode(value) {
       globalctx.memory["tour"]["code"].toString();
   return res;
 }
+
+updateDatatable(context, data) {
+  var processedData = processData(context, data, null);
+  searcherHeader.value = processedData[0];
+  if (searchResult!.value.isEmpty) {
+    searcherDetail.value = processedData[1];
+  }
+}

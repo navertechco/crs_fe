@@ -20,7 +20,7 @@ class SearcherPage extends GetView<SearcherController> {
             children: [
               QuoteHistoryTitle(),
               QuoteHistoryFilter(),
-              QuoteHistoryButton(),
+              // QuoteHistoryButton(),
               QuoteHistoryTable(controller: controller),
             ],
           ),
@@ -48,20 +48,13 @@ class QuoteHistoryTable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(
-        top: MediaQuery.of(context).size.height * 0.0,
-        left: MediaQuery.of(context).size.width * 0.0,
-      ),
-      child: Obx(() {
-        if (quoteDisplay.value) {
-          return SearcherWidget(
-            ctrl: controller,
-          );
-        } else {
-          return Text("");
-        }
-      }),
-    );
+        padding: EdgeInsets.only(
+          top: MediaQuery.of(context).size.height * 0.0,
+          left: MediaQuery.of(context).size.width * 0.0,
+        ),
+        child: SearcherWidget(
+          ctrl: controller,
+        ));
   }
 }
 
@@ -84,9 +77,9 @@ class QuoteHistoryButton extends StatelessWidget {
             child: Text(!quoteDisplay.value ? 'Display' : 'Hide',
                 style: KTextSytle(
                   context: context,
-                  fontSize: 25,
+                  fontSize: 15,
                   fontWeight: FontWeight.bold,
-                  color: Color.fromARGB(255, 204, 164, 61),
+                  color: Colors.white,
                 ).getStyle()),
           )),
     );
@@ -122,7 +115,7 @@ class QuoteHistoryFilter extends StatelessWidget {
                     "date",
                   ),
                   value);
-              filterCruises(context);
+              filterQuoteHistory(context);
             },
             hintText: "Quote Date",
             data: findMemoryChildCatalog(
@@ -146,7 +139,7 @@ class QuoteHistoryFilter extends StatelessWidget {
                     "date",
                   ),
                   value);
-              filterCruises(context);
+              filterQuoteHistory(context);
             },
             hintText: "Quote Date",
             data: findMemoryChildCatalog(
@@ -170,7 +163,7 @@ class QuoteHistoryFilter extends StatelessWidget {
                     "date",
                   ),
                   value);
-              filterCruises(context);
+              filterQuoteHistory(context);
             },
             hintText: "Quote Date",
             data: findMemoryChildCatalog(
@@ -194,7 +187,7 @@ class QuoteHistoryFilter extends StatelessWidget {
                     "date",
                   ),
                   value);
-              filterCruises(context);
+              filterQuoteHistory(context);
             },
             hintText: "Quote Date",
             data: findMemoryChildCatalog(
