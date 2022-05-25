@@ -29,8 +29,9 @@ processQuoteHistoryItinerary(row) {
 }
 
 filterQuoteHistory(ctx) {
-  if (globalctx.memory["quotes"] != null) {
+  if (globalctx.memory["tours"] != null) {
     List filtered = globalctx.memory["tours"];
+    filtered = filtered.where((e) => e["date"] == quoteDate.value).toList();
     quoteFilter.value = filtered.toList();
     updateDatatable(ctx, quoteFilter.value);
   }
