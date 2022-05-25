@@ -226,37 +226,37 @@ class LeftInfoHeader extends StatelessWidget {
   final int fontSize;
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-          top: MediaQuery.of(context).size.height * 0.01,
-          left: MediaQuery.of(context).size.width * 0.0),
-      child: Column(children: [
-        header,
-        CustomTitleWidget(
-            fontWeight: FontWeight.bold,
-            label:
-                "Current Day: ${dayFormat.format(currentDate.value).replaceAll(" ", "-")}",
-            color: Colors.white,
-            fontSize: fontSize),
-        CustomTitleWidget(
-            fontWeight: FontWeight.bold,
-            label:
-                "Travel Rhythm: ${findTravelRhythmDescription(parseInt(currentTravelRhythm.value))}",
-            color: Colors.white,
-            fontSize: fontSize),
-        CustomTitleWidget(
-            fontWeight: FontWeight.bold,
-            label:
-                "Accumulated Hours: ${getTimeStringFromDouble(getRXValue(accumulatedHours, currentDay.value, 0.0))}",
-            color: Colors.white,
-            fontSize: fontSize),
-        CustomTitleWidget(
-            fontWeight: FontWeight.bold,
-            label:
-                "Left Hours: ${getTimeStringFromDouble(getRXValue(leftHours, currentDay.value, getMaxTrValue(currentTravelRhythm.value)))}",
-            color: Colors.white,
-            fontSize: fontSize),
-      ]),
-    );
+    return Obx(() => Padding(
+          padding: EdgeInsets.only(
+              top: MediaQuery.of(context).size.height * 0.01,
+              left: MediaQuery.of(context).size.width * 0.0),
+          child: Column(children: [
+            header,
+            CustomTitleWidget(
+                fontWeight: FontWeight.bold,
+                label:
+                    "Current Day: ${dayFormat.format(currentDate.value).replaceAll(" ", "-")}",
+                color: Colors.white,
+                fontSize: fontSize),
+            CustomTitleWidget(
+                fontWeight: FontWeight.bold,
+                label:
+                    "Travel Rhythm: ${findTravelRhythmDescription(parseInt(currentTravelRhythm.value))}",
+                color: Colors.white,
+                fontSize: fontSize),
+            CustomTitleWidget(
+                fontWeight: FontWeight.bold,
+                label:
+                    "Accumulated Hours: ${getTimeStringFromDouble(getRXValue(accumulatedHours, currentDay.value, 0.0))}",
+                color: Colors.white,
+                fontSize: fontSize),
+            CustomTitleWidget(
+                fontWeight: FontWeight.bold,
+                label:
+                    "Left Hours: ${getTimeStringFromDouble(getRXValue(leftHours, currentDay.value, getMaxTrValue(currentTravelRhythm.value)))}",
+                color: Colors.white,
+                fontSize: fontSize),
+          ]),
+        ));
   }
 }
