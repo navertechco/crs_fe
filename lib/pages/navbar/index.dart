@@ -18,6 +18,7 @@ class NavBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    showTutorial(context);
     return Obx(() {
       List<BottomNavigationBarItem> itemList = [];
       for (var page in pageList) {
@@ -31,6 +32,7 @@ class NavBarWidget extends StatelessWidget {
         label: "Exit",
       ));
       return BottomNavigationBar(
+        key: GlobalKey(debugLabel: "NAVBAR"),
         backgroundColor: Colors.black,
         unselectedItemColor: Colors.black,
         iconSize: 20,

@@ -8,3 +8,4 @@ export './tourfunctions.dart';
 export './cruisefunctions.dart';
 export './hotelfunctions.dart';
 export './quotehistoryfunctions.dart';
+export './tutorialfunctions.dart';
