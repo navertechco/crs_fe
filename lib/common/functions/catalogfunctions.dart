@@ -29,82 +29,35 @@ findMemoryChildCatalog(name, field, description,
     var idx = 1;
     if (filter != null) {
       if (filter["value"].isNotEmpty) {
-        if (catalog != null) {
-          var descriptions = catalog.keys
-              .toList()
-              .map((e) => e.toString().toUpperCase())
-              .toList();
-
-          if (included) {
-            if (field.isNotEmpty) {
-              memory = memory
-                  .where((e) => e[field][filter["key"]]
-                      .toString()
-                      .toUpperCase()
-                      .contains(filter["value"].toString().toUpperCase()))
-                  .toList()
-                  .where((e) => descriptions.contains(
-                      [field][filter["key"]].toString().toUpperCase()));
-            } else {
-              memory = memory
-                  .where((e) => e[filter["key"]]
-                      .toString()
-                      .toUpperCase()
-                      .contains(filter["value"].toString().toUpperCase()))
-                  .toList()
-                  .where((e) => descriptions
-                      .contains([filter["key"]].toString().toUpperCase()));
-            }
+        if (included) {
+          if (field.isNotEmpty) {
+            memory = memory
+                .where((e) => e[field][filter["key"]]
+                    .toString()
+                    .toUpperCase()
+                    .contains(filter["value"].toString().toUpperCase()))
+                .toList();
           } else {
-            if (field.isNotEmpty) {
-              memory = memory
-                  .where((e) =>
-                      e[field][filter["key"]].toString().toUpperCase() ==
-                      filter["value"].toString().toUpperCase())
-                  .toList()
-                  .where((e) => descriptions.contains(
-                      [field][filter["key"]].toString().toUpperCase()));
-            } else {
-              memory = memory
-                  .where((e) =>
-                      e[filter["key"]].toString().toUpperCase() ==
-                      filter["value"].toString().toUpperCase())
-                  .toList()
-                  .where((e) => descriptions.contains(
-                      [field][filter["key"]].toString().toUpperCase()));
-            }
+            memory = memory
+                .where((e) => e[filter["key"]]
+                    .toString()
+                    .toUpperCase()
+                    .contains(filter["value"].toString().toUpperCase()))
+                .toList();
           }
         } else {
-          if (included) {
-            if (field.isNotEmpty) {
-              memory = memory
-                  .where((e) => e[field][filter["key"]]
-                      .toString()
-                      .toUpperCase()
-                      .contains(filter["value"].toString().toUpperCase()))
-                  .toList();
-            } else {
-              memory = memory
-                  .where((e) => e[filter["key"]]
-                      .toString()
-                      .toUpperCase()
-                      .contains(filter["value"].toString().toUpperCase()))
-                  .toList();
-            }
+          if (field.isNotEmpty) {
+            memory = memory
+                .where((e) =>
+                    e[field][filter["key"]].toString().toUpperCase() ==
+                    filter["value"].toString().toUpperCase())
+                .toList();
           } else {
-            if (field.isNotEmpty) {
-              memory = memory
-                  .where((e) =>
-                      e[field][filter["key"]].toString().toUpperCase() ==
-                      filter["value"].toString().toUpperCase())
-                  .toList();
-            } else {
-              memory = memory
-                  .where((e) =>
-                      e[filter["key"]].toString().toUpperCase() ==
-                      filter["value"].toString().toUpperCase())
-                  .toList();
-            }
+            memory = memory
+                .where((e) =>
+                    e[filter["key"]].toString().toUpperCase() ==
+                    filter["value"].toString().toUpperCase())
+                .toList();
           }
         }
       }

@@ -120,7 +120,7 @@ class CustomLeisureTimeDetailForm extends StatelessWidget {
                         initial: getFormValue(globalctx.memory["days"],
                             currentDay.value, "leisureTime", 0),
                         min: 0,
-                        max: leftHours[currentDay.value].value + 1,
+                        max: (leftHours[currentDay.value].value + 1) as int,
                         bound: 0,
                         onValueChanged: (value) {
                           setFormValue(globalctx.memory["days"],

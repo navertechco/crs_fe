@@ -39,16 +39,43 @@ class CruiseFiltersWidget extends StatelessWidget {
                   width: 0.15,
                   height: 0.05,
                   validator: CustomRequiredValidator(
+                      errorText: "Cruise Islet is required ", ctx: ctx),
+                  value: "0",
+                  onSaved: (value) {},
+                  onChanged: (value) {
+                    cruiseIslet.value =
+                        getCatalogDescription(findCatalog("galapagos"), value);
+                    filterCruises(context);
+                  },
+                  hintText: "Islet     ",
+                  data: findCatalog("galapagos")),
+              if (cruiseIslet.value.isNotEmpty)
+                CustomFormDropDownFieldWidget(
+                  width: 0.15,
+                  height: 0.05,
+                  validator: CustomRequiredValidator(
                       errorText: "Cruise Category is required ", ctx: ctx),
                   value: "0",
                   onSaved: (value) {},
                   onChanged: (value) {
                     cruiseCategory.value = getCatalogDescription(
-                        findMemoryCatalog("cruises", "cruise_category"), value);
+                        findMemoryChildCatalog("cruises", "", "cruise_category",
+                            included: true,
+                            filter: {
+                              "key": "cruise_itinerary",
+                              "value": cruiseIslet.value
+                            }),
+                        value);
                     filterCruises(context);
                   },
-                  hintText: "Category             ",
-                  data: findMemoryCatalog("cruises", "cruise_category")),
+                  hintText: "roomcategory     ",
+                  data: findMemoryChildCatalog("cruises", "", "cruise_category",
+                      included: true,
+                      filter: {
+                        "key": "cruise_itinerary",
+                        "value": cruiseIslet.value
+                      }),
+                ),
               if (cruiseCategory.value.isNotEmpty)
                 CustomFormDropDownFieldWidget(
                   width: 0.11,
@@ -74,22 +101,6 @@ class CruiseFiltersWidget extends StatelessWidget {
                         "value": cruiseCategory.value
                       }),
                 ),
-              if (cruiseCategory.value.isNotEmpty)
-                if (cruiseModality.value.isNotEmpty)
-                  CustomFormDropDownFieldWidget(
-                      width: 0.15,
-                      height: 0.05,
-                      validator: CustomRequiredValidator(
-                          errorText: "Cruise Islet is required ", ctx: ctx),
-                      value: "0",
-                      onSaved: (value) {},
-                      onChanged: (value) {
-                        cruiseIslet.value = getCatalogDescription(
-                            findCatalog("galapagos"), value);
-                        filterCruises(context);
-                      },
-                      hintText: "Islet     ",
-                      data: findCatalog("galapagos")),
             ],
           ),
           Row(
@@ -107,10 +118,12 @@ class CruiseFiltersWidget extends StatelessWidget {
                         onChanged: (value) {
                           cruiseType.value = getCatalogDescription(
                               findMemoryChildCatalog(
-                                  "cruises", "", "cruise_type", filter: {
-                                "key": "modality",
-                                "value": cruiseModality.value
-                              },included:true),
+                                  "cruises", "", "cruise_type",
+                                  filter: {
+                                    "key": "modality",
+                                    "value": cruiseModality.value
+                                  },
+                                  included: true),
                               value);
                           filterCruises(context);
                         },
