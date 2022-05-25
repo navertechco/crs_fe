@@ -46,6 +46,26 @@ class TravelChips extends HookWidget {
                         filterExperiences();
                       },
                     ),
+                  if (currentTravelRhythm.value == "0")
+                    CustomFormDropDownFieldWidget(
+                      value: currentTravelRhythm.value,
+                      onSaved: (value) {
+                        setFormValue(globalctx.memory["destinations"],
+                            getDestinationIndexByDay(), "travel_rhythm", value);
+                        clearedHours[currentDay.value] = false;
+                        currentTravelRhythm.value = value!;
+                        filterExperiences();
+                      },
+                      onChanged: (value) {
+                        setFormValue(globalctx.memory["destinations"],
+                            getDestinationIndexByDay(), "travel_rhythm", value);
+                        clearedHours[currentDay.value] = false;
+                        currentTravelRhythm.value = value!;
+                        filterExperiences();
+                      },
+                      hintText: "Travel Rhythm",
+                      data: findCatalog("travel_rhythm"),
+                    ),
                 ],
               );
             })
