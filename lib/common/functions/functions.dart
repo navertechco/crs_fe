@@ -589,9 +589,9 @@ getDetail(context, data, columns) {
       }
 
       for (var key in keys) {
-        if (key == "state") {
-          row[key] = states[row[key]];
-        }
+        // if (key == "state") {
+        //   row[key] = states[row[key]];
+        // }
 
         cells.add(DataCell(Text('${row[key]}',
             style: KTextSytle(
