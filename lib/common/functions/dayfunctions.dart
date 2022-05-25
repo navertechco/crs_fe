@@ -223,6 +223,11 @@ prepareAllToResume() async {
     globalctx.payload["totalDays"] = globalctx.memory["totalDays"];
     globalctx.payload["promoted"] = globalctx.memory["promoted"];
 
+    if (translatingService.value.isNotEmpty) {
+      globalctx.payload["tour"]["passengers"] =
+          (int.parse(globalctx.payload["tour"]["passengers"]) + 1).toString();
+    }
+
     try {
       for (var day in globalctx.payload["days"].keys) {
         globalctx.payload["days"][day] = globalctx.payload["days"][day].value;
@@ -289,8 +294,6 @@ updateCurrentDestinationTravelRhythm() {
       globalctx.memory["destinations"], index, "travel_rhythm", "1");
   currentTravelRhythm.value = travelRhythm;
 }
-
-
 
 resetLeftDays() {
   leftAccumulated.value = 0;

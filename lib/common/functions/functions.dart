@@ -633,9 +633,26 @@ getDetail(context, data, columns) {
                 });
               },
             ),
+            // IconButton(
+            //   icon: const Icon(Icons.mode_edit),
+            //   tooltip: 'Edit',
+            //   onPressed: () {
+            //     getTour(context, tourId: row["quote"], detail: true,
+            //         cb: (data) {
+            //       if (data.length > 0) {
+            //         globalctx.memory["tour"] = data[0];
+            //         if (row["quote"] == 0) {
+            //           Get.toNamed("/Searcher");
+            //         } else {
+            //           Get.toNamed("/Tour");
+            //         }
+            //       }
+            //     });
+            //   },
+            // ),
             IconButton(
-              icon: const Icon(Icons.mode_edit),
-              tooltip: 'Edit',
+              icon: const Icon(Icons.copy),
+              tooltip: 'Copy',
               onPressed: () {
                 getTour(context, tourId: row["quote"], detail: true,
                     cb: (data) {
