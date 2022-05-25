@@ -128,73 +128,55 @@ class QuoteHistoryFilter extends StatelessWidget {
             width: 0.1,
             height: 0.05,
             validator: CustomRequiredValidator(
-                errorText: "Quote Date is required ", ctx: context),
+                errorText: "Quote Name is required ", ctx: context),
             value: "0",
             onSaved: (value) {},
             onChanged: (value) {
-              quoteDate.value = getCatalogDescription(
-                  findMemoryChildCatalog(
-                    "tours",
-                    "",
-                    "date",
-                  ),
+              quoteName.value = getCatalogDescription(
+                  findMemoryChildCatalog("tours", "", "name",
+                      filter: {"key": "date", "value": quoteDate.value}),
                   value);
               filterQuoteHistory(context);
             },
-            hintText: "Quote Date",
-            data: findMemoryChildCatalog(
-              "tours",
-              "",
-              "date",
-            ),
+            hintText: "Quote Name",
+            data: findMemoryChildCatalog("tours", "", "name",
+                filter: {"key": "date", "value": quoteDate.value}),
           ),
           CustomFormDropDownFieldWidget(
             width: 0.1,
             height: 0.05,
             validator: CustomRequiredValidator(
-                errorText: "Quote Date is required ", ctx: context),
+                errorText: "Quote Id is required ", ctx: context),
             value: "0",
             onSaved: (value) {},
             onChanged: (value) {
-              quoteDate.value = getCatalogDescription(
-                  findMemoryChildCatalog(
-                    "tours",
-                    "",
-                    "date",
-                  ),
+              quoteId.value = getCatalogDescription(
+                  findMemoryChildCatalog("tours", "", "quote",
+                      filter: {"key": "date", "value": quoteDate.value}),
                   value);
               filterQuoteHistory(context);
             },
-            hintText: "Quote Date",
-            data: findMemoryChildCatalog(
-              "tours",
-              "",
-              "date",
-            ),
+            hintText: "Quote Id",
+            data: findMemoryChildCatalog("tours", "", "quote",
+                filter: {"key": "date", "value": quoteDate.value}),
           ),
           CustomFormDropDownFieldWidget(
             width: 0.1,
             height: 0.05,
             validator: CustomRequiredValidator(
-                errorText: "Quote Date is required ", ctx: context),
+                errorText: "Quote State is required ", ctx: context),
             value: "0",
             onSaved: (value) {},
             onChanged: (value) {
-              quoteDate.value = getCatalogDescription(
-                  findMemoryChildCatalog(
-                    "tours",
-                    "",
-                    "date",
-                  ),
+              quoteState.value = getCatalogDescription(
+                  findMemoryChildCatalog("tours", "", "state",
+                      filter: {"key": "date", "value": quoteDate.value}),
                   value);
               filterQuoteHistory(context);
             },
-            hintText: "Quote Date",
-            data: findMemoryChildCatalog(
-              "tours",
-              "",
-              "date",
-            ),
+            hintText: "Quote State",
+            data: findMemoryChildCatalog("tours", "", "state",
+                filter: {"key": "date", "value": quoteDate.value}),
           ),
         ],
       ),

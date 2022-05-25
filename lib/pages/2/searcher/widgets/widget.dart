@@ -45,10 +45,11 @@ class SearcherWidget extends GetView<SearcherController> {
                       return Column(
                         children: [
                           SearcherField(data: data, formKey: _formKey),
-                          DataTable(
-                            columns: searcherHeader.value,
-                            rows: searcherDetail.value,
-                          ),
+                          if (searcherHeader.value.isNotEmpty)
+                            DataTable(
+                              columns: searcherHeader.value,
+                              rows: searcherDetail.value,
+                            ),
                         ],
                       );
                     }),

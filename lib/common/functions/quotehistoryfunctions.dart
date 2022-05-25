@@ -31,7 +31,30 @@ processQuoteHistoryItinerary(row) {
 filterQuoteHistory(ctx) {
   if (globalctx.memory["tours"] != null) {
     List filtered = globalctx.memory["tours"];
-    filtered = filtered.where((e) => e["date"] == quoteDate.value).toList();
+    filtered = filtered.where((e) {
+      if (quoteDate.value.isEmpty) {
+        return true;
+      }
+      return e["date"] == quoteDate.value;
+    }).toList();
+    filtered = filtered.where((e) {
+      if (quoteName.value.isEmpty) {
+        return true;
+      }
+      return e["name"] == quoteName.value;
+    }).toList();
+    filtered = filtered.where((e) {
+      if (quoteId.value.isEmpty) {
+        return true;
+      }
+      return e["quote"].toString() == quoteId.value;
+    }).toList();
+    filtered = filtered.where((e) {
+      if (quoteState.value.isEmpty) {
+        return true;
+      }
+      return e["state"].toString() == quoteState.value;
+    }).toList();
     quoteFilter.value = filtered.toList();
     updateDatatable(ctx, quoteFilter.value);
   }
