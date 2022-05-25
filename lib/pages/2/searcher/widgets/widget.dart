@@ -29,21 +29,7 @@ class SearcherWidget extends GetView<SearcherController> {
         alignment: Alignment.bottomCenter,
         child: Stack(
           children: [
-            Padding(
-              padding: EdgeInsets.only(
-                top: MediaQuery.of(context).size.height * 0.2,
-                left: MediaQuery.of(context).size.width * 0.4,
-              ),
-              child: Text(
-                'Quote History',
-                style: KTextSytle(
-                  context: context,
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                  color: Color.fromARGB(255, 204, 164, 61),
-                ).getStyle(),
-              ),
-            ),
+          
             Padding(
                 padding: EdgeInsets.only(
                   top: MediaQuery.of(context).size.height * 0.3,
