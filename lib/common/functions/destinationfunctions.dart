@@ -45,6 +45,12 @@ orderDestination(List destinations) {
   }
 }
 
+promote(destination, index, type) {
+  setDestinationState(destination, index, "promoted", type);
+  updateDraggableDestinations();
+  updateTotalLeftAccumulated();
+}
+
 promoteDestination(ctrl, _formKey, destination, index, type) {
   if (_formKey.currentState!.validate()) {
     _formKey.currentState!.save();
@@ -52,14 +58,12 @@ promoteDestination(ctrl, _formKey, destination, index, type) {
       globalctx.promotedDestinations.add(index);
       destinations = globalctx.memory["destinations"];
     }
-    setDestinationState(destination, index, "promoted", type);
     arrivalState.value = "selected";
     departureState.value = "selected";
     if (globalctx.promotedDestinations.isNotEmpty) {
       arrivalState.value = "promoted";
     }
-    updateDraggableDestinations();
-    updateTotalLeftAccumulated();
+    promote(destination, index, type);
     Get.close(1);
   }
 }
@@ -146,16 +150,24 @@ addDestination(String destination) {
 }
 
 filterSelectedDestinations() {
+  var galapagos = getFormValue(globalctx.memory, "tour", "galapagos", false);
   if (dayleft.value > 1 &&
       globalctx.promotedDestinations.length >=
           globalctx.selectedDestinations.length - 1) {
     if (selectedDestinations.contains(arrival["description"])) {
       selectedDestinations.remove(arrival["description"]);
     }
+
+    if (selectedDestinations.contains("galapagos") || galapagos) {
+      selectedDestinations.remove("galapagos");
+    }
     if (selectedDestinations.contains(departure["description"])) {
       selectedDestinations.remove(departure["description"]);
     }
     selectedDestinations.insert(0, arrival["description"]);
+    if (galapagos) {
+      selectedDestinations.add("galapagos");
+    }
     selectedDestinations.add(departure["description"]);
     globalctx.selectedDestinations.value = [];
     globalctx.destinationDragData.value = <Widget>[];
@@ -297,6 +309,7 @@ getLeftAccumulated(destination, id) {
 getMaxTrValue(tr) {
   return trMaxValues[tr];
 }
+
 getMaxTrHourValue(tr) {
   return trMaxHourValues[tr];
 }

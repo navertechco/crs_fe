@@ -31,10 +31,10 @@ class NavBarWidget extends StatelessWidget {
             label: page["label"],
           ));
         }
-        // itemList.add(BottomNavigationBarItem(
-        //   icon: Icon(Icons.exit_to_app, key: exitKey, color: Colors.red),
-        //   label: "Exit",
-        // ));
+        itemList.add(BottomNavigationBarItem(
+          icon: Icon(Icons.exit_to_app, color: Colors.red),
+          label: "Exit",
+        ));
 
         return BottomNavigationBar(
           backgroundColor: Colors.black,

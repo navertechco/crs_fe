@@ -25,23 +25,6 @@ loadTargets() {
       shape: ShapeLightFocus.Circle,
     ));
   }
-  targets.add(TargetFocus(
-    identify: "EXIT",
-    keyTarget: exitKey,
-    contents: [
-      TargetContent(
-        align: ContentAlign.top,
-        child: Container(
-          padding: EdgeInsets.all(8.0),
-          child: Text(
-            "EXIT",
-            style: TextStyle(color: Colors.black, fontSize: 50),
-          ),
-        ),
-      ),
-    ],
-    shape: ShapeLightFocus.Circle,
-  ));
 
   return targets;
 }

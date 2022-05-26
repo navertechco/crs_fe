@@ -146,8 +146,7 @@ var airportCatalog = findCatalog("airport");
 
 RxInt destDraggable = 0.obs;
 RxInt expDraggable = 1.obs;
-RxInt srvDraggable = 1.obs;
-GlobalKey exitKey = GlobalKey(); 
+RxInt srvDraggable = 1.obs; 
 
 List pageList = [
   {"label": "Tour", "icon": Icons.travel_explore, "color": Colors.green, "key":GlobalKey()},

@@ -88,18 +88,20 @@ class CustomStarDestinationForm extends StatelessWidget {
                 Text("Remaining Days: $dayleft",
                     style: GoogleFonts.poppins(
                         textStyle: TextStyle(
-                      color: (dayleft.value) < 1 ? Colors.yellow : Colors.green,
+                      color: (dayleft.value) < 1
+                          ? Colors.yellow
+                          : Color.fromARGB(255, 0, 255, 0),
                       fontSize: MediaQuery.of(context).size.width /
                           MediaQuery.of(context).size.height *
                           15,
                       fontWeight: FontWeight.bold,
                     ))),
-                Text("Selected Days: $accumulated",
+                Text("    Selected Days: $accumulated",
                     style: GoogleFonts.poppins(
                         textStyle: TextStyle(
                       color: (accumulated.value) == 0
-                          ? Colors.yellow
-                          : Color.fromARGB(255, 0, 255, 0),
+                          ? Color.fromARGB(255, 0, 255, 0)
+                          : Colors.yellow,
                       fontSize: MediaQuery.of(context).size.width /
                           MediaQuery.of(context).size.height *
                           15,
@@ -376,54 +378,54 @@ class CustomStarDestinationForm extends StatelessWidget {
                   }
                   return Text("");
                 })),
-                SizedBox(child: Obx(() {
-                  var expMode = explorationMode.value;
-                  if (destination == "galapagos" &&
-                      (explorationMode.value == "3" ||
-                          explorationMode.value == "2")) {
-                    return Column(
-                      children: [
-                        Obx(
-                          () {
-                            return CustomFormCalendarFieldWidget(
-                                label: "Cruise Range           ",
-                                initialStartDate: cruiseStartDate.value,
-                                initialEndDate: cruiseEndDate.value,
-                                minimumDate: firstDayDate.value,
-                                maximumDate: cruiseEndDate.value,
-                                startEndDateChange: (start, end) {
-                                  cruiseStartDate.value = start;
-                                  cruiseEndDate.value = end;
-                                },
-                                onSaved: () {
-                                  var start = cruiseStartDate.value;
-                                  var end = cruiseEndDate.value;
-                                  setFormValue(globalctx.memory["destinations"],
-                                      index, "cruiseStartDate", start);
-                                  setFormValue(globalctx.memory["destinations"],
-                                      index, "cruiseEndDate", end);
+                // SizedBox(child: Obx(() {
+                //   var expMode = explorationMode.value;
+                //   if (destination == "galapagos" &&
+                //       (explorationMode.value == "3" ||
+                //           explorationMode.value == "2")) {
+                //     return Column(
+                //       children: [
+                //         Obx(
+                //           () {
+                //             return CustomFormCalendarFieldWidget(
+                //                 label: "Cruise Range           ",
+                //                 initialStartDate: cruiseStartDate.value,
+                //                 initialEndDate: cruiseEndDate.value,
+                //                 minimumDate: firstDayDate.value,
+                //                 maximumDate: cruiseEndDate.value,
+                //                 startEndDateChange: (start, end) {
+                //                   cruiseStartDate.value = start;
+                //                   cruiseEndDate.value = end;
+                //                 },
+                //                 onSaved: () {
+                //                   var start = cruiseStartDate.value;
+                //                   var end = cruiseEndDate.value;
+                //                   setFormValue(globalctx.memory["destinations"],
+                //                       index, "cruiseStartDate", start);
+                //                   setFormValue(globalctx.memory["destinations"],
+                //                       index, "cruiseEndDate", end);
 
-                                  var val1 = cruiseEndDate.value
-                                          .difference(cruiseStartDate.value)
-                                          .inDays +
-                                      1;
-                                  var val0 = int.parse(getFormValue(
-                                      globalctx.memory["destinations"],
-                                      index,
-                                      "cruiseExpDays",
-                                      "0"));
+                //                   var val1 = cruiseEndDate.value
+                //                           .difference(cruiseStartDate.value)
+                //                           .inDays +
+                //                       1;
+                //                   var val0 = int.parse(getFormValue(
+                //                       globalctx.memory["destinations"],
+                //                       index,
+                //                       "cruiseExpDays",
+                //                       "0"));
 
-                                  saveExplorationDays(index, val0, val1,
-                                      key: "cruiseExpDays");
-                                  validateGalapagosTR();
-                                });
-                          },
-                        )
-                      ],
-                    );
-                  }
-                  return Text("");
-                })),
+                //                   saveExplorationDays(index, val0, val1,
+                //                       key: "cruiseExpDays");
+                //                   validateGalapagosTR();
+                //                 });
+                //           },
+                //         )
+                //       ],
+                //     );
+                //   }
+                //   return Text("");
+                // })),
               ]),
             ),
           ),

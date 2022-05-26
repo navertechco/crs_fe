@@ -14,10 +14,11 @@ class DestinationsOrderableListWidget extends StatelessWidget {
     onAccept = (String destination) {
       dragDestination(destination);
     };
+    
     return Padding(
         padding: EdgeInsets.only(
           top: MediaQuery.of(context).size.height * 0.0,
-          left: MediaQuery.of(context).size.width * 0.46,
+          left: MediaQuery.of(context).size.width * 0.44,
         ),
         child: DestinationDragTargetWidget(onAccept: onAccept));
   }
