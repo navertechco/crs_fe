@@ -17,7 +17,6 @@ class CustomBodyDaysWidget extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    ctrl.state.memory = globalctx.memory;
 
     return Stack(
       children: [
