@@ -26,28 +26,24 @@ class DestinationDragTargetWidget extends StatelessWidget {
               color: Color.fromARGB(0, 0, 0, 0),
               child: Align(
                 alignment: Alignment.topCenter,
-                child: Obx(() {
-                  return SingleChildScrollView(
-                    child: Stack(
-                      children: [
-                        Column(
-                          children: [
-                            Align(
-                              alignment: Alignment.topCenter,
-                              child: Image.asset("assets/custom/img/dots.png",
-                                  color: Colors.grey,
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.05),
-                            ),
-                          ],
-                        ),
-                        Column(children: [
-                          ...globalctx.destinationDragData.value,
-                        ]),
-                      ],
-                    ),
-                  );
-                }),
+                child: SingleChildScrollView(
+                  child: Stack(
+                    children: [
+                      Column(
+                        children: [
+                          Align(
+                            alignment: Alignment.topCenter,
+                            child: Image.asset("assets/custom/img/dots.png",
+                                color: Colors.grey,
+                                width:
+                                    MediaQuery.of(context).size.width * 0.05),
+                          ),
+                        ],
+                      ),
+                      Obx(() => Column(children: destinationDragData.value)),
+                    ],
+                  ),
+                ),
               ),
             );
           },

@@ -121,14 +121,14 @@ class CustomTourInformationForm extends StatelessWidget {
                       enabled: true,
                       iconSize: 32,
                       onSaved: (value) {
+                        galapagos.value = value;
                         setFormValue(
                             globalctx.memory, "tour", "galapagos", value);
-                        
                       },
                       onChanged: (value) {
+                        galapagos.value = value;
                         setFormValue(
                             globalctx.memory, "tour", "galapagos", value);
-                        
                       },
                     ),
                   ],
