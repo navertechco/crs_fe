@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../index.dart';
-
 class ServiceFrontOptionWidget extends StatelessWidget {
   const ServiceFrontOptionWidget({Key? key, required this.service})
       : super(key: key);

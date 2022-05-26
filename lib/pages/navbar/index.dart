@@ -18,30 +18,38 @@ class NavBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    showTutorial(context);
-    return Obx(() {
-      List<BottomNavigationBarItem> itemList = [];
-      for (var page in pageList) {
-        itemList.add(BottomNavigationBarItem(
-          icon: Icon(page["icon"], key: page["key"], color: page["color"]),
-          label: page["label"],
-        ));
-      }
-      itemList.add(BottomNavigationBarItem(
-        icon: Icon(Icons.exit_to_app, key: exitKey, color: Colors.red),
-        label: "Exit",
-      ));
-      return BottomNavigationBar(
-        backgroundColor: Colors.black,
-        unselectedItemColor: Colors.black,
-        iconSize: 20,
-        showUnselectedLabels: true,
-        items: itemList,
-        currentIndex:
-            selectedIndex.value >= pageList.length ? 0 : selectedIndex.value,
-        selectedItemColor: Colors.amber[800],
-        onTap: _onItemTapped,
-      );
-    });
+    try {
+      return Obx(() {
+        List<BottomNavigationBarItem> itemList = [];
+        for (var page in pageList) {
+          if (!isFirstLaunch) {
+            page["key"] = GlobalKey();
+          }
+
+          itemList.add(BottomNavigationBarItem(
+            icon: Icon(page["icon"], key: page["key"], color: page["color"]),
+            label: page["label"],
+          ));
+        }
+        // itemList.add(BottomNavigationBarItem(
+        //   icon: Icon(Icons.exit_to_app, key: exitKey, color: Colors.red),
+        //   label: "Exit",
+        // ));
+
+        return BottomNavigationBar(
+          backgroundColor: Colors.black,
+          unselectedItemColor: Colors.black,
+          iconSize: 20,
+          showUnselectedLabels: true,
+          items: itemList,
+          currentIndex:
+              selectedIndex.value >= pageList.length ? 0 : selectedIndex.value,
+          selectedItemColor: Colors.amber[800],
+          onTap: _onItemTapped,
+        );
+      });
+    } catch (e) {
+      return Container();
+    }
   }
 }

@@ -4,7 +4,6 @@ import 'package:naver_crs/common/index.dart';
 
 import '../../../../index.dart';
 import '../index.dart';
-import 'index.dart';
 
 class CustomLeftStarDestinationForm extends StatelessWidget {
   const CustomLeftStarDestinationForm({

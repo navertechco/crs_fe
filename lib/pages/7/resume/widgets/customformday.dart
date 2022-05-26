@@ -22,9 +22,6 @@ class CustomFormDayWidget extends StatelessWidget {
       var dayId = getDayId(destId, destDay);
       var destinations = getCombinedDestinations();
       var destination = destinations[destId.toString()];
-      var memory = globalctx.memory;
-      var daysData = destination["destinationDay"];
-      var promoted = memory["promoted"]["day"][destDay] ?? {};
       var destData = getDestinationValueByName(destination["destination"]);
       var daydescription = destData[8];
       return RepaintBoundary(

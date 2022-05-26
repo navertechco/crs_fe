@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../index.dart';
 
+bool isFirstLaunch = true;
 var currentDestinationIndex = 0.obs;
 var defaultToken;
 Context globalctx = Context();
@@ -146,24 +147,17 @@ var airportCatalog = findCatalog("airport");
 RxInt destDraggable = 0.obs;
 RxInt expDraggable = 1.obs;
 RxInt srvDraggable = 1.obs;
-GlobalKey exitKey = GlobalKey();
-GlobalKey TourKey = GlobalKey();
-GlobalKey LogisticKey = GlobalKey();
-GlobalKey CustomerKey = GlobalKey();
-GlobalKey DestinationKey = GlobalKey();
-GlobalKey ExperiencesKey = GlobalKey();
-GlobalKey ServicesKey = GlobalKey();
-GlobalKey ResumeKey = GlobalKey();
-GlobalKey PrintDocsKey = GlobalKey();
+GlobalKey exitKey = GlobalKey(); 
+
 List pageList = [
-  {"label": "Tour", "icon": Icons.travel_explore, "color": Colors.green, "key":TourKey},
-  {"label": "Logistic", "icon": Icons.cases_sharp, "color": Colors.green, "key":LogisticKey},
-  {"label": "Customer", "icon": Icons.person, "color": Colors.green, "key":CustomerKey},
-  {"label": "Destination", "icon": Icons.place, "color": Colors.green, "key":DestinationKey},
-  {"label": "Experiences", "icon": Icons.access_time, "color": Colors.green, "key":ExperiencesKey},
-  {"label": "Services", "icon": Icons.hotel, "color": Colors.green, "key":ServicesKey},
-  {"label": "Resume", "icon": Icons.shopping_cart, "color": Colors.green, "key":ResumeKey},
-  {"label": "PrintDocs", "icon": Icons.print, "color": Colors.green, "key":PrintDocsKey},
+  {"label": "Tour", "icon": Icons.travel_explore, "color": Colors.green, "key":GlobalKey()},
+  {"label": "Logistic", "icon": Icons.cases_sharp, "color": Colors.green, "key":GlobalKey()},
+  {"label": "Customer", "icon": Icons.person, "color": Colors.green, "key":GlobalKey()},
+  {"label": "Destination", "icon": Icons.place, "color": Colors.green, "key":GlobalKey()},
+  {"label": "Experiences", "icon": Icons.access_time, "color": Colors.green, "key":GlobalKey()},
+  {"label": "Services", "icon": Icons.hotel, "color": Colors.green, "key":GlobalKey()},
+  {"label": "Resume", "icon": Icons.shopping_cart, "color": Colors.green, "key":GlobalKey()},
+  {"label": "PrintDocs", "icon": Icons.print, "color": Colors.green, "key":GlobalKey()},
 ];
 
 RxString arrivalState = getDestinationState("", 0).toString().obs;

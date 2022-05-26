@@ -98,7 +98,6 @@ class CustomLeisureTimeDetailForm extends StatelessWidget {
     };
 
     return Obx(() {
-      var lt = leisureTime;
       return Stack(
         children: [
           Form(

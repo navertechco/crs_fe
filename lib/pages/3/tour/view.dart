@@ -22,6 +22,14 @@ class TourPage extends GetView<TourController> {
 GetBuilder<TourController> _buildTourFormPage(
   BuildContext context,
 ) {
+  try {
+    if (isFirstLaunch) {
+      showTutorial(context); 
+    }
+  } catch (e) {
+    log(e);
+  }
+
   return GetBuilder<TourController>(
     id: 'Tour_form_page',
     builder: (controller) => Stack(

@@ -47,10 +47,11 @@ loadTargets() {
 }
 
 void showTutorial(context) {
-  TutorialCoachMark tutorial = TutorialCoachMark(context,
+  TutorialCoachMark(context,
       textStyleSkip: TextStyle(color: Colors.black, fontSize: 50),
       targets: loadTargets(),
       colorShadow: Colors.grey.shade200, onFinish: () {
+    isFirstLaunch = false;
     log("finish");
   }, onClickTargetWithTapPosition: (target, tapDetails) {
     log("target: $target");
@@ -58,7 +59,7 @@ void showTutorial(context) {
   }, onClickTarget: (target) {
     log(target);
   }, onSkip: () {
+    isFirstLaunch = false;
     log("skip");
-  })
-    ..show();
+  }).show();
 }

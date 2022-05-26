@@ -69,8 +69,7 @@ getQuoteHistoryHeader(context, data, columns) {
     if (columns != null) {
       cols = columns;
     }
-    for (var key in cols) {
-      String title = key ?? "";
+    for (int i = 0; i < cols.length; i++) {
       header.add(DataColumn(
         label: Text(
           "",

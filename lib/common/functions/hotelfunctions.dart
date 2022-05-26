@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import '../index.dart';
 
@@ -33,7 +32,6 @@ var budgets = {"1": "5 stars", "0": "4 stars"};
 filterHotels(ctx) {
   if (globalctx.memory["hotels"] != null) {
     List filtered = globalctx.memory["hotels"];
-    List aux = globalctx.memory["hotels"];
     var destData = globalctx.memory["destinations"]
         [currentDestinationIndex.value.toString()];
     var destname = destData["destination"];
@@ -196,7 +194,6 @@ getHotelHeader(context, data, columns) {
       cols = columns;
     }
     for (var key in cols) {
-      String title = key ?? "";
       header.add(DataColumn(
         label: Text(
           "",

@@ -2,10 +2,8 @@
 
 import 'package:checkbox_formfield/checkbox_icon_formfield.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/common/index.dart';
-import 'package:sweetalert/sweetalert.dart';
 import '../../../index.dart';
 
 class CustomTourInformationForm extends StatelessWidget {
