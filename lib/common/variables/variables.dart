@@ -146,45 +146,62 @@ var airportCatalog = findCatalog("airport");
 
 RxInt destDraggable = 0.obs;
 RxInt expDraggable = 1.obs;
-RxInt srvDraggable = 1.obs; 
+RxInt srvDraggable = 1.obs;
 
 List pageList = [
-  {"label": "Tour", "icon": Icons.travel_explore, "color": Colors.green, "key":GlobalKey()},
-  {"label": "Logistic", "icon": Icons.cases_sharp, "color": Colors.green, "key":GlobalKey()},
-  {"label": "Customer", "icon": Icons.person, "color": Colors.green, "key":GlobalKey()},
-  {"label": "Destination", "icon": Icons.place, "color": Colors.green, "key":GlobalKey()},
-  {"label": "Experiences", "icon": Icons.access_time, "color": Colors.green, "key":GlobalKey()},
-  {"label": "Services", "icon": Icons.hotel, "color": Colors.green, "key":GlobalKey()},
-  {"label": "Resume", "icon": Icons.shopping_cart, "color": Colors.green, "key":GlobalKey()},
-  {"label": "PrintDocs", "icon": Icons.print, "color": Colors.green, "key":GlobalKey()},
+  {
+    "label": "Tour",
+    "icon": Icons.travel_explore,
+    "color": Colors.green,
+    "key": GlobalKey()
+  },
+  {
+    "label": "Logistic",
+    "icon": Icons.cases_sharp,
+    "color": Colors.green,
+    "key": GlobalKey()
+  },
+  {
+    "label": "Customer",
+    "icon": Icons.person,
+    "color": Colors.green,
+    "key": GlobalKey()
+  },
+  {
+    "label": "Destination",
+    "icon": Icons.place,
+    "color": Colors.green,
+    "key": GlobalKey()
+  },
+  {
+    "label": "Experiences",
+    "icon": Icons.access_time,
+    "color": Colors.green,
+    "key": GlobalKey()
+  },
+  {
+    "label": "Services",
+    "icon": Icons.hotel,
+    "color": Colors.green,
+    "key": GlobalKey()
+  },
+  {
+    "label": "Resume",
+    "icon": Icons.shopping_cart,
+    "color": Colors.green,
+    "key": GlobalKey()
+  },
+  {
+    "label": "PrintDocs",
+    "icon": Icons.print,
+    "color": Colors.green,
+    "key": GlobalKey()
+  },
 ];
 
 RxString arrivalState = getDestinationState("", 0).toString().obs;
 RxString departureState =
     getDestinationState("", destinations.length - 1).toString().obs;
-
-Function validateDestinationDialog = (destination, type) {
-  var rule1 = (destDraggable.value == 0 && type == "arrival");
-  var rule2 = (destDraggable.value != 0 &&
-      type == "tour" &&
-      destination != arrival["description"] &&
-      destination != departure["description"]);
-  var rule3 = (destDraggable.value != 0 &&
-      globalctx.promotedDestinations.length !=
-          globalctx.selectedDestinations.length &&
-      globalctx.promotedDestinations.length >=
-          globalctx.selectedDestinations.length - 1 &&
-      globalctx.selectedDestinations.length >= 3 &&
-      globalctx.promotedDestinations.length >= 2 &&
-      type == "departure");
-  var rule4 = globalctx.selectedDestinations.contains(destination);
-  var rule5 = accumulated.value > 0;
-  var rule6 = dayleft.value > 0;
-  return (((rule1 || rule2 || rule3) && rule4 ||
-              (rule1 || rule2 || rule3) && rule5) &&
-          rule6)
-      .obs;
-};
 
 Rx<dynamic> transportService = Rx(getFormValue(globalctx.memory["destinations"],
         globalDestinationIndex.value, "service_type", <String>[]) ??

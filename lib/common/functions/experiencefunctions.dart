@@ -220,6 +220,38 @@ getExpFiltered() {
   return filtered;
 }
 
+validateDestinationDialog(destination, index, type) {
+  var isArrival = index == 0 && type == "arrival";
+  var isDeparture =
+      destination == departure["description"] && type == "departure";
+  var isSelected = getDestinationState(destination, index) == "selected";
+  var isPromoted = getDestinationState(destination, index) == "promoted";
+  var isSuggested = !isSelected && !isPromoted;
+  var isArrivalPromoted =
+      getDestinationState(arrival["description"], 0) == "promoted";
+  var isTour = !isArrival && !isDeparture;
+  var isDepartureConsistent = (destDraggable.value != 0 &&
+      globalctx.promotedDestinations.length !=
+          globalctx.selectedDestinations.length &&
+      globalctx.promotedDestinations.length >=
+          globalctx.selectedDestinations.length - 1 &&
+      globalctx.selectedDestinations.length >= 3 &&
+      globalctx.promotedDestinations.length >= 2 &&
+      type == "departure");
+  var isAccumulated = accumulated.value > 0;
+  var isDayleft = dayleft.value > 0;
+  var arrivalRule = isArrival && isSelected && isDayleft;
+  var departureRule = isDeparture &&
+      isDepartureConsistent &&
+      isSelected &&
+      isArrivalPromoted &&
+      isAccumulated &&
+      isDayleft;
+  var tourRule =
+      isTour && isSelected && isArrivalPromoted && isAccumulated && isDayleft;
+  return (arrivalRule || departureRule || tourRule).obs;
+}
+
 initializeHours() {
   leftHours[currentDay.value] ??= 0.0.obs;
   accumulatedHours[currentDay.value] ??= 0.0.obs;
