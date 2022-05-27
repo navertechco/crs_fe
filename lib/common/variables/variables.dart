@@ -131,12 +131,12 @@ RxString travelCode = (() {
     return (leadPassenger.value.toString()).obs;
   }
 })();
-var galapagos =
-        Rx(getFormValue(globalctx.memory, "tour", "galapagos", false));
+
 RxString leadPassenger = "pp".obs;
 RxString arrivalPort = "6".obs;
 RxString departurePort = "6".obs;
-RxString destCountry = "1".obs; 
+RxString destCountry = "1".obs;
+var selectedDestinations = globalctx.destinations;
 var destinationsCatalog = findCatalog("destinations");
 var destinationCountry = findCatalog("destination_country");
 var arrival = {}.obs;
@@ -150,6 +150,34 @@ RxInt srvDraggable = 1.obs;
 RxString arrivalState = getDestinationState("", 0).toString().obs;
 RxString departureState =
     getDestinationState("", destinations.length - 1).toString().obs;
+
+Function validateDestinationDialog = (destination, type) {
+  var rule1 = (destDraggable.value == 0 && type == "arrival");
+  var rule2 = (destDraggable.value != 0 &&
+      type == "tour" &&
+      destination != arrival["description"] &&
+      destination != departure["description"]);
+  var rule3 = (destDraggable.value != 0 &&
+      globalctx.promotedDestinations.length !=
+          globalctx.selectedDestinations.length &&
+      globalctx.promotedDestinations.length >=
+          globalctx.selectedDestinations.length - 1 &&
+      globalctx.selectedDestinations.length >= 3 &&
+      globalctx.promotedDestinations.length >= 2 &&
+      type == "departure");
+  var rule4 = (destination == "galapagos" &&
+      type == "tour" &&
+      getDestinationState("galapagos", 1) != "suggested" &&
+      getDestinationState(arrival["description"], 0) == "promoted");
+  var rule5 = !globalctx.promotedDestinations.contains(destination);
+  var rule6 = globalctx.selectedDestinations.contains(destination);
+  var rule7 = accumulated.value > 0;
+  var rule8 = dayleft.value > 0;
+  return (((rule1 || rule2 || rule3 || rule4) && rule6 && rule5 ||
+              (rule1 || rule2 || rule3 || rule4) && rule7 && rule5) &&
+          rule8)
+      .obs;
+};
 
 Rx<dynamic> transportService = Rx(getFormValue(globalctx.memory["destinations"],
         globalDestinationIndex.value, "service_type", <String>[]) ??

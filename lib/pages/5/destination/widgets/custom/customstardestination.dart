@@ -45,11 +45,7 @@ class CustomStarDestinationForm extends StatelessWidget {
 
     Rx<List> trCatalog = Rx(findCatalog("travel_rhythm"));
     var destData = globalctx.memory["destinations"][index.toString()];
-    var type = "departure";
-    try {
-      type = globalctx.states["destinations"][index]["type"];
-    } catch (e) {}
-
+    var type = globalctx.states["destinations"][index]["type"];
     RxString explorationMode = getFormValue(
             globalctx.memory["destinations"], index, "explorationMode", "0")
         .toString()
@@ -173,7 +169,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                 }),
                 Obx(() {
                   var expMode = explorationMode.value;
-                  if (index == 0) {
+                  if (type == "arrival") {
                     return CustomFormDropDownFieldWidget(
                         validator: CustomRequiredValidator(
                             errorText: "Arrival Hour is required ",

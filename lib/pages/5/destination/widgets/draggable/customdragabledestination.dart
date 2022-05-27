@@ -16,8 +16,8 @@ class CustomDragableDestination extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      var isNotSelected = !isSelectedDestination(destination);
-      if (isNotSelected) {
+      var rule1 = !globalctx.selectedDestinations.contains(destination);
+      if (rule1) {
         return Draggable<String>(
           // Data is the value this Draggable stores.
           maxSimultaneousDrags: destDraggable.value,

@@ -15,7 +15,8 @@ class CustomLogisticInformationForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var readonly = getContext("readonly") ?? false;
-    
+    var galapagos =
+        Rx(getFormValue(globalctx.memory, "tour", "galapagos", false));
     return Stack(
       children: [
         SingleChildScrollView(

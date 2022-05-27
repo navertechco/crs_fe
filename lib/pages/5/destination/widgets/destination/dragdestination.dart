@@ -23,11 +23,10 @@ class DragDestinationWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      index =
-          type == "departure" ? destinationDragData.value.length + 1 : index;
       var explorationDay = getFormValue(
           globalctx.memory["destinations"], index, "explorationDay", "0");
-      return validateShowSelectedDestination(destination, index, type, out)
+      return globalctx.destinations.contains(destination) &&
+              ((!out && type == "tour") || (out && type != "tour"))
           ? Row(
               children: [
                 DestinationOptionWidget(
@@ -44,7 +43,7 @@ class DragDestinationWidget extends StatelessWidget {
                                   .getStyle()),
                           GestureDetector(
                             onTap: () {
-                              removeDestination(destination);
+                              deleteDestination(destination);
                             },
                             child: Image.asset("assets/custom/img/redmark.png",
                                 width:
@@ -63,7 +62,7 @@ class DragDestinationWidget extends StatelessWidget {
                                   .getStyle()),
                           GestureDetector(
                             onTap: () {
-                              removeDestination(destination);
+                              deleteDestination(destination);
                             },
                             child: Image.asset(
                                 "assets/custom/img/greencheck.png",
