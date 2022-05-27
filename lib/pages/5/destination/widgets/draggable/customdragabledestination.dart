@@ -16,7 +16,7 @@ class CustomDragableDestination extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      var isNotSelected = !selectedDestinations.contains(destination);
+      var isNotSelected = !isSelectedDestination(destination);
       if (isNotSelected) {
         return Draggable<String>(
           // Data is the value this Draggable stores.

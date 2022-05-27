@@ -6,6 +6,12 @@ import 'package:naver_crs/pages/5/destination/widgets/index.dart';
 import 'package:sweetalert/sweetalert.dart';
 import '../index.dart';
 
+dragDestination(destination) {
+  setDestinationState(
+      destination, globalctx.destinations.length - 2, "selected", "tour");
+  filterDestinations();
+}
+
 getDestinationList() {
   List<Widget> destinationlist = [];
   List destinations = destinationsCatalog.toList();
@@ -49,15 +55,13 @@ promote(destination, index, type) {
 promoteDestination(ctrl, _formKey, destination, index, type) {
   if (_formKey.currentState!.validate()) {
     _formKey.currentState!.save();
-    if (!promotedDestinations
-        .where((p0) => p0[0] == destination && p0[1] == index)
-        .isEmpty) {
-      promotedDestinations.add([destination, index]);
+    if (!globalctx.promotedDestinations.contains(index)) {
+      globalctx.promotedDestinations.add(index);
       destinations = globalctx.memory["destinations"];
     }
     arrivalState.value = "selected";
     departureState.value = "selected";
-    if (promotedDestinations.isNotEmpty) {
+    if (globalctx.promotedDestinations.isNotEmpty) {
       arrivalState.value = "promoted";
     }
     promote(destination, index, type);
@@ -66,13 +70,15 @@ promoteDestination(ctrl, _formKey, destination, index, type) {
 }
 
 updateDraggableDestinations() {
+  globalctx.destinations.value = globalctx.destinations.toSet().toList();
   arrivalState.value = getDestinationState(arrival["description"], 0);
-  if (arrivalState.value == "promoted" && promotedDestinations.length == 1) {
+  if (arrivalState.value == "promoted" &&
+      globalctx.promotedDestinations.length == 1) {
     destDraggable.value = 1;
   }
   if (arrivalState.value == "promoted" &&
       departureState.value == "promoted" &&
-      promotedDestinations.length == selectedDestinations.length) {
+      globalctx.promotedDestinations.length == globalctx.destinations.length) {
     destDraggable.value = 0;
   }
 }
@@ -100,7 +106,7 @@ getCombinedDestinations() {
 
 processDestinations(context) async {
   // ignore: unrelated_type_equality_checks
-  if (promotedDestinations.isNotEmpty & (dayleft == 0)) {
+  if (globalctx.promotedDestinations.isNotEmpty & (dayleft == 0)) {
     var destinationDay = [];
     experiencePromotedDragData.value = <Widget>[];
 
@@ -138,32 +144,24 @@ processDestinations(context) async {
   }
 }
 
-dragDestination(destination) {
-  if (!selectedDestinations.contains(destination)) {
-    selectedDestinations.add(destination);
-  }
-  var index = selectedDestinations.indexOf(destination);
-  setDestinationState(destination, index, "selected", type);
-  filterDestinations();
-}
-
-filterDestinations() {
-  var arr = getDestinationById(arrivalPort.value);
-  var dep = getDestinationById(departurePort.value);
-  arrival.value = arr;
-  departure.value = dep;
-  filterSelectedDestinations();
+validateShowSelectedDestination(destination, index, type, out) {
+  var isSelected = isSelectedDestination(destination);
+  var isNotArrival = destination != arrival["description"];
+  var isNotDeparture = destination != arrival["description"];
+  var isSelectedTour = (!out && isNotArrival && isNotDeparture && isSelected);
+  var isNotTour = (out && type != "tour");
+  return isSelectedTour || isNotTour;
 }
 
 filterSelectedDestinations() {
   destinationDragData.value = <Widget>[];
   var index = 0;
-  for (var selected in selectedDestinations.toList()) {
+  for (var selected in globalctx.destinations.value.toList()) {
     addDestination(selected, index);
     index++;
   }
   if (galapagos.value) {
-    addDestination("galapagos", selectedDestinations.length - 1);
+    addDestination("galapagos", globalctx.destinations.length - 2);
   }
 }
 
@@ -172,12 +170,16 @@ addDestination(String destination, index) {
   if (index == 0) {
     type = "arrival";
   }
-  if (index == selectedDestinations.length - 1) {
+  if (index == globalctx.destinations.length - 1) {
     type = "departure";
   }
+  setDestinationState(destination, index, "selected", type);
   destinationDragData.value.add(DragDestinationWidget(
       destination: destination, index: index, type: type, out: false));
+  globalctx.destinations.value = globalctx.destinations.toSet().toList();
 }
+
+var destinationDragData = Rx(<Widget>[]);
 
 unDragDestination(destination) {
   var newList = <Widget>[];
@@ -190,23 +192,23 @@ unDragDestination(destination) {
   destinationDragData.value = newList;
 }
 
-removeDestination(destination, type, index) {
+removeDestination(destination) {
   try {
+    var index =
+        globalctx.destinations.indexWhere((element) => element == destination);
     var rule1 = index >= 0;
     var rule2 = destination != arrival["description"];
     var rule3 = destination != departure["description"];
     var rule4 = getDestinationState(destination, index) != "suggested";
     if (rule1 && (rule2 || rule3) && rule4) {
-      if (selectedDestinations.contains(destination)) {
-        selectedDestinations.removeWhere((e) => e == destination);
+      if (globalctx.destinations.contains(destination)) {
+        globalctx.destinations.removeWhere((e) => e == destination);
       }
-      if (selectedDestinations.contains(destination)) {
-        selectedDestinations.removeWhere((e) => e == destination);
+      if (globalctx.destinations.contains(destination)) {
+        globalctx.destinations.removeWhere((e) => e == destination);
       }
-      if (promotedDestinations
-          .where((p0) => p0[0] == destination && p0[1] == index)
-          .isEmpty) {
-        promotedDestinations.remove(index);
+      if (globalctx.promotedDestinations.contains(index)) {
+        globalctx.promotedDestinations.remove(index);
       }
       setDestinationState(destination, index, "suggested", type);
       unDragDestination(destination);
@@ -362,46 +364,51 @@ isDraggedDestination(destination) {
   return rule;
 }
 
-validateShowSelectedDestination(destination, index, type, out) {
-  var isSelected = selectedDestinations.contains(destination);
-  var isNotArrival = destination != arrival["description"];
-  var isNotDeparture = destination != arrival["description"];
-  var isSelectedTour = (!out && isNotArrival && isNotDeparture && isSelected);
-  var isNotTour = (out && type != "tour");
-  return isSelectedTour || isNotTour;
+isSelectedDestination(destination) {
+  var result = [];
+  for (var dest in globalctx.states["destinations"].entries) {
+    if (dest.value["destination"] == destination) {
+      result.add(dest);
+    }
+  }
+  var rule = result.length > 0;
+  return rule;
 }
 
-validateDestinationDialog(destination, type, index) {
+validateDestinationDialog(destination, type) {
+  var index = globalctx.states["destinations"].entries
+      .toList()
+      .indexWhere((element) => element.value["destination"] == destination);
   if (type == "arrival") {
     index = 0;
   }
   if (type == "departure") {
-    index = selectedDestinations.length + 1;
+    index = destinationDragData.value.length + 1;
   }
 
-  var isArrivalPromoted = promotedDestinations
-      .where((p0) => p0[0] == destination && p0[1] == index)
-      .isEmpty;
+  var isArrivalPromoted = globalctx.promotedDestinations.contains(0);
   var isArrival = (type == "arrival");
   var isDeparture = type == "departure";
   var isTour = (destination != arrival["description"] &&
       destination != departure["description"]);
-  var isNotPromoted = promotedDestinations
-      .where((p0) => p0[0] == destination && p0[1] == index)
-      .isEmpty;
-  var isSelected = selectedDestinations.contains(destination);
+  var isNotPromoted = !globalctx.promotedDestinations.contains(index);
+  var isSelected = isSelectedDestination(destination);
   var isDragged = isDraggedDestination(destination);
   var isAccumulated = dayleft.value > 0;
-  var isConsistent =
-      promotedDestinations.length > destinationDragData.value.length + 1;
+  var isConsistent = globalctx.promotedDestinations.length >
+      destinationDragData.value.length + 1;
   var isCompletedArrival = (isArrival) && isNotPromoted;
   var isCompletedDeparture = (isDeparture) &&
       isNotPromoted &&
       isArrivalPromoted &&
       isConsistent &&
       isAccumulated;
-  var isCompletedTour =
-      (isTour) && isArrivalPromoted && isSelected && isDragged && isAccumulated;
+  var isCompletedTour = (isTour) &&
+      isNotPromoted &&
+      isDragged &&
+      isArrivalPromoted &&
+      isSelected &&
+      isAccumulated;
   return (isCompletedArrival || isCompletedDeparture || isCompletedTour).obs;
 }
 
@@ -417,7 +424,7 @@ getDestinationIndex(String destination, String type) {
     destIndex = 0;
   }
   if (type == "departure") {
-    destIndex = promotedDestinations.length - 1;
+    destIndex = globalctx.promotedDestinations.length - 1;
   }
   return destIndex;
 }
@@ -446,6 +453,14 @@ getDestinationKa(destination, type) {
   return destData["key_activities"];
 }
 
+filterDestinations() {
+  var arr = getDestinationById(arrivalPort.value);
+  var dep = getDestinationById(departurePort.value);
+  arrival.value = arr;
+  departure.value = dep;
+  filterSelectedDestinations();
+}
+
 getDestinationDay(index) {
   index = index.toString();
   if (destinations[index] != null) {
@@ -470,8 +485,10 @@ updateCurrentDestination() {
 
 resetDestinations() {
   destDraggable.value = 0;
-  promotedDestinations.value = [];
-  selectedDestinations.value = [];
+  allPromotedDestinations.value = [];
+  globalctx.promotedDestinations.value = [];
+  globalctx.destinations.value = [];
+  globalctx.destinations.value = [];
   destinationDragData.value = [];
   globalctx.memory["destinations"] = {};
   globalctx.states["destinations"] = {};
