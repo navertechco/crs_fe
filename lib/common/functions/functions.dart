@@ -588,9 +588,9 @@ getDetail(context, data, columns) {
       }
 
       for (var key in keys) {
-        // if (key == "state") {
-        //   row[key] = states[row[key]];
-        // }
+        if (key == "state") {
+          row[key] = states[row[key]];
+        }
 
         cells.add(DataCell(Text('${row[key]}',
             style: KTextSytle(
@@ -632,23 +632,6 @@ getDetail(context, data, columns) {
                 });
               },
             ),
-            // IconButton(
-            //   icon: const Icon(Icons.mode_edit),
-            //   tooltip: 'Edit',
-            //   onPressed: () {
-            //     getTour(context, tourId: row["quote"], detail: true,
-            //         cb: (data) {
-            //       if (data.length > 0) {
-            //         globalctx.memory["tour"] = data[0];
-            //         if (row["quote"] == 0) {
-            //           Get.toNamed("/Searcher");
-            //         } else {
-            //           Get.toNamed("/Tour");
-            //         }
-            //       }
-            //     });
-            //   },
-            // ),
             IconButton(
               icon: const Icon(Icons.copy),
               tooltip: 'Copy',
@@ -682,6 +665,7 @@ getNetRateDetail(context, data) {
     for (var row in data) {
       var cells = <DataCell>[];
       for (var key in row.keys) {
+        if (key == "") {}
         cells.add(DataCell(Text('${row[key]}',
             style: KTextSytle(
                     context: context,
