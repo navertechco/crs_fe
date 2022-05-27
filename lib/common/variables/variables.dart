@@ -146,7 +146,19 @@ var airportCatalog = findCatalog("airport");
 
 RxInt destDraggable = 0.obs;
 RxInt expDraggable = 1.obs;
-RxInt srvDraggable = 1.obs;
+RxInt srvDraggable = 1.obs; 
+
+List pageList = [
+  {"label": "Tour", "icon": Icons.travel_explore, "color": Colors.green, "key":GlobalKey()},
+  {"label": "Logistic", "icon": Icons.cases_sharp, "color": Colors.green, "key":GlobalKey()},
+  {"label": "Customer", "icon": Icons.person, "color": Colors.green, "key":GlobalKey()},
+  {"label": "Destination", "icon": Icons.place, "color": Colors.green, "key":GlobalKey()},
+  {"label": "Experiences", "icon": Icons.access_time, "color": Colors.green, "key":GlobalKey()},
+  {"label": "Services", "icon": Icons.hotel, "color": Colors.green, "key":GlobalKey()},
+  {"label": "Resume", "icon": Icons.shopping_cart, "color": Colors.green, "key":GlobalKey()},
+  {"label": "PrintDocs", "icon": Icons.print, "color": Colors.green, "key":GlobalKey()},
+];
+
 RxString arrivalState = getDestinationState("", 0).toString().obs;
 RxString departureState =
     getDestinationState("", destinations.length - 1).toString().obs;
@@ -165,17 +177,12 @@ Function validateDestinationDialog = (destination, type) {
       globalctx.selectedDestinations.length >= 3 &&
       globalctx.promotedDestinations.length >= 2 &&
       type == "departure");
-  var rule4 = (destination == "galapagos" &&
-      type == "tour" &&
-      getDestinationState("galapagos", 1) != "suggested" &&
-      getDestinationState(arrival["description"], 0) == "promoted");
-  var rule5 = !globalctx.promotedDestinations.contains(destination);
-  var rule6 = globalctx.selectedDestinations.contains(destination);
-  var rule7 = accumulated.value > 0;
-  var rule8 = dayleft.value > 0;
-  return (((rule1 || rule2 || rule3 || rule4) && rule6 && rule5 ||
-              (rule1 || rule2 || rule3 || rule4) && rule7 && rule5) &&
-          rule8)
+  var rule4 = globalctx.selectedDestinations.contains(destination);
+  var rule5 = accumulated.value > 0;
+  var rule6 = dayleft.value > 0;
+  return (((rule1 || rule2 || rule3) && rule4 ||
+              (rule1 || rule2 || rule3) && rule5) &&
+          rule6)
       .obs;
 };
 
@@ -324,53 +331,3 @@ var hotelTable = Rx(
 );
 
 var moreFilters = false.obs;
-List pageList = [
-  {
-    "label": "Tour",
-    "icon": Icons.travel_explore,
-    "color": Colors.green,
-    "key": GlobalKey()
-  },
-  {
-    "label": "Logistic",
-    "icon": Icons.cases_sharp,
-    "color": Colors.green,
-    "key": GlobalKey()
-  },
-  {
-    "label": "Customer",
-    "icon": Icons.person,
-    "color": Colors.green,
-    "key": GlobalKey()
-  },
-  {
-    "label": "Destination",
-    "icon": Icons.place,
-    "color": Colors.green,
-    "key": GlobalKey()
-  },
-  {
-    "label": "Experiences",
-    "icon": Icons.access_time,
-    "color": Colors.green,
-    "key": GlobalKey()
-  },
-  {
-    "label": "Services",
-    "icon": Icons.hotel,
-    "color": Colors.green,
-    "key": GlobalKey()
-  },
-  {
-    "label": "Resume",
-    "icon": Icons.shopping_cart,
-    "color": Colors.green,
-    "key": GlobalKey()
-  },
-  {
-    "label": "PrintDocs",
-    "icon": Icons.print,
-    "color": Colors.green,
-    "key": GlobalKey()
-  },
-];

@@ -16,19 +16,14 @@ class CustomDragableDestination extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      var rule1 = !globalctx.selectedDestinations.contains(destination);
-      if (rule1) {
-        return Draggable<String>(
-          // Data is the value this Draggable stores.
-          maxSimultaneousDrags: destDraggable.value,
-          data: destination,
-          feedback: DestinationOptionWidget(destination: destination),
-          childWhenDragging: DestinationOptionWidget(destination: destination),
-          child: DestinationOptionWidget(destination: destination),
-        );
-      } else {
-        return Container();
-      }
+      return Draggable<String>(
+        // Data is the value this Draggable stores.
+        maxSimultaneousDrags: destDraggable.value,
+        data: destination,
+        feedback: DestinationOptionWidget(destination: destination),
+        childWhenDragging: DestinationOptionWidget(destination: destination),
+        child: DestinationOptionWidget(destination: destination),
+      );
     });
   }
 }

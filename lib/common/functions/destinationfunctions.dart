@@ -69,9 +69,9 @@ promoteDestination(ctrl, _formKey, destination, index, type) {
 }
 
 updateDraggableDestinations() {
-  arrivalState.value = getDestinationState(arrival["description"], 0);
   if (arrivalState.value == "promoted" &&
-      globalctx.promotedDestinations.length == 1) {
+      globalctx.promotedDestinations.length >=
+          globalctx.selectedDestinations.length - 1) {
     destDraggable.value = 1;
   }
   if (arrivalState.value == "promoted" &&
@@ -143,15 +143,8 @@ processDestinations(context) async {
   }
 }
 
-removeDestination(String destination) {
-  if (globalctx.destinations.contains(destination)) {
-    globalctx.destinations.remove(destination);
-  }
-}
-
 addDestination(String destination) {
-  if (!globalctx.destinations.contains(destination) &&
-      !globalctx.selectedDestinations.contains(destination)) {
+  if (!globalctx.destinations.contains(destination)) {
     globalctx.destinations.add(destination);
   }
 }
@@ -165,21 +158,16 @@ filterSelectedDestinations() {
       selectedDestinations.remove(arrival["description"]);
     }
 
-    if (selectedDestinations.contains("galapagos")) {
+    if (selectedDestinations.contains("galapagos") || galapagos) {
       selectedDestinations.remove("galapagos");
     }
-
     if (selectedDestinations.contains(departure["description"])) {
       selectedDestinations.remove(departure["description"]);
     }
     selectedDestinations.insert(0, arrival["description"]);
     if (galapagos) {
-      selectedDestinations.insert(1, "galapagos");
-      removeDestination("galapagos");
-      addDestination("galapagos");
-      setDestinationState("galapagos", 1, "selected", "tour");
+      selectedDestinations.add("galapagos");
     }
-
     selectedDestinations.add(departure["description"]);
     globalctx.selectedDestinations.value = [];
     globalctx.destinationDragData.value = <Widget>[];
@@ -206,42 +194,29 @@ moveDestination(String destination, int index, String type) {
       destination: destination, index: index, type: type, out: false));
 }
 
-removeDestinationFrom(memory, destination) {
-  try {
-    var index = memory.indexWhere((element) => element == destination);
-    setDestinationState(destination, index, "suggested", type);
-    memory.removeAt(index);
-  } catch (e) {
-    log(e);
-  }
-}
-
 deleteDestination(String destination) {
-  if (destination != arrival["description"] ||
-      destination != departure["description"]) {
+  if (arrivalPort.value != getDestinationIdByName(destination) &&
+      departurePort.value != getDestinationIdByName(destination) &&
+      globalctx.destinations.contains(destination)) {
+    globalctx.promotedDestinations.remove(destination);
     var index =
         globalctx.destinations.indexWhere((element) => element == destination);
+    globalctx.destinations.removeAt(index);
+    globalctx.selectedDestinations.removeAt(index);
     globalctx.destinationDragData.value.removeAt(index);
-    removeDestinationFrom(globalctx.promotedDestinations,
-        getDestinationIndex(destination, "tour"));
-    removeDestinationFrom(globalctx.selectedDestinations, destination);
-    removeDestinationFrom(globalctx.destinations, destination);
-    downgradeDestination(destination, index);
-  }
-}
-
-downgradeDestination(String destination, index) {
-  if (globalctx.memory["destinations"].keys.contains(index.toString())) {
-    accumulated -= int.parse(getFormValue(globalctx.memory["destinations"],
-        index.toString(), "explorationDay", "0"));
-    dayleft += int.parse(getFormValue(globalctx.memory["destinations"],
-        index.toString(), "explorationDay", "0"));
-  }
-  if (destination == "galapagos") {
-    iHStartDate = Rx(firstDayDate.value);
-    iHEndDate = Rx(penultimateDayDate.value);
-    cruiseStartDate = Rx(firstDayDate.value);
-    cruiseEndDate = Rx(penultimateDayDate.value);
+    if (globalctx.memory["destinations"].keys.contains(index.toString())) {
+      accumulated -= int.parse(getFormValue(globalctx.memory["destinations"],
+          index.toString(), "explorationDay", "0"));
+      dayleft += int.parse(getFormValue(globalctx.memory["destinations"],
+          index.toString(), "explorationDay", "0"));
+    }
+    if (destination == "galapagos") {
+      iHStartDate = Rx(firstDayDate.value);
+      iHEndDate = Rx(penultimateDayDate.value);
+      cruiseStartDate = Rx(firstDayDate.value);
+      cruiseEndDate = Rx(penultimateDayDate.value);
+    }
+    setDestinationState(destination, index, "suggested", type);
   }
 }
 

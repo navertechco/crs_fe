@@ -1,11 +1,11 @@
 import 'package:get/get.dart';
-import '../../index.dart';
-import 'widgets/experiencedetail/state.dart'; 
+import 'package:naver_crs/pages/5/destination/widgets/index.dart'; 
+import '../../index.dart'; 
 
 class ExperiencesController extends GetxController {
   ExperiencesController();
 
-  final state = ExperienceDetailState();
+  final state = DestinationDetailState();
 
   @override
   void onInit() { 
