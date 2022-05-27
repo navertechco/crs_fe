@@ -14,12 +14,10 @@ class Header extends StatelessWidget {
     return Column(
       children: [
         CustomFormTitleWidget(
-            level: 1,
+            level: 2,
             label:
                 "Data report #(Between: ${tour["arrival_date"]} and ${tour["departure_date"]})"),
-        CustomDescriptionWidget(
-            text:
-                "Data report #(Between: ${tour["arrival_date"]} and ${tour["departure_date"]})"),
+        CustomDescriptionWidget(text: "Destinations: "),
       ],
     );
   }

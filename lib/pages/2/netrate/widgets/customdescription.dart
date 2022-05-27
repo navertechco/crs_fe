@@ -20,7 +20,7 @@ class CustomDescriptionWidget extends StatelessWidget {
     return SizedBox(
       width: MediaQuery.of(context).size.width * width,
       child: Text(text,
-          textAlign: TextAlign.center,
+          textAlign: TextAlign.left,
           style: GoogleFonts.poppins(
               textStyle: TextStyle(
             color: const Color.fromARGB(255, 0, 0, 0),

@@ -5,28 +5,25 @@ import 'customformdestination.dart';
 
 // ignore: must_be_immutable
 class Destinations extends StatelessWidget {
-  const Destinations({
-    Key? key 
-  }) : super(key: key);
- 
+  const Destinations({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> destinations = [];
-    Map<String, dynamic> data = memory;
-    if (data != null && globalctx.promotedDestinations.isNotEmpty) {
+    List<Widget> dests = [];
+    var tour = globalctx.memory["tour"];
+    var destinations = tour["destinations"];
+    if (destinations.isNotEmpty) {
       var i = 0;
-      for (var dest in globalctx.promotedDestinations) {
+      for (var dest in destinations) {
         // var destData = getDestinationById(dest);
         var key = GlobalKey();
         globalctx.keys["destination-$i"] = key;
-        destinations.add(
-            CustomFormDestination( index: i, destination: dest));
+        dests.add(CustomFormDestination(index: i, destination: dest));
         i++;
       }
     }
     return Column(
-      children: destinations,
+      children: dests,
     );
   }
 }

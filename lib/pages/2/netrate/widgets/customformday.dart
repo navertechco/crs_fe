@@ -7,22 +7,23 @@ import 'customformtitle.dart';
 
 class CustomFormDayWidget extends StatelessWidget {
   const CustomFormDayWidget({
-    Key? key, 
+    Key? key,
     required this.indexes,
   }) : super(key: key);
- 
+
   final List<int> indexes;
   @override
   Widget build(BuildContext context) {
     try {
       var destinationindex = indexes[0];
       var dayindex = indexes[1];
-      var destinations = getCombinedDestinations();
-      var destination = destinations[destinationindex.toString()];
+      var tour = globalctx.memory["tour"];
+      var destinations = tour["destinations"];
+      var destination = destinations[destinationindex];
       var daysData = destination["daysData"] ?? {};
       var days = daysData.entries.toList();
       var day = days[dayindex];
-      var daydescription = day['day_description'];
+      var daydescription = day.value['day_description'] ?? "";
       var dayLabel =
           (destinationindex != 0 ? destinationindex + 1 : destinationindex) +
               (destinationindex == 0 ? dayindex + 1 : dayindex + 2);
@@ -34,7 +35,7 @@ class CustomFormDayWidget extends StatelessWidget {
               CustomFormTitleWidget(level: 4, label: "Day: $dayLabel#####"),
               CustomDescriptionWidget(
                   text: daydescription, width: 0.55, fontSize: 0.016),
-              CustomFormExperiencesDetailWidget(  indexes: indexes),
+              CustomFormExperiencesDetailWidget(indexes: indexes),
               SizedBox(height: MediaQuery.of(context).size.height * 0.01),
             ],
           ));

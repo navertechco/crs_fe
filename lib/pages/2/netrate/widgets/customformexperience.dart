@@ -4,17 +4,18 @@ import 'customdescription.dart';
 
 class CustomFormExperienceRowWidget extends StatelessWidget {
   const CustomFormExperienceRowWidget({
-    Key? key, 
+    Key? key,
     required this.indexes,
-  }) : super(key: key); 
+  }) : super(key: key);
   final List<int> indexes;
   @override
   Widget build(BuildContext context) {
     var destinationindex = indexes[0];
     var dayindex = indexes[1];
     var experienceindex = indexes[2];
-    var destinations = globalctx.memory["destinations"];
-    var destination = destinations[destinationindex.toString()];
+    var tour = globalctx.memory["tour"];
+    var destinations = tour["destinations"];
+    var destination = destinations[destinationindex];
     var daysData = destination["daysData"];
     var days = daysData.entries.toList();
     var day = days[dayindex].value;
