@@ -224,9 +224,7 @@ validateDestinationDialog(destination, index, type) {
   var isArrival = index == 0 && type == "arrival";
   var isDeparture =
       destination == departure["description"] && type == "departure";
-  var isSelected = getDestinationState(destination, index) == "selected";
-  var isPromoted = getDestinationState(destination, index) == "promoted";
-  var isSuggested = !isSelected && !isPromoted;
+  var isSelected = getDestinationState(destination, index) == "selected"; 
   var isArrivalPromoted =
       getDestinationState(arrival["description"], 0) == "promoted";
   var isTour = !isArrival && !isDeparture;
