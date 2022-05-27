@@ -19,7 +19,7 @@ class CustomFormDayWidget extends StatelessWidget {
       var dayindex = indexes[1];
       var tour = globalctx.memory["tour"];
       var destinations = tour["destinations"];
-      var destination = destinations[destinationindex];
+      var destination = destinations[destinationindex.toString()];
       var daysData = destination["daysData"] ?? {};
       var days = daysData.entries.toList();
       var day = days[dayindex];
@@ -36,6 +36,8 @@ class CustomFormDayWidget extends StatelessWidget {
               CustomDescriptionWidget(
                   text: daydescription, width: 0.55, fontSize: 0.016),
               CustomFormExperiencesDetailWidget(indexes: indexes),
+              CustomDescriptionWidget(
+                  text: "Day Net Rate: 0", width: 0.55, fontSize: 0.016),
               SizedBox(height: MediaQuery.of(context).size.height * 0.01),
             ],
           ));

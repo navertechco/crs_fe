@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:naver_crs/pages/2/netrate/widgets/customdescription.dart';
 import 'cover.dart';
 import 'destinations.dart';
 import 'header.dart';
@@ -32,6 +33,11 @@ class Itinerary extends StatelessWidget {
                         child: Header(),
                       ),
                       Destinations(),
+                      CustomDescriptionWidget(
+                          fontWeight: FontWeight.bold,
+                          text: "Total Net Rate: 0",
+                          width: 0.55,
+                          fontSize: 0.016),
                     ]),
                   ),
                 ),

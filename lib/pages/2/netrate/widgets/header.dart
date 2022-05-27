@@ -17,7 +17,6 @@ class Header extends StatelessWidget {
             level: 2,
             label:
                 "Data report #(Between: ${tour["arrival_date"]} and ${tour["departure_date"]})"),
-        CustomDescriptionWidget(text: "Destinations: "),
       ],
     );
   }

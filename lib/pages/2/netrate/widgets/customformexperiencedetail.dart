@@ -16,12 +16,12 @@ class CustomFormExperiencesDetailWidget extends StatelessWidget {
     var tour = globalctx.memory["tour"];
     var destinations = tour["destinations"];
     var destinationDay = destinations;
-    var destination = destinationDay[destinationindex];
+    var destination = destinationDay[destinationindex.toString()];
     var daysData = destination["daysData"];
     var days = daysData.entries.toList();
     var day = days[dayindex].value;
     var dayexps = day['experiences'];
-    List<CustomFormExperienceRowWidget> list = [];
+    List<Widget> list = [];
 
     for (var i = 0; i < dayexps.length; i++) {
       list.add(CustomFormExperienceRowWidget(
