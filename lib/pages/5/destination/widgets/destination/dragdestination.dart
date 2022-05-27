@@ -32,7 +32,9 @@ class DragDestinationWidget extends StatelessWidget {
               children: [
                 DestinationOptionWidget(
                     destination: destination, type: type, index: index),
-                !globalctx.promotedDestinations.contains(index)
+                promotedDestinations
+                        .where((p0) => p0[0] == destination && p0[1] == index)
+                        .isEmpty
                     ? Column(
                         children: [
                           Text(explorationDay,
@@ -44,7 +46,7 @@ class DragDestinationWidget extends StatelessWidget {
                                   .getStyle()),
                           GestureDetector(
                             onTap: () {
-                              removeDestination(destination);
+                              removeDestination(destination, type, index);
                             },
                             child: Image.asset("assets/custom/img/redmark.png",
                                 width:
@@ -63,7 +65,7 @@ class DragDestinationWidget extends StatelessWidget {
                                   .getStyle()),
                           GestureDetector(
                             onTap: () {
-                              removeDestination(destination);
+                              removeDestination(destination, type, index);
                             },
                             child: Image.asset(
                                 "assets/custom/img/greencheck.png",

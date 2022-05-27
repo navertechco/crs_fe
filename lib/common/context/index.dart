@@ -27,7 +27,6 @@ class Context with PropertyChangeNotifier<String> {
   RxList<dynamic> destinationlist = [].obs;
   RxList<dynamic> experiencelist = [].obs;
   RxList<dynamic> servicelist = [].obs;
-  RxList promotedDestinations = [].obs;
   RxList promotedDays = [].obs; 
   var promotedExperiences = {}.obs;
   var selectedExperiences = {}.obs;

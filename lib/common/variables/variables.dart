@@ -4,6 +4,9 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../index.dart';
 
+RxList selectedDestinations = [].obs;
+RxList promotedDestinations = [].obs;
+var destinationDragData = Rx(<Widget>[]);
 bool isFirstLaunch = true;
 var currentDestinationIndex = 0.obs;
 var defaultToken;
@@ -15,7 +18,6 @@ var airports = {"1": "quito", "2": "guayaquil"};
 Rx<int> currentDay = 0.obs;
 Rx<int> currentDestination = 0.obs;
 var result = [];
-var allPromotedDestinations = globalctx.promotedDestinations;
 var globalDestinationName = Rx("quito");
 var globalDestinationType = Rx("arrival");
 var globalDestinationIndex = Rx("0");
@@ -114,7 +116,6 @@ var destinationList = allDestinations.entries
 List<dynamic> customDestinationData = [
   ...destinationList,
 ];
-var promotedDestinations = globalctx.promotedDestinations;
 RxInt selectedIndex = 0.obs;
 RxString travelCode = (() {
   try {
@@ -131,12 +132,11 @@ RxString travelCode = (() {
     return (leadPassenger.value.toString()).obs;
   }
 })();
-var galapagos =
-        Rx(getFormValue(globalctx.memory, "tour", "galapagos", false));
+var galapagos = Rx(getFormValue(globalctx.memory, "tour", "galapagos", false));
 RxString leadPassenger = "pp".obs;
 RxString arrivalPort = "6".obs;
 RxString departurePort = "6".obs;
-RxString destCountry = "1".obs; 
+RxString destCountry = "1".obs;
 var destinationsCatalog = findCatalog("destinations");
 var destinationCountry = findCatalog("destination_country");
 var arrival = {}.obs;

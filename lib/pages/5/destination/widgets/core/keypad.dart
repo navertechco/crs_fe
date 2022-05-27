@@ -16,68 +16,67 @@ class KeyPadWidget extends StatelessWidget {
         left: MediaQuery.of(context).size.width * 0.75,
       ),
       child: Obx(() {
-        if (!globalctx.destinationlist.isNotEmpty) {
-          return Row(
-            children: [
-              TextButton(
-                child: Text("Previous",
-                    style: KTextSytle(
-                            context: context,
-                            fontSize: 10,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white)
-                        .getStyle()),
-                onPressed: () {
-                  selectedIndex.value = pageList.indexOf("Customer");
-                  goto("Customer");
-                },
-              ),
-              TextButton(
-                child: Text("Reset",
-                    style: KTextSytle(
-                            context: context,
-                            fontSize: 10,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white)
-                        .getStyle()),
-                onPressed: () {
-                  globalctxReset();
-                },
-              ),
-              TextButton(
-                child: Text("Next",
-                    style: KTextSytle(
-                            context: context,
-                            fontSize: 10,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white)
-                        .getStyle()),
-                onPressed: () async {
-                  if (dayleft.value == 0) {
-                    await processDestinations(context);
-                  } else {
-                    showCustomDialog(
-                      context,
-                      Text(
-                          "You have $dayleft left, would you like to assign to another destination?",
-                          style: KTextSytle(
-                                  context: context,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black)
-                              .getStyle()),
-                      "Close",
-                      height: 0.15,
-                      backgroundColor: Colors.white,
-                      buttonColor: Colors.black,
-                    );
-                  }
-                },
-              ),
-            ],
-          );
-        }
-        return const Text("");
+        var t = arrivalDate.value;
+
+        return Row(
+          children: [
+            TextButton(
+              child: Text("Previous",
+                  style: KTextSytle(
+                          context: context,
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white)
+                      .getStyle()),
+              onPressed: () {
+                selectedIndex.value = pageList.indexOf("Customer");
+                goto("Customer");
+              },
+            ),
+            TextButton(
+              child: Text("Reset",
+                  style: KTextSytle(
+                          context: context,
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white)
+                      .getStyle()),
+              onPressed: () {
+                globalctxReset();
+              },
+            ),
+            TextButton(
+              child: Text("Next",
+                  style: KTextSytle(
+                          context: context,
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white)
+                      .getStyle()),
+              onPressed: () async {
+                if (dayleft.value == 0) {
+                  await processDestinations(context);
+                } else {
+                  showCustomDialog(
+                    context,
+                    Text(
+                        "You have $dayleft left, would you like to assign to another destination?",
+                        style: KTextSytle(
+                                context: context,
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black)
+                            .getStyle()),
+                    "Close",
+                    height: 0.15,
+                    backgroundColor: Colors.white,
+                    buttonColor: Colors.black,
+                  );
+                }
+              },
+            ),
+          ],
+        );
       }),
     );
   }
