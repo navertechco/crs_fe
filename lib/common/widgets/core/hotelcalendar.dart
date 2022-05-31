@@ -54,8 +54,8 @@ class HotelFiltersWidget extends StatelessWidget {
                   data: findMemoryChildCatalog("hotel", "value", "budget_fk")),
               CustomFormMultiDropDownFieldWidget(
                   value: [],
-                  onSaved: (value) {},
-                  onChanged: (value) {
+                  onChanged: (value) {},
+                  onSaved: (value) {
                     hotelRoomCategory.value = getCatalogDescription(
                         findMemoryChildCatalog("hotel", "value", "roomcategory",
                             condition: (element) {
@@ -113,8 +113,8 @@ class HotelFiltersWidget extends StatelessWidget {
                             hotelCategory.value ==
                                 element["value"]["budget_fk"];
                         rule = rule &&
-                            hotelRoomCategory.value ==
-                                element["value"]["roomcategory"];
+                            hotelRoomCategory.value
+                                .contains(element["value"]["roomcategory"]);
                         return rule;
                       }),
                       value);
@@ -134,8 +134,8 @@ class HotelFiltersWidget extends StatelessWidget {
                   rule = rule &&
                       hotelCategory.value == element["value"]["budget_fk"];
                   rule = rule &&
-                      hotelRoomCategory.value ==
-                          element["value"]["roomcategory"];
+                      hotelRoomCategory.value
+                          .contains(element["value"]["roomcategory"]);
                   return rule;
                 }),
               ),
@@ -164,7 +164,7 @@ class HotelKeyPadWidget extends StatelessWidget {
                 onPressed: () {
                   hotelName.value = "";
                   hotelCategory.value = "";
-                  hotelRoomCategory.value = "";
+                  hotelRoomCategory.value = [];
                   moreFilters.value = false;
                   filterHotels(context);
                 },

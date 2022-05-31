@@ -212,6 +212,9 @@ getHotelDetail(context, data, columns) {
   return detail;
 }
 
+var currentHotelName = Rx(getFormValue(
+    globalctx.memory["destinations"], globalDestinationIndex, "hotelName", ""));
+
 getHotelDataCell(context, row) {
   var dataCell = DataCell(
     Row(
@@ -252,10 +255,18 @@ getHotelDataCell(context, row) {
             );
           },
         ),
-        CheckboxIconFormField(
-          padding: 0,
-          onChanged: (value) {},
-        ),
+        Obx(() => CheckboxIconFormField(
+              padding: 0,
+              initialValue: currentHotelName.value == row["description"],
+              onChanged: (value) {
+                currentHotelName.value = row["description"];
+                setFormValue(
+                    globalctx.memory["destinations"],
+                    globalDestinationIndex,
+                    "hotelName",
+                    currentHotelName.value);
+              },
+            )),
       ],
     ),
   );

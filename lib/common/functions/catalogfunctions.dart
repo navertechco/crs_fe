@@ -140,6 +140,19 @@ getCatalogDescription(catalog, value) {
   if (value == "0") {
     return "";
   }
+
+  if (value is List) {
+    var result = [];
+    if (value.isNotEmpty) {
+      for (var item in catalog) {
+        if (value.contains(item["code"])) {
+          result.add(item["description"]);
+        }
+      }
+    }
+    return result;
+  }
+
   return catalog.firstWhere((element) =>
       element["code"].toString() == (value.toString()))["description"];
 }
