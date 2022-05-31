@@ -188,7 +188,11 @@ filterSelectedDestinations() {
 }
 
 moveDestination(String destination, int index, String type) {
-  setDestinationState(destination, index, "selected", type);
+  var state = "selected";
+  if (globalctx.promotedDestinations.contains(index)) {
+    state = "promoted";
+  }
+  setDestinationState(destination, index, state, type);
   globalctx.selectedDestinations.add(destination);
   globalctx.destinationDragData.value.add(DragDestinationWidget(
       destination: destination, index: index, type: type, out: false));
@@ -259,12 +263,12 @@ getDestinationByName(String destination) {
   return result;
 }
 
-setDestinationState(String dest, index, state, type) {
+setDestinationState(dest, index, state, type) {
   globalctx.states["destinations"][index] ??= {}.obs;
+  globalctx.states["destinations"][index]["destination"] = dest;
+  globalctx.states["destinations"][index]["index"] = index;
   globalctx.states["destinations"][index]["state"] = state;
   globalctx.states["destinations"][index]["type"] = type;
-  globalctx.states["destinations"][index]["index"] = index;
-  globalctx.states["destinations"][index]["destination"] = dest;
 }
 
 getDestinationState(destination, index) {

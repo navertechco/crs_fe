@@ -29,12 +29,12 @@ class CustomStarDestinationForm extends StatelessWidget {
             globalctx.memory["destinations"], index, "explorationDay", "0") ??
         "0"));
 
-    if (globalctx.reset.value) {
-      for (String item in destinations.keys) {
-        globalctx.memory["destinations"][item] = null;
-      }
-      globalctx.reset.value = false;
-    }
+    // if (globalctx.reset.value) {
+    //   for (String item in destinations.keys) {
+    //     globalctx.memory["destinations"][item] = null;
+    //   }
+    //   globalctx.reset.value = false;
+    // }
 
     List<String> keyActivities = getFormValue(
         globalctx.memory["destinations"], index, "key_activities", <String>[]);
