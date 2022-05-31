@@ -20,117 +20,55 @@ getCatalog(
   }
 }
 
-findMemoryChildCatalog(name, field, description,
-    {Map<String, dynamic>? filter,
-    bool included = false,
-    List<Map<String, dynamic>>? catalog,
-    bool reverse = false,
-    Function? condition}) {
-  var memory = globalctx.memory[name];
+cruiseReset() {
+  cruiseCategory.value = "";
+  cruiseModality.value = "";
+  cruiseIslet.value = "";
+  cruiseType.value = "";
+  cruiseStarts.value = "";
+  cruiseEnds.value = "";
+  moreFilters.value = false;
+}
+
+findMemoryChildCatalog(name, field, description, {Map? filter}) {
+  List<Map<String, dynamic>> memory = findCatalog(name);
   List<Map<String, dynamic>> output = <Map<String, dynamic>>[];
   List items = [];
-
-  if (memory != null) {
-    var idx = 1;
-    if (filter != null) {
-      if (filter["value"].isNotEmpty) {
-        if (included) {
-          if (field.isNotEmpty) {
-            if (reverse) {
-              memory = memory
-                  .where((e) => filter["value"]
-                      .toString()
-                      .toUpperCase()
-                      .contains(
-                          e[field][filter["key"]].toString().toUpperCase()))
-                  .toList();
-            } else {
-              memory = memory
-                  .where((e) => e[field][filter["key"]]
-                      .toString()
-                      .toUpperCase()
-                      .contains(filter["value"].toString().toUpperCase()))
-                  .toList();
-            }
-          } else {
-            memory = memory
-                .where((e) => e[filter["key"]]
-                    .toString()
-                    .toUpperCase()
-                    .contains(filter["value"].toString().toUpperCase()))
-                .toList();
-          }
-        } else {
-          if (field.isNotEmpty) {
-            memory = memory
-                .where((e) =>
-                    e[field][filter["key"]].toString().toUpperCase() ==
-                    filter["value"].toString().toUpperCase())
-                .toList();
-          } else {
-            memory = memory
-                .where((e) =>
-                    e[filter["key"]].toString().toUpperCase() ==
-                    filter["value"].toString().toUpperCase())
-                .toList();
-          }
+  var idx = 1;
+  if (filter != null) {
+    var relations = filter["relation"];
+    var fc = findCatalog(filter["catalog"]);
+    for (var j in fc) {
+      for (var k in memory) {
+        var rule = true;
+        for (var rel in relations) {
+          rule = rule && k[field][rel].toString() == j[field][rel].toString();
+        }
+        if (j[field][filter["key"]].toString() == filter["value"].toString() &&
+            rule) {
+          items.add(k);
         }
       }
     }
-
-    if (catalog != null) {
-      items = [];
-      for (var mem in memory) {
-        for (var item in catalog) {
-          if (field.isNotEmpty) {
-            if (mem[field][description]
-                .toString()
-                .contains(item["description"])) {
-              items.add(item);
-            }
-          } else {
-            if (condition != null) {
-              var rule = condition(mem, item);
-              if (rule) {
-                items.add(item);
-              }
-            } else {
-              if (mem[description].toString().contains(item["description"])) {
-                items.add(item);
-              }
-            }
-          }
-        }
-      }
-      items = items.map((e) => e["description"].toString()).toSet().toList();
+    items = items.map((e) => e[field][description].toString()).toSet().toList();
+  } else {
+    if (description.isEmpty) {
+      items = memory.map((e) => e[field].toString()).toSet().toList();
     } else {
-      if (field.isNotEmpty) {
-        items = memory
-            .map((e) {
-              if (e[field] is List) {
-                return e[field]
-                    .map((f) => f[description].toString())
-                    .toSet()
-                    .toList()[0];
-              } else {
-                return e[field][description].toString();
-              }
-            })
-            .toSet()
-            .toList();
-      } else {
-        items = memory.map((e) => e[description].toString()).toSet().toList();
-      }
-    }
-    items.sort();
-    for (var item in items) {
-      Map<String, dynamic> row = {};
-      row["code"] = idx;
-      row["description"] = item;
-      output.add(row);
-      idx++;
+      items =
+          memory.map((e) => e[field][description].toString()).toSet().toList();
     }
   }
+
+  items.sort();
+  for (var item in items) {
+    Map<String, dynamic> row = {};
+    row["code"] = idx;
+    row["description"] = item;
+    output.add(row);
+    idx++;
+  }
+
   return output;
 }
 
@@ -183,6 +121,16 @@ getCatalogDescription(catalog, value) {
   }
   return catalog.firstWhere((element) =>
       element["code"].toString() == (value.toString()))["description"];
+}
+
+secureFilter(catalog, condition) {
+  try {
+    var res = catalog.where(condition).toList();
+    return res;
+  } catch (e) {
+    log(e);
+    return <Map<String, dynamic>>[];
+  }
 }
 
 filterCatalog(catalog, key, value) {

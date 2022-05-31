@@ -14,3 +14,6 @@ var cruiseTriple = "".obs;
 var cruiseStarts = "".obs;
 var cruiseEnds = "".obs;
 var cruiseIslet = "".obs;
+var cruiseItinerary = "".obs;
+var cruisePort = "".obs;
+var cruiseAnimal = "".obs;

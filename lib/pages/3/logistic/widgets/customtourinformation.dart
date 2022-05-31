@@ -47,7 +47,16 @@ class CustomLogisticInformationForm extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                                 textColor: Colors.black,
                                 onTap: () async {
-                                  getCruise(context, cruiseId: 0);
+                                  // getCruise(context, cruiseId: 0);
+                                  showCustomDialog(
+                                      context,
+                                      CruiseCalendarWidget(ctx: context),
+                                      "Close",
+                                      customChild: CruiseKeyPadWidget(),
+                                      backgroundColor: Colors.white,
+                                      buttonColor: Colors.black,
+                                      height: 0.25,
+                                      width: 0.2);
                                 },
                               ),
                             ],
