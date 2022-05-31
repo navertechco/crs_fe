@@ -93,7 +93,7 @@ class CustomLogisticInformationForm extends StatelessWidget {
                       ),
                       Obx(() {
                         return CustomFormDateFieldWidget(
-                          disabled: readonly || galapagos.value,
+                          disabled: readonly || cruiseDay.value.isNotEmpty,
                           initialValue: arrivalDate.value,
                           validator: CustomDatetimeGreaterValidator(
                               context: context,
@@ -142,7 +142,7 @@ class CustomLogisticInformationForm extends StatelessWidget {
                       ),
                       Obx(() {
                         return CustomFormDateFieldWidget(
-                          disabled: readonly || galapagos.value,
+                          disabled: readonly || cruiseDay.value.isNotEmpty,
                           initialValue: departureDate.value,
                           validator: CustomDatetimeGreaterValidator(
                               context: context,
@@ -228,7 +228,7 @@ class CustomLogisticInformationForm extends StatelessWidget {
                                   },
                                   label: '\t\tOpen Credit Amount',
                                   width: 0.2),
-                            if (galapagos.value)
+                            if (cruiseDay.value.isNotEmpty)
                               CustomTitleWidget(
                                 width: 0.3,
                                 fontWeight: FontWeight.bold,

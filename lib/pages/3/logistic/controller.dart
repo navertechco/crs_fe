@@ -17,7 +17,7 @@ class LogisticController extends GetxController {
       globalctx.memory["logistic"] = mem;
       filterDestinations();
 
-      Get.toNamed("/Customer");
+      goto("Customer");
     };
   }
 }

@@ -98,6 +98,11 @@ globalctxReset() {
   resetDestinations();
   updateDraggableDestinations();
   filterDestinations();
+  if (cruiseDay.value.isNotEmpty) {
+    promote(arrival["description"], 0, "arrival");
+    promote("galapagos", 1, "tour");
+    promote(departure["description"], 2, "departure");
+  }
 }
 
 getItems(data, value, hintText) {
