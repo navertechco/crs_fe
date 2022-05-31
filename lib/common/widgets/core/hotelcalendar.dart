@@ -48,6 +48,11 @@ class HotelFiltersWidget extends StatelessWidget {
                     hotelCategory.value = getCatalogDescription(
                         findMemoryChildCatalog("hotel", "value", "budget_fk"),
                         value);
+                    setFormValue(
+                        globalctx.memory["destinations"],
+                        globalDestinationIndex,
+                        "hotelCategory",
+                        hotelCategory.value);
                     filterHotels(context);
                   },
                   hintText: "Category     ",
@@ -73,6 +78,11 @@ class HotelFiltersWidget extends StatelessWidget {
                           return rule;
                         }),
                         value);
+                    setFormValue(
+                        globalctx.memory["destinations"],
+                        globalDestinationIndex,
+                        "hotelRoomCategory",
+                        hotelRoomCategory.value);
                     filterHotels(context);
                   },
                   hintText: "Room Category     ",
@@ -114,7 +124,7 @@ class HotelFiltersWidget extends StatelessWidget {
                     setFormValue(
                         globalctx.memory["destinations"],
                         globalDestinationIndex,
-                        "hotelMoreFilters",
+                        "hotelFilterMemory",
                         hotelFilterMemory.value);
                   }
                   filterHotels(context);
@@ -152,6 +162,8 @@ class HotelFiltersWidget extends StatelessWidget {
                         return rule;
                       }),
                       value);
+                  setFormValue(globalctx.memory["destinations"],
+                      globalDestinationIndex, "hotelName", hotelName.value);
                   filterHotels(context);
                 },
                 hintText: "Hotel Name     ",
