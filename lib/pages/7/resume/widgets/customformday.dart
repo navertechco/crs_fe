@@ -38,19 +38,7 @@ class CustomFormDayWidget extends StatelessWidget {
               CustomDescriptionWidget(
                   text: daydescription, width: 0.55, fontSize: 0.016),
               CustomFormExperiencesDetailWidget(indexes: indexes),
-              // SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-              // if (observation != null)
-              //   CustomDescriptionWidget(
-              //     text: "Observation: $observation",
-              //     width: 0.55,
-              //     fontSize: 0.016,
-              //     fontWeight: FontWeight.bold,
-              //   ),
-              // CustomDescriptionWidget(
-              //     text: "Meals: $meals",
-              //     width: 0.55,
-              //     fontSize: 0.016,
-              //     fontWeight: FontWeight.bold),
+              
             ],
           ));
     } catch (e) {

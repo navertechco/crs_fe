@@ -14,16 +14,11 @@ class CustomFormExperiencesDetailWidget extends StatelessWidget {
     try {
       var destId = indexes[0];
       var destDay = indexes[1];
-      var destinationDay = globalctx.memory["destinations"];
-      var destination = destinationDay[destId.toString()];
-      var daysData = getDestinationValueByName(destination["destination"]);
-      var days = globalctx.memory["days"];
-      var dayId = getDayId(destId, destDay);
-      var day = days[dayId.toString()].value;
-      var dayexps = day.entries.toList();
+      var promoted = globalctx.memory["promoted"][destDay];
+
       List<CustomFormExperienceRowWidget> list = [];
 
-      for (var i = 0; i < dayexps.length; i++) {
+      for (var i = 0; i < promoted.length; i++) {
         list.add(CustomFormExperienceRowWidget(indexes: [destId, destDay, i]));
       }
 
@@ -35,9 +30,7 @@ class CustomFormExperiencesDetailWidget extends StatelessWidget {
         ),
       );
     } catch (e) {
-      return Text("");
       return Text("Error of CustomFormExperiencesDetailWidget: $e");
     }
   }
 }
-

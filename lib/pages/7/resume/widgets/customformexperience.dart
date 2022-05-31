@@ -14,23 +14,17 @@ class CustomFormExperienceRowWidget extends StatelessWidget {
       var destId = indexes[0];
       var destDay = indexes[1];
       var experienceindex = indexes[2];
-      var destinations = globalctx.memory["destinations"];
-      var destination = destinations[destId.toString()];
-      var days = globalctx.memory["days"];
-      var dayId = getDayId(destId, destDay);
-      var day = days[dayId.toString()].value;
-      var dayexps = day.entries.toList();
-      var expList = [];
-      for (var exp in dayexps) {
+      var promoted = globalctx.memory["promoted"][destDay];
+      for (var exp in promoted) {
         expList.add(exp.key);
       }
       var expName = expList[experienceindex];
-      var nextIndex = experienceindex + 1 < dayexps.length
+      var nextIndex = experienceindex + 1 < promoted.length
           ? experienceindex + 1
           : experienceindex;
       var nextExpName = expList[nextIndex];
       var experience = getExperienceByName(expName);
-      var nextexperience = dayexps[nextExpName];
+      var nextexperience = promoted[nextExpName];
       var title = expName.toString();
       var description = experience['description'].toString();
       var next = experience['next'].toString() != ""
@@ -64,7 +58,6 @@ class CustomFormExperienceRowWidget extends StatelessWidget {
         ],
       );
     } catch (e) {
-      return Text("");
       return Text("Error of CustomFormExperienceRowWidget: $e");
     }
   }

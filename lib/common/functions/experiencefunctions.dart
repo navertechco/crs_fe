@@ -300,9 +300,9 @@ saveExperience(experience, state) {
     CatalogDto experienceData =
         filtered.firstWhere((e) => e.description == experience);
     globalctx.memory["promoted"] ??= {};
-    globalctx.memory["promoted"]["day"] ??= {};
-    globalctx.memory["promoted"]["day"][currentDay.value] ??= {};
-    globalctx.memory["promoted"]["day"][currentDay.value][experience] =
+    globalctx.memory["promoted"] ??= {};
+    globalctx.memory["promoted"][currentDay.value] ??= {};
+    globalctx.memory["promoted"][currentDay.value][experience] =
         experienceData.toJson();
   }
 }

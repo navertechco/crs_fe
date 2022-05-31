@@ -9,8 +9,8 @@ import 'functions.dart';
 
 paginateDay(context) async {
   if (globalctx.memory["promoted"] != null &&
-      globalctx.memory["promoted"]["day"] != null &&
-      globalctx.memory["promoted"]["day"][currentDay.value] != null) {
+      globalctx.memory["promoted"] != null &&
+      globalctx.memory["promoted"][currentDay.value] != null) {
     await nextDay();
   } else {
     showCustomDialog(
@@ -192,7 +192,7 @@ prepareAllToResume() async {
         var dayDto = getDtos()[0];
         var expDto = getDtos()[1];
         // Prepare Frame to send to Resume Page
-        var exps = globalctx.memory["promoted"]["day"][dayIndex];
+        var exps = globalctx.memory["promoted"][dayIndex];
         for (var exp in exps.keys) {
           Map newExp = {};
           Map newEntry = exps[exp];

@@ -12,20 +12,126 @@ class Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Column(
       children: [
         const CustomFormTitleWidget(level: 1, label: "Client Information"),
-        // CustomFormHeaderWidget(data: chunkMap(customer, 3, customerTemplate)),
+        Row(
+          children: [
+            CustomDetailWidget(
+                label: "Names: ",
+                value: getFormValue(globalctx.memory, "customer", "names", "")),
+            CustomDetailWidget(
+                label: "Last Names: ",
+                value: getFormValue(
+                    globalctx.memory, "customer", "last_names", "")),
+            CustomDetailWidget(
+                label: "email: ",
+                value: getFormValue(globalctx.memory, "customer", "email", "")),
+            CustomDetailWidget(
+                label: "dni: ",
+                value: getFormValue(globalctx.memory, "customer", "dni", "")),
+          ],
+        ),
+        Row(
+          children: [
+            CustomDetailWidget(
+                label: "Lead Passenger: ",
+                value: getFormValue(
+                    globalctx.memory, "customer", "lead_passenger", "")),
+            CustomDetailWidget(
+                label: "Address Line: ",
+                value: getFormValue(
+                    globalctx.memory, "customer", "address_line", "")),
+            CustomDetailWidget(
+                label: "City: ",
+                value: getFormValue(globalctx.memory, "customer", "city", "")),
+            CustomDetailWidget(
+                label: "Country: ",
+                value:
+                    getFormValue(globalctx.memory, "customer", "country", "")),
+          ],
+        ),
         const CustomFormTitleWidget(level: 1, label: "Tour Information"),
-        // CustomFormHeaderWidget(data: chunkMap(tour, 3, tourTemplate)),
+        Row(
+          children: [
+            CustomDetailWidget(
+                label: "Tour Code: ",
+                value: getFormValue(globalctx.memory, "tour", "code", "")),
+            CustomDetailWidget(
+                label: "Passengers: ",
+                value:
+                    getFormValue(globalctx.memory, "tour", "passengers", "")),
+            CustomDetailWidget(
+                label: "Budget: ",
+                value: getFormValue(
+                    globalctx.memory, "tour", "accomodation_type", "")),
+            CustomDetailWidget(
+                label: "Country: ",
+                value: getFormValue(globalctx.memory, "tour", "country", "")),
+          ],
+        ),
         const CustomFormTitleWidget(level: 1, label: "Logistic Information"),
-        // CustomFormHeaderWidget(data: chunkMap(logistic, 3, logisticTemplate)),
+        Row(
+          children: [
+            CustomDetailWidget(
+                label: "Arrival Port: ",
+                value: getFormValue(
+                    globalctx.memory, "logistic", "arrival_port", "")),
+            CustomDetailWidget(
+                label: "Departure Port: ",
+                value: getFormValue(
+                    globalctx.memory, "logistic", "departure_port", "")),
+            CustomDetailWidget(
+                label: "Tour option: ",
+                value: getFormValue(
+                    globalctx.memory, "logistic", "tour_option", "")),
+          ],
+        ),
+        Row(
+          children: [
+            CustomDetailWidget(
+                label: "Arrival Date: ",
+                value: getFormValue(
+                    globalctx.memory, "logistic", "arrival_date", "")),
+            CustomDetailWidget(
+                label: "Departure Date: ",
+                value: getFormValue(
+                    globalctx.memory, "logistic", "departure_date", "")),
+          ],
+        ),
         CustomFormTitleWidget(
             level: 2,
             label:
                 "Itinerary #(Between: ${currentDayFormat.format(arrivalDate.value)} and ${currentDayFormat.format(departureDate.value)})"),
       ],
+    );
+  }
+}
+
+class CustomDetailWidget extends StatelessWidget {
+  const CustomDetailWidget({
+    Key? key,
+    this.label,
+    this.value,
+  }) : super(key: key);
+  final label;
+  final value;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(
+        left: MediaQuery.of(context).size.width * 0.08,
+        top: MediaQuery.of(context).size.height * 0.001,
+      ),
+      child: Row(
+        children: [
+          CustomFormLabelWidget(
+            label: label,
+            fontWeight: FontWeight.bold,
+          ),
+          CustomFormLabelWidget(label: value.toString()),
+        ],
+      ),
     );
   }
 }
