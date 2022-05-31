@@ -31,69 +31,50 @@ processCruiseItinerary(row) {
 }
 
 filterCruises(ctx) {
-  if (globalctx.memory["cruises"] != null) {
-    List filtered = globalctx.memory["cruises"];
+  List filtered = findCatalog("cruises");
 
-    List filterByCategory = filtered
-        .where((element) => element["cruise_category"]
-            .toString()
-            .toUpperCase()
-            .contains(cruiseCategory.value))
-        .toList();
-    List filterByKey = filterByCategory
-        .where((element) => element["cruise_itinerary"]
-            .toString()
-            .toUpperCase()
-            .contains(cruiseKey.value))
-        .toList();
-    List filterByType = filterByKey
-        .where((element) => element["cruise_type"]
-            .toString()
-            .toUpperCase()
-            .contains(cruiseType.value))
-        .toList();
-    List filterByModality = filterByType
-        .where((element) => element["modality"]
-            .toString()
-            .toUpperCase()
-            .contains(cruiseModality.value))
-        .toList();
-    List filterByArrival = filterByModality
-        .where((element) => element["cruise_format"]
-            .toString()
-            .toUpperCase()
-            .contains(cruiseStarts.value.toString().toUpperCase()))
-        .toList();
-    List filterByDeparture = filterByArrival
-        .where((element) => element["cruise_format"]
-            .toString()
-            .toUpperCase()
-            .contains(cruiseEnds.value.toString().toUpperCase()))
-        .toList();
-    List filterByIslet = filterByDeparture
-        .where((element) => element["cruise_itinerary"]
-            .toString()
-            .toUpperCase()
-            .contains(cruiseIslet.value.toString().toUpperCase()))
-        .toList();
-    List filterByDays = filterByIslet.where((element) => true).toList();
-    List filterByDay = filterByDays.where((element) => true).toList();
-    List filterByCruise = filterByDay.where((element) => true).toList();
-    List filterByDateRange = filterByCruise.where((element) => true).toList();
-    List filterByCabine = filterByDateRange.where((element) => true).toList();
-    List filterByTriple = filterByCabine.where((element) => true).toList();
+  filtered = filtered
+      .where((element) => element["value"]["cruise_category"]
+          .toString()
+          .toUpperCase()
+          .contains(cruiseCategory.value))
+      .toList();
+  filtered = filtered
+      .where((element) => element["value"]["cruise_type"]
+          .toString()
+          .toUpperCase()
+          .contains(cruiseType.value))
+      .toList();
+  filtered = filtered
+      .where((element) => element["value"]["modality"]
+          .toString()
+          .toUpperCase()
+          .contains(cruiseModality.value))
+      .toList();
+  filtered = filtered
+      .where((element) => element["value"]["cruise_port"]
+          .toString()
+          .toUpperCase()
+          .contains(cruisePort.value.toString().toUpperCase()))
+      .toList();
 
-    cruiseResults.value = filterByTriple.toList();
+  filtered = filtered.where((element) => true).toList();
+  filtered = filtered.where((element) => true).toList();
+  filtered = filtered.where((element) => true).toList();
+  filtered = filtered.where((element) => true).toList();
+  filtered = filtered.where((element) => true).toList();
+  filtered = filtered.where((element) => true).toList();
 
-    var processedData = processCruiseData(ctx, cruiseResults.value);
-    searcherHeader.value = processedData[0];
-    searcherDetail.value = processedData[1];
-    if (searcherHeader.value.isNotEmpty) {
-      cruiseTable.value = (DataTable(
-        columns: searcherHeader.value,
-        rows: searcherDetail.value,
-      ));
-    }
+  cruiseResults.value = filtered.toList();
+
+  var processedData = processCruiseData(ctx, cruiseResults.value);
+  searcherHeader.value = processedData[0];
+  searcherDetail.value = processedData[1];
+  if (searcherHeader.value.isNotEmpty) {
+    cruiseTable.value = (DataTable(
+      columns: searcherHeader.value,
+      rows: searcherDetail.value,
+    ));
   }
 }
 
@@ -153,8 +134,9 @@ clearCruiseFilter() {
   cruiseEnds.value = "";
   cruiseIslet.value = "";
 }
+
 processCruiseData(context, data) {
-  var columns = ["cruise_name", "cruise_format"];
+  var columns = ["description"];
   var header = getCruiseHeader(context, data, columns);
   var detail = getCruiseDetail(context, data, columns);
   return [header, detail];
@@ -199,71 +181,75 @@ getCruisDataCell(context, row) {
       icon: const Icon(Icons.event_note_rounded, size: 20),
       tooltip: 'Show Cruise Itinerary',
       onPressed: () {
-        showCustomDialog(
-          context,
-          SingleChildScrollView(
-            child: Column(
-              children: [
-                Text(
-                  "${row['cruise_name']}",
-                  style: KTextSytle(
-                    context: context,
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Color.fromARGB(255, 204, 164, 61),
-                  ).getStyle(),
-                ),
-                Image.network(
-                  "${row['image']}",
-                  width: MediaQuery.of(context).size.width * 0.5,
-                  height: MediaQuery.of(context).size.height * 0.5,
-                ),
-                Text(
-                  "${processCruiseItinerary(row)}",
-                  style: KTextSytle(
-                    context: context,
-                    fontSize: 10,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ).getStyle(),
-                ),
-                Obx(() {
-                  try {
-                    return SfCalendar(
-                      firstDayOfWeek: 1,
-                      backgroundColor: Colors.white,
-                      minDate: arrivalDate.value.add(Duration(days: 1)),
-                      maxDate: departureDate.value.add(Duration(days: -1)),
-                      view: CalendarView.month,
-                      dataSource: MeetingDataSource(getDataSource(
-                          "${row['cruise_itinerary']}"
-                              .replaceAll("[", " ")
-                              .replaceAll("]", " "))),
-                      monthViewSettings: MonthViewSettings(
-                          appointmentDisplayMode:
-                              MonthAppointmentDisplayMode.appointment),
-                    );
-                  } catch (e) {
-                    log(e);
-                    return Text(
-                      "No Calendar Aivalable",
-                      style: KTextSytle(
-                        context: context,
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(255, 204, 164, 61),
-                      ).getStyle(),
-                    );
-                  }
-                })
-              ],
-            ),
-          ),
-          "Close",
-          backgroundColor: Color.fromARGB(100, 0, 0, 0),
-        );
+        getCruise(context, cruiseId: 999, cruiseName: row["description"]);
       },
     ),
   );
   return dataCell;
+}
+
+showCruiseDetail(context, row) {
+  showCustomDialog(
+    context,
+    SingleChildScrollView(
+      child: Column(
+        children: [
+          Text(
+            "${row['cruise_name']}",
+            style: KTextSytle(
+              context: context,
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+              color: Color.fromARGB(255, 204, 164, 61),
+            ).getStyle(),
+          ),
+          Image.network(
+            "${row['image']}",
+            width: MediaQuery.of(context).size.width * 0.5,
+            height: MediaQuery.of(context).size.height * 0.5,
+          ),
+          Text(
+            "${processCruiseItinerary(row)}",
+            style: KTextSytle(
+              context: context,
+              fontSize: 10,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ).getStyle(),
+          ),
+          Obx(() {
+            try {
+              return SfCalendar(
+                firstDayOfWeek: 1,
+                backgroundColor: Colors.white,
+                minDate: arrivalDate.value.add(Duration(days: 1)),
+                maxDate: departureDate.value.add(Duration(days: -1)),
+                view: CalendarView.month,
+                dataSource: MeetingDataSource(getDataSource(
+                    "${row['cruise_itinerary']}"
+                        .replaceAll("[", " ")
+                        .replaceAll("]", " "))),
+                monthViewSettings: MonthViewSettings(
+                    appointmentDisplayMode:
+                        MonthAppointmentDisplayMode.appointment),
+              );
+            } catch (e) {
+              log(e);
+              return Text(
+                "No Calendar Aivalable",
+                style: KTextSytle(
+                  context: context,
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 204, 164, 61),
+                ).getStyle(),
+              );
+            }
+          })
+        ],
+      ),
+    ),
+    "Close",
+    backgroundColor: Color.fromARGB(100, 0, 0, 0),
+  );
 }

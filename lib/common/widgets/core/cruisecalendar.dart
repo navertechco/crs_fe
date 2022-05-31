@@ -251,24 +251,25 @@ class CruiseFiltersWidget extends StatelessWidget {
                             "relation": ["cruise_id", "days"]
                           }),
                     ),
-                    CustomFormDropDownFieldWidget(
-                      width: 0.15,
-                      height: 0.05,
-                      validator: CustomRequiredValidator(
-                          errorText: "Cruise Animals is required ", ctx: ctx),
-                      value: "0",
-                      onSaved: (value) {},
-                      onChanged: (value) {
-                        cruiseAnimal.value = getCatalogDescription(
-                            findMemoryChildCatalog(
-                                "animals", "description", ""),
-                            value);
-                        filterCruises(context);
-                      },
-                      hintText: "Animals    ",
-                      data:
-                          findMemoryChildCatalog("animals", "description", ""),
-                    ),
+                    if (moreFilters.value)
+                      CustomFormDropDownFieldWidget(
+                        width: 0.15,
+                        height: 0.05,
+                        validator: CustomRequiredValidator(
+                            errorText: "Cruise Animals is required ", ctx: ctx),
+                        value: "0",
+                        onSaved: (value) {},
+                        onChanged: (value) {
+                          cruiseAnimal.value = getCatalogDescription(
+                              findMemoryChildCatalog(
+                                  "animals", "description", ""),
+                              value);
+                          filterCruises(context);
+                        },
+                        hintText: "Animals    ",
+                        data: findMemoryChildCatalog(
+                            "animals", "description", ""),
+                      ),
                   ]),
         ]));
     //
@@ -345,94 +346,88 @@ class CruiseResultWidget extends StatelessWidget {
       child: Stack(children: [
         if (cruiseCategory.value.isNotEmpty)
           if (cruiseModality.value.isNotEmpty)
-            if (cruiseIslet.value.isNotEmpty)
-              if (cruiseType.value.isNotEmpty)
-                if (cruiseStarts.value.isNotEmpty)
-                  if (cruiseEnds.value.isNotEmpty)
-                    Column(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(
-                            top: MediaQuery.of(context).size.height * 0.03,
-                            left: MediaQuery.of(context).size.width * 0.0,
-                          ),
-                          child: Container(
-                            width: MediaQuery.of(context).size.width * 0.5,
-                            height: MediaQuery.of(context).size.height * 0.03,
-                            decoration: BoxDecoration(color: Colors.grey),
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    "Cruise Name",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    "Itinerary",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                                Expanded(
-                                    child: Text(
-                                  "Actions",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold),
-                                )),
-                              ],
+            if (cruiseType.value.isNotEmpty)
+              if (cruisePort.value.isNotEmpty)
+                Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(
+                        top: MediaQuery.of(context).size.height * 0.03,
+                        left: MediaQuery.of(context).size.width * 0.0,
+                      ),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.5,
+                        height: MediaQuery.of(context).size.height * 0.03,
+                        decoration: BoxDecoration(color: Colors.grey),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                "Cruise Name",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 15, fontWeight: FontWeight.bold),
+                              ),
                             ),
-                          ),
+                            Expanded(
+                              child: Text(
+                                "Itinerary",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 15, fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            Expanded(
+                                child: Text(
+                              "Actions",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.bold),
+                            )),
+                          ],
                         ),
-                        Container(
-                            width: MediaQuery.of(context).size.width * 0.6,
-                            height: MediaQuery.of(context).size.height * 0.3,
-                            child: Stack(
-                              children: [
-                                SingleChildScrollView(
-                                  scrollDirection: Axis.vertical,
-                                  child: Padding(
-                                    padding: EdgeInsets.only(
-                                      top: MediaQuery.of(context).size.height *
-                                          0.0,
-                                      left: MediaQuery.of(context).size.width *
-                                          0.03,
-                                    ),
-                                    child: Align(
-                                      alignment: Alignment.topCenter,
-                                      child: Column(
-                                        children: [
-                                          if (cruiseResults.value.isNotEmpty &&
-                                              searcherHeader.value.isNotEmpty)
-                                            cruiseTable.value
-                                          else
-                                            Text(
-                                              "No Cruises Found",
-                                              style: KTextSytle(
-                                                context: context,
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold,
-                                                color: Color.fromARGB(
-                                                    255, 204, 164, 61),
-                                              ).getStyle(),
-                                            )
-                                        ],
-                                      ),
-                                    ),
+                      ),
+                    ),
+                    Container(
+                        width: MediaQuery.of(context).size.width * 0.6,
+                        height: MediaQuery.of(context).size.height * 0.3,
+                        child: Stack(
+                          children: [
+                            SingleChildScrollView(
+                              scrollDirection: Axis.vertical,
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                  top: MediaQuery.of(context).size.height * 0.0,
+                                  left:
+                                      MediaQuery.of(context).size.width * 0.03,
+                                ),
+                                child: Align(
+                                  alignment: Alignment.topCenter,
+                                  child: Column(
+                                    children: [
+                                      if (cruiseResults.value.isNotEmpty &&
+                                          searcherHeader.value.isNotEmpty)
+                                        cruiseTable.value
+                                      else
+                                        Text(
+                                          "No Cruises Found",
+                                          style: KTextSytle(
+                                            context: context,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold,
+                                            color: Color.fromARGB(
+                                                255, 204, 164, 61),
+                                          ).getStyle(),
+                                        )
+                                    ],
                                   ),
                                 ),
-                              ],
-                            ))
-                      ],
-                    ),
+                              ),
+                            ),
+                          ],
+                        ))
+                  ],
+                ),
       ]),
     );
   }

@@ -393,42 +393,30 @@ getHotel(ctx, {int id = 0, int index = 0}) async {
   }
 }
 
-getCruise(ctx, {int cruiseId = 0}) async {
-  if (globalctx.memory["cruises"] == null) {
-    var frame = {
-      "data": {"cruise_id": cruiseId}
-    };
-    var res = await fetchhandler(kDefaultSchema, kDefaultServer,
-        kDefaultServerPort, kDefaultFindCruise, 'POST', frame);
-    // ignore: avoid_print
-    log(res);
-    if (res['state'] == true) {
-      var data = res['data'];
-      if (data.length > 0) {
-        globalctx.memory["cruises"] = data;
-        showCustomDialog(ctx, CruiseCalendarWidget(ctx: ctx), "Close",
-            customChild: CruiseKeyPadWidget(),
-            backgroundColor: Colors.white,
-            buttonColor: Colors.black,
-            height: 0.25,
-            width: 0.2);
-      }
-    } else {
-      SweetAlert.show(ctx,
-          curve: ElasticInCurve(),
-          title: res['message'],
-          style: SweetAlertStyle.error, onPress: (bool isConfirm) {
-        Get.close(1);
-        return false;
-      });
+getCruise(ctx, {int cruiseId = 999, String cruiseName = ""}) async {
+  var frame = {
+    "data": {
+      "cruise_id": cruiseId,
+      "cruise_name": cruiseName != "" ? cruiseName.split("-")[0] : ""
+    },
+  };
+  var res = await fetchhandler(kDefaultSchema, kDefaultServer,
+      kDefaultServerPort, kDefaultFindCruise, 'POST', frame);
+  // ignore: avoid_print
+  log(res);
+  if (res['state'] == true) {
+    var data = res['data'];
+    if (data.length > 0) {
+      showCruiseDetail(ctx, data[0]);
     }
   } else {
-    showCustomDialog(ctx, CruiseCalendarWidget(ctx: ctx), "Close",
-        customChild: CruiseKeyPadWidget(),
-        backgroundColor: Colors.white,
-        buttonColor: Colors.black,
-        height: 0.25,
-        width: 0.2);
+    SweetAlert.show(ctx,
+        curve: ElasticInCurve(),
+        title: res['message'],
+        style: SweetAlertStyle.error, onPress: (bool isConfirm) {
+      Get.close(1);
+      return false;
+    });
   }
 }
 
