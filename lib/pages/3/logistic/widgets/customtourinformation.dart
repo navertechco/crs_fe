@@ -104,7 +104,7 @@ class CustomLogisticInformationForm extends StatelessWidget {
                           onSaved: (value) {
                             ctrl!.state.arrivalDate = value!;
                             arrivalDate.value = value;
-                            clearCruiseFilter();
+                            // clearCruiseFilter();
                             filterCruises(context);
                           },
                           onChanged: (value) {
@@ -155,7 +155,7 @@ class CustomLogisticInformationForm extends StatelessWidget {
                             ctrl!.state.departureDate = value!;
                             departureDate.value = value;
                             processDaysCatalog();
-                            clearCruiseFilter();
+                            // clearCruiseFilter();
                             filterCruises(context);
                           },
                           onChanged: (value) {
@@ -260,7 +260,6 @@ class CustomLogisticInformationForm extends StatelessWidget {
                 if (_formKey.currentState!.validate()) {
                   _formKey.currentState!.save();
                   ctrl!.saveLogistic();
-                  selectedIndex.value = selectedIndex.value + 1;
                 }
               }),
         ),

@@ -54,17 +54,21 @@ promote(destination, index, type) {
 promoteDestination(ctrl, _formKey, destination, index, type) {
   if (_formKey.currentState!.validate()) {
     _formKey.currentState!.save();
-    if (!globalctx.promotedDestinations.contains(index)) {
-      globalctx.promotedDestinations.add(index);
-      destinations = globalctx.memory["destinations"];
-    }
-    arrivalState.value = "selected";
-    departureState.value = "selected";
-    if (globalctx.promotedDestinations.isNotEmpty) {
-      arrivalState.value = "promoted";
-    }
+    updatePromotedDestination(destination, index);
     promote(destination, index, type);
     Get.close(1);
+  }
+}
+
+updatePromotedDestination(destination, index) {
+  if (!globalctx.promotedDestinations.contains(index)) {
+    globalctx.promotedDestinations.add(index);
+    destinations = globalctx.memory["destinations"];
+  }
+  arrivalState.value = "selected";
+  departureState.value = "selected";
+  if (globalctx.promotedDestinations.isNotEmpty) {
+    arrivalState.value = "promoted";
   }
 }
 

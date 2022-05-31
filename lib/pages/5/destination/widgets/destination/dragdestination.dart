@@ -34,7 +34,7 @@ class DragDestinationWidget extends StatelessWidget {
                 !globalctx.promotedDestinations.contains(index)
                     ? Column(
                         children: [
-                          Text(explorationDay,
+                          Text(explorationDay.toString(),
                               style: KTextSytle(
                                       context: context,
                                       fontSize: 20,
