@@ -45,18 +45,21 @@ class CustomLogisticInformationForm extends StatelessWidget {
                                 height: 0.05,
                                 fontSize: 3,
                                 fontWeight: FontWeight.bold,
-                                textColor: Colors.black,
+                                textColor: cruiseDay.value.isEmpty
+                                    ? Colors.black
+                                    : Colors.black54,
                                 onTap: () async {
-                                  // getCruise(context, cruiseId: 0);
-                                  showCustomDialog(
-                                      context,
-                                      CruiseCalendarWidget(ctx: context),
-                                      "Close",
-                                      customChild: CruiseKeyPadWidget(),
-                                      backgroundColor: Colors.white,
-                                      buttonColor: Colors.black,
-                                      height: 0.25,
-                                      width: 0.2);
+                                  if (cruiseDay.value.isEmpty) {
+                                    showCustomDialog(
+                                        context,
+                                        CruiseCalendarWidget(ctx: context),
+                                        "Close",
+                                        customChild: CruiseKeyPadWidget(),
+                                        backgroundColor: Colors.white,
+                                        buttonColor: Colors.black,
+                                        height: 0.25,
+                                        width: 0.2);
+                                  }
                                 },
                               ),
                             ],
@@ -90,7 +93,7 @@ class CustomLogisticInformationForm extends StatelessWidget {
                       ),
                       Obx(() {
                         return CustomFormDateFieldWidget(
-                          disabled: readonly,
+                          disabled: readonly || galapagos.value,
                           initialValue: arrivalDate.value,
                           validator: CustomDatetimeGreaterValidator(
                               context: context,
@@ -139,7 +142,7 @@ class CustomLogisticInformationForm extends StatelessWidget {
                       ),
                       Obx(() {
                         return CustomFormDateFieldWidget(
-                          disabled: readonly,
+                          disabled: readonly || galapagos.value,
                           initialValue: departureDate.value,
                           validator: CustomDatetimeGreaterValidator(
                               context: context,
@@ -226,12 +229,12 @@ class CustomLogisticInformationForm extends StatelessWidget {
                                   label: '\t\tOpen Credit Amount',
                                   width: 0.2),
                             if (galapagos.value)
-                              const CustomTitleWidget(
+                              CustomTitleWidget(
                                 width: 0.3,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.red,
                                 label:
-                                    "  Remember you have selected Galapagos Cruise !!!!",
+                                    "  Remember you have selected  ${cruiseDay.value} days of Galapagos Cruise !!!!",
                               ),
                           ],
                         );

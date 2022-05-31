@@ -191,6 +191,50 @@ getCruisDataCell(context, row) {
             getCruise(context, cruiseId: 999, cruiseName: row["description"]);
           },
         ),
+        Obx(
+          () {
+            return CustomFormCalendarFieldWidget(
+                width: 0.01,
+                label: "",
+                initialStartDate: cruiseStartDate.value,
+                initialEndDate: cruiseEndDate.value,
+                minimumDate: firstDayDate.value,
+                maximumDate: firstDayDate.value
+                    .add(Duration(days: int.parse(cruiseDay.value))),
+                startEndDateChange: (start, end) {
+                  cruiseStartDate.value = start;
+                  cruiseEndDate.value = end;
+                  departureDate.value =
+                      cruiseEndDate.value.add(Duration(days: 1));
+                  cruiseDay.value =
+                      (cruiseEndDate.value.difference(cruiseStartDate.value)
+                              .inDays +
+                          1)
+                          .toString();
+                },
+                onSaved: () {
+                  var start = cruiseStartDate.value;
+                  var end = cruiseEndDate.value;
+                  setFormValue(globalctx.memory["destinations"], 1,
+                      "cruiseStartDate", start);
+                  setFormValue(globalctx.memory["destinations"], 1,
+                      "cruiseEndDate", end);
+
+                  var val1 = cruiseEndDate.value
+                          .difference(cruiseStartDate.value)
+                          .inDays +
+                      1;
+                  var val0 = int.parse(getFormValue(
+                      globalctx.memory["destinations"],
+                      1,
+                      "cruiseExpDays",
+                      "0"));
+                  departureDate.value =
+                      cruiseEndDate.value.add(Duration(days: 1));
+                  saveExplorationDays(1, val0, val1, key: "cruiseExpDays");
+                });
+          },
+        ),
         Obx(() => CheckboxIconFormField(
               padding: 0,
               initialValue: selectedCruise.value == row["description"],

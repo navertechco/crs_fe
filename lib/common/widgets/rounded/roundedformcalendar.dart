@@ -17,21 +17,21 @@ class RoundedFormCalendar extends StatelessWidget {
   final void Function() onSaved;
   final label;
 
-  const RoundedFormCalendar({
-    Key? key,
-    this.label,
-    this.left = 0,
-    this.top = 0,
-    this.width = 0.2,
-    this.height = 0.05,
-    this.color = Colors.grey,
-    this.initialStartDate,
-    this.initialEndDate,
-    this.minimumDate,
-    this.maximumDate,
-    this.startEndDateChange,
-    required this.onSaved
-  }) : super(key: key);
+  const RoundedFormCalendar(
+      {Key? key,
+      this.label,
+      this.left = 0,
+      this.top = 0,
+      this.width = 0.1,
+      this.height = 0.05,
+      this.color = Colors.grey,
+      this.initialStartDate,
+      this.initialEndDate,
+      this.minimumDate,
+      this.maximumDate,
+      this.startEndDateChange,
+      required this.onSaved})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

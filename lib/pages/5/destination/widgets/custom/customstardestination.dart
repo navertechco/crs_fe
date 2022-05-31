@@ -378,54 +378,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                   }
                   return Text("");
                 })),
-                // SizedBox(child: Obx(() {
-                //   var expMode = explorationMode.value;
-                //   if (destination == "galapagos" &&
-                //       (explorationMode.value == "3" ||
-                //           explorationMode.value == "2")) {
-                //     return Column(
-                //       children: [
-                //         Obx(
-                //           () {
-                //             return CustomFormCalendarFieldWidget(
-                //                 label: "Cruise Range           ",
-                //                 initialStartDate: cruiseStartDate.value,
-                //                 initialEndDate: cruiseEndDate.value,
-                //                 minimumDate: firstDayDate.value,
-                //                 maximumDate: cruiseEndDate.value,
-                //                 startEndDateChange: (start, end) {
-                //                   cruiseStartDate.value = start;
-                //                   cruiseEndDate.value = end;
-                //                 },
-                //                 onSaved: () {
-                //                   var start = cruiseStartDate.value;
-                //                   var end = cruiseEndDate.value;
-                //                   setFormValue(globalctx.memory["destinations"],
-                //                       index, "cruiseStartDate", start);
-                //                   setFormValue(globalctx.memory["destinations"],
-                //                       index, "cruiseEndDate", end);
-
-                //                   var val1 = cruiseEndDate.value
-                //                           .difference(cruiseStartDate.value)
-                //                           .inDays +
-                //                       1;
-                //                   var val0 = int.parse(getFormValue(
-                //                       globalctx.memory["destinations"],
-                //                       index,
-                //                       "cruiseExpDays",
-                //                       "0"));
-
-                //                   saveExplorationDays(index, val0, val1,
-                //                       key: "cruiseExpDays");
-                //                   validateGalapagosTR();
-                //                 });
-                //           },
-                //         )
-                //       ],
-                //     );
-                //   }
-                //   return Text("");
-                // })),
+               
               ]),
             ),
           ),

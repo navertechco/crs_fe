@@ -5,7 +5,6 @@ import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:intl/intl.dart';
 
 import '../../index.dart';
- 
 
 class RoundedFormDatepicker extends StatelessWidget {
   final double left;
@@ -45,10 +44,14 @@ class RoundedFormDatepicker extends StatelessWidget {
       child: DateTimeField(
         enabled: !disabled,
         validator: validator,
+        cursorColor: Colors.grey,
         decoration: InputDecoration.collapsed(
             hintText: hintText, enabled: !disabled, fillColor: Colors.red),
         style: KTextSytle(
-                context: context, fontSize: 10, fontWeight: FontWeight.bold)
+                color: disabled ? Colors.black45 : Colors.black,
+                context: context,
+                fontSize: 10,
+                fontWeight: FontWeight.bold)
             .getStyle(),
         format: format,
         onChanged: onChanged,
