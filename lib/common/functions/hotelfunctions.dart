@@ -31,16 +31,27 @@ processHotelItinerary(row) {
 var budgets = {"1": "5 stars", "0": "4 stars"};
 
 filterHotels(ctx) {
-  if (globalctx.memory["hotels"] != null) {
+  var destData = globalctx.memory["destinations"]
+      [currentDestinationIndex.value.toString()];
+  hotelResults.value = [];
+  if (globalctx.memory["hotels"] != null && destData != null) {
     List filtered = globalctx.memory["hotels"];
-    var destData = globalctx.memory["destinations"]
-        [currentDestinationIndex.value.toString()];
-    var destname = destData["destination"];
+    var destname = globalDestinationName.value;
     var keyActivity = destData["key_activities"] ?? [];
     var tour = globalctx.memory["tour"];
     var purposes =
         tour["purposes"].map((e) => e.toString().toUpperCase()).toList();
     var budget = budgets[tour["accomodation_type"] ?? "1"];
+
+    //Destination
+    filtered = filtered.where((element) {
+      var rule = true;
+      var dest = element["relation"]["destination"];
+      if (destname != null) {
+        rule = destname == dest.toString();
+      }
+      return rule;
+    }).toList();
 
     //budget_fk
     filtered = filtered.where((element) {
@@ -97,16 +108,6 @@ filterHotels(ctx) {
         rule = keyActivity.contains(k1) |
             keyActivity.contains(k2) |
             keyActivity.contains(k3);
-      }
-      return rule;
-    }).toList();
-
-    //Destination
-    filtered = filtered.where((element) {
-      var rule = true;
-      var dest = element["relation"]["destination"];
-      if (destname != null) {
-        rule = destname == dest.toString();
       }
       return rule;
     }).toList();

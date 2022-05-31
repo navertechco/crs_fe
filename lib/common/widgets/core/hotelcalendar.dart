@@ -134,57 +134,6 @@ class HotelFiltersWidget extends StatelessWidget {
                 label: "",
                 data: findCatalog("more_hotel_filters"),
               ),
-              CustomFormDropDownFieldWidget(
-                width: 0.11,
-                height: 0.05,
-                validator: CustomRequiredValidator(
-                    errorText: "Hotel Name is required ", ctx: ctx),
-                value: "0",
-                onSaved: (value) {},
-                onChanged: (value) {
-                  hotelName.value = getCatalogDescription(
-                      findMemoryChildCatalog("hotel", "value", "hotelname",
-                          condition: (element) {
-                        var rule = true;
-                        var rt = element["value"]["#roomtypes"] == ""
-                            ? 1
-                            : element["value"]["#roomtypes"];
-                        var mc = element["value"]["maxCapacity"];
-                        var pax = globalctx.memory["tour"]["passengers"];
-
-                        rule = rt * mc >= pax;
-                        rule = rule &&
-                            hotelCategory.value ==
-                                element["value"]["budget_fk"];
-                        rule = rule &&
-                            hotelRoomCategory.value
-                                .contains(element["value"]["roomcategory"]);
-                        return rule;
-                      }),
-                      value);
-                  setFormValue(globalctx.memory["destinations"],
-                      globalDestinationIndex, "hotelName", hotelName.value);
-                  filterHotels(context);
-                },
-                hintText: "Hotel Name     ",
-                data: findMemoryChildCatalog("hotel", "value", "hotelname",
-                    condition: (element) {
-                  var rule = true;
-                  var rt = element["value"]["#roomtypes"] == ""
-                      ? 1
-                      : element["value"]["#roomtypes"];
-                  var mc = element["value"]["maxCapacity"];
-                  var pax = globalctx.memory["tour"]["passengers"];
-
-                  rule = rt * mc >= pax;
-                  rule = rule &&
-                      hotelCategory.value == element["value"]["budget_fk"];
-                  rule = rule &&
-                      hotelRoomCategory.value
-                          .contains(element["value"]["roomcategory"]);
-                  return rule;
-                }),
-              ),
             ],
           ),
         ],
