@@ -303,6 +303,7 @@ List filteredExperiences = [];
 var filteredData = [].obs;
 var absorvedPurpose = false.obs;
 var purposeMemory = <String>[].obs;
+var hotelFilterMemory = <String>[].obs;
 var kaMemory = <String>[].obs;
 var generated = false;
 var customerTypeCatalog = findCatalog("legal_client_type");
