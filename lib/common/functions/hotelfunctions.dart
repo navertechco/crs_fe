@@ -192,8 +192,6 @@ getHotelDetail(context, data, columns) {
       }
 
       for (var key in keys) {
-      
-
         cells.add(DataCell(Text('${row[key]}',
             textAlign: TextAlign.left,
             style: KTextSytle(

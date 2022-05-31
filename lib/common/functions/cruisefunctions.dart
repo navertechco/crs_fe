@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_function_declarations_over_variables
 
+import 'package:checkbox_formfield/checkbox_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
@@ -177,15 +178,29 @@ getCruiseDetail(context, data, columns) {
   return detail;
 }
 
+var selectedCruise = "".obs;
 getCruisDataCell(context, row) {
   var dataCell = DataCell(
-    IconButton(
-      padding: EdgeInsets.all(0),
-      icon: const Icon(Icons.event_note_rounded, size: 20),
-      tooltip: 'Show Cruise Itinerary',
-      onPressed: () {
-        getCruise(context, cruiseId: 999, cruiseName: row["description"]);
-      },
+    Row(
+      children: [
+        IconButton(
+          padding: EdgeInsets.all(0),
+          icon: const Icon(Icons.event_note_rounded, size: 20),
+          tooltip: 'Show Cruise Itinerary',
+          onPressed: () {
+            getCruise(context, cruiseId: 999, cruiseName: row["description"]);
+          },
+        ),
+        Obx(() => CheckboxIconFormField(
+              padding: 0,
+              initialValue: selectedCruise.value == row["description"],
+              onChanged: (value) {
+                selectedCruise.value = row["description"];
+                setFormValue(globalctx.memory, "logistic", "cruiseName",
+                    selectedCruise.value);
+              },
+            )),
+      ],
     ),
   );
   return dataCell;
