@@ -30,11 +30,32 @@ cruiseReset() {
   moreFilters.value = false;
 }
 
-findMemoryChildCatalog(name, field, description, {Map? filter}) {
+findMemoryChildCatalog(name, field, description,
+    {Map? filter, Function? condition}) {
   List<Map<String, dynamic>> memory = findCatalog(name);
   List<Map<String, dynamic>> output = <Map<String, dynamic>>[];
   List items = [];
   var idx = 1;
+
+  if (condition != null) {
+    memory = memory.where((e) => condition(e)).toList();
+    if (description.isEmpty) {
+      items = memory.map((e) => e[field].toString()).toSet().toList();
+    } else {
+      items =
+          memory.map((e) => e[field][description].toString()).toSet().toList();
+    }
+    items.sort();
+    for (var item in items) {
+      Map<String, dynamic> row = {};
+      row["code"] = idx;
+      row["description"] = item;
+      output.add(row);
+      idx++;
+    }
+    return output;
+  }
+
   if (filter != null) {
     var relations = filter["relation"];
     var fc = findCatalog(filter["catalog"]);

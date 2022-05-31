@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_function_declarations_over_variables
 
+import 'package:checkbox_formfield/checkbox_icon_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -41,88 +42,37 @@ filterHotels(ctx) {
         tour["purposes"].map((e) => e.toString().toUpperCase()).toList();
     var budget = budgets[tour["accomodation_type"] ?? "1"];
 
-    //Max Capacity
+    //budget_fk
     filtered = filtered.where((element) {
       var rule = true;
-      var max = element["value"]["maxCapacity"];
-      if (hotelMaxCapacity.value.isNotEmpty) {
-        rule = hotelMaxCapacity.value == max.toString();
+      var max = element["value"]["budget_fk"];
+      if (hotelCategory.value.isNotEmpty) {
+        rule = hotelCategory.value == max.toString();
       }
       return rule;
     }).toList();
-    //Room Category
+    //hotelname
     filtered = filtered.where((element) {
       var rule = true;
-      var room = element["value"]["roomcategory"];
-      if (hotelRoomCategory.value.isNotEmpty) {
-        rule = hotelRoomCategory.value == room.toString();
+      var max = element["value"]["hotelname"];
+      if (hotelName.value.isNotEmpty) {
+        rule = hotelName.value == max.toString();
       }
       return rule;
     }).toList();
-    //Terrace or Patio
+    //RoomType x MaxCapacity vs PAX
     filtered = filtered.where((element) {
       var rule = true;
-      var top = element["value"]["TerraceorPatio"];
-      if (hotelTerraceorPatio.value.isNotEmpty) {
-        rule = hotelTerraceorPatio.value == top.toString();
+      var rt = element["value"]["#roomtypes"] == ""
+          ? 1
+          : element["value"]["#roomtypes"];
+      var mc = element["value"]["maxCapacity"];
+      var pax = globalctx.memory["tour"]["passengers"];
+      if (purposes.isNotEmpty) {
+        rule = rt * mc >= pax;
       }
       return rule;
     }).toList();
-    //Balcony
-    filtered = filtered.where((element) {
-      var rule = true;
-      var balcony = element["value"]["Balcony"];
-      if (hotelBalcony.value.isNotEmpty) {
-        rule = hotelBalcony.value == balcony.toString();
-      }
-      return rule;
-    }).toList();
-    //Extrabed
-    filtered = filtered.where((element) {
-      var rule = true;
-      var extra = element["value"]["extrabed"];
-      if (hotelExtrabed.value.isNotEmpty) {
-        rule = hotelExtrabed.value == extra.toString();
-      }
-      return rule;
-    }).toList();
-    //Pet Friendly
-    filtered = filtered.where((element) {
-      var rule = true;
-      var pet = element["value"]["petFriendly"];
-      if (hotelPetFriendly.value.isNotEmpty) {
-        rule = hotelPetFriendly.value == pet.toString();
-      }
-      return rule;
-    }).toList();
-    //Tub or Jacuzzi
-    filtered = filtered.where((element) {
-      var rule = true;
-      var toj = element["value"]["TuborJacuzzi"];
-      if (hotelTuborJacuzzi.value.isNotEmpty) {
-        rule = hotelTuborJacuzzi.value == toj.toString();
-      }
-      return rule;
-    }).toList();
-    //Child Friendly
-    filtered = filtered.where((element) {
-      var rule = true;
-      var cf = element["value"]["childFriendly"];
-      if (hotelChildFriendly.value.isNotEmpty) {
-        rule = hotelChildFriendly.value == cf.toString();
-      }
-      return rule;
-    }).toList();
-    //Infant Friendly
-    filtered = filtered.where((element) {
-      var rule = true;
-      var infant = element["value"]["infantFriendly"];
-      if (hotelInfantFriendly.value.isNotEmpty) {
-        rule = hotelInfantFriendly.value == infant.toString();
-      }
-      return rule;
-    }).toList();
-
     //Purpose
     filtered = filtered.where((element) {
       var rule = true;
@@ -161,15 +111,15 @@ filterHotels(ctx) {
       return rule;
     }).toList();
 
-    //Budget
-    filtered = filtered.where((element) {
-      var rule = true;
-      var b1 = element["value"]["budget_fk"];
-      if (budget!.isNotEmpty) {
-        rule = budget == b1.toString();
-      }
-      return rule;
-    }).toList();
+    // //Budget
+    // filtered = filtered.where((element) {
+    //   var rule = true;
+    //   var b1 = element["value"]["budget_fk"];
+    //   if (budget!.isNotEmpty) {
+    //     rule = budget == b1.toString();
+    //   }
+    //   return rule;
+    // }).toList();
     hotelResults.value = filtered.toList();
 
     var processedData = processHotelData(ctx, hotelResults.value);
@@ -242,6 +192,8 @@ getHotelDetail(context, data, columns) {
       }
 
       for (var key in keys) {
+      
+
         cells.add(DataCell(Text('${row[key]}',
             textAlign: TextAlign.left,
             style: KTextSytle(
@@ -264,84 +216,49 @@ getHotelDetail(context, data, columns) {
 
 getHotelDataCell(context, row) {
   var dataCell = DataCell(
-    IconButton(
-      padding: EdgeInsets.all(0),
-      icon: const Icon(Icons.event_note_rounded, size: 20),
-      tooltip: 'Show Hotel Itinerary',
-      onPressed: () {
-        showCustomDialog(
-          context,
-          SingleChildScrollView(
-            child: Column(
-              children: [
-                Text(
-                  "${row["value"]['roomcategory']}",
-                  style: KTextSytle(
-                    context: context,
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Color.fromARGB(255, 204, 164, 61),
-                  ).getStyle(),
+    Row(
+      children: [
+        IconButton(
+          padding: EdgeInsets.all(0),
+          icon: const Icon(Icons.event_note_rounded, size: 20),
+          tooltip: 'Show Hotel Itinerary',
+          onPressed: () {
+            showCustomDialog(
+              context,
+              SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Text(
+                      "${row["value"]['roomcategory']}",
+                      style: KTextSytle(
+                        context: context,
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 204, 164, 61),
+                      ).getStyle(),
+                    ),
+                    Text(
+                      "${row["value"]['roomdescription']}",
+                      style: KTextSytle(
+                        context: context,
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ).getStyle(),
+                    ),
+                  ],
                 ),
-                Text(
-                  "${row["value"]['roomdescription']}",
-                  style: KTextSytle(
-                    context: context,
-                    fontSize: 10,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ).getStyle(),
-                ),
-                // Image.network(
-                //   "${row['image']}",
-                //   width: MediaQuery.of(context).size.width * 0.5,
-                //   height: MediaQuery.of(context).size.height * 0.5,
-                // ),
-                // Text(
-                //   "${processHotelItinerary(row)}",
-                //   style: KTextSytle(
-                //     context: context,
-                //     fontSize: 10,
-                //     fontWeight: FontWeight.bold,
-                //     color: Colors.white,
-                //   ).getStyle(),
-                // ),
-                // Obx(() {
-                //   try {
-                //     return SfCalendar(
-                //       firstDayOfWeek: 1,
-                //       backgroundColor: Colors.white,
-                //       minDate: arrivalDate.value.add(Duration(days: 1)),
-                //       maxDate: departureDate.value.add(Duration(days: -1)),
-                //       view: CalendarView.month,
-                //       dataSource: MeetingDataSource(getDataSource(
-                //           "${row['hotel_itinerary']}"
-                //               .replaceAll("[", " ")
-                //               .replaceAll("]", " "))),
-                //       monthViewSettings: MonthViewSettings(
-                //           appointmentDisplayMode:
-                //               MonthAppointmentDisplayMode.appointment),
-                //     );
-                //   } catch (e) {
-                //     log(e);
-                //     return Text(
-                //       "No Calendar Aivalable",
-                //       style: KTextSytle(
-                //         context: context,
-                //         fontSize: 15,
-                //         fontWeight: FontWeight.bold,
-                //         color: Color.fromARGB(255, 204, 164, 61),
-                //       ).getStyle(),
-                //     );
-                //   }
-                // })
-              ],
-            ),
-          ),
-          "Close",
-          backgroundColor: Color.fromARGB(100, 0, 0, 0),
-        );
-      },
+              ),
+              "Close",
+              backgroundColor: Color.fromARGB(100, 0, 0, 0),
+            );
+          },
+        ),
+        CheckboxIconFormField(
+          padding: 0,
+          onChanged: (value) {},
+        ),
+      ],
     ),
   );
   return dataCell;

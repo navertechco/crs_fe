@@ -154,6 +154,9 @@ getCruiseDetail(context, data, columns) {
       }
 
       for (var key in keys) {
+        if (key == "description") {
+          row[key] = row[key].split("-")[0];
+        }
         cells.add(DataCell(Text('${row[key]}',
             textAlign: TextAlign.left,
             style: KTextSytle(

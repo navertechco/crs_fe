@@ -370,14 +370,6 @@ class CruiseResultWidget extends StatelessWidget {
                               ),
                             ),
                             Expanded(
-                              child: Text(
-                                "Itinerary",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontSize: 15, fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            Expanded(
                                 child: Text(
                               "Actions",
                               textAlign: TextAlign.center,

@@ -41,225 +41,106 @@ class HotelFiltersWidget extends StatelessWidget {
                   width: 0.11,
                   height: 0.05,
                   validator: CustomRequiredValidator(
-                      errorText: "Hotel maxCapacity is required ", ctx: ctx),
+                      errorText: "Hotel Category is required ", ctx: ctx),
                   value: "0",
                   onSaved: (value) {},
                   onChanged: (value) {
-                    hotelMaxCapacity.value = getCatalogDescription(
-                        findMemoryChildCatalog(
-                            "hotels", "value", "maxCapacity"),
+                    hotelCategory.value = getCatalogDescription(
+                        findMemoryChildCatalog("hotel", "value", "budget_fk"),
                         value);
                     filterHotels(context);
                   },
-                  hintText: "maxCapacity     ",
-                  data:
-                      findMemoryChildCatalog("hotels", "value", "maxCapacity")),
-              if (hotelMaxCapacity.value.isNotEmpty)
-                CustomFormDropDownFieldWidget(
-                  width: 0.11,
-                  height: 0.05,
-                  validator: CustomRequiredValidator(
-                      errorText: "Hotel roomcategory is required ", ctx: ctx),
-                  value: "0",
+                  hintText: "Category     ",
+                  data: findMemoryChildCatalog("hotel", "value", "budget_fk")),
+              CustomFormMultiDropDownFieldWidget(
+                  value: [],
                   onSaved: (value) {},
                   onChanged: (value) {
                     hotelRoomCategory.value = getCatalogDescription(
-                        findMemoryChildCatalog(
-                            "hotels", "value", "roomcategory", filter: {
-                          "key": "maxCapacity",
-                          "value": hotelMaxCapacity.value
+                        findMemoryChildCatalog("hotel", "value", "roomcategory",
+                            condition: (element) {
+                          var rule = true;
+                          var rt = element["value"]["#roomtypes"] == ""
+                              ? 1
+                              : element["value"]["#roomtypes"];
+                          var mc = element["value"]["maxCapacity"];
+                          var pax = globalctx.memory["tour"]["passengers"];
+
+                          rule = rt * mc >= pax;
+                          rule = rule &&
+                              hotelCategory.value ==
+                                  element["value"]["budget_fk"];
+                          return rule;
                         }),
                         value);
                     filterHotels(context);
                   },
-                  hintText: "roomcategory     ",
-                  data: findMemoryChildCatalog(
-                      "hotels", "value", "roomcategory", filter: {
-                    "key": "maxCapacity",
-                    "value": hotelMaxCapacity.value
-                  }),
-                ),
-              if (hotelRoomCategory.value.isNotEmpty)
-                CustomFormDropDownFieldWidget(
-                  width: 0.11,
-                  height: 0.05,
-                  validator: CustomRequiredValidator(
-                      errorText: "Hotel TerraceorPatio is required ", ctx: ctx),
-                  value: "0",
-                  onSaved: (value) {},
-                  onChanged: (value) {
-                    hotelTerraceorPatio.value = getCatalogDescription(
-                        findMemoryChildCatalog(
-                            "hotels", "value", "TerraceorPatio", filter: {
-                          "key": "roomcategory",
-                          "value": hotelRoomCategory.value
-                        }),
-                        value);
-                    filterHotels(context);
-                  },
-                  hintText: "TerraceorPatio             ",
-                  data: findMemoryChildCatalog(
-                      "hotels", "value", "TerraceorPatio", filter: {
-                    "key": "roomcategory",
-                    "value": hotelRoomCategory.value
-                  }),
-                ),
-              if (hotelTerraceorPatio.value.isNotEmpty)
-                CustomFormDropDownFieldWidget(
-                  width: 0.11,
-                  height: 0.05,
-                  validator: CustomRequiredValidator(
-                      errorText: "Hotel Balcony is required ", ctx: ctx),
-                  value: "0",
-                  onSaved: (value) {},
-                  onChanged: (value) {
-                    hotelBalcony.value = getCatalogDescription(
-                        findMemoryChildCatalog("hotels", "value", "Balcony",
-                            filter: {
-                              "key": "TerraceorPatio",
-                              "value": hotelTerraceorPatio.value
-                            }),
-                        value);
-                    filterHotels(context);
-                  },
-                  hintText: "Balcony     ",
-                  data: findMemoryChildCatalog("hotels", "value", "Balcony",
-                      filter: {
-                        "key": "TerraceorPatio",
-                        "value": hotelTerraceorPatio.value
+                  hintText: "Room Category     ",
+                  data: findMemoryChildCatalog("hotel", "value", "roomcategory",
+                      condition: (element) {
+                    var rule = true;
+                    var rt = element["value"]["#roomtypes"] == ""
+                        ? 1
+                        : element["value"]["#roomtypes"];
+                    var mc = element["value"]["maxCapacity"];
+                    var pax = globalctx.memory["tour"]["passengers"];
+
+                    rule = rt * mc >= pax;
+                    rule = rule &&
+                        hotelCategory.value == element["value"]["budget_fk"];
+                    return rule;
+                  })),
+              CustomFormDropDownFieldWidget(
+                width: 0.11,
+                height: 0.05,
+                validator: CustomRequiredValidator(
+                    errorText: "Hotel Name is required ", ctx: ctx),
+                value: "0",
+                onSaved: (value) {},
+                onChanged: (value) {
+                  hotelName.value = getCatalogDescription(
+                      findMemoryChildCatalog("hotel", "value", "hotelname",
+                          condition: (element) {
+                        var rule = true;
+                        var rt = element["value"]["#roomtypes"] == ""
+                            ? 1
+                            : element["value"]["#roomtypes"];
+                        var mc = element["value"]["maxCapacity"];
+                        var pax = globalctx.memory["tour"]["passengers"];
+
+                        rule = rt * mc >= pax;
+                        rule = rule &&
+                            hotelCategory.value ==
+                                element["value"]["budget_fk"];
+                        rule = rule &&
+                            hotelRoomCategory.value ==
+                                element["value"]["roomcategory"];
+                        return rule;
                       }),
-                ),
-              if (hotelBalcony.value.isNotEmpty)
-                CustomFormDropDownFieldWidget(
-                  width: 0.11,
-                  height: 0.05,
-                  validator: CustomRequiredValidator(
-                      errorText: "Hotel extrabed is required ", ctx: ctx),
-                  value: "0",
-                  onSaved: (value) {},
-                  onChanged: (value) {
-                    hotelExtrabed.value = getCatalogDescription(
-                        findMemoryChildCatalog("hotels", "value", "extrabed",
-                            filter: {
-                              "key": "Balcony",
-                              "value": hotelBalcony.value
-                            }),
-                        value);
-                    filterHotels(context);
-                  },
-                  hintText: "extrabed             ",
-                  data: findMemoryChildCatalog("hotels", "value", "extrabed",
-                      filter: {"key": "Balcony", "value": hotelBalcony.value}),
-                ),
+                      value);
+                  filterHotels(context);
+                },
+                hintText: "Hotel Name     ",
+                data: findMemoryChildCatalog("hotel", "value", "hotelname",
+                    condition: (element) {
+                  var rule = true;
+                  var rt = element["value"]["#roomtypes"] == ""
+                      ? 1
+                      : element["value"]["#roomtypes"];
+                  var mc = element["value"]["maxCapacity"];
+                  var pax = globalctx.memory["tour"]["passengers"];
+
+                  rule = rt * mc >= pax;
+                  rule = rule &&
+                      hotelCategory.value == element["value"]["budget_fk"];
+                  rule = rule &&
+                      hotelRoomCategory.value ==
+                          element["value"]["roomcategory"];
+                  return rule;
+                }),
+              ),
             ],
           ),
-          if (moreFilters.value)
-            Wrap(
-              children: [
-                if (hotelExtrabed.value.isNotEmpty)
-                  CustomFormDropDownFieldWidget(
-                    width: 0.11,
-                    height: 0.05,
-                    validator: CustomRequiredValidator(
-                        errorText: "Hotel TuborJacuzzi is required ", ctx: ctx),
-                    value: "0",
-                    onSaved: (value) {},
-                    onChanged: (value) {
-                      hotelTuborJacuzzi.value = getCatalogDescription(
-                          findMemoryChildCatalog(
-                              "hotels", "value", "TuborJacuzzi", filter: {
-                            "key": "extrabed",
-                            "value": hotelExtrabed.value
-                          }),
-                          value);
-                      filterHotels(context);
-                    },
-                    hintText: "TuborJacuzzi     ",
-                    data: findMemoryChildCatalog(
-                        "hotels", "value", "TuborJacuzzi", filter: {
-                      "key": "extrabed",
-                      "value": hotelExtrabed.value
-                    }),
-                  ),
-                if (hotelTuborJacuzzi.value.isNotEmpty)
-                  CustomFormDropDownFieldWidget(
-                    width: 0.11,
-                    height: 0.05,
-                    validator: CustomRequiredValidator(
-                        errorText: "Hotel petFriendly is required ", ctx: ctx),
-                    value: "0",
-                    onSaved: (value) {},
-                    onChanged: (value) {
-                      hotelPetFriendly.value = getCatalogDescription(
-                          findMemoryChildCatalog(
-                              "hotels", "value", "petFriendly", filter: {
-                            "key": "TuborJacuzzi",
-                            "value": hotelTuborJacuzzi.value
-                          }),
-                          value);
-                      filterHotels(context);
-                    },
-                    hintText: "petFriendly             ",
-                    data: findMemoryChildCatalog(
-                        "hotels", "value", "petFriendly", filter: {
-                      "key": "TuborJacuzzi",
-                      "value": hotelTuborJacuzzi.value
-                    }),
-                  ),
-                if (hotelPetFriendly.value.isNotEmpty)
-                  CustomFormDropDownFieldWidget(
-                    width: 0.11,
-                    height: 0.05,
-                    validator: CustomRequiredValidator(
-                        errorText: "Hotel childFriendly is required ",
-                        ctx: ctx),
-                    value: "0",
-                    onSaved: (value) {},
-                    onChanged: (value) {
-                      hotelChildFriendly.value = getCatalogDescription(
-                          findMemoryChildCatalog(
-                              "hotels", "value", "childFriendly", filter: {
-                            "key": "petFriendly",
-                            "value": hotelPetFriendly.value
-                          }),
-                          value);
-                      filterHotels(context);
-                    },
-                    hintText: "childFriendly             ",
-                    data: findMemoryChildCatalog(
-                        "hotels", "value", "childFriendly", filter: {
-                      "key": "petFriendly",
-                      "value": hotelPetFriendly.value
-                    }),
-                  ),
-                if (hotelChildFriendly.value.isNotEmpty)
-                  CustomFormDropDownFieldWidget(
-                    width: 0.11,
-                    height: 0.05,
-                    validator: CustomRequiredValidator(
-                        errorText: "Hotel infantFriendly is required ",
-                        ctx: ctx),
-                    value: "0",
-                    onSaved: (value) {},
-                    onChanged: (value) {
-                      hotelInfantFriendly.value = getCatalogDescription(
-                          findMemoryChildCatalog(
-                              "hotels", "value", "infantFriendly", filter: {
-                            "key": "childFriendly",
-                            "value": hotelChildFriendly.value
-                          }),
-                          value);
-                      filterHotels(context);
-                    },
-                    hintText: "infantFriendly             ",
-                    data: findMemoryChildCatalog(
-                        "hotels", "value", "infantFriendly", filter: {
-                      "key": "childFriendly",
-                      "value": hotelChildFriendly.value
-                    }),
-                  ),
-              ],
-            ),
         ],
       ),
     );
@@ -281,13 +162,11 @@ class HotelKeyPadWidget extends StatelessWidget {
             children: [
               TextButton(
                 onPressed: () {
-                  hotelTerraceorPatio.value = "";
-                  hotelExtrabed.value = "";
-                  hotelMaxCapacity.value = "";
-                  hotelBalcony.value = "";
-                  hotelTuborJacuzzi.value = "";
+                  hotelName.value = "";
+                  hotelCategory.value = "";
                   hotelRoomCategory.value = "";
                   moreFilters.value = false;
+                  filterHotels(context);
                 },
                 child: Text('Reset',
                     style: KTextSytle(
@@ -311,20 +190,19 @@ class HotelKeyPadWidget extends StatelessWidget {
                             color: Colors.black)
                         .getStyle()),
               ),
-              if (hotelExtrabed.value.isNotEmpty)
-                TextButton(
-                  onPressed: () {
-                    moreFilters.value = !moreFilters.value;
-                  },
-                  child: Text(
-                      !moreFilters.value ? 'More Filters' : 'Less Filters',
-                      style: KTextSytle(
-                              context: context,
-                              fontSize: 10,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black)
-                          .getStyle()),
-                ),
+              TextButton(
+                onPressed: () {
+                  moreFilters.value = !moreFilters.value;
+                },
+                child: Text(
+                    !moreFilters.value ? 'More Filters' : 'Less Filters',
+                    style: KTextSytle(
+                            context: context,
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black)
+                        .getStyle()),
+              ),
             ],
           ),
         ));
