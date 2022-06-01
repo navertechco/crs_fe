@@ -94,6 +94,7 @@ class DestinationFrontOptionWidget extends StatelessWidget {
         ],
       ),
       Obx(() {
+        var t = arrivalDate.value;
         if (isListed ||
             !validateDestinationDialog(destination, index, type).value) {
           return Padding(
