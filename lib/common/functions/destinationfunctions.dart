@@ -26,6 +26,10 @@ globalctxReset() {
 
 autoFillDestination(destination, index, type, days) {
   setFormValue(globalctx.memory["destinations"], index, "explorationDay", days);
+  setFormValue(globalctx.memory["destinations"], index, "type", type);
+  setFormValue(globalctx.memory["destinations"], index, "index", index);
+  setFormValue(
+      globalctx.memory["destinations"], index, "destination", destination);
   setFormValue(
       globalctx.memory["destinations"], index, "key_activities", ["SURPRISE"]);
   setFormValue(globalctx.memory["destinations"], index, "travel_rhythm",
