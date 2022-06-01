@@ -199,9 +199,12 @@ List pageList = [
   },
 ];
 
-RxString arrivalState = getDestinationState("", 0).toString().obs;
-RxString departureState =
-    getDestinationState("", destinations.length - 1).toString().obs;
+RxString arrivalState =
+    getDestinationState(arrival["description"], 0, "arrival").toString().obs;
+RxString departureState = getDestinationState(
+        departure["description"], destinations.length - 1, "departure")
+    .toString()
+    .obs;
 
 Rx<dynamic> transportService = Rx(getFormValue(globalctx.memory["destinations"],
         globalDestinationIndex.value, "service_type", <String>[]) ??

@@ -20,9 +20,9 @@ class CustomDragableDestination extends StatelessWidget {
         // Data is the value this Draggable stores.
         maxSimultaneousDrags: destDraggable.value,
         data: destination,
-        feedback: DestinationOptionWidget(destination: destination),
-        childWhenDragging: DestinationOptionWidget(destination: destination),
-        child: DestinationOptionWidget(destination: destination),
+        feedback: DestinationOptionWidget(destination: destination, isListed:true),
+        childWhenDragging: DestinationOptionWidget(destination: destination, isListed:true),
+        child: DestinationOptionWidget(destination: destination, isListed:true),
       );
     });
   }

@@ -7,12 +7,14 @@ class DestinationFrontOptionWidget extends StatelessWidget {
       {Key? key,
       this.destination = "coast",
       required this.index,
-      required this.type})
+      required this.type,
+      this.isListed = false})
       : super(key: key);
 
   final String destination;
   final index;
   final type;
+  final isListed;
   @override
   Widget build(BuildContext context) {
     // ignore: unnecessary_null_comparison
@@ -92,7 +94,8 @@ class DestinationFrontOptionWidget extends StatelessWidget {
         ],
       ),
       Obx(() {
-        if (!validateDestinationDialog(destination, index, type).value) {
+        if (isListed ||
+            !validateDestinationDialog(destination, index, type).value) {
           return Padding(
             padding: EdgeInsets.only(
               top: MediaQuery.of(context).size.height * 0.017,

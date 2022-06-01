@@ -208,12 +208,16 @@ moveDownDestinationState(dest, index, state, type) {
 validateDestinationDialog(destination, index, type) {
   var galapagos = getFormValue(globalctx.memory, "tour", "galapagos", false);
   var isArrival = index == 0 && type == "arrival";
-
+  var days = int.parse(getFormValue(
+      globalctx.memory["destinations"], index, "explorationDay", "0"));
   var isDeparture =
       destination == departure["description"] && type == "departure";
-  var isSelected = getDestinationState(destination, index) == "selected";
+  var isSelected = getDestinationState(destination, index, type) == "selected";
+  var isSuggested =
+      getDestinationState(destination, index, type) == "suggested";
+  var isPromoted = getDestinationState(destination, index, type) == "promoted";
   var isArrivalPromoted =
-      getDestinationState(arrival["description"], 0) == "promoted";
+      getDestinationState(arrival["description"], 0, "arrival") == "promoted";
   var isTour = !isArrival && !isDeparture;
   var isDepartureConsistent = (destDraggable.value != 0 &&
       globalctx.promotedDestinations.length !=
@@ -237,8 +241,8 @@ validateDestinationDialog(destination, index, type) {
       isAccumulated &&
       isDayleft;
   var tourRule = isTour && isArrivalPromoted && isAccumulated && isDayleft;
-  if (galapagos) {
-    return true.obs;
+  if (galapagos && days > 0) {
+    return ((isPromoted || isSelected || isTour)).obs;
   }
   return ((preArrival || arrivalRule || departureRule || tourRule)).obs;
 }
@@ -378,10 +382,13 @@ setDestinationState(dest, index, state, type) {
   globalctx.states["destinations"][index]["type"] = type;
 }
 
-getDestinationState(destination, index) {
+getDestinationState(destination, index, type) {
   var state = "suggested";
   globalctx.states["destinations"][index] ??= {}.obs;
   state = globalctx.states["destinations"][index]["state"] ?? "suggested";
+  if (globalctx.states["destinations"][index]["type"] != type) {
+    state = "suggested";
+  }
   return state;
 }
 

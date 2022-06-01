@@ -12,7 +12,8 @@ class SwitcherWidget extends StatelessWidget {
       required this.seccondchild,
       required this.destination,
       required this.type,
-      required this.index})
+      required this.index,
+      this.isListed = false})
       : super(key: key);
 
   final Widget firstchild;
@@ -20,7 +21,7 @@ class SwitcherWidget extends StatelessWidget {
   final String destination;
   final String type;
   final int index;
-
+  final bool isListed;
   @override
   Widget build(BuildContext context) {
     RxBool _showFrontSide = true.obs;
@@ -40,18 +41,17 @@ class SwitcherWidget extends StatelessWidget {
           : dests.remove(destination);
 
       globalctx.destinationlist = dests;
-      if (!validateDestinationDialog(destination, index, type).value) {
+      if (isListed ||
+          !validateDestinationDialog(destination, index, type).value) {
         _changeRotationAxis();
       } else {
-        if (validateDestinationDialog(destination, index, type).value) {
-          globalDestinationName.value = destination;
-          showDialog(
-              context: context,
-              builder: (context) {
-                return DestinationDetailPage(
-                    destination: destination, type: type, index: index);
-              });
-        }
+        globalDestinationName.value = destination;
+        showDialog(
+            context: context,
+            builder: (context) {
+              return DestinationDetailPage(
+                  destination: destination, type: type, index: index);
+            });
       }
     }
 
