@@ -169,7 +169,8 @@ class CustomStarDestinationForm extends StatelessWidget {
                 }),
                 Obx(() {
                   var expMode = explorationMode.value;
-                  if (type == "arrival") {
+                  if (type == "arrival" &&
+                      destination == arrival["description"]) {
                     return CustomFormDropDownFieldWidget(
                         validator: CustomRequiredValidator(
                             errorText: "Arrival Hour is required ",
@@ -345,10 +346,12 @@ class CustomStarDestinationForm extends StatelessWidget {
                         Obx(() {
                           return CustomFormCalendarFieldWidget(
                               label: "IH Range                    ",
-                              initialStartDate: iHStartDate.value,
-                              initialEndDate: iHEndDate.value,
-                              minimumDate: firstDayDate.value,
-                              maximumDate: iHEndDate.value,
+                              initialStartDate: cruiseEndDate.value,
+                              initialEndDate:
+                                  departureDate.value.add(Duration(days: -1)),
+                              minimumDate: cruiseEndDate.value,
+                              maximumDate:
+                                  departureDate.value.add(Duration(days: -1)),
                               startEndDateChange: (start, end) {
                                 iHStartDate.value = start;
                                 iHEndDate.value = end;
@@ -358,19 +361,19 @@ class CustomStarDestinationForm extends StatelessWidget {
                                     index, "iHEndDate", end);
                               },
                               onSaved: () {
-                                var val1 = iHEndDate.value
-                                        .difference(iHStartDate.value)
-                                        .inDays +
-                                    1;
-                                var val0 = int.parse(getFormValue(
-                                    globalctx.memory["destinations"],
-                                    index,
-                                    "iHExpDays",
-                                    "0"));
+                                // var val1 = iHEndDate.value
+                                //         .difference(iHStartDate.value)
+                                //         .inDays +
+                                //     1;
+                                // var val0 = int.parse(getFormValue(
+                                //     globalctx.memory["destinations"],
+                                //     index,
+                                //     "iHExpDays",
+                                //     "0"));
 
-                                saveExplorationDays(index, val0, val1,
-                                    key: "iHExpDays");
-                                validateGalapagosTR();
+                                // saveExplorationDays(index, val0, val1,
+                                //     key: "iHExpDays");
+                                // validateGalapagosTR();
                               });
                         }),
                       ],
@@ -378,7 +381,6 @@ class CustomStarDestinationForm extends StatelessWidget {
                   }
                   return Text("");
                 })),
-               
               ]),
             ),
           ),

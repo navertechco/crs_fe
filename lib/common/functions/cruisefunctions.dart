@@ -198,19 +198,19 @@ getCruisDataCell(context, row) {
                 label: "",
                 initialStartDate: cruiseStartDate.value,
                 initialEndDate: cruiseEndDate.value,
-                minimumDate: firstDayDate.value,
-                maximumDate: firstDayDate.value
+                minimumDate: arrivalDate.value,
+                maximumDate: departureDate.value
                     .add(Duration(days: int.parse(cruiseDay.value))),
                 startEndDateChange: (start, end) {
                   cruiseStartDate.value = start;
                   cruiseEndDate.value = end;
-                  departureDate.value =
-                      cruiseEndDate.value.add(Duration(days: 1));
-                  cruiseDay.value =
-                      (cruiseEndDate.value.difference(cruiseStartDate.value)
+                  arrivalDate.value = start.add(Duration(days: -1));
+                  departureDate.value = end.add(Duration(days: 1));
+                  cruiseDay.value = (cruiseEndDate.value
+                              .difference(cruiseStartDate.value)
                               .inDays +
                           1)
-                          .toString();
+                      .toString();
                 },
                 onSaved: () {
                   var start = cruiseStartDate.value;

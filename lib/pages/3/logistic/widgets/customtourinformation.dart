@@ -1,3 +1,4 @@
+import 'package:checkbox_formfield/checkbox_icon_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/common/index.dart';
@@ -92,28 +93,40 @@ class CustomLogisticInformationForm extends StatelessWidget {
                         data: airportCatalog.toList(),
                       ),
                       Obx(() {
-                        return CustomFormDateFieldWidget(
-                          disabled: readonly || cruiseDay.value.isNotEmpty,
-                          initialValue: arrivalDate.value,
-                          validator: CustomDatetimeGreaterValidator(
-                              context: context,
-                              compare: departureDate.value,
-                              errorText:
-                                  "There is a problem with the Departure Date"),
-                          label: "Arrival Date               ",
-                          onSaved: (value) {
-                            ctrl!.state.arrivalDate = value!;
-                            arrivalDate.value = value;
-                            // clearCruiseFilter();
-                            filterCruises(context);
-                          },
-                          onChanged: (value) {
-                            value ??= DateTime.now();
-                            ctrl!.state.arrivalDate = value;
-                            arrivalDate.value = value;
-                            processDaysCatalog();
-                            filterCruises(context);
-                          },
+                        return Row(
+                          children: [
+                            CustomFormDateFieldWidget(
+                              disabled:
+                                  (readonly || cruiseDay.value.isNotEmpty) &&
+                                      !arrivalEdit.value,
+                              initialValue: arrivalDate.value,
+                              validator: CustomDatetimeGreaterValidator(
+                                  context: context,
+                                  compare: departureDate.value,
+                                  errorText:
+                                      "There is a problem with the Departure Date"),
+                              label: "Arrival Date               ",
+                              onSaved: (value) {
+                                ctrl!.state.arrivalDate = value!;
+                                arrivalDate.value = value;
+                                // clearCruiseFilter();
+                                filterCruises(context);
+                              },
+                              onChanged: (value) {
+                                value ??= DateTime.now();
+                                ctrl!.state.arrivalDate = value;
+                                arrivalDate.value = value;
+                                processDaysCatalog();
+                                filterCruises(context);
+                              },
+                            ),
+                            CheckboxIconFormField(
+                                padding: 0,
+                                initialValue: arrivalEdit.value,
+                                onChanged: (value) {
+                                  arrivalEdit.value = !arrivalEdit.value;
+                                })
+                          ],
                         );
                       }),
                       const CustomTitleWidget(
@@ -141,29 +154,41 @@ class CustomLogisticInformationForm extends StatelessWidget {
                         data: airportCatalog.toList(),
                       ),
                       Obx(() {
-                        return CustomFormDateFieldWidget(
-                          disabled: readonly || cruiseDay.value.isNotEmpty,
-                          initialValue: departureDate.value,
-                          validator: CustomDatetimeGreaterValidator(
-                              context: context,
-                              compare: arrivalDate.value,
-                              errorText:
-                                  "There is a problem with the Arrival Date",
-                              invert: true),
-                          label: "Departure Date       ",
-                          onSaved: (value) {
-                            ctrl!.state.departureDate = value!;
-                            departureDate.value = value;
-                            processDaysCatalog();
-                            // clearCruiseFilter();
-                            filterCruises(context);
-                          },
-                          onChanged: (value) {
-                            value ??= DateTime.now();
-                            ctrl!.state.departureDate = value;
-                            departureDate.value = value;
-                            filterCruises(context);
-                          },
+                        return Row(
+                          children: [
+                            CustomFormDateFieldWidget(
+                              disabled:
+                                  (readonly || cruiseDay.value.isNotEmpty) &&
+                                      !departureEdit.value,
+                              initialValue: departureDate.value,
+                              validator: CustomDatetimeGreaterValidator(
+                                  context: context,
+                                  compare: arrivalDate.value,
+                                  errorText:
+                                      "There is a problem with the Arrival Date",
+                                  invert: true),
+                              label: "Departure Date       ",
+                              onSaved: (value) {
+                                ctrl!.state.departureDate = value!;
+                                departureDate.value = value;
+                                processDaysCatalog();
+                                // clearCruiseFilter();
+                                filterCruises(context);
+                              },
+                              onChanged: (value) {
+                                value ??= DateTime.now();
+                                ctrl!.state.departureDate = value;
+                                departureDate.value = value;
+                                filterCruises(context);
+                              },
+                            ),
+                            CheckboxIconFormField(
+                                padding: 0,
+                                initialValue: departureEdit.value,
+                                onChanged: (value) {
+                                  departureEdit.value = !departureEdit.value;
+                                })
+                          ],
                         );
                       }),
                       Obx(() {

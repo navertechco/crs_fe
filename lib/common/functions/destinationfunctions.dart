@@ -11,6 +11,29 @@ dragDestination(destination) {
   filterDestinations();
 }
 
+globalctxReset() {
+  globalctx.reset.value = true;
+  resetLeftDays();
+  resetDestinations();
+  updateDraggableDestinations();
+  filterDestinations();
+  if (cruiseDay.value.isNotEmpty) {
+    autoFillDestination(arrival["description"], 0, "arrival", "1");
+    autoFillDestination("galapagos", 1, "arrival", cruiseDay.value);
+    autoFillDestination(departure["description"], 2, "departure", "1");
+  }
+}
+
+autoFillDestination(destination, index, type, days) {
+  setFormValue(globalctx.memory["destinations"], index, "explorationDay", days);
+  setFormValue(
+      globalctx.memory["destinations"], index, "key_activities", ["SURPRISE"]);
+  setFormValue(globalctx.memory["destinations"], index, "travel_rhythm",
+      destination == "galapagos" ? "3" : "1");
+  addDestination(destination);
+  promote(destination, index, type);
+}
+
 getDestinationList() {
   List<Widget> destinationlist = [];
   List destinations = destinationsCatalog.toList();
@@ -49,6 +72,7 @@ promote(destination, index, type) {
   setDestinationState(destination, index, "promoted", type);
   updateDraggableDestinations();
   updateTotalLeftAccumulated();
+  updatePromotedDestination(destination, index);
 }
 
 promoteDestination(ctrl, _formKey, destination, index, type) {
@@ -148,9 +172,75 @@ processDestinations(context) async {
 }
 
 addDestination(String destination) {
+  var newIndex = globalctx.destinations.length - 1;
   if (!globalctx.destinations.contains(destination)) {
-    globalctx.destinations.add(destination);
+    globalctx.destinations.insert(newIndex, destination);
   }
+  // moveDownDestinationState(
+  //     departure["description"], newIndex, "selected", "departure");
+
+  setDestinationState(destination, newIndex, "selected", "tour");
+}
+
+moveDownDestinationState(dest, index, state, type) {
+  globalctx.states["destinations"][index + 1] =
+      globalctx.states["destinations"][index];
+  globalctx.states["destinations"][index + 1]["destination"] =
+      globalctx.states["destinations"][index]["destination"];
+  globalctx.states["destinations"][index + 1]["index"] =
+      globalctx.states["destinations"][index]["index"];
+  globalctx.states["destinations"][index + 1]["state"] =
+      globalctx.states["destinations"][index]["state"];
+  globalctx.states["destinations"][index + 1]["type"] =
+      globalctx.states["destinations"][index]["type"];
+  globalctx.memory["destinations"][(index + 1).toString()] =
+      globalctx.memory["destinations"][(index).toString()];
+  globalctx.promotedDestinations.remove(index);
+  globalctx.promotedDestinations.add(index + 1);
+  setDestinationState(
+      departure["description"], index + 1, "selected", "departure");
+  globalctx.memory["destinations"][(index).toString()] = null;
+  globalctx.states["destinations"][index] = null;
+  cleanDestinations(globalctx.states["destinations"]);
+  cleanDestinations(globalctx.memory["destinations"]);
+}
+
+validateDestinationDialog(destination, index, type) {
+  var galapagos = getFormValue(globalctx.memory, "tour", "galapagos", false);
+  var isArrival = index == 0 && type == "arrival";
+
+  var isDeparture =
+      destination == departure["description"] && type == "departure";
+  var isSelected = getDestinationState(destination, index) == "selected";
+  var isArrivalPromoted =
+      getDestinationState(arrival["description"], 0) == "promoted";
+  var isTour = !isArrival && !isDeparture;
+  var isDepartureConsistent = (destDraggable.value != 0 &&
+      globalctx.promotedDestinations.length !=
+          globalctx.selectedDestinations.length &&
+      globalctx.promotedDestinations.length >=
+          globalctx.selectedDestinations.length - 1 &&
+      globalctx.selectedDestinations.length >= 3 &&
+      globalctx.promotedDestinations.length >= 2 &&
+      type == "departure");
+  var isAccumulated = accumulated.value > 0;
+  var isDayleft = dayleft.value > 0;
+  var arrivalRule = isArrival && isSelected && isDayleft;
+  var cruiseFirstDayDirefferece =
+      cruiseStartDate.value.difference(arrivalDate.value).inDays;
+  var preArrival =
+      isArrival && galapagos && isDayleft && cruiseFirstDayDirefferece > 1;
+  var departureRule = isDeparture &&
+      isDepartureConsistent &&
+      isSelected &&
+      isArrivalPromoted &&
+      isAccumulated &&
+      isDayleft;
+  var tourRule = isTour && isArrivalPromoted && isAccumulated && isDayleft;
+  if (galapagos) {
+    return true.obs;
+  }
+  return ((preArrival || arrivalRule || departureRule || tourRule)).obs;
 }
 
 filterSelectedDestinations() {
@@ -170,7 +260,7 @@ filterSelectedDestinations() {
     }
     selectedDestinations.insert(0, arrival["description"]);
     if (galapagos) {
-      selectedDestinations.add("galapagos");
+      selectedDestinations.insert(1, "galapagos");
     }
     selectedDestinations.add(departure["description"]);
     globalctx.selectedDestinations.value = [];
@@ -193,9 +283,9 @@ filterSelectedDestinations() {
 
 moveDestination(String destination, int index, String type) {
   var state = "selected";
-  if (globalctx.promotedDestinations.contains(index)) {
-    state = "promoted";
-  }
+  // if (globalctx.promotedDestinations.contains(index)) {
+  //   state = "promoted";
+  // }
   setDestinationState(destination, index, state, type);
   globalctx.selectedDestinations.add(destination);
   globalctx.destinationDragData.value.add(DragDestinationWidget(
@@ -209,22 +299,27 @@ deleteDestination(String destination) {
     globalctx.promotedDestinations.remove(destination);
     var index =
         globalctx.destinations.indexWhere((element) => element == destination);
+    var type = "tour";
+    setDestinationState(destination, index, "suggested", type);
     globalctx.destinations.removeAt(index);
     globalctx.selectedDestinations.removeAt(index);
     globalctx.destinationDragData.value.removeAt(index);
-    if (globalctx.memory["destinations"].keys.contains(index.toString())) {
-      accumulated -= int.parse(getFormValue(globalctx.memory["destinations"],
-          index.toString(), "explorationDay", "0"));
-      dayleft += int.parse(getFormValue(globalctx.memory["destinations"],
-          index.toString(), "explorationDay", "0"));
+    var destDay = int.parse(getFormValue(globalctx.memory["destinations"],
+        index.toString(), "explorationDay", "0"));
+    var destinationExists =
+        globalctx.memory["destinations"].keys.contains(index.toString());
+
+    if (destinationExists) {
+      accumulated -= destDay;
+      dayleft += destDay;
     }
+
     if (destination == "galapagos") {
       iHStartDate = Rx(firstDayDate.value);
       iHEndDate = Rx(penultimateDayDate.value);
       cruiseStartDate = Rx(firstDayDate.value);
       cruiseEndDate = Rx(penultimateDayDate.value);
     }
-    setDestinationState(destination, index, "suggested", type);
   }
 }
 
@@ -265,6 +360,14 @@ getDestinationByName(String destination) {
     log(e);
   }
   return result;
+}
+
+cleanDestinations(memory) {
+  for (var dest in memory.entries.toList()) {
+    if (dest.value == null) {
+      memory.remove(dest.key);
+    }
+  }
 }
 
 setDestinationState(dest, index, state, type) {

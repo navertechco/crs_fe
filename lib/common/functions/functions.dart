@@ -92,29 +92,6 @@ cityData(Rx<List<Map<String, dynamic>>> citylist, cities) {
   }
 }
 
-globalctxReset() {
-  globalctx.reset.value = true;
-  resetLeftDays();
-  resetDestinations();
-
-  updateDraggableDestinations();
-  filterDestinations();
-  if (cruiseDay.value.isNotEmpty) {
-    autoFillDestination(arrival["description"], 0, "arrival", "1");
-    autoFillDestination("galapagos", 1, "arrival", cruiseDay.value);
-    autoFillDestination(departure["description"], 2, "departure", "1");
-  }
-}
-
-autoFillDestination(destination, index, type, days) {
-  setFormValue(globalctx.memory["destinations"], index, "explorationDay", days);
-  setFormValue(
-      globalctx.memory["destinations"], index, "key_activities", ["SURPRISE"]);
-  setFormValue(globalctx.memory["destinations"], index, "travel_rhythm",
-      destination == "galapagos" ? "3" : "1");
-  updatePromotedDestination(destination, index);
-  promote(destination, index, type);
-}
 
 getItems(data, value, hintText) {
   RxList<DropdownMenuItem<String>> items = <DropdownMenuItem<String>>[].obs;
