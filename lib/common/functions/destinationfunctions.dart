@@ -34,6 +34,8 @@ autoFillDestination(destination, index, type, days) {
       globalctx.memory["destinations"], index, "key_activities", ["SURPRISE"]);
   setFormValue(globalctx.memory["destinations"], index, "travel_rhythm",
       destination == "galapagos" ? "3" : "1");
+  setFormValue(globalctx.memory["destinations"], index, "explorationMode",
+      destination == "galapagos" ? "1" : "0");
   addDestination(destination);
   promote(destination, index, type);
 }
@@ -73,16 +75,15 @@ orderDestination(List destinations) {
 }
 
 promote(destination, index, type) {
+  updatePromotedDestination(destination, index);
   setDestinationState(destination, index, "promoted", type);
   updateDraggableDestinations();
   updateTotalLeftAccumulated();
-  updatePromotedDestination(destination, index);
 }
 
 promoteDestination(ctrl, _formKey, destination, index, type) {
   if (_formKey.currentState!.validate()) {
     _formKey.currentState!.save();
-    updatePromotedDestination(destination, index);
     promote(destination, index, type);
     Get.close(1);
   }

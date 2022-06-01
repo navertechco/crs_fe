@@ -11,6 +11,7 @@ paginateDay(context) async {
   if (globalctx.memory["promoted"] != null &&
       globalctx.memory["promoted"] != null &&
       globalctx.memory["promoted"][currentDay.value] != null) {
+    currentDay.value++;
     await nextDay();
   } else {
     showCustomDialog(

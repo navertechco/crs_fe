@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/common/index.dart';
+import 'package:sweetalert/sweetalert.dart';
 import '../../../index.dart';
 
 class CustomCustomerDataForm extends StatelessWidget {
@@ -187,10 +188,16 @@ class CustomCustomerDataForm extends StatelessWidget {
                                           errorText: "Country is required ",
                                           ctx: context)
                                       .call(value);
-                                  CustomRequiredValidator(
-                                          errorText: "City is required ",
-                                          ctx: context)
-                                      .call(city.value);
+                                  if (city.value.isEmpty) {
+                                    SweetAlert.show(context,
+                                        curve: ElasticInCurve(),
+                                        title: "City Field is required",
+                                        style: SweetAlertStyle.error,
+                                        onPress: (bool isConfirm) {
+                                      Get.close(1);
+                                      return false;
+                                    });
+                                  }
                                 },
                                 value: country.value,
                                 width: country.value == "" ? 0.3 : 0.15,
@@ -300,7 +307,18 @@ class CustomCustomerDataForm extends StatelessWidget {
                   onTap: () {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
-                      ctrl!.saveCustomer();
+                      if (city.value.isEmpty) {
+                        SweetAlert.show(context,
+                            curve: ElasticInCurve(),
+                            title: "City Field is required",
+                            style: SweetAlertStyle.error,
+                            onPress: (bool isConfirm) {
+                          Get.close(1);
+                          return false;
+                        });
+                      } else {
+                        ctrl!.saveCustomer();
+                      }
                     }
                   },
                   child: const CustomTitleWidget(
