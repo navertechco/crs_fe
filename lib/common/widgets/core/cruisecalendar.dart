@@ -289,7 +289,7 @@ class CruiseFiltersWidget extends StatelessWidget {
                     data: findMemoryChildCatalog(
                         "cruises", "value", "cruise_port",
                         condition: (element) {
-                      var rule = true;
+                      var rule = true; 
                       var rule2 = cabine.where((cab) {
                         return cab["value"]["cruise_id"] ==
                             element["value"]["cruise_id"];
