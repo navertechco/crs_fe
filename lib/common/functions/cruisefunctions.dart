@@ -1,4 +1,5 @@
 // ignore_for_file: prefer_function_declarations_over_variables
+// ignore_for_file: curly_braces_in_flow_control_structures
 
 import 'package:checkbox_formfield/checkbox_formfield.dart';
 import 'package:flutter/material.dart';
@@ -31,42 +32,85 @@ processCruiseItinerary(row) {
   return result;
 }
 
+List cruises = findCatalog("cruises");
+List cabine = findCatalog("cabine");
+List itinerary = findCatalog("itinerary");
+List animals = findCatalog("animals");
+
 filterCruises(ctx) {
-  List filtered = findCatalog("cruises");
+  cruises = findCatalog("cruises");
+  cabine = findCatalog("cabine");
+  itinerary = findCatalog("itinerary");
+  animals = findCatalog("animals");
+  //CRUISE CATEGORY LUJO / PRIMERA
+  if (cruiseCategory.value.isNotEmpty)
+    cruises = cruises
+        .where((element) => element["value"]["cruise_category"]
+            .toString()
+            .toUpperCase()
+            .contains(cruiseCategory.value))
+        .toList();
+  //CRUISE TYPE
+  if (cruiseType.value.isNotEmpty)
+    cruises = cruises
+        .where((element) => element["value"]["cruise_type"]
+            .toString()
+            .toUpperCase()
+            .contains(cruiseType.value))
+        .toList();
+  //CRUISE MODALITY CATAMARAN / MONOCASCO / YATE
+  if (cruiseModality.value.isNotEmpty)
+    cruises = cruises
+        .where((element) => element["value"]["modality"]
+            .toString()
+            .toUpperCase()
+            .contains(cruiseModality.value))
+        .toList();
+  //CRUISE PORT BAQUERIZO / AYORA
+  if (cruisePort.value.isNotEmpty)
+    cruises = cruises
+        .where((element) => element["value"]["cruise_port"]
+            .toString()
+            .toUpperCase()
+            .contains(cruisePort.value.toString().toUpperCase()))
+        .toList();
+  //CRUISE DURATION
+  if (cruiseDay.value.isNotEmpty)
+    cabine = cabine
+        .where((element) =>
+            element["value"]["days"].toString().toUpperCase() ==
+            (cruiseDay.value.toString().toUpperCase()))
+        .toList();
+  //CRUISE CABINE
+  if (cruiseCabine.value.isNotEmpty)
+    cabine = cabine
+        .where((element) =>
+            element["value"]["cabine_type"].toString().toUpperCase() ==
+            (cruiseCabine.value.toString().toUpperCase()))
+        .toList();
+  //CRUISE ANIMALS
+  if (cruiseAnimal.value.isNotEmpty)
+    animals = animals
+        .where((element) =>
+            element["description"].toString().toUpperCase() ==
+            (cruiseAnimal.value.toString().toUpperCase()))
+        .toList();
+  //CRUISE ITINERARY
+  if (cruiseDay.value.isNotEmpty)
+    itinerary = itinerary
+        .where((element) =>
+            element["value"]["days"].toString().toUpperCase() ==
+            (cruiseDay.value.toString().toUpperCase()))
+        .toList();
+  //CRUISE ITINERARY FORMAT
+  if (cruiseItinerary.value.isNotEmpty)
+    itinerary = itinerary
+        .where((element) =>
+            element["value"]["itinerary_format"].toString().toUpperCase() ==
+            (cruiseItinerary.value.toString().toUpperCase()))
+        .toList();
 
-  filtered = filtered
-      .where((element) => element["value"]["cruise_category"]
-          .toString()
-          .toUpperCase()
-          .contains(cruiseCategory.value))
-      .toList();
-  filtered = filtered
-      .where((element) => element["value"]["cruise_type"]
-          .toString()
-          .toUpperCase()
-          .contains(cruiseType.value))
-      .toList();
-  filtered = filtered
-      .where((element) => element["value"]["modality"]
-          .toString()
-          .toUpperCase()
-          .contains(cruiseModality.value))
-      .toList();
-  filtered = filtered
-      .where((element) => element["value"]["cruise_port"]
-          .toString()
-          .toUpperCase()
-          .contains(cruisePort.value.toString().toUpperCase()))
-      .toList();
-
-  filtered = filtered.where((element) => true).toList();
-  filtered = filtered.where((element) => true).toList();
-  filtered = filtered.where((element) => true).toList();
-  filtered = filtered.where((element) => true).toList();
-  filtered = filtered.where((element) => true).toList();
-  filtered = filtered.where((element) => true).toList();
-
-  cruiseResults.value = filtered.toList();
+  cruiseResults.value = cruises.toList();
 
   var processedData = processCruiseData(ctx, cruiseResults.value);
   searcherHeader.value = processedData[0];

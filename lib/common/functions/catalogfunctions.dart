@@ -21,12 +21,25 @@ getCatalog(
 }
 
 cruiseReset() {
+  cruiseFormat.value = "";
+  cruiseDay.value = "";
+  cruiseShip.value = "";
+  cruiseRange.value = "";
   cruiseCategory.value = "";
-  cruiseModality.value = "";
-  cruiseIslet.value = "";
+  cruiseKey.value = "";
   cruiseType.value = "";
+  cruiseCabine.value = "";
+  cruiseModality.value = "";
+  cruisePax.value = "";
+  cruiseTriple.value = "";
   cruiseStarts.value = "";
   cruiseEnds.value = "";
+  cruiseIslet.value = "";
+  cruiseItinerary.value = "";
+  cruisePort.value = "";
+  cruiseAnimal.value = "";
+  arrivalEdit.value = false;
+  departureEdit.value = false;
   moreFilters.value = false;
 }
 
