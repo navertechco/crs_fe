@@ -529,18 +529,18 @@ List<Meeting> getDataSource(data) {
   var firstOfMonth = DateTime(now.year, now.month, 1);
   var firstMonday = firstOfMonth
       .add(Duration(days: (7 - (firstOfMonth.weekday - DateTime.monday)) % 7));
-  var currentDay = firstMonday;
+  var current = firstMonday;
   for (var day in dataList) {
     if (day == "" || day == " ") {
       count++;
       continue;
     }
 
-    if (currentDay.month == now.month) {
-      var nextDay = currentDay.add(Duration(days: count));
+    if (current.month == now.month) {
+      var nextDay = current.add(Duration(days: count));
       meetings
           .add(Meeting(day, nextDay, nextDay, const Color(0xFF0F8644), true));
-      currentDay = nextDay;
+      current = nextDay;
     }
     count++;
   }

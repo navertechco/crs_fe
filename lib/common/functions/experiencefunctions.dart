@@ -220,8 +220,6 @@ getExpFiltered() {
   return filtered;
 }
 
-
-
 initializeHours() {
   leftHours[currentDay.value] ??= 0.0.obs;
   accumulatedHours[currentDay.value] ??= 0.0.obs;

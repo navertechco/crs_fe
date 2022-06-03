@@ -229,9 +229,11 @@ var days = [
   {"dayId": 1, "spa": "Lunes", "eng": "Monday"},
   {"dayId": 2, "spa": "Martes", "eng": "Tuesday"},
   {"dayId": 3, "spa": "Miercoles", "eng": "Wednesday"},
+  {"dayId": 3, "spa": "Miércoles", "eng": "Wednesday"},
   {"dayId": 4, "spa": "Jueves", "eng": "Thursday"},
   {"dayId": 5, "spa": "Viernes", "eng": "Friday"},
   {"dayId": 6, "spa": "Sabado", "eng": "Saturday"},
+  {"dayId": 6, "spa": "Sábado", "eng": "Saturday"},
   {"dayId": 7, "spa": "Domingo", "eng": "Sunday"}
 ];
 
@@ -290,11 +292,25 @@ getCruisDataCell(context, row) {
                 startEndDateChange: (start, end) {
                   cruiseStartDate.value = start;
                   cruiseEndDate.value = end;
+                  if (cruiseStartDate.value
+                          .difference(arrivalDate.value)
+                          .inDays <=
+                      0) {
+                    arrivalDate.value =
+                        cruiseStartDate.value.add(Duration(days: -1));
+                  }
                   departureDate.value = end.add(Duration(days: 1));
                 },
                 onSaved: () {
                   var start = cruiseStartDate.value;
                   var end = cruiseEndDate.value;
+                  if (cruiseStartDate.value
+                          .difference(arrivalDate.value)
+                          .inDays <=
+                      0) {
+                    arrivalDate.value =
+                        cruiseStartDate.value.add(Duration(days: -1));
+                  }
                   departureDate.value = end.add(Duration(days: 1));
                   setFormValue(globalctx.memory["destinations"], 1,
                       "cruiseStartDate", start);

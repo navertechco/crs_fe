@@ -35,6 +35,7 @@ class CustomFooterWidget extends StatelessWidget {
                           color: Colors.white)
                       .getStyle()),
               onPressed: () {
+                
                 previousDay();
               },
             ),

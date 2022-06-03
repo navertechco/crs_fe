@@ -11,7 +11,6 @@ paginateDay(context) async {
   if (globalctx.memory["promoted"] != null &&
       globalctx.memory["promoted"] != null &&
       globalctx.memory["promoted"][currentDay.value] != null) {
-    currentDay.value++;
     await nextDay();
   } else {
     showCustomDialog(
@@ -19,38 +18,78 @@ paginateDay(context) async {
   }
 }
 
+nextDay() async {
+  if (currentDay.value < totalDays.value - 1) {
+    jumpDay("forward");
+  } else {
+    goto("Services");
+  }
+}
+
+jumpDay(direction) {
+  decideBypass(direction);
+  expDraggable.value = 1;
+  currentDate.value =
+      arrivalDate.value.add(Duration(days: currentDay.value - 1));
+  updateCurrentDestination();
+  filterSuggestedExperiences();
+  initializeHours();
+  goto("Experiences");
+}
+
 decideBypass(direction) {
   int index = getDestinationIndexByDay();
   int explorationMode = int.parse(getFormValue(
       globalctx.memory["destinations"], index, "explorationMode", "0"));
+  var explorationDay = getCurrentExplorationDay();
+  var keyActivities = getCurrentKA();
   if (explorationMode > 0) {
     bypassCruise(direction);
+  } else if (keyActivities.contains("hh")) {
+    bypassDay(direction, explorationDay);
   } else {
-    bypassSurprise(direction);
+    updateCurrentDay(direction);
   }
 }
 
-bypassSurprise(String direction) {
-  try {
-    int index = getDestinationIndexByDay();
-    List keyActivities = (getFormValue(
-        globalctx.memory["destinations"], index, "key_activities", []));
+getDestinationIndexByDay() {
+  var _accumulated = 0;
+  var _destinations = globalctx.memory["destinations"];
 
-    int explorationDay = int.parse(getFormValue(
-        globalctx.memory["destinations"], index, "explorationDay", "0"));
-    // return;
-
-    if (keyActivities.contains("SURPRISE")) {
-      if (direction == "forward") {
-        currentDay.value += explorationDay;
-      } else {
-        currentDay.value -= explorationDay;
-      }
-    } else {
-      updateCurrentDay(direction);
+  if (currentDay.value <= 0) {
+    return 0;
+  }
+  var lenght = _destinations.length;
+  for (var i = 0; i < lenght; i++) {
+    var _dest = _destinations[i.toString()];
+    var _explorationDay = int.parse(_dest["explorationDay"]);
+    _accumulated += _explorationDay;
+    if (currentDay.value < _accumulated ||
+        _accumulated - currentDay.value == 0) {
+      return i;
     }
-  } catch (e) {
-    log(e);
+  }
+}
+
+getCurrentExplorationDay() {
+  int index = getDestinationIndexByDay();
+  int explorationDay = int.parse(getFormValue(
+      globalctx.memory["destinations"], index, "explorationDay", "0"));
+  return explorationDay;
+}
+
+getCurrentKA() {
+  int index = getDestinationIndexByDay();
+  List keyActivities = (getFormValue(
+      globalctx.memory["destinations"], index, "key_activities", []));
+  return keyActivities;
+}
+
+bypassDay(direction, int explorationDay) {
+  if (direction == "forward") {
+    currentDay.value += explorationDay;
+  } else {
+    currentDay.value -= explorationDay;
   }
 }
 
@@ -102,27 +141,9 @@ adjustCurrentDay() {
 
 updateCurrentDay(direction) {
   if (direction == "forward") {
-    currentDay.value += 1;
+    currentDay.value++;
   } else {
-    currentDay.value -= 1;
-  }
-}
-
-jumpDay(direction) {
-  decideBypass(direction);
-  expDraggable.value = 1;
-  currentDate.value = arrivalDate.value.add(Duration(days: currentDay.value));
-  updateCurrentDestination();
-  filterSuggestedExperiences();
-  initializeHours();
-  goto("Experiences");
-}
-
-nextDay() async {
-  if (currentDay.value < totalDays.value - 1) {
-    jumpDay("forward");
-  } else {
-    goto("Services");
+    currentDay.value--;
   }
 }
 

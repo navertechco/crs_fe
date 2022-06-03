@@ -12,7 +12,7 @@ var session = {};
 ////
 Rx<int> leftAccumulated = 0.obs;
 var airports = {"1": "quito", "2": "guayaquil"};
-Rx<int> currentDay = 0.obs;
+var currentDay = 0.obs;
 Rx<int> currentDestination = 0.obs;
 var result = [];
 var allPromotedDestinations = globalctx.promotedDestinations;

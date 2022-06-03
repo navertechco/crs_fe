@@ -218,8 +218,6 @@ validateDestinationDialog(destination, index, type) {
   var isDeparture =
       destination == departure["description"] && type == "departure";
   var isSelected = getDestinationState(destination, index, type) == "selected";
-  var isSuggested =
-      getDestinationState(destination, index, type) == "suggested";
   var isPromoted = getDestinationState(destination, index, type) == "promoted";
   var isArrivalPromoted =
       getDestinationState(arrival["description"], 0, "arrival") == "promoted";
@@ -439,25 +437,6 @@ getMaxTrHourValue(tr) {
 
 getAgeMaxTrValue(tr) {
   return trAgeMaxValues[tr];
-}
-
-getDestinationIndexByDay() {
-  var _accumulated = 0;
-  var _destinations = globalctx.memory["destinations"];
-
-  if (currentDay.value <= 0) {
-    return 0;
-  }
-  var lenght = _destinations.length;
-  for (var i = 0; i < lenght; i++) {
-    var _dest = _destinations[i.toString()];
-    var _explorationDay = int.parse(_dest["explorationDay"]);
-    _accumulated += _explorationDay;
-    if (currentDay.value < _accumulated ||
-        _accumulated - currentDay.value == 0) {
-      return i;
-    }
-  }
 }
 
 getDestinationIndex(String destination, String type) {
