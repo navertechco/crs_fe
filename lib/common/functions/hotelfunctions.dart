@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_function_declarations_over_variables
+// ignore_for_file: prefer_function_declarations_over_variables, curly_braces_in_flow_control_structures
 
 import 'package:checkbox_formfield/checkbox_icon_formfield.dart';
 import 'package:flutter/material.dart';
@@ -28,33 +28,60 @@ processHotelItinerary(row) {
   return result;
 }
 
-var budgets = {"1": "5 stars", "0": "4 stars"};
-
 filterHotels(ctx) {
+  hotelResults.value = [];
+  filteredHotel = findCatalog("hotel");
+
+  //DESTINATION
+  filteredHotel = filteredHotel.where((element) {
+    var rule = true;
+    var dest = element["relation"]["destination"];
+    rule = globalDestinationName.value == dest.toString();
+    return rule;
+  }).toList();
+
+  //PURPOSE
+  var purposes = globalctx.memory["tour"]["purposes"]
+      .map((e) => e.toString().toUpperCase())
+      .toList();
+  filteredHotel = filteredHotel.where((element) {
+    var rule = true;
+    var p1 = element["value"]["purpose_fk"].toString().toUpperCase();
+    var p2 = element["value"]["purpouse_fk.1"].toString().toUpperCase();
+    var p3 = element["value"]["purpouse_fk.2"].toString().toUpperCase();
+    if (purposes.isNotEmpty) {
+      rule =
+          purposes.contains(p1) | purposes.contains(p2) | purposes.contains(p3);
+    }
+    return rule;
+  }).toList();
+
+  //KEY_ACTIVITIES
   var destData = globalctx.memory["destinations"]
       [currentDestinationIndex.value.toString()];
-  hotelResults.value = [];
-  if (globalctx.memory["hotels"] != null && destData != null) {
-    List filtered = globalctx.memory["hotels"];
-    var destname = globalDestinationName.value;
+  if (destData != null) {
     var keyActivity = destData["key_activities"] ?? [];
-    var tour = globalctx.memory["tour"];
-    var purposes =
-        tour["purposes"].map((e) => e.toString().toUpperCase()).toList();
-    var budget = budgets[tour["accomodation_type"] ?? "1"];
-
-    //Destination
-    filtered = filtered.where((element) {
+    filteredHotel = filteredHotel.where((element) {
       var rule = true;
-      var dest = element["relation"]["destination"];
-      if (destname != null) {
-        rule = destname == dest.toString();
+      if (keyActivity.isNotEmpty) {
+        var k1 =
+            element["value"]["keyActivityType_fk"].toString().toUpperCase();
+        var k2 =
+            element["value"]["keyActivityType_fk.1"].toString().toUpperCase();
+        var k3 =
+            element["value"]["keyActivityType_fk.2"].toString().toUpperCase();
+
+        rule = keyActivity.contains(k1) |
+            keyActivity.contains(k2) |
+            keyActivity.contains(k3);
       }
       return rule;
     }).toList();
+  }
 
-    //budget_fk
-    filtered = filtered.where((element) {
+  //BUDGET
+  if (hotelCategory.value.isNotEmpty)
+    filteredHotel = filteredHotel.where((element) {
       var rule = true;
       var max = element["value"]["budget_fk"];
       if (hotelCategory.value.isNotEmpty) {
@@ -62,77 +89,53 @@ filterHotels(ctx) {
       }
       return rule;
     }).toList();
-    //hotelname
-    filtered = filtered.where((element) {
+
+  //HOTELNAME
+  if (hotelName.value.isNotEmpty)
+    filteredHotel = filteredHotel.where((element) {
       var rule = true;
       var max = element["value"]["hotelname"];
-      if (hotelName.value.isNotEmpty) {
-        rule = hotelName.value == max.toString();
-      }
-      return rule;
-    }).toList();
-    //RoomType x MaxCapacity vs PAX
-    filtered = filtered.where((element) {
-      var rule = true;
-      var rt = element["value"]["#roomtypes"] == ""
-          ? 1
-          : element["value"]["#roomtypes"];
-      var mc = element["value"]["maxCapacity"];
-      var pax = globalctx.memory["tour"]["passengers"];
-      if (purposes.isNotEmpty) {
-        rule = rt * mc >= pax;
-      }
-      return rule;
-    }).toList();
-    //Purpose
-    filtered = filtered.where((element) {
-      var rule = true;
-      var p1 = element["value"]["purpose_fk"].toString().toUpperCase();
-      var p2 = element["value"]["purpouse_fk.1"].toString().toUpperCase();
-      var p3 = element["value"]["purpouse_fk.2"].toString().toUpperCase();
-      if (purposes.isNotEmpty) {
-        rule = purposes.contains(p1) |
-            purposes.contains(p2) |
-            purposes.contains(p3);
-      }
+      rule = hotelName.value == max.toString();
       return rule;
     }).toList();
 
-    //Key Activities
-    filtered = filtered.where((element) {
-      var rule = true;
-      var k1 = element["value"]["keyActivityType_fk"];
-      var k2 = element["value"]["keyActivityType_fk.1"];
-      var k3 = element["value"]["keyActivityType_fk.2"];
-      if (keyActivity.isNotEmpty) {
-        rule = keyActivity.contains(k1) |
-            keyActivity.contains(k2) |
-            keyActivity.contains(k3);
-      }
-      return rule;
-    }).toList();
+  //RoomType x MaxCapacity vs PAX
+  filteredHotel = filteredHotel.where((element) {
+    var rule = true;
+    var capacity = getHotelCapacity(element["value"]["hotelname"]);
+    var pax = globalctx.memory["tour"]["passengers"];
+    rule = capacity >= pax;
+    return rule;
+  }).toList();
 
-    // //Budget
-    // filtered = filtered.where((element) {
-    //   var rule = true;
-    //   var b1 = element["value"]["budget_fk"];
-    //   if (budget!.isNotEmpty) {
-    //     rule = budget == b1.toString();
-    //   }
-    //   return rule;
-    // }).toList();
-    hotelResults.value = filtered.toList();
+  //FINAL RESULT
+  hotelResults.value = filteredHotel.toList();
 
-    var processedData = processHotelData(ctx, hotelResults.value);
-    searcherHeader.value = processedData[0];
-    searcherDetail.value = processedData[1];
-    if (searcherHeader.value.isNotEmpty) {
-      hotelTable.value = (DataTable(
-        columns: searcherHeader.value,
-        rows: searcherDetail.value,
-      ));
-    }
+  //BUILD TABLE
+  var processedData = processHotelData(ctx, hotelResults.value);
+  searcherHeader.value = processedData[0];
+  searcherDetail.value = processedData[1];
+  if (searcherHeader.value.isNotEmpty) {
+    hotelTable.value = (DataTable(
+      columns: searcherHeader.value,
+      rows: searcherDetail.value,
+    ));
   }
+}
+
+getHotelCapacity(hotelName) {
+  var hotels = findCatalog("hotel");
+  int capacity = 0;
+  hotels = hotels
+      .where((element) => element["value"]["hotelname"] == hotelName)
+      .toList();
+  for (var hotel in hotels) {
+    int rt =
+        hotel["value"]["#roomtypes"] == "" ? 10 : hotel["value"]["#roomtypes"];
+    int mc = hotel["value"]["maxCapacity"];
+    capacity = capacity + (rt * mc);
+  }
+  return capacity;
 }
 
 getHotelHeader(context, data, columns) {
