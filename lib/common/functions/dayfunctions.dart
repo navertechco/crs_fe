@@ -23,7 +23,7 @@ decideBypass(direction) {
   int index = getDestinationIndexByDay();
   int explorationMode = int.parse(getFormValue(
       globalctx.memory["destinations"], index, "explorationMode", "0"));
-  if (explorationMode > 1) {
+  if (explorationMode > 0) {
     bypassCruise(direction);
   } else {
     bypassSurprise(direction);
@@ -40,7 +40,7 @@ bypassSurprise(String direction) {
         globalctx.memory["destinations"], index, "explorationDay", "0"));
     // return;
 
-    if (keyActivities.contains("Surprise")) {
+    if (keyActivities.contains("SURPRISE")) {
       if (direction == "forward") {
         currentDay.value += explorationDay;
       } else {
@@ -116,16 +116,6 @@ jumpDay(direction) {
   filterSuggestedExperiences();
   initializeHours();
   goto("Experiences");
-}
-
-jumpDestination(direction) {
-  decideBypass(direction);
-  expDraggable.value = 1;
-  currentDate.value = arrivalDate.value.add(Duration(days: currentDay.value));
-  updateCurrentDestination();
-  filterSuggestedExperiences();
-  initializeHours();
-  goto("Services");
 }
 
 nextDay() async {

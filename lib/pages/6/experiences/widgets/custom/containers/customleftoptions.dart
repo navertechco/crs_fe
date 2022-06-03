@@ -34,22 +34,25 @@ class CustomBodyDaysWidget extends HookWidget {
               left: MediaQuery.of(context).size.width * 0.0),
           child: CustomContentWidget(ctrl: ctrl),
         ),
-        Obx(() => Padding(
-              padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height * 0.875,
-                  left: MediaQuery.of(context).size.width * 0.05),
-              child: Text(
-                leftHours[currentDay.value].value < 0
-                    ? "You have exceeded the maximum hours planned for this day !!!"
-                    : "",
-                style: KTextSytle(
-                  context: context,
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
-                  color: Color.fromARGB(255, 204, 164, 61),
-                ).getStyle(),
-              ),
-            )),
+        Obx(() {
+          var currentLeftHours = leftHours[currentDay.value] ?? 0.obs;
+          return Padding(
+            padding: EdgeInsets.only(
+                top: MediaQuery.of(context).size.height * 0.875,
+                left: MediaQuery.of(context).size.width * 0.05),
+            child: Text(
+              currentLeftHours.value < 0
+                  ? "You have exceeded the maximum hours planned for this day !!!"
+                  : "",
+              style: KTextSytle(
+                context: context,
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+                color: Color.fromARGB(255, 204, 164, 61),
+              ).getStyle(),
+            ),
+          );
+        }),
       ],
     );
   }

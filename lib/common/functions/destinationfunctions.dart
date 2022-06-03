@@ -442,20 +442,19 @@ getAgeMaxTrValue(tr) {
 }
 
 getDestinationIndexByDay() {
-  var _left = 0;
   var _accumulated = 0;
   var _destinations = globalctx.memory["destinations"];
 
   if (currentDay.value <= 0) {
     return 0;
   }
-
-  for (var i = 0; i < _destinations.length; i++) {
+  var lenght = _destinations.length;
+  for (var i = 0; i < lenght; i++) {
     var _dest = _destinations[i.toString()];
-    var _explorationDay = _dest["explorationDay"];
-    _accumulated += int.parse(_explorationDay);
-    _left = totalDays.value - _accumulated;
-    if (_left <= currentDay.value) {
+    var _explorationDay = int.parse(_dest["explorationDay"]);
+    _accumulated += _explorationDay;
+    if (currentDay.value < _accumulated ||
+        _accumulated - currentDay.value == 0) {
       return i;
     }
   }
