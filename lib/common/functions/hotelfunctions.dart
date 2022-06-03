@@ -260,24 +260,34 @@ getHotelDataCell(context, row) {
           },
         ),
         CustomFormCounterFieldWidget(
-            initial: 0,
+            initial: getFormValue(globalctx.memory["destinations"],
+                globalDestinationIndex, "hotelPax.${row["description"]}", 0),
             min: 0,
             max: 50,
             step: 1,
             original: true,
-            onValueChanged: (value) {},
+            onValueChanged: (value) {
+              setFormValue(
+                  globalctx.memory["destinations"],
+                  globalDestinationIndex,
+                  "hotelPax.${row["description"]}",
+                  value);
+            },
             label: '',
             width: 0.2),
         Obx(() => CheckboxIconFormField(
               padding: 0,
-              initialValue: currentHotelName.value == row["description"],
+              initialValue: getFormValue(
+                  globalctx.memory["destinations"],
+                  globalDestinationIndex,
+                  "hotelName.${row["description"]}",
+                  false),
               onChanged: (value) {
-                currentHotelName.value = row["description"];
                 setFormValue(
                     globalctx.memory["destinations"],
                     globalDestinationIndex,
-                    "hotelName",
-                    currentHotelName.value);
+                    "hotelName.${row["description"]}",
+                    value);
               },
             )),
       ],

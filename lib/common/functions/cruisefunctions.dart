@@ -4,6 +4,7 @@
 import 'package:checkbox_formfield/checkbox_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import '../index.dart';
@@ -223,6 +224,46 @@ getCruiseDetail(context, data, columns) {
 }
 
 var selectedCruise = "".obs;
+
+var days = [
+  {"dayId": 1, "spa": "Lunes", "eng": "Monday"},
+  {"dayId": 2, "spa": "Martes", "eng": "Tuesday"},
+  {"dayId": 3, "spa": "Miercoles", "eng": "Wednesday"},
+  {"dayId": 4, "spa": "Jueves", "eng": "Thursday"},
+  {"dayId": 5, "spa": "Viernes", "eng": "Friday"},
+  {"dayId": 6, "spa": "Sabado", "eng": "Saturday"},
+  {"dayId": 7, "spa": "Domingo", "eng": "Sunday"}
+];
+
+getDay(day) {
+  var res = days.firstWhere((element) =>
+      element["spa"].toString().toUpperCase() == day.toUpperCase() ||
+      element["eng"].toString().toUpperCase() == day.toUpperCase());
+  return res;
+}
+
+getNextOnCurrentDate(dayName) {
+  var now = arrivalDate.value.add(Duration(days: 7));
+  var dayId = getDay(dayName)["dayId"] as int;
+  var firstOfMonth = DateTime(now.year, now.month, 1);
+  var firstMonday = firstOfMonth
+      .add(Duration(days: (7 - (firstOfMonth.weekday - DateTime.monday)) % 7));
+  var firstDay = firstMonday.add(Duration(days: (dayId - 1)));
+  if (now.difference(firstDay).inDays > 0) {
+    var mod = 7 * ((now.day / firstDay.day).round() - 1);
+    firstDay = firstDay.add(Duration(days: mod));
+  }
+
+  return firstDay;
+}
+
+getNextCruiseDate() {
+  var dayName =
+      cruiseItinerary.value.toString().split("-")[0].replaceAll(" ", "");
+  var nextCruiseDate = getNextOnCurrentDate(dayName);
+  return nextCruiseDate;
+}
+
 getCruisDataCell(context, row) {
   var dataCell = DataCell(
     Row(
@@ -240,8 +281,9 @@ getCruisDataCell(context, row) {
             return CustomFormCalendarFieldWidget(
                 width: 0.01,
                 label: "",
-                initialStartDate: cruiseStartDate.value,
-                initialEndDate: cruiseEndDate.value,
+                initialStartDate: getNextCruiseDate(),
+                initialEndDate: getNextCruiseDate()
+                    .add(Duration(days: int.parse(cruiseDay.value) - 1)),
                 minimumDate: arrivalDate.value,
                 maximumDate: departureDate.value
                     .add(Duration(days: int.parse(cruiseDay.value))),
