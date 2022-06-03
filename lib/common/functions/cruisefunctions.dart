@@ -285,22 +285,17 @@ getCruisDataCell(context, row) {
                 initialEndDate: getNextCruiseDate()
                     .add(Duration(days: int.parse(cruiseDay.value) - 1)),
                 minimumDate: arrivalDate.value,
-                maximumDate: departureDate.value
+                maximumDate: getNextCruiseDate()
                     .add(Duration(days: int.parse(cruiseDay.value))),
                 startEndDateChange: (start, end) {
                   cruiseStartDate.value = start;
                   cruiseEndDate.value = end;
-                  arrivalDate.value = start.add(Duration(days: -1));
                   departureDate.value = end.add(Duration(days: 1));
-                  cruiseDay.value = (cruiseEndDate.value
-                              .difference(cruiseStartDate.value)
-                              .inDays +
-                          1)
-                      .toString();
                 },
                 onSaved: () {
                   var start = cruiseStartDate.value;
                   var end = cruiseEndDate.value;
+                  departureDate.value = end.add(Duration(days: 1));
                   setFormValue(globalctx.memory["destinations"], 1,
                       "cruiseStartDate", start);
                   setFormValue(globalctx.memory["destinations"], 1,
@@ -315,8 +310,7 @@ getCruisDataCell(context, row) {
                       1,
                       "cruiseExpDays",
                       "0"));
-                  departureDate.value =
-                      cruiseEndDate.value.add(Duration(days: 1));
+
                   saveExplorationDays(1, val0, val1, key: "cruiseExpDays");
                 });
           },

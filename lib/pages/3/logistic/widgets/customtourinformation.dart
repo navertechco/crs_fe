@@ -46,11 +46,13 @@ class CustomLogisticInformationForm extends StatelessWidget {
                                 height: 0.05,
                                 fontSize: 3,
                                 fontWeight: FontWeight.bold,
-                                textColor: cruiseDay.value.isEmpty
-                                    ? Colors.black
-                                    : Colors.black54,
+                                textColor:
+                                    cruiseDay.value.isEmpty || cruiseEdit.value
+                                        ? Colors.black
+                                        : Colors.black54,
                                 onTap: () async {
-                                  if (cruiseDay.value.isEmpty) {
+                                  if (cruiseDay.value.isEmpty ||
+                                      cruiseEdit.value) {
                                     showCustomDialog(
                                         context,
                                         CruiseCalendarWidget(ctx: context),
@@ -63,6 +65,12 @@ class CustomLogisticInformationForm extends StatelessWidget {
                                   }
                                 },
                               ),
+                              CheckboxIconFormField(
+                                  padding: 0,
+                                  initialValue: cruiseEdit.value,
+                                  onChanged: (value) {
+                                    cruiseEdit.value = !cruiseEdit.value;
+                                  })
                             ],
                           );
                         } else {

@@ -19,3 +19,4 @@ var cruisePort = "".obs;
 var cruiseAnimal = "".obs;
 var arrivalEdit = false.obs;
 var departureEdit = false.obs;
+var cruiseEdit = false.obs;
