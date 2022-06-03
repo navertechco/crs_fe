@@ -243,7 +243,7 @@ getDay(day) {
 }
 
 getNextOnCurrentDate(dayName) {
-  var now = arrivalDate.value.add(Duration(days: 7));
+  var now = arrivalDate.value;
   var dayId = getDay(dayName)["dayId"] as int;
   var firstOfMonth = DateTime(now.year, now.month, 1);
   var firstMonday = firstOfMonth
