@@ -259,6 +259,15 @@ getHotelDataCell(context, row) {
             );
           },
         ),
+        CustomFormCounterFieldWidget(
+            initial: 0,
+            min: 0,
+            max: 50,
+            step: 1,
+            original: true,
+            onValueChanged: (value) {},
+            label: '',
+            width: 0.2),
         Obx(() => CheckboxIconFormField(
               padding: 0,
               initialValue: currentHotelName.value == row["description"],
