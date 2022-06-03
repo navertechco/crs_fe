@@ -128,7 +128,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                             "explorationDay",
                             "0")),
                         min: 0,
-                        max: dayleft.value,
+                        max: dayleft.value + (type == "departure" ? 1 : 0),
                         bound: 0,
                         onValueChanged: (value) {
                           saveExplorationDays(
