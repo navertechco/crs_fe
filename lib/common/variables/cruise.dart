@@ -1,5 +1,7 @@
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
+import '../index.dart';
+
 var cruiseFormat = "".obs;
 var cruiseDay = "".obs;
 var cruiseShip = "".obs;
@@ -20,3 +22,9 @@ var cruiseAnimal = "".obs;
 var arrivalEdit = false.obs;
 var departureEdit = false.obs;
 var cruiseEdit = false.obs;
+var selectedCruise = "".obs;
+Rx<Iterable> cruiseResults = Rx([]);
+List cruises = findCatalog("cruises");
+List cabine = findCatalog("cabine");
+List itinerary = findCatalog("itinerary");
+List animals = findCatalog("animals");

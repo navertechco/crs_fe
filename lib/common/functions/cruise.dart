@@ -1,16 +1,25 @@
 // ignore_for_file: prefer_function_declarations_over_variables
 // ignore_for_file: curly_braces_in_flow_control_structures
-
 import 'package:checkbox_formfield/checkbox_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:naver_crs/pages/3/logistic/widgets/index.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
-
 import '../index.dart';
 
-Rx<Iterable> cruiseResults = Rx([]);
-processCruiseItinerary(row) {
+/// ## getCruiseItinerary
+/// *__Method to get the cruise itinerary from a gived extracted cruise registry from memory__*
+///
+///### Uses:
+/// ```dart
+/// Text(
+///       "${getCruiseItinerary(row)}",.....
+/// ```
+///
+/// @return itinerary (String)
+///
+getCruiseItinerary(row) {
   var itinerary = row["cruise_itinerary"]
       .toString()
       .replaceAll("[", "")
@@ -33,11 +42,16 @@ processCruiseItinerary(row) {
   return result;
 }
 
-List cruises = findCatalog("cruises");
-List cabine = findCatalog("cabine");
-List itinerary = findCatalog("itinerary");
-List animals = findCatalog("animals");
-
+/// ## filterCruises
+/// *__Method to filter cruise catalogs__*
+///
+///### Uses:
+/// ```dart
+///  filterCruises(context);
+/// ```
+///
+/// @return void
+///
 filterCruises(ctx) {
   cruises = findCatalog("cruises");
   cabine = findCatalog("cabine");
@@ -113,7 +127,7 @@ filterCruises(ctx) {
 
   cruiseResults.value = cruises.toList();
 
-  var processedData = processCruiseData(ctx, cruiseResults.value);
+  var processedData = buildCruiseDataTable(ctx, cruiseResults.value);
   searcherHeader.value = processedData[0];
   searcherDetail.value = processedData[1];
   if (searcherHeader.value.isNotEmpty) {
@@ -124,6 +138,16 @@ filterCruises(ctx) {
   }
 }
 
+/// ## getCruiseHeader
+/// *__Method to get Filtered Cruise DataColumn to build DataTable__*
+///
+///### Uses:
+/// ```dart
+///  var header = getCruiseHeader(context, data, columns);
+/// ```
+///
+/// @return List<DataColumn>
+///
 getCruiseHeader(context, data, columns) {
   var header = <DataColumn>[];
   List cols = [];
@@ -164,6 +188,16 @@ getCruiseHeader(context, data, columns) {
   return header;
 }
 
+/// ## clearCruiseFilter
+/// *__Method to reset cruise variables__*
+///
+///### Uses:
+/// ```dart
+///  clearCruiseFilter();
+/// ```
+///
+/// @return void
+///
 clearCruiseFilter() {
   cruiseFormat.value = "";
   cruiseDay.value = "";
@@ -181,13 +215,34 @@ clearCruiseFilter() {
   cruiseIslet.value = "";
 }
 
-processCruiseData(context, data) {
+/// ## clearCruiseFilter
+/// *__Method to build cruise datatable__*
+///
+///### Uses:
+/// ```dart
+///  clearCruiseFilter();
+/// ```
+///
+/// @return [List<DataColumn>, List<DataRow>]
+///
+buildCruiseDataTable(context, data) {
   var columns = ["description"];
   var header = getCruiseHeader(context, data, columns);
   var detail = getCruiseDetail(context, data, columns);
   return [header, detail];
 }
 
+/// ## getCruiseDetail
+/// *__Method to get cruise DataRow to build a cruise DataTable__*
+///
+///### Uses:
+/// ```dart
+///  var detail = getCruiseDetail(context, data, columns);
+/// ```
+/// ### Returns:
+///```dart
+/// List<DataRow>
+///```
 getCruiseDetail(context, data, columns) {
   var detail = <DataRow>[];
   if (data.length > 0) {
@@ -214,7 +269,7 @@ getCruiseDetail(context, data, columns) {
       }
 
       cells.add(
-        getCruisDataCell(context, row),
+        getCruiseDataCell(context, row),
       );
       detail.add(DataRow(cells: cells));
     }
@@ -223,27 +278,35 @@ getCruiseDetail(context, data, columns) {
   return detail;
 }
 
-var selectedCruise = "".obs;
-
-var days = [
-  {"dayId": 1, "spa": "Lunes", "eng": "Monday"},
-  {"dayId": 2, "spa": "Martes", "eng": "Tuesday"},
-  {"dayId": 3, "spa": "Miercoles", "eng": "Wednesday"},
-  {"dayId": 3, "spa": "Miércoles", "eng": "Wednesday"},
-  {"dayId": 4, "spa": "Jueves", "eng": "Thursday"},
-  {"dayId": 5, "spa": "Viernes", "eng": "Friday"},
-  {"dayId": 6, "spa": "Sabado", "eng": "Saturday"},
-  {"dayId": 6, "spa": "Sábado", "eng": "Saturday"},
-  {"dayId": 7, "spa": "Domingo", "eng": "Sunday"}
-];
-
-getDay(day) {
-  var res = days.firstWhere((element) =>
-      element["spa"].toString().toUpperCase() == day.toUpperCase() ||
-      element["eng"].toString().toUpperCase() == day.toUpperCase());
-  return res;
+/// ## getNextCruiseDate
+/// *__Method to get next day gived a cruise itinerary__*
+///
+///### Uses:
+/// ```dart
+///  initialStartDate: getNextCruiseDate(),
+/// ```
+/// ### Returns:
+///```dart
+/// DateTime
+///```
+getNextCruiseDate() {
+  var dayName =
+      cruiseItinerary.value.toString().split("-")[0].replaceAll(" ", "");
+  var nextCruiseDate = getNextOnCurrentDate(dayName);
+  return nextCruiseDate;
 }
 
+/// ## getNextOnCurrentDate
+/// *__Method to get next week day DateTime gived a dayName__*
+///
+///### Uses:
+/// ```dart
+///  var nextCruiseDate = getNextOnCurrentDate(dayName);
+/// ```
+/// ### Returns:
+///```dart
+/// DateTime
+///```
 getNextOnCurrentDate(dayName) {
   var now = arrivalDate.value;
   var dayId = getDay(dayName)["dayId"] as int;
@@ -259,14 +322,38 @@ getNextOnCurrentDate(dayName) {
   return firstDay;
 }
 
-getNextCruiseDate() {
-  var dayName =
-      cruiseItinerary.value.toString().split("-")[0].replaceAll(" ", "");
-  var nextCruiseDate = getNextOnCurrentDate(dayName);
-  return nextCruiseDate;
+/// ## getDay
+/// *__Method to get filtered day registry from days catalog__*
+///
+///### Uses:
+/// ```dart
+///   var dayId = getDay(dayName)["dayId"] as int;
+/// ```
+/// ### Returns:
+///```dart
+/// List
+///```
+getDay(day) {
+  var res = days.firstWhere((element) =>
+      element["spa"].toString().toUpperCase() == day.toUpperCase() ||
+      element["eng"].toString().toUpperCase() == day.toUpperCase());
+  return res;
 }
 
-getCruisDataCell(context, row) {
+/// ## getCruiseDataCell
+/// *__Method to populate a DataCell gived a cruise registry__*
+///
+///### Uses:
+/// ```dart
+///  cells.add(
+///        getCruiseDataCell(context, row),
+///      );
+/// ```
+/// ### Returns:
+///```dart
+/// DataCell
+///```
+getCruiseDataCell(context, row) {
   var dataCell = DataCell(
     Row(
       children: [
@@ -346,68 +433,25 @@ getCruisDataCell(context, row) {
   return dataCell;
 }
 
-showCruiseDetail(context, row) {
+/// ## showCruiseDetailDialog
+/// *__Method to show a cruise detail dialog__*
+///
+///### Uses:
+/// ```dart
+///  if (data.length > 0) {
+///      showCruiseDetailDialog(ctx, data[0]);
+///    }
+/// ```
+/// ### Returns:
+///```dart
+/// void
+///```
+showCruiseDetailDialog(context, row) {
   showCustomDialog(
     context,
-    SingleChildScrollView(
-      child: Column(
-        children: [
-          Text(
-            "${row['cruise_name']}",
-            style: KTextSytle(
-              context: context,
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-              color: Color.fromARGB(255, 204, 164, 61),
-            ).getStyle(),
-          ),
-          Image.network(
-            "${row['image']}",
-            width: MediaQuery.of(context).size.width * 0.5,
-            height: MediaQuery.of(context).size.height * 0.5,
-          ),
-          Text(
-            "${processCruiseItinerary(row)}",
-            style: KTextSytle(
-              context: context,
-              fontSize: 10,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ).getStyle(),
-          ),
-          Obx(() {
-            try {
-              return SfCalendar(
-                firstDayOfWeek: 1,
-                backgroundColor: Colors.white,
-                minDate: arrivalDate.value.add(Duration(days: 1)),
-                maxDate: departureDate.value.add(Duration(days: -1)),
-                view: CalendarView.month,
-                dataSource: MeetingDataSource(getDataSource(
-                    "${row['cruise_itinerary']}"
-                        .replaceAll("[", " ")
-                        .replaceAll("]", " "))),
-                monthViewSettings: MonthViewSettings(
-                    appointmentDisplayMode:
-                        MonthAppointmentDisplayMode.appointment),
-              );
-            } catch (e) {
-              log(e);
-              return Text(
-                "No Calendar Aivalable",
-                style: KTextSytle(
-                  context: context,
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
-                  color: Color.fromARGB(255, 204, 164, 61),
-                ).getStyle(),
-              );
-            }
-          })
-        ],
-      ),
-    ),
+    CruiseDetailWidget(row:row),
     "Close",
     backgroundColor: Color.fromARGB(100, 0, 0, 0),
   );
 }
+

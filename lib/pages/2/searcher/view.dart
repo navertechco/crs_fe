@@ -109,7 +109,7 @@ class QuoteHistoryFilter extends StatelessWidget {
             onSaved: (value) {},
             onChanged: (value) {
               quoteDate.value = getCatalogDescription(
-                  findMemoryChildCatalog(
+                  getMemoryCatalogChild(
                     "tours",
                     "",
                     "date",
@@ -118,7 +118,7 @@ class QuoteHistoryFilter extends StatelessWidget {
               filterQuoteHistory(context);
             },
             hintText: "Quote Date",
-            data: findMemoryChildCatalog(
+            data: getMemoryCatalogChild(
               "tours",
               "",
               "date",
@@ -133,13 +133,13 @@ class QuoteHistoryFilter extends StatelessWidget {
             onSaved: (value) {},
             onChanged: (value) {
               quoteName.value = getCatalogDescription(
-                  findMemoryChildCatalog("tours", "", "name",
+                  getMemoryCatalogChild("tours", "", "name",
                       filter: {"key": "date", "value": quoteDate.value}),
                   value);
               filterQuoteHistory(context);
             },
             hintText: "Quote Name",
-            data: findMemoryChildCatalog("tours", "", "name",
+            data: getMemoryCatalogChild("tours", "", "name",
                 filter: {"key": "date", "value": quoteDate.value}),
           ),
           CustomFormDropDownFieldWidget(
@@ -151,13 +151,13 @@ class QuoteHistoryFilter extends StatelessWidget {
             onSaved: (value) {},
             onChanged: (value) {
               quoteId.value = getCatalogDescription(
-                  findMemoryChildCatalog("tours", "", "quote",
+                  getMemoryCatalogChild("tours", "", "quote",
                       filter: {"key": "date", "value": quoteDate.value}),
                   value);
               filterQuoteHistory(context);
             },
             hintText: "Quote Id",
-            data: findMemoryChildCatalog("tours", "", "quote",
+            data: getMemoryCatalogChild("tours", "", "quote",
                 filter: {"key": "date", "value": quoteDate.value}),
           ),
           CustomFormDropDownFieldWidget(
@@ -169,13 +169,13 @@ class QuoteHistoryFilter extends StatelessWidget {
             onSaved: (value) {},
             onChanged: (value) {
               quoteState.value = getCatalogDescription(
-                  findMemoryChildCatalog("tours", "", "state",
+                  getMemoryCatalogChild("tours", "", "state",
                       filter: {"key": "date", "value": quoteDate.value}),
                   value);
               filterQuoteHistory(context);
             },
             hintText: "Quote State",
-            data: findMemoryChildCatalog("tours", "", "state",
+            data: getMemoryCatalogChild("tours", "", "state",
                 // catalog: findCatalog("quote_state"),
                 filter: {"key": "date", "value": quoteDate.value}),
           ),

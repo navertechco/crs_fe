@@ -1,12 +1,24 @@
 //  Functions
 // ignore_for_file: prefer_function_declarations_over_variables
-
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:get/get.dart';
 import 'package:naver_crs/pages/5/destination/widgets/destinationdetail/widgets/index.dart';
-// ignore: import_of_legacy_library_into_null_safe
 import '../index.dart';
-import 'functions.dart';
+import 'general.dart';
 
+/// ## paginateDay
+/// *__Method to paginate a day__*
+///
+///### Uses:
+/// ```dart
+///  if (formKey.currentState!.validate()) {
+///                      await paginateDay(context);
+///                    }
+/// ```
+/// ### Returns:
+///```dart
+/// void
+///```
 paginateDay(context) async {
   if (globalctx.memory["promoted"] != null &&
       globalctx.memory["promoted"] != null &&
@@ -18,6 +30,18 @@ paginateDay(context) async {
   }
 }
 
+/// ## nextDay
+/// *__Method to paginate a day__*
+///
+///### Uses:
+/// ```dart
+///  await nextDay();
+///
+/// ```
+/// ### Returns:
+///```dart
+/// void
+///```
 nextDay() async {
   if (currentDay.value < totalDays.value - 1) {
     jumpDay("forward");
@@ -26,17 +50,40 @@ nextDay() async {
   }
 }
 
+/// ## jumpDay
+/// *__Method to jump over a day__*
+///
+///### Uses:
+/// ```dart
+///  jumpDay("forward");
+/// ```
+/// ### Returns:
+///```dart
+/// void
+///```
 jumpDay(direction) {
   decideBypass(direction);
   expDraggable.value = 1;
   currentDate.value =
       arrivalDate.value.add(Duration(days: currentDay.value - 1));
   updateCurrentDestination();
+  // updateMeals();
   filterSuggestedExperiences();
   initializeHours();
   goto("Experiences");
 }
 
+/// ## decideBypass
+/// *__Method to decide if bypass a day__*
+///
+///### Uses:
+/// ```dart
+///  decideBypass("forward");
+/// ```
+/// ### Returns:
+///```dart
+/// void
+///```
 decideBypass(direction) {
   int index = getDestinationIndexByDay();
   int explorationMode = int.parse(getFormValue(
@@ -52,6 +99,17 @@ decideBypass(direction) {
   }
 }
 
+/// ## getDestinationIndexByDay
+/// *__Method to get a destination index from memory__*
+///
+///### Uses:
+/// ```dart
+///  int index = getDestinationIndexByDay();
+/// ```
+/// ### Returns:
+///```dart
+/// int
+///```
 getDestinationIndexByDay() {
   var _accumulated = 0;
   var _destinations = globalctx.memory["destinations"];
@@ -71,6 +129,17 @@ getDestinationIndexByDay() {
   }
 }
 
+/// ## getCurrentExplorationDay
+/// *__Method to get the current eplorationDay gived a destination index from memory__*
+///
+///### Uses:
+/// ```dart
+///  var explorationDay = getCurrentExplorationDay();
+/// ```
+/// ### Returns:
+///```dart
+/// int
+///```
 getCurrentExplorationDay() {
   int index = getDestinationIndexByDay();
   int explorationDay = int.parse(getFormValue(
@@ -78,6 +147,17 @@ getCurrentExplorationDay() {
   return explorationDay;
 }
 
+/// ## getCurrentKA
+/// *__Method to get the current Key Activities gived a destination index from memory__*
+///
+///### Uses:
+/// ```dart
+///  var explorationDay = getCurrentExplorationDay();
+/// ```
+/// ### Returns:
+///```dart
+/// int
+///```
 getCurrentKA() {
   int index = getDestinationIndexByDay();
   List keyActivities = (getFormValue(
@@ -85,6 +165,17 @@ getCurrentKA() {
   return keyActivities;
 }
 
+/// ## bypassDay
+/// *__Method to increase or decrease the currentDay.value__*
+///
+///### Uses:
+/// ```dart
+///  bypassDay(direction, explorationDay);
+/// ```
+/// ### Returns:
+///```dart
+/// void
+///```
 bypassDay(direction, int explorationDay) {
   if (direction == "forward") {
     currentDay.value += explorationDay;
@@ -93,6 +184,17 @@ bypassDay(direction, int explorationDay) {
   }
 }
 
+/// ## bypassCruise
+/// *__Method to bypass a day if it's a cruise day__*
+///
+///### Uses:
+/// ```dart
+///  bypassCruise(direction);
+/// ```
+/// ### Returns:
+///```dart
+/// void
+///```
 bypassCruise(String direction) {
   try {
     int index = getDestinationIndex(globalDestinationName.value, "tour");
@@ -132,13 +234,17 @@ bypassCruise(String direction) {
   }
 }
 
-adjustCurrentDay() {
-  if (currentDay.value < 0) {
-    currentDay.value = 0;
-    resetExperiences();
-  }
-}
-
+/// ## updateCurrentDay
+/// *__Method to increase or decrease the currentDay.value__*
+///
+///### Uses:
+/// ```dart
+///  updateCurrentDay(direction);
+/// ```
+/// ### Returns:
+///```dart
+/// void
+///```
 updateCurrentDay(direction) {
   if (direction == "forward") {
     currentDay.value++;
@@ -147,46 +253,23 @@ updateCurrentDay(direction) {
   }
 }
 
+/// ## updateCurrentDay
+/// *__Method to paginate to a prevoius day__*
+///
+///### Uses:
+/// ```dart
+///  previousDay()
+/// ```
+/// ### Returns:
+///```dart
+/// void
+///```
 previousDay() {
   if (currentDay.value > 0) {
     jumpDay("backward");
   } else {
-    resetExperiences();
     goto("Destination");
   }
-}
-
-previousDestination() {
-  goto("Experience");
-}
-
-getDtos() {
-  var day = {
-    "date": "",
-    "observation": "",
-    "day_description": "",
-    "day_name": "",
-    "parent": 0,
-    "option_id": 1,
-    "transport_id": 1,
-    "key_activities": [],
-    "meals": "B/L/D/O",
-    "experiences": {},
-    "destination": ""
-  };
-
-  var experience = {
-    "destination": "",
-    "day": "",
-    "title": "",
-    "description": "",
-    "next": "",
-    "previous": "",
-    "experience_id": "",
-    "photo": ""
-  };
-
-  return [day, experience];
 }
 
 prepareAllToResume() async {
@@ -201,17 +284,18 @@ prepareAllToResume() async {
       var explorationDay = destination["explorationDay"];
 
       for (var i = 0; i < int.parse(explorationDay); i++) {
-        var dayDto = getDtos()[0];
-        var expDto = getDtos()[1];
+        Map myDayDto = dayDto;
+        Map myExpDto = experienceDto;
         // Prepare Frame to send to Resume Page
         var exps = globalctx.memory["promoted"][dayIndex];
-        for (var exp in exps.keys) {
+        for (String exp in exps.keys) {
           Map newExp = {};
           Map newEntry = exps[exp];
-          newExp = {...expDto, ...newEntry};
-          dayDto["experiences"][exp] = newExp;
+          newExp = {...myExpDto, ...newEntry};
+          myDayDto["experiences"] ??= {};
+          myDayDto["experiences"][exp] = newExp;
         }
-        destinations[dest]["daysData"][dayIndex] = dayDto;
+        destinations[dest]["daysData"][dayIndex] = myDayDto;
         dayIndex++;
       }
     }
@@ -219,9 +303,10 @@ prepareAllToResume() async {
 
     try {
       for (var dest in globalctx.memory["resume"].keys) {
-        if (globalctx.memory["resume"][dest] != null)
+        if (globalctx.memory["resume"][dest] != null) {
           globalctx.memory["resume"][dest] =
               globalctx.memory["resume"][dest].value;
+        }
       }
     } catch (e) {
       log(e);

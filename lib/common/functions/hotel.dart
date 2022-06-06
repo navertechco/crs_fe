@@ -3,10 +3,8 @@
 import 'package:checkbox_formfield/checkbox_icon_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../index.dart';
 
-Rx<Iterable> hotelResults = Rx([]);
 processHotelItinerary(row) {
   var itinerary =
       row["hotel_itinerary"].toString().replaceAll("[", "").replaceAll("]", "");

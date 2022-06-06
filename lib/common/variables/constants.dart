@@ -6,9 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../context/index.dart';
 import '../index.dart';
 
-/*
- * DATOS DE SERVIDOR
- */
+//SERVER DATA
 
 class KTextSytle {
   var getStyle;
@@ -52,13 +50,13 @@ const kDefaultNewTourEdit = "/Tour/NewId";
 const kDefaultFindCatalog = "/System/FindCatalog";
 const kDefaultCreateCatalog = "/Admin/CreateCatalog";
 
-//DIMENSIONES
+//DIMENSSIONS
 var kDefaultPadding = 20.0;
 const kDefaultRadius = BorderRadius.all(Radius.circular(8.0));
 const kFontSize = 72.0;
 var kSize = getContext('size');
 
-///COLORES
+///COLORS
 
 const kPrimaryColor = Color(0xFFFFFFFF);
 const kPrimaryLightColor = Color(0xFFF6F6F6);
@@ -82,7 +80,7 @@ const kShadowGradientColor = LinearGradient(
 
 const kBackgroundColor = Color(0xFFF6F6F6);
 
-//BORDES
+//BORDERS
 const kDefaultBorder = BorderRadius.all(Radius.circular(8.0));
 const kDefaultBorderLight = BorderRadius.all(Radius.circular(4.0));
 const kDefaultBorderDark = BorderRadius.all(Radius.circular(4.0));

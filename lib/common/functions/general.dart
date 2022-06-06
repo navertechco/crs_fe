@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_function_declarations_over_variables, import_of_legacy_library_into_null_safe
 import 'dart:convert';
 import 'dart:math';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,9 +9,9 @@ import 'package:naver_crs/pages/7/endservices/widgets/index.dart';
 import 'package:naver_crs/pages/index.dart';
 import 'package:sweetalert/sweetalert.dart';
 import '../index.dart';
-export 'dayfunctions.dart';
-export './destinationfunctions.dart';
-export './experiencefunctions.dart';
+export 'day.dart';
+export 'destination.dart';
+export 'experience.dart';
 
 load(key) async {
   try {
@@ -91,7 +90,6 @@ cityData(Rx<List<Map<String, dynamic>>> citylist, cities) {
     index++;
   }
 }
-
 
 getItems(data, value, hintText) {
   RxList<DropdownMenuItem<String>> items = <DropdownMenuItem<String>>[].obs;
@@ -400,7 +398,7 @@ getCruise(ctx, {int cruiseId = 999, String cruiseName = ""}) async {
   if (res['state'] == true) {
     var data = res['data'];
     if (data.length > 0) {
-      showCruiseDetail(ctx, data[0]);
+      showCruiseDetailDialog(ctx, data[0]);
     }
   } else {
     SweetAlert.show(ctx,

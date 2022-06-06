@@ -46,12 +46,12 @@ class CustomTourInformationForm extends StatelessWidget {
                   onSaved: (value) {
                     ctrl!.state.country = value!;
                     destCountry.value = value;
-                    updateDestinationsCatalog();
+                    updateDestinationsCatalogFilteredByCountry();
                   },
                   onChanged: (value) {
                     ctrl!.state.country = value!;
                     destCountry.value = value;
-                    updateDestinationsCatalog();
+                    updateDestinationsCatalogFilteredByCountry();
                   },
                   label: "Destination Country ",
                   data: destinationCountry,
@@ -123,12 +123,10 @@ class CustomTourInformationForm extends StatelessWidget {
                       onSaved: (value) {
                         setFormValue(
                             globalctx.memory, "tour", "galapagos", value);
-                        
                       },
                       onChanged: (value) {
                         setFormValue(
                             globalctx.memory, "tour", "galapagos", value);
-                        
                       },
                     ),
                   ],

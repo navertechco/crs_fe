@@ -92,6 +92,40 @@ Map<String, dynamic> states = {
   "suggested": globalctx.suggestedExperiences,
   "promoted": globalctx.promotedExperiences
 };
+Map dayDto = {
+  "date": "",
+  "observation": "",
+  "day_description": "",
+  "day_name": "",
+  "parent": 0,
+  "option_id": 1,
+  "transport_id": 1,
+  "key_activities": [],
+  "meals": "B/L/D/O",
+  "experiences": {},
+  "destination": ""
+};
+Map experienceDto = {
+  "destination": "",
+  "day": "",
+  "title": "",
+  "description": "",
+  "next": "",
+  "previous": "",
+  "experience_id": "",
+  "photo": ""
+};
+var days = [
+  {"dayId": 1, "spa": "Lunes", "eng": "Monday"},
+  {"dayId": 2, "spa": "Martes", "eng": "Tuesday"},
+  {"dayId": 3, "spa": "Miercoles", "eng": "Wednesday"},
+  {"dayId": 3, "spa": "Miércoles", "eng": "Wednesday"},
+  {"dayId": 4, "spa": "Jueves", "eng": "Thursday"},
+  {"dayId": 5, "spa": "Viernes", "eng": "Friday"},
+  {"dayId": 6, "spa": "Sabado", "eng": "Saturday"},
+  {"dayId": 6, "spa": "Sábado", "eng": "Saturday"},
+  {"dayId": 7, "spa": "Domingo", "eng": "Sunday"}
+];
 var travelRhytmAges = {
   20: ["1", "2", "3"],
   40: ["1", "2", "3"],
@@ -297,8 +331,6 @@ List netRateData = [
 ];
 List data = [];
 RxString? searchResult = ''.obs;
-RxList<Map<String, dynamic>> daysCatalog = <Map<String, dynamic>>[].obs;
-
 List filtered = [];
 int idx = 0;
 String type = "";

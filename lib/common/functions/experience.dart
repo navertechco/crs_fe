@@ -234,6 +234,14 @@ initializeHours() {
   clearKA();
 }
 
+updateMeals() {
+  for (var exp in globalctx.experiences[currentDay.value] as Iterable) {
+    if (exp.value["experience_type"] == "meal") {
+      promoteExperience(exp, "promoted");
+    }
+  }
+}
+
 resetExperiences() {
   for (var exp in globalctx.experiences[currentDay.value] as Iterable) {
     promoteExperience(exp, "suggested");

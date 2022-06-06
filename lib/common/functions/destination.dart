@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_function_declarations_over_variables
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/pages/5/destination/widgets/index.dart';
-// ignore: import_of_legacy_library_into_null_safe
 import 'package:sweetalert/sweetalert.dart';
 import '../index.dart';
 

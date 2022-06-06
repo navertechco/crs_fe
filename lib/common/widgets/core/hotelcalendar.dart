@@ -46,7 +46,7 @@ class HotelFiltersWidget extends StatelessWidget {
                   onSaved: (value) {},
                   onChanged: (value) {
                     hotelCategory.value = getCatalogDescription(
-                        findMemoryChildCatalog("hotel", "value", "budget_fk"),
+                        getMemoryCatalogChild("hotel", "value", "budget_fk"),
                         value);
                     setFormValue(
                         globalctx.memory["destinations"],
@@ -56,13 +56,13 @@ class HotelFiltersWidget extends StatelessWidget {
                     filterHotels(context);
                   },
                   hintText: "Category     ",
-                  data: findMemoryChildCatalog("hotel", "value", "budget_fk")),
+                  data: getMemoryCatalogChild("hotel", "value", "budget_fk")),
               CustomFormMultiDropDownFieldWidget(
                   value: [],
                   onChanged: (value) {},
                   onSaved: (value) {
                     hotelRoomCategory.value = getCatalogDescription(
-                        findMemoryChildCatalog("hotel", "value", "roomcategory",
+                        getMemoryCatalogChild("hotel", "value", "roomcategory",
                             condition: (element) {
                           var rule = true;
                           var rt = element["value"]["#roomtypes"] == ""
@@ -86,7 +86,7 @@ class HotelFiltersWidget extends StatelessWidget {
                     filterHotels(context);
                   },
                   hintText: "Room Category     ",
-                  data: findMemoryChildCatalog("hotel", "value", "roomcategory",
+                  data: getMemoryCatalogChild("hotel", "value", "roomcategory",
                       condition: (element) {
                     var rule = true;
                     var rt = element["value"]["#roomtypes"] == ""

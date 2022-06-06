@@ -1,5 +1,5 @@
 export './constants.dart';
-export './cruisevariables.dart';
-export './hotelvariables.dart';
-export './quotevariables.dart';
-export './variables.dart';
+export 'cruise.dart';
+export 'hotel.dart';
+export 'quote.dart';
+export 'general.dart';

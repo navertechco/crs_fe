@@ -42,11 +42,11 @@ class CruiseFiltersWidget extends StatelessWidget {
               onSaved: (value) {},
               onChanged: (value) {
                 cruiseDay.value = getCatalogDescription(
-                    findMemoryChildCatalog("cabine", "value", "days"), value);
+                    getMemoryCatalogChild("cabine", "value", "days"), value);
                 filterCruises(context);
               },
               hintText: "Days    ",
-              data: findMemoryChildCatalog("cabine", "value", "days"),
+              data: getMemoryCatalogChild("cabine", "value", "days"),
             ),
             if (cruiseDay.value.isNotEmpty)
               CustomFormDropDownFieldWidget(
@@ -58,7 +58,7 @@ class CruiseFiltersWidget extends StatelessWidget {
                 onSaved: (value) {},
                 onChanged: (value) {
                   cruiseItinerary.value = getCatalogDescription(
-                      findMemoryChildCatalog(
+                      getMemoryCatalogChild(
                           "itinerary", "value", "itinerary_format",
                           filter: {
                             "catalog": "cabine",
@@ -70,7 +70,7 @@ class CruiseFiltersWidget extends StatelessWidget {
                   filterCruises(context);
                 },
                 hintText: "itinerary Format    ",
-                data: findMemoryChildCatalog(
+                data: getMemoryCatalogChild(
                     "itinerary", "value", "itinerary_format",
                     filter: {
                       "catalog": "cabine",
@@ -89,7 +89,7 @@ class CruiseFiltersWidget extends StatelessWidget {
                 onSaved: (value) {},
                 onChanged: (value) {
                   cruiseCabine.value = getCatalogDescription(
-                      findMemoryChildCatalog("cabine", "value", "cabine_type",
+                      getMemoryCatalogChild("cabine", "value", "cabine_type",
                           filter: {
                             "catalog": "itinerary",
                             "key": "itinerary_format",
@@ -100,7 +100,7 @@ class CruiseFiltersWidget extends StatelessWidget {
                   filterCruises(context);
                 },
                 hintText: "Cabine Type    ",
-                data: findMemoryChildCatalog("cabine", "value", "cabine_type",
+                data: getMemoryCatalogChild("cabine", "value", "cabine_type",
                     filter: {
                       "catalog": "itinerary",
                       "key": "itinerary_format",
@@ -118,12 +118,12 @@ class CruiseFiltersWidget extends StatelessWidget {
             //     onSaved: (value) {},
             //     onChanged: (value) {
             //       cruiseAnimal.value = getCatalogDescription(
-            //           findMemoryChildCatalog("animals", "description", ""),
+            //           getMemoryCatalogChild("animals", "description", ""),
             //           value);
             //       filterCruises(context);
             //     },
             //     hintText: "Animals    ",
-            //     data: findMemoryChildCatalog("animals", "description", ""),
+            //     data: getMemoryCatalogChild("animals", "description", ""),
             //   ),
           ]),
           Row(children: [
@@ -139,7 +139,7 @@ class CruiseFiltersWidget extends StatelessWidget {
                   cruiseReset();
                 } else {
                   cruiseCategory.value = getCatalogDescription(
-                      findMemoryChildCatalog(
+                      getMemoryCatalogChild(
                           "cruises", "value", "cruise_category",
                           condition: (element) {
                         var rule = true;
@@ -158,8 +158,8 @@ class CruiseFiltersWidget extends StatelessWidget {
                 }
               },
               hintText: "Category    ",
-              data: findMemoryChildCatalog(
-                  "cruises", "value", "cruise_category", condition: (element) {
+              data: getMemoryCatalogChild("cruises", "value", "cruise_category",
+                  condition: (element) {
                 var rule = true;
                 var rule2 = cabine.where((cab) {
                   return cab["value"]["cruise_id"] ==
@@ -182,7 +182,7 @@ class CruiseFiltersWidget extends StatelessWidget {
                 onSaved: (value) {},
                 onChanged: (value) {
                   cruiseModality.value = getCatalogDescription(
-                      findMemoryChildCatalog("cruises", "value", "modality",
+                      getMemoryCatalogChild("cruises", "value", "modality",
                           condition: (element) {
                         var rule = true;
                         var rule2 = cabine.where((cab) {
@@ -199,7 +199,7 @@ class CruiseFiltersWidget extends StatelessWidget {
                   filterCruises(context);
                 },
                 hintText: "Modality    ",
-                data: findMemoryChildCatalog("cruises", "value", "modality",
+                data: getMemoryCatalogChild("cruises", "value", "modality",
                     condition: (element) {
                   var rule = true;
                   var rule2 = cabine.where((cab) {
@@ -224,8 +224,7 @@ class CruiseFiltersWidget extends StatelessWidget {
                   onSaved: (value) {},
                   onChanged: (value) {
                     cruiseType.value = getCatalogDescription(
-                        findMemoryChildCatalog(
-                            "cruises", "value", "cruise_type",
+                        getMemoryCatalogChild("cruises", "value", "cruise_type",
                             condition: (element) {
                           var rule = true;
                           var rule2 = cabine.where((cab) {
@@ -242,8 +241,8 @@ class CruiseFiltersWidget extends StatelessWidget {
                     filterCruises(context);
                   },
                   hintText: "Cruise Type    ",
-                  data: findMemoryChildCatalog(
-                      "cruises", "value", "cruise_type", condition: (element) {
+                  data: getMemoryCatalogChild("cruises", "value", "cruise_type",
+                      condition: (element) {
                     var rule = true;
                     var rule2 = cabine.where((cab) {
                       return cab["value"]["cruise_id"] ==
@@ -268,7 +267,7 @@ class CruiseFiltersWidget extends StatelessWidget {
                     onSaved: (value) {},
                     onChanged: (value) {
                       cruisePort.value = getCatalogDescription(
-                          findMemoryChildCatalog(
+                          getMemoryCatalogChild(
                               "cruises", "value", "cruise_port",
                               condition: (element) {
                             var rule = true;
@@ -286,10 +285,10 @@ class CruiseFiltersWidget extends StatelessWidget {
                       filterCruises(context);
                     },
                     hintText: "Cruise Port    ",
-                    data: findMemoryChildCatalog(
-                        "cruises", "value", "cruise_port",
-                        condition: (element) {
-                      var rule = true; 
+                    data:
+                        getMemoryCatalogChild("cruises", "value", "cruise_port",
+                            condition: (element) {
+                      var rule = true;
                       var rule2 = cabine.where((cab) {
                         return cab["value"]["cruise_id"] ==
                             element["value"]["cruise_id"];

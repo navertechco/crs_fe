@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:naver_crs/common/functions/servicefunctions.dart';
+import 'package:naver_crs/common/functions/service.dart';
 import 'package:naver_crs/pages/5/destination/widgets/index.dart';
 
 class ServicesController extends GetxController {

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
-
 import '../index.dart';
 
 loadTargets() {
@@ -29,7 +28,7 @@ loadTargets() {
   return targets;
 }
 
-void showTutorial(context) {
+showTutorial(context) {
   TutorialCoachMark(context,
       textStyleSkip: TextStyle(color: Colors.black, fontSize: 50),
       targets: loadTargets(),
