@@ -21,9 +21,10 @@ Future<http.Response> head() async {
 }
 
 Future<http.Response> fetch(method, body, uri) async {
-  if (defaultToken == null) {
+  var rule = defaultToken == null || defaultToken == "None";
+  if (rule) {
     var res = await head();
-    defaultToken = res.headers['token'];
+    defaultToken = res.headers['token'] == "None" ? null : res.headers['token'];
   }
   Map<String, String> headers = {
     'token': defaultToken ?? '',
@@ -32,7 +33,7 @@ Future<http.Response> fetch(method, body, uri) async {
     'Access-Control-Allow-Origin': '*',
     'Accept': 'application/json',
   };
-  if (defaultToken != null) {
+  if (!rule) {
     if (method == 'GET') {
       return await http.get(uri, headers: headers);
     }
