@@ -253,7 +253,7 @@ updateCurrentDay(direction) {
   }
 }
 
-/// ## updateCurrentDay
+/// ## previousDay
 /// *__Method to paginate to a prevoius day__*
 ///
 ///### Uses:
@@ -272,83 +272,17 @@ previousDay() {
   }
 }
 
-prepareAllToResume() async {
-  try {
-    var dayIndex = 0;
-    var destinations = getCombinedDestinations();
-    for (String dest in destinations.keys.toList()) {
-      var destination = destinations[dest];
-      destination["daysData"] ??= {};
-      destination["daysData"] = {};
-      destinations[dest] = destination;
-      var explorationDay = destination["explorationDay"];
-
-      for (var i = 0; i < int.parse(explorationDay); i++) {
-        Map myDayDto = dayDto;
-        Map myExpDto = experienceDto;
-        // Prepare Frame to send to Resume Page
-        var exps = globalctx.memory["promoted"][dayIndex];
-        for (String exp in exps.keys) {
-          Map newExp = {};
-          Map newEntry = exps[exp];
-          newExp = {...myExpDto, ...newEntry};
-          myDayDto["experiences"] ??= {};
-          myDayDto["experiences"][exp] = newExp;
-        }
-        destinations[dest]["daysData"][dayIndex] = myDayDto;
-        dayIndex++;
-      }
-    }
-    globalctx.memory["resume"] = destinations;
-
-    try {
-      for (var dest in globalctx.memory["resume"].keys) {
-        if (globalctx.memory["resume"][dest] != null) {
-          globalctx.memory["resume"][dest] =
-              globalctx.memory["resume"][dest].value;
-        }
-      }
-    } catch (e) {
-      log(e);
-    }
-
-    globalctx.payload["tour"] = globalctx.memory["tour"];
-    globalctx.payload["logistic"] = globalctx.memory["logistic"];
-    globalctx.payload["customer"] = globalctx.memory["customer"];
-    globalctx.payload["destinations"] = globalctx.memory["resume"];
-    globalctx.payload["days"] = globalctx.memory["days"];
-    globalctx.payload["totalDays"] = globalctx.memory["totalDays"];
-    globalctx.payload["promoted"] = globalctx.memory["promoted"];
-
-    if (translatingService.value.isNotEmpty) {
-      globalctx.payload["tour"]["passengers"] =
-          (int.parse(globalctx.payload["tour"]["passengers"]) + 1).toString();
-    }
-
-    try {
-      for (var day in globalctx.payload["days"].keys) {
-        globalctx.payload["days"][day] = globalctx.payload["days"][day].value;
-      }
-    } catch (e) {
-      log(e);
-    }
-
-    globalctx.payload["logistic"]["arrival_date"] =
-        globalctx.payload["logistic"]["arrival_date"].toString();
-    globalctx.payload["logistic"]["since_date"] =
-        globalctx.payload["logistic"]["since_date"].toString();
-    globalctx.payload["logistic"]["departure_date"] =
-        globalctx.payload["logistic"]["departure_date"].toString();
-    globalctx.payload["logistic"]["until_date"] =
-        globalctx.payload["logistic"]["until_date"].toString();
-    await saveTour();
-  } catch (e) {
-    log(e);
-  } finally {
-    goto("PrintDocs");
-  }
-}
-
+/// ## processDays
+/// *__Method to process all days edited on memory__*
+///
+///### Uses:
+/// ```dart
+///  processDays()
+/// ```
+/// ### Returns:
+///```dart
+/// void
+///```
 processDays() {
   result = [];
 
@@ -371,6 +305,17 @@ processDays() {
   }
 }
 
+/// ## updateCurrentKeyActivities
+/// *__Method to current KA from current Day Destination__*
+///
+///### Uses:
+/// ```dart
+///  updateCurrentKeyActivities()
+/// ```
+/// ### Returns:
+///```dart
+/// void
+///```
 updateCurrentKeyActivities() {
   var index = getDestinationIndexByDay();
   var ka = getFormValue(
@@ -378,6 +323,17 @@ updateCurrentKeyActivities() {
   currentDestinationKeyActivities.value = ka;
 }
 
+/// ## updateCurrentDestinationOption
+/// *__Method to current DestOption from current Day Destination__*
+///
+///### Uses:
+/// ```dart
+///  updateCurrentDestinationOption()
+/// ```
+/// ### Returns:
+///```dart
+/// void
+///```
 updateCurrentDestinationOption() {
   var index = getDestinationIndexByDay();
   var destinationOption = getFormValue(
@@ -385,6 +341,17 @@ updateCurrentDestinationOption() {
   currentDestinationOption.value = destinationOption;
 }
 
+/// ## updateCurrentDestinationTravelRhythm
+/// *__Method to current TR from current Day Destination__*
+///
+///### Uses:
+/// ```dart
+///  updateCurrentDestinationTravelRhythm()
+/// ```
+/// ### Returns:
+///```dart
+/// void
+///```
 updateCurrentDestinationTravelRhythm() {
   var index = getDestinationIndexByDay();
   var travelRhythm = getFormValue(
@@ -392,13 +359,18 @@ updateCurrentDestinationTravelRhythm() {
   currentTravelRhythm.value = travelRhythm;
 }
 
-resetLeftDays() {
-  leftAccumulated.value = 0;
-  dayleft.value = totalDays.value;
-  accumulated.value = 0;
-}
-
-saveExplorationDays(int index, int val0, int val1, {String? key}) {
+/// ## saveExplorationDay
+/// *__Method to save ExplorationDay to memory__*
+///
+///### Uses:
+/// ```dart
+///    saveExplorationDay(1, val0, val1, key: "cruiseExpDays");
+/// ```
+/// ### Returns:
+///```dart
+/// void
+///```
+saveExplorationDay(int index, int val0, int val1, {String? key}) {
   try {
     int acc0 = accumulated.value;
     int td = totalDays.value;
@@ -433,6 +405,17 @@ saveExplorationDays(int index, int val0, int val1, {String? key}) {
   }
 }
 
+/// ## parseHour
+/// *__Method to parse a Hour String__*
+///
+///### Uses:
+/// ```dart
+///    var closeTime = parseHour(e.value["closeTime"]);
+/// ```
+/// ### Returns:
+///```dart
+/// int
+///```
 parseHour(str) {
   if (str.contains("h")) {
     var parts = str.split("h");

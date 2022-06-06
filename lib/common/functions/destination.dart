@@ -24,6 +24,22 @@ globalctxReset() {
   }
 }
 
+/// ## resetLeftDays
+/// *__Method to reset Destination day variables from memory__*
+///
+///### Uses:
+/// ```dart
+///  resetLeftDays()
+/// ```
+/// ### Returns:
+///```dart
+/// void
+///```
+resetLeftDays() {
+  leftAccumulated.value = 0;
+  dayleft.value = totalDays.value;
+  accumulated.value = 0;
+}
 autoFillDestination(destination, index, type, days) {
   setFormValue(globalctx.memory["destinations"], index, "explorationDay", days);
   setFormValue(globalctx.memory["destinations"], index, "type", type);

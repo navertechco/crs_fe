@@ -414,7 +414,7 @@ getCruiseDataCell(context, row) {
                       "cruiseExpDays",
                       "0"));
 
-                  saveExplorationDays(1, val0, val1, key: "cruiseExpDays");
+                  saveExplorationDay(1, val0, val1, key: "cruiseExpDays");
                 });
           },
         ),
@@ -449,9 +449,8 @@ getCruiseDataCell(context, row) {
 showCruiseDetailDialog(context, row) {
   showCustomDialog(
     context,
-    CruiseDetailWidget(row:row),
+    CruiseDetailWidget(row: row),
     "Close",
     backgroundColor: Color.fromARGB(100, 0, 0, 0),
   );
 }
-

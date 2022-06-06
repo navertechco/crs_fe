@@ -131,7 +131,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                         max: dayleft.value + (type == "departure" ? 1 : 0),
                         bound: 0,
                         onValueChanged: (value) {
-                          saveExplorationDays(
+                          saveExplorationDay(
                               index,
                               int.parse(getFormValue(
                                   globalctx.memory["destinations"],
@@ -371,7 +371,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                                 //     "iHExpDays",
                                 //     "0"));
 
-                                // saveExplorationDays(index, val0, val1,
+                                // saveExplorationDay(index, val0, val1,
                                 //     key: "iHExpDays");
                                 // validateGalapagosTR();
                               });

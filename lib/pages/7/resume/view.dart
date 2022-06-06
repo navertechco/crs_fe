@@ -68,7 +68,7 @@ class ResumePage extends GetView<ResumeController> {
             ),
             FloatingActionButton(
               onPressed: () async {
-                await prepareAllToResume();
+                await processTour();
               },
               child: Icon(Icons.save),
               backgroundColor: Colors.green,
