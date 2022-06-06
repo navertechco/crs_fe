@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import '../index.dart';
+import 'index.dart';
+import 'package:naver_crs/index.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:flutter_swiper/flutter_swiper.dart';
-import '../../../../../index.dart';
 
 class CarouselWidget extends StatelessWidget {
   const CarouselWidget({
@@ -17,7 +19,6 @@ class CarouselWidget extends StatelessWidget {
         .value;
     var images = [];
     var datas = [];
- 
 
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.3,
@@ -33,7 +34,7 @@ class CarouselWidget extends StatelessWidget {
                       SizedBox(
                           height: MediaQuery.of(context).size.height * 0.5,
                           width: MediaQuery.of(context).size.width * 0.5,
-                          child:  Text("Video")),
+                          child: Text("Video")),
                     ],
                   ),
                   "Close");

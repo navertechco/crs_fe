@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import '../index.dart';
+import 'index.dart';
+import 'package:naver_crs/index.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:naver_crs/pages/6/services/widgets/servicecedetail/widgets/index.dart';
 
-import '../../../../index.dart';
+import 'package:naver_crs/index.dart';
 
 class ServiceRearOptionWidget extends StatelessWidget {
   const ServiceRearOptionWidget({Key? key, this.service = "coast"})

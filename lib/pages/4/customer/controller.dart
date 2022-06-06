@@ -1,7 +1,7 @@
 // ignore_for_file: import_of_legacy_library_into_null_safe
 import 'package:get/get.dart';
-import 'index.dart';
-import '../../index.dart';
+import 'package:naver_crs/index.dart';
+import 'package:naver_crs/index.dart';
 
 class CustomerController extends GetxController {
   final state = CustomerState();
@@ -14,7 +14,7 @@ class CustomerController extends GetxController {
       Map mem = {...globalctx.memory["customer"], ...state.toMap()};
       globalctx.memory["customer"] = mem;
       // filterDestinations();
-      // globalctxReset();
+      // resetAllDestinations();
       goto("Destination");
     };
   }

@@ -1,6 +1,6 @@
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
-import '../index.dart';
+import 'package:naver_crs/index.dart';
 
 var cruiseFormat = "".obs;
 var cruiseDay = "".obs;

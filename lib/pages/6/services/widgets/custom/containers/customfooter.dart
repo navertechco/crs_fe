@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import '../index.dart';
+import 'package:naver_crs/index.dart';
 
-import '../../../../../index.dart';
 import '../../../controller.dart';
 
 class CustomFooterWidget extends StatelessWidget {

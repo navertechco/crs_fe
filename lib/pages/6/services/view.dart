@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import '../../index.dart';
-import 'widgets/index.dart';
 import 'index.dart';
+import 'package:naver_crs/index.dart';
+import 'package:get/get.dart';
+import 'widgets/index.dart';
+import 'package:naver_crs/index.dart';
 
 class ServicesPage extends GetView<ServicesController> {
   const ServicesPage({Key? key}) : super(key: key);

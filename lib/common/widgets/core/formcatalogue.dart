@@ -1,8 +1,12 @@
 // ignore_for_file: unused_local_variable, prefer_function_declarations_over_variables, unnecessary_null_comparison
 
 import 'package:flutter/material.dart';
+import '../index.dart';
+import 'index.dart';
+import 'package:naver_crs/index.dart';
+import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
-import '../../index.dart';
+import 'package:naver_crs/index.dart';
 
 // ignore: must_be_immutable
 class FormCatalogueWidget extends StatelessWidget {
@@ -31,46 +35,45 @@ class FormCatalogueWidget extends StatelessWidget {
     return Obx(() {
       try {
         return DropdownButtonHideUnderline(
-        child: DropdownButtonFormField(
-          style: KTextSytle(
-                  context: context,
-                  fontSize: value == null ? 10 : 8,
-                  fontWeight:
-                      value == null ? FontWeight.normal : FontWeight.bold)
-              .getStyle(),
-          alignment: Alignment.centerLeft,
-          isExpanded: true,
-          value: value,
-          disabledHint: Text(
-            "data",
+          child: DropdownButtonFormField(
             style: KTextSytle(
                     context: context,
                     fontSize: value == null ? 10 : 8,
                     fontWeight:
                         value == null ? FontWeight.normal : FontWeight.bold)
                 .getStyle(),
+            alignment: Alignment.centerLeft,
+            isExpanded: true,
+            value: value,
+            disabledHint: Text(
+              "data",
+              style: KTextSytle(
+                      context: context,
+                      fontSize: value == null ? 10 : 8,
+                      fontWeight:
+                          value == null ? FontWeight.normal : FontWeight.bold)
+                  .getStyle(),
+            ),
+            validator: validator,
+            decoration: InputDecoration.collapsed(
+              filled: false,
+              hintText: hintText,
+              hintStyle: KTextSytle(
+                      context: context,
+                      fontSize: value == null ? 10 : 8,
+                      fontWeight:
+                          value == null ? FontWeight.normal : FontWeight.bold)
+                  .getStyle(),
+            ),
+            onSaved: onSaved,
+            onChanged: disabled ? null : onChanged,
+            items: items,
           ),
-          validator: validator,
-          decoration: InputDecoration.collapsed(
-            filled: false,
-            hintText: hintText,
-            hintStyle: KTextSytle(
-                    context: context,
-                    fontSize: value == null ? 10 : 8,
-                    fontWeight:
-                        value == null ? FontWeight.normal : FontWeight.bold)
-                .getStyle(),
-          ),
-          onSaved: onSaved,
-          onChanged: disabled ? null : onChanged,
-          items: items,
-        ),
-      );
+        );
       } catch (e) {
         log(e);
         return Text("");
       }
-      
     });
   }
 }

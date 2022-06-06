@@ -1,10 +1,13 @@
 // ignore_for_file: prefer_function_declarations_over_variables
 import 'package:flutter/material.dart';
+import '../index.dart';
+import 'index.dart';
+import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 import 'package:sweetalert/sweetalert.dart';
 import 'package:yaml/yaml.dart';
-import '../index.dart';
-
+import 'package:naver_crs/index.dart';
+import 'package:naver_crs/index.dart';
 
 /// ## processTour
 /// *__Method to prepare all memory data to send it to backend__*

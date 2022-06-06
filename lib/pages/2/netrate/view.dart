@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import '../../index.dart';
-import 'widgets/index.dart';
 import 'index.dart';
+import 'package:naver_crs/index.dart';
+import 'package:get/get.dart';
+import 'package:naver_crs/index.dart';
+import 'widgets/index.dart';
+import 'package:naver_crs/index.dart';
 
 class NetRatePage extends GetView<NetRateController> {
-  NetRatePage({Key? key }) : super(key: key);
- 
+  NetRatePage({Key? key}) : super(key: key);
+
   final Map<String, GlobalKey<State<StatefulWidget>>> keys = {
     "cover": GlobalKey(),
     "header": GlobalKey(),
     "dest": GlobalKey(),
     "end": GlobalKey()
   };
-
 
   Widget _buildView(BuildContext _context) {
     return ContentLayoutWidget(

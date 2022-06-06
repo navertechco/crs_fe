@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'index.dart';
+import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 import 'widgets/index.dart';
-import 'index.dart';
-import '../../index.dart';
+import 'package:naver_crs/index.dart';
+import 'package:naver_crs/index.dart';
 
 class TourPage extends GetView<TourController> {
   const TourPage({Key? key}) : super(key: key);
@@ -24,7 +26,7 @@ GetBuilder<TourController> _buildTourFormPage(
 ) {
   try {
     if (isFirstLaunch) {
-      showTutorial(context); 
+      showTutorial(context);
     }
   } catch (e) {
     log(e);

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../../../index.dart';
+import '../index.dart';
+import 'index.dart';
+import 'package:naver_crs/index.dart';
 
 class TitleWidget extends StatelessWidget {
   const TitleWidget({
@@ -10,7 +12,7 @@ class TitleWidget extends StatelessWidget {
   final experience;
 
   @override
-  Widget build(BuildContext context) { 
+  Widget build(BuildContext context) {
     return Text(experience.toString().split("-")[0],
         style: KTextSytle(
                 context: context,

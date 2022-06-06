@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import '../index.dart';
+import 'index.dart';
+import 'package:naver_crs/index.dart';
 import 'package:get/get_utils/src/extensions/string_extensions.dart';
 
-import '../../../index.dart';
+import 'package:naver_crs/index.dart';
 import 'customformday.dart';
 import 'customformtitle.dart';
 
@@ -20,7 +23,7 @@ class CustomFormDestination extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> daylist = [];
     var promotedDestinationDay = globalctx.memory["destinations"];
-    var destindex = index; 
+    var destindex = index;
     var destination = promotedDestinationDay[destindex.toString()];
     var explorationDay = int.parse(destination["explorationDay"]);
     var title = destination["destination"].toString().capitalize;
@@ -32,7 +35,7 @@ class CustomFormDestination extends StatelessWidget {
           RepaintBoundary(
               // key: globalctx.keys["day-$index-$day"],
               child: CustomFormTitleWidget(level: 3, label: "$title")),
-          CustomFormDayWidget(  indexes: [destindex, day]),
+          CustomFormDayWidget(indexes: [destindex, day]),
         ],
       ));
     }

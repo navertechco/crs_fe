@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import '../index.dart';
+import 'index.dart';
+import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
-import '../../../../../index.dart';
 
 class LeftWidget extends StatelessWidget {
   const LeftWidget({
@@ -14,7 +16,7 @@ class LeftWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Rx<List> galleryData = Rx([]); 
+    Rx<List> galleryData = Rx([]);
     galleryData.value = experiences.where((experience) {
       var value = experience["value"];
       var dest = value["destination"].toString().toUpperCase();

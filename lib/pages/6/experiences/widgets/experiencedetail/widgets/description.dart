@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../../../index.dart';
+import '../index.dart';
+import 'index.dart';
+import 'package:naver_crs/index.dart';
 
 class DescriptionWidget extends StatelessWidget {
   const DescriptionWidget({
@@ -10,7 +12,7 @@ class DescriptionWidget extends StatelessWidget {
   final experience;
 
   @override
-  Widget build(BuildContext context) { 
+  Widget build(BuildContext context) {
     var expData = experiences
         .toList()
         .firstWhere((exp) => exp["description"] == experience)["value"];

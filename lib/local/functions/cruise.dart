@@ -2,11 +2,15 @@
 // ignore_for_file: curly_braces_in_flow_control_structures
 import 'package:checkbox_formfield/checkbox_formfield.dart';
 import 'package:flutter/material.dart';
+import '../index.dart';
+import 'index.dart';
+import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:naver_crs/pages/3/logistic/widgets/index.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
-import '../index.dart';
+import 'package:naver_crs/index.dart';
+import 'package:naver_crs/index.dart';
 
 /// ## getCruiseItinerary
 /// *__Method to get the cruise itinerary from a gived extracted cruise registry from memory__*
@@ -19,7 +23,7 @@ import '../index.dart';
 ///
 /// @return itinerary (String)
 ///
-getCruiseItinerary(row) {
+String getCruiseItinerary(row) {
   var itinerary = row["cruise_itinerary"]
       .toString()
       .replaceAll("[", "")
@@ -52,7 +56,7 @@ getCruiseItinerary(row) {
 ///
 /// @return void
 ///
-filterCruises(ctx) {
+void filterCruises(ctx) {
   cruises = findCatalog("cruises");
   cabine = findCatalog("cabine");
   itinerary = findCatalog("itinerary");
@@ -148,7 +152,7 @@ filterCruises(ctx) {
 ///
 /// @return List<DataColumn>
 ///
-getCruiseHeader(context, data, columns) {
+List<DataColumn> getCruiseHeader(context, data, columns) {
   var header = <DataColumn>[];
   List cols = [];
 
@@ -198,7 +202,7 @@ getCruiseHeader(context, data, columns) {
 ///
 /// @return void
 ///
-clearCruiseFilter() {
+void clearCruiseFilter() {
   cruiseFormat.value = "";
   cruiseDay.value = "";
   cruiseShip.value = "";
@@ -225,7 +229,7 @@ clearCruiseFilter() {
 ///
 /// @return [List<DataColumn>, List<DataRow>]
 ///
-buildCruiseDataTable(context, data) {
+List buildCruiseDataTable(context, data) {
   var columns = ["description"];
   var header = getCruiseHeader(context, data, columns);
   var detail = getCruiseDetail(context, data, columns);
@@ -243,7 +247,7 @@ buildCruiseDataTable(context, data) {
 ///```dart
 /// List<DataRow>
 ///```
-getCruiseDetail(context, data, columns) {
+List<DataRow> getCruiseDetail(context, data, columns) {
   var detail = <DataRow>[];
   if (data.length > 0) {
     for (var row in data) {
@@ -289,7 +293,7 @@ getCruiseDetail(context, data, columns) {
 ///```dart
 /// DateTime
 ///```
-getNextCruiseDate() {
+DateTime getNextCruiseDate() {
   var dayName =
       cruiseItinerary.value.toString().split("-")[0].replaceAll(" ", "");
   var nextCruiseDate = getNextOnCurrentDate(dayName);
@@ -307,7 +311,7 @@ getNextCruiseDate() {
 ///```dart
 /// DateTime
 ///```
-getNextOnCurrentDate(dayName) {
+DateTime getNextOnCurrentDate(dayName) {
   var now = arrivalDate.value;
   var dayId = getDay(dayName)["dayId"] as int;
   var firstOfMonth = DateTime(now.year, now.month, 1);
@@ -331,9 +335,9 @@ getNextOnCurrentDate(dayName) {
 /// ```
 /// ### Returns:
 ///```dart
-/// List
+/// Map<String, Object>
 ///```
-getDay(day) {
+Map<String, Object> getDay(day) {
   var res = days.firstWhere((element) =>
       element["spa"].toString().toUpperCase() == day.toUpperCase() ||
       element["eng"].toString().toUpperCase() == day.toUpperCase());
@@ -353,7 +357,7 @@ getDay(day) {
 ///```dart
 /// DataCell
 ///```
-getCruiseDataCell(context, row) {
+DataCell getCruiseDataCell(context, row) {
   var dataCell = DataCell(
     Row(
       children: [
@@ -446,7 +450,7 @@ getCruiseDataCell(context, row) {
 ///```dart
 /// void
 ///```
-showCruiseDetailDialog(context, row) {
+void showCruiseDetailDialog(context, row) {
   showCustomDialog(
     context,
     CruiseDetailWidget(row: row),

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'index.dart';
+import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 import 'package:pdf/pdf.dart';
-import '../../index.dart';
 import 'widgets/index.dart';
 import 'package:pdf/widgets.dart ' as pw;
-import 'index.dart';
 import 'package:printing/printing.dart';
 
 class ResumePage extends GetView<ResumeController> {

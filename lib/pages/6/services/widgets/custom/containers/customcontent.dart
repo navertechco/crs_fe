@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import '../index.dart';
+import 'package:naver_crs/index.dart';
 import '../../../controller.dart';
-import '../../index.dart';
+import 'package:naver_crs/index.dart';
 
 class CustomContentWidget extends StatelessWidget {
   const CustomContentWidget({

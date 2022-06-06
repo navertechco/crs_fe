@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../../../index.dart';
+import '../index.dart';
+import 'index.dart';
+import 'package:naver_crs/index.dart';
 
 class DescriptionWidget extends StatelessWidget {
   const DescriptionWidget({
@@ -13,7 +15,8 @@ class DescriptionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var srvData = filteredsrv
         .toList()
-        .firstWhere((srv) => srv.description == service).value;
+        .firstWhere((srv) => srv.description == service)
+        .value;
     return Text("$service",
         style: KTextSytle(
                 context: context,

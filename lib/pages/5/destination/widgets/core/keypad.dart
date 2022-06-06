@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import '../index.dart';
+import 'index.dart';
+import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 // ignore: import_of_legacy_library_into_null_safe
-import '../../../../index.dart';
+import 'package:naver_crs/index.dart';
 
 class KeyPadWidget extends StatelessWidget {
   const KeyPadWidget({
@@ -41,7 +44,7 @@ class KeyPadWidget extends StatelessWidget {
                             color: Colors.white)
                         .getStyle()),
                 onPressed: () {
-                  globalctxReset();
+                  resetAllDestinations();
                 },
               ),
               TextButton(

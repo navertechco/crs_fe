@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import '../index.dart';
+import 'index.dart';
+import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 
-import '../../index.dart';
+import 'package:naver_crs/index.dart';
 
 class VideoItem extends StatelessWidget {
   const VideoItem({
@@ -9,7 +12,7 @@ class VideoItem extends StatelessWidget {
     required this.item,
   }) : super(key: key);
 
-  final   item;
+  final item;
 
   @override
   Widget build(BuildContext context) {

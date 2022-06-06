@@ -1,17 +1,46 @@
 // ignore_for_file: prefer_function_declarations_over_variables
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:flutter/material.dart';
+import '../index.dart';
+import 'index.dart';
+import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/pages/5/destination/widgets/index.dart';
 import 'package:sweetalert/sweetalert.dart';
-import '../index.dart';
+import 'package:naver_crs/index.dart';
 
+/// ## dragDestination
+/// *__Method to drag a destinatio option widget to left container and account it__*
+///
+///### Uses:
+/// ```dart
+///   onAccept = (String destination) {
+///      dragDestination(destination);
+///    };
+/// ```
+/// ### Returns:
+///```dart
+/// void
+///```
 dragDestination(destination) {
   addDestination(destination);
   filterDestinations();
 }
 
-globalctxReset() {
+/// ## resetAllDestinations
+/// *__Method to reset all destination options__*
+///
+///### Uses:
+/// ```dart
+///
+///      resetAllDestinations();
+///
+/// ```
+/// ### Returns:
+///```dart
+/// void
+///```
+void resetAllDestinations() {
   globalctx.reset.value = true;
   resetLeftDays();
   resetDestinations();
@@ -35,12 +64,25 @@ globalctxReset() {
 ///```dart
 /// void
 ///```
-resetLeftDays() {
+void resetLeftDays() {
   leftAccumulated.value = 0;
   dayleft.value = totalDays.value;
   accumulated.value = 0;
 }
-autoFillDestination(destination, index, type, days) {
+
+/// ## autoFillDestination
+/// *__Method to auto fill destination options__*
+///
+///### Uses:
+/// ```dart
+///autoFillDestination(arrival["description"], 0, "arrival", "1");
+///
+/// ```
+/// ### Returns:
+///```dart
+/// void
+///```
+void autoFillDestination(destination, index, type, days) {
   setFormValue(globalctx.memory["destinations"], index, "explorationDay", days);
   setFormValue(globalctx.memory["destinations"], index, "type", type);
   setFormValue(globalctx.memory["destinations"], index, "index", index);
@@ -56,7 +98,19 @@ autoFillDestination(destination, index, type, days) {
   promote(destination, index, type);
 }
 
-getDestinationList() {
+/// ## getDestinationList
+/// *__Method to get destination list__*
+///
+///### Uses:
+/// ```dart
+///getDestinationList();
+///
+/// ```
+/// ### Returns:
+///```dart
+/// List
+///```
+List getDestinationList() {
   List<Widget> destinationlist = [];
   List destinations = destinationsCatalog.toList();
 
@@ -72,7 +126,7 @@ getDestinationList() {
   return destinationlist;
 }
 
-orderDestination(List destinations) {
+void orderDestination(List destinations) {
   if (arrival.isNotEmpty) {
     destinations.sort((a, b) {
       var arrivalData = toCatalog(filterCatalog(

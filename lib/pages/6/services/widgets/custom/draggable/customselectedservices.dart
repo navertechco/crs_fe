@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:naver_crs/index.dart';
 import 'package:naver_crs/pages/6/services/widgets/custom/draggable/servicedragtarget.dart';
-import '../../../../../index.dart';
 
 class CustomSelectedServicesWidget extends StatelessWidget {
   const CustomSelectedServicesWidget({

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'index.dart';
+import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:sweetalert/sweetalert.dart';
-import '../../index.dart';
-import 'index.dart';
+import 'package:naver_crs/index.dart';
+import 'package:naver_crs/index.dart';
 
 class SigninController extends GetxController {
   SigninController();

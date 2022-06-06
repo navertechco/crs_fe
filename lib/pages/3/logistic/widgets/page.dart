@@ -1,8 +1,13 @@
 // ignore_for_file: file_names, import_of_legacy_library_into_null_safe
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import '../index.dart';
-import './index.dart';
+import 'index.dart';
+import 'package:naver_crs/index.dart';
+import 'package:get/get.dart';
+import 'package:naver_crs/index.dart';
+import 'package:naver_crs/index.dart';
+
+import 'index.dart';
 
 class LogisticFormPage extends GetView<StatelessWidget> {
   const LogisticFormPage({

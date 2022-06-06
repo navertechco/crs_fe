@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import '../../index.dart';
-import 'widgets/index.dart';
 import 'index.dart';
+import 'package:naver_crs/index.dart';
+import 'package:get/get.dart';
+import 'package:naver_crs/index.dart';
+import 'widgets/index.dart';
+import 'package:naver_crs/index.dart';
 
 class ExperiencesPage extends GetView<ExperiencesController> {
   const ExperiencesPage({Key? key}) : super(key: key);

@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:intl/intl.dart';
 import 'package:naver_crs/pages/6/experiences/widgets/custom/index.dart';
-import '../index.dart';
+import 'package:naver_crs/index.dart';
 
 filterSuggestedExperiences() {
   processDays();

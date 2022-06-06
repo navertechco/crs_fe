@@ -1,9 +1,13 @@
 import 'package:checkbox_formfield/checkbox_icon_formfield.dart';
 import 'package:flutter/material.dart';
+import '../index.dart';
+import 'index.dart';
+import 'package:naver_crs/index.dart';
+import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/common/index.dart';
-import '../../../index.dart';
-import '../index.dart';
+import 'package:naver_crs/index.dart';
+import 'package:naver_crs/index.dart';
 
 class CustomLogisticInformationForm extends StatelessWidget {
   CustomLogisticInformationForm({Key? key, this.profile, this.ctrl})
@@ -89,7 +93,7 @@ class CustomLogisticInformationForm extends StatelessWidget {
                           setFormValue(globalctx.memory, "logistic",
                               "arrival_port", value);
                           arrivalPort.value = value;
-                          globalctxReset();
+                          resetAllDestinations();
                         },
                         onChanged: (value) {
                           ctrl!.state.arrival_port = value!;
@@ -152,7 +156,7 @@ class CustomLogisticInformationForm extends StatelessWidget {
                         onChanged: (value) {
                           ctrl!.state.departure_port = value!;
                           departurePort.value = value;
-                          globalctxReset();
+                          resetAllDestinations();
                         },
                         validator: CustomRequiredValidator(
                             errorText: "Departure Port is required ",

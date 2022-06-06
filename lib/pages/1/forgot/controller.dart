@@ -1,10 +1,12 @@
 // ignore_for_file: import_of_legacy_library_into_null_safe
 
 import 'package:flutter/material.dart';
+import 'index.dart';
+import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 import 'package:sweetalert/sweetalert.dart';
-import 'index.dart';
-import '../../index.dart';
+import 'package:naver_crs/index.dart';
+import 'package:naver_crs/index.dart';
 
 class ForgotController extends GetxController {
   ForgotController();

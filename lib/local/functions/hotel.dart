@@ -2,8 +2,12 @@
 
 import 'package:checkbox_formfield/checkbox_icon_formfield.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import '../index.dart';
+import 'index.dart';
+import 'package:naver_crs/index.dart';
+import 'package:get/get.dart';
+import 'package:naver_crs/index.dart';
+import 'package:naver_crs/index.dart';
 
 processHotelItinerary(row) {
   var itinerary =

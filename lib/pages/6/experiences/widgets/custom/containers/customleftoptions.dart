@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import '../index.dart';
+import 'package:naver_crs/index.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get.dart';
-import '../../../../../index.dart';
-import '../../index.dart';
+
+import 'package:naver_crs/index.dart';
 
 class CustomBodyDaysWidget extends HookWidget {
   final ExperiencesController ctrl;

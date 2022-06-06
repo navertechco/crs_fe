@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import '../index.dart';
+import 'index.dart';
+import 'package:naver_crs/index.dart';
 import 'package:naver_crs/common/index.dart';
 
-import '../../index.dart';
+import 'package:naver_crs/index.dart';
 
 class RoundedFormButton extends StatelessWidget {
   final double left;
@@ -10,7 +13,7 @@ class RoundedFormButton extends StatelessWidget {
   final double height;
   final double fontSize;
   final String label;
-  final  color;
+  final color;
   final Color textColor;
   final void Function()? onTap;
   final fontWeight;

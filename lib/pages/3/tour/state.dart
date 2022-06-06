@@ -1,7 +1,7 @@
 // ignore_for_file: unnecessary_this
 
 import 'package:get/get.dart';
-import '../../index.dart';
+import 'package:naver_crs/index.dart';
 
 class TourState extends GetXState {
   TourState() {

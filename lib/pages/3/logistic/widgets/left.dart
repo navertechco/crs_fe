@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import '../index.dart';
+import 'index.dart';
+import 'package:naver_crs/index.dart';
+import 'package:naver_crs/index.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:flutter_swiper/flutter_swiper.dart';
 
-import '../../../index.dart';
+import 'package:naver_crs/index.dart';
 
 class LeftWidget extends StatelessWidget {
   const LeftWidget({

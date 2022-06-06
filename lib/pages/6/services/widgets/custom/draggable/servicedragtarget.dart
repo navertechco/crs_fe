@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
-import '../../../../../index.dart';
 
 class ServiceDragTargetWidget extends StatelessWidget {
   const ServiceDragTargetWidget({

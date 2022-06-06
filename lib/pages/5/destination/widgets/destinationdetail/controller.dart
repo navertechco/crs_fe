@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 
-import 'index.dart';
+import 'package:naver_crs/index.dart';
+
+import '../index.dart';
 
 class DestinationDetailController extends GetxController {
   DestinationDetailController();

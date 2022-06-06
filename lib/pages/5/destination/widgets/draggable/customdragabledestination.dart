@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import '../index.dart';
+import 'index.dart';
+import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/common/index.dart';
 
-import '../../../../index.dart';
-import '../index.dart';
+import 'package:naver_crs/index.dart';
+import 'package:naver_crs/index.dart';
 
 class CustomDragableDestination extends StatelessWidget {
   const CustomDragableDestination({
@@ -20,9 +23,12 @@ class CustomDragableDestination extends StatelessWidget {
         // Data is the value this Draggable stores.
         maxSimultaneousDrags: destDraggable.value,
         data: destination,
-        feedback: DestinationOptionWidget(destination: destination, isListed:true),
-        childWhenDragging: DestinationOptionWidget(destination: destination, isListed:true),
-        child: DestinationOptionWidget(destination: destination, isListed:true),
+        feedback:
+            DestinationOptionWidget(destination: destination, isListed: true),
+        childWhenDragging:
+            DestinationOptionWidget(destination: destination, isListed: true),
+        child:
+            DestinationOptionWidget(destination: destination, isListed: true),
       );
     });
   }

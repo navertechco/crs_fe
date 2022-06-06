@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import '../../../../index.dart';
+import '../index.dart';
 import 'index.dart';
+import 'package:naver_crs/index.dart';
+import 'package:get/get.dart';
+import 'package:naver_crs/index.dart';
+import 'package:naver_crs/index.dart';
 
 class DGalleryPage extends GetView<DGalleryController> {
   final destination;
@@ -9,7 +12,6 @@ class DGalleryPage extends GetView<DGalleryController> {
 
   Widget _buildView(BuildContext? _context) {
     Rx<Map> galleryData = Rx({});
- 
 
     galleryData.value = getContext('Experiences');
 

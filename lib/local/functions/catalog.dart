@@ -1,7 +1,7 @@
 // Other s
 import 'package:naver_crs/common/com/index.dart';
 
-import '../index.dart';
+import 'package:naver_crs/index.dart';
 
 /// ## getCatalog
 /// *__Method to fetch a catalog list from backend__*
@@ -13,9 +13,9 @@ import '../index.dart';
 ///  getCatalog(["catalog1", "catalog2"])
 /// ```
 ///
-/// @return catalogs (List<Catalog>)
+/// @return void
 ///
-getCatalog(
+void getCatalog(
   List<String> catalogs,
 ) async {
   var res = await fetchhandler(kDefaultSchema, kDefaultServer,
@@ -26,9 +26,6 @@ getCatalog(
   log(res);
   if (res['state'] == true) {
     setContext("catalogs", res['data']);
-    return true;
-  } else {
-    return false;
   }
 }
 
@@ -41,7 +38,7 @@ getCatalog(
 /// ```
 ///
 ///
-cruiseReset() {
+void cruiseReset() {
   cruiseFormat.value = "";
   cruiseDay.value = "";
   cruiseShip.value = "";
@@ -74,7 +71,7 @@ cruiseReset() {
 ///
 /// @return catalogs (List<Catalog>)
 ///
-getMemoryCatalogChild(name, field, description,
+List<Map<String, dynamic>> getMemoryCatalogChild(name, field, description,
     {Map? filter, Function? condition}) {
   List<Map<String, dynamic>> memory = findCatalog(name);
   List<Map<String, dynamic>> output = <Map<String, dynamic>>[];
@@ -147,14 +144,14 @@ getMemoryCatalogChild(name, field, description,
 ///
 /// @return void
 ///
-updateDestinationsCatalogFilteredByCountry() {
+void updateDestinationsCatalogFilteredByCountry() {
   var countryName = getCountryNameById(destCountry.value);
   destinationsCatalog = findCatalog("destinations").where((element) =>
       element["relation"]["country"].toString().toLowerCase() ==
-      countryName.toString().toLowerCase());
+      countryName.toString().toLowerCase()) as List<Map<String, dynamic>>;
   airportCatalog = findCatalog("airport").where((element) =>
       element["relation"]["country"].toString().toLowerCase() ==
-      countryName.toString().toLowerCase());
+      countryName.toString().toLowerCase()) as List<Map<String, dynamic>>;
 }
 
 /// ## getCatalogDescription
@@ -167,9 +164,9 @@ updateDestinationsCatalogFilteredByCountry() {
 ///                        value)
 /// ```
 ///
-/// @return catalog (List<String>)
+/// @return dynamic
 ///
-getCatalogDescription(catalog, value) {
+dynamic getCatalogDescription(catalog, value) {
   log(value);
   if (value == "0") {
     return "";
@@ -190,7 +187,7 @@ getCatalogDescription(catalog, value) {
   return catalog.firstWhere((element) =>
       element["code"].toString() == (value.toString()))["description"];
 }
- 
+
 /// ## filterCatalog
 /// *__Method to filter a catalog gived a key and a value__*
 ///
@@ -201,7 +198,7 @@ getCatalogDescription(catalog, value) {
 ///
 /// @return catalog (List<String>)
 ///
-filterCatalog(catalog, key, value) {
+List filterCatalog(catalog, key, value) {
   try {
     var res =
         findCatalog(catalog).toList().where((e) => e[key] == value).toList();
@@ -223,7 +220,7 @@ filterCatalog(catalog, key, value) {
 ///
 /// @return catalog (Catalog)
 ///
-toCatalog(item) {
+CatalogDto toCatalog(item) {
   List list = item.values.toList();
   CatalogDto ctlg = CatalogDto(list);
   return ctlg;
@@ -241,7 +238,7 @@ toCatalog(item) {
 ///
 /// @return catalogs (List<Catalog>)
 ///
-getCatalogs(catalogs) async {
+dynamic getCatalogs(catalogs) async {
   Map res = await fetchhandler(kDefaultSchema, kDefaultServer,
       kDefaultServerPort, kDefaultFindCatalog, 'POST', {
     "data": {"catalogs": catalogs}
@@ -265,7 +262,7 @@ getCatalogs(catalogs) async {
 ///
 /// @return catalog (Catalog)
 ///
-findCatalog(name) {
+List<Map<String, dynamic>> findCatalog(name) {
   var catalogs = getContext("catalogs");
   List<Map<String, dynamic>> catalog = <Map<String, dynamic>>[];
   if (catalogs.isNotEmpty) {

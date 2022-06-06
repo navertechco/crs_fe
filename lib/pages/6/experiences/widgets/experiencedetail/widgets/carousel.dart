@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import '../index.dart';
+import 'index.dart';
+import 'package:naver_crs/index.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:flutter_swiper/flutter_swiper.dart';
-import '../../../../../index.dart';
 
 class CarouselWidget extends StatelessWidget {
   const CarouselWidget({
@@ -10,7 +12,7 @@ class CarouselWidget extends StatelessWidget {
   }) : super(key: key);
   final experience;
   @override
-  Widget build(BuildContext context) { 
+  Widget build(BuildContext context) {
     var expData = experiences
         .toList()
         .firstWhere((element) => element["description"] == experience)["value"];

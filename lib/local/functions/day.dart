@@ -3,7 +3,7 @@
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:get/get.dart';
 import 'package:naver_crs/pages/5/destination/widgets/destinationdetail/widgets/index.dart';
-import '../index.dart';
+import 'package:naver_crs/index.dart';
 import 'general.dart';
 
 /// ## paginateDay
@@ -15,11 +15,8 @@ import 'general.dart';
 ///                      await paginateDay(context);
 ///                    }
 /// ```
-/// ### Returns:
-///```dart
-/// void
-///```
-paginateDay(context) async {
+
+Future paginateDay(context) async {
   if (globalctx.memory["promoted"] != null &&
       globalctx.memory["promoted"] != null &&
       globalctx.memory["promoted"][currentDay.value] != null) {
@@ -42,7 +39,7 @@ paginateDay(context) async {
 ///```dart
 /// void
 ///```
-nextDay() async {
+Future nextDay() async {
   if (currentDay.value < totalDays.value - 1) {
     jumpDay("forward");
   } else {
@@ -61,7 +58,7 @@ nextDay() async {
 ///```dart
 /// void
 ///```
-jumpDay(direction) {
+Future jumpDay(direction) async {
   decideBypass(direction);
   expDraggable.value = 1;
   currentDate.value =
@@ -370,7 +367,7 @@ updateCurrentDestinationTravelRhythm() {
 ///```dart
 /// void
 ///```
-saveExplorationDay(int index, int val0, int val1, {String? key}) {
+void saveExplorationDay(int index, int val0, int val1, {String? key}) {
   try {
     int acc0 = accumulated.value;
     int td = totalDays.value;
@@ -416,7 +413,7 @@ saveExplorationDay(int index, int val0, int val1, {String? key}) {
 ///```dart
 /// int
 ///```
-parseHour(str) {
+int parseHour(str) {
   if (str.contains("h")) {
     var parts = str.split("h");
     return int.parse(parts[0]) * 60 + int.parse(parts[1]);

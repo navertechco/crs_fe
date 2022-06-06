@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:naver_crs/pages/5/destination/widgets/index.dart'; 
-import '../../index.dart'; 
+import 'package:naver_crs/pages/5/destination/widgets/index.dart';
+import 'package:naver_crs/index.dart';
 
 class ExperiencesController extends GetxController {
   ExperiencesController();
@@ -8,14 +8,14 @@ class ExperiencesController extends GetxController {
   final state = DestinationDetailState();
 
   @override
-  void onInit() { 
-    super.onInit();  
+  void onInit() {
+    super.onInit();
     filterSuggestedExperiences();
   }
 
   @override
   void refresh() {
-    super.refresh(); 
+    super.refresh();
     filterSuggestedExperiences();
   }
 }

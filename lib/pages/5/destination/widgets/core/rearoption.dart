@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import '../index.dart';
+import 'index.dart';
+import 'package:naver_crs/index.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:naver_crs/pages/5/destination/widgets/destinationdetail/widgets/index.dart';
-import '../../../../index.dart';
+import 'package:naver_crs/index.dart';
 
 // ignore: must_be_immutable
 class DestinationRearOptionWidget extends StatelessWidget {

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-
-import '../../../../../index.dart';
-import '../../../controller.dart';
-import '../../index.dart';
+import '../index.dart';
+import 'package:naver_crs/index.dart';
 
 class CustomSugestedServicesWidget extends StatelessWidget {
   const CustomSugestedServicesWidget({

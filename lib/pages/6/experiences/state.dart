@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-import '../../index.dart';
+import 'package:naver_crs/index.dart';
 
 class ExperiencesState extends GetXState {
   // title

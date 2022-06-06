@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:naver_crs/pages/6/services/widgets/custom/index.dart';
-import '../index.dart';
+import 'package:naver_crs/index.dart';
 
 filterSuggestedServices() {
   getFilteredServices().then((value) {
