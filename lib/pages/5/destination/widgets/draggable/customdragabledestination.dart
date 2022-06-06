@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:naver_crs/common/index.dart';
 
 import 'package:naver_crs/index.dart';
-import 'package:naver_crs/index.dart';
 
 class CustomDragableDestination extends StatelessWidget {
   const CustomDragableDestination({

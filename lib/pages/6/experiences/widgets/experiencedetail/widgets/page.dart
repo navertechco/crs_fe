@@ -6,8 +6,6 @@ import 'index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 
-import 'package:naver_crs/index.dart';
-import 'package:naver_crs/index.dart';
 
 class ExperienceDetailWidget extends GetView<ExperienceDetailController> {
   const ExperienceDetailWidget({Key? key, this.experience}) : super(key: key);

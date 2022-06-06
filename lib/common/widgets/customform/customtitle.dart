@@ -3,8 +3,6 @@ import '../index.dart';
 import 'index.dart';
 import 'package:naver_crs/index.dart';
 
-import 'package:naver_crs/index.dart';
-
 class CustomTitleWidget extends StatelessWidget {
   const CustomTitleWidget(
       {Key? key,

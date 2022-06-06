@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import '../index.dart';
-import 'index.dart';
-import 'package:naver_crs/index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
-import 'package:naver_crs/index.dart';
 import '../../validators.dart';
 
 class CruiseCalendarWidget extends StatelessWidget {
@@ -414,7 +411,7 @@ class CruiseResultWidget extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Container(
+                    SizedBox(
                         width: MediaQuery.of(context).size.width * 0.6,
                         height: MediaQuery.of(context).size.height * 0.3,
                         child: Stack(

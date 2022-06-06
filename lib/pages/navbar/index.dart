@@ -5,7 +5,6 @@ import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 
 import 'package:naver_crs/index.dart';
-import 'package:naver_crs/index.dart';
 
 // ignore: must_be_immutable
 class NavBarWidget extends StatelessWidget {

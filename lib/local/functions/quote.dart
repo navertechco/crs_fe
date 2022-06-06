@@ -7,7 +7,6 @@ import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:naver_crs/index.dart';
-import 'package:naver_crs/index.dart';
 
 processQuoteHistoryItinerary(row) {
   var itinerary =

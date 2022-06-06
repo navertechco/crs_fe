@@ -4,7 +4,6 @@ import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 import 'widgets/index.dart';
 import 'package:naver_crs/index.dart';
-import 'package:naver_crs/index.dart';
 
 class CustomerPage extends GetView<CustomerController> {
   const CustomerPage({Key? key}) : super(key: key);

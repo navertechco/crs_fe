@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import 'package:naver_crs/index.dart';
-import 'package:naver_crs/index.dart';
 
 Future<http.Response> head() async {
   var headers = {

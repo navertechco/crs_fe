@@ -3,7 +3,6 @@ import '../index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import 'package:naver_crs/index.dart';
 
 class CustomBodyDestinationsWidget extends HookWidget {
   final ServicesController ctrl;

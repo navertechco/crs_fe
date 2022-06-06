@@ -9,7 +9,6 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/common/index.dart';
 
-import 'package:naver_crs/index.dart';
 
 class ScrollBehavior extends MaterialScrollBehavior {
   // Override behavior methods and getters like dragDevices

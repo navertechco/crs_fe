@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 import 'package:sweetalert/sweetalert.dart';
 import 'package:yaml/yaml.dart';
 import 'package:naver_crs/index.dart';
-import 'package:naver_crs/index.dart';
 
 /// ## processTour
 /// *__Method to prepare all memory data to send it to backend__*

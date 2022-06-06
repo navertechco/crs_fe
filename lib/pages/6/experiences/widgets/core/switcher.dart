@@ -1,14 +1,11 @@
 import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../index.dart';
-import 'index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/pages/6/experiences/widgets/experiencedetail/widgets/index.dart';
 import 'package:naver_crs/pages/6/experiences/widgets/leisuretimedetail/widgets/index.dart';
 
-import 'package:naver_crs/index.dart';
 
 // ignore: must_be_immutable
 class SwitcherWidget extends StatelessWidget {

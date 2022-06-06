@@ -1,10 +1,6 @@
 // ignore_for_file: prefer_function_declarations_over_variables
 
 import 'package:flutter/material.dart';
-import '../index.dart';
-import 'index.dart';
-import 'package:naver_crs/index.dart';
-
 import 'package:naver_crs/index.dart';
 import 'customdescription.dart';
 import 'customformexperiencedetail.dart';

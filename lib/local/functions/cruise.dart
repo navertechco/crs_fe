@@ -10,7 +10,6 @@ import 'package:intl/intl.dart';
 import 'package:naver_crs/pages/3/logistic/widgets/index.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:naver_crs/index.dart';
-import 'package:naver_crs/index.dart';
 
 /// ## getCruiseItinerary
 /// *__Method to get the cruise itinerary from a gived extracted cruise registry from memory__*

@@ -6,7 +6,6 @@ import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 import 'package:sweetalert/sweetalert.dart';
 import 'package:naver_crs/index.dart';
-import 'package:naver_crs/index.dart';
 
 class ForgotController extends GetxController {
   ForgotController();

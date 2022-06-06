@@ -3,10 +3,7 @@
 import 'package:flutter/material.dart';
 import '../index.dart';
 import 'index.dart';
-import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
-import 'package:naver_crs/index.dart';
-import 'package:naver_crs/index.dart';
 
 class LeisureTimeDetailWidget extends GetView<LeisureTimeDetailController> {
   const LeisureTimeDetailWidget({Key? key, this.experience}) : super(key: key);
