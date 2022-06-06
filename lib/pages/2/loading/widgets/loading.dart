@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
@@ -30,9 +31,9 @@ class LoadingWidget extends GetView<LoadingController> {
                           label: "New Tour",
                           height: 0.07,
                           fontSize: 5,
-                          onTap: () {
+                          onPressed: () {
                             setContext("readonly", false);
-                            newTour();
+                            // newTour();
                           }),
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.02,
@@ -41,7 +42,7 @@ class LoadingWidget extends GetView<LoadingController> {
                           label: "Find Tour",
                           height: 0.07,
                           fontSize: 5,
-                          onTap: () {
+                          onPressed: () {
                             getTour(context, tourId: 0, cb: (data) {
                               if (data.length > 0) {
                                 globalctx.memory["tours"] = data;

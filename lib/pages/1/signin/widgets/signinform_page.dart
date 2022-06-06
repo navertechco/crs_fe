@@ -36,7 +36,7 @@ class SigninFormPage extends GetView<StatelessWidget> {
                     label: "SignIn",
                     height: 0.07,
                     fontSize: 5,
-                    onTap: () async {
+                    onPressed: () async {
                       if (_formKey.currentState!.validate()) {
                         _formKey.currentState!.save();
                         await ctrl!.onSignin(context, ctrl!.state.username,

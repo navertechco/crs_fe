@@ -78,7 +78,7 @@ class WebButton extends StatelessWidget {
         label: label,
         height: 0.07,
         fontSize: 5,
-        onTap: () async {
+        onPressed: () async {
           showCustomDialog(context, WebView(url: url), "Close",
               buttonColor: Colors.white);
         },

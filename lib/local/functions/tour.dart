@@ -150,7 +150,7 @@ newTour() async {
     globalctx.memory["tour"]["code"] = res['data']["id"];
     setContext("catalogs", res['data']["catalogs"]);
     selectedIndex.value = 0;
-    Get.toNamed("/Tour");
+    goto("Tour");
   } else {
     log(res["message"]);
   }

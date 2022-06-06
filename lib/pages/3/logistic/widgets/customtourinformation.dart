@@ -50,7 +50,7 @@ class CustomLogisticInformationForm extends StatelessWidget {
                                     cruiseDay.value.isEmpty || cruiseEdit.value
                                         ? Colors.black
                                         : Colors.black54,
-                                onTap: () async {
+                                onPressed: () async {
                                   if (cruiseDay.value.isEmpty ||
                                       cruiseEdit.value) {
                                     showCustomDialog(

@@ -31,7 +31,7 @@ class ForgotFormPage extends GetView<StatelessWidget> {
                   textColor: Colors.white70,
                   fontWeight: FontWeight.bold,
                   label: "Send",
-                  onTap: () {
+                  onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
                       ctrl!.onForgot(context, ctrl!.state.email);

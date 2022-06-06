@@ -1,7 +1,8 @@
 import 'dart:io';
+import 'dart:js';
 
 import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'; 
 import '../index.dart';
 import 'index.dart';
 import 'package:naver_crs/index.dart';
@@ -27,6 +28,8 @@ class MyHttpOverrides extends HttpOverrides {
 
 void main() {
   try {
+
+    
     HttpOverrides.global = MyHttpOverrides();
     WidgetsFlutterBinding.ensureInitialized();
     SystemChrome.setPreferredOrientations(
