@@ -2,13 +2,10 @@
 
 import 'package:flutter/material.dart';
 import '../index.dart';
-import '../index.dart';
-import 'index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:naver_crs/common/index.dart';
-import 'package:naver_crs/index.dart';
 
 class CustomStarDestinationForm extends StatelessWidget {
   CustomStarDestinationForm({
@@ -146,7 +143,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                         label: "\t\tExploration Days    ",
                         width: 0.20);
                   }
-                  return Text("");
+                  return Text('');
                 }),
                 Obx(() {
                   var t = arrivalDate.value;
@@ -197,7 +194,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                         label: "Arrival Hour              ",
                         data: arrival_hour);
                   }
-                  return Text("");
+                  return Text('');
                 }),
                 Obx(() {
                   var expMode = explorationMode.value;
@@ -238,7 +235,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                         label: "Travel Rhythm         ",
                         data: findCatalog("travel_rhythm"));
                   }
-                  return Text("");
+                  return Text('');
                 }),
                 Obx(() {
                   if (explorationMode.value != "2") {
@@ -274,7 +271,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                       data: findCatalog("key_activity"),
                     );
                   }
-                  return Text("");
+                  return Text('');
                 }),
                 SizedBox(
                   child: (() {
@@ -336,7 +333,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                       );
                     }
                   } else {
-                    return Text("");
+                    return Text('');
                   }
                 }),
                 SizedBox(child: Obx(() {
@@ -382,7 +379,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                       ],
                     );
                   }
-                  return Text("");
+                  return Text('');
                 })),
               ]),
             ),

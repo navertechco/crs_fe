@@ -1,11 +1,9 @@
 // ignore_for_file: prefer_function_declarations_over_variables, non_constant_identifier_names
 import 'package:flutter/material.dart';
 import '../index.dart';
-import 'index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:naver_crs/index.dart';
 
 bool isFirstLaunch = true;
 var currentDestinationIndex = 0.obs;
@@ -96,27 +94,27 @@ Map<String, dynamic> states = {
   "promoted": globalctx.promotedExperiences
 };
 Map dayDto = {
-  "date": "",
-  "observation": "",
-  "day_description": "",
-  "day_name": "",
+  "date": '',
+  "observation": '',
+  "day_description": '',
+  "day_name": '',
   "parent": 0,
   "option_id": 1,
   "transport_id": 1,
   "key_activities": [],
   "meals": "B/L/D/O",
   "experiences": {},
-  "destination": ""
+  "destination": ''
 };
 Map experienceDto = {
-  "destination": "",
-  "day": "",
-  "title": "",
-  "description": "",
-  "next": "",
-  "previous": "",
-  "experience_id": "",
-  "photo": ""
+  "destination": '',
+  "day": '',
+  "title": '',
+  "description": '',
+  "next": '',
+  "previous": '',
+  "experience_id": '',
+  "photo": ''
 };
 var days = [
   {"dayId": 1, "spa": "Lunes", "eng": "Monday"},
@@ -336,7 +334,7 @@ List data = [];
 RxString? searchResult = ''.obs;
 List filtered = [];
 int idx = 0;
-String type = "";
+String type = '';
 List filteredExperiences = [];
 var filteredData = [].obs;
 var absorvedPurpose = false.obs;

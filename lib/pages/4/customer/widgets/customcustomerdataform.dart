@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import '../index.dart';
-import 'index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/common/index.dart';
 import 'package:sweetalert/sweetalert.dart';
-import 'package:naver_crs/index.dart';
 
 class CustomCustomerDataForm extends StatelessWidget {
   final CustomerController? ctrl;
@@ -93,7 +91,7 @@ class CustomCustomerDataForm extends StatelessWidget {
                                         "Tax Id                            ",
                                     width: 0.1);
                               } else {
-                                return Text("");
+                                return Text('');
                               }
                             }),
                             Obx(() {
@@ -111,7 +109,7 @@ class CustomCustomerDataForm extends StatelessWidget {
                                     hintText: "Legal Contact  Name  ",
                                     width: 0.24);
                               } else {
-                                return Text("");
+                                return Text('');
                               }
                             }),
                             Obx(() {
@@ -132,7 +130,7 @@ class CustomCustomerDataForm extends StatelessWidget {
                                     hintText: "DNI/PASSPORT         ",
                                     width: 0.24);
                               } else {
-                                return Text("");
+                                return Text('');
                               }
                             }),
                           ],
@@ -203,7 +201,7 @@ class CustomCustomerDataForm extends StatelessWidget {
                                   }
                                 },
                                 value: country.value,
-                                width: country.value == "" ? 0.3 : 0.15,
+                                width: country.value == '' ? 0.3 : 0.15,
                                 hintText: "Country",
                                 onChanged: (value) {
                                   country.value = value!;
@@ -224,7 +222,7 @@ class CustomCustomerDataForm extends StatelessWidget {
                                 },
                                 data: countrydata.value,
                               ),
-                              // if (country.value != "")
+                              // if (country.value != '')
                               CustomFormDropDownFieldWidget(
                                 validator: CustomCatalogRequiredValidator(
                                     errorText: "City is required ",

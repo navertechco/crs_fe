@@ -2,11 +2,9 @@
 
 import 'package:flutter/material.dart';
 import '../index.dart';
-import 'index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 import 'package:property_change_notifier/property_change_notifier.dart';
-import 'package:naver_crs/index.dart';
 
 // ignore: mixin_inherits_from_not_object
 class Context with PropertyChangeNotifier<String> {
@@ -15,7 +13,7 @@ class Context with PropertyChangeNotifier<String> {
     "index": 0.obs,
     "icons": {}.obs,
     "countries": {},
-    "session": {"avatar": "".obs},
+    "session": {"avatar": ''.obs},
     "destinationdata": {}.obs,
     "experiencedata": {}.obs,
     "catalogs": {}.obs

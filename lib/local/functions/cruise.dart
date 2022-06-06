@@ -6,10 +6,7 @@ import '../index.dart';
 import 'index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:naver_crs/pages/3/logistic/widgets/index.dart';
-import 'package:syncfusion_flutter_calendar/calendar.dart';
-import 'package:naver_crs/index.dart';
 
 /// ## getCruiseItinerary
 /// *__Method to get the cruise itinerary from a gived extracted cruise registry from memory__*
@@ -25,13 +22,13 @@ import 'package:naver_crs/index.dart';
 String getCruiseItinerary(row) {
   var itinerary = row["cruise_itinerary"]
       .toString()
-      .replaceAll("[", "")
-      .replaceAll("]", "");
+      .replaceAll("[", '')
+      .replaceAll("]", '');
   var itineraryList = itinerary.split(",");
-  var result = "";
+  var result = '';
   var i = 1;
   for (var item in itineraryList) {
-    if (item.toString() != "") {
+    if (item.toString() != '') {
       result +=
           "${getCatalogDescription(findCatalog("week_day"), i)}: ${item.toString()} \n";
     }
@@ -61,7 +58,7 @@ void filterCruises(ctx) {
   itinerary = findCatalog("itinerary");
   animals = findCatalog("animals");
   //CRUISE CATEGORY LUJO / PRIMERA
-  if (cruiseCategory.value.isNotEmpty)
+  if (cruiseCategory.isNotEmpty)
     cruises = cruises
         .where((element) => element["value"]["cruise_category"]
             .toString()
@@ -69,7 +66,7 @@ void filterCruises(ctx) {
             .contains(cruiseCategory.value))
         .toList();
   //CRUISE TYPE
-  if (cruiseType.value.isNotEmpty)
+  if (cruiseType.isNotEmpty)
     cruises = cruises
         .where((element) => element["value"]["cruise_type"]
             .toString()
@@ -77,7 +74,7 @@ void filterCruises(ctx) {
             .contains(cruiseType.value))
         .toList();
   //CRUISE MODALITY CATAMARAN / MONOCASCO / YATE
-  if (cruiseModality.value.isNotEmpty)
+  if (cruiseModality.isNotEmpty)
     cruises = cruises
         .where((element) => element["value"]["modality"]
             .toString()
@@ -85,7 +82,7 @@ void filterCruises(ctx) {
             .contains(cruiseModality.value))
         .toList();
   //CRUISE PORT BAQUERIZO / AYORA
-  if (cruisePort.value.isNotEmpty)
+  if (cruisePort.isNotEmpty)
     cruises = cruises
         .where((element) => element["value"]["cruise_port"]
             .toString()
@@ -93,35 +90,35 @@ void filterCruises(ctx) {
             .contains(cruisePort.value.toString().toUpperCase()))
         .toList();
   //CRUISE DURATION
-  if (cruiseDay.value.isNotEmpty)
+  if (cruiseDay.isNotEmpty)
     cabine = cabine
         .where((element) =>
             element["value"]["days"].toString().toUpperCase() ==
             (cruiseDay.value.toString().toUpperCase()))
         .toList();
   //CRUISE CABINE
-  if (cruiseCabine.value.isNotEmpty)
+  if (cruiseCabine.isNotEmpty)
     cabine = cabine
         .where((element) =>
             element["value"]["cabine_type"].toString().toUpperCase() ==
             (cruiseCabine.value.toString().toUpperCase()))
         .toList();
   //CRUISE ANIMALS
-  if (cruiseAnimal.value.isNotEmpty)
+  if (cruiseAnimal.isNotEmpty)
     animals = animals
         .where((element) =>
             element["description"].toString().toUpperCase() ==
             (cruiseAnimal.value.toString().toUpperCase()))
         .toList();
   //CRUISE ITINERARY
-  if (cruiseDay.value.isNotEmpty)
+  if (cruiseDay.isNotEmpty)
     itinerary = itinerary
         .where((element) =>
             element["value"]["days"].toString().toUpperCase() ==
             (cruiseDay.value.toString().toUpperCase()))
         .toList();
   //CRUISE ITINERARY FORMAT
-  if (cruiseItinerary.value.isNotEmpty)
+  if (cruiseItinerary.isNotEmpty)
     itinerary = itinerary
         .where((element) =>
             element["value"]["itinerary_format"].toString().toUpperCase() ==
@@ -160,11 +157,10 @@ List<DataColumn> getCruiseHeader(context, data, columns) {
     if (columns != null) {
       cols = columns;
     }
-    for (var key in cols) {
-      String title = key ?? "";
+    for (int i = 0; i < cols.length; i++) {
       header.add(DataColumn(
         label: Text(
-          "",
+          '',
           textAlign: TextAlign.left,
           style: KTextSytle(
             context: context,
@@ -202,20 +198,20 @@ List<DataColumn> getCruiseHeader(context, data, columns) {
 /// @return void
 ///
 void clearCruiseFilter() {
-  cruiseFormat.value = "";
-  cruiseDay.value = "";
-  cruiseShip.value = "";
-  cruiseRange.value = "";
-  cruiseCategory.value = "";
-  cruiseKey.value = "";
-  cruiseType.value = "";
-  cruiseCabine.value = "";
-  cruiseModality.value = "";
-  cruisePax.value = "";
-  cruiseTriple.value = "";
-  cruiseStarts.value = "";
-  cruiseEnds.value = "";
-  cruiseIslet.value = "";
+  cruiseFormat.value = '';
+  cruiseDay.value = '';
+  cruiseShip.value = '';
+  cruiseRange.value = '';
+  cruiseCategory.value = '';
+  cruiseKey.value = '';
+  cruiseType.value = '';
+  cruiseCabine.value = '';
+  cruiseModality.value = '';
+  cruisePax.value = '';
+  cruiseTriple.value = '';
+  cruiseStarts.value = '';
+  cruiseEnds.value = '';
+  cruiseIslet.value = '';
 }
 
 /// ## clearCruiseFilter
@@ -294,7 +290,7 @@ List<DataRow> getCruiseDetail(context, data, columns) {
 ///```
 DateTime getNextCruiseDate() {
   var dayName =
-      cruiseItinerary.value.toString().split("-")[0].replaceAll(" ", "");
+      cruiseItinerary.value.toString().split("-")[0].replaceAll(" ", '');
   var nextCruiseDate = getNextOnCurrentDate(dayName);
   return nextCruiseDate;
 }
@@ -372,7 +368,7 @@ DataCell getCruiseDataCell(context, row) {
           () {
             return CustomFormCalendarFieldWidget(
                 width: 0.01,
-                label: "",
+                label: '',
                 initialStartDate: getNextCruiseDate(),
                 initialEndDate: getNextCruiseDate()
                     .add(Duration(days: int.parse(cruiseDay.value) - 1)),

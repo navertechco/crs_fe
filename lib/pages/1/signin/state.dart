@@ -3,9 +3,9 @@ import 'package:get/get.dart';
 class SigninState extends GetXState {
   // title
   bool isLoading = false;
-  String? error = "";
-  String username = "";
-  String password = "";
+  String? error = '';
+  String username = '';
+  String password = '';
 
   final _title = "SIGNIN".obs;
   set title(value) => _title.value = value;

@@ -4,13 +4,12 @@ import 'index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 
-
 // ignore: must_be_immutable
 class CustomFormCheckboxWidget extends StatelessWidget {
   CustomFormCheckboxWidget(
       {Key? key,
-      this.label = "",
-      this.hintText = "",
+      this.label = '',
+      this.hintText = '',
       this.width = 0.2,
       this.height = 0.05,
       required this.value,

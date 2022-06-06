@@ -7,7 +7,7 @@ class CustomerState extends GetXState {
     // ignore: prefer_function_declarations_over_variables, unused_local_variable
     toMap = () {
       return {
-        "contact_name": contactName, 
+        "contact_name": contactName,
         "customer_type": customerType,
         "country": country,
         "email": email,
@@ -25,18 +25,18 @@ class CustomerState extends GetXState {
   }
   // ignore: prefer_function_declarations_over_variables
   Function toMap = () {};
-  String contactName = ""; 
-  String city = "";
-  String addressLine = "";
-  String leadPassenger = "";
-  String travelCode = "";
-  String email = "";
-  String country = "";
-  String customerType = "";
+  String contactName = '';
+  String city = '';
+  String addressLine = '';
+  String leadPassenger = '';
+  String travelCode = '';
+  String email = '';
+  String country = '';
+  String customerType = '';
   // ignore: non_constant_identifier_names
-  String dni = "";
-  String taxId = "";
-  String names = "";
-  String lastNames = "";
-  String birthDate = "" ;
+  String dni = '';
+  String taxId = '';
+  String names = '';
+  String lastNames = '';
+  String birthDate = '';
 }

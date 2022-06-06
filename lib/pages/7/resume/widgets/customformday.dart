@@ -40,7 +40,7 @@ class CustomFormDayWidget extends StatelessWidget {
             ],
           ));
     } catch (e) {
-      return Text("");
+      return Text('');
     }
   }
 }

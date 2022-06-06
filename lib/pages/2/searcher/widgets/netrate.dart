@@ -2,8 +2,6 @@
 
 import 'package:flutter/material.dart';
 import '../index.dart';
-import 'index.dart';
-import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/index.dart';
 
@@ -59,8 +57,6 @@ class TotalNetRateWidget extends GetView<SearcherController> {
                       // color: Colors.white,
                       child: SingleChildScrollView(
                         child: Obx(() {
-                          var t = netRateHeader.value;
-                          t = netRateHeader.value;
                           return Column(
                             children: [
                               // SearcherField(data: data, formKey: _formKey),

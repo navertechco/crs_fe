@@ -19,9 +19,9 @@ class LogisticState extends GetXState {
   // ignore: prefer_function_declarations_over_variables
   Function toMap = () {};
   // ignore: non_constant_identifier_names
-  String arrival_port = "";
+  String arrival_port = '';
   // ignore: non_constant_identifier_names
-  String departure_port = "";
+  String departure_port = '';
   DateTime arrivalDate = DateTime.now();
   DateTime sinceDate = DateTime.now();
   DateTime departureDate = DateTime.now();

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get.dart';
@@ -23,11 +22,11 @@ class TravelChips extends HookWidget {
             Obx(() {
               return Column(
                 children: [
-                  if (currentDestinationKeyActivities.value.isNotEmpty)
+                  if (currentDestinationKeyActivities.isNotEmpty)
                     InputChip(
                       deleteIcon: Icon(Icons.cancel),
                       label: Text(
-                          " Key Activities: ${currentDestinationKeyActivities.value.toString().replaceAll("[", "").replaceAll("]", "")}"),
+                          " Key Activities: ${currentDestinationKeyActivities.value.toString().replaceAll("[", '').replaceAll("]", '')}"),
                       onSelected: (bool value) {},
                       onDeleted: () {
                         clearedKA[currentDay.value] = true;

@@ -1,7 +1,6 @@
 // ignore_for_file: unnecessary_this
 
 import 'package:get/get.dart';
-import 'package:naver_crs/index.dart';
 
 class TourState extends GetXState {
   TourState() {
@@ -16,8 +15,8 @@ class TourState extends GetXState {
   }
   // ignore: prefer_function_declarations_over_variables
   Function toMap = () {};
-  String country = "";
+  String country = '';
   // ignore: non_constant_identifier_names
-  String accomodation_type = "";
+  String accomodation_type = '';
   int passengers = 0;
 }

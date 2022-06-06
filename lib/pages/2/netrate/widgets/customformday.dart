@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import '../index.dart';
-import 'index.dart';
 import 'package:naver_crs/index.dart';
 import 'customdescription.dart';
 import 'customformexperiencedetail.dart';
@@ -24,7 +22,7 @@ class CustomFormDayWidget extends StatelessWidget {
       var daysData = destination["daysData"] ?? {};
       var days = daysData.entries.toList();
       var day = days[dayindex];
-      var daydescription = day.value['day_description'] ?? "";
+      var daydescription = day.value['day_description'] ?? '';
       var dayLabel =
           (destinationindex != 0 ? destinationindex + 1 : destinationindex) +
               (destinationindex == 0 ? dayindex + 1 : dayindex + 2);

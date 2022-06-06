@@ -68,7 +68,7 @@ class FormCatalogueWidget extends StatelessWidget {
         );
       } catch (e) {
         log(e);
-        return Text("");
+        return Text('');
       }
     });
   }

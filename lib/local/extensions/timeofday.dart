@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import '../index.dart';
-import 'index.dart';
-import 'package:naver_crs/index.dart';
 
 TimeOfDay minutesToTimeOfDay(int minutes) {
   Duration duration = Duration(minutes: minutes);

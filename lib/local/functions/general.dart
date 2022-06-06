@@ -11,7 +11,6 @@ import 'package:get/get.dart';
 import 'package:naver_crs/pages/7/endservices/widgets/index.dart';
 import 'package:naver_crs/pages/index.dart';
 import 'package:sweetalert/sweetalert.dart';
-import 'package:naver_crs/index.dart';
 export 'day.dart';
 export 'destination.dart';
 export 'experience.dart';
@@ -172,7 +171,7 @@ getFormValue(data, formKey, key, def) {
   if (data != null) {
     if (data[formKey] != null) {
       if (data[formKey][key] != null) {
-        if (data[formKey][key] == "") {
+        if (data[formKey][key] == '') {
           return def;
         }
         return data[formKey][key] ?? def;
@@ -186,7 +185,7 @@ getFormDateValue(data, formKey, key, def) {
   if (data != null) {
     if (data[formKey] != null) {
       if (data[formKey][key] != null) {
-        if (data[formKey][key] == "") {
+        if (data[formKey][key] == '') {
           return DateTime.parse(def);
         }
         return DateTime.parse(data[formKey][key]);
@@ -201,10 +200,10 @@ parseIntValue(value) {
     return value;
   }
   value ??= "0";
-  if (value == "") {
+  if (value == '') {
     value = "0";
   }
-  value = value.replaceAll(RegExp(r'[^0-9]'), '').replaceAll("-", "");
+  value = value.replaceAll(RegExp(r'[^0-9]'), '').replaceAll("-", '');
   return int.parse(value);
 }
 
@@ -387,11 +386,11 @@ getHotel(ctx, {int id = 0, int index = 0}) async {
   }
 }
 
-getCruise(ctx, {int cruiseId = 999, String cruiseName = ""}) async {
+getCruise(ctx, {int cruiseId = 999, String cruiseName = ''}) async {
   var frame = {
     "data": {
       "cruise_id": cruiseId,
-      "cruise_name": cruiseName != "" ? cruiseName.split("-")[0] : ""
+      "cruise_name": cruiseName != '' ? cruiseName.split("-")[0] : ''
     },
   };
   var res = await fetchhandler(kDefaultSchema, kDefaultServer,
@@ -416,9 +415,9 @@ getCruise(ctx, {int cruiseId = 999, String cruiseName = ""}) async {
 
 resetData(context, controller) {
   var data = globalctx.memory["tours"];
-  if (searchResult!.value.isNotEmpty) {
+  if (searchResult!.isNotEmpty) {
     controller.clear();
-    searchResult!.value = "";
+    searchResult!.value = '';
     filteredData.value = data;
     var detail = getDetail(context, filteredData, null);
     searcherDetail.value = (detail);
@@ -429,7 +428,7 @@ filterData(context, value) {
   var data = globalctx.memory["tours"];
   try {
     searchResult!.value = value.toString();
-    if (searchResult!.value.isNotEmpty) {
+    if (searchResult!.isNotEmpty) {
       filteredData.value = data
           .where((quote) =>
               quote["date"].toString().contains(searchResult!.value) ||
@@ -460,7 +459,7 @@ getNetRateHeader(context, data) {
   var header = <DataColumn>[];
   if (data.length > 0) {
     for (var key in data[0].keys) {
-      String title = key ?? "";
+      String title = key ?? '';
       header.add(DataColumn(
         label: Text(
           title.capitalize!.replaceAll("_", " "),
@@ -488,7 +487,7 @@ getHeader(context, data, columns) {
       cols = columns;
     }
     for (var key in cols) {
-      String title = key ?? "";
+      String title = key ?? '';
       header.add(DataColumn(
         label: Text(
           title.capitalize!.replaceAll("_", " "),
@@ -532,7 +531,7 @@ List<Meeting> getDataSource(data) {
       .add(Duration(days: (7 - (firstOfMonth.weekday - DateTime.monday)) % 7));
   var current = firstMonday;
   for (var day in dataList) {
-    if (day == "" || day == " ") {
+    if (day == '' || day == " ") {
       count++;
       continue;
     }
@@ -647,7 +646,7 @@ getNetRateDetail(context, data) {
     for (var row in data) {
       var cells = <DataCell>[];
       for (var key in row.keys) {
-        if (key == "") {}
+        if (key == '') {}
         cells.add(DataCell(Text('${row[key]}',
             style: KTextSytle(
                     context: context,

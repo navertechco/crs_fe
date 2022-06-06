@@ -6,16 +6,15 @@ import 'index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
-import 'package:naver_crs/index.dart';
 
 processQuoteHistoryItinerary(row) {
   var itinerary =
-      row["quote_itinerary"].toString().replaceAll("[", "").replaceAll("]", "");
+      row["quote_itinerary"].toString().replaceAll("[", '').replaceAll("]", '');
   var itineraryList = itinerary.split(",");
-  var result = "";
+  var result = '';
   var i = 1;
   for (var item in itineraryList) {
-    if (item.toString() != "") {
+    if (item.toString() != '') {
       result +=
           "${getCatalogDescription(findCatalog("week_day"), i)}: ${item.toString()} \n";
     }
@@ -73,7 +72,7 @@ getQuoteHistoryHeader(context, data, columns) {
     for (int i = 0; i < cols.length; i++) {
       header.add(DataColumn(
         label: Text(
-          "",
+          '',
           textAlign: TextAlign.left,
           style: KTextSytle(
             context: context,

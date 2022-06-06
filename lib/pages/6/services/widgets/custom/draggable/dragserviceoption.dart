@@ -38,7 +38,7 @@ class DragServiceOptionWidget extends StatelessWidget {
                       )
               ],
             )
-          : Text("");
+          : Text('');
     });
   }
 }

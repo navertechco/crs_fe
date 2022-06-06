@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import '../index.dart';
-import 'index.dart';
-import 'package:naver_crs/index.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ServiceFrontOptionWidget extends StatelessWidget {
@@ -10,7 +7,7 @@ class ServiceFrontOptionWidget extends StatelessWidget {
   final String service;
   @override
   Widget build(BuildContext context) {
-    var title = "";
+    var title = '';
 
     if (service.contains("-")) {
       for (var item in service.toString().split("-")) {

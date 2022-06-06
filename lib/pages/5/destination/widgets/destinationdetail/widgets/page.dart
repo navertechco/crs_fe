@@ -4,8 +4,6 @@ import 'index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 
-import 'package:naver_crs/index.dart';
-
 class DestinationDetailWidget extends GetView<DestinationDetailController> {
   DestinationDetailWidget(
       {Key? key,

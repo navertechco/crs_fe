@@ -1,7 +1,6 @@
 // ignore_for_file: unused_local_variable, prefer_function_declarations_over_variables
 
 import 'package:flutter/material.dart';
-import '../index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 

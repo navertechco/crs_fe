@@ -3,7 +3,6 @@ import '../../index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 
-
 class DragExperienceTarget extends StatelessWidget {
   final String experience;
   const DragExperienceTarget({
@@ -39,7 +38,7 @@ class DragExperienceTarget extends StatelessWidget {
                       )
               ],
             )
-          : Text("");
+          : Text('');
     });
   }
 }

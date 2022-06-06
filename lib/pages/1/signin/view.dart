@@ -3,7 +3,6 @@ import 'index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 import 'widgets/index.dart';
-import 'package:naver_crs/index.dart';
 
 class SigninPage extends GetView<SigninController> {
   const SigninPage({Key? key}) : super(key: key);

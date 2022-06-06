@@ -42,7 +42,7 @@ Future<http.Response> fetch(method, body, uri) async {
 }
 
 Future<dynamic> fetchhandler(scheme, host, port, path, method, body) async {
-  http.Response response = http.Response("", 201);
+  http.Response response = http.Response('', 201);
   try {
     if (method == 'GET') {
       response = await fetch(

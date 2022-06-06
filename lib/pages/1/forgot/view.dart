@@ -3,7 +3,6 @@ import 'index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 import 'widgets/index.dart';
-import 'package:naver_crs/index.dart';
 
 class ForgotPage extends GetView<ForgotController> {
   const ForgotPage({Key? key}) : super(key: key);
@@ -24,6 +23,6 @@ GetBuilder<ForgotController> _buildForgotFormPage(
     builder: (controller) => ContentLayoutWidget(
         background: "assets/custom/img/home.png",
         child: ForgotFormPage(ctrl: controller),
-        text: ""),
+        text: ''),
   );
 }

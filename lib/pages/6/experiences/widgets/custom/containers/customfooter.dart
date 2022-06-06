@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import '../index.dart';
 import 'package:naver_crs/index.dart';
-import 'package:naver_crs/common/index.dart';
 // ignore: import_of_legacy_library_into_null_safe
 
 class CustomFooterWidget extends StatelessWidget {
@@ -79,7 +77,7 @@ class CustomFooterWidget extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black)
                             .getStyle()),
-                    "",
+                    '',
                     width: 0.3,
                     height: 0.2,
                     customChild: LeisureTimeBypassKeyPad(),

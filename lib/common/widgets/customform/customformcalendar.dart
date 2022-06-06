@@ -4,13 +4,12 @@ import 'index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:flutter/services.dart';
 
-
 // ignore: must_be_immutable
 class CustomFormCalendarFieldWidget extends StatelessWidget {
   CustomFormCalendarFieldWidget({
     Key? key,
-    this.label = "",
-    this.hintText = "",
+    this.label = '',
+    this.hintText = '',
     this.width = 0.2,
     this.height = 0.05,
     this.disabled = false,

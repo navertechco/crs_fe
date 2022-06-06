@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import '../index.dart';
-import 'package:naver_crs/index.dart';
 
 class CustomHeaderWidget extends StatelessWidget {
   const CustomHeaderWidget({
@@ -10,7 +8,7 @@ class CustomHeaderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [Text("")],
+      children: [Text('')],
     );
   }
 }

@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import '../index.dart';
-import 'index.dart';
-import 'package:naver_crs/index.dart';
 import 'package:get/get_utils/src/extensions/string_extensions.dart';
-
 import 'package:naver_crs/index.dart';
 import 'customformday.dart';
 import 'customformtitle.dart';

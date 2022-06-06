@@ -2,12 +2,10 @@
 
 import 'package:flutter/material.dart';
 import '../index.dart';
-import 'index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:flutter_html/shims/dart_ui_real.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../context/index.dart';
-import 'package:naver_crs/index.dart';
 
 //SERVER DATA
 

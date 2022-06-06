@@ -11,7 +11,7 @@ class ServicesPage extends GetView<ServicesController> {
     return ContentLayoutWidget(
         background: "assets/custom/img/layout.png",
         child: ServicesWidget(ctrl: controller),
-        text: "");
+        text: '');
   }
 
   @override

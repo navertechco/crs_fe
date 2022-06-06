@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'index.dart';
-import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
-import 'package:naver_crs/index.dart';
 import 'widgets/index.dart';
 import 'package:naver_crs/index.dart';
 

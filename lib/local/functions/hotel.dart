@@ -6,16 +6,15 @@ import '../index.dart';
 import 'index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
-import 'package:naver_crs/index.dart';
 
 processHotelItinerary(row) {
   var itinerary =
-      row["hotel_itinerary"].toString().replaceAll("[", "").replaceAll("]", "");
+      row["hotel_itinerary"].toString().replaceAll("[", '').replaceAll("]", '');
   var itineraryList = itinerary.split(",");
-  var result = "";
+  var result = '';
   var i = 1;
   for (var item in itineraryList) {
-    if (item.toString() != "") {
+    if (item.toString() != '') {
       result +=
           "${getCatalogDescription(findCatalog("week_day"), i)}: ${item.toString()} \n";
     }
@@ -81,18 +80,18 @@ filterHotels(ctx) {
   }
 
   //BUDGET
-  if (hotelCategory.value.isNotEmpty)
+  if (hotelCategory.isNotEmpty)
     filteredHotel = filteredHotel.where((element) {
       var rule = true;
       var max = element["value"]["budget_fk"];
-      if (hotelCategory.value.isNotEmpty) {
+      if (hotelCategory.isNotEmpty) {
         rule = hotelCategory.value == max.toString();
       }
       return rule;
     }).toList();
 
   //HOTELNAME
-  if (hotelName.value.isNotEmpty)
+  if (hotelName.isNotEmpty)
     filteredHotel = filteredHotel.where((element) {
       var rule = true;
       var max = element["value"]["hotelname"];
@@ -132,7 +131,7 @@ getHotelCapacity(hotelName) {
       .toList();
   for (var hotel in hotels) {
     int rt =
-        hotel["value"]["#roomtypes"] == "" ? 10 : hotel["value"]["#roomtypes"];
+        hotel["value"]["#roomtypes"] == '' ? 10 : hotel["value"]["#roomtypes"];
     int mc = hotel["value"]["maxCapacity"];
     capacity = capacity + (rt * mc);
   }
@@ -148,10 +147,10 @@ getHotelHeader(context, data, columns) {
     if (columns != null) {
       cols = columns;
     }
-    for (var key in cols) {
+    for (int i = 0; i < cols.length; i++) {
       header.add(DataColumn(
         label: Text(
-          "",
+          '',
           textAlign: TextAlign.left,
           style: KTextSytle(
             context: context,
@@ -218,7 +217,7 @@ getHotelDetail(context, data, columns) {
 }
 
 var currentHotelName = Rx(getFormValue(
-    globalctx.memory["destinations"], globalDestinationIndex, "hotelName", ""));
+    globalctx.memory["destinations"], globalDestinationIndex, "hotelName", ''));
 
 getHotelDataCell(context, row) {
   var dataCell = DataCell(

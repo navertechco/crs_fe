@@ -1,8 +1,6 @@
 import 'package:checkbox_formfield/checkbox_icon_formfield.dart';
 import 'package:flutter/material.dart';
 import '../index.dart';
-import 'index.dart';
-import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/common/index.dart';
 import 'package:naver_crs/index.dart';
@@ -106,9 +104,8 @@ class CustomLogisticInformationForm extends StatelessWidget {
                         return Row(
                           children: [
                             CustomFormDateFieldWidget(
-                              disabled:
-                                  (readonly || cruiseDay.value.isNotEmpty) &&
-                                      !arrivalEdit.value,
+                              disabled: (readonly || cruiseDay.isNotEmpty) &&
+                                  !arrivalEdit.value,
                               initialValue: arrivalDate.value,
                               validator: CustomDatetimeGreaterValidator(
                                   context: context,
@@ -166,9 +163,8 @@ class CustomLogisticInformationForm extends StatelessWidget {
                         return Row(
                           children: [
                             CustomFormDateFieldWidget(
-                              disabled:
-                                  (readonly || cruiseDay.value.isNotEmpty) &&
-                                      !departureEdit.value,
+                              disabled: (readonly || cruiseDay.isNotEmpty) &&
+                                  !departureEdit.value,
                               initialValue: departureDate.value,
                               validator: CustomDatetimeGreaterValidator(
                                   context: context,
@@ -260,7 +256,7 @@ class CustomLogisticInformationForm extends StatelessWidget {
                                   },
                                   label: '\t\tOpen Credit Amount',
                                   width: 0.2),
-                            if (cruiseDay.value.isNotEmpty)
+                            if (cruiseDay.isNotEmpty)
                               CustomTitleWidget(
                                 width: 0.3,
                                 fontWeight: FontWeight.bold,

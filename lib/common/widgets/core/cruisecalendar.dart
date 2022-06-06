@@ -49,7 +49,7 @@ class CruiseFiltersWidget extends StatelessWidget {
               hintText: "Days    ",
               data: getMemoryCatalogChild("cabine", "value", "days"),
             ),
-            if (cruiseDay.value.isNotEmpty)
+            if (cruiseDay.isNotEmpty)
               CustomFormDropDownFieldWidget(
                 width: 0.15,
                 height: 0.05,
@@ -80,7 +80,7 @@ class CruiseFiltersWidget extends StatelessWidget {
                       "relation": ["cruise_id", "days"]
                     }),
               ),
-            if (cruiseItinerary.value.isNotEmpty)
+            if (cruiseItinerary.isNotEmpty)
               CustomFormDropDownFieldWidget(
                 width: 0.15,
                 height: 0.05,
@@ -119,12 +119,12 @@ class CruiseFiltersWidget extends StatelessWidget {
             //     onSaved: (value) {},
             //     onChanged: (value) {
             //       cruiseAnimal.value = getCatalogDescription(
-            //           getMemoryCatalogChild("animals", "description", ""),
+            //           getMemoryCatalogChild("animals", "description", ''),
             //           value);
             //       filterCruises(context);
             //     },
             //     hintText: "Animals    ",
-            //     data: getMemoryCatalogChild("animals", "description", ""),
+            //     data: getMemoryCatalogChild("animals", "description", ''),
             //   ),
           ]),
           Row(children: [
@@ -173,7 +173,7 @@ class CruiseFiltersWidget extends StatelessWidget {
                 return rule && rule2 && rule3;
               }),
             ),
-            if (cruiseCategory.value.isNotEmpty)
+            if (cruiseCategory.isNotEmpty)
               CustomFormDropDownFieldWidget(
                 width: 0.15,
                 height: 0.05,
@@ -214,8 +214,8 @@ class CruiseFiltersWidget extends StatelessWidget {
                   return rule && rule2 && rule3;
                 }),
               ),
-            if (cruiseCategory.value.isNotEmpty)
-              if (cruiseModality.value.isNotEmpty)
+            if (cruiseCategory.isNotEmpty)
+              if (cruiseModality.isNotEmpty)
                 CustomFormDropDownFieldWidget(
                   width: 0.15,
                   height: 0.05,
@@ -256,9 +256,9 @@ class CruiseFiltersWidget extends StatelessWidget {
                     return rule && rule2 && rule3;
                   }),
                 ),
-            if (cruiseCategory.value.isNotEmpty)
-              if (cruiseModality.value.isNotEmpty)
-                if (cruiseType.value.isNotEmpty)
+            if (cruiseCategory.isNotEmpty)
+              if (cruiseModality.isNotEmpty)
+                if (cruiseType.isNotEmpty)
                   CustomFormDropDownFieldWidget(
                     width: 0.15,
                     height: 0.05,
@@ -332,7 +332,7 @@ class CruiseKeyPadWidget extends StatelessWidget {
                             color: Colors.black)
                         .getStyle()),
               ),
-              if (cruiseCabine.value.isNotEmpty)
+              if (cruiseCabine.isNotEmpty)
                 TextButton(
                   onPressed: () {
                     showCustomDialog(context, CruiseResultWidget(), "Close",
@@ -346,7 +346,7 @@ class CruiseKeyPadWidget extends StatelessWidget {
                               color: Colors.black)
                           .getStyle()),
                 ),
-              if (cruiseCabine.value.isNotEmpty)
+              if (cruiseCabine.isNotEmpty)
                 TextButton(
                   onPressed: () {
                     moreFilters.value = !moreFilters.value;
@@ -375,10 +375,10 @@ class CruiseResultWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       child: Stack(children: [
-        if (cruiseCategory.value.isNotEmpty)
-          if (cruiseModality.value.isNotEmpty)
-            if (cruiseType.value.isNotEmpty)
-              if (cruisePort.value.isNotEmpty)
+        if (cruiseCategory.isNotEmpty)
+          if (cruiseModality.isNotEmpty)
+            if (cruiseType.isNotEmpty)
+              if (cruisePort.isNotEmpty)
                 Column(
                   children: [
                     Padding(

@@ -6,7 +6,7 @@ import 'package:naver_crs/index.dart';
 class CustomFormMultiDropDownFieldWidget extends StatelessWidget {
   const CustomFormMultiDropDownFieldWidget(
       {Key? key,
-      this.label = "",
+      this.label = '',
       this.hintText = '',
       required this.data,
       required this.value,

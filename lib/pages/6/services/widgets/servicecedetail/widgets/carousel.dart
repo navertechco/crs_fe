@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import '../index.dart';
-import 'index.dart';
 import 'package:naver_crs/index.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:flutter_swiper/flutter_swiper.dart';
@@ -13,12 +11,8 @@ class CarouselWidget extends StatelessWidget {
   final service;
   @override
   Widget build(BuildContext context) {
-    var srvData = filteredsrv
-        .toList()
-        .firstWhere((element) => element.description == service)
-        .value;
-    var images = [];
-    var datas = [];
+ 
+    var images = []; 
 
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.3,

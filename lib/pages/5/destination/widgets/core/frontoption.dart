@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import '../index.dart';
-import 'index.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/index.dart';
 
@@ -110,7 +108,7 @@ class DestinationFrontOptionWidget extends StatelessWidget {
                 height: MediaQuery.of(context).size.height * 0.13),
           );
         } else {
-          return Text("");
+          return Text('');
         }
       }),
     ]);

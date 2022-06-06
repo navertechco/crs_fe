@@ -54,7 +54,7 @@ class CustomRequiredValidator extends TextFieldValidator {
 
   @override
   bool isValid(String? value) {
-    return value != null && value != "" && value != "0";
+    return value != null && value != '' && value != "0";
   }
 
   @override
@@ -86,7 +86,7 @@ class CustomCatalogRequiredValidator extends TextFieldValidator {
 
   @override
   bool isValid(String? value) {
-    return value != null && value != "" && value != "0" && catalog.isNotEmpty;
+    return value != null && value != '' && value != "0" && catalog.isNotEmpty;
   }
 
   @override

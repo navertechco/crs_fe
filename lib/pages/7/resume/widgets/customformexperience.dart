@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import '../index.dart';
-import 'index.dart';
 import 'package:naver_crs/index.dart';
 import 'customdescription.dart';
 
@@ -13,7 +11,6 @@ class CustomFormExperienceRowWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     try {
-      var destId = indexes[0];
       var destDay = indexes[1];
       var experienceindex = indexes[2];
       var promoted = globalctx.memory["promoted"][destDay];
@@ -29,7 +26,7 @@ class CustomFormExperienceRowWidget extends StatelessWidget {
       var nextexperience = promoted[nextExpName];
       var title = expName.toString();
       var description = experience['description'].toString();
-      var next = experience['next'].toString() != ""
+      var next = experience['next'].toString() != ''
           ? experience['next'].toString()
           : nextexperience['previous'].toString();
 

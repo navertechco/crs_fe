@@ -1,8 +1,6 @@
 // ignore_for_file: unnecessary_this
 
 import 'package:flutter/material.dart';
-import '../index.dart';
-import 'index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 
@@ -112,7 +110,7 @@ class TitleWidget extends StatelessWidget {
           children: [
             TextButton(child: Obx(() {
               return Text(
-                  "Starts at: ${timeStart.value.toString().replaceAll("TimeOfDay", "").replaceAll("(", "").replaceAll(")", "")}",
+                  "Starts at: ${timeStart.value.toString().replaceAll("TimeOfDay", '').replaceAll("(", '').replaceAll(")", '')}",
                   style: KTextSytle(
                           context: context,
                           fontSize: 15,
@@ -139,7 +137,7 @@ class TitleWidget extends StatelessWidget {
           children: [
             Obx(() {
               return Text(
-                  "  Ends at: ${(timeStart.value!.addMinute(expData["exptime"])).toString().replaceAll("TimeOfDay", "").replaceAll("(", "").replaceAll(")", "")}",
+                  "  Ends at: ${(timeStart.value!.addMinute(expData["exptime"])).toString().replaceAll("TimeOfDay", '').replaceAll("(", '').replaceAll(")", '')}",
                   style: KTextSytle(
                           context: context,
                           fontSize: 15,

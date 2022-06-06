@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_use_of_protected_member
+
 import 'package:flutter/material.dart';
 import '../index.dart';
 import 'package:naver_crs/index.dart';
@@ -66,7 +68,7 @@ class HotelFiltersWidget extends StatelessWidget {
                         getMemoryCatalogChild("hotel", "value", "roomcategory",
                             condition: (element) {
                           var rule = true;
-                          var rt = element["value"]["#roomtypes"] == ""
+                          var rt = element["value"]["#roomtypes"] == ''
                               ? 1
                               : element["value"]["#roomtypes"];
                           var mc = element["value"]["maxCapacity"];
@@ -90,7 +92,7 @@ class HotelFiltersWidget extends StatelessWidget {
                   data: getMemoryCatalogChild("hotel", "value", "roomcategory",
                       condition: (element) {
                     var rule = true;
-                    var rt = element["value"]["#roomtypes"] == ""
+                    var rt = element["value"]["#roomtypes"] == ''
                         ? 1
                         : element["value"]["#roomtypes"];
                     var mc = element["value"]["maxCapacity"];
@@ -132,8 +134,8 @@ class HotelFiltersWidget extends StatelessWidget {
                     filterHotels(context);
                   },
                   onChanged: (values) {},
-                  hintText: "",
-                  label: "",
+                  hintText: '',
+                  label: '',
                   data: findCatalog("more_hotel_filters"),
                 ),
             ],
@@ -159,8 +161,8 @@ class HotelKeyPadWidget extends StatelessWidget {
             children: [
               TextButton(
                 onPressed: () {
-                  hotelName.value = "";
-                  hotelCategory.value = "";
+                  hotelName.value = '';
+                  hotelCategory.value = '';
                   hotelRoomCategory.value = [];
                   moreFilters.value = false;
                   filterHotels(context);
@@ -173,7 +175,7 @@ class HotelKeyPadWidget extends StatelessWidget {
                             color: Colors.black)
                         .getStyle()),
               ),
-              // if (hotelExtrabed.value.isNotEmpty)
+              // if (hotelExtrabed.isNotEmpty)
               TextButton(
                 onPressed: () {
                   showCustomDialog(context, HotelResultWidget(), "Close",
@@ -215,11 +217,11 @@ class HotelResultWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       child: Stack(children: [
-        // if (hotelTerraceorPatio.value.isNotEmpty)
-        //   if (hotelMaxCapacity.value.isNotEmpty)
-        //     if (hotelBalcony.value.isNotEmpty)
-        //       if (hotelExtrabed.value.isNotEmpty)
-        //         if (hotelExtrabed.value.isNotEmpty)
+        // if (hotelTerraceorPatio.isNotEmpty)
+        //   if (hotelMaxCapacity.isNotEmpty)
+        //     if (hotelBalcony.isNotEmpty)
+        //       if (hotelExtrabed.isNotEmpty)
+        //         if (hotelExtrabed.isNotEmpty)
         Column(
           children: [
             Padding(
@@ -252,7 +254,7 @@ class HotelResultWidget extends StatelessWidget {
                 ),
               ),
             ),
-            Container(
+            SizedBox(
                 width: MediaQuery.of(context).size.width * 0.8,
                 height: MediaQuery.of(context).size.height * 0.65,
                 child: Stack(

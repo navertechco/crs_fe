@@ -80,7 +80,7 @@ getFilteredExperiences() {
     // return rule;
   }).toList();
   filteredExperiences = filteredExperiences.where((e) {
-    if (currentDestinationKeyActivities.value.isEmpty) {
+    if (currentDestinationKeyActivities.isEmpty) {
       return true;
     }
     if (currentDay.value == 0 || e.description == "Leisure Time") {

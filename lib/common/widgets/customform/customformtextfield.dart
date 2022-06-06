@@ -4,13 +4,12 @@ import 'index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:flutter/services.dart';
 
-
 // ignore: must_be_immutable
 class CustomFormTextFieldWidget extends StatelessWidget {
   CustomFormTextFieldWidget({
     Key? key,
-    this.label = "",
-    this.hintText = "",
+    this.label = '',
+    this.hintText = '',
     this.keyboardType = TextInputType.text,
     this.validator,
     this.width = 0.2,

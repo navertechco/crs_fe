@@ -4,7 +4,6 @@ import 'package:naver_crs/index.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get.dart';
 
-
 class CustomBodyDaysWidget extends HookWidget {
   final ExperiencesController ctrl;
   final ValueNotifier<int> counter;
@@ -44,7 +43,7 @@ class CustomBodyDaysWidget extends HookWidget {
             child: Text(
               currentLeftHours.value < 0
                   ? "You have exceeded the maximum hours planned for this day !!!"
-                  : "",
+                  : '',
               style: KTextSytle(
                 context: context,
                 fontSize: 15,

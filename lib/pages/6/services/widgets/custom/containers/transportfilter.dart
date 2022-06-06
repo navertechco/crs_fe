@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import '../index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/pages/6/services/widgets/custom/containers/leftHeader.dart';
-
 import '../../../controller.dart';
 
+// ignore: must_be_immutable
 class TransportFilter extends HookWidget {
   TransportFilter(
       {Key? key, required this.ctrl, this.counter, required this.formKey})
@@ -35,11 +34,7 @@ class BodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      var index = getDestinationIndex(
-          globalDestinationName.value, globalDestinationType.value);
-      Rx<bool> customGuide = Rx(getFormValue(
-          globalctx.memory["destinations"], index, "customGuide", false));
-
+      var t = arrivalDate.value;
       return Form(
         key: formKey,
         child: Padding(

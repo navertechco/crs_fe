@@ -1,10 +1,7 @@
 // ignore_for_file: unnecessary_this
 
 import 'package:flutter/material.dart';
-import '../index.dart';
-import 'index.dart';
 import 'package:naver_crs/index.dart';
-import 'package:get/get.dart';
 
 class TitleWidget extends StatelessWidget {
   const TitleWidget({
@@ -17,13 +14,7 @@ class TitleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var srvData = getServiceByName(service).value;
-    Rx<TimeOfDay?> timeStart = Rx(getFormValue(
-            globalctx.memory["days"][currentDay.value],
-            service,
-            "timeStart",
-            time) ??
-        time);
-
+ 
     return Column(
       children: [
         Text(service.toString().split("-")[0],

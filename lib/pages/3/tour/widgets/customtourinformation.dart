@@ -3,11 +3,9 @@
 import 'package:checkbox_formfield/checkbox_icon_formfield.dart';
 import 'package:flutter/material.dart';
 import '../index.dart';
-import 'index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/common/index.dart';
-import 'package:naver_crs/index.dart';
 
 class CustomTourInformationForm extends StatelessWidget {
   CustomTourInformationForm({Key? key, this.profile, this.ctrl})

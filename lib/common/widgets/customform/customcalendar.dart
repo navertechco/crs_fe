@@ -1,9 +1,6 @@
 // ignore_for_file: prefer_function_declarations_over_variables
 
 import 'package:flutter/material.dart';
-import '../index.dart';
-import 'index.dart';
-import 'package:naver_crs/index.dart';
 import 'package:intl/intl.dart';
 
 class CustomCalendarView extends StatefulWidget {
@@ -227,125 +224,123 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
           Expanded(
             child: AspectRatio(
               aspectRatio: 1.0,
-              child: Container(
-                child: Stack(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(top: 3, bottom: 3),
-                      child: Material(
-                        color: Colors.transparent,
-                        child: Padding(
-                          padding: EdgeInsets.only(
-                              top: 2,
-                              bottom: 2,
-                              left: isStartDateRadius(date) ? 4 : 0,
-                              right: isEndDateRadius(date) ? 4 : 0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: startDate != null && endDate != null
-                                  ? getIsItStartAndEndDate(date) ||
-                                          getIsInRange(date)
-                                      ? Theme.of(context)
-                                          .primaryColor
-                                          .withOpacity(0.4)
-                                      : Colors.grey.shade300
-                                  : Colors.grey.shade300,
-                              borderRadius: BorderRadius.only(
-                                bottomLeft: isStartDateRadius(date)
-                                    ? const Radius.circular(24.0)
-                                    : const Radius.circular(0.0),
-                                topLeft: isStartDateRadius(date)
-                                    ? const Radius.circular(24.0)
-                                    : const Radius.circular(0.0),
-                                topRight: isEndDateRadius(date)
-                                    ? const Radius.circular(24.0)
-                                    : const Radius.circular(0.0),
-                                bottomRight: isEndDateRadius(date)
-                                    ? const Radius.circular(24.0)
-                                    : const Radius.circular(0.0),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Material(
+              child: Stack(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(top: 3, bottom: 3),
+                    child: Material(
                       color: Colors.transparent,
-                      child: InkWell(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(32.0)),
-                        onTap: () {
-                          saveDate(date);
-                        },
-                        onFocusChange: (b) {
-                          saveDate(date);
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.all(2),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: getIsItStartAndEndDate(date)
-                                  ? Theme.of(context).primaryColor
-                                  : Colors.transparent,
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(32.0)),
-                              border: Border.all(
-                                color: getIsItStartAndEndDate(date)
-                                    ? Colors.white
-                                    : Colors.transparent,
-                                width: 2,
-                              ),
-                              boxShadow: getIsItStartAndEndDate(date)
-                                  ? <BoxShadow>[
-                                      BoxShadow(
-                                          color: Colors.grey.withOpacity(0.6),
-                                          blurRadius: 4,
-                                          offset: const Offset(0, 0)),
-                                    ]
-                                  : null,
-                            ),
-                            child: Center(
-                              child: Text(
-                                '${date.day}',
-                                style: TextStyle(
-                                    color: getIsItStartAndEndDate(date)
-                                        ? Colors.white
-                                        : currentMonthDate!.month == date.month
-                                            ? Colors.black
-                                            : Colors.grey.withOpacity(0.6),
-                                    fontSize:
-                                        MediaQuery.of(context).size.width > 360
-                                            ? 18
-                                            : 16,
-                                    fontWeight: getIsItStartAndEndDate(date)
-                                        ? FontWeight.bold
-                                        : FontWeight.normal),
-                              ),
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            top: 2,
+                            bottom: 2,
+                            left: isStartDateRadius(date) ? 4 : 0,
+                            right: isEndDateRadius(date) ? 4 : 0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: startDate != null && endDate != null
+                                ? getIsItStartAndEndDate(date) ||
+                                        getIsInRange(date)
+                                    ? Theme.of(context)
+                                        .primaryColor
+                                        .withOpacity(0.4)
+                                    : Colors.grey.shade300
+                                : Colors.grey.shade300,
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: isStartDateRadius(date)
+                                  ? const Radius.circular(24.0)
+                                  : const Radius.circular(0.0),
+                              topLeft: isStartDateRadius(date)
+                                  ? const Radius.circular(24.0)
+                                  : const Radius.circular(0.0),
+                              topRight: isEndDateRadius(date)
+                                  ? const Radius.circular(24.0)
+                                  : const Radius.circular(0.0),
+                              bottomRight: isEndDateRadius(date)
+                                  ? const Radius.circular(24.0)
+                                  : const Radius.circular(0.0),
                             ),
                           ),
                         ),
                       ),
                     ),
-                    Positioned(
-                      bottom: 9,
-                      right: 0,
-                      left: 0,
-                      child: Container(
-                        height: 6,
-                        width: 6,
-                        decoration: BoxDecoration(
-                            color: DateTime.now().day == date.day &&
-                                    DateTime.now().month == date.month &&
-                                    DateTime.now().year == date.year
-                                ? getIsInRange(date)
-                                    ? Colors.white
-                                    : Theme.of(context).primaryColor
+                  ),
+                  Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(32.0)),
+                      onTap: () {
+                        saveDate(date);
+                      },
+                      onFocusChange: (b) {
+                        saveDate(date);
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(2),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: getIsItStartAndEndDate(date)
+                                ? Theme.of(context).primaryColor
                                 : Colors.transparent,
-                            shape: BoxShape.circle),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(32.0)),
+                            border: Border.all(
+                              color: getIsItStartAndEndDate(date)
+                                  ? Colors.white
+                                  : Colors.transparent,
+                              width: 2,
+                            ),
+                            boxShadow: getIsItStartAndEndDate(date)
+                                ? <BoxShadow>[
+                                    BoxShadow(
+                                        color: Colors.grey.withOpacity(0.6),
+                                        blurRadius: 4,
+                                        offset: const Offset(0, 0)),
+                                  ]
+                                : null,
+                          ),
+                          child: Center(
+                            child: Text(
+                              '${date.day}',
+                              style: TextStyle(
+                                  color: getIsItStartAndEndDate(date)
+                                      ? Colors.white
+                                      : currentMonthDate!.month == date.month
+                                          ? Colors.black
+                                          : Colors.grey.withOpacity(0.6),
+                                  fontSize:
+                                      MediaQuery.of(context).size.width > 360
+                                          ? 18
+                                          : 16,
+                                  fontWeight: getIsItStartAndEndDate(date)
+                                      ? FontWeight.bold
+                                      : FontWeight.normal),
+                            ),
+                          ),
+                        ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                  Positioned(
+                    bottom: 9,
+                    right: 0,
+                    left: 0,
+                    child: Container(
+                      height: 6,
+                      width: 6,
+                      decoration: BoxDecoration(
+                          color: DateTime.now().day == date.day &&
+                                  DateTime.now().month == date.month &&
+                                  DateTime.now().year == date.year
+                              ? getIsInRange(date)
+                                  ? Colors.white
+                                  : Theme.of(context).primaryColor
+                              : Colors.transparent,
+                          shape: BoxShape.circle),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),

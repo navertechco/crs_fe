@@ -7,7 +7,6 @@ import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/pages/5/destination/widgets/index.dart';
 import 'package:sweetalert/sweetalert.dart';
-import 'package:naver_crs/index.dart';
 
 /// ## dragDestination
 /// *__Method to drag a destinatio option widget to left container and account it__*
@@ -46,7 +45,7 @@ void resetAllDestinations() {
   resetDestinations();
   updateDraggableDestinations();
   filterDestinations();
-  if (cruiseDay.value.isNotEmpty) {
+  if (cruiseDay.isNotEmpty) {
     autoFillDestination(arrival["description"], 0, "arrival", "1");
     autoFillDestination("galapagos", 1, "arrival", cruiseDay.value);
     autoFillDestination(departure["description"], 2, "departure", "1");

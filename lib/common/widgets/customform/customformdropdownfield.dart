@@ -9,7 +9,7 @@ class CustomFormDropDownFieldWidget extends StatelessWidget {
       {Key? key,
       this.disabled = false,
       required this.data,
-      this.label = "",
+      this.label = '',
       this.hintText,
       this.width = 0.2,
       this.height = 0.05,

@@ -1,6 +1,5 @@
 // ignore_for_file: must_be_immutable
 import 'package:flutter/material.dart';
-import '../index.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:intl/intl.dart';
 import 'package:naver_crs/index.dart';
@@ -20,7 +19,7 @@ class RoundedFormDatepicker extends StatelessWidget {
   RoundedFormDatepicker(
       {Key? key,
       required this.format,
-      this.hintText = "",
+      this.hintText = '',
       this.left = 65,
       this.top = 10,
       this.width = 0.2,

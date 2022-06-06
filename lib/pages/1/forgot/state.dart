@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
 class ForgotState extends GetXState {
-  String email = "";
+  String email = '';
   // title
   final _title = "Forgot".obs;
   set title(value) => _title.value = value;

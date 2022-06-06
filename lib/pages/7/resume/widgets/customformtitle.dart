@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-import '../index.dart';
-import 'index.dart';
-import 'package:naver_crs/index.dart';
-
 import 'custompadingtitle.dart';
 
 class CustomFormTitleWidget extends StatelessWidget {
   const CustomFormTitleWidget({
     Key? key,
-    this.label = "",
+    this.label = '',
     this.level = 1,
   }) : super(key: key);
   final String label;
@@ -17,7 +13,7 @@ class CustomFormTitleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var columnlabel = (() {
-      var title = "";
+      var title = '';
 
       var titlearray = label.split("#");
       if (titlearray.length > 1) {
@@ -31,7 +27,7 @@ class CustomFormTitleWidget extends StatelessWidget {
     })();
 
     var identlabel = (() {
-      var ident = "";
+      var ident = '';
       if (level > 1) {
         for (var i = 1; i <= level; i++) {
           ident += "\t";

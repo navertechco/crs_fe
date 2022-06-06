@@ -4,13 +4,12 @@ import 'index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:intl/intl.dart';
 
-
 // ignore: must_be_immutable
 class CustomFormDateFieldWidget extends StatelessWidget {
   CustomFormDateFieldWidget(
       {Key? key,
-      this.label = "",
-      this.hintText = "",
+      this.label = '',
+      this.hintText = '',
       this.width = 0.2,
       this.height = 0.05,
       this.onChanged,

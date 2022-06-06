@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
-import 'package:naver_crs/index.dart';
 import 'widgets/index.dart';
-import 'package:naver_crs/index.dart';
 
 class NetRatePage extends GetView<NetRateController> {
   NetRatePage({Key? key}) : super(key: key);
@@ -24,7 +22,7 @@ class NetRatePage extends GetView<NetRateController> {
             NetRateWidget(pkeys: keys),
           ],
         ),
-        text: "");
+        text: '');
   }
 
   final _controller = ScrollController();

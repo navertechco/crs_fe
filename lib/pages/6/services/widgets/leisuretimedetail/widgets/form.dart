@@ -98,7 +98,6 @@ class CustomLeisureTimeDetailForm extends StatelessWidget {
     };
 
     return Obx(() {
-      var lt = leisureTime;
       return Stack(
         children: [
           Form(
@@ -115,7 +114,7 @@ class CustomLeisureTimeDetailForm extends StatelessWidget {
                           .getStyle()),
                   TextButton(child: Obx(() {
                     return Text(
-                        "Starts at: ${leisureTimeStart.value.toString().replaceAll("TimeOfDay", "").replaceAll("(", "").replaceAll(")", "")}",
+                        "Starts at: ${leisureTimeStart.value.toString().replaceAll("TimeOfDay", '').replaceAll("(", '').replaceAll(")", '')}",
                         style: KTextSytle(
                                 context: context,
                                 fontSize: 15,
@@ -128,7 +127,7 @@ class CustomLeisureTimeDetailForm extends StatelessWidget {
                   }),
                   TextButton(
                       child: Text(
-                          "Ends at: ${leisureTimeEnd.value.toString().replaceAll("TimeOfDay", "").replaceAll("(", "").replaceAll(")", "")}",
+                          "Ends at: ${leisureTimeEnd.value.toString().replaceAll("TimeOfDay", '').replaceAll("(", '').replaceAll(")", '')}",
                           style: KTextSytle(
                                   context: context,
                                   fontSize: 15,
