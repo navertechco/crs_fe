@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:naver_crs/index.dart';
 
-
 class RoundedFormButton extends StatelessWidget {
   final double left;
   final double top;
@@ -31,19 +30,19 @@ class RoundedFormButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var isMobile = isMobileDevice() ? 2 : 1;
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        width: MediaQuery.of(context).size.width * width,
-        height: MediaQuery.of(context).size.height * height,
-        padding: EdgeInsets.only(
-          left: left,
-          top: top,
-        ),
-        decoration: BoxDecoration(
-            color: color, borderRadius: BorderRadius.circular(50)),
-        child: Align(
-          alignment: Alignment.center,
+    return Container(
+      width: MediaQuery.of(context).size.width * width,
+      height: MediaQuery.of(context).size.height * height,
+      padding: EdgeInsets.only(
+        left: left,
+        top: top,
+      ),
+      decoration:
+          BoxDecoration(color: color, borderRadius: BorderRadius.circular(50)),
+      child: Align(
+        alignment: Alignment.center,
+        child: TextButton(
+          onPressed: onTap,
           child: Text(
             label,
             strutStyle: StrutStyle(

@@ -103,7 +103,7 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
                   ),
                 ),
               ),
-              Expanded(
+              Container(
                 child: Center(
                   child: Text(
                     DateFormat('MMMM, yyyy').format(currentMonthDate!),
@@ -168,7 +168,7 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
     final List<Widget> listUI = <Widget>[];
     for (int i = 0; i < 7; i++) {
       listUI.add(
-        Expanded(
+        Container(
           child: Center(
             child: Text(
               DateFormat('EEE').format(dateList[i]),
@@ -221,7 +221,7 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
         };
 
         listUI.add(
-          Expanded(
+          Container(
             child: AspectRatio(
               aspectRatio: 1.0,
               child: Stack(

@@ -3,45 +3,6 @@ import 'package:http/http.dart' as http;
 
 import 'package:naver_crs/index.dart';
 
-Future<http.Response> head() async {
-  var headers = {
-    'Content-Type': 'application/json',
-    'Keep-Alive': 'timeout=5, max=1000',
-    'Access-Control-Allow-Origin': '*',
-    'Accept': 'application/json',
-  };
-  var uri = Uri(
-      scheme: kDefaultSchema,
-      host: kDefaultServer,
-      port: kDefaultServerPort,
-      path: kDefaultConnectPath);
-  var res = await http.head(uri, headers: headers);
-
-  return res;
-}
-
-Future<http.Response> fetch(method, body, uri) async {
-  var rule = defaultToken == null || defaultToken == "None";
-  if (rule) {
-    var res = await head();
-    defaultToken = res.headers['token'] == "None" ? null : res.headers['token'];
-  }
-  Map<String, String> headers = {
-    'token': defaultToken ?? '',
-    'Content-Type': 'application/json',
-    'Keep-Alive': 'timeout=5, max=1000',
-    'Access-Control-Allow-Origin': '*',
-    'Accept': 'application/json',
-  };
-  if (!rule) {
-    if (method == 'GET') {
-      return await http.get(uri, headers: headers);
-    }
-    return await http.post(uri, headers: headers, body: json.encode(body));
-  }
-  return http.Response('', 500);
-}
-
 Future<dynamic> fetchhandler(scheme, host, port, path, method, body) async {
   http.Response response = http.Response('', 201);
   try {
@@ -74,4 +35,53 @@ Future<dynamic> fetchhandler(scheme, host, port, path, method, body) async {
       'code': response.statusCode
     };
   }
+}
+
+Future<http.Response> fetch(method, body, uri) async {
+  var rule = defaultToken == null || defaultToken == "None";
+  var res = http.Response('', 500);
+  if (rule) {
+    res = await head();
+    if (res.statusCode == 200) {
+      defaultToken = res.headers['token'] == "None"
+          ? 'gAAAAABhjtSOlFafpsgJ70Sx11gM7Iv_6RuTpnOs1UWf4ELEnYC1gsvx7E2OZjRAUkkflPMXqR7ua7MtC7Y3LCWoB8uo5lmBV-Sns1lIpIy0YPuPXhdPx96We9xqbRcEylp8Fz91PAQf'
+          : res.headers['token'];
+      rule = false;
+      res = await goFetch(rule, method, uri, body);
+    }
+  } else {
+    res = await goFetch(rule, method, uri, body);
+  }
+  return res;
+}
+
+Future<http.Response> head() async {
+  var uri = Uri(
+      scheme: kDefaultSchema,
+      host: kDefaultServer,
+      port: kDefaultServerPort,
+      path: kDefaultConnectPath);
+  var res = await http.head(uri);
+  return res;
+}
+
+Future goFetch(rule, method, uri, body) async {
+  var res = http.Response('', 500);
+  if (!rule) {
+    Map<String, String> headers = {
+      'token': defaultToken ??
+          'gAAAAABhjtSOlFafpsgJ70Sx11gM7Iv_6RuTpnOs1UWf4ELEnYC1gsvx7E2OZjRAUkkflPMXqR7ua7MtC7Y3LCWoB8uo5lmBV-Sns1lIpIy0YPuPXhdPx96We9xqbRcEylp8Fz91PAQf',
+      'Content-Type': 'application/json',
+      // 'Keep-Alive': 'timeout=5, max=1000',
+      'Access-Control-Allow-Origin': '*',
+      'Accept': 'application/json',
+    };
+    if (method == 'GET') {
+      res = await http.get(uri, headers: headers);
+      return res;
+    }
+    res = await http.post(uri, headers: headers, body: json.encode(body));
+    return res;
+  }
+  return res;
 }

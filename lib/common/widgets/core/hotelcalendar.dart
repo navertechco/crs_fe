@@ -235,7 +235,7 @@ class HotelResultWidget extends StatelessWidget {
                 decoration: BoxDecoration(color: Colors.grey),
                 child: Row(
                   children: [
-                    Expanded(
+                    Container(
                       child: Text(
                         "Hotel Name",
                         textAlign: TextAlign.center,
@@ -243,7 +243,7 @@ class HotelResultWidget extends StatelessWidget {
                             fontSize: 15, fontWeight: FontWeight.bold),
                       ),
                     ),
-                    Expanded(
+                    Container(
                         child: Text(
                       "Actions",
                       textAlign: TextAlign.center,

@@ -20,7 +20,7 @@ class CustomCustomerDataForm extends StatelessWidget {
     return Form(
       key: _formKey,
       child: SingleChildScrollView(
-        child: Expanded(
+        child: Container(
           child: Stack(
             children: [
               Row(

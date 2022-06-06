@@ -8,7 +8,25 @@ import 'package:google_fonts/google_fonts.dart';
 import '../context/index.dart';
 
 //SERVER DATA
-
+const kDefaultSchema = "https";
+const kDefaultServer = "192.168.101.4"; //"uiodesign.fortiddns.com";
+const kDefaultServerPort = 9999;
+const kDefaultLogoutPath = "/User/Logout";
+const kDefaultCatalogPath = "/System/FindCatalog";
+const kDefaultQueryPath = "/Agent/Query";
+const kDefaultDestinationPath = "/Agent/GetDestination";
+const kDefaultExperiencePath = "/Agent/GetExperience";
+const kDefaultConnectPath = "/User/Connect";
+const kDefaultSendPollPath = "/Gamer/SendPoll";
+const kDefaultBuyCreditsPath = "/Gamer/BuyCredit";
+const kDefaultJoinTournmanetPath = "/Gamer/JoinTournament";
+const kDefaultFindTour = "/Tour/FindTour";
+const kDefaultFindCruise = "/Tour/FindCruise";
+const kDefaultFindHotel = "/Tour/FindHotel";
+const kDefaultTourEdit = "/Tour/Edit";
+const kDefaultNewTourEdit = "/Tour/NewId";
+const kDefaultFindCatalog = "/System/FindCatalog";
+const kDefaultCreateCatalog = "/Admin/CreateCatalog";
 class KTextSytle {
   var getStyle;
   KTextSytle(
@@ -29,27 +47,6 @@ class KTextSytle {
     };
   }
 }
-
-const kDefaultSchema = "https";
-const kDefaultServer = "192.168.101.4"; //"uiodesign.fortiddns.com";
-const kDefaultServerPort = 8888;
-const kDefaultLogoutPath = "/User/Logout";
-const kDefaultCatalogPath = "/System/FindCatalog";
-const kDefaultQueryPath = "/Agent/Query";
-const kDefaultDestinationPath = "/Agent/GetDestination";
-const kDefaultExperiencePath = "/Agent/GetExperience";
-const kDefaultConnectPath = "/User/Connect";
-const kDefaultSendPollPath = "/Gamer/SendPoll";
-const kDefaultBuyCreditsPath = "/Gamer/BuyCredit";
-const kDefaultJoinTournmanetPath = "/Gamer/JoinTournament";
-const kDefaultFindTour = "/Tour/FindTour";
-const kDefaultFindCruise = "/Tour/FindCruise";
-const kDefaultFindHotel = "/Tour/FindHotel";
-const kDefaultTourEdit = "/Tour/Edit";
-const kDefaultNewTourEdit = "/Tour/NewId";
-const kDefaultFindCatalog = "/System/FindCatalog";
-const kDefaultCreateCatalog = "/Admin/CreateCatalog";
-
 //DIMENSSIONS
 var kDefaultPadding = 20.0;
 const kDefaultRadius = BorderRadius.all(Radius.circular(8.0));

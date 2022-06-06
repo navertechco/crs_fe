@@ -8,7 +8,7 @@ class ProfileLayoutWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(fit: StackFit.expand, children: [
-      Expanded(
+      Container(
         // top: 0,
         // right: 0,
         child: Image.asset(
