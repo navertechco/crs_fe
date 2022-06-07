@@ -146,12 +146,16 @@ List<Map<String, dynamic>> getMemoryCatalogChild(name, field, description,
 ///
 void updateDestinationsCatalogFilteredByCountry() {
   var countryName = getCountryNameById(destCountry.value);
-  destinationsCatalog = findCatalog("destinations").where((element) =>
-      element["relation"]["country"].toString().toLowerCase() ==
-      countryName.toString().toLowerCase()) as List<Map<String, dynamic>>;
-  airportCatalog = findCatalog("airport").where((element) =>
-      element["relation"]["country"].toString().toLowerCase() ==
-      countryName.toString().toLowerCase()) as List<Map<String, dynamic>>;
+  destinationsCatalog = findCatalog("destinations")
+      .where((element) =>
+          element["relation"]["country"].toString().toLowerCase() ==
+          countryName.toString().toLowerCase())
+      .toList();
+  airportCatalog = findCatalog("airport")
+      .where((element) =>
+          element["relation"]["country"].toString().toLowerCase() ==
+          countryName.toString().toLowerCase())
+      .toList();
 }
 
 /// ## getCatalogDescription
