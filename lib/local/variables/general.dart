@@ -7,7 +7,7 @@ import 'package:intl/intl.dart';
 bool isFirstLaunch = true;
 var currentDestinationIndex = 0.obs;
 var defaultToken;
-Context globalctx = Context();
+LocalContext globalctx = LocalContext();
 var session = {};
 ////
 Rx<int> leftAccumulated = 0.obs;

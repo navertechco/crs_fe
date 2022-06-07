@@ -18,7 +18,7 @@ import 'package:naver_crs/index.dart';
 void getCatalog(
   List<String> catalogs,
 ) async {
-  var res = await fetchhandler(kDefaultSchema, kDefaultServer,
+  var res = await fetchHandler(kDefaultSchema, kDefaultServer,
       kDefaultServerPort, kDefaultCatalogPath, 'POST', {
     "data": {"catalogs": catalogs}
   });
@@ -239,7 +239,7 @@ CatalogDto toCatalog(item) {
 /// @return catalogs (List<Catalog>)
 ///
 dynamic getCatalogs(catalogs) async {
-  Map res = await fetchhandler(kDefaultSchema, kDefaultServer,
+  Map res = await fetchHandler(kDefaultSchema, kDefaultServer,
       kDefaultServerPort, kDefaultFindCatalog, 'POST', {
     "data": {"catalogs": catalogs}
   });

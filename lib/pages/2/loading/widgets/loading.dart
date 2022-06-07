@@ -30,9 +30,9 @@ class LoadingWidget extends GetView<LoadingController> {
                           label: "New Tour",
                           height: 0.07,
                           fontSize: 5,
-                          onPressed: () {
+                          onPressed: () async {
                             setContext("readonly", false);
-                            // newTour();
+                            await newTour();
                           }),
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.02,

@@ -12,6 +12,32 @@ export 'day.dart';
 export 'destination.dart';
 export 'experience.dart';
 
+
+/// ## loadDummyData
+/// *__Method to set data to context__*
+///
+///### Uses:
+/// ```dart
+///   if (res['state'] == true) {
+///    setContext("catalogs", res['data']);
+///  }
+/// ```
+setContext(key, value) {
+  globalctx.set_context(key, value);
+  log(globalctx.context.value);
+}
+
+/// ## loadDummyData
+/// *__Method to get data from context__*
+///
+///### Uses:
+/// ```dart
+///  var catalogs = getContext("catalogs");
+/// ```
+getContext(key) {
+  return globalctx.get_context(key);
+}
+
 getCountryNameById(id) {
   var country = destinationCountry
       .firstWhere((element) => element["code"] == int.parse(id));
@@ -120,7 +146,7 @@ getHotel(ctx, {int id = 0, int index = 0}) async {
     var frame = {
       "data": {"id": id}
     };
-    var res = await fetchhandler(kDefaultSchema, kDefaultServer,
+    var res = await fetchHandler(kDefaultSchema, kDefaultServer,
         kDefaultServerPort, kDefaultFindHotel, 'POST', frame);
     // ignore: avoid_print
     log(res);
@@ -171,7 +197,7 @@ getCruise(ctx, {int cruiseId = 999, String cruiseName = ''}) async {
       "cruise_name": cruiseName != '' ? cruiseName.split("-")[0] : ''
     },
   };
-  var res = await fetchhandler(kDefaultSchema, kDefaultServer,
+  var res = await fetchHandler(kDefaultSchema, kDefaultServer,
       kDefaultServerPort, kDefaultFindCruise, 'POST', frame);
   // ignore: avoid_print
   log(res);
@@ -271,7 +297,7 @@ getDetail(context, data, columns) {
       }
 
       for (var key in keys) {
-        if (key == "state") {
+        if (key == "state"&&row[key]is int) {
           row[key] = states[row[key]];
         }
 

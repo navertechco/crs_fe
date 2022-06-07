@@ -19,7 +19,7 @@ class PrintResumeController extends GetxController {
     try {
       if (!isLoading) {
         isLoading = !isLoading;
-        var res = await fetchhandler(kDefaultSchema, kDefaultServer,
+        var res = await fetchHandler(kDefaultSchema, kDefaultServer,
             kDefaultServerPort, kDefaultConnectPath, 'POST', {
           "state": "signin",
           "data": {"username": state.username, "password": state.password}

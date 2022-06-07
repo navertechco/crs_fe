@@ -1,8 +1,6 @@
-import 'package:get/get.dart';
-import 'package:naver_crs/index.dart';
+import 'package:get/get.dart'; 
 
-class DestinationDetailState extends GetXState {
-  final localDestination = Rx(getContext('destinationdata'));
+class DestinationDetailState extends GetXState { 
   var memory = {};
 
   @override

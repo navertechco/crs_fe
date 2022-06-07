@@ -27,7 +27,7 @@ class ForgotController extends GetxController {
   Future<void> onForgot(ctx, String email) async {
     state.email = email;
 
-    var res = await fetchhandler(kDefaultSchema, kDefaultServer,
+    var res = await fetchHandler(kDefaultSchema, kDefaultServer,
         kDefaultServerPort, kDefaultConnectPath, 'POST', {
       "state": "forgot",
       "data": {"email": state.email}

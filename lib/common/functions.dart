@@ -8,7 +8,14 @@ import 'package:get/get.dart';
 
 import '../index.dart';
 
-load(key) async {
+/// ## loadDummyData
+/// *__Method load local json file as dummy data__*
+///
+///### Uses:
+/// ```dart
+///  await loadDummyData("countries");
+/// ```
+loadDummyData(key) async {
   try {
     var result = await rootBundle.loadString("assets/data/$key.json");
     setContext(key, json.decode(result));
@@ -354,7 +361,7 @@ goto(page) {
 logout(
   username,
 ) async {
-  var res = await fetchhandler(kDefaultSchema, kDefaultServer,
+  var res = await fetchHandler(kDefaultSchema, kDefaultServer,
       kDefaultServerPort, kDefaultConnectPath, 'POST', {
     "state": "logout",
     "data": {"username": username}
@@ -397,3 +404,5 @@ String getTimeStringFromDouble(double value) {
 
   return '$hourValue:$minuteString';
 }
+
+

@@ -100,7 +100,7 @@ saveTour() async {
     var payload = globalctx.payload.toString();
     var yaml = loadYaml(payload);
     var data = (yaml.toString());
-    var res = await fetchhandler(
+    var res = await fetchHandler(
         kDefaultSchema,
         kDefaultServer,
         kDefaultServerPort,
@@ -120,7 +120,7 @@ getTour(ctx, {int tourId = 0, detail = false, cb}) async {
   var frame = {
     "data": {"tour_id": tourId, "detail": detail}
   };
-  var res = await fetchhandler(kDefaultSchema, kDefaultServer,
+  var res = await fetchHandler(kDefaultSchema, kDefaultServer,
       kDefaultServerPort, kDefaultFindTour, 'POST', frame);
   // ignore: avoid_print
   log(res);
@@ -144,13 +144,13 @@ getTourPurpose() {
 }
 
 newTour() async {
-  var res = await fetchhandler(kDefaultSchema, kDefaultServer,
-      kDefaultServerPort, kDefaultNewTourEdit, 'POST', {});
+  var res = await fetchHandler(kDefaultSchema, kDefaultServer,
+      kDefaultServerPort, kDefaultNewTourEdit, 'POST', {"id": 1});
   if (res['state'] == true) {
     globalctx.memory["tour"]["code"] = res['data']["id"];
     setContext("catalogs", res['data']["catalogs"]);
     selectedIndex.value = 0;
-    goto("Tour");
+    Get.toNamed("/Tour");
   } else {
     log(res["message"]);
   }

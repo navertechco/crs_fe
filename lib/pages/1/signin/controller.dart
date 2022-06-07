@@ -12,7 +12,7 @@ class SigninController extends GetxController {
   var isLoading = false;
 
   Future<void> onSignin(ctx, String username, String password) async {
-    await load("countries");
+    await loadDummyData("countries");
     session["username"] = username;
     state.error = null;
     state.username = username;
@@ -21,7 +21,7 @@ class SigninController extends GetxController {
     try {
       if (!isLoading) {
         isLoading = !isLoading;
-        var res = await fetchhandler(kDefaultSchema, kDefaultServer,
+        var res = await fetchHandler(kDefaultSchema, kDefaultServer,
             kDefaultServerPort, kDefaultConnectPath, 'POST', {
           "state": "signin",
           "data": {"username": state.username, "password": state.password}

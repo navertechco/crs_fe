@@ -39,7 +39,7 @@ class DGalleryController extends GetxController {
   }
 
   Future<void> onJoinTournament(ctx) async {
-    var res = await fetchhandler(kDefaultSchema, kDefaultServer,
+    var res = await fetchHandler(kDefaultSchema, kDefaultServer,
         kDefaultServerPort, kDefaultJoinTournmanetPath, 'POST', {
       "data": {"identification": session['identification']}
     });
