@@ -19,13 +19,15 @@ class TravelFilter extends HookWidget {
     var index = 0;
 
     Rx<dynamic> keyActivities = Rx(getFormValue(
-        globalctx.memory["destinations"], index, "key_activities", <String>[]));
+        globalctx["memory"]["destinations"],
+        index,
+        "key_activities", <String>[]));
 
     Rx<dynamic> destinationOption = Rx(getFormValue(
-        globalctx.memory["destinations"], index, "destination_option", "0"));
+        globalctx["memory"]["destinations"], index, "destination_option", "0"));
 
     Rx<dynamic> travelRhythm = Rx(getFormValue(
-        globalctx.memory["destinations"], index, "travel_rhythm", "0"));
+        globalctx["memory"]["destinations"], index, "travel_rhythm", "0"));
 
     var kaDataCatalog = Rx(findCatalog("key_activity"));
     return Align(
@@ -51,12 +53,12 @@ class TravelFilter extends HookWidget {
                       CustomFormDropDownFieldWidget(
                         value: destinationOption.value,
                         onSaved: (value) {
-                          setFormValue(globalctx.memory["destinations"], index,
-                              "destination_option", value);
+                          setFormValue(globalctx["memory"]["destinations"],
+                              index, "destination_option", value);
                         },
                         onChanged: (value) {
-                          setFormValue(globalctx.memory["destinations"], index,
-                              "destination_option", value);
+                          setFormValue(globalctx["memory"]["destinations"],
+                              index, "destination_option", value);
                         },
                         hintText: "Travel Options",
                         data: findCatalog("destination_option"),
@@ -64,12 +66,12 @@ class TravelFilter extends HookWidget {
                       CustomFormDropDownFieldWidget(
                         value: travelRhythm.value,
                         onSaved: (value) {
-                          setFormValue(globalctx.memory["destinations"], index,
-                              "travel_rhythm", value);
+                          setFormValue(globalctx["memory"]["destinations"],
+                              index, "travel_rhythm", value);
                         },
                         onChanged: (value) {
-                          setFormValue(globalctx.memory["destinations"], index,
-                              "travel_rhythm", value);
+                          setFormValue(globalctx["memory"]["destinations"],
+                              index, "travel_rhythm", value);
                         },
                         hintText: "Travel Rhythm",
                         data: filterTrByAge(),
@@ -81,10 +83,10 @@ class TravelFilter extends HookWidget {
                                 context: context),
                         value: keyActivities.value,
                         onSaved: (value) {
-                          setFormValue(globalctx.memory["destinations"], index,
-                              "key_activities", null);
+                          setFormValue(globalctx["memory"]["destinations"],
+                              index, "key_activities", null);
                           setFormValue(
-                              globalctx.memory["destinations"],
+                              globalctx["memory"]["destinations"],
                               index,
                               "key_activities",
                               value!
@@ -93,8 +95,8 @@ class TravelFilter extends HookWidget {
                                   .toList());
                         },
                         onChanged: (value) {
-                          setFormValue(globalctx.memory["destinations"], index,
-                              "key_activities", value);
+                          setFormValue(globalctx["memory"]["destinations"],
+                              index, "key_activities", value);
                         },
                         hintText:
                             "\t\t\t\t\t\t\t\t\t\t\t\tKey Activities            \n",

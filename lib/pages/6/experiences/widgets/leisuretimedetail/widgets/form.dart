@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart'; 
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:naver_crs/common/index.dart';
 
 // ignore: must_be_immutable
@@ -16,10 +16,13 @@ class CustomLeisureTimeDetailForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Rx<TimeOfDay?> leisureTimeStart = Rx(getFormValue(globalctx.memory["days"],
-            currentDay.value, "leisureTimeStart", time) ??
+    Rx<TimeOfDay?> leisureTimeStart = Rx(getFormValue(
+            globalctx["memory"]["days"],
+            currentDay.value,
+            "leisureTimeStart",
+            time) ??
         time);
-    Rx<TimeOfDay?> leisureTimeEnd = Rx(getFormValue(globalctx.memory["days"],
+    Rx<TimeOfDay?> leisureTimeEnd = Rx(getFormValue(globalctx["memory"]["days"],
             currentDay.value, "leisureTimeEnd", time) ??
         time);
     Rx<double?> leisureTime = Rx(
@@ -28,7 +31,6 @@ class CustomLeisureTimeDetailForm extends StatelessWidget {
                     leisureTimeStart.value!.minute)) *
             1.0 /
             60);
- 
 
     return Obx(() {
       return Stack(
@@ -47,7 +49,7 @@ class CustomLeisureTimeDetailForm extends StatelessWidget {
                           .getStyle()),
                   Obx(() {
                     return CustomFormCounterFieldWidget(
-                        initial: getFormValue(globalctx.memory["days"],
+                        initial: getFormValue(globalctx["memory"]["days"],
                                 currentDay.value, "leisureTime", 0)
                             .round() as int,
                         min: 0,
@@ -55,7 +57,7 @@ class CustomLeisureTimeDetailForm extends StatelessWidget {
                             as int,
                         bound: 0,
                         onValueChanged: (value) {
-                          setFormValue(globalctx.memory["days"],
+                          setFormValue(globalctx["memory"]["days"],
                               currentDay.value, "leisureTime", value);
                           // promoteExperience(experience, "promoted");
                         },

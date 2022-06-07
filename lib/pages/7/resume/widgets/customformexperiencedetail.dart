@@ -13,7 +13,7 @@ class CustomFormExperiencesDetailWidget extends StatelessWidget {
     try {
       var destId = indexes[0];
       var destDay = indexes[1];
-      var promoted = globalctx.memory["promoted"][destDay];
+      var promoted = globalctx["memory"]["promoted"][destDay];
 
       List<CustomFormExperienceRowWidget> list = [];
 

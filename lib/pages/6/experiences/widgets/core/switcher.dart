@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:naver_crs/pages/6/experiences/widgets/experiencedetail/widgets/index.dart';
 import 'package:naver_crs/pages/6/experiences/widgets/leisuretimedetail/widgets/index.dart';
 
-
 // ignore: must_be_immutable
 class SwitcherWidget extends StatelessWidget {
   SwitcherWidget(
@@ -33,14 +32,14 @@ class SwitcherWidget extends StatelessWidget {
     }
 
     void _switchCard() {
-      globalctx.value.value = globalctx.value.value;
-      RxList exps = globalctx.experiencelist;
+      globalctx["value"] = globalctx["value"];
+      var exps = globalctx["experiencelist"];
 
       exps.contains(experience) && _showFrontSide.value
           ? exps.add(experience)
           : exps.remove(experience);
 
-      globalctx.experiencelist = exps;
+      globalctx["experiencelist"] = exps;
       suggested = getExperienceState(experience) == "suggested";
 
       if (suggested) {

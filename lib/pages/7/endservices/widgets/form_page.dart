@@ -31,19 +31,19 @@ class PrintDocsFormPage extends GetView<StatelessWidget> {
                     label: "PDF Resume",
                     color: Color.fromARGB(255, 204, 164, 61),
                     url:
-                        "$kDefaultSchema://$kDefaultServer:$kDefaultServerPort/docx.html?doc=${globalctx.memory['customer']['travel_code']}"),
+                        "$kDefaultSchema://$kDefaultServer:$kDefaultServerPort/docx.html?doc=${globalctx["memory"]['customer']['travel_code']}"),
                 SizedBox(height: kDefaultPadding),
                 WebButton(
                     label: "WORD Resume",
                     color: Color.fromARGB(255, 204, 164, 61),
                     url:
-                        "$kDefaultSchema://$kDefaultServer:$kDefaultServerPort/docx.html?doc=${globalctx.memory['customer']['travel_code']}"),
+                        "$kDefaultSchema://$kDefaultServer:$kDefaultServerPort/docx.html?doc=${globalctx["memory"]['customer']['travel_code']}"),
                 SizedBox(height: kDefaultPadding),
                 WebButton(
                     label: "Video Gallery",
                     color: Color.fromARGB(255, 204, 164, 61),
                     url:
-                        "$kDefaultSchema://$kDefaultServer:$kDefaultServerPort/Client/PlayTour/${globalctx.memory["tour"]["playlist_slug"]}"),
+                        "$kDefaultSchema://$kDefaultServer:$kDefaultServerPort/Client/PlayTour/${globalctx["memory"]["tour"]["playlist_slug"]}"),
                 SizedBox(height: kDefaultPadding),
                 WebButton(
                     label: "Photo Gallery",

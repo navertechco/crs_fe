@@ -16,7 +16,7 @@ class CustomFormDayWidget extends StatelessWidget {
     try {
       var destinationindex = indexes[0];
       var dayindex = indexes[1];
-      var tour = globalctx.memory["tour"];
+      var tour = globalctx["memory"]["tour"];
       var destinations = tour["destinations"];
       var destination = destinations[destinationindex.toString()];
       var daysData = destination["daysData"] ?? {};
@@ -28,7 +28,7 @@ class CustomFormDayWidget extends StatelessWidget {
               (destinationindex == 0 ? dayindex + 1 : dayindex + 2);
 
       return RepaintBoundary(
-          key: globalctx.keys["day-$destinationindex-$dayindex"],
+          key: globalctx["keys"]["day-$destinationindex-$dayindex"],
           child: Column(
             children: [
               CustomFormTitleWidget(level: 4, label: "Day: $dayLabel#####"),

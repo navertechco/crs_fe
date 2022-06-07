@@ -33,14 +33,14 @@ class SwitcherWidget extends StatelessWidget {
     }
 
     void _switchCard() {
-      globalctx.value.value = globalctx.value.value;
-      RxList dests = globalctx.destinationlist;
+      globalctx["value"] = globalctx["value"];
+      var dests = globalctx["destinationlist"];
 
       dests.contains(destination) && _showFrontSide.value
           ? dests.add(destination)
           : dests.remove(destination);
 
-      globalctx.destinationlist = dests;
+      globalctx["destinationlist"] = dests;
       if (isListed ||
           !validateDestinationDialog(destination, index, type).value) {
         _changeRotationAxis();

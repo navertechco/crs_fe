@@ -5,7 +5,6 @@ import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/pages/6/services/widgets/servicecedetail/widgets/index.dart';
 
-
 // ignore: must_be_immutable
 class SwitcherWidget extends StatelessWidget {
   SwitcherWidget(
@@ -32,14 +31,14 @@ class SwitcherWidget extends StatelessWidget {
     }
 
     void _switchCard() {
-      globalctx.value.value = globalctx.value.value;
-      RxList exps = globalctx.servicelist;
+      globalctx["value"] = globalctx["value"];
+      var exps = globalctx["servicelist"];
 
       exps.contains(service) && _showFrontSide.value
           ? exps.add(service)
           : exps.remove(service);
 
-      globalctx.servicelist = exps;
+      globalctx["servicelist"] = exps;
       suggested = getServiceState(service) == "suggested";
 
       if (suggested) {

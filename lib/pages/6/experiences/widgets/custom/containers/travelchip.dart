@@ -50,14 +50,14 @@ class TravelChips extends HookWidget {
                     CustomFormDropDownFieldWidget(
                       value: currentTravelRhythm.value,
                       onSaved: (value) {
-                        setFormValue(globalctx.memory["destinations"],
+                        setFormValue(globalctx["memory"]["destinations"],
                             getDestinationIndexByDay(), "travel_rhythm", value);
                         clearedHours[currentDay.value] = false;
                         currentTravelRhythm.value = value!;
                         filterExperiences();
                       },
                       onChanged: (value) {
-                        setFormValue(globalctx.memory["destinations"],
+                        setFormValue(globalctx["memory"]["destinations"],
                             getDestinationIndexByDay(), "travel_rhythm", value);
                         clearedHours[currentDay.value] = false;
                         currentTravelRhythm.value = value!;

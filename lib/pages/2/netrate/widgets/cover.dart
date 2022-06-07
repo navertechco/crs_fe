@@ -7,7 +7,7 @@ class Cover extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Map tour = globalctx.memory["tour"];
+    Map tour = globalctx["memory"]["tour"];
     return Column(
       children: [
         CustomDescriptionWidget(

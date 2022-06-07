@@ -34,7 +34,7 @@ class CustomRightStarDestinationForm extends StatelessWidget {
                 ),
                 child: DragDestinationWidget(
                     destination: departure["description"],
-                    index: globalctx.destinationDragData.value.length - 1,
+                    index: globalctx["destinationDragData"].length - 1,
                     type: "departure",
                     out: true),
               );

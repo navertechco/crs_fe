@@ -17,10 +17,13 @@ class CustomLeisureTimeDetailForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Rx<TimeOfDay?> leisureTimeStart = Rx(getFormValue(globalctx.memory["days"],
-            currentDay.value, "leisureTimeStart", time) ??
+    Rx<TimeOfDay?> leisureTimeStart = Rx(getFormValue(
+            globalctx["memory"]["days"],
+            currentDay.value,
+            "leisureTimeStart",
+            time) ??
         time);
-    Rx<TimeOfDay?> leisureTimeEnd = Rx(getFormValue(globalctx.memory["days"],
+    Rx<TimeOfDay?> leisureTimeEnd = Rx(getFormValue(globalctx["memory"]["days"],
             currentDay.value, "leisureTimeEnd", time) ??
         time);
     Rx<double?> leisureTime = Rx(
@@ -69,9 +72,9 @@ class CustomLeisureTimeDetailForm extends StatelessWidget {
         } else {
           setLT(lt.value);
           setFormValue(
-              globalctx.memory["days"], currentDay.value, "$save", value);
+              globalctx["memory"]["days"], currentDay.value, "$save", value);
 
-          setFormValue(globalctx.memory["days"], currentDay.value,
+          setFormValue(globalctx["memory"]["days"], currentDay.value,
               "leisureTime", lt.value);
 
           if (leftHours[currentDay.value].value == 0) {

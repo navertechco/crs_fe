@@ -23,14 +23,14 @@ class DragDestinationWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() {
       var explorationDay = getFormValue(
-          globalctx.memory["destinations"], index, "explorationDay", "0");
-      return globalctx.destinations.contains(destination) &&
+          globalctx["memory"]["destinations"], index, "explorationDay", "0");
+      return globalctx["destinations"].contains(destination) &&
               ((!out && type == "tour") || (out && type != "tour"))
           ? Row(
               children: [
                 DestinationOptionWidget(
                     destination: destination, type: type, index: index),
-                !globalctx.promotedDestinations.contains(index)
+                !globalctx["promotedDestinations"].contains(index)
                     ? Column(
                         children: [
                           Text(explorationDay.toString(),

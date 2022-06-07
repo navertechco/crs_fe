@@ -44,7 +44,7 @@ class LoadingWidget extends GetView<LoadingController> {
                           onPressed: () {
                             getTour(context, tourId: 0, cb: (data) {
                               if (data.length > 0) {
-                                globalctx.memory["tours"] = data;
+                                globalctx["memory"]["tours"] = data;
                                 if (0 == 0) {
                                   Get.toNamed("/Searcher");
                                 } else {

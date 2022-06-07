@@ -17,9 +17,9 @@ import 'general.dart';
 /// ```
 
 Future paginateDay(context) async {
-  if (globalctx.memory["promoted"] != null &&
-      globalctx.memory["promoted"] != null &&
-      globalctx.memory["promoted"][currentDay.value] != null) {
+  if (globalctx["memory"]["promoted"] != null &&
+      globalctx["memory"]["promoted"] != null &&
+      globalctx["memory"]["promoted"][currentDay.value] != null) {
     await nextDay();
   } else {
     showCustomDialog(
@@ -84,7 +84,7 @@ Future jumpDay(direction) async {
 decideBypass(direction) {
   int index = getDestinationIndexByDay();
   int explorationMode = int.parse(getFormValue(
-      globalctx.memory["destinations"], index, "explorationMode", "0"));
+      globalctx["memory"]["destinations"], index, "explorationMode", "0"));
   var explorationDay = getCurrentExplorationDay();
   var keyActivities = getCurrentKA();
   if (explorationMode > 0) {
@@ -109,7 +109,7 @@ decideBypass(direction) {
 ///```
 getDestinationIndexByDay() {
   var _accumulated = 0;
-  var _destinations = globalctx.memory["destinations"];
+  var _destinations = globalctx["memory"]["destinations"];
 
   if (currentDay.value <= 0) {
     return 0;
@@ -140,7 +140,7 @@ getDestinationIndexByDay() {
 getCurrentExplorationDay() {
   int index = getDestinationIndexByDay();
   int explorationDay = int.parse(getFormValue(
-      globalctx.memory["destinations"], index, "explorationDay", "0"));
+      globalctx["memory"]["destinations"], index, "explorationDay", "0"));
   return explorationDay;
 }
 
@@ -158,7 +158,7 @@ getCurrentExplorationDay() {
 getCurrentKA() {
   int index = getDestinationIndexByDay();
   List keyActivities = (getFormValue(
-      globalctx.memory["destinations"], index, "key_activities", []));
+      globalctx["memory"]["destinations"], index, "key_activities", []));
   return keyActivities;
 }
 
@@ -196,19 +196,22 @@ bypassCruise(String direction) {
   try {
     int index = getDestinationIndex(globalDestinationName.value, "tour");
     int explorationMode = int.parse(getFormValue(
-        globalctx.memory["destinations"], index, "explorationMode", "0"));
+        globalctx["memory"]["destinations"], index, "explorationMode", "0"));
     int explorationDay = 0;
     int cruiseExpDays = int.parse(getFormValue(
-        globalctx.memory["destinations"], index, "cruiseExpDays", "0"));
+        globalctx["memory"]["destinations"], index, "cruiseExpDays", "0"));
     if (cruiseExpDays > 0) {
       if (explorationMode > 1) {
         DateTime cruiseStartDate = getFormValue(
-            globalctx.memory["destinations"],
+            globalctx["memory"]["destinations"],
             index,
             "cruiseStartDate",
             DateTime(5555, 02, 02));
-        DateTime cruiseEndDate = getFormValue(globalctx.memory["destinations"],
-            index, "cruiseEndDate", DateTime(5555, 02, 02));
+        DateTime cruiseEndDate = getFormValue(
+            globalctx["memory"]["destinations"],
+            index,
+            "cruiseEndDate",
+            DateTime(5555, 02, 02));
 
         if (direction == "forward") {
           if (currentDate.value ==
@@ -316,7 +319,7 @@ processDays() {
 updateCurrentKeyActivities() {
   var index = getDestinationIndexByDay();
   var ka = getFormValue(
-      globalctx.memory["destinations"], index, "key_activities", []);
+      globalctx["memory"]["destinations"], index, "key_activities", []);
   currentDestinationKeyActivities.value = ka;
 }
 
@@ -334,7 +337,7 @@ updateCurrentKeyActivities() {
 updateCurrentDestinationOption() {
   var index = getDestinationIndexByDay();
   var destinationOption = getFormValue(
-      globalctx.memory["destinations"], index, "destination_option", "1");
+      globalctx["memory"]["destinations"], index, "destination_option", "1");
   currentDestinationOption.value = destinationOption;
 }
 
@@ -352,7 +355,7 @@ updateCurrentDestinationOption() {
 updateCurrentDestinationTravelRhythm() {
   var index = getDestinationIndexByDay();
   var travelRhythm = getFormValue(
-      globalctx.memory["destinations"], index, "travel_rhythm", "1");
+      globalctx["memory"]["destinations"], index, "travel_rhythm", "1");
   currentTravelRhythm.value = travelRhythm;
 }
 
@@ -372,7 +375,7 @@ void saveExplorationDay(int index, int val0, int val1, {String? key}) {
     int acc0 = accumulated.value;
     int td = totalDays.value;
     int total0 = int.parse(getFormValue(
-        globalctx.memory["destinations"], index, "explorationDay", "0"));
+        globalctx["memory"]["destinations"], index, "explorationDay", "0"));
     int nei0 = total0 - val0;
     if (total0 == 0 || nei0 < 0) {
       nei0 = 0;
@@ -388,10 +391,10 @@ void saveExplorationDay(int index, int val0, int val1, {String? key}) {
       accumulated.value = acc1;
       if (key != null) {
         setFormValue(
-            globalctx.memory["destinations"], index, key, val1.toString());
+            globalctx["memory"]["destinations"], index, key, val1.toString());
       }
 
-      setFormValue(globalctx.memory["destinations"], index, "explorationDay",
+      setFormValue(globalctx["memory"]["destinations"], index, "explorationDay",
           (total1).toString());
       if (index == 0) {
         firstDayDate = Rx(arrivalDate.value.add(Duration(days: acc1)));

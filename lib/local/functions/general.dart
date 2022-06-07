@@ -12,7 +12,6 @@ export 'day.dart';
 export 'destination.dart';
 export 'experience.dart';
 
-
 /// ## loadDummyData
 /// *__Method to set data to context__*
 ///
@@ -23,8 +22,7 @@ export 'experience.dart';
 ///  }
 /// ```
 setContext(key, value) {
-  globalctx.set_context(key, value);
-  log(globalctx.context.value);
+  globalctx[key] = value;
 }
 
 /// ## loadDummyData
@@ -35,7 +33,7 @@ setContext(key, value) {
 ///  var catalogs = getContext("catalogs");
 /// ```
 getContext(key) {
-  return globalctx.get_context(key);
+  return globalctx[key];
 }
 
 getCountryNameById(id) {
@@ -134,7 +132,7 @@ log(e) {
 setLT(value) {
   int ltindex =
       expList.indexWhere((element) => element["description"] == "Leisure Time");
-  globalctx.context.value["catalogs"]["experiences"][ltindex]["value"]
+  globalctx["context"]["catalogs"]["experiences"][ltindex]["value"]
           ["exptime"] ==
       value;
   experiences = findCatalog("experiences");
@@ -142,7 +140,7 @@ setLT(value) {
 
 getHotel(ctx, {int id = 0, int index = 0}) async {
   currentDestinationIndex.value = index;
-  if (globalctx.memory["hotels"] == null) {
+  if (globalctx["memory"]["hotels"] == null) {
     var frame = {
       "data": {"id": id}
     };
@@ -153,7 +151,7 @@ getHotel(ctx, {int id = 0, int index = 0}) async {
     if (res['state'] == true) {
       var data = res['data'];
       if (data.length > 0) {
-        globalctx.memory["hotels"] = data;
+        globalctx["memory"]["hotels"] = data;
         showCustomDialog(
             ctx,
             HotelCalendarWidget(
@@ -218,7 +216,7 @@ getCruise(ctx, {int cruiseId = 999, String cruiseName = ''}) async {
 }
 
 resetData(context, controller) {
-  var data = globalctx.memory["tours"];
+  var data = globalctx["memory"]["tours"];
   if (searchResult!.isNotEmpty) {
     controller.clear();
     searchResult!.value = '';
@@ -229,7 +227,7 @@ resetData(context, controller) {
 }
 
 filterData(context, value) {
-  var data = globalctx.memory["tours"];
+  var data = globalctx["memory"]["tours"];
   try {
     searchResult!.value = value.toString();
     if (searchResult!.isNotEmpty) {
@@ -297,7 +295,7 @@ getDetail(context, data, columns) {
       }
 
       for (var key in keys) {
-        if (key == "state"&&row[key]is int) {
+        if (key == "state" && row[key] is int) {
           row[key] = states[row[key]];
         }
 
@@ -334,7 +332,7 @@ getDetail(context, data, columns) {
                 getTour(context, tourId: row['quote'], detail: true,
                     cb: (data) {
                   if (data.length > 0) {
-                    globalctx.memory["tour"] = data[0];
+                    globalctx["memory"]["tour"] = data[0];
                     showCustomDialog(context, NetRatePage(), "Close",
                         buttonColor: Colors.white, width: 1.0);
                   }
@@ -348,7 +346,7 @@ getDetail(context, data, columns) {
                 getTour(context, tourId: row["quote"], detail: true,
                     cb: (data) {
                   if (data.length > 0) {
-                    globalctx.memory["tour"] = data[0];
+                    globalctx["memory"]["tour"] = data[0];
                     if (row["quote"] == 0) {
                       Get.toNamed("/Searcher");
                     } else {
@@ -421,7 +419,7 @@ savePurposes(values) {
               ["description"]
           .toString());
     }
-    setFormValue(globalctx.memory, "tour", "purposes", purposeMemory.value);
+    setFormValue(globalctx["memory"], "tour", "purposes", purposeMemory.value);
   }
 }
 
@@ -438,7 +436,7 @@ getDayId(int destId, int destDay) {
 
 updateDestDays() {
   destDays = [];
-  for (var dest in globalctx.memory["destinations"].entries) {
+  for (var dest in globalctx["memory"]["destinations"].entries) {
     var destDay = dest.value;
     destDays.add(int.parse(destDay["explorationDay"]));
   }
@@ -492,6 +490,6 @@ getTravelCode(value) {
       "-" +
       dayFormat.format(arrivalDate.value).replaceAll(" ", "-") +
       "-" +
-      globalctx.memory["tour"]["code"].toString();
+      globalctx["memory"]["tour"]["code"].toString();
   return res;
 }

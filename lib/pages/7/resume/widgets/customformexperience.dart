@@ -13,7 +13,7 @@ class CustomFormExperienceRowWidget extends StatelessWidget {
     try {
       var destDay = indexes[1];
       var experienceindex = indexes[2];
-      var promoted = globalctx.memory["promoted"][destDay];
+      var promoted = globalctx["memory"]["promoted"][destDay];
       for (var exp in promoted) {
         expList.add(exp.key);
       }

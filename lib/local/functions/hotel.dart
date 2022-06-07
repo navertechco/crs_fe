@@ -41,7 +41,7 @@ filterHotels(ctx) {
   }).toList();
 
   //PURPOSE
-  var purposes = globalctx.memory["tour"]["purposes"]
+  var purposes = globalctx["memory"]["tour"]["purposes"]
       .map((e) => e.toString().toUpperCase())
       .toList();
   filteredHotel = filteredHotel.where((element) {
@@ -57,7 +57,7 @@ filterHotels(ctx) {
   }).toList();
 
   //KEY_ACTIVITIES
-  var destData = globalctx.memory["destinations"]
+  var destData = globalctx["memory"]["destinations"]
       [currentDestinationIndex.value.toString()];
   if (destData != null) {
     var keyActivity = destData["key_activities"] ?? [];
@@ -103,7 +103,7 @@ filterHotels(ctx) {
   filteredHotel = filteredHotel.where((element) {
     var rule = true;
     var capacity = getHotelCapacity(element["value"]["hotelname"]);
-    var pax = globalctx.memory["tour"]["passengers"];
+    var pax = globalctx["memory"]["tour"]["passengers"];
     rule = capacity >= pax;
     return rule;
   }).toList();
@@ -216,8 +216,8 @@ getHotelDetail(context, data, columns) {
   return detail;
 }
 
-var currentHotelName = Rx(getFormValue(
-    globalctx.memory["destinations"], globalDestinationIndex, "hotelName", ''));
+var currentHotelName = Rx(getFormValue(globalctx["memory"]["destinations"],
+    globalDestinationIndex, "hotelName", ''));
 
 getHotelDataCell(context, row) {
   var dataCell = DataCell(
@@ -260,7 +260,7 @@ getHotelDataCell(context, row) {
           },
         ),
         CustomFormCounterFieldWidget(
-            initial: getFormValue(globalctx.memory["destinations"],
+            initial: getFormValue(globalctx["memory"]["destinations"],
                 globalDestinationIndex, "hotelPax.${row["description"]}", 0),
             min: 0,
             max: 50,
@@ -268,7 +268,7 @@ getHotelDataCell(context, row) {
             original: true,
             onValueChanged: (value) {
               setFormValue(
-                  globalctx.memory["destinations"],
+                  globalctx["memory"]["destinations"],
                   globalDestinationIndex,
                   "hotelPax.${row["description"]}",
                   value);
@@ -278,13 +278,13 @@ getHotelDataCell(context, row) {
         Obx(() => CheckboxIconFormField(
               padding: 0,
               initialValue: getFormValue(
-                  globalctx.memory["destinations"],
+                  globalctx["memory"]["destinations"],
                   globalDestinationIndex,
                   "hotelName.${row["description"]}",
                   false),
               onChanged: (value) {
                 setFormValue(
-                    globalctx.memory["destinations"],
+                    globalctx["memory"]["destinations"],
                     globalDestinationIndex,
                     "hotelName.${row["description"]}",
                     value);

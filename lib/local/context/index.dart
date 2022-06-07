@@ -1,48 +1,26 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import './variables.dart';
 
-import '../../index.dart';
 
-class LocalContext extends Context {
-  LocalContext() {
-    loadDummyData("countries");
-  }
-  
-  Rx<List<Widget>> destinationDragData = Rx(<Widget>[]);
-  RxMap destinationState = {}.obs;
-  RxBool value = true.obs;
-  RxBool reset = false.obs;
-  RxList destinations = [].obs;
-  RxMap services = {}.obs;
-  RxMap experiences = {}.obs;
-  RxList<dynamic> destinationlist = [].obs;
-  RxList<dynamic> experiencelist = [].obs;
-  RxList<dynamic> servicelist = [].obs;
-  RxList promotedDestinations = [].obs;
-  RxList promotedDays = [].obs;
-  RxList selectedDestinations = [].obs;
-  var promotedExperiences = {}.obs;
-  var selectedExperiences = {}.obs;
-  var suggestedExperiences = {}.obs;
-  RxMap<String, dynamic> states = {
-    "services": {},
-    "experiences": {},
-    "destinations": {},
-  }.obs;
-  var payload = {};
-  RxMap<String, dynamic> memory = {
-    "catalogs": {},
-    "tour": {},
-    "logistic": {},
-    "customer": {},
-    "destinations": {},
-    "destinationDay": [],
-    "days": {},
-    "experiences": {},
-    "services": {},
-    "promoted": {},
-    "days_left": 0
-  }.obs;
-  int counter = 0;
-  Map<String, GlobalKey<State<StatefulWidget>>> keys = {};
-}
+Map<String, dynamic> globalctx = {
+  "context": context,
+  "destinationlist": destinationlist,
+  "destinationDragData": destinationDragData,
+  "value": value,
+  "reset": reset,
+  "destinations": destinations,
+  "services": services,
+  "experiences": experiences,
+  "experiencelist": experiencelist,
+  "servicelist": servicelist,
+  "promotedDestinations": promotedDestinations,
+  "promotedDays": promotedDays,
+  "selectedDestinations": selectedDestinations,
+  "promotedExperiences": promotedExperiences,
+  "selectedExperiences": selectedExperiences,
+  "suggestedExperiences": suggestedExperiences,
+  "states": states,
+  "payload": payload,
+  "memory": memory,
+  "counter": counter,
+  "keys": keys
+};

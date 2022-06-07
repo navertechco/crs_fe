@@ -52,7 +52,7 @@ class HotelFiltersWidget extends StatelessWidget {
                         getMemoryCatalogChild("hotel", "value", "budget_fk"),
                         value);
                     setFormValue(
-                        globalctx.memory["destinations"],
+                        globalctx["memory"]["destinations"],
                         globalDestinationIndex,
                         "hotelCategory",
                         hotelCategory.value);
@@ -72,7 +72,7 @@ class HotelFiltersWidget extends StatelessWidget {
                               ? 1
                               : element["value"]["#roomtypes"];
                           var mc = element["value"]["maxCapacity"];
-                          var pax = globalctx.memory["tour"]["passengers"];
+                          var pax = globalctx["memory"]["tour"]["passengers"];
 
                           rule = rt * mc >= pax;
                           rule = rule &&
@@ -82,7 +82,7 @@ class HotelFiltersWidget extends StatelessWidget {
                         }),
                         value);
                     setFormValue(
-                        globalctx.memory["destinations"],
+                        globalctx["memory"]["destinations"],
                         globalDestinationIndex,
                         "hotelRoomCategory",
                         hotelRoomCategory.value);
@@ -96,7 +96,7 @@ class HotelFiltersWidget extends StatelessWidget {
                         ? 1
                         : element["value"]["#roomtypes"];
                     var mc = element["value"]["maxCapacity"];
-                    var pax = globalctx.memory["tour"]["passengers"];
+                    var pax = globalctx["memory"]["tour"]["passengers"];
 
                     rule = rt * mc >= pax;
                     rule = rule &&
@@ -126,7 +126,7 @@ class HotelFiltersWidget extends StatelessWidget {
                             .toList()[0]["description"]);
                       }
                       setFormValue(
-                          globalctx.memory["destinations"],
+                          globalctx["memory"]["destinations"],
                           globalDestinationIndex,
                           "hotelFilterMemory",
                           hotelFilterMemory.value);

@@ -3,7 +3,6 @@ import '../index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-
 class CustomBodyDestinationsWidget extends HookWidget {
   final ServicesController ctrl;
   final ValueNotifier<int> counter;
@@ -17,7 +16,7 @@ class CustomBodyDestinationsWidget extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    ctrl.state.memory = globalctx.memory;
+    ctrl.state.memory = globalctx["memory"];
 
     return Stack(
       children: [

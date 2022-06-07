@@ -7,7 +7,8 @@ import 'package:intl/intl.dart';
 bool isFirstLaunch = true;
 var currentDestinationIndex = 0.obs;
 var defaultToken;
-LocalContext globalctx = LocalContext();
+
+
 var session = {};
 ////
 Rx<int> leftAccumulated = 0.obs;
@@ -15,7 +16,7 @@ var airports = {"1": "quito", "2": "guayaquil"};
 var currentDay = 0.obs;
 Rx<int> currentDestination = 0.obs;
 var result = [];
-var allPromotedDestinations = globalctx.promotedDestinations;
+var allPromotedDestinations = globalctx["promotedDestinations"];
 var globalDestinationName = Rx("quito");
 var globalDestinationType = Rx("arrival");
 var globalDestinationIndex = Rx("0");
@@ -29,9 +30,9 @@ int accDays = 0;
 var destDays = [];
 List destList = getParam("DESTINATION_DATA").values.toList();
 CatalogDto destinationData = CatalogDto(destList);
-Map<dynamic, dynamic> destinations = globalctx.memory["destinations"] ?? {};
+var destinations = globalctx["memory"]["destinations"] ?? {};
 Rx<DateTime> birthDate =
-    Rx(DateTime.parse(globalctx.memory["customer"]["birth_date"]));
+    Rx(DateTime.parse(globalctx["memory"]["customer"]["birth_date"]));
 Rx<DateTime> arrivalDate = Rx(DateTime(2022, 12, 10));
 RxString arrivalDateName =
     DateFormat('EEEE').format(arrivalDate.value).toString().obs;
@@ -76,7 +77,7 @@ RxInt selected = 0.obs;
 RxInt dayleft = 0.obs;
 Rx<double> customerAge =
     Rx(DateTime.now().difference(birthDate.value).inDays / 365);
-Rx<int> memoryDayLeft = Rx(globalctx.memory["days_left"]);
+Rx<int> memoryDayLeft = Rx(globalctx["memory"]["days_left"]);
 final currentDayFormat = DateFormat('EEEE MMMM d yyyy');
 final dayFormat = DateFormat('d-MM-yyyy');
 List filteredsrv = [];
@@ -88,9 +89,9 @@ List expList = findCatalog("experiences").toList();
 var experienceSelectedDragData = Rx(<Widget>[]);
 RxList<Widget> destlist = <Widget>[].obs;
 Map<String, dynamic> states = {
-  "selected": globalctx.selectedExperiences,
-  "suggested": globalctx.suggestedExperiences,
-  "promoted": globalctx.promotedExperiences
+  "selected": globalctx["selectedExperiences"],
+  "suggested": globalctx["suggestedExperiences"],
+  "promoted": globalctx["promotedExperiences"]
 };
 Map dayDto = {
   "date": '',
@@ -139,7 +140,7 @@ Rx<List<String>> refresh = Rx(<String>[]);
 Rx<int> trigger = Rx(0);
 Stream? stream;
 final formKey = GlobalKey<FormState>();
-var memory = globalctx.memory;
+var memory = globalctx["memory"];
 var detsdata = getValue(memory, "destinations", def: []);
 var allDestinations = memory["destinations"];
 var destinationList = allDestinations.entries
@@ -148,19 +149,19 @@ var destinationList = allDestinations.entries
 List<dynamic> customDestinationData = [
   ...destinationList,
 ];
-var promotedDestinations = globalctx.promotedDestinations;
+var promotedDestinations = globalctx["promotedDestinations"];
 RxInt selectedIndex = 0.obs;
 RxString travelCode = (() {
   try {
-    globalctx.memory["customer"]["travel_code"] =
+    globalctx["memory"]["customer"]["travel_code"] =
         leadPassenger.value.toString() +
             "-" +
-            globalctx.memory["tour"]["passengers"] +
+            globalctx["memory"]["tour"]["passengers"] +
             "-" +
             dayFormat.format(arrivalDate.value).replaceAll(" ", "-") +
             "-" +
-            globalctx.memory["tour"]["code"].toString();
-    return (globalctx.memory["customer"]["travel_code"]).obs;
+            globalctx["memory"]["tour"]["code"].toString();
+    return (globalctx["memory"]["customer"]["travel_code"]).obs;
   } catch (e) {
     return (leadPassenger.value.toString()).obs;
   }
@@ -170,7 +171,7 @@ RxString leadPassenger = "pp".obs;
 RxString arrivalPort = "6".obs;
 RxString departurePort = "6".obs;
 RxString destCountry = "1".obs;
-var selectedDestinations = globalctx.destinations;
+var selectedDestinations = globalctx["destinations"];
 var destinationsCatalog = findCatalog("destinations");
 var destinationCountry = findCatalog("destination_country");
 var arrival = {}.obs;
@@ -240,25 +241,25 @@ RxString departureState = getDestinationState(
     .toString()
     .obs;
 
-Rx<dynamic> transportService = Rx(getFormValue(globalctx.memory["destinations"],
+Rx<dynamic> transportService = Rx(getFormValue(globalctx["memory"]["destinations"],
         globalDestinationIndex.value, "service_type", <String>[]) ??
     <String>[]);
 Rx<dynamic> translatingService = Rx(getFormValue(
-    globalctx.memory["destinations"],
+    globalctx["memory"]["destinations"],
     globalDestinationIndex.value,
     "translating_service", <String>[]));
-Rx<int> guide = Rx(getFormValue(globalctx.memory["destinations"],
+Rx<int> guide = Rx(getFormValue(globalctx["memory"]["destinations"],
     globalDestinationIndex.value, "guide_type", 1));
 Rx<int> openBoolCredit =
-    Rx(getFormValue(globalctx.memory, "logistic", "open_credit", 0));
+    Rx(getFormValue(globalctx["memory"], "logistic", "open_credit", 0));
 Rx<int> arrivalDinner =
-    Rx(getFormValue(globalctx.memory, "logistic", "dinner", 0));
+    Rx(getFormValue(globalctx["memory"], "logistic", "dinner", 0));
 Rx<int> openCredit =
-    Rx(getFormValue(globalctx.memory, "logistic", "open_credit_value", 100));
+    Rx(getFormValue(globalctx["memory"], "logistic", "open_credit_value", 100));
 RxBool openGuide = false.obs;
 RxBool openTranslate = false.obs;
 Rx<String> arrivalHour = Rx(getFormValue(
-    globalctx.memory["destinations"], 0, "arrival_value", "00:00"));
+    globalctx["memory"]["destinations"], 0, "arrival_value", "00:00"));
 
 var serviceTypeCatalog = Rx(findCatalog("service_type"));
 var translatingCatalog = Rx(findCatalog("translating_service"));
@@ -342,8 +343,8 @@ var hotelFilterMemory = <String>[].obs;
 var kaMemory = <String>[].obs;
 var generated = false;
 var customerTypeCatalog = findCatalog("legal_client_type");
-var client = globalctx.memory["customer"];
-var tour = globalctx.memory["tour"];
+var client = globalctx["memory"]["customer"];
+var tour = globalctx["memory"]["tour"];
 Rx<List<Map<String, dynamic>>> citylist = Rx([]);
 RxString customerType = client["client_type_id"].toString().obs;
 RxString country = getValue(client, "origin_id", def: "1").toString().obs;

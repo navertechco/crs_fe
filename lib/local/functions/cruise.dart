@@ -398,9 +398,9 @@ DataCell getCruiseDataCell(context, row) {
                         cruiseStartDate.value.add(Duration(days: -1));
                   }
                   departureDate.value = end.add(Duration(days: 1));
-                  setFormValue(globalctx.memory["destinations"], 1,
+                  setFormValue(globalctx["memory"]["destinations"], 1,
                       "cruiseStartDate", start);
-                  setFormValue(globalctx.memory["destinations"], 1,
+                  setFormValue(globalctx["memory"]["destinations"], 1,
                       "cruiseEndDate", end);
 
                   var val1 = cruiseEndDate.value
@@ -408,7 +408,7 @@ DataCell getCruiseDataCell(context, row) {
                           .inDays +
                       1;
                   var val0 = int.parse(getFormValue(
-                      globalctx.memory["destinations"],
+                      globalctx["memory"]["destinations"],
                       1,
                       "cruiseExpDays",
                       "0"));
@@ -422,7 +422,7 @@ DataCell getCruiseDataCell(context, row) {
               initialValue: selectedCruise.value == row["description"],
               onChanged: (value) {
                 selectedCruise.value = row["description"];
-                setFormValue(globalctx.memory, "logistic", "cruiseName",
+                setFormValue(globalctx["memory"], "logistic", "cruiseName",
                     selectedCruise.value);
               },
             )),

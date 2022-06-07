@@ -19,7 +19,7 @@ class TitleWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var expData = getExperienceByName(experience).value;
     Rx<TimeOfDay?> timeStart = Rx(getFormValue(
-            globalctx.memory["days"][currentDay.value],
+            globalctx["memory"]["days"][currentDay.value],
             experience,
             "timeStart",
             time) ??
@@ -124,9 +124,10 @@ class TitleWidget extends StatelessWidget {
                 initialTime: time,
               )
                   .then((value) {
-                globalctx.memory["days"][currentDay.value] ??= {};
-                globalctx.memory["days"][currentDay.value][experience] ??= {};
-                setFormValue(globalctx.memory["days"][currentDay.value],
+                globalctx["memory"]["days"][currentDay.value] ??= {};
+                globalctx["memory"]["days"][currentDay.value]
+                    [experience] ??= {};
+                setFormValue(globalctx["memory"]["days"][currentDay.value],
                     experience, "timeStart", value);
                 return value;
               });

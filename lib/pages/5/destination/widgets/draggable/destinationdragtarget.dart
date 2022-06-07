@@ -42,7 +42,7 @@ class DestinationDragTargetWidget extends StatelessWidget {
                           ],
                         ),
                         Column(children: [
-                          ...globalctx.destinationDragData.value,
+                          ...globalctx["destinationDragData"],
                         ]),
                       ],
                     ),

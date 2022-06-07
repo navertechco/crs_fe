@@ -38,7 +38,7 @@ class BodyWidget extends StatelessWidget {
       var index = getDestinationIndex(
           globalDestinationName.value, globalDestinationType.value);
       Rx<bool> customGuide = Rx(getFormValue(
-          globalctx.memory["destinations"], index, "customGuide", false));
+          globalctx["memory"]["destinations"], index, "customGuide", false));
 
       return Form(
         key: formKey,
@@ -106,12 +106,12 @@ class LeftDayOptions extends StatelessWidget {
                     enabled: true,
                     iconSize: 32,
                     onSaved: (value) {
-                      setFormValue(globalctx.memory["destinations"], index,
+                      setFormValue(globalctx["memory"]["destinations"], index,
                           "customGuide", value);
                     },
                     onChanged: (value) {
                       customGuide.value = value;
-                      setFormValue(globalctx.memory["destinations"], index,
+                      setFormValue(globalctx["memory"]["destinations"], index,
                           "customGuide", value);
                     },
                   ),
@@ -126,7 +126,7 @@ class LeftDayOptions extends StatelessWidget {
               validator: (value) => CustomMultiDropdownRequiredValidator(value,
                   errorText: "Day Transport Options are required ",
                   context: context),
-              value: getFormValue(globalctx.memory["destinations"],
+              value: getFormValue(globalctx["memory"]["destinations"],
                   globalDestinationIndex.value, "service_type", ["DRIVING"]),
               onSaved: (values) {
                 transportService.value = values;
@@ -135,7 +135,7 @@ class LeftDayOptions extends StatelessWidget {
                 multiSaving(
                     values,
                     "service_type",
-                    globalctx.memory["destinations"],
+                    globalctx["memory"]["destinations"],
                     index,
                     "service_type",
                     transportService);
@@ -144,7 +144,7 @@ class LeftDayOptions extends StatelessWidget {
                 transportService.value = value;
                 openGuide.value = transportService.value.contains(3);
                 openTranslate.value = transportService.value.contains(2);
-                setFormValue(globalctx.memory["destinations"],
+                setFormValue(globalctx["memory"]["destinations"],
                     globalDestinationIndex.value, "service_type", value);
               },
               hintText: "                  Services\n",
@@ -159,7 +159,7 @@ class LeftDayOptions extends StatelessWidget {
                 value: translatingService.value ?? <String>[],
                 onSaved: (value) {
                   setFormValue(
-                      globalctx.memory["destinations"],
+                      globalctx["memory"]["destinations"],
                       globalDestinationIndex.value,
                       "translating_service",
                       value);
@@ -168,7 +168,7 @@ class LeftDayOptions extends StatelessWidget {
                   openTranslate.value = false;
                   translatingService.value = value;
                   setFormValue(
-                      globalctx.memory["destinations"],
+                      globalctx["memory"]["destinations"],
                       globalDestinationIndex.value,
                       "translating_service",
                       value);
@@ -187,7 +187,7 @@ class LeftDayOptions extends StatelessWidget {
                         guide.value = 0;
                       } else {
                         guide.value = value;
-                        setFormValue(globalctx.memory["destinations"],
+                        setFormValue(globalctx["memory"]["destinations"],
                             globalDestinationIndex.value, "guide_type", value);
                       }
                     },
@@ -201,7 +201,7 @@ class LeftDayOptions extends StatelessWidget {
                         guide.value = 0;
                       } else {
                         guide.value = value;
-                        setFormValue(globalctx.memory["destinations"],
+                        setFormValue(globalctx["memory"]["destinations"],
                             globalDestinationIndex.value, "guide_type", value);
                       }
                     },
