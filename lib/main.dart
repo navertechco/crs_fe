@@ -1,8 +1,7 @@
 import 'dart:io';
-import 'dart:js';
 
-import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart'; 
+import 'common/behavior.dart' as common_behavior;
+import 'package:flutter/material.dart';
 import '../index.dart';
 import 'index.dart';
 import 'package:naver_crs/index.dart';
@@ -10,27 +9,9 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/common/index.dart';
 
-
-class ScrollBehavior extends MaterialScrollBehavior {
-  // Override behavior methods and getters like dragDevices
-  @override
-  Set<PointerDeviceKind> get dragDevices;
-}
-
-class MyHttpOverrides extends HttpOverrides {
-  @override
-  HttpClient createHttpClient(SecurityContext? context) {
-    return super.createHttpClient(context)
-      ..badCertificateCallback =
-          (X509Certificate cert, String host, int port) => true;
-  }
-}
-
 void main() {
   try {
-
-    
-    HttpOverrides.global = MyHttpOverrides();
+    HttpOverrides.global = common_behavior.MyHttpOverrides();
     WidgetsFlutterBinding.ensureInitialized();
     SystemChrome.setPreferredOrientations(
         [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
@@ -40,7 +21,7 @@ void main() {
         routes.toList().firstWhere((element) => element.name == "/Splash");
 
     runApp(GetMaterialApp(
-        scrollBehavior: ScrollBehavior(),
+        scrollBehavior: common_behavior.ScrollBehavior(),
         debugShowCheckedModeBanner: false,
         initialRoute: registry.name,
         theme: lightTheme,

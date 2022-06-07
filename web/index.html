@@ -3,9 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="author" content="Jose Cuevas">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Art Experiences</title>
   <script defer src="main.dart.js" type="application/javascript"></script>
+  <script>
+    document.addEventListener('wheel', function(e) {
+      e.ctrlKey && e.preventDefault();
+    }, {
+      passive: false,
+    });
+  </script>
+  <script>
+    window.addEventListener('keydown', function(e) {
+      if (event.metaKey || event.ctrlKey) {
+        switch (event.key) {
+          case '=':
+          case '-':
+            event.preventDefault();
+            break;
+        }
+      }
+    });
+  </script>
 </head>
 <body>
 </body>

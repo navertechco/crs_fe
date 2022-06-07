@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:flutter/material.dart';
+import 'package:naver_crs/common/functions.dart';
 import '../index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';

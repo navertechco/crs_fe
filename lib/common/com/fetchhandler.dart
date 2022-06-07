@@ -1,13 +1,12 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-
 import 'package:naver_crs/index.dart';
 
-Future<dynamic> fetchhandler(scheme, host, port, path, method, body) async {
-  http.Response response = http.Response('', 201);
+Future fetchhandler(scheme, host, port, path, method, body) async {
+  var res = http.Response('', 500);
   try {
     if (method == 'GET') {
-      response = await fetch(
+      res = await fetch(
           method,
           body,
           Uri(
@@ -17,12 +16,12 @@ Future<dynamic> fetchhandler(scheme, host, port, path, method, body) async {
               path: path,
               queryParameters: body));
     } else {
-      response = await fetch(method, body,
+      res = await fetch(method, body,
           Uri(scheme: scheme, host: host, port: port, path: path));
     }
 
-    if (response.statusCode == 200) {
-      Map<String, dynamic> jsonResponse = json.decode(response.body);
+    if (res.statusCode == 200) {
+      Map<String, dynamic> jsonResponse = json.decode(res.body);
       return jsonResponse;
     } else {
       throw Exception('Failed to connect');
@@ -32,12 +31,12 @@ Future<dynamic> fetchhandler(scheme, host, port, path, method, body) async {
       'state': false,
       'data': null,
       'message': "Service is temporarily unavailable, please try again later",
-      'code': response.statusCode
+      'code': res.statusCode
     };
   }
 }
 
-Future<http.Response> fetch(method, body, uri) async {
+Future fetch(method, body, uri) async {
   var rule = defaultToken == null || defaultToken == "None";
   var res = http.Response('', 500);
   if (rule) {
@@ -55,7 +54,7 @@ Future<http.Response> fetch(method, body, uri) async {
   return res;
 }
 
-Future<http.Response> head() async {
+Future head() async {
   var uri = Uri(
       scheme: kDefaultSchema,
       host: kDefaultServer,

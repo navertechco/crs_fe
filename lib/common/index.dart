@@ -1,4 +1,4 @@
-export './com/index.dart';
-export './widgets/index.dart';
-export './theme/index.dart';
-export './validators.dart';
+export './com/index.dart'; 
+export './theme/index.dart'; 
+export './extensions/index.dart';
+export './functions.dart';
