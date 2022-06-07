@@ -33,6 +33,7 @@ class CustomLogisticInformationForm extends StatelessWidget {
                   SingleChildScrollView(
                     child: Column(children: [
                       Obx(() {
+                        var d = arrivalDate.value;
                         if (galapagos.value) {
                           return Row(
                             children: [
@@ -101,10 +102,11 @@ class CustomLogisticInformationForm extends StatelessWidget {
                         data: airportCatalog.toList(),
                       ),
                       Obx(() {
+                        var d = arrivalDate.value;
                         return Row(
                           children: [
                             CustomFormDateFieldWidget(
-                              disabled: (readonly || cruiseDay.isNotEmpty) &&
+                              disabled: (readonly || cruiseDay != null) &&
                                   !arrivalEdit.value,
                               initialValue: arrivalDate.value,
                               validator: CustomDatetimeGreaterValidator(
@@ -160,10 +162,11 @@ class CustomLogisticInformationForm extends StatelessWidget {
                         data: airportCatalog.toList(),
                       ),
                       Obx(() {
+                        var d = arrivalDate.value;
                         return Row(
                           children: [
                             CustomFormDateFieldWidget(
-                              disabled: (readonly || cruiseDay.isNotEmpty) &&
+                              disabled: (readonly || cruiseDay != null) &&
                                   !departureEdit.value,
                               initialValue: departureDate.value,
                               validator: CustomDatetimeGreaterValidator(
@@ -195,6 +198,7 @@ class CustomLogisticInformationForm extends StatelessWidget {
                         );
                       }),
                       Obx(() {
+                        var d = arrivalDate.value;
                         return Column(
                           children: [
                             const CustomTitleWidget(
@@ -256,7 +260,7 @@ class CustomLogisticInformationForm extends StatelessWidget {
                                   },
                                   label: '\t\tOpen Credit Amount',
                                   width: 0.2),
-                            if (cruiseDay.isNotEmpty)
+                            if (cruiseDay != null)
                               CustomTitleWidget(
                                 width: 0.3,
                                 fontWeight: FontWeight.bold,

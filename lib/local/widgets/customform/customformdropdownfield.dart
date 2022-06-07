@@ -37,7 +37,7 @@ class CustomFormDropDownFieldWidget extends StatelessWidget {
       child: Row(
         children: [
           CustomFormLabelWidget(label: label, fontWeight: FontWeight.normal),
-          if (data.isNotEmpty)
+          if (data != null)
             RoundedFormDropdown(
                 onChanged: onChanged,
                 width: width,

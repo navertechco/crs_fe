@@ -22,6 +22,7 @@ class DragDestinationWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
+      var d = arrivalDate.value;
       var explorationDay = getFormValue(
           globalctx["memory"]["destinations"], index, "explorationDay", "0");
       return globalctx["destinations"].contains(destination) &&

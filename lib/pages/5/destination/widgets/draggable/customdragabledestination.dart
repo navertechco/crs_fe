@@ -14,6 +14,7 @@ class CustomDragableDestination extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
+      var d = arrivalDate.value;
       return Draggable<String>(
         // Data is the value this Draggable stores.
         maxSimultaneousDrags: destDraggable.value,

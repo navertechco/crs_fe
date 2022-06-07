@@ -58,7 +58,7 @@ void filterCruises(ctx) {
   itinerary = findCatalog("itinerary");
   animals = findCatalog("animals");
   //CRUISE CATEGORY LUJO / PRIMERA
-  if (cruiseCategory.isNotEmpty)
+  if (cruiseCategory != null)
     cruises = cruises
         .where((element) => element["value"]["cruise_category"]
             .toString()
@@ -66,7 +66,7 @@ void filterCruises(ctx) {
             .contains(cruiseCategory.value))
         .toList();
   //CRUISE TYPE
-  if (cruiseType.isNotEmpty)
+  if (cruiseType != null)
     cruises = cruises
         .where((element) => element["value"]["cruise_type"]
             .toString()
@@ -74,7 +74,7 @@ void filterCruises(ctx) {
             .contains(cruiseType.value))
         .toList();
   //CRUISE MODALITY CATAMARAN / MONOCASCO / YATE
-  if (cruiseModality.isNotEmpty)
+  if (cruiseModality != null)
     cruises = cruises
         .where((element) => element["value"]["modality"]
             .toString()
@@ -82,7 +82,7 @@ void filterCruises(ctx) {
             .contains(cruiseModality.value))
         .toList();
   //CRUISE PORT BAQUERIZO / AYORA
-  if (cruisePort.isNotEmpty)
+  if (cruisePort != null)
     cruises = cruises
         .where((element) => element["value"]["cruise_port"]
             .toString()
@@ -90,35 +90,35 @@ void filterCruises(ctx) {
             .contains(cruisePort.value.toString().toUpperCase()))
         .toList();
   //CRUISE DURATION
-  if (cruiseDay.isNotEmpty)
+  if (cruiseDay != null)
     cabine = cabine
         .where((element) =>
             element["value"]["days"].toString().toUpperCase() ==
             (cruiseDay.value.toString().toUpperCase()))
         .toList();
   //CRUISE CABINE
-  if (cruiseCabine.isNotEmpty)
+  if (cruiseCabine != null)
     cabine = cabine
         .where((element) =>
             element["value"]["cabine_type"].toString().toUpperCase() ==
             (cruiseCabine.value.toString().toUpperCase()))
         .toList();
   //CRUISE ANIMALS
-  if (cruiseAnimal.isNotEmpty)
+  if (cruiseAnimal != null)
     animals = animals
         .where((element) =>
             element["description"].toString().toUpperCase() ==
             (cruiseAnimal.value.toString().toUpperCase()))
         .toList();
   //CRUISE ITINERARY
-  if (cruiseDay.isNotEmpty)
+  if (cruiseDay != null)
     itinerary = itinerary
         .where((element) =>
             element["value"]["days"].toString().toUpperCase() ==
             (cruiseDay.value.toString().toUpperCase()))
         .toList();
   //CRUISE ITINERARY FORMAT
-  if (cruiseItinerary.isNotEmpty)
+  if (cruiseItinerary != null)
     itinerary = itinerary
         .where((element) =>
             element["value"]["itinerary_format"].toString().toUpperCase() ==
@@ -130,7 +130,7 @@ void filterCruises(ctx) {
   var processedData = buildCruiseDataTable(ctx, cruiseResults.value);
   searcherHeader.value = processedData[0];
   searcherDetail.value = processedData[1];
-  if (searcherHeader.value.isNotEmpty) {
+  if (searcherHeader.value != null) {
     cruiseTable.value = (DataTable(
       columns: searcherHeader.value,
       rows: searcherDetail.value,
@@ -152,7 +152,7 @@ List<DataColumn> getCruiseHeader(context, data, columns) {
   var header = <DataColumn>[];
   List cols = [];
 
-  if (data.isNotEmpty) {
+  if (data != null) {
     cols = data[0].keys.toList();
     if (columns != null) {
       cols = columns;

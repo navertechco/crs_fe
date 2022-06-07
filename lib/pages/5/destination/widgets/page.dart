@@ -17,6 +17,7 @@ class DestinationWidget extends GetView<DestinationController> {
           top: MediaQuery.of(context).size.height * 0.1,
           left: MediaQuery.of(context).size.width * 0.1,
           child: Obx(() {
+            var d = arrivalDate.value;
             return Row(
               children: [
                 Text("Remaining Days: $dayleft",

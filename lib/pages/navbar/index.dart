@@ -19,6 +19,7 @@ class NavBarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     try {
       return Obx(() {
+        var d = arrivalDate.value;
         List<BottomNavigationBarItem> itemList = [];
         for (var page in pageList) {
           if (!isFirstLaunch) {

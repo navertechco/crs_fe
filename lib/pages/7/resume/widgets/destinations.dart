@@ -15,7 +15,7 @@ class Destinations extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> destinations = [];
     Map<String, dynamic> data = memory;
-    if (data != null && globalctx["promotedDestinations"].isNotEmpty) {
+    if (data != null && globalctx["promotedDestinations"] != null) {
       var i = 0;
       for (var dest in globalctx["promotedDestinations"]) {
         // var destData = getDestinationById(dest);

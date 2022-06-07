@@ -12,6 +12,7 @@ class CustomDestinationWidget extends StatelessWidget {
     DateTime date = DateTime(now.year, now.month, now.day);
 
     return Obx(() {
+      var d = arrivalDate.value;
       Rx<TimeOfDay?> leisureTimeStart = Rx(getFormValue(
               globalctx["memory"]["days"],
               currentDay.value,

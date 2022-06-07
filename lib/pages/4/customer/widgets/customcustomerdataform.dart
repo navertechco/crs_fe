@@ -76,6 +76,7 @@ class CustomCustomerDataForm extends StatelessWidget {
                         Row(
                           children: [
                             Obx(() {
+                              var d = arrivalDate.value;
                               if (customerType.value == "1") {
                                 return CustomFormTextFieldWidget(
                                     validator: CustomRequiredValidator(
@@ -95,6 +96,7 @@ class CustomCustomerDataForm extends StatelessWidget {
                               }
                             }),
                             Obx(() {
+                              var d = arrivalDate.value;
                               if (customerType.value == "1") {
                                 return CustomFormTextFieldWidget(
                                     validator: CustomRequiredValidator(
@@ -113,6 +115,7 @@ class CustomCustomerDataForm extends StatelessWidget {
                               }
                             }),
                             Obx(() {
+                              var d = arrivalDate.value;
                               if (customerType.value != "1") {
                                 return CustomFormTextFieldWidget(
                                     validator: CustomRequiredValidator(
@@ -181,6 +184,7 @@ class CustomCustomerDataForm extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             label: " Address information"),
                         Obx(() {
+                          var d = arrivalDate.value;
                           return Row(
                             children: [
                               CustomFormDropDownFieldWidget(
@@ -290,6 +294,7 @@ class CustomCustomerDataForm extends StatelessWidget {
                           ],
                         ),
                         Obx(() {
+                          var d = arrivalDate.value;
                           return CustomTitleWidget(
                               width: 0.1,
                               fontWeight: FontWeight.normal,

@@ -64,7 +64,7 @@ getQuoteHistoryHeader(context, data, columns) {
   var header = <DataColumn>[];
   List cols = [];
 
-  if (data.isNotEmpty) {
+  if (data != null) {
     cols = data[0].keys.toList();
     if (columns != null) {
       cols = columns;
@@ -174,6 +174,7 @@ getQuoteHistoryDataCell(context, row) {
                   ).getStyle(),
                 ),
                 Obx(() {
+                  var d = arrivalDate.value;
                   try {
                     return SfCalendar(
                       firstDayOfWeek: 1,

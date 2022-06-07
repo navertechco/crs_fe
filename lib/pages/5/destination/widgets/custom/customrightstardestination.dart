@@ -27,6 +27,7 @@ class CustomRightStarDestinationForm extends StatelessWidget {
             ),
             DestinationsOrderableListWidget(),
             Obx(() {
+              var d = arrivalDate.value;
               return Padding(
                 padding: EdgeInsets.only(
                   top: MediaQuery.of(context).size.height * 0.0,

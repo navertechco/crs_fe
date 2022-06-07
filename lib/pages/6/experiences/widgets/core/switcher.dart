@@ -69,6 +69,7 @@ class SwitcherWidget extends StatelessWidget {
           final value =
               isUnder ? min(rotateAnim.value, pi / 2) : rotateAnim.value;
           return Obx(() {
+            var d = arrivalDate.value;
             return Transform(
               transform: _flipXAxis.value
                   ? (Matrix4.rotationY(value)..setEntry(3, 0, tilt))
@@ -89,6 +90,7 @@ class SwitcherWidget extends StatelessWidget {
           transitionBuilder: _transitionBuilder,
           layoutBuilder: (widget, list) => Stack(children: [widget!, ...list]),
           child: Obx(() {
+            var d = arrivalDate.value;
             return _showFrontSide.value ? firstchild : seccondchild;
           }),
           switchInCurve: Curves.easeInBack,

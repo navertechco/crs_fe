@@ -178,7 +178,7 @@ dynamic getCatalogDescription(catalog, value) {
 
   if (value is List) {
     var result = [];
-    if (value.isNotEmpty) {
+    if (value != null) {
       for (var item in catalog) {
         if (value.contains(item["code"])) {
           result.add(item["description"]);
@@ -269,7 +269,7 @@ dynamic getCatalogs(catalogs) async {
 List<Map<String, dynamic>> findCatalog(name) {
   var catalogs = getContext("catalogs");
   List<Map<String, dynamic>> catalog = <Map<String, dynamic>>[];
-  if (catalogs.isNotEmpty) {
+  if (catalogs != null) {
     var items = catalogs[name];
     if (items != null) {
       for (var item in items) {

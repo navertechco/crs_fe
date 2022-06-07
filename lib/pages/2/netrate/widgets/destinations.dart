@@ -11,7 +11,7 @@ class Destinations extends StatelessWidget {
     List<Widget> dests = [];
     var tour = globalctx["memory"]["tour"];
     var destinations = tour["destinations"];
-    if (destinations.isNotEmpty) {
+    if (destinations != null) {
       var i = 0;
       for (var dest in destinations.entries) {
         // var destData = getDestinationById(dest);

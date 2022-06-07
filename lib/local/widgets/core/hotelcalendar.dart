@@ -175,7 +175,7 @@ class HotelKeyPadWidget extends StatelessWidget {
                             color: Colors.black)
                         .getStyle()),
               ),
-              // if (hotelExtrabed.isNotEmpty)
+              // if (hotelExtrabed !=null)
               TextButton(
                 onPressed: () {
                   showCustomDialog(context, HotelResultWidget(), "Close",
@@ -217,11 +217,11 @@ class HotelResultWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       child: Stack(children: [
-        // if (hotelTerraceorPatio.isNotEmpty)
-        //   if (hotelMaxCapacity.isNotEmpty)
-        //     if (hotelBalcony.isNotEmpty)
-        //       if (hotelExtrabed.isNotEmpty)
-        //         if (hotelExtrabed.isNotEmpty)
+        // if (hotelTerraceorPatio !=null)
+        //   if (hotelMaxCapacity !=null)
+        //     if (hotelBalcony !=null)
+        //       if (hotelExtrabed !=null)
+        //         if (hotelExtrabed !=null)
         Column(
           children: [
             Padding(
@@ -270,8 +270,8 @@ class HotelResultWidget extends StatelessWidget {
                           alignment: Alignment.topCenter,
                           child: Column(
                             children: [
-                              if (hotelResults.value.isNotEmpty &&
-                                  searcherHeader.value.isNotEmpty)
+                              if (hotelResults.value != null &&
+                                  searcherHeader.value != null)
                                 hotelTable.value
                               else
                                 Text(

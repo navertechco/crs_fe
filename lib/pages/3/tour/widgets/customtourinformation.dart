@@ -83,9 +83,10 @@ class CustomTourInformationForm extends StatelessWidget {
                       setFormValue(globalctx["memory"], "tour", "passengers",
                           value as int);
                     },
-                    label: "  Passengers\t\t\t\t\t\t\t\t\t\t\t\t\t\t",
+                    label: " Passengers\t\t\t\t\t\t\t\t\t",
                     width: 0.20),
                 Obx(() {
+                  var d = arrivalDate.value;
                   return AbsorbPointer(
                     absorbing: absorvedPurpose.value,
                     child: CustomFormMultiDropDownFieldWidget(

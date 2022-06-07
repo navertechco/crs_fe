@@ -88,6 +88,7 @@ class CustomStarDestinationForm extends StatelessWidget {
       child: Column(
         children: [
           Obx(() {
+            var d = arrivalDate.value;
             return Wrap(
               children: [
                 Text("Remaining Days: $dayleft",
@@ -123,6 +124,7 @@ class CustomStarDestinationForm extends StatelessWidget {
             child: SizedBox(
               child: Wrap(children: [
                 Obx(() {
+                  var d = arrivalDate.value;
                   var expDay = explorationDay.value;
 
                   if (destination != "galapagos") {
@@ -151,6 +153,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                   return Text('');
                 }),
                 Obx(() {
+                  var d = arrivalDate.value;
                   var t = arrivalDate.value;
                   return Row(
                     children: [
@@ -173,6 +176,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                   );
                 }),
                 Obx(() {
+                  var d = arrivalDate.value;
                   var expMode = explorationMode.value;
                   if (type == "arrival" &&
                       destination == arrival["description"]) {
@@ -202,6 +206,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                   return Text('');
                 }),
                 Obx(() {
+                  var d = arrivalDate.value;
                   var expMode = explorationMode.value;
                   if (explorationMode.value != "2") {
                     return CustomFormDropDownFieldWidget(
@@ -243,6 +248,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                   return Text('');
                 }),
                 Obx(() {
+                  var d = arrivalDate.value;
                   if (explorationMode.value != "2") {
                     return CustomFormMultiDropDownFieldWidget(
                       validator: (value) =>
@@ -282,6 +288,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                   child: (() {
                     if (destination == "galapagos" || destination == "amazon") {
                       return Obx(() {
+                        var d = arrivalDate.value;
                         var expDay = explorationDay.value;
                         return CustomFormDropDownFieldWidget(
                           validator: CustomRequiredValidator(
@@ -310,6 +317,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                   })(),
                 ),
                 Obx(() {
+                  var d = arrivalDate.value;
                   var expDay = explorationDay.value;
                   if ((destination == "galapagos" &&
                           (explorationMode.value == "3" ||
@@ -342,6 +350,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                   }
                 }),
                 SizedBox(child: Obx(() {
+                  var d = arrivalDate.value;
                   var expMode = explorationMode.value;
                   if (destination == "galapagos" &&
                       (explorationMode.value == "3" ||
@@ -349,6 +358,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                     return Column(
                       children: [
                         Obx(() {
+                          var d = arrivalDate.value;
                           return CustomFormCalendarFieldWidget(
                               label: "IH Range                    ",
                               initialStartDate: cruiseEndDate.value,

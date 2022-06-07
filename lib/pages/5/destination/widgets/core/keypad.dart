@@ -16,7 +16,8 @@ class KeyPadWidget extends StatelessWidget {
         left: MediaQuery.of(context).size.width * 0.75,
       ),
       child: Obx(() {
-        if (!globalctx["destinationlist"].isNotEmpty) {
+        var d = arrivalDate.value;
+        if (!globalctx["destinationlist"] != null) {
           return Row(
             children: [
               TextButton(

@@ -41,10 +41,11 @@ class SearcherWidget extends GetView<SearcherController> {
                   // color: Colors.white,
                   child: SingleChildScrollView(
                     child: Obx(() {
+                      var d = arrivalDate.value;
                       return Column(
                         children: [
                           SearcherField(data: data, formKey: _formKey),
-                          if (searcherHeader.value.isNotEmpty)
+                          if (searcherHeader.value != null)
                             DataTable(
                               columns: searcherHeader.value,
                               rows: searcherDetail.value,

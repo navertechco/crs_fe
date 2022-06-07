@@ -35,6 +35,7 @@ class BodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
+      var d = arrivalDate.value;
       var index = getDestinationIndex(
           globalDestinationName.value, globalDestinationType.value);
       Rx<bool> customGuide = Rx(getFormValue(

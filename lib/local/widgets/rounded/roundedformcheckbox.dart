@@ -48,6 +48,7 @@ class RoundedFormCheckbox extends StatelessWidget {
         child: Row(
           children: [
             Obx(() {
+              var d = arrivalDate.value;
               return Radio(
                   value: value,
                   groupValue: groupValue.value,

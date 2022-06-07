@@ -13,6 +13,7 @@ class SearcherField extends StatelessWidget {
     TextEditingController? controller = TextEditingController();
 
     return Obx(() {
+      var d = arrivalDate.value;
       return Card(
         child: ListTile(
           leading: Icon(Icons.search),

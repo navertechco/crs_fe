@@ -33,6 +33,7 @@ class CustomLeisureTimeDetailForm extends StatelessWidget {
             60);
 
     return Obx(() {
+      var d = arrivalDate.value;
       return Stack(
         children: [
           Form(
@@ -48,6 +49,7 @@ class CustomLeisureTimeDetailForm extends StatelessWidget {
                               color: Colors.white)
                           .getStyle()),
                   Obx(() {
+                    var d = arrivalDate.value;
                     return CustomFormCounterFieldWidget(
                         initial: getFormValue(globalctx["memory"]["days"],
                                 currentDay.value, "leisureTime", 0)

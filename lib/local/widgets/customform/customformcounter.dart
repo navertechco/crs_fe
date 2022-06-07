@@ -55,6 +55,7 @@ class CustomFormCounterFieldWidget extends StatelessWidget {
           children: [
             CustomFormLabelWidget(
                 label: label, color: color, fontWeight: fontWeight),
+            Spacer(),
             RoundedFormCounterField(
                 disabled: disabled,
                 hintText: hintText,

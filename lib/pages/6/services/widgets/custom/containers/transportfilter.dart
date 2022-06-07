@@ -34,6 +34,7 @@ class BodyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
+      var d = arrivalDate.value;
       var t = arrivalDate.value;
       return Form(
         key: formKey,

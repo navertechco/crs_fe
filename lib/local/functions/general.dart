@@ -217,7 +217,7 @@ getCruise(ctx, {int cruiseId = 999, String cruiseName = ''}) async {
 
 resetData(context, controller) {
   var data = globalctx["memory"]["tours"];
-  if (searchResult!.isNotEmpty) {
+  if (searchResult! != null) {
     controller.clear();
     searchResult!.value = '';
     filteredData.value = data;
@@ -230,7 +230,7 @@ filterData(context, value) {
   var data = globalctx["memory"]["tours"];
   try {
     searchResult!.value = value.toString();
-    if (searchResult!.isNotEmpty) {
+    if (searchResult! != null) {
       filteredData.value = data
           .where((quote) =>
               quote["date"].toString().contains(searchResult!.value) ||

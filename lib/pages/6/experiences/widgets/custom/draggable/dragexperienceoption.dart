@@ -13,6 +13,7 @@ class DragExperienceTarget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
+      var d = arrivalDate.value;
       var state = Rx(getExperienceState(experience));
       return state.value != "suggested"
           ? Row(

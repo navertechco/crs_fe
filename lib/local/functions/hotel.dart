@@ -49,7 +49,7 @@ filterHotels(ctx) {
     var p1 = element["value"]["purpose_fk"].toString().toUpperCase();
     var p2 = element["value"]["purpouse_fk.1"].toString().toUpperCase();
     var p3 = element["value"]["purpouse_fk.2"].toString().toUpperCase();
-    if (purposes.isNotEmpty) {
+    if (purposes != null) {
       rule =
           purposes.contains(p1) | purposes.contains(p2) | purposes.contains(p3);
     }
@@ -63,7 +63,7 @@ filterHotels(ctx) {
     var keyActivity = destData["key_activities"] ?? [];
     filteredHotel = filteredHotel.where((element) {
       var rule = true;
-      if (keyActivity.isNotEmpty) {
+      if (keyActivity != null) {
         var k1 =
             element["value"]["keyActivityType_fk"].toString().toUpperCase();
         var k2 =
@@ -80,18 +80,18 @@ filterHotels(ctx) {
   }
 
   //BUDGET
-  if (hotelCategory.isNotEmpty)
+  if (hotelCategory != null)
     filteredHotel = filteredHotel.where((element) {
       var rule = true;
       var max = element["value"]["budget_fk"];
-      if (hotelCategory.isNotEmpty) {
+      if (hotelCategory != null) {
         rule = hotelCategory.value == max.toString();
       }
       return rule;
     }).toList();
 
   //HOTELNAME
-  if (hotelName.isNotEmpty)
+  if (hotelName != null)
     filteredHotel = filteredHotel.where((element) {
       var rule = true;
       var max = element["value"]["hotelname"];
@@ -115,7 +115,7 @@ filterHotels(ctx) {
   var processedData = processHotelData(ctx, hotelResults.value);
   searcherHeader.value = processedData[0];
   searcherDetail.value = processedData[1];
-  if (searcherHeader.value.isNotEmpty) {
+  if (searcherHeader.value != null) {
     hotelTable.value = (DataTable(
       columns: searcherHeader.value,
       rows: searcherDetail.value,
@@ -142,7 +142,7 @@ getHotelHeader(context, data, columns) {
   var header = <DataColumn>[];
   List cols = [];
 
-  if (data.isNotEmpty) {
+  if (data != null) {
     cols = data[0].keys.toList();
     if (columns != null) {
       cols = columns;

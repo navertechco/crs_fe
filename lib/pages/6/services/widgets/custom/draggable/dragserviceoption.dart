@@ -13,6 +13,7 @@ class DragServiceOptionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
+      var d = arrivalDate.value;
       var state = Rx(getServiceState(service));
       return state.value != "suggested"
           ? Row(

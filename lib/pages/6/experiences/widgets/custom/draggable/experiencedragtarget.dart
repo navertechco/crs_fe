@@ -22,6 +22,7 @@ class ExperienceDragTargetWidget extends StatelessWidget {
             List<dynamic> rejected,
           ) {
             return Obx(() {
+              var d = arrivalDate.value;
               return Scrollbar(
                   child: SingleChildScrollView(
                 child: Column(children: experiencePromotedDragData.value),

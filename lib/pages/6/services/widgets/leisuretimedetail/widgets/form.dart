@@ -101,6 +101,7 @@ class CustomLeisureTimeDetailForm extends StatelessWidget {
     };
 
     return Obx(() {
+      var d = arrivalDate.value;
       return Stack(
         children: [
           Form(
@@ -116,6 +117,7 @@ class CustomLeisureTimeDetailForm extends StatelessWidget {
                               color: Colors.white)
                           .getStyle()),
                   TextButton(child: Obx(() {
+                    var d = arrivalDate.value;
                     return Text(
                         "Starts at: ${leisureTimeStart.value.toString().replaceAll("TimeOfDay", '').replaceAll("(", '').replaceAll(")", '')}",
                         style: KTextSytle(

@@ -20,9 +20,10 @@ class TravelChips extends HookWidget {
                 label: "Filtered Services by:",
                 color: Colors.white),
             Obx(() {
+              var d = arrivalDate.value;
               return Column(
                 children: [
-                  if (currentDestinationKeyActivities.isNotEmpty)
+                  if (currentDestinationKeyActivities != null)
                     InputChip(
                       deleteIcon: Icon(Icons.cancel),
                       label: Text(

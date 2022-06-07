@@ -21,7 +21,7 @@ getFilteredServices() async {
       .toList();
   globalctx["memory"]["catalogs"][currentDestination.value] ??= [];
   var catalogs = globalctx["memory"]["catalogs"][currentDestination.value];
-  var rule = catalogs.isNotEmpty;
+  var rule = catalogs != null;
   if (rule) {
     filtered = filtered.where((service) {
       var state = getServiceState(service.description);
@@ -31,9 +31,8 @@ getFilteredServices() async {
 
       if (service.catalog == "hotel") {
         var room = service.description.split("-")[1];
-        if (promotedServices
-            .where((element) => element.contains(room))
-            .isNotEmpty) {
+        if (promotedServices.where((element) => element.contains(room)) !=
+            null) {
           return false;
         }
         return true;
@@ -41,9 +40,8 @@ getFilteredServices() async {
 
       if (service.catalog == "food_services") {
         var meal = service.description.split("-")[1];
-        if (promotedServices
-            .where((element) => element.contains(meal))
-            .isNotEmpty) {
+        if (promotedServices.where((element) => element.contains(meal)) !=
+            null) {
           return false;
         }
         return true;

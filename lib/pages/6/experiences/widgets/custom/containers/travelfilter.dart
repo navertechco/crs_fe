@@ -47,6 +47,7 @@ class TravelFilter extends HookWidget {
                   endIndent: 5,
                 ),
                 Obx(() {
+                  var d = arrivalDate.value;
                   return Column(
                     children: [
                       CustomFormDropDownFieldWidget(

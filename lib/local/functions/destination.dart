@@ -45,7 +45,7 @@ void resetAllDestinations() {
   resetDestinations();
   updateDraggableDestinations();
   filterDestinations();
-  if (cruiseDay.isNotEmpty) {
+  if (cruiseDay != null) {
     autoFillDestination(arrival["description"], 0, "arrival", "1");
     autoFillDestination("galapagos", 1, "arrival", cruiseDay.value);
     autoFillDestination(departure["description"], 2, "departure", "1");
@@ -127,7 +127,7 @@ List getDestinationList() {
 }
 
 void orderDestination(List destinations) {
-  if (arrival.isNotEmpty) {
+  if (arrival != null) {
     destinations.sort((a, b) {
       var arrivalData = toCatalog(filterCatalog(
           "destinations", "description", arrival.value["description"])[0]);
@@ -166,7 +166,7 @@ updatePromotedDestination(destination, index) {
   }
   arrivalState.value = "selected";
   departureState.value = "selected";
-  if (globalctx["promotedDestinations"].isNotEmpty) {
+  if (globalctx["promotedDestinations"] != null) {
     arrivalState.value = "promoted";
   }
 }
@@ -208,7 +208,7 @@ getCombinedDestinations() {
 
 processDestinations(context) async {
   // ignore: unrelated_type_equality_checks
-  if (globalctx["promotedDestinations"].isNotEmpty & (dayleft == 0)) {
+  if (globalctx["promotedDestinations"] != null && (dayleft == 0)) {
     var destinationDay = [];
     experiencePromotedDragData.value = <Widget>[];
 
@@ -467,7 +467,7 @@ getDestinationState(destination, index, type) {
 
 updateTotalLeftAccumulated() {
   accumulated.value = 0;
-  if (destinations.isNotEmpty) {
+  if (destinations != null) {
     for (var destination in destinations.keys) {
       accumulated.value += getDestinationDay(destination) as int;
     }

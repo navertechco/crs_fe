@@ -66,7 +66,7 @@ processTour() async {
     globalctx["payload"]["totalDays"] = globalctx["memory"]["totalDays"];
     globalctx["payload"]["promoted"] = globalctx["memory"]["promoted"];
 
-    if (translatingService.value.isNotEmpty) {
+    if (translatingService.value != null) {
       globalctx["payload"]["tour"]["passengers"] =
           (int.parse(globalctx["payload"]["tour"]["passengers"]) + 1)
               .toString();

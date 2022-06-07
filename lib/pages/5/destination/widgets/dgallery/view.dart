@@ -15,6 +15,7 @@ class DGalleryPage extends GetView<DGalleryController> {
 
     return GalleryLayoutWidget(
         child: Obx(() {
+          var d = arrivalDate.value;
           return GalleryWidget(galleryData: galleryData.value);
         }),
         text: "DGallery");

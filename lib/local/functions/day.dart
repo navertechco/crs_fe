@@ -292,7 +292,7 @@ processDays() {
     }
   }
 
-  if (result.isNotEmpty) {
+  if (result != null) {
     globalDestinationName.value = result[currentDay.value]["destination"];
     clearedHours[currentDay.value] ??= false;
     clearedKA[currentDay.value] ??= false;
