@@ -33,13 +33,7 @@ class PrintDocsFormPage extends GetView<StatelessWidget> {
                     url:
                         "$kDefaultSchema://$kDefaultServer:$kDefaultServerPort/docx.html?doc=${globalctx.memory['customer']['travel_code']}"),
                 SizedBox(height: kDefaultPadding),
-                WebButton(
-                    label: "WORD Resume",
-                    color: Color.fromARGB(255, 204, 164, 61),
-                    url:
-                        "$kDefaultSchema://$kDefaultServer:$kDefaultServerPort/docx.html?doc=${globalctx.memory['customer']['travel_code']}"),
-                SizedBox(height: kDefaultPadding),
-                WebButton(
+                         WebButton(
                     label: "Video Gallery",
                     color: Color.fromARGB(255, 204, 164, 61),
                     url:
