@@ -221,7 +221,9 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
         };
 
         listUI.add(
-          Container(
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.06,
+            height: MediaQuery.of(context).size.height * 0.1,
             child: AspectRatio(
               aspectRatio: 1.0,
               child: Stack(

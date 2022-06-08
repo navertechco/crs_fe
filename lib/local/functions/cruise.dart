@@ -354,19 +354,18 @@ Map<String, Object> getDay(day) {
 ///```
 DataCell getCruiseDataCell(context, row) {
   var dataCell = DataCell(
-    Row(
-      children: [
-        IconButton(
-          padding: EdgeInsets.all(0),
-          icon: const Icon(Icons.event_note_rounded, size: 20),
-          tooltip: 'Show Cruise Itinerary',
-          onPressed: () {
-            getCruise(context, cruiseId: 999, cruiseName: row["description"]);
-          },
-        ),
-        Obx(
-          () {
-            return CustomFormCalendarFieldWidget(
+    Obx(() => Row(
+          children: [
+            IconButton(
+              padding: EdgeInsets.all(0),
+              icon: const Icon(Icons.event_note_rounded, size: 20),
+              tooltip: 'Show Cruise Itinerary',
+              onPressed: () {
+                getCruise(context,
+                    cruiseId: 999, cruiseName: row["description"]);
+              },
+            ),
+            CustomFormCalendarFieldWidget(
                 width: 0.01,
                 label: '',
                 initialStartDate: getNextCruiseDate(),
@@ -414,10 +413,8 @@ DataCell getCruiseDataCell(context, row) {
                       "0"));
 
                   saveExplorationDay(1, val0, val1, key: "cruiseExpDays");
-                });
-          },
-        ),
-        Obx(() => CheckboxIconFormField(
+                }),
+            CheckboxIconFormField(
               padding: 0,
               initialValue: selectedCruise.value == row["description"],
               onChanged: (value) {
@@ -425,9 +422,9 @@ DataCell getCruiseDataCell(context, row) {
                 setFormValue(globalctx.memory, "logistic", "cruiseName",
                     selectedCruise.value);
               },
-            )),
-      ],
-    ),
+            ),
+          ],
+        )),
   );
   return dataCell;
 }
