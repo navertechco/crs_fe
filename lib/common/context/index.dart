@@ -3,10 +3,9 @@ import 'package:get/get.dart';
 import 'package:property_change_notifier/property_change_notifier.dart';
 
 // ignore: mixin_inherits_from_not_object
-class Context with PropertyChangeNotifier<String> {
+class Context {
   void set_context(key, value) {
     context.value[key] = value;
-    notifyListeners(key);
   }
 
   dynamic get_context(key) {
