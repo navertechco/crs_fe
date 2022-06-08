@@ -131,7 +131,7 @@ class LeisureTimeBypassKeyPad extends StatelessWidget {
                     .getStyle()),
             onPressed: () async {
               Navigator.pop(context);
-              setFormValue(globalctx["memory"]["days"], currentDay.value,
+              setFormValue(globalctx.memory["days"], currentDay.value,
                   "leisureTime", leftHours[currentDay.value].value);
               promoteExperience("Leisure Time", "promoted");
               await paginateDay(context);

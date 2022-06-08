@@ -15,12 +15,12 @@ class Destinations extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> destinations = [];
     Map<String, dynamic> data = memory;
-    if (data != null && globalctx["promotedDestinations"] != null) {
+    if (data != null && globalctx.promotedDestinations.isNotEmpty) {
       var i = 0;
-      for (var dest in globalctx["promotedDestinations"]) {
+      for (var dest in globalctx.promotedDestinations) {
         // var destData = getDestinationById(dest);
         var key = GlobalKey();
-        globalctx["keys"]["destination-$i"] = key;
+        globalctx.keys["destination-$i"] = key;
         destinations.add(
             CustomFormDestination(data: data, index: i, destination: dest));
         i++;

@@ -19,7 +19,7 @@ class GalleryWidget extends GetView<DGalleryController> {
   Widget build(BuildContext context) {
     List<Widget> galleryList = [];
     var destData = getDestinationValueByName(destination);
-    if (galleryData != null && galleryData != null) {
+    if (galleryData != null && galleryData.isNotEmpty) {
       var index = 0;
       for (var item in galleryData) {
         var ctlg = CatalogDto(null,

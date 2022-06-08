@@ -17,7 +17,7 @@ class CustomTourInformationForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var tourdata = globalctx["memory"];
+    var tourdata = globalctx.memory;
     var tour = getValue(tourdata, "tour");
     var readonly = getContext("readonly") ?? false;
     var purposes = findCatalog("purposes");
@@ -73,20 +73,19 @@ class CustomTourInformationForm extends StatelessWidget {
                   data: accomodationType,
                 ),
                 CustomFormCounterFieldWidget(
-                    initial: getFormValue(
-                        globalctx["memory"], "tour", "passengers", 1),
+                    initial:
+                        getFormValue(globalctx.memory, "tour", "passengers", 1),
                     min: 1,
                     max: 50,
                     bound: 0,
                     onValueChanged: (value) {
                       ctrl!.state.passengers = value! as int;
-                      setFormValue(globalctx["memory"], "tour", "passengers",
-                          value as int);
+                      setFormValue(
+                          globalctx.memory, "tour", "passengers", value as int);
                     },
-                    label: " Passengers\t\t\t\t\t\t\t\t\t",
+                    label: "  Passengers\t\t\t\t\t\t\t\t\t\t\t\t\t\t",
                     width: 0.20),
                 Obx(() {
-                  var d = arrivalDate.value;
                   return AbsorbPointer(
                     absorbing: absorvedPurpose.value,
                     child: CustomFormMultiDropDownFieldWidget(
@@ -119,16 +118,16 @@ class CustomTourInformationForm extends StatelessWidget {
                       context: context,
                       trueIconColor: Colors.green,
                       initialValue: getFormValue(
-                          globalctx["memory"], "tour", "galapagos", false),
+                          globalctx.memory, "tour", "galapagos", false),
                       enabled: true,
                       iconSize: 32,
                       onSaved: (value) {
                         setFormValue(
-                            globalctx["memory"], "tour", "galapagos", value);
+                            globalctx.memory, "tour", "galapagos", value);
                       },
                       onChanged: (value) {
                         setFormValue(
-                            globalctx["memory"], "tour", "galapagos", value);
+                            globalctx.memory, "tour", "galapagos", value);
                       },
                     ),
                   ],

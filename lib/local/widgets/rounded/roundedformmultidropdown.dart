@@ -39,7 +39,7 @@ class RoundedFormMultiDropdown extends StatelessWidget {
   Widget build(BuildContext context) {
     try {
       if (data != null) {
-        if (data != null) {
+        if (data.isNotEmpty) {
           dataSource = data.map((e) {
             return {"display": e["description"], "value": e["code"]};
           }).toList();
@@ -54,7 +54,7 @@ class RoundedFormMultiDropdown extends StatelessWidget {
       }
 
       if (value != null) {
-        if (value != null) {
+        if (value.isNotEmpty) {
           dataValue = [];
           for (var item in value) {
             dataValue.add(data.firstWhere(

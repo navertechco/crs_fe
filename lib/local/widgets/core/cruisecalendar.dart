@@ -48,7 +48,7 @@ class CruiseFiltersWidget extends StatelessWidget {
               hintText: "Days    ",
               data: getMemoryCatalogChild("cabine", "value", "days"),
             ),
-            if (cruiseDay != null)
+            if (cruiseDay.isNotEmpty)
               CustomFormDropDownFieldWidget(
                 width: 0.15,
                 height: 0.05,
@@ -79,7 +79,7 @@ class CruiseFiltersWidget extends StatelessWidget {
                       "relation": ["cruise_id", "days"]
                     }),
               ),
-            if (cruiseItinerary != null)
+            if (cruiseItinerary.isNotEmpty)
               CustomFormDropDownFieldWidget(
                 width: 0.15,
                 height: 0.05,
@@ -144,15 +144,13 @@ class CruiseFiltersWidget extends StatelessWidget {
                           condition: (element) {
                         var rule = true;
                         var rule2 = cabine.where((cab) {
-                              return cab["value"]["cruise_id"] ==
-                                  element["value"]["cruise_id"];
-                            }) !=
-                            null;
+                          return cab["value"]["cruise_id"] ==
+                              element["value"]["cruise_id"];
+                        }).isNotEmpty;
                         var rule3 = itinerary.where((iti) {
-                              return iti["value"]["cruise_id"] ==
-                                  element["value"]["cruise_id"];
-                            }) !=
-                            null;
+                          return iti["value"]["cruise_id"] ==
+                              element["value"]["cruise_id"];
+                        }).isNotEmpty;
                         return rule && rule2 && rule3;
                       }),
                       value);
@@ -164,19 +162,17 @@ class CruiseFiltersWidget extends StatelessWidget {
                   condition: (element) {
                 var rule = true;
                 var rule2 = cabine.where((cab) {
-                      return cab["value"]["cruise_id"] ==
-                          element["value"]["cruise_id"];
-                    }) !=
-                    null;
+                  return cab["value"]["cruise_id"] ==
+                      element["value"]["cruise_id"];
+                }).isNotEmpty;
                 var rule3 = itinerary.where((iti) {
-                      return iti["value"]["cruise_id"] ==
-                          element["value"]["cruise_id"];
-                    }) !=
-                    null;
+                  return iti["value"]["cruise_id"] ==
+                      element["value"]["cruise_id"];
+                }).isNotEmpty;
                 return rule && rule2 && rule3;
               }),
             ),
-            if (cruiseCategory != null)
+            if (cruiseCategory.isNotEmpty)
               CustomFormDropDownFieldWidget(
                 width: 0.15,
                 height: 0.05,
@@ -190,15 +186,13 @@ class CruiseFiltersWidget extends StatelessWidget {
                           condition: (element) {
                         var rule = true;
                         var rule2 = cabine.where((cab) {
-                              return cab["value"]["cruise_id"] ==
-                                  element["value"]["cruise_id"];
-                            }) !=
-                            null;
+                          return cab["value"]["cruise_id"] ==
+                              element["value"]["cruise_id"];
+                        }).isNotEmpty;
                         var rule3 = itinerary.where((iti) {
-                              return iti["value"]["cruise_id"] ==
-                                  element["value"]["cruise_id"];
-                            }) !=
-                            null;
+                          return iti["value"]["cruise_id"] ==
+                              element["value"]["cruise_id"];
+                        }).isNotEmpty;
                         return rule && rule2 && rule3;
                       }),
                       value);
@@ -209,20 +203,18 @@ class CruiseFiltersWidget extends StatelessWidget {
                     condition: (element) {
                   var rule = true;
                   var rule2 = cabine.where((cab) {
-                        return cab["value"]["cruise_id"] ==
-                            element["value"]["cruise_id"];
-                      }) !=
-                      null;
+                    return cab["value"]["cruise_id"] ==
+                        element["value"]["cruise_id"];
+                  }).isNotEmpty;
                   var rule3 = itinerary.where((iti) {
-                        return iti["value"]["cruise_id"] ==
-                            element["value"]["cruise_id"];
-                      }) !=
-                      null;
+                    return iti["value"]["cruise_id"] ==
+                        element["value"]["cruise_id"];
+                  }).isNotEmpty;
                   return rule && rule2 && rule3;
                 }),
               ),
-            if (cruiseCategory != null)
-              if (cruiseModality != null)
+            if (cruiseCategory.isNotEmpty)
+              if (cruiseModality.isNotEmpty)
                 CustomFormDropDownFieldWidget(
                   width: 0.15,
                   height: 0.05,
@@ -236,15 +228,13 @@ class CruiseFiltersWidget extends StatelessWidget {
                             condition: (element) {
                           var rule = true;
                           var rule2 = cabine.where((cab) {
-                                return cab["value"]["cruise_id"] ==
-                                    element["value"]["cruise_id"];
-                              }) !=
-                              null;
+                            return cab["value"]["cruise_id"] ==
+                                element["value"]["cruise_id"];
+                          }).isNotEmpty;
                           var rule3 = itinerary.where((iti) {
-                                return iti["value"]["cruise_id"] ==
-                                    element["value"]["cruise_id"];
-                              }) !=
-                              null;
+                            return iti["value"]["cruise_id"] ==
+                                element["value"]["cruise_id"];
+                          }).isNotEmpty;
                           return rule && rule2 && rule3;
                         }),
                         value);
@@ -255,21 +245,19 @@ class CruiseFiltersWidget extends StatelessWidget {
                       condition: (element) {
                     var rule = true;
                     var rule2 = cabine.where((cab) {
-                          return cab["value"]["cruise_id"] ==
-                              element["value"]["cruise_id"];
-                        }) !=
-                        null;
+                      return cab["value"]["cruise_id"] ==
+                          element["value"]["cruise_id"];
+                    }).isNotEmpty;
                     var rule3 = itinerary.where((iti) {
-                          return iti["value"]["cruise_id"] ==
-                              element["value"]["cruise_id"];
-                        }) !=
-                        null;
+                      return iti["value"]["cruise_id"] ==
+                          element["value"]["cruise_id"];
+                    }).isNotEmpty;
                     return rule && rule2 && rule3;
                   }),
                 ),
-            if (cruiseCategory != null)
-              if (cruiseModality != null)
-                if (cruiseType != null)
+            if (cruiseCategory.isNotEmpty)
+              if (cruiseModality.isNotEmpty)
+                if (cruiseType.isNotEmpty)
                   CustomFormDropDownFieldWidget(
                     width: 0.15,
                     height: 0.05,
@@ -284,15 +272,13 @@ class CruiseFiltersWidget extends StatelessWidget {
                               condition: (element) {
                             var rule = true;
                             var rule2 = cabine.where((cab) {
-                                  return cab["value"]["cruise_id"] ==
-                                      element["value"]["cruise_id"];
-                                }) !=
-                                null;
+                              return cab["value"]["cruise_id"] ==
+                                  element["value"]["cruise_id"];
+                            }).isNotEmpty;
                             var rule3 = itinerary.where((iti) {
-                                  return iti["value"]["cruise_id"] ==
-                                      element["value"]["cruise_id"];
-                                }) !=
-                                null;
+                              return iti["value"]["cruise_id"] ==
+                                  element["value"]["cruise_id"];
+                            }).isNotEmpty;
                             return rule && rule2 && rule3;
                           }),
                           value);
@@ -304,15 +290,13 @@ class CruiseFiltersWidget extends StatelessWidget {
                             condition: (element) {
                       var rule = true;
                       var rule2 = cabine.where((cab) {
-                            return cab["value"]["cruise_id"] ==
-                                element["value"]["cruise_id"];
-                          }) !=
-                          null;
+                        return cab["value"]["cruise_id"] ==
+                            element["value"]["cruise_id"];
+                      }).isNotEmpty;
                       var rule3 = itinerary.where((iti) {
-                            return iti["value"]["cruise_id"] ==
-                                element["value"]["cruise_id"];
-                          }) !=
-                          null;
+                        return iti["value"]["cruise_id"] ==
+                            element["value"]["cruise_id"];
+                      }).isNotEmpty;
                       return rule && rule2 && rule3;
                     }),
                   ),
@@ -347,7 +331,7 @@ class CruiseKeyPadWidget extends StatelessWidget {
                             color: Colors.black)
                         .getStyle()),
               ),
-              if (cruiseCabine != null)
+              if (cruiseCabine.isNotEmpty)
                 TextButton(
                   onPressed: () {
                     showCustomDialog(context, CruiseResultWidget(), "Close",
@@ -361,7 +345,7 @@ class CruiseKeyPadWidget extends StatelessWidget {
                               color: Colors.black)
                           .getStyle()),
                 ),
-              if (cruiseCabine != null)
+              if (cruiseCabine.isNotEmpty)
                 TextButton(
                   onPressed: () {
                     moreFilters.value = !moreFilters.value;
@@ -390,10 +374,10 @@ class CruiseResultWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       child: Stack(children: [
-        if (cruiseCategory != null)
-          if (cruiseModality != null)
-            if (cruiseType != null)
-              if (cruisePort != null)
+        if (cruiseCategory.isNotEmpty)
+          if (cruiseModality.isNotEmpty)
+            if (cruiseType.isNotEmpty)
+              if (cruisePort.isNotEmpty)
                 Column(
                   children: [
                     Padding(
@@ -443,8 +427,8 @@ class CruiseResultWidget extends StatelessWidget {
                                   alignment: Alignment.topCenter,
                                   child: Column(
                                     children: [
-                                      if (cruiseResults.value != null &&
-                                          searcherHeader.value != null)
+                                      if (cruiseResults.value.isNotEmpty &&
+                                          searcherHeader.value.isNotEmpty)
                                         cruiseTable.value
                                       else
                                         Text(

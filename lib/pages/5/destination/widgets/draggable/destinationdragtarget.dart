@@ -27,7 +27,6 @@ class DestinationDragTargetWidget extends StatelessWidget {
               child: Align(
                 alignment: Alignment.topCenter,
                 child: Obx(() {
-                  var d = arrivalDate.value;
                   return SingleChildScrollView(
                     child: Stack(
                       children: [
@@ -43,7 +42,7 @@ class DestinationDragTargetWidget extends StatelessWidget {
                           ],
                         ),
                         Column(children: [
-                          ...globalctx["destinationDragData"],
+                          ...globalctx.destinationDragData.value,
                         ]),
                       ],
                     ),

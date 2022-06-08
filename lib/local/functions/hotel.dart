@@ -41,7 +41,7 @@ filterHotels(ctx) {
   }).toList();
 
   //PURPOSE
-  var purposes = globalctx["memory"]["tour"]["purposes"]
+  var purposes = globalctx.memory["tour"]["purposes"]
       .map((e) => e.toString().toUpperCase())
       .toList();
   filteredHotel = filteredHotel.where((element) {
@@ -49,7 +49,7 @@ filterHotels(ctx) {
     var p1 = element["value"]["purpose_fk"].toString().toUpperCase();
     var p2 = element["value"]["purpouse_fk.1"].toString().toUpperCase();
     var p3 = element["value"]["purpouse_fk.2"].toString().toUpperCase();
-    if (purposes != null) {
+    if (purposes.isNotEmpty) {
       rule =
           purposes.contains(p1) | purposes.contains(p2) | purposes.contains(p3);
     }
@@ -57,13 +57,13 @@ filterHotels(ctx) {
   }).toList();
 
   //KEY_ACTIVITIES
-  var destData = globalctx["memory"]["destinations"]
+  var destData = globalctx.memory["destinations"]
       [currentDestinationIndex.value.toString()];
   if (destData != null) {
     var keyActivity = destData["key_activities"] ?? [];
     filteredHotel = filteredHotel.where((element) {
       var rule = true;
-      if (keyActivity != null) {
+      if (keyActivity.isNotEmpty) {
         var k1 =
             element["value"]["keyActivityType_fk"].toString().toUpperCase();
         var k2 =
@@ -80,18 +80,18 @@ filterHotels(ctx) {
   }
 
   //BUDGET
-  if (hotelCategory != null)
+  if (hotelCategory.isNotEmpty)
     filteredHotel = filteredHotel.where((element) {
       var rule = true;
       var max = element["value"]["budget_fk"];
-      if (hotelCategory != null) {
+      if (hotelCategory.isNotEmpty) {
         rule = hotelCategory.value == max.toString();
       }
       return rule;
     }).toList();
 
   //HOTELNAME
-  if (hotelName != null)
+  if (hotelName.isNotEmpty)
     filteredHotel = filteredHotel.where((element) {
       var rule = true;
       var max = element["value"]["hotelname"];
@@ -103,7 +103,7 @@ filterHotels(ctx) {
   filteredHotel = filteredHotel.where((element) {
     var rule = true;
     var capacity = getHotelCapacity(element["value"]["hotelname"]);
-    var pax = globalctx["memory"]["tour"]["passengers"];
+    var pax = globalctx.memory["tour"]["passengers"];
     rule = capacity >= pax;
     return rule;
   }).toList();
@@ -115,7 +115,7 @@ filterHotels(ctx) {
   var processedData = processHotelData(ctx, hotelResults.value);
   searcherHeader.value = processedData[0];
   searcherDetail.value = processedData[1];
-  if (searcherHeader.value != null) {
+  if (searcherHeader.value.isNotEmpty) {
     hotelTable.value = (DataTable(
       columns: searcherHeader.value,
       rows: searcherDetail.value,
@@ -142,7 +142,7 @@ getHotelHeader(context, data, columns) {
   var header = <DataColumn>[];
   List cols = [];
 
-  if (data != null) {
+  if (data.isNotEmpty) {
     cols = data[0].keys.toList();
     if (columns != null) {
       cols = columns;
@@ -216,8 +216,8 @@ getHotelDetail(context, data, columns) {
   return detail;
 }
 
-var currentHotelName = Rx(getFormValue(globalctx["memory"]["destinations"],
-    globalDestinationIndex, "hotelName", ''));
+var currentHotelName = Rx(getFormValue(
+    globalctx.memory["destinations"], globalDestinationIndex, "hotelName", ''));
 
 getHotelDataCell(context, row) {
   var dataCell = DataCell(
@@ -260,7 +260,7 @@ getHotelDataCell(context, row) {
           },
         ),
         CustomFormCounterFieldWidget(
-            initial: getFormValue(globalctx["memory"]["destinations"],
+            initial: getFormValue(globalctx.memory["destinations"],
                 globalDestinationIndex, "hotelPax.${row["description"]}", 0),
             min: 0,
             max: 50,
@@ -268,7 +268,7 @@ getHotelDataCell(context, row) {
             original: true,
             onValueChanged: (value) {
               setFormValue(
-                  globalctx["memory"]["destinations"],
+                  globalctx.memory["destinations"],
                   globalDestinationIndex,
                   "hotelPax.${row["description"]}",
                   value);
@@ -278,13 +278,13 @@ getHotelDataCell(context, row) {
         Obx(() => CheckboxIconFormField(
               padding: 0,
               initialValue: getFormValue(
-                  globalctx["memory"]["destinations"],
+                  globalctx.memory["destinations"],
                   globalDestinationIndex,
                   "hotelName.${row["description"]}",
                   false),
               onChanged: (value) {
                 setFormValue(
-                    globalctx["memory"]["destinations"],
+                    globalctx.memory["destinations"],
                     globalDestinationIndex,
                     "hotelName.${row["description"]}",
                     value);

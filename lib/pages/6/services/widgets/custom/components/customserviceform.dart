@@ -27,7 +27,6 @@ class CustomServiceForm extends StatelessWidget {
     props.value = row.value;
 
     return Obx(() {
-      var d = arrivalDate.value;
       return Column(
         children: [
           FirstTextwidget(props: props),

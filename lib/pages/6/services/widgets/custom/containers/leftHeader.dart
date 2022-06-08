@@ -22,7 +22,6 @@ class LeftHeader extends HookWidget {
         left: MediaQuery.of(context).size.width * 0.0,
       ),
       child: Obx(() {
-        var d = arrivalDate.value;
         return Text(
             "Destination:  ${globalDestinationName.value.toString().capitalize} ${globalDestinationType.value.toString().capitalize} ",
             style: KTextSytle(

@@ -274,7 +274,7 @@ getHeader(context, data, columns) {
   var header = <DataColumn>[];
   List cols = [];
 
-  if (data != null) {
+  if (data.isNotEmpty) {
     cols = data[0].keys.toList();
     if (columns != null) {
       cols = columns;
@@ -404,3 +404,5 @@ String getTimeStringFromDouble(double value) {
 
   return '$hourValue:$minuteString';
 }
+
+

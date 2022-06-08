@@ -52,7 +52,7 @@ class HotelFiltersWidget extends StatelessWidget {
                         getMemoryCatalogChild("hotel", "value", "budget_fk"),
                         value);
                     setFormValue(
-                        globalctx["memory"]["destinations"],
+                        globalctx.memory["destinations"],
                         globalDestinationIndex,
                         "hotelCategory",
                         hotelCategory.value);
@@ -72,7 +72,7 @@ class HotelFiltersWidget extends StatelessWidget {
                               ? 1
                               : element["value"]["#roomtypes"];
                           var mc = element["value"]["maxCapacity"];
-                          var pax = globalctx["memory"]["tour"]["passengers"];
+                          var pax = globalctx.memory["tour"]["passengers"];
 
                           rule = rt * mc >= pax;
                           rule = rule &&
@@ -82,7 +82,7 @@ class HotelFiltersWidget extends StatelessWidget {
                         }),
                         value);
                     setFormValue(
-                        globalctx["memory"]["destinations"],
+                        globalctx.memory["destinations"],
                         globalDestinationIndex,
                         "hotelRoomCategory",
                         hotelRoomCategory.value);
@@ -96,7 +96,7 @@ class HotelFiltersWidget extends StatelessWidget {
                         ? 1
                         : element["value"]["#roomtypes"];
                     var mc = element["value"]["maxCapacity"];
-                    var pax = globalctx["memory"]["tour"]["passengers"];
+                    var pax = globalctx.memory["tour"]["passengers"];
 
                     rule = rt * mc >= pax;
                     rule = rule &&
@@ -126,7 +126,7 @@ class HotelFiltersWidget extends StatelessWidget {
                             .toList()[0]["description"]);
                       }
                       setFormValue(
-                          globalctx["memory"]["destinations"],
+                          globalctx.memory["destinations"],
                           globalDestinationIndex,
                           "hotelFilterMemory",
                           hotelFilterMemory.value);
@@ -175,7 +175,7 @@ class HotelKeyPadWidget extends StatelessWidget {
                             color: Colors.black)
                         .getStyle()),
               ),
-              // if (hotelExtrabed !=null)
+              // if (hotelExtrabed.isNotEmpty)
               TextButton(
                 onPressed: () {
                   showCustomDialog(context, HotelResultWidget(), "Close",
@@ -217,11 +217,11 @@ class HotelResultWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       child: Stack(children: [
-        // if (hotelTerraceorPatio !=null)
-        //   if (hotelMaxCapacity !=null)
-        //     if (hotelBalcony !=null)
-        //       if (hotelExtrabed !=null)
-        //         if (hotelExtrabed !=null)
+        // if (hotelTerraceorPatio.isNotEmpty)
+        //   if (hotelMaxCapacity.isNotEmpty)
+        //     if (hotelBalcony.isNotEmpty)
+        //       if (hotelExtrabed.isNotEmpty)
+        //         if (hotelExtrabed.isNotEmpty)
         Column(
           children: [
             Padding(
@@ -270,8 +270,8 @@ class HotelResultWidget extends StatelessWidget {
                           alignment: Alignment.topCenter,
                           child: Column(
                             children: [
-                              if (hotelResults.value != null &&
-                                  searcherHeader.value != null)
+                              if (hotelResults.value.isNotEmpty &&
+                                  searcherHeader.value.isNotEmpty)
                                 hotelTable.value
                               else
                                 Text(

@@ -29,8 +29,8 @@ processQuoteHistoryItinerary(row) {
 }
 
 filterQuoteHistory(ctx) {
-  if (globalctx["memory"]["tours"] != null) {
-    List filtered = globalctx["memory"]["tours"];
+  if (globalctx.memory["tours"] != null) {
+    List filtered = globalctx.memory["tours"];
     filtered = filtered.where((e) {
       if (quoteDate.value.isEmpty) {
         return true;
@@ -64,7 +64,7 @@ getQuoteHistoryHeader(context, data, columns) {
   var header = <DataColumn>[];
   List cols = [];
 
-  if (data != null) {
+  if (data.isNotEmpty) {
     cols = data[0].keys.toList();
     if (columns != null) {
       cols = columns;
@@ -174,7 +174,6 @@ getQuoteHistoryDataCell(context, row) {
                   ).getStyle(),
                 ),
                 Obx(() {
-                  var d = arrivalDate.value;
                   try {
                     return SfCalendar(
                       firstDayOfWeek: 1,

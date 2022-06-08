@@ -58,7 +58,7 @@ void filterCruises(ctx) {
   itinerary = findCatalog("itinerary");
   animals = findCatalog("animals");
   //CRUISE CATEGORY LUJO / PRIMERA
-  if (cruiseCategory != null)
+  if (cruiseCategory.isNotEmpty)
     cruises = cruises
         .where((element) => element["value"]["cruise_category"]
             .toString()
@@ -66,7 +66,7 @@ void filterCruises(ctx) {
             .contains(cruiseCategory.value))
         .toList();
   //CRUISE TYPE
-  if (cruiseType != null)
+  if (cruiseType.isNotEmpty)
     cruises = cruises
         .where((element) => element["value"]["cruise_type"]
             .toString()
@@ -74,7 +74,7 @@ void filterCruises(ctx) {
             .contains(cruiseType.value))
         .toList();
   //CRUISE MODALITY CATAMARAN / MONOCASCO / YATE
-  if (cruiseModality != null)
+  if (cruiseModality.isNotEmpty)
     cruises = cruises
         .where((element) => element["value"]["modality"]
             .toString()
@@ -82,7 +82,7 @@ void filterCruises(ctx) {
             .contains(cruiseModality.value))
         .toList();
   //CRUISE PORT BAQUERIZO / AYORA
-  if (cruisePort != null)
+  if (cruisePort.isNotEmpty)
     cruises = cruises
         .where((element) => element["value"]["cruise_port"]
             .toString()
@@ -90,35 +90,35 @@ void filterCruises(ctx) {
             .contains(cruisePort.value.toString().toUpperCase()))
         .toList();
   //CRUISE DURATION
-  if (cruiseDay != null)
+  if (cruiseDay.isNotEmpty)
     cabine = cabine
         .where((element) =>
             element["value"]["days"].toString().toUpperCase() ==
             (cruiseDay.value.toString().toUpperCase()))
         .toList();
   //CRUISE CABINE
-  if (cruiseCabine != null)
+  if (cruiseCabine.isNotEmpty)
     cabine = cabine
         .where((element) =>
             element["value"]["cabine_type"].toString().toUpperCase() ==
             (cruiseCabine.value.toString().toUpperCase()))
         .toList();
   //CRUISE ANIMALS
-  if (cruiseAnimal != null)
+  if (cruiseAnimal.isNotEmpty)
     animals = animals
         .where((element) =>
             element["description"].toString().toUpperCase() ==
             (cruiseAnimal.value.toString().toUpperCase()))
         .toList();
   //CRUISE ITINERARY
-  if (cruiseDay != null)
+  if (cruiseDay.isNotEmpty)
     itinerary = itinerary
         .where((element) =>
             element["value"]["days"].toString().toUpperCase() ==
             (cruiseDay.value.toString().toUpperCase()))
         .toList();
   //CRUISE ITINERARY FORMAT
-  if (cruiseItinerary != null)
+  if (cruiseItinerary.isNotEmpty)
     itinerary = itinerary
         .where((element) =>
             element["value"]["itinerary_format"].toString().toUpperCase() ==
@@ -130,7 +130,7 @@ void filterCruises(ctx) {
   var processedData = buildCruiseDataTable(ctx, cruiseResults.value);
   searcherHeader.value = processedData[0];
   searcherDetail.value = processedData[1];
-  if (searcherHeader.value != null) {
+  if (searcherHeader.value.isNotEmpty) {
     cruiseTable.value = (DataTable(
       columns: searcherHeader.value,
       rows: searcherDetail.value,
@@ -152,7 +152,7 @@ List<DataColumn> getCruiseHeader(context, data, columns) {
   var header = <DataColumn>[];
   List cols = [];
 
-  if (data != null) {
+  if (data.isNotEmpty) {
     cols = data[0].keys.toList();
     if (columns != null) {
       cols = columns;
@@ -398,9 +398,9 @@ DataCell getCruiseDataCell(context, row) {
                         cruiseStartDate.value.add(Duration(days: -1));
                   }
                   departureDate.value = end.add(Duration(days: 1));
-                  setFormValue(globalctx["memory"]["destinations"], 1,
+                  setFormValue(globalctx.memory["destinations"], 1,
                       "cruiseStartDate", start);
-                  setFormValue(globalctx["memory"]["destinations"], 1,
+                  setFormValue(globalctx.memory["destinations"], 1,
                       "cruiseEndDate", end);
 
                   var val1 = cruiseEndDate.value
@@ -408,7 +408,7 @@ DataCell getCruiseDataCell(context, row) {
                           .inDays +
                       1;
                   var val0 = int.parse(getFormValue(
-                      globalctx["memory"]["destinations"],
+                      globalctx.memory["destinations"],
                       1,
                       "cruiseExpDays",
                       "0"));
@@ -422,7 +422,7 @@ DataCell getCruiseDataCell(context, row) {
               initialValue: selectedCruise.value == row["description"],
               onChanged: (value) {
                 selectedCruise.value = row["description"];
-                setFormValue(globalctx["memory"], "logistic", "cruiseName",
+                setFormValue(globalctx.memory, "logistic", "cruiseName",
                     selectedCruise.value);
               },
             )),

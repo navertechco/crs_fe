@@ -19,7 +19,7 @@ class TitleWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var expData = getExperienceByName(experience).value;
     Rx<TimeOfDay?> timeStart = Rx(getFormValue(
-            globalctx["memory"]["days"][currentDay.value],
+            globalctx.memory["days"][currentDay.value],
             experience,
             "timeStart",
             time) ??
@@ -109,7 +109,6 @@ class TitleWidget extends StatelessWidget {
         Row(
           children: [
             TextButton(child: Obx(() {
-              var d = arrivalDate.value;
               return Text(
                   "Starts at: ${timeStart.value.toString().replaceAll("TimeOfDay", '').replaceAll("(", '').replaceAll(")", '')}",
                   style: KTextSytle(
@@ -125,10 +124,9 @@ class TitleWidget extends StatelessWidget {
                 initialTime: time,
               )
                   .then((value) {
-                globalctx["memory"]["days"][currentDay.value] ??= {};
-                globalctx["memory"]["days"][currentDay.value]
-                    [experience] ??= {};
-                setFormValue(globalctx["memory"]["days"][currentDay.value],
+                globalctx.memory["days"][currentDay.value] ??= {};
+                globalctx.memory["days"][currentDay.value][experience] ??= {};
+                setFormValue(globalctx.memory["days"][currentDay.value],
                     experience, "timeStart", value);
                 return value;
               });
@@ -138,7 +136,6 @@ class TitleWidget extends StatelessWidget {
         Row(
           children: [
             Obx(() {
-              var d = arrivalDate.value;
               return Text(
                   "  Ends at: ${(timeStart.value!.addMinute(expData["exptime"])).toString().replaceAll("TimeOfDay", '').replaceAll("(", '').replaceAll(")", '')}",
                   style: KTextSytle(

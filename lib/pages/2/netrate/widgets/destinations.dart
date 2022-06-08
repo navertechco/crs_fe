@@ -9,14 +9,14 @@ class Destinations extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> dests = [];
-    var tour = globalctx["memory"]["tour"];
+    var tour = globalctx.memory["tour"];
     var destinations = tour["destinations"];
-    if (destinations != null) {
+    if (destinations.isNotEmpty) {
       var i = 0;
       for (var dest in destinations.entries) {
         // var destData = getDestinationById(dest);
         var key = GlobalKey();
-        globalctx["keys"]["destination-${i.toString()}"] = key;
+        globalctx.keys["destination-$i"] = key;
         dests.add(CustomFormDestination(index: i, destination: dest));
         i++;
       }

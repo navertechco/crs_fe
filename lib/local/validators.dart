@@ -86,7 +86,7 @@ class CustomCatalogRequiredValidator extends TextFieldValidator {
 
   @override
   bool isValid(String? value) {
-    return value != null && value != '' && value != "0" && catalog != null;
+    return value != null && value != '' && value != "0" && catalog.isNotEmpty;
   }
 
   @override

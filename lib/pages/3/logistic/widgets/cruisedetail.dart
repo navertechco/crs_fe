@@ -38,7 +38,6 @@ class CruiseDetailWidget extends StatelessWidget {
             ).getStyle(),
           ),
           Obx(() {
-            var d = arrivalDate.value;
             try {
               return SfCalendar(
                 firstDayOfWeek: 1,

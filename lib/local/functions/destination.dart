@@ -40,12 +40,12 @@ dragDestination(destination) {
 /// void
 ///```
 void resetAllDestinations() {
-  globalctx["reset"] = true;
+  globalctx.reset.value = true;
   resetLeftDays();
   resetDestinations();
   updateDraggableDestinations();
   filterDestinations();
-  if (cruiseDay != null) {
+  if (cruiseDay.isNotEmpty) {
     autoFillDestination(arrival["description"], 0, "arrival", "1");
     autoFillDestination("galapagos", 1, "arrival", cruiseDay.value);
     autoFillDestination(departure["description"], 2, "departure", "1");
@@ -82,17 +82,16 @@ void resetLeftDays() {
 /// void
 ///```
 void autoFillDestination(destination, index, type, days) {
+  setFormValue(globalctx.memory["destinations"], index, "explorationDay", days);
+  setFormValue(globalctx.memory["destinations"], index, "type", type);
+  setFormValue(globalctx.memory["destinations"], index, "index", index);
   setFormValue(
-      globalctx["memory"]["destinations"], index, "explorationDay", days);
-  setFormValue(globalctx["memory"]["destinations"], index, "type", type);
-  setFormValue(globalctx["memory"]["destinations"], index, "index", index);
+      globalctx.memory["destinations"], index, "destination", destination);
   setFormValue(
-      globalctx["memory"]["destinations"], index, "destination", destination);
-  setFormValue(globalctx["memory"]["destinations"], index, "key_activities",
-      ["SURPRISE"]);
-  setFormValue(globalctx["memory"]["destinations"], index, "travel_rhythm",
+      globalctx.memory["destinations"], index, "key_activities", ["SURPRISE"]);
+  setFormValue(globalctx.memory["destinations"], index, "travel_rhythm",
       destination == "galapagos" ? "3" : "1");
-  setFormValue(globalctx["memory"]["destinations"], index, "explorationMode",
+  setFormValue(globalctx.memory["destinations"], index, "explorationMode",
       destination == "galapagos" ? "1" : "0");
   addDestination(destination);
   promote(destination, index, type);
@@ -127,7 +126,7 @@ List getDestinationList() {
 }
 
 void orderDestination(List destinations) {
-  if (arrival != null) {
+  if (arrival.isNotEmpty) {
     destinations.sort((a, b) {
       var arrivalData = toCatalog(filterCatalog(
           "destinations", "description", arrival.value["description"])[0]);
@@ -160,27 +159,27 @@ promoteDestination(ctrl, _formKey, destination, index, type) {
 }
 
 updatePromotedDestination(destination, index) {
-  if (!globalctx["promotedDestinations"].contains(index)) {
-    globalctx["promotedDestinations"].add(index);
-    destinations = globalctx["memory"]["destinations"];
+  if (!globalctx.promotedDestinations.contains(index)) {
+    globalctx.promotedDestinations.add(index);
+    destinations = globalctx.memory["destinations"];
   }
   arrivalState.value = "selected";
   departureState.value = "selected";
-  if (globalctx["promotedDestinations"] != null) {
+  if (globalctx.promotedDestinations.isNotEmpty) {
     arrivalState.value = "promoted";
   }
 }
 
 updateDraggableDestinations() {
   if (arrivalState.value == "promoted" &&
-      globalctx["promotedDestinations"].length >=
-          globalctx["selectedDestinations"].length - 1) {
+      globalctx.promotedDestinations.length >=
+          globalctx.selectedDestinations.length - 1) {
     destDraggable.value = 1;
   }
   if (arrivalState.value == "promoted" &&
       departureState.value == "promoted" &&
-      globalctx["promotedDestinations"].length ==
-          globalctx["selectedDestinations"].length) {
+      globalctx.promotedDestinations.length ==
+          globalctx.selectedDestinations.length) {
     destDraggable.value = 0;
   }
 }
@@ -196,7 +195,7 @@ getDestinationAirport() {
 }
 
 getCombinedDestinations() {
-  Map<String, dynamic> memoryDestinations = {};
+  var memoryDestinations = {};
   for (var destination in destinations.entries) {
     var key = destination.key;
     var value = destination.value;
@@ -208,7 +207,7 @@ getCombinedDestinations() {
 
 processDestinations(context) async {
   // ignore: unrelated_type_equality_checks
-  if (globalctx["promotedDestinations"] != null && (dayleft == 0)) {
+  if (globalctx.promotedDestinations.isNotEmpty & (dayleft == 0)) {
     var destinationDay = [];
     experiencePromotedDragData.value = <Widget>[];
 
@@ -222,8 +221,8 @@ processDestinations(context) async {
       accDays += days;
       idx++;
     }
-    globalctx["memory"]["destinationDay"] = destinationDay;
-    globalctx["memory"]["totalDays"] = totalDays.value;
+    globalctx.memory["destinationDay"] = destinationDay;
+    globalctx.memory["totalDays"] = totalDays.value;
     arrival.value = getDestinationById(arrivalPort.value);
     departure.value = getDestinationById(departurePort.value);
     globalDestinationName.value = arrival["description"];
@@ -247,9 +246,9 @@ processDestinations(context) async {
 }
 
 addDestination(String destination) {
-  var newIndex = globalctx["destinations"].length - 1;
-  if (!globalctx["destinations"].contains(destination)) {
-    globalctx["destinations"].insert(newIndex, destination);
+  var newIndex = globalctx.destinations.length - 1;
+  if (!globalctx.destinations.contains(destination)) {
+    globalctx.destinations.insert(newIndex, destination);
   }
   // moveDownDestinationState(
   //     departure["description"], newIndex, "selected", "departure");
@@ -258,33 +257,33 @@ addDestination(String destination) {
 }
 
 moveDownDestinationState(dest, index, state, type) {
-  globalctx["states"]["destinations"][index + 1] =
-      globalctx["states"]["destinations"][index];
-  globalctx["states"]["destinations"][index + 1]["destination"] =
-      globalctx["states"]["destinations"][index]["destination"];
-  globalctx["states"]["destinations"][index + 1]["index"] =
-      globalctx["states"]["destinations"][index]["index"];
-  globalctx["states"]["destinations"][index + 1]["state"] =
-      globalctx["states"]["destinations"][index]["state"];
-  globalctx["states"]["destinations"][index + 1]["type"] =
-      globalctx["states"]["destinations"][index]["type"];
-  globalctx["memory"]["destinations"][(index + 1).toString()] =
-      globalctx["memory"]["destinations"][(index).toString()];
-  globalctx["promotedDestinations"].remove(index);
-  globalctx["promotedDestinations"].add(index + 1);
+  globalctx.states["destinations"][index + 1] =
+      globalctx.states["destinations"][index];
+  globalctx.states["destinations"][index + 1]["destination"] =
+      globalctx.states["destinations"][index]["destination"];
+  globalctx.states["destinations"][index + 1]["index"] =
+      globalctx.states["destinations"][index]["index"];
+  globalctx.states["destinations"][index + 1]["state"] =
+      globalctx.states["destinations"][index]["state"];
+  globalctx.states["destinations"][index + 1]["type"] =
+      globalctx.states["destinations"][index]["type"];
+  globalctx.memory["destinations"][(index + 1).toString()] =
+      globalctx.memory["destinations"][(index).toString()];
+  globalctx.promotedDestinations.remove(index);
+  globalctx.promotedDestinations.add(index + 1);
   setDestinationState(
       departure["description"], index + 1, "selected", "departure");
-  globalctx["memory"]["destinations"][(index).toString()] = null;
-  globalctx["states"]["destinations"][index] = null;
-  cleanDestinations(globalctx["states"]["destinations"]);
-  cleanDestinations(globalctx["memory"]["destinations"]);
+  globalctx.memory["destinations"][(index).toString()] = null;
+  globalctx.states["destinations"][index] = null;
+  cleanDestinations(globalctx.states["destinations"]);
+  cleanDestinations(globalctx.memory["destinations"]);
 }
 
 validateDestinationDialog(destination, index, type) {
-  var galapagos = getFormValue(globalctx["memory"], "tour", "galapagos", false);
+  var galapagos = getFormValue(globalctx.memory, "tour", "galapagos", false);
   var isArrival = index == 0 && type == "arrival";
   var days = int.parse(getFormValue(
-      globalctx["memory"]["destinations"], index, "explorationDay", "0"));
+      globalctx.memory["destinations"], index, "explorationDay", "0"));
   var isDeparture =
       destination == departure["description"] && type == "departure";
   var isSelected = getDestinationState(destination, index, type) == "selected";
@@ -293,12 +292,12 @@ validateDestinationDialog(destination, index, type) {
       getDestinationState(arrival["description"], 0, "arrival") == "promoted";
   var isTour = !isArrival && !isDeparture;
   var isDepartureConsistent = (destDraggable.value != 0 &&
-      globalctx["promotedDestinations"].length !=
-          globalctx["selectedDestinations"].length &&
-      globalctx["promotedDestinations"].length >=
-          globalctx["selectedDestinations"].length - 1 &&
-      globalctx["selectedDestinations"].length >= 3 &&
-      globalctx["promotedDestinations"].length >= 2 &&
+      globalctx.promotedDestinations.length !=
+          globalctx.selectedDestinations.length &&
+      globalctx.promotedDestinations.length >=
+          globalctx.selectedDestinations.length - 1 &&
+      globalctx.selectedDestinations.length >= 3 &&
+      globalctx.promotedDestinations.length >= 2 &&
       type == "departure");
   var isAccumulated = accumulated.value > 0;
   var isDayleft = dayleft.value > 0;
@@ -321,10 +320,10 @@ validateDestinationDialog(destination, index, type) {
 }
 
 filterSelectedDestinations() {
-  var galapagos = getFormValue(globalctx["memory"], "tour", "galapagos", false);
+  var galapagos = getFormValue(globalctx.memory, "tour", "galapagos", false);
   if (dayleft.value > 1 &&
-      globalctx["promotedDestinations"].length >=
-          globalctx["selectedDestinations"].length - 1) {
+      globalctx.promotedDestinations.length >=
+          globalctx.selectedDestinations.length - 1) {
     if (selectedDestinations.contains(arrival["description"])) {
       selectedDestinations.remove(arrival["description"]);
     }
@@ -340,8 +339,8 @@ filterSelectedDestinations() {
       selectedDestinations.insert(1, "galapagos");
     }
     selectedDestinations.add(departure["description"]);
-    globalctx["selectedDestinations"] = [];
-    globalctx["destinationDragData"] = <Widget>[];
+    globalctx.selectedDestinations.value = [];
+    globalctx.destinationDragData.value = <Widget>[];
     idx = 0;
     var destlength = selectedDestinations.length;
     for (var selected in selectedDestinations) {
@@ -360,31 +359,31 @@ filterSelectedDestinations() {
 
 moveDestination(String destination, int index, String type) {
   var state = "selected";
-  // if (globalctx["promotedDestinations"].contains(index)) {
+  // if (globalctx.promotedDestinations.contains(index)) {
   //   state = "promoted";
   // }
   setDestinationState(destination, index, state, type);
-  globalctx["selectedDestinations"].add(destination);
-  globalctx["destinationDragData"].add(DragDestinationWidget(
+  globalctx.selectedDestinations.add(destination);
+  globalctx.destinationDragData.value.add(DragDestinationWidget(
       destination: destination, index: index, type: type, out: false));
 }
 
 deleteDestination(String destination) {
   if (arrivalPort.value != getDestinationIdByName(destination) &&
       departurePort.value != getDestinationIdByName(destination) &&
-      globalctx["destinations"].contains(destination)) {
-    globalctx["promotedDestinations"].remove(destination);
-    var index = globalctx["destinations"]
-        .indexWhere((element) => element == destination);
+      globalctx.destinations.contains(destination)) {
+    globalctx.promotedDestinations.remove(destination);
+    var index =
+        globalctx.destinations.indexWhere((element) => element == destination);
     var type = "tour";
     setDestinationState(destination, index, "suggested", type);
-    globalctx["destinations"].removeAt(index);
-    globalctx["selectedDestinations"].removeAt(index);
-    globalctx["destinationDragData"].removeAt(index);
-    var destDay = int.parse(getFormValue(globalctx["memory"]["destinations"],
+    globalctx.destinations.removeAt(index);
+    globalctx.selectedDestinations.removeAt(index);
+    globalctx.destinationDragData.value.removeAt(index);
+    var destDay = int.parse(getFormValue(globalctx.memory["destinations"],
         index.toString(), "explorationDay", "0"));
     var destinationExists =
-        globalctx["memory"]["destinations"].keys.contains(index.toString());
+        globalctx.memory["destinations"].keys.contains(index.toString());
 
     if (destinationExists) {
       accumulated -= destDay;
@@ -448,18 +447,18 @@ cleanDestinations(memory) {
 }
 
 setDestinationState(dest, index, state, type) {
-  globalctx["states"]["destinations"][index] ??= {}.obs;
-  globalctx["states"]["destinations"][index]["destination"] = dest;
-  globalctx["states"]["destinations"][index]["index"] = index;
-  globalctx["states"]["destinations"][index]["state"] = state;
-  globalctx["states"]["destinations"][index]["type"] = type;
+  globalctx.states["destinations"][index] ??= {}.obs;
+  globalctx.states["destinations"][index]["destination"] = dest;
+  globalctx.states["destinations"][index]["index"] = index;
+  globalctx.states["destinations"][index]["state"] = state;
+  globalctx.states["destinations"][index]["type"] = type;
 }
 
 getDestinationState(destination, index, type) {
   var state = "suggested";
-  globalctx["states"]["destinations"][index] ??= {}.obs;
-  state = globalctx["states"]["destinations"][index]["state"] ?? "suggested";
-  if (globalctx["states"]["destinations"][index]["type"] != type) {
+  globalctx.states["destinations"][index] ??= {}.obs;
+  state = globalctx.states["destinations"][index]["state"] ?? "suggested";
+  if (globalctx.states["destinations"][index]["type"] != type) {
     state = "suggested";
   }
   return state;
@@ -467,7 +466,7 @@ getDestinationState(destination, index, type) {
 
 updateTotalLeftAccumulated() {
   accumulated.value = 0;
-  if (destinations != null) {
+  if (destinations.isNotEmpty) {
     for (var destination in destinations.keys) {
       accumulated.value += getDestinationDay(destination) as int;
     }
@@ -511,7 +510,7 @@ getAgeMaxTrValue(tr) {
 
 getDestinationIndex(String destination, String type) {
   int destIndex = 0;
-  var destinations = globalctx["states"]["destinations"].entries;
+  var destinations = globalctx.states["destinations"].entries;
   for (var e in destinations) {
     if (e.value["destination"] == destination && e.value["type"] == type) {
       destIndex = e.value["index"];
@@ -521,14 +520,14 @@ getDestinationIndex(String destination, String type) {
     destIndex = 0;
   }
   if (type == "departure") {
-    destIndex = globalctx["promotedDestinations"].length - 1;
+    destIndex = globalctx.promotedDestinations.length - 1;
   }
   return destIndex;
 }
 
 getDestinationDestOption(destination, type) {
   int destIndex = getDestinationIndex(destination, type);
-  var destData = globalctx["memory"]["destinations"][destIndex.toString()];
+  var destData = globalctx.memory["destinations"][destIndex.toString()];
   var trData = findCatalog("detination_option").toList();
   var trRange = trData
       .firstWhere((e) => e["code"] == int.parse(destData["detination_option"]));
@@ -537,7 +536,7 @@ getDestinationDestOption(destination, type) {
 
 getDestinationTravelRhythm(destination, type) {
   int destIndex = getDestinationIndex(destination, type);
-  var destData = globalctx["memory"]["destinations"][destIndex.toString()];
+  var destData = globalctx.memory["destinations"][destIndex.toString()];
   var trData = findCatalog("travel_rhythm").toList();
   var trRange = trData
       .firstWhere((e) => e["code"] == int.parse(destData["travel_rhythm"]));
@@ -546,7 +545,7 @@ getDestinationTravelRhythm(destination, type) {
 
 getDestinationKa(destination, type) {
   int destIndex = getDestinationIndex(destination, type);
-  var destData = globalctx["memory"]["destinations"][destIndex.toString()];
+  var destData = globalctx.memory["destinations"][destIndex.toString()];
   return destData["key_activities"];
 }
 
@@ -582,13 +581,13 @@ updateCurrentDestination() {
 
 resetDestinations() {
   destDraggable.value = 0;
-  allPromotedDestinations = [];
-  globalctx["promotedDestinations"] = [];
-  globalctx["selectedDestinations"] = [];
-  globalctx["destinations"] = [];
-  globalctx["destinationDragData"] = [];
-  globalctx["memory"]["destinations"] = {};
-  globalctx["states"]["destinations"] = {};
+  allPromotedDestinations.value = [];
+  globalctx.promotedDestinations.value = [];
+  globalctx.selectedDestinations.value = [];
+  globalctx.destinations.value = [];
+  globalctx.destinationDragData.value = [];
+  globalctx.memory["destinations"] = {};
+  globalctx.states["destinations"] = {};
   arrivalState.value = "selected";
   departureState.value = "selected";
 }
@@ -612,7 +611,7 @@ getSubs(String destination) {
 filterTrByAge() {
   var tr = findCatalog("travel_rhythm");
   var filtered = tr.toList();
-  var birthDate = globalctx["memory"]["customer"]["birth_date"];
+  var birthDate = globalctx.memory["customer"]["birth_date"];
   var age = DateTime.now().difference(DateTime.parse(birthDate)).inDays / 365;
   filtered = tr.toList().where((e) {
     var range = getAgeMaxTrValue(e["description"].toString().toUpperCase());

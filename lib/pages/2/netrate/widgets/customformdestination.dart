@@ -16,7 +16,7 @@ class CustomFormDestination extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> daylist = [];
-    var tour = globalctx["memory"]["tour"];
+    var tour = globalctx.memory["tour"];
     var destinations = tour["destinations"];
     var promotedDestinationDay = destinations;
     var destindex = index;
@@ -25,11 +25,11 @@ class CustomFormDestination extends StatelessWidget {
     var title = destination["destination"].toString().capitalize;
     for (var day = 0; day < explorationDay; day++) {
       var key = GlobalKey();
-      globalctx["keys"]["day-$destindex-$day"] = key;
+      globalctx.keys["day-$destindex-$day"] = key;
       daylist.add(Column(
         children: [
           RepaintBoundary(
-              // key: globalctx["keys"]["day-$index-$day"],
+              // key: globalctx.keys["day-$index-$day"],
               child: CustomFormTitleWidget(level: 3, label: "$title")),
           CustomFormDayWidget(indexes: [destindex, day]),
         ],

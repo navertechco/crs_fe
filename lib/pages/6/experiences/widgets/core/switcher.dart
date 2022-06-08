@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:naver_crs/pages/6/experiences/widgets/experiencedetail/widgets/index.dart';
 import 'package:naver_crs/pages/6/experiences/widgets/leisuretimedetail/widgets/index.dart';
 
+
 // ignore: must_be_immutable
 class SwitcherWidget extends StatelessWidget {
   SwitcherWidget(
@@ -32,14 +33,14 @@ class SwitcherWidget extends StatelessWidget {
     }
 
     void _switchCard() {
-      globalctx["value"] = globalctx["value"];
-      var exps = globalctx["experiencelist"];
+      globalctx.value.value = globalctx.value.value;
+      RxList exps = globalctx.experiencelist;
 
       exps.contains(experience) && _showFrontSide.value
           ? exps.add(experience)
           : exps.remove(experience);
 
-      globalctx["experiencelist"] = exps;
+      globalctx.experiencelist = exps;
       suggested = getExperienceState(experience) == "suggested";
 
       if (suggested) {
@@ -69,7 +70,6 @@ class SwitcherWidget extends StatelessWidget {
           final value =
               isUnder ? min(rotateAnim.value, pi / 2) : rotateAnim.value;
           return Obx(() {
-            var d = arrivalDate.value;
             return Transform(
               transform: _flipXAxis.value
                   ? (Matrix4.rotationY(value)..setEntry(3, 0, tilt))
@@ -90,7 +90,6 @@ class SwitcherWidget extends StatelessWidget {
           transitionBuilder: _transitionBuilder,
           layoutBuilder: (widget, list) => Stack(children: [widget!, ...list]),
           child: Obx(() {
-            var d = arrivalDate.value;
             return _showFrontSide.value ? firstchild : seccondchild;
           }),
           switchInCurve: Curves.easeInBack,

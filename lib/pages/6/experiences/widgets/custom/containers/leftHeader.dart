@@ -27,7 +27,6 @@ class LeftHeader extends HookWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      var d = arrivalDate.value;
       return Align(
         alignment: Alignment.centerLeft,
         child: Text(

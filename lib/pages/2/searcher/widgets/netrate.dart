@@ -57,7 +57,6 @@ class TotalNetRateWidget extends GetView<SearcherController> {
                       // color: Colors.white,
                       child: SingleChildScrollView(
                         child: Obx(() {
-                          var d = arrivalDate.value;
                           return Column(
                             children: [
                               // SearcherField(data: data, formKey: _formKey),

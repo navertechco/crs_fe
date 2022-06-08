@@ -22,7 +22,6 @@ class LeftWidget extends StatelessWidget {
     }).toList();
 
     return Obx(() {
-      var d = arrivalDate.value;
       return GalleryWidget(
           galleryData: galleryData.value, destination: destination);
     });

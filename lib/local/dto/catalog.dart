@@ -15,7 +15,7 @@ class CatalogDto {
       this.value,
       this.relation,
       this.catalog}) {
-    if (data != null && data != null) {
+    if (data != null && data.isNotEmpty) {
       catalog = data[0];
       order = data[1];
       description = data[2];

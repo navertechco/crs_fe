@@ -9,8 +9,8 @@ class Cover extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Map tour = globalctx["memory"]["tour"];
-    Map customer = globalctx["memory"]["customer"];
+    Map tour = globalctx.memory["tour"];
+    Map customer = globalctx.memory["customer"];
     var title = tour["title"] ?? "Enchanting Ecuador";
     var passengers = tour["passengers"] ?? "1";
     var days = totalDays.value;

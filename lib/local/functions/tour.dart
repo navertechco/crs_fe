@@ -33,7 +33,7 @@ processTour() async {
         Map myDayDto = dayDto;
         Map myExpDto = experienceDto;
         // Prepare Frame to send to Resume Page
-        var exps = globalctx["memory"]["promoted"][dayIndex];
+        var exps = globalctx.memory["promoted"][dayIndex];
         for (String exp in exps.keys) {
           Map newExp = {};
           Map newEntry = exps[exp];
@@ -45,50 +45,48 @@ processTour() async {
         dayIndex++;
       }
     }
-    globalctx["memory"]["resume"] = destinations;
+    globalctx.memory["resume"] = destinations;
 
     try {
-      for (var dest in globalctx["memory"]["resume"].keys) {
-        if (globalctx["memory"]["resume"][dest] != null) {
-          globalctx["memory"]["resume"][dest] =
-              globalctx["memory"]["resume"][dest].value;
+      for (var dest in globalctx.memory["resume"].keys) {
+        if (globalctx.memory["resume"][dest] != null) {
+          globalctx.memory["resume"][dest] =
+              globalctx.memory["resume"][dest].value;
         }
       }
     } catch (e) {
       log(e);
     }
 
-    globalctx["payload"]["tour"] = globalctx["memory"]["tour"];
-    globalctx["payload"]["logistic"] = globalctx["memory"]["logistic"];
-    globalctx["payload"]["customer"] = globalctx["memory"]["customer"];
-    globalctx["payload"]["destinations"] = globalctx["memory"]["resume"];
-    globalctx["payload"]["days"] = globalctx["memory"]["days"];
-    globalctx["payload"]["totalDays"] = globalctx["memory"]["totalDays"];
-    globalctx["payload"]["promoted"] = globalctx["memory"]["promoted"];
+    globalctx.payload["tour"] = globalctx.memory["tour"];
+    globalctx.payload["logistic"] = globalctx.memory["logistic"];
+    globalctx.payload["customer"] = globalctx.memory["customer"];
+    globalctx.payload["destinations"] = globalctx.memory["resume"];
+    globalctx.payload["days"] = globalctx.memory["days"];
+    globalctx.payload["totalDays"] = globalctx.memory["totalDays"];
+    globalctx.payload["promoted"] = globalctx.memory["promoted"];
 
-    if (translatingService.value != null) {
-      globalctx["payload"]["tour"]["passengers"] =
-          (int.parse(globalctx["payload"]["tour"]["passengers"]) + 1)
-              .toString();
+    if (translatingService.value.isNotEmpty) {
+      globalctx.payload["tour"]["passengers"] =
+          (int.parse(globalctx.payload["tour"]["passengers"]) + 1).toString();
     }
 
     try {
-      for (var day in globalctx["payload"]["days"].keys) {
-        globalctx["payload"]["days"][day] =
-            globalctx["payload"]["days"][day].value;
+      for (var day in globalctx.payload["days"].keys) {
+        globalctx.payload["days"][day] = globalctx.payload["days"][day].value;
       }
     } catch (e) {
       log(e);
     }
 
-    globalctx["payload"]["logistic"]["arrival_date"] =
-        globalctx["payload"]["logistic"]["arrival_date"].toString();
-    globalctx["payload"]["logistic"]["since_date"] =
-        globalctx["payload"]["logistic"]["since_date"].toString();
-    globalctx["payload"]["logistic"]["departure_date"] =
-        globalctx["payload"]["logistic"]["departure_date"].toString();
-    globalctx["payload"]["logistic"]["until_date"] =
-        globalctx["payload"]["logistic"]["until_date"].toString();
+    globalctx.payload["logistic"]["arrival_date"] =
+        globalctx.payload["logistic"]["arrival_date"].toString();
+    globalctx.payload["logistic"]["since_date"] =
+        globalctx.payload["logistic"]["since_date"].toString();
+    globalctx.payload["logistic"]["departure_date"] =
+        globalctx.payload["logistic"]["departure_date"].toString();
+    globalctx.payload["logistic"]["until_date"] =
+        globalctx.payload["logistic"]["until_date"].toString();
     await saveTour();
   } catch (e) {
     log(e);
@@ -99,18 +97,18 @@ processTour() async {
 
 saveTour() async {
   try {
-    var payload = globalctx["payload"].toString();
+    var payload = globalctx.payload.toString();
     var yaml = loadYaml(payload);
     var data = (yaml.toString());
-    var res = await fetchHandler(kDefaultSchema, kDefaultServer,
-        kDefaultServerPort, kDefaultTourEdit, 'POST', {
-      "state": "new",
-      "id": globalctx["memory"]["tour"]["code"],
-      "data": data
-    });
+    var res = await fetchHandler(
+        kDefaultSchema,
+        kDefaultServer,
+        kDefaultServerPort,
+        kDefaultTourEdit,
+        'POST',
+        {"state": "new", "id": globalctx.memory["tour"]["code"], "data": data});
     if (res.statusCode == 200 && res["state"]) {
-      globalctx["memory"]["tour"]["playlist_slug"] =
-          res["data"]["playlist_slug"];
+      globalctx.memory["tour"]["playlist_slug"] = res["data"]["playlist_slug"];
       generated = true;
     }
   } catch (e) {
@@ -141,7 +139,7 @@ getTour(ctx, {int tourId = 0, detail = false, cb}) async {
 }
 
 getTourPurpose() {
-  var purposes = globalctx["memory"]["tour"]["purposes"];
+  var purposes = globalctx.memory["tour"]["purposes"];
   return purposes;
 }
 
@@ -149,7 +147,7 @@ newTour() async {
   var res = await fetchHandler(kDefaultSchema, kDefaultServer,
       kDefaultServerPort, kDefaultNewTourEdit, 'POST', {"id": 1});
   if (res['state'] == true) {
-    globalctx["memory"]["tour"]["code"] = res['data']["id"];
+    globalctx.memory["tour"]["code"] = res['data']["id"];
     setContext("catalogs", res['data']["catalogs"]);
     selectedIndex.value = 0;
     Get.toNamed("/Tour");

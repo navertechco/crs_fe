@@ -17,7 +17,7 @@ class CustomBodyDaysWidget extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    ctrl.state.memory = globalctx["memory"];
+    ctrl.state.memory = globalctx.memory;
 
     return Stack(
       children: [
@@ -35,7 +35,6 @@ class CustomBodyDaysWidget extends HookWidget {
           child: CustomContentWidget(ctrl: ctrl),
         ),
         Obx(() {
-          var d = arrivalDate.value;
           var currentLeftHours = leftHours[currentDay.value] ?? 0.obs;
           return Padding(
             padding: EdgeInsets.only(

@@ -9,6 +9,6 @@ var quoteName = ''.obs;
 var quoteId = ''.obs;
 var quoteState = ''.obs;
 var quoteDisplay = false.obs;
-var quoteFilter = Rx(globalctx["memory"]["tours"]);
+var quoteFilter = Rx(globalctx.memory["tours"]);
 var quoteTable = DataTable(columns: [], rows: []).obs;
 Rx<Iterable> quoteResults = Rx([]);

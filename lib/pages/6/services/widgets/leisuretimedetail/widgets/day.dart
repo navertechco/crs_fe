@@ -12,23 +12,19 @@ class CustomDestinationWidget extends StatelessWidget {
     DateTime date = DateTime(now.year, now.month, now.day);
 
     return Obx(() {
-      var d = arrivalDate.value;
       Rx<TimeOfDay?> leisureTimeStart = Rx(getFormValue(
-              globalctx["memory"]["days"],
+              globalctx.memory["days"],
               currentDay.value,
               "leisureTimeStart",
               time) ??
           time);
-      Rx<TimeOfDay?> leisureTimeEnd = Rx(getFormValue(
-              globalctx["memory"]["days"],
-              currentDay.value,
-              "leisureTimeEnd",
-              time) ??
+      Rx<TimeOfDay?> leisureTimeEnd = Rx(getFormValue(globalctx.memory["days"],
+              currentDay.value, "leisureTimeEnd", time) ??
           time);
       var eventList = <FlutterWeekViewEvent>[];
 
-      if (globalctx["memory"]["days"][currentDay.value.toString()] != null) {
-        if (globalctx["memory"]["days"][currentDay.value.toString()]
+      if (globalctx.memory["days"][currentDay.value.toString()] != null) {
+        if (globalctx.memory["days"][currentDay.value.toString()]
                 ["leisureTimeEnd"] !=
             null) {
           eventList.add(FlutterWeekViewEvent(

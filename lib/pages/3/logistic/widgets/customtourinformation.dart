@@ -17,7 +17,7 @@ class CustomLogisticInformationForm extends StatelessWidget {
   Widget build(BuildContext context) {
     var readonly = getContext("readonly") ?? false;
     var galapagos =
-        Rx(getFormValue(globalctx["memory"], "tour", "galapagos", false));
+        Rx(getFormValue(globalctx.memory, "tour", "galapagos", false));
     return Stack(
       children: [
         SingleChildScrollView(
@@ -33,7 +33,6 @@ class CustomLogisticInformationForm extends StatelessWidget {
                   SingleChildScrollView(
                     child: Column(children: [
                       Obx(() {
-                        var d = arrivalDate.value;
                         if (galapagos.value) {
                           return Row(
                             children: [
@@ -87,7 +86,7 @@ class CustomLogisticInformationForm extends StatelessWidget {
                         disabled: readonly,
                         onSaved: (value) {
                           ctrl!.state.arrival_port = value!;
-                          setFormValue(globalctx["memory"], "logistic",
+                          setFormValue(globalctx.memory, "logistic",
                               "arrival_port", value);
                           arrivalPort.value = value;
                           resetAllDestinations();
@@ -102,11 +101,10 @@ class CustomLogisticInformationForm extends StatelessWidget {
                         data: airportCatalog.toList(),
                       ),
                       Obx(() {
-                        var d = arrivalDate.value;
                         return Row(
                           children: [
                             CustomFormDateFieldWidget(
-                              disabled: (readonly || cruiseDay != null) &&
+                              disabled: (readonly || cruiseDay.isNotEmpty) &&
                                   !arrivalEdit.value,
                               initialValue: arrivalDate.value,
                               validator: CustomDatetimeGreaterValidator(
@@ -146,7 +144,7 @@ class CustomLogisticInformationForm extends StatelessWidget {
                         disabled: readonly,
                         onSaved: (value) {
                           ctrl!.state.departure_port = value!;
-                          setFormValue(globalctx["memory"], "logistic",
+                          setFormValue(globalctx.memory, "logistic",
                               "departure_port", value);
                           departurePort.value = value;
                         },
@@ -162,11 +160,10 @@ class CustomLogisticInformationForm extends StatelessWidget {
                         data: airportCatalog.toList(),
                       ),
                       Obx(() {
-                        var d = arrivalDate.value;
                         return Row(
                           children: [
                             CustomFormDateFieldWidget(
-                              disabled: (readonly || cruiseDay != null) &&
+                              disabled: (readonly || cruiseDay.isNotEmpty) &&
                                   !departureEdit.value,
                               initialValue: departureDate.value,
                               validator: CustomDatetimeGreaterValidator(
@@ -198,7 +195,6 @@ class CustomLogisticInformationForm extends StatelessWidget {
                         );
                       }),
                       Obx(() {
-                        var d = arrivalDate.value;
                         return Column(
                           children: [
                             const CustomTitleWidget(
@@ -212,11 +208,11 @@ class CustomLogisticInformationForm extends StatelessWidget {
                                   ctx: context),
                               value: tourOption.value,
                               onSaved: (value) {
-                                setFormValue(globalctx["memory"], "logistic",
+                                setFormValue(globalctx.memory, "logistic",
                                     "tour_option", value);
                               },
                               onChanged: (value) {
-                                setFormValue(globalctx["memory"], "logistic",
+                                setFormValue(globalctx.memory, "logistic",
                                     "tour_option", value);
                                 tourOption.value = value!;
                               },
@@ -231,8 +227,8 @@ class CustomLogisticInformationForm extends StatelessWidget {
                                   groupValue: openBoolCredit,
                                   onChanged: (value) {
                                     openBoolCredit.value = value;
-                                    setFormValue(globalctx["memory"],
-                                        "logistic", "open_credit", value);
+                                    setFormValue(globalctx.memory, "logistic",
+                                        "open_credit", value);
                                   },
                                 ),
                               ],
@@ -249,7 +245,7 @@ class CustomLogisticInformationForm extends StatelessWidget {
                                       if (value! > 0) {
                                         openCredit.value = value as int;
                                         setFormValue(
-                                            globalctx["memory"],
+                                            globalctx.memory,
                                             "logistic",
                                             "open_credit_value",
                                             value);
@@ -260,7 +256,7 @@ class CustomLogisticInformationForm extends StatelessWidget {
                                   },
                                   label: '\t\tOpen Credit Amount',
                                   width: 0.2),
-                            if (cruiseDay != null)
+                            if (cruiseDay.isNotEmpty)
                               CustomTitleWidget(
                                 width: 0.3,
                                 fontWeight: FontWeight.bold,

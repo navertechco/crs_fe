@@ -19,9 +19,9 @@ getFilteredServices() async {
           service.relation["destination"] == globalDestinationName.value ||
           service.relation["destination"] == "all")
       .toList();
-  globalctx["memory"]["catalogs"][currentDestination.value] ??= [];
-  var catalogs = globalctx["memory"]["catalogs"][currentDestination.value];
-  var rule = catalogs != null;
+  globalctx.memory["catalogs"][currentDestination.value] ??= [];
+  var catalogs = globalctx.memory["catalogs"][currentDestination.value];
+  var rule = catalogs.isNotEmpty;
   if (rule) {
     filtered = filtered.where((service) {
       var state = getServiceState(service.description);
@@ -31,8 +31,9 @@ getFilteredServices() async {
 
       if (service.catalog == "hotel") {
         var room = service.description.split("-")[1];
-        if (promotedServices.where((element) => element.contains(room)) !=
-            null) {
+        if (promotedServices
+            .where((element) => element.contains(room))
+            .isNotEmpty) {
           return false;
         }
         return true;
@@ -40,8 +41,9 @@ getFilteredServices() async {
 
       if (service.catalog == "food_services") {
         var meal = service.description.split("-")[1];
-        if (promotedServices.where((element) => element.contains(meal)) !=
-            null) {
+        if (promotedServices
+            .where((element) => element.contains(meal))
+            .isNotEmpty) {
           return false;
         }
         return true;
@@ -70,8 +72,8 @@ updateDragServices() {
           .add(DragServiceOptionWidget(service: srv.description));
     }
   }
-  globalctx["memory"]["services"][currentDestination.value] = promotedServices;
-  globalctx["memory"]["catalogs"][currentDestination.value] = promotedCatalogs;
+  globalctx.memory["services"][currentDestination.value] = promotedServices;
+  globalctx.memory["catalogs"][currentDestination.value] = promotedCatalogs;
   return;
 }
 
@@ -86,7 +88,7 @@ resetDrags() {
 getSrvFiltered() async {
   filteredsrv = [];
 
-  Iterable srvs = services as Iterable;
+  Iterable srvs = await services;
   for (var item in srvs) {
     List itemList = item;
     for (var catalog in itemList) {
@@ -103,12 +105,12 @@ paginateDestination(String direction) async {
   int sum = direction == "next" ? 1 : -1;
   if (currentDestination.value + sum >= 0 &&
       currentDestination.value + sum <
-          globalctx["memory"]["destinations"].length) {
+          globalctx.memory["destinations"].length) {
     currentDestination.value = currentDestination.value + sum;
     globalDestinationIndex.value = currentDestination.value.toString();
     try {
-      globalDestinationName.value = globalctx["memory"]["destinations"]
-              [globalDestinationIndex.value]
+      globalDestinationName.value = globalctx
+          .memory["destinations"][globalDestinationIndex.value]
           .value["destination"];
     } catch (e) {
       globalDestinationName.value = "quito";
@@ -120,14 +122,14 @@ paginateDestination(String direction) async {
       globalDestinationType.value = "arrival";
     }
     if (currentDestination.value ==
-        globalctx["memory"]["destinations"].length - 1) {
+        globalctx.memory["destinations"].length - 1) {
       globalDestinationType.value = "departure";
     }
 
     log("currentDestination.value: ${currentDestination.value}");
     filterSuggestedServices();
   } else if (currentDestination.value + sum >
-      globalctx["memory"]["destinations"].length - 1) {
+      globalctx.memory["destinations"].length - 1) {
     goto("Resume");
   } else {
     goto("Experiences");
@@ -150,18 +152,18 @@ resetServices() {
 }
 
 setServiceState(service, state) {
-  globalctx["states"]["services"][currentDestination.value] ??= {}.obs;
-  globalctx["states"]["services"][currentDestination.value][service] ??= {}.obs;
-  globalctx["states"]["services"][currentDestination.value][service]["state"] =
+  globalctx.states["services"][currentDestination.value] ??= {}.obs;
+  globalctx.states["services"][currentDestination.value][service] ??= {}.obs;
+  globalctx.states["services"][currentDestination.value][service]["state"] =
       state;
   filterSuggestedServices();
 }
 
 getServiceState(service) {
-  globalctx["states"]["services"][currentDestination.value] ??= {}.obs;
-  globalctx["states"]["services"][currentDestination.value][service] ??= {}.obs;
-  var state = globalctx["states"]["services"][currentDestination.value][service]
-      ["state"];
+  globalctx.states["services"][currentDestination.value] ??= {}.obs;
+  globalctx.states["services"][currentDestination.value][service] ??= {}.obs;
+  var state =
+      globalctx.states["services"][currentDestination.value][service]["state"];
   state ??= "suggested";
   return state;
 }

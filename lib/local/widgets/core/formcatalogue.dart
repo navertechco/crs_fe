@@ -29,7 +29,6 @@ class FormCatalogueWidget extends StatelessWidget {
     var items = getItems(data, value, hintText);
 
     return Obx(() {
-      var d = arrivalDate.value;
       try {
         return DropdownButtonHideUnderline(
           child: DropdownButtonFormField(

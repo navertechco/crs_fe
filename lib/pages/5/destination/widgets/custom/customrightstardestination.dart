@@ -27,7 +27,6 @@ class CustomRightStarDestinationForm extends StatelessWidget {
             ),
             DestinationsOrderableListWidget(),
             Obx(() {
-              var d = arrivalDate.value;
               return Padding(
                 padding: EdgeInsets.only(
                   top: MediaQuery.of(context).size.height * 0.0,
@@ -35,7 +34,7 @@ class CustomRightStarDestinationForm extends StatelessWidget {
                 ),
                 child: DragDestinationWidget(
                     destination: departure["description"],
-                    index: globalctx["destinationDragData"].length - 1,
+                    index: globalctx.destinationDragData.value.length - 1,
                     type: "departure",
                     out: true),
               );
