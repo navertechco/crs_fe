@@ -417,7 +417,7 @@ savePurposes(values) {
     purposeMemory.value = <String>[];
     var length = values.length;
     for (var i = 0; i < length; i++) {
-      purposeMemory.value.add(filterCatalog("purposes", "code", values[i])[0]
+      purposeMemory.add(filterCatalog("purposes", "code", values[i])[0]
               ["description"]
           .toString());
     }

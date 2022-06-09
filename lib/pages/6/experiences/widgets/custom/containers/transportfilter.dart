@@ -7,6 +7,7 @@ import 'package:naver_crs/pages/6/experiences/widgets/custom/containers/leftHead
 import 'package:naver_crs/pages/6/experiences/widgets/custom/containers/travelchip.dart';
 import '../../../controller.dart';
 
+// ignore: must_be_immutable
 class TransportFilter extends HookWidget {
   TransportFilter(
       {Key? key, required this.ctrl, this.counter, required this.formKey})
@@ -26,6 +27,7 @@ class TransportFilter extends HookWidget {
   }
 }
 
+// ignore: must_be_immutable
 class BodyWidget extends StatelessWidget {
   BodyWidget({Key? key, this.ctrl, this.counter, required this.formKey})
       : super(key: key);

@@ -103,7 +103,7 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
                   ),
                 ),
               ),
-              Container(
+              SizedBox(
                 child: Center(
                   child: Text(
                     DateFormat('MMMM, yyyy').format(currentMonthDate!),

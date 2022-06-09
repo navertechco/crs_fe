@@ -25,6 +25,7 @@ class TransportFilter extends HookWidget {
   }
 }
 
+// ignore: must_be_immutable
 class BodyWidget extends StatelessWidget {
   BodyWidget({Key? key, this.ctrl, this.counter, required this.formKey})
       : super(key: key);

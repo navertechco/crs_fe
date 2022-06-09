@@ -88,31 +88,30 @@ class WebView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        child: Stack(children: [
+    return Stack(children: [
       InAppWebView(
-          key: webViewKey,
-          initialOptions: InAppWebViewGroupOptions(
-            android: AndroidInAppWebViewOptions(
-              useShouldInterceptRequest: true,
-              useHybridComposition: true,
-              safeBrowsingEnabled: false,
-            ),
-            crossPlatform: InAppWebViewOptions(
-              useShouldOverrideUrlLoading: true,
-              javaScriptCanOpenWindowsAutomatically: true,
-              javaScriptEnabled: true,
-              mediaPlaybackRequiresUserGesture: false,
-              preferredContentMode: UserPreferredContentMode.MOBILE,
-            ),
-          ),
-          onReceivedServerTrustAuthRequest: (controller, challenge) async {
-            return ServerTrustAuthResponse(
-                action: ServerTrustAuthResponseAction.PROCEED);
-          },
-          initialUrlRequest: URLRequest(
-            url: Uri.parse(url),
-          ))
-    ]));
+      key: webViewKey,
+      initialOptions: InAppWebViewGroupOptions(
+        android: AndroidInAppWebViewOptions(
+          useShouldInterceptRequest: true,
+          useHybridComposition: true,
+          safeBrowsingEnabled: false,
+        ),
+        crossPlatform: InAppWebViewOptions(
+          useShouldOverrideUrlLoading: true,
+          javaScriptCanOpenWindowsAutomatically: true,
+          javaScriptEnabled: true,
+          mediaPlaybackRequiresUserGesture: false,
+          preferredContentMode: UserPreferredContentMode.MOBILE,
+        ),
+      ),
+      onReceivedServerTrustAuthRequest: (controller, challenge) async {
+        return ServerTrustAuthResponse(
+            action: ServerTrustAuthResponseAction.PROCEED);
+      },
+      initialUrlRequest: URLRequest(
+        url: Uri.parse(url),
+      ))
+    ]);
   }
 }

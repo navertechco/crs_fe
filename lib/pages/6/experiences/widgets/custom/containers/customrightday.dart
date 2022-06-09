@@ -4,6 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:naver_crs/pages/6/experiences/controller.dart';
 import 'package:naver_crs/pages/6/experiences/widgets/custom/containers/transportfilter.dart';
 
+// ignore: must_be_immutable
 class CustomTopDayWidget extends HookWidget {
   final ExperiencesController ctrl;
   final ValueNotifier<int> counter;

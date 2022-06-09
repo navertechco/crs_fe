@@ -4,6 +4,7 @@ import 'package:naver_crs/index.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 
+// ignore: must_be_immutable
 class CustomBodyDestinationsWidget extends HookWidget {
   final ServicesController ctrl;
   final ValueNotifier<int> counter;

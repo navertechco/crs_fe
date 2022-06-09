@@ -13,7 +13,7 @@ class ContentLayoutWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(fit: StackFit.expand, children: [
-      Container(
+      SizedBox(
         child: Image.asset(background ?? "assets/custom/img/layout.png",
             fit: BoxFit.fill, height: double.infinity),
       ),

@@ -391,7 +391,7 @@ class CruiseResultWidget extends StatelessWidget {
                         decoration: BoxDecoration(color: Colors.grey),
                         child: Row(
                           children: [
-                            Container(
+                            SizedBox(
                               child: Text(
                                 "Cruise Name",
                                 textAlign: TextAlign.center,
@@ -399,7 +399,7 @@ class CruiseResultWidget extends StatelessWidget {
                                     fontSize: 15, fontWeight: FontWeight.bold),
                               ),
                             ),
-                            Container(
+                            SizedBox(
                                 child: Text(
                               "Actions",
                               textAlign: TextAlign.center,

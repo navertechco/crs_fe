@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/index.dart';
 
+// ignore: must_be_immutable
 class SearcherField extends StatelessWidget {
   SearcherField({Key? key, this.data, required this.formKey}) : super(key: key);
 

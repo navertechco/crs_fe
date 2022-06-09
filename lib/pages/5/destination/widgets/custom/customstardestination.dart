@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:naver_crs/common/index.dart';
 
+// ignore: must_be_immutable
 class CustomStarDestinationForm extends StatelessWidget {
   CustomStarDestinationForm({
     Key? key,
@@ -24,7 +25,7 @@ class CustomStarDestinationForm extends StatelessWidget {
   Widget build(BuildContext context) {
     var tour = getContext("tour");
     var ctx = globalctx.context.value;
-    var arrival_hour = findCatalog("arrival_hour");
+    var arrivalHourCatalog = findCatalog("arrival_hour");
     Rx<int> explorationDay = Rx(int.parse(getFormValue(
             globalctx.memory["destinations"], index, "explorationDay", "0") ??
         "0"));
@@ -192,7 +193,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                               ["description"];
                         },
                         label: "Arrival Hour              ",
-                        data: arrival_hour);
+                        data: arrivalHourCatalog);
                   }
                   return Text('');
                 }),
@@ -253,7 +254,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                           var length = values.length;
 
                           for (var i = 0; i < length; i++) {
-                            kaMemory.value.add(findCatalog("key_activity")
+                            kaMemory.add(findCatalog("key_activity")
                                 .toList()
                                 .where((e) => e["code"] == values[i])
                                 .toList()[0]["description"]);

@@ -6,7 +6,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get.dart';
 
 class LeftHeader extends HookWidget {
-  LeftHeader({
+  const LeftHeader({
     Key? key,
     required this.ctrl,
     required this.counter,

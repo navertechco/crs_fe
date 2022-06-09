@@ -4,6 +4,7 @@ import 'package:naver_crs/index.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get.dart';
 
+// ignore: must_be_immutable
 class CustomBodyDaysWidget extends HookWidget {
   final ExperiencesController ctrl;
   final ValueNotifier<int> counter;

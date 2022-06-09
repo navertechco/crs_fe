@@ -29,7 +29,7 @@ class CruiseDetailWidget extends StatelessWidget {
             height: MediaQuery.of(context).size.height * 0.5,
           ),
           Text(
-            "${getCruiseItinerary(row)}",
+            getCruiseItinerary(row),
             style: KTextSytle(
               context: context,
               fontSize: 10,

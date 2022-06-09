@@ -13,10 +13,10 @@ class PrintDocs extends StatelessWidget {
     var end = getValue(memory, "end", def: []);
     var netrates = getValue(end, "net_rates", def: []);
     var included = getValue(end, "included", def: []);
-    var notincluded = getValue(end, "not_included", def: []);
+    var notIncluded = getValue(end, "not_included", def: []);
 
     List<CustomDescriptionWidget> includedlist = [];
-    List<CustomDescriptionWidget> notincludedlist = [];
+    List<CustomDescriptionWidget> notIncludedlist = [];
     List<TableRow> nrlist = [];
     // ignore: unnecessary_null_comparison
     if (data != null && included != null) {
@@ -28,10 +28,10 @@ class PrintDocs extends StatelessWidget {
             fontWeight: FontWeight.bold));
       }
     }
-    if (data != null && notincluded != null) {
-      for (var i = 0; i < notincluded.length; i++) {
-        notincludedlist.add(CustomDescriptionWidget(
-            text: "\u2022 ${notincluded[i]}",
+    if (data != null && notIncluded != null) {
+      for (var i = 0; i < notIncluded.length; i++) {
+        notIncludedlist.add(CustomDescriptionWidget(
+            text: "\u2022 ${notIncluded[i]}",
             width: 0.45,
             fontSize: 0.012,
             fontWeight: FontWeight.bold));

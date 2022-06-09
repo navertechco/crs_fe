@@ -60,7 +60,6 @@ class KeypadWidget extends StatelessWidget {
                       color: Colors.white)
                   .getStyle()),
           onPressed: () {
-            var state = getServiceState(service);
 
             Get.close(1);
           },

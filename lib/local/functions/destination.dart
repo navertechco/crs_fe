@@ -6,6 +6,7 @@ import 'index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/pages/5/destination/widgets/index.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:sweetalert/sweetalert.dart';
 
 /// ## dragDestination
@@ -129,7 +130,7 @@ void orderDestination(List destinations) {
   if (arrival.isNotEmpty) {
     destinations.sort((a, b) {
       var arrivalData = toCatalog(filterCatalog(
-          "destinations", "description", arrival.value["description"])[0]);
+          "destinations", "description", arrival["description"])[0]);
       var arrivalLat = arrivalData.relation["latitude"];
       var arrivalLong = arrivalData.relation["longitude"];
       var aLat = toCatalog(a).relation["latitude"];

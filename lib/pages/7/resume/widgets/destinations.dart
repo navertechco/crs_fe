@@ -4,12 +4,12 @@ import 'customformdestination.dart';
 
 // ignore: must_be_immutable
 class Destinations extends StatelessWidget {
-  Destinations({
+  const Destinations({
     Key? key,
     required this.data,
   }) : super(key: key);
 
-  var data;
+  final data;
 
   @override
   Widget build(BuildContext context) {
