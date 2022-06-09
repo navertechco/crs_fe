@@ -114,8 +114,6 @@ flutter:
     - assets/custom/img/0.75x/    
     - assets/custom/svg/
     - assets/custom/svg/images/
-    - assets/custom/svg/icons/
-    - assets/custom/svg/screens/
     
   generate: true
   uses-material-design: true
