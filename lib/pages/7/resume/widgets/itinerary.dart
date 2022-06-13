@@ -13,7 +13,7 @@ class Itinerary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05),
+      padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.07),
       child: Stack(
         children: [
           Positioned(

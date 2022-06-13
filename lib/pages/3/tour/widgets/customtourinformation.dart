@@ -316,9 +316,11 @@ class GalapagosCheckboxField extends StatelessWidget {
           iconSize: 32,
           onSaved: (value) {
             setFormValue(globalctx.memory, "tour", "galapagos", value);
+            setFormValue(globalctx.memory, "tour", "galapagos_guide", value);
           },
           onChanged: (value) {
             setFormValue(globalctx.memory, "tour", "galapagos", value);
+            setFormValue(globalctx.memory, "tour", "galapagos_guide", value);
           },
         ),
       ],
