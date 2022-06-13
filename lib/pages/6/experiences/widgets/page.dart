@@ -19,7 +19,7 @@ class ExperiencesWidget extends HookWidget {
     useEffect(() {}, [stream, counter.value]);
 
     return Stack(children: [
-      CustomTopDayWidget(ctrl: ctrl, counter: counter, formKey: formKey),
+      CustomTopDayWidget(),
       CustomBodyDaysWidget(ctrl: ctrl, counter: counter, formKey: formKey),
     ]);
   }

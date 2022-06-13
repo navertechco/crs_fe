@@ -9,12 +9,10 @@ import '../../../controller.dart';
 
 // ignore: must_be_immutable
 class TransportFilter extends HookWidget {
-  TransportFilter(
-      {Key? key, required this.ctrl, this.counter, required this.formKey})
-      : super(key: key);
-  GlobalKey<FormState> formKey;
-  final ExperiencesController ctrl;
-  final counter;
+  TransportFilter({
+    Key? key,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -22,18 +20,15 @@ class TransportFilter extends HookWidget {
         top: MediaQuery.of(context).size.height * 0,
         left: MediaQuery.of(context).size.width * 0.6,
       ),
-      child: BodyWidget(ctrl: ctrl, counter: counter, formKey: formKey),
+      child: BodyWidget(),
     );
   }
 }
 
 // ignore: must_be_immutable
 class BodyWidget extends StatelessWidget {
-  BodyWidget({Key? key, this.ctrl, this.counter, required this.formKey})
-      : super(key: key);
-  final ctrl;
-  final counter;
-  GlobalKey<FormState> formKey;
+  BodyWidget({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Obx(() {
@@ -57,12 +52,12 @@ class BodyWidget extends StatelessWidget {
                   LeftInfoHeader(
                       fontSize: 13,
                       header: LeftHeader(
-                          fontSize: 15, ctrl: ctrl, counter: counter)),
+                        fontSize: 15,
+                      )),
                   LeftDayOptions(
-                      customGuide: customGuide,
-                      index: index,
-                      ctrl: ctrl,
-                      counter: counter),
+                    customGuide: customGuide,
+                    index: index,
+                  ),
                 ],
               )),
         ),
@@ -76,14 +71,10 @@ class LeftDayOptions extends StatelessWidget {
     Key? key,
     required this.customGuide,
     required this.index,
-    required this.ctrl,
-    required this.counter,
   }) : super(key: key);
 
   final Rx<bool> customGuide;
   final index;
-  final ctrl;
-  final counter;
 
   @override
   Widget build(BuildContext context) {
@@ -119,7 +110,7 @@ class LeftDayOptions extends StatelessWidget {
                   ),
                 ],
               ),
-            TravelChips(ctrl: ctrl, counter: counter),
+            TravelChips(),
             CustomTitleWidget(
                 fontWeight: FontWeight.bold,
                 label: "Day Transport Options:",
@@ -152,32 +143,7 @@ class LeftDayOptions extends StatelessWidget {
               hintText: "                  Services\n",
               data: serviceTypeCatalog.value,
             ),
-            if (openTranslate.value)
-              CustomFormMultiDropDownFieldWidget(
-                validator: (value) => CustomMultiDropdownRequiredValidator(
-                    value,
-                    errorText: "Translating Service is required ",
-                    context: context),
-                value: translatingService.value ?? <String>[],
-                onSaved: (value) {
-                  setFormValue(
-                      globalctx.memory["destinations"],
-                      globalDestinationIndex.value,
-                      "translating_service",
-                      value);
-                },
-                onChanged: (value) {
-                  openTranslate.value = false;
-                  translatingService.value = value;
-                  setFormValue(
-                      globalctx.memory["destinations"],
-                      globalDestinationIndex.value,
-                      "translating_service",
-                      value);
-                },
-                hintText: "          Translating Services",
-                data: translatingCatalog.value,
-              ),
+            
             if (openGuide.value)
               Column(
                 children: [

@@ -4,10 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get.dart';
 
 class TravelChips extends HookWidget {
-  const TravelChips({Key? key, required this.ctrl, required this.counter})
-      : super(key: key);
-  final ValueNotifier<int> counter;
-  final ExperiencesController ctrl;
+  const TravelChips({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

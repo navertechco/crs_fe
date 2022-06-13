@@ -8,13 +8,11 @@ import 'package:get/get.dart';
 class LeftHeader extends HookWidget {
   LeftHeader({
     Key? key,
-    required this.ctrl,
-    required this.counter,
+    
     required this.fontSize,
   }) : super(key: key);
   final int fontSize;
-  final ValueNotifier<int> counter;
-  final ExperiencesController ctrl;
+   
   final type = (() {
     if (currentDay.value == 0) {
       return "Arrival";
