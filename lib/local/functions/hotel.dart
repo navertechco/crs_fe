@@ -216,8 +216,7 @@ getHotelDetail(context, data, columns) {
   return detail;
 }
 
-var currentHotelName = Rx(getFormValue(
-    globalctx.memory["destinations"], globalDestinationIndex, "hotelName", ''));
+
 
 getHotelDataCell(context, row) {
   var dataCell = DataCell(

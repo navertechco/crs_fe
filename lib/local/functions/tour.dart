@@ -118,7 +118,7 @@ saveTour() async {
 
 getTour(ctx, {int tourId = 0, detail = false, cb}) async {
   var frame = {
-    "data": {"tour_id": tourId, "detail": detail}
+    "data": {"tour_id": tourId, "detail": detail, "limit": 10, "offset": 0}
   };
   var res = await fetchHandler(kDefaultSchema, kDefaultServer,
       kDefaultServerPort, kDefaultFindTour, 'POST', frame);
