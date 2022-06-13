@@ -1,15 +1,13 @@
-import 'package:checkbox_formfield/checkbox_icon_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:naver_crs/index.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/pages/6/experiences/widgets/custom/containers/leftHeader.dart';
 import 'package:naver_crs/pages/6/experiences/widgets/custom/containers/travelchip.dart';
-import '../../../controller.dart';
 
 // ignore: must_be_immutable
-class TransportFilter extends HookWidget {
-  TransportFilter({
+class DayExpFilter extends HookWidget {
+  const DayExpFilter({
     Key? key,
   }) : super(key: key);
 
@@ -83,103 +81,7 @@ class LeftDayOptions extends StatelessWidget {
         top: MediaQuery.of(context).size.height * 0.195,
         left: MediaQuery.of(context).size.width * 0.0,
       ),
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            if (globalDestinationName.value == "galapagos")
-              Row(
-                children: [
-                  CustomTitleWidget(
-                      fontWeight: FontWeight.bold,
-                      label: "Custom Additional guide:",
-                      color: Colors.white),
-                  CheckboxIconFormField(
-                    context: context,
-                    initialValue: customGuide.value,
-                    enabled: true,
-                    iconSize: 32,
-                    onSaved: (value) {
-                      setFormValue(globalctx.memory["destinations"], index,
-                          "customGuide", value);
-                    },
-                    onChanged: (value) {
-                      customGuide.value = value;
-                      setFormValue(globalctx.memory["destinations"], index,
-                          "customGuide", value);
-                    },
-                  ),
-                ],
-              ),
-            TravelChips(),
-            CustomTitleWidget(
-                fontWeight: FontWeight.bold,
-                label: "Day Transport Options:",
-                color: Colors.white),
-            CustomFormMultiDropDownFieldWidget(
-              validator: (value) => CustomMultiDropdownRequiredValidator(value,
-                  errorText: "Day Transport Options are required ",
-                  context: context),
-              value: getFormValue(globalctx.memory["destinations"],
-                  globalDestinationIndex.value, "service_type", ["DRIVING"]),
-              onSaved: (values) {
-                transportService.value = values;
-                openGuide.value = transportService.value.contains(3);
-                openTranslate.value = transportService.value.contains(2);
-                multiSaving(
-                    values,
-                    "service_type",
-                    globalctx.memory["destinations"],
-                    index,
-                    "service_type",
-                    transportService);
-              },
-              onChanged: (value) {
-                transportService.value = value;
-                openGuide.value = transportService.value.contains(3);
-                openTranslate.value = transportService.value.contains(2);
-                setFormValue(globalctx.memory["destinations"],
-                    globalDestinationIndex.value, "service_type", value);
-              },
-              hintText: "                  Services\n",
-              data: serviceTypeCatalog.value,
-            ),
-            
-            if (openGuide.value)
-              Column(
-                children: [
-                  CustomFormCheckboxWidget(
-                    value: 1,
-                    groupValue: guide,
-                    onChanged: (value) {
-                      if (guide.value == value) {
-                        guide.value = 0;
-                      } else {
-                        guide.value = value;
-                        setFormValue(globalctx.memory["destinations"],
-                            globalDestinationIndex.value, "guide_type", value);
-                      }
-                    },
-                    hintText: "Driver guide?",
-                  ),
-                  CustomFormCheckboxWidget(
-                    value: 2,
-                    groupValue: guide,
-                    onChanged: (value) {
-                      if (guide.value == value) {
-                        guide.value = 0;
-                      } else {
-                        guide.value = value;
-                        setFormValue(globalctx.memory["destinations"],
-                            globalDestinationIndex.value, "guide_type", value);
-                      }
-                    },
-                    hintText: "Additional guide?",
-                  ),
-                ],
-              ),
-          ],
-        ),
-      ),
+      child: TravelChips(),
     );
   }
 }

@@ -43,7 +43,7 @@ Future nextDay() async {
   if (currentDay.value < totalDays.value - 1) {
     jumpDay("forward");
   } else {
-    goto("Services");
+    goto("Resume");
   }
 }
 

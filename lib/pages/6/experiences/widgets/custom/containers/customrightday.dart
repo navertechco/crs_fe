@@ -6,14 +6,12 @@ import 'package:naver_crs/pages/6/experiences/widgets/custom/containers/transpor
 
 // ignore: must_be_immutable
 class CustomTopDayWidget extends HookWidget {
-   
   CustomTopDayWidget({
     Key? key,
-     
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return TransportFilter();
+    return DayExpFilter();
   }
 }

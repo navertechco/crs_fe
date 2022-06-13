@@ -214,12 +214,6 @@ List pageList = [
     "key": GlobalKey()
   },
   {
-    "label": "Services",
-    "icon": Icons.hotel,
-    "color": Colors.green,
-    "key": GlobalKey()
-  },
-  {
     "label": "Resume",
     "icon": Icons.shopping_cart,
     "color": Colors.green,

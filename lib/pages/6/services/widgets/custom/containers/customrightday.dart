@@ -18,6 +18,6 @@ class CustomTopDestinationWidget extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TransportFilter(ctrl: ctrl, counter: counter, formKey: formKey);
+    return DayExpFilter(ctrl: ctrl, counter: counter, formKey: formKey);
   }
 }
