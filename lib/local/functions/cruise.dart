@@ -187,6 +187,38 @@ List<DataColumn> getCruiseHeader(context, data, columns) {
   return header;
 }
 
+/// ## cruiseReset
+/// *__Method to reset cruise memory variables__*
+///
+/// ### Uses:
+/// ```dart
+///  cruiseReset()
+/// ```
+///
+///
+void cruiseReset() {
+  cruiseFormat.value = '';
+  cruiseDay.value = '';
+  cruiseShip.value = '';
+  cruiseRange.value = '';
+  cruiseCategory.value = '';
+  cruiseKey.value = '';
+  cruiseType.value = '';
+  cruiseCabine.value = '';
+  cruiseModality.value = '';
+  cruisePax.value = '';
+  cruiseTriple.value = '';
+  cruiseStarts.value = '';
+  cruiseEnds.value = '';
+  cruiseIslet.value = '';
+  cruiseItinerary.value = '';
+  cruisePort.value = '';
+  cruiseAnimal.value = '';
+  arrivalEdit.value = false;
+  departureEdit.value = false;
+  moreFilters.value = false;
+}
+
 /// ## clearCruiseFilter
 /// *__Method to reset cruise variables__*
 ///
@@ -214,12 +246,12 @@ void clearCruiseFilter() {
   cruiseIslet.value = '';
 }
 
-/// ## clearCruiseFilter
+/// ## buildCruiseDataTable
 /// *__Method to build cruise datatable__*
 ///
 ///### Uses:
 /// ```dart
-///  clearCruiseFilter();
+///  buildCruiseDataTable(context, data);
 /// ```
 ///
 /// @return [List<DataColumn>, List<DataRow>]
