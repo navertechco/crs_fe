@@ -234,13 +234,9 @@ RxString departureState = getDestinationState(
     .toString()
     .obs;
 
-Rx<dynamic> transportService = Rx(getFormValue(globalctx.memory["destinations"],
-        globalDestinationIndex.value, "service_type", <String>[]) ??
-    <String>[]);
-Rx<dynamic> translatingService = Rx(getFormValue(
-    globalctx.memory["destinations"],
-    globalDestinationIndex.value,
-    "translating_service", <String>[]));
+var transportService = "0".obs;
+Rx<List<String>> translatingService = Rx(
+    getFormValue(globalctx.memory, "tour", "translating_service", <String>[]));
 Rx<int> guide = Rx(getFormValue(globalctx.memory["destinations"],
     globalDestinationIndex.value, "guide_type", 1));
 Rx<int> openBoolCredit =

@@ -217,24 +217,20 @@ class TranslatingField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomFormMultiDropDownFieldWidget(
-      label: "Translating Services",
-      validator: (value) => CustomMultiDropdownRequiredValidator(value,
-          errorText: "Translating Service is required ", context: context),
-      value: translatingService.value ?? <String>[],
-      onSaved: (value) {
-        setFormValue(globalctx.memory["destinations"],
-            globalDestinationIndex.value, "translating_service", value);
-      },
-      onChanged: (value) {
-        openTranslate.value = false;
-        translatingService.value = value;
-        setFormValue(globalctx.memory["destinations"],
-            globalDestinationIndex.value, "translating_service", value);
-      },
-      hintText: "",
-      data: translatingCatalog.value,
-    );
+    return Obx(() => CustomFormMultiDropDownFieldWidget(
+          label: "Translating Services",
+          validator: (value) => CustomMultiDropdownRequiredValidator(value,
+              errorText: "Translating Service is required ", context: context),
+          value: translatingService.value,
+          onSaved: (values) {
+            saveTranslatingServices(values);
+          },
+          onChanged: (values) {
+            saveTranslatingServices(values);
+          },
+          hintText: "",
+          data: translatingCatalog.value,
+        ));
   }
 }
 
@@ -281,12 +277,14 @@ class TransportField extends StatelessWidget {
       label: "Transport Options    ",
       validator: (value) => CustomMultiDropdownRequiredValidator(value,
           errorText: "Day Transport Options are required ", context: context),
-      value: "0",
-      onSaved: (values) {
-        transportService.value = values;
+      value: getFormValue(globalctx.memory, "tour", "transport", "0"),
+      onSaved: (value) {
+        transportService.value = value!;
+        setFormValue(globalctx.memory, "tour", "transport", value);
       },
       onChanged: (value) {
-        transportService.value = value;
+        transportService.value = value!;
+        setFormValue(globalctx.memory, "tour", "transport", value);
       },
       hintText: "",
       data: serviceTypeCatalog.value,

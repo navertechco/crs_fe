@@ -116,6 +116,17 @@ saveTour() async {
   }
 }
 
+saveTranslatingServices(values) {
+  var result = <String>[];
+  for (var value in values) {
+    var description = translatingCatalog.value
+        .firstWhere((item) => item["code"] == value)["description"];
+    result.add(description.toString());
+  }
+  translatingService.value = result;
+  setFormValue(globalctx.memory, "tour", "translating_service", result);
+}
+
 getTour(ctx, {int tourId = 0, detail = false, cb}) async {
   var frame = {
     "data": {"tour_id": tourId, "detail": detail, "limit": 10, "offset": 0}
