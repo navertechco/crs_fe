@@ -9,7 +9,7 @@ import 'package:naver_crs/index.dart';
 /// ```dart
 ///  var res = await fetchHandler(kDefaultSchema, kDefaultServer,
 ///      kDefaultServerPort, kDefaultConnectPath, 'POST', {
-///    "state": "logout",
+///    "state": "logOut",
 ///    "data": {"username": username}
 ///  });
 /// ```

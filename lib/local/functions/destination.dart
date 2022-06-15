@@ -137,8 +137,8 @@ void orderDestination(List destinations) {
       var bLat = toCatalog(b).relation["latitude"];
       var aLong = toCatalog(a).relation["longitude"];
       var bLong = toCatalog(b).relation["longitude"];
-      var bDistance = (getDistance(bLat, bLong, arrivalLat, arrivalLong));
-      var aDistance = (getDistance(aLat, aLong, arrivalLat, arrivalLong));
+      var bDistance = (getGPSDistance(bLat, bLong, arrivalLat, arrivalLong));
+      var aDistance = (getGPSDistance(aLat, aLong, arrivalLat, arrivalLong));
       return aDistance.compareTo(bDistance);
     });
   }

@@ -282,7 +282,7 @@ class CustomLogisticInformationForm extends StatelessWidget {
           child: CustomKeypadWidget(
               width: 0.265,
               onPrevious: () {
-                goto("Tour");
+                gotoPage("Tour");
               },
               onNext: () {
                 if (_formKey.currentState!.validate()) {

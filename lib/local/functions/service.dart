@@ -130,9 +130,9 @@ paginateDestination(String direction) async {
     filterSuggestedServices();
   } else if (currentDestination.value + sum >
       globalctx.memory["destinations"].length - 1) {
-    goto("Resume");
+    gotoPage("Resume");
   } else {
-    goto("Experiences");
+    gotoPage("Experiences");
   }
 }
 

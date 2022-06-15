@@ -152,8 +152,8 @@ class CustomCustomerDataForm extends StatelessWidget {
                               validator: CustomRequiredValidator(
                                   errorText: "Last Names is required ",
                                   ctx: context),
-                              value: getValue(client, "last_names",
-                                  def: "Cuevas"),
+                              value:
+                                  getValue(client, "last_names", def: "Cuevas"),
                               onSaved: (value) {
                                 ctrl!.state.lastNames = value!;
                               },
@@ -205,7 +205,7 @@ class CustomCustomerDataForm extends StatelessWidget {
                               hintText: "Country",
                               onChanged: (value) {
                                 country.value = value!;
-                                cityData(
+                                procCityData(
                                     citylist,
                                     countries[countrylist[int.parse(value)]
                                         ["description"]]);
@@ -214,7 +214,7 @@ class CustomCustomerDataForm extends StatelessWidget {
                               onSaved: (value) {
                                 ctrl!.state.country = value!;
                                 country.value = value;
-                                cityData(
+                                procCityData(
                                     citylist,
                                     countries[countrylist[int.parse(value)]
                                         ["description"]]);
@@ -259,8 +259,7 @@ class CustomCustomerDataForm extends StatelessWidget {
                       CustomFormTextFieldWidget(
                           validator: CustomRequiredValidator(
                               errorText: "Email is required ", ctx: context),
-                          value:
-                              getValue(client, "email", def: "jose@aol.com"),
+                          value: getValue(client, "email", def: "jose@aol.com"),
                           onSaved: (value) {
                             ctrl!.state.email = value!;
                           },

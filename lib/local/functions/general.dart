@@ -12,7 +12,6 @@ export 'day.dart';
 export 'destination.dart';
 export 'experience.dart';
 
-
 /// ## loadDummyData
 /// *__Method to set data to context__*
 ///
@@ -297,7 +296,7 @@ getDetail(context, data, columns) {
       }
 
       for (var key in keys) {
-        if (key == "state"&&row[key]is int) {
+        if (key == "state" && row[key] is int) {
           row[key] = states[row[key]];
         }
 
@@ -459,7 +458,7 @@ getAccOff(destId) {
 
 getMaxDestDays() {
   updateDestDays();
-  var maxValue = getMax(destDays);
+  var maxValue = getListMaxValue(destDays);
   return maxValue;
 }
 

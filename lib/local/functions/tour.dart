@@ -91,7 +91,7 @@ processTour() async {
   } catch (e) {
     log(e);
   } finally {
-    goto("PrintDocs");
+    gotoPage("PrintDocs");
   }
 }
 

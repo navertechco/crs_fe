@@ -43,7 +43,7 @@ Future nextDay() async {
   if (currentDay.value < totalDays.value - 1) {
     jumpDay("forward");
   } else {
-    goto("Resume");
+    gotoPage("Resume");
   }
 }
 
@@ -67,7 +67,7 @@ Future jumpDay(direction) async {
   // updateMeals();
   filterSuggestedExperiences();
   initializeHours();
-  goto("Experiences");
+  gotoPage("Experiences");
 }
 
 /// ## decideBypass
@@ -265,7 +265,7 @@ previousDay() {
   if (currentDay.value > 0) {
     jumpDay("backward");
   } else {
-    goto("Destination");
+    gotoPage("Destination");
   }
 }
 

@@ -24,21 +24,42 @@ loadDummyData(key) async {
   }
 }
 
-getDateValue(data, key, {def}) {
+/// ## getDateValue
+/// *__Method to get a Date Value from memory__*
+///
+///### Uses:
+/// ```dart
+///  initialValue: getDateValue(client, "birth_date",
+///                                  def: DateTime(1981, 02, 12)),
+/// ```
+///
+/// @return DateTime?
+///
+DateTime? getDateValue(data, key, {DateTime? def}) {
   try {
     if (data ?? true) {
       if (data[key] ?? true) {
         return DateTime.parse(data[key]);
       }
     } else {
-      return def;
+      return def!;
     }
   } catch (e) {
-    return def;
+    return def!;
   }
 }
 
-getValue(data, key, {def}) {
+/// ## getValue
+/// *__Method to get value from memory__*
+///
+///### Uses:
+/// ```dart
+///  var detsdata = getValue(memory, "destinations", def: []);
+/// ```
+///
+/// @return dynamic
+///
+dynamic getValue(data, key, {def}) {
   try {
     return data[key] ?? def;
   } catch (e) {
@@ -46,31 +67,31 @@ getValue(data, key, {def}) {
   }
 }
 
-setValue(data, key, value) {
+/// ## setValue
+/// *__Method to set a value to memory__*
+///
+///### Uses:
+/// ```dart
+///  var detsdata = setValue(memory, "destinations", def: []);
+/// ```
+///
+///
+///
+void setValue(data, key, value) {
   data[key] = value;
 }
 
-validateData(data) {
-  return data != null ? data.length > 0 : false;
-}
-
-getData(data, sub, key) {
-  // ignore: invalid_use_of_protected_member
-  return data != null && data[sub] != null
-      // ignore: invalid_use_of_protected_member
-      ? data[sub][key]
-      : "0";
-}
-
-getDataList(data, sub, key) {
-  // ignore: invalid_use_of_protected_member
-  return data != null && data[sub] != null
-      // ignore: invalid_use_of_protected_member
-      ? data[sub][key]
-      : <Map<String, dynamic>>[];
-}
-
-getParam(key) {
+/// ## getParam
+/// *__Method to get a parameter from parameters catalog__*
+///
+///### Uses:
+/// ```dart
+///  List destList = getParam("DESTINATION_DATA").values.toList();
+/// ```
+///
+/// @return dynamic
+///
+dynamic getParam(String key) {
   try {
     var params = findCatalog("params");
     var child =
@@ -81,7 +102,24 @@ getParam(key) {
   }
 }
 
-cityData(Rx<List<Map<String, dynamic>>> citylist, cities) {
+/// ## procCityData
+/// *__Method to process Country city dropdown filtering__*
+///
+///### Uses:
+/// ```dart
+///  onChanged: (value) {
+///                               country.value = value!;
+///                                procCityData(
+///                                    citylist,
+///                                    countries[countrylist[int.parse(value)]
+///                                        ["description"]]);
+///                                log("CHANGED: ");
+///                              },
+/// ```
+///
+///
+///
+void procCityData(Rx<List<Map<String, dynamic>>> citylist, cities) {
   var index = 1;
   citylist.value = [];
   for (var city in cities) {
@@ -93,29 +131,46 @@ cityData(Rx<List<Map<String, dynamic>>> citylist, cities) {
   }
 }
 
+/// ## toMinutes
+/// *__Method to convert to minutes a TimeOfDay value__*
+///
+///### Uses:
+/// ```dart
+///  var rule = closeTime - toMinutes(endHours[currentDay.value].value)
+/// ```
+///
+///
+///
 toMinutes(TimeOfDay time) {
   return time.hour * 60 + time.minute;
 }
 
-getDistance(a, b, c, d) {
-  return acos(sin(double.parse(c) * sin(double.parse(a)) +
-          cos(double.parse(a)) *
-              cos(double.parse(c)) *
-              cos(double.parse(d) - double.parse(b)))) *
+/// ## getGPSDistance
+/// *__Method to distance between two GPS coordinates__*
+///
+///### Uses:
+/// ```dart
+///   var bDistance = (getGPSDistance(bLat, bLong, arrivalLat, arrivalLong));
+/// ```
+/// @return double
+double getGPSDistance(String latA, String longA, String latB, String longB) {
+  return acos(sin(double.parse(latB) * sin(double.parse(latA)) +
+          cos(double.parse(latA)) *
+              cos(double.parse(latB)) *
+              cos(double.parse(longB) - double.parse(longA)))) *
       6371;
 }
 
-getMax(list) {
-  var result = list[0];
-  for (var i = 0; i < list.length; i++) {
-    if (list[i] > result) {
-      result = list[i];
-    }
-  }
-  return result;
-}
-
-updateDatatable(context, data) {
+/// ## updateDatatable
+/// *__Method to update a DataTable__*
+///
+///### Uses:
+/// ```dart
+///   updateDatatable(ctx, quoteFilter.value);
+/// ```
+/// @return void
+///
+void updateDatatable(context, data) {
   var processedData = processData(context, data, null);
   searcherHeader.value = processedData[0];
   if (searchResult!.value.isEmpty) {
@@ -123,7 +178,16 @@ updateDatatable(context, data) {
   }
 }
 
-getItems(data, value, hintText) {
+/// ## getItems
+/// *__Method to get items from a parent dropdown widget__*
+///
+///### Uses:
+/// ```dart
+///   var items = getItems(data, value, hintText);
+/// ```
+/// @return RxList<DropdownMenuItem<String>>
+///
+RxList<DropdownMenuItem<String>> getItems(data, value, hintText) {
   RxList<DropdownMenuItem<String>> items = <DropdownMenuItem<String>>[].obs;
   List<Map<String, dynamic>> data2 = [];
   try {
@@ -153,7 +217,16 @@ getItems(data, value, hintText) {
   return items;
 }
 
-isMobileDevice() {
+/// ## isMobileDevice
+/// *__Method to detect if host is a mobile device__*
+///
+///### Uses:
+/// ```dart
+///   var isMobile = isMobileDevice() ? 2 : 1;
+/// ```
+/// @return bool
+///
+bool isMobileDevice() {
   if ((defaultTargetPlatform == TargetPlatform.iOS) ||
       (defaultTargetPlatform == TargetPlatform.android)) {
     // Some android/ios specific code
@@ -162,11 +235,17 @@ isMobileDevice() {
   return false;
 }
 
-setData(data, key, value) {
-  data[key] = value;
-}
-
-getRXValue(data, key, def) {
+/// ## getRXValue
+/// *__Method to get valu from a GetX memory__*
+///
+///### Uses:
+/// ```dart
+///    label: "Accumulated Hours: ${getTimeStringFromDouble(getRXValue(accumulatedHours, currentDay.value, 0.0))}",
+///
+/// ```
+/// @return dynamic
+///
+dynamic getRXValue(data, key, def) {
   try {
     return data[key].value;
   } catch (e) {
@@ -174,7 +253,17 @@ getRXValue(data, key, def) {
   }
 }
 
-getFormValue(data, formKey, key, def) {
+/// ## getFormValue
+/// *__Method to detect form value from memory__*
+///
+///### Uses:
+/// ```dart
+///     var days = int.parse(getFormValue(
+///      globalctx.memory["destinations"], index, "explorationDay", "0"));
+/// ```
+/// @return dynamic
+///
+dynamic getFormValue(data, formKey, key, def) {
   formKey = formKey.toString();
   if (data != null) {
     if (data[formKey] != null) {
@@ -189,33 +278,17 @@ getFormValue(data, formKey, key, def) {
   return def;
 }
 
-getFormDateValue(data, formKey, key, def) {
-  if (data != null) {
-    if (data[formKey] != null) {
-      if (data[formKey][key] != null) {
-        if (data[formKey][key] == '') {
-          return DateTime.parse(def);
-        }
-        return DateTime.parse(data[formKey][key]);
-      }
-    }
-  }
-  return DateTime.parse(def);
-}
-
-parseIntValue(value) {
-  if (value is int) {
-    return value;
-  }
-  value ??= "0";
-  if (value == '') {
-    value = "0";
-  }
-  value = value.replaceAll(RegExp(r'[^0-9]'), '').replaceAll("-", '');
-  return int.parse(value);
-}
-
-setFormValue(data, formKey, key, value) {
+/// ## setFormValue
+/// *__Method to set a form value to memory__*
+///
+///### Uses:
+/// ```dart
+///      setFormValue(globalctx.memory["destinations"], 1,
+///                      "cruiseStartDate", start);
+/// ```
+/// @return void
+///
+void setFormValue(data, formKey, key, value) {
   try {
     data ??= {}.obs;
     formKey = formKey.toString();
@@ -228,50 +301,48 @@ setFormValue(data, formKey, key, value) {
   }
 }
 
-dynamic myEncode(dynamic item) {
-  if (item is DateTime || item is Map) {
-    return item.toIso8601String();
-  }
-  return item;
-}
-
-chunkMap(data, int portion, List<Map<String, dynamic>> list) {
-  List<List<Map<String, dynamic>>> chunks = [];
-  int aprox = (list.length / portion).round() * portion;
-  int module = aprox > list.length
-      ? (list.length / portion).round()
-      : (list.length / portion).round() + 1;
-  for (var i = 0; i < module; i++) {
-    chunks.add([]);
-    for (var j = 0; j < portion; j++) {
-      var index = (i * portion) + j;
-      if (index > list.length - 1) {
-        break;
-      }
-      Map<String, dynamic> item = list[index];
-      String code = item["code"];
-      item["value"] = data[code];
-      chunks[i].add(item);
-    }
-  }
-  return chunks;
-}
-
-parseInt(value) {
+/// ## setFormValue
+/// *__Method to parse a value to int__*
+///
+///### Uses:
+/// ```dart
+///     var exptime = (parseInt(expData['exptime']) * 1.0) as double;
+/// ```
+/// @return int
+///
+int parseInt(dynamic value) {
   if (value is String) {
     return int.parse(value);
   }
   return value;
 }
 
-processData(context, data, columns) {
-  var header = getHeader(context, data, columns);
-  var detail = getDetail(context, data, columns);
+/// ## processData
+/// *__Method to process data to a dataTable__*
+///
+///### Uses:
+/// ```dart
+///     var processedData = processData(context, data, null);
+/// ```
+/// @return List
+///
+List processData(context, data, columns) {
+  List<DataColumn> header = getHeader(context, data, columns);
+  List<DataRow> detail = getDetail(context, data, columns);
   return [header, detail];
 }
 
-getHeader(context, data, columns) {
-  var header = <DataColumn>[];
+/// ## getHeader
+/// *__Method to get a dataTable header__*
+///
+///### Uses:
+/// ```dart
+///     List<DataColumn> header = getHeader(context, data, columns);
+/// ```
+/// @return List
+///
+List<DataColumn> getHeader(context, data, columns) {
+  List<DataColumn> header = <DataColumn>[];
   List cols = [];
 
   if (data.isNotEmpty) {
@@ -310,6 +381,18 @@ getHeader(context, data, columns) {
   return header;
 }
 
+/// ## getDataSource
+/// *__Method to get a Calendar dataSource__*
+///
+///### Uses:
+/// ```dart
+///     dataSource: MeetingDataSource(getDataSource(
+///                          "${row['quote_itinerary']}"
+///                              .replaceAll("[", " ")
+///                              .replaceAll("]", " "))),
+/// ```
+/// @return List
+///
 List<Meeting> getDataSource(data) {
   List dataList = [];
   final List<Meeting> meetings = <Meeting>[];
@@ -340,15 +423,61 @@ List<Meeting> getDataSource(data) {
   return meetings;
 }
 
+/// ## getTimeStringFromDouble
+/// *__Method to get a time value in string format from a decimal value__*
+///
+///### Uses:
+/// ```dart
+///     label:"Accumulated Hours: ${getTimeStringFromDouble(getRXValue(accumulatedHours, currentDay.value, 0.0))}",
+/// ```
+/// @return String
+///
+String getTimeStringFromDouble(double value) {
+  if (value < 0) return '00:00';
+  int flooredValue = value.floor();
+  double decimalValue = value - flooredValue;
+  String hourValue = getHourString(flooredValue);
+  String minuteString = getMinuteString(decimalValue);
+
+  return '$hourValue:$minuteString';
+}
+
+/// ## getMinuteString
+/// *__Method to get a minute in string format from a decimal value__*
+///
+///### Uses:
+/// ```dart
+///     String minuteString = getMinuteString(decimalValue);
+/// ```
+/// @return String
+///
 String getMinuteString(double decimalValue) {
   return '${(decimalValue * 60).toInt()}'.padLeft(2, '0');
 }
 
+/// ## getHourString
+/// *__Method to get a minute in string format from a decimal value__*
+///
+///### Uses:
+/// ```dart
+///     String hourValue = getHourString(flooredValue);
+/// ```
+/// @return String
+///
 String getHourString(int flooredValue) {
   return '${flooredValue % 24}'.padLeft(2, '0');
 }
 
-goto(page) {
+/// ## gotoPage
+/// *__Method to jump to a page updating toolbar menu__*
+///
+///### Uses:
+/// ```dart
+///     gotoPage("Resume");
+/// ```
+/// @return void
+///
+void gotoPage(page) {
   var index = pageList.indexWhere((element) => element["label"] == page);
   if (index != -1) {
     if (selectedIndex.value != index) {
@@ -358,12 +487,21 @@ goto(page) {
   }
 }
 
-logout(
+/// ## gotoPage
+/// *__Method to logOut__*
+///
+///### Uses:
+/// ```dart
+///     logOut(session["username"]);
+/// ```
+/// @return void
+///
+logOut(
   username,
 ) async {
   var res = await fetchHandler(kDefaultSchema, kDefaultServer,
       kDefaultServerPort, kDefaultConnectPath, 'POST', {
-    "state": "logout",
+    "state": "logOut",
     "data": {"username": username}
   });
 
@@ -375,18 +513,15 @@ logout(
   }
 }
 
-multiSaving(values, catalog, context, index, field, memory) {
-  memory.value = <String>[];
-  var length = values.length;
-
-  for (var i = 0; i < length; i++) {
-    memory.value.add(
-        filterCatalog(catalog, "code", values[i])[0]["description"].toString());
-  }
-
-  setFormValue(context, index, field, memory.value);
-}
-
+/// ## gotoPage
+/// *__Method to push List__*
+///
+///### Uses:
+/// ```dart
+///     pushList(daysOff, destId, currenDestDaysOff);
+/// ```
+/// @return void
+///
 pushList(List list, int id, dynamic value) {
   try {
     list[id] = value;
@@ -395,14 +530,21 @@ pushList(List list, int id, dynamic value) {
   }
 }
 
-String getTimeStringFromDouble(double value) {
-  if (value < 0) return '00:00';
-  int flooredValue = value.floor();
-  double decimalValue = value - flooredValue;
-  String hourValue = getHourString(flooredValue);
-  String minuteString = getMinuteString(decimalValue);
-
-  return '$hourValue:$minuteString';
+/// ## getListMaxValue
+/// *__Method to get Max value from a List__*
+///
+///### Uses:
+/// ```dart
+///     var maxValue = getListMaxValue(destDays);
+/// ```
+/// @return dynamic
+///
+dynamic getListMaxValue(List list) {
+  var result = list[0];
+  for (var i = 0; i < list.length; i++) {
+    if (list[i] > result) {
+      result = list[i];
+    }
+  }
+  return result;
 }
-
-

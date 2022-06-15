@@ -14,7 +14,7 @@ class CustomerController extends GetxController {
       globalctx.memory["customer"] = mem;
       // filterDestinations();
       // resetAllDestinations();
-      goto("Destination");
+      gotoPage("Destination");
     };
   }
 }

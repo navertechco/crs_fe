@@ -37,7 +37,7 @@ class SigninController extends GetxController {
               curve: ElasticInCurve(),
               title: res['message'],
               style: SweetAlertStyle.error, onPress: (bool isConfirm) {
-            logout(session["username"]);
+            logOut(session["username"]);
             Get.close(1);
             return false;
           });
