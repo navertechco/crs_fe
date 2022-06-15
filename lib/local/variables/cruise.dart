@@ -9,6 +9,7 @@ var cruiseCategory = ''.obs;
 var cruiseKey = ''.obs;
 var cruiseType = ''.obs;
 var cruiseCabine = ''.obs;
+var cruiseCabineLocation = ''.obs;
 var cruiseModality = ''.obs;
 var cruisePax = ''.obs;
 var cruiseTriple = ''.obs;

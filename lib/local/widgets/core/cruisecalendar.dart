@@ -31,176 +31,151 @@ class CruiseFiltersWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => Column(children: [
-          Row(children: [
-            CustomFormDropDownFieldWidget(
-              width: 0.1,
-              height: 0.05,
-              validator: CustomRequiredValidator(
-                  errorText: "Cruise Days is required ", ctx: ctx),
-              value: "0",
-              onSaved: (value) {},
-              onChanged: (value) {
-                cruiseDay.value = getCatalogDescription(
-                    getMemoryCatalogChild("cabine", "value", "days"), value);
-                filterCruises(context);
-              },
-              hintText: "Days    ",
-              data: getMemoryCatalogChild("cabine", "value", "days"),
-            ),
-            if (cruiseDay.isNotEmpty)
+    return SingleChildScrollView(
+      child: Obx(() => Column(children: [
+            Row(children: [
               CustomFormDropDownFieldWidget(
-                width: 0.15,
+                width: 0.1,
                 height: 0.05,
                 validator: CustomRequiredValidator(
-                    errorText: "Itinerary Format is required ", ctx: ctx),
+                    errorText: "Cruise Days is required ", ctx: ctx),
                 value: "0",
                 onSaved: (value) {},
                 onChanged: (value) {
-                  cruiseItinerary.value = getCatalogDescription(
-                      getMemoryCatalogChild(
-                          "itinerary", "value", "itinerary_format",
-                          filter: {
-                            "catalog": "cabine",
-                            "key": "days",
-                            "value": cruiseDay.value,
-                            "relation": ["cruise_id", "days"]
-                          }),
-                      value);
+                  cruiseDay.value = getCatalogDescription(
+                      getMemoryCatalogChild("cabine", "value", "days"), value);
                   filterCruises(context);
                 },
-                hintText: "itinerary Format    ",
-                data: getMemoryCatalogChild(
-                    "itinerary", "value", "itinerary_format",
-                    filter: {
-                      "catalog": "cabine",
-                      "key": "days",
-                      "value": cruiseDay.value,
-                      "relation": ["cruise_id", "days"]
-                    }),
+                hintText: "Days    ",
+                data: getMemoryCatalogChild("cabine", "value", "days"),
               ),
-            if (cruiseItinerary.isNotEmpty)
+              if (cruiseDay.isNotEmpty)
+                CustomFormDropDownFieldWidget(
+                  width: 0.15,
+                  height: 0.05,
+                  validator: CustomRequiredValidator(
+                      errorText: "Itinerary Format is required ", ctx: ctx),
+                  value: "0",
+                  onSaved: (value) {},
+                  onChanged: (value) {
+                    cruiseItinerary.value = getCatalogDescription(
+                        getMemoryCatalogChild(
+                            "itinerary", "value", "itinerary_format",
+                            filter: {
+                              "catalog": "cabine",
+                              "key": "days",
+                              "value": cruiseDay.value,
+                              "relation": ["cruise_id", "days"]
+                            }),
+                        value);
+                    filterCruises(context);
+                  },
+                  hintText: "itinerary Format    ",
+                  data: getMemoryCatalogChild(
+                      "itinerary", "value", "itinerary_format",
+                      filter: {
+                        "catalog": "cabine",
+                        "key": "days",
+                        "value": cruiseDay.value,
+                        "relation": ["cruise_id", "days"]
+                      }),
+                ),
+              if (cruiseItinerary.isNotEmpty)
+                CustomFormDropDownFieldWidget(
+                  width: 0.15,
+                  height: 0.05,
+                  validator: CustomRequiredValidator(
+                      errorText: "Cabine Type is required ", ctx: ctx),
+                  value: "0",
+                  onSaved: (value) {},
+                  onChanged: (value) {
+                    cruiseCabine.value = getCatalogDescription(
+                        getMemoryCatalogChild("cabine", "value", "cabine_type",
+                            filter: {
+                              "catalog": "itinerary",
+                              "key": "itinerary_format",
+                              "value": cruiseItinerary.value,
+                              "relation": ["cruise_id", "days"]
+                            }),
+                        value);
+                    filterCruises(context);
+                  },
+                  hintText: "Cabine Type    ",
+                  data: getMemoryCatalogChild("cabine", "value", "cabine_type",
+                      filter: {
+                        "catalog": "itinerary",
+                        "key": "itinerary_format",
+                        "value": cruiseItinerary.value,
+                        "relation": ["cruise_id", "days"]
+                      }),
+                ),
+              if (cruiseItinerary.isNotEmpty)
+                CustomFormDropDownFieldWidget(
+                  width: 0.15,
+                  height: 0.05,
+                  validator: CustomRequiredValidator(
+                      errorText: "Cabine Type is required ", ctx: ctx),
+                  value: "0",
+                  onSaved: (value) {},
+                  onChanged: (value) {
+                    cruiseCabineLocation.value = getCatalogDescription(
+                        getMemoryCatalogChild(
+                            "cabine", "value", "cabine_location",
+                            filter: {
+                              "catalog": "itinerary",
+                              "key": "itinerary_format",
+                              "value": cruiseItinerary.value,
+                              "relation": ["cruise_id", "days"]
+                            }),
+                        value);
+                    filterCruises(context);
+                  },
+                  hintText: "Cabine Location    ",
+                  data: getMemoryCatalogChild(
+                      "cabine", "value", "cabine_location",
+                      filter: {
+                        "catalog": "itinerary",
+                        "key": "itinerary_format",
+                        "value": cruiseItinerary.value,
+                        "relation": ["cruise_id", "days"]
+                      }),
+                ),
+            ]),
+            Row(children: [
               CustomFormDropDownFieldWidget(
-                width: 0.15,
+                width: 0.1,
                 height: 0.05,
                 validator: CustomRequiredValidator(
-                    errorText: "Cabine Type is required ", ctx: ctx),
+                    errorText: "Cruise Category is required ", ctx: ctx),
                 value: "0",
                 onSaved: (value) {},
                 onChanged: (value) {
-                  cruiseCabine.value = getCatalogDescription(
-                      getMemoryCatalogChild("cabine", "value", "cabine_type",
-                          filter: {
-                            "catalog": "itinerary",
-                            "key": "itinerary_format",
-                            "value": cruiseItinerary.value,
-                            "relation": ["cruise_id", "days"]
-                          }),
-                      value);
-                  filterCruises(context);
+                  if (value == "0") {
+                    cruiseReset();
+                  } else {
+                    cruiseCategory.value = getCatalogDescription(
+                        getMemoryCatalogChild(
+                            "cruises", "value", "cruise_category",
+                            condition: (element) {
+                          var rule = true;
+                          var rule2 = cabine.where((cab) {
+                            return cab["value"]["cruise_id"] ==
+                                element["value"]["cruise_id"];
+                          }).isNotEmpty;
+                          var rule3 = itinerary.where((iti) {
+                            return iti["value"]["cruise_id"] ==
+                                element["value"]["cruise_id"];
+                          }).isNotEmpty;
+                          return rule && rule2 && rule3;
+                        }),
+                        value);
+                    filterCruises(context);
+                  }
                 },
-                hintText: "Cabine Type    ",
-                data: getMemoryCatalogChild("cabine", "value", "cabine_type",
-                    filter: {
-                      "catalog": "itinerary",
-                      "key": "itinerary_format",
-                      "value": cruiseItinerary.value,
-                      "relation": ["cruise_id", "days"]
-                    }),
-              ),
-            // if (moreFilters.value)
-            //   CustomFormDropDownFieldWidget(
-            //     width: 0.15,
-            //     height: 0.05,
-            //     validator: CustomRequiredValidator(
-            //         errorText: "Cruise Animals is required ", ctx: ctx),
-            //     value: "0",
-            //     onSaved: (value) {},
-            //     onChanged: (value) {
-            //       cruiseAnimal.value = getCatalogDescription(
-            //           getMemoryCatalogChild("animals", "description", ''),
-            //           value);
-            //       filterCruises(context);
-            //     },
-            //     hintText: "Animals    ",
-            //     data: getMemoryCatalogChild("animals", "description", ''),
-            //   ),
-          ]),
-          Row(children: [
-            CustomFormDropDownFieldWidget(
-              width: 0.1,
-              height: 0.05,
-              validator: CustomRequiredValidator(
-                  errorText: "Cruise Category is required ", ctx: ctx),
-              value: "0",
-              onSaved: (value) {},
-              onChanged: (value) {
-                if (value == "0") {
-                  cruiseReset();
-                } else {
-                  cruiseCategory.value = getCatalogDescription(
-                      getMemoryCatalogChild(
-                          "cruises", "value", "cruise_category",
-                          condition: (element) {
-                        var rule = true;
-                        var rule2 = cabine.where((cab) {
-                          return cab["value"]["cruise_id"] ==
-                              element["value"]["cruise_id"];
-                        }).isNotEmpty;
-                        var rule3 = itinerary.where((iti) {
-                          return iti["value"]["cruise_id"] ==
-                              element["value"]["cruise_id"];
-                        }).isNotEmpty;
-                        return rule && rule2 && rule3;
-                      }),
-                      value);
-                  filterCruises(context);
-                }
-              },
-              hintText: "Category    ",
-              data: getMemoryCatalogChild("cruises", "value", "cruise_category",
-                  condition: (element) {
-                var rule = true;
-                var rule2 = cabine.where((cab) {
-                  return cab["value"]["cruise_id"] ==
-                      element["value"]["cruise_id"];
-                }).isNotEmpty;
-                var rule3 = itinerary.where((iti) {
-                  return iti["value"]["cruise_id"] ==
-                      element["value"]["cruise_id"];
-                }).isNotEmpty;
-                return rule && rule2 && rule3;
-              }),
-            ),
-            if (cruiseCategory.isNotEmpty)
-              CustomFormDropDownFieldWidget(
-                width: 0.15,
-                height: 0.05,
-                validator: CustomRequiredValidator(
-                    errorText: "Cruise Modality is required ", ctx: ctx),
-                value: "0",
-                onSaved: (value) {},
-                onChanged: (value) {
-                  cruiseModality.value = getCatalogDescription(
-                      getMemoryCatalogChild("cruises", "value", "modality",
-                          condition: (element) {
-                        var rule = true;
-                        var rule2 = cabine.where((cab) {
-                          return cab["value"]["cruise_id"] ==
-                              element["value"]["cruise_id"];
-                        }).isNotEmpty;
-                        var rule3 = itinerary.where((iti) {
-                          return iti["value"]["cruise_id"] ==
-                              element["value"]["cruise_id"];
-                        }).isNotEmpty;
-                        return rule && rule2 && rule3;
-                      }),
-                      value);
-                  filterCruises(context);
-                },
-                hintText: "Modality    ",
-                data: getMemoryCatalogChild("cruises", "value", "modality",
-                    condition: (element) {
+                hintText: "Category    ",
+                data:
+                    getMemoryCatalogChild("cruises", "value", "cruise_category",
+                        condition: (element) {
                   var rule = true;
                   var rule2 = cabine.where((cab) {
                     return cab["value"]["cruise_id"] ==
@@ -213,18 +188,17 @@ class CruiseFiltersWidget extends StatelessWidget {
                   return rule && rule2 && rule3;
                 }),
               ),
-            if (cruiseCategory.isNotEmpty)
-              if (cruiseModality.isNotEmpty)
+              if (cruiseCategory.isNotEmpty)
                 CustomFormDropDownFieldWidget(
                   width: 0.15,
                   height: 0.05,
                   validator: CustomRequiredValidator(
-                      errorText: "Cruise Type is required ", ctx: ctx),
+                      errorText: "Cruise Modality is required ", ctx: ctx),
                   value: "0",
                   onSaved: (value) {},
                   onChanged: (value) {
-                    cruiseType.value = getCatalogDescription(
-                        getMemoryCatalogChild("cruises", "value", "cruise_type",
+                    cruiseModality.value = getCatalogDescription(
+                        getMemoryCatalogChild("cruises", "value", "modality",
                             condition: (element) {
                           var rule = true;
                           var rule2 = cabine.where((cab) {
@@ -240,8 +214,8 @@ class CruiseFiltersWidget extends StatelessWidget {
                         value);
                     filterCruises(context);
                   },
-                  hintText: "Cruise Type    ",
-                  data: getMemoryCatalogChild("cruises", "value", "cruise_type",
+                  hintText: "Modality    ",
+                  data: getMemoryCatalogChild("cruises", "value", "modality",
                       condition: (element) {
                     var rule = true;
                     var rule2 = cabine.where((cab) {
@@ -255,20 +229,19 @@ class CruiseFiltersWidget extends StatelessWidget {
                     return rule && rule2 && rule3;
                   }),
                 ),
-            if (cruiseCategory.isNotEmpty)
-              if (cruiseModality.isNotEmpty)
-                if (cruiseType.isNotEmpty)
+              if (cruiseCategory.isNotEmpty)
+                if (cruiseModality.isNotEmpty)
                   CustomFormDropDownFieldWidget(
                     width: 0.15,
                     height: 0.05,
                     validator: CustomRequiredValidator(
-                        errorText: "Cruise Port is required ", ctx: ctx),
+                        errorText: "Cruise Type is required ", ctx: ctx),
                     value: "0",
                     onSaved: (value) {},
                     onChanged: (value) {
-                      cruisePort.value = getCatalogDescription(
+                      cruiseType.value = getCatalogDescription(
                           getMemoryCatalogChild(
-                              "cruises", "value", "cruise_port",
+                              "cruises", "value", "cruise_type",
                               condition: (element) {
                             var rule = true;
                             var rule2 = cabine.where((cab) {
@@ -284,9 +257,9 @@ class CruiseFiltersWidget extends StatelessWidget {
                           value);
                       filterCruises(context);
                     },
-                    hintText: "Cruise Port    ",
+                    hintText: "Cruise Type    ",
                     data:
-                        getMemoryCatalogChild("cruises", "value", "cruise_port",
+                        getMemoryCatalogChild("cruises", "value", "cruise_type",
                             condition: (element) {
                       var rule = true;
                       var rule2 = cabine.where((cab) {
@@ -300,8 +273,67 @@ class CruiseFiltersWidget extends StatelessWidget {
                       return rule && rule2 && rule3;
                     }),
                   ),
-          ]),
-        ]));
+              if (cruiseCategory.isNotEmpty)
+                if (cruiseModality.isNotEmpty)
+                  if (cruiseType.isNotEmpty)
+                    CustomFormDropDownFieldWidget(
+                      width: 0.15,
+                      height: 0.05,
+                      validator: CustomRequiredValidator(
+                          errorText: "Cruise Port is required ", ctx: ctx),
+                      value: "0",
+                      onSaved: (value) {},
+                      onChanged: (value) {
+                        cruisePort.value = getCatalogDescription(
+                            getMemoryCatalogChild(
+                                "cruises", "value", "cruise_port",
+                                condition: (element) {
+                              var rule = true;
+                              var rule2 = cabine.where((cab) {
+                                return cab["value"]["cruise_id"] ==
+                                    element["value"]["cruise_id"];
+                              }).isNotEmpty;
+                              var rule3 = itinerary.where((iti) {
+                                return iti["value"]["cruise_id"] ==
+                                    element["value"]["cruise_id"];
+                              }).isNotEmpty;
+                              return rule && rule2 && rule3;
+                            }),
+                            value);
+                        filterCruises(context);
+                      },
+                      hintText: "Cruise Port    ",
+                      data: getMemoryCatalogChild(
+                          "cruises", "value", "cruise_port",
+                          condition: (element) {
+                        var rule = true;
+                        var rule2 = cabine.where((cab) {
+                          return cab["value"]["cruise_id"] ==
+                              element["value"]["cruise_id"];
+                        }).isNotEmpty;
+                        var rule3 = itinerary.where((iti) {
+                          return iti["value"]["cruise_id"] ==
+                              element["value"]["cruise_id"];
+                        }).isNotEmpty;
+                        return rule && rule2 && rule3;
+                      }),
+                    ),
+            ]),
+            if (moreFilters.value)
+              CustomFormMultiDropDownFieldWidget(
+                value: [],
+                onSaved: (value) {},
+                onChanged: (value) {
+                  cruiseAnimal.value = getCatalogDescription(
+                      getMemoryCatalogChild("animals", "description", ''),
+                      value);
+                  filterCruises(context);
+                },
+                hintText: "Animals    ",
+                data: getMemoryCatalogChild("animals", "description", ''),
+              ),
+          ])),
+    );
     //
   }
 }
