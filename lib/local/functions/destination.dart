@@ -95,7 +95,7 @@ void autoFillDestination(destination, index, type, days) {
   setFormValue(globalctx.memory["destinations"], index, "explorationMode",
       destination == "galapagos" ? "1" : "0");
   addDestination(destination);
-  promote(destination, index, type);
+  processDestinationPromotion(destination, index, type);
 }
 
 /// ## getDestinationList
@@ -126,6 +126,16 @@ List getDestinationList() {
   return destinationlist;
 }
 
+/// ## orderDestination
+/// *__Method to order destinations__*
+///
+///### Uses:
+/// ```dart
+///  orderDestination(destinations);
+/// ```
+///
+/// @return void
+///
 void orderDestination(List destinations) {
   if (arrival.isNotEmpty) {
     destinations.sort((a, b) {
@@ -144,22 +154,54 @@ void orderDestination(List destinations) {
   }
 }
 
-promote(destination, index, type) {
+/// ## processDestinationPromotion
+/// *__Method to promote destination__*
+///
+///### Uses:
+/// ```dart
+///  processDestinationPromotion(destination, index, type);
+/// ```
+///
+/// @return void
+///
+void processDestinationPromotion(destination, index, type) {
   updatePromotedDestination(destination, index);
   setDestinationState(destination, index, "promoted", type);
   updateDraggableDestinations();
   updateTotalLeftAccumulated();
 }
 
-promoteDestination(ctrl, _formKey, destination, index, type) {
+/// ## promoteDestination
+/// *__Method to promote destination__*
+///
+///### Uses:
+/// ```dart
+///   onNext: () {
+///                  promoteDestination(ctrl, _formKey, destination, index, type);
+///                },
+/// ```
+///
+/// @return void
+///
+void promoteDestination(ctrl, _formKey, destination, index, type) {
   if (_formKey.currentState!.validate()) {
     _formKey.currentState!.save();
-    promote(destination, index, type);
+    processDestinationPromotion(destination, index, type);
     Get.close(1);
   }
 }
 
-updatePromotedDestination(destination, index) {
+/// ## updatePromotedDestination
+/// *__Method to update a promoted destination__*
+///
+///### Uses:
+/// ```dart
+///   updatePromotedDestination(destination, index);
+/// ```
+///
+/// @return void
+///
+void updatePromotedDestination(destination, index) {
   if (!globalctx.promotedDestinations.contains(index)) {
     globalctx.promotedDestinations.add(index);
     destinations = globalctx.memory["destinations"];
@@ -171,7 +213,17 @@ updatePromotedDestination(destination, index) {
   }
 }
 
-updateDraggableDestinations() {
+/// ## updateDraggableDestinations
+/// *__Method to update a draggable destinations__*
+///
+///### Uses:
+/// ```dart
+///   updateDraggableDestinations();
+/// ```
+///
+/// @return void
+///
+void updateDraggableDestinations() {
   if (arrivalState.value == "promoted" &&
       globalctx.promotedDestinations.length >=
           globalctx.selectedDestinations.length - 1) {
@@ -185,17 +237,17 @@ updateDraggableDestinations() {
   }
 }
 
-//  Functions
-getDestinationAirport() {
-  var airport = "quito";
-  try {
-    return airport;
-  } catch (e) {
-    return airport;
-  }
-}
-
-getCombinedDestinations() {
+/// ## getCombinedDestinations
+/// *__Method to get combined destinations whit memory__*
+///
+///### Uses:
+/// ```dart
+///   var destinations = getCombinedDestinations();
+/// ```
+///
+/// @return Map
+///
+Map getCombinedDestinations() {
   var memoryDestinations = {};
   for (var destination in destinations.entries) {
     var key = destination.key;
@@ -206,7 +258,17 @@ getCombinedDestinations() {
   return destinations;
 }
 
-processDestinations(context) async {
+/// ## processDestinations
+/// *__Method to update a draggable destinations__*
+///
+///### Uses:
+/// ```dart
+///  await processDestinations(context);
+/// ```
+///
+/// @return Future
+///
+Future processDestinations(context) async {
   // ignore: unrelated_type_equality_checks
   if (globalctx.promotedDestinations.isNotEmpty & (dayleft == 0)) {
     var destinationDay = [];
@@ -246,41 +308,55 @@ processDestinations(context) async {
   }
 }
 
-addDestination(String destination) {
+/// ## addDestination
+/// *__Method to add a destination to memory__*
+///
+///### Uses:
+/// ```dart
+///  addDestination(destination);
+/// ```
+///
+/// @return void
+///
+void addDestination(String destination) {
   var newIndex = globalctx.destinations.length - 1;
   if (!globalctx.destinations.contains(destination)) {
     globalctx.destinations.insert(newIndex, destination);
   }
-  // moveDownDestinationState(
-  //     departure["description"], newIndex, "selected", "departure");
 
   setDestinationState(destination, newIndex, "selected", "tour");
 }
 
-moveDownDestinationState(dest, index, state, type) {
-  globalctx.states["destinations"][index + 1] =
-      globalctx.states["destinations"][index];
-  globalctx.states["destinations"][index + 1]["destination"] =
-      globalctx.states["destinations"][index]["destination"];
-  globalctx.states["destinations"][index + 1]["index"] =
-      globalctx.states["destinations"][index]["index"];
-  globalctx.states["destinations"][index + 1]["state"] =
-      globalctx.states["destinations"][index]["state"];
-  globalctx.states["destinations"][index + 1]["type"] =
-      globalctx.states["destinations"][index]["type"];
-  globalctx.memory["destinations"][(index + 1).toString()] =
-      globalctx.memory["destinations"][(index).toString()];
-  globalctx.promotedDestinations.remove(index);
-  globalctx.promotedDestinations.add(index + 1);
-  setDestinationState(
-      departure["description"], index + 1, "selected", "departure");
-  globalctx.memory["destinations"][(index).toString()] = null;
-  globalctx.states["destinations"][index] = null;
-  cleanDestinations(globalctx.states["destinations"]);
-  cleanDestinations(globalctx.memory["destinations"]);
+/// ## setDestinationState
+/// *__Method to change Destination states__*
+///
+///### Uses:
+/// ```dart
+///  setDestinationState(destination, index, "promoted", type);
+/// ```
+///
+/// @return void
+///
+void setDestinationState(dest, index, state, type) {
+  globalctx.states["destinations"][index] ??= {}.obs;
+  globalctx.states["destinations"][index]["destination"] = dest;
+  globalctx.states["destinations"][index]["index"] = index;
+  globalctx.states["destinations"][index]["state"] = state;
+  globalctx.states["destinations"][index]["type"] = type;
 }
 
-validateDestinationDialog(destination, index, type) {
+/// ## validateDragDestinationOptions
+/// *__Method to validate graphic drag destination options__*
+///
+///### Uses:
+/// ```dart
+///  if (isListed ||
+///         !validateDragDestinationOptions(destination, index, type).value)
+/// ```
+///
+/// @return RxBool
+///
+RxBool validateDragDestinationOptions(destination, index, type) {
   var galapagos = getFormValue(globalctx.memory, "tour", "galapagos", false);
   var isArrival = index == 0 && type == "arrival";
   var days = int.parse(getFormValue(
@@ -320,7 +396,17 @@ validateDestinationDialog(destination, index, type) {
   return ((preArrival || arrivalRule || departureRule || tourRule)).obs;
 }
 
-filterSelectedDestinations() {
+/// ## filterSelectedDestinations
+/// *__Method to filter destinations__*
+///
+///### Uses:
+/// ```dart
+///  filterSelectedDestinations();
+/// ```
+///
+/// @return void
+///
+void filterSelectedDestinations() {
   var galapagos = getFormValue(globalctx.memory, "tour", "galapagos", false);
   if (dayleft.value > 1 &&
       globalctx.promotedDestinations.length >=
@@ -352,24 +438,44 @@ filterSelectedDestinations() {
       if (idx == destlength - 1) {
         type = "departure";
       }
-      moveDestination(selected, idx, type);
+      moveGraphDragDestinationOption(selected, idx, type);
       idx++;
     }
   }
 }
 
-moveDestination(String destination, int index, String type) {
+/// ## moveGraphDragDestinationOption
+/// *__Method to move graphic drag destination option__*
+///
+///### Uses:
+/// ```dart
+///   moveGraphDragDestinationOption(selected, idx, type);
+/// ```
+///
+/// @return void
+///
+void moveGraphDragDestinationOption(
+    String destination, int index, String type) {
   var state = "selected";
-  // if (globalctx.promotedDestinations.contains(index)) {
-  //   state = "promoted";
-  // }
   setDestinationState(destination, index, state, type);
   globalctx.selectedDestinations.add(destination);
   globalctx.destinationDragData.value.add(DragDestinationWidget(
       destination: destination, index: index, type: type, out: false));
 }
 
-deleteDestination(String destination) {
+/// ## deleteGraphDragDestinationOption
+/// *__Method to delete destinations__*
+///
+///### Uses:
+/// ```dart
+///  onTap: () {
+///     deleteGraphDragDestinationOption(destination);
+///      },
+/// ```
+///
+/// @return void
+///
+void deleteGraphDragDestinationOption(String destination) {
   if (arrivalPort.value != getDestinationIdByName(destination) &&
       departurePort.value != getDestinationIdByName(destination) &&
       globalctx.destinations.contains(destination)) {
@@ -445,14 +551,6 @@ cleanDestinations(memory) {
       memory.remove(dest.key);
     }
   }
-}
-
-setDestinationState(dest, index, state, type) {
-  globalctx.states["destinations"][index] ??= {}.obs;
-  globalctx.states["destinations"][index]["destination"] = dest;
-  globalctx.states["destinations"][index]["index"] = index;
-  globalctx.states["destinations"][index]["state"] = state;
-  globalctx.states["destinations"][index]["type"] = type;
 }
 
 getDestinationState(destination, index, type) {

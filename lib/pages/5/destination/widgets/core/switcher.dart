@@ -42,7 +42,7 @@ class SwitcherWidget extends StatelessWidget {
 
       globalctx.destinationlist = dests;
       if (isListed ||
-          !validateDestinationDialog(destination, index, type).value) {
+          !validateDragDestinationOptions(destination, index, type).value) {
         _changeRotationAxis();
       } else {
         globalDestinationName.value = destination;

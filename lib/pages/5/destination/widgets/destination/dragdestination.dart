@@ -42,7 +42,7 @@ class DragDestinationWidget extends StatelessWidget {
                                   .getStyle()),
                           GestureDetector(
                             onTap: () {
-                              deleteDestination(destination);
+                              deleteGraphDragDestinationOption(destination);
                             },
                             child: Image.asset("assets/custom/img/redmark.png",
                                 width:
@@ -61,7 +61,7 @@ class DragDestinationWidget extends StatelessWidget {
                                   .getStyle()),
                           GestureDetector(
                             onTap: () {
-                              deleteDestination(destination);
+                              deleteGraphDragDestinationOption(destination);
                             },
                             child: Image.asset(
                                 "assets/custom/img/greencheck.png",
