@@ -357,18 +357,18 @@ void setDestinationState(dest, index, state, type) {
 /// @return RxBool
 ///
 RxBool validateDragDestinationOptions(destination, index, type) {
-  var galapagos = getFormValue(globalctx.memory, "tour", "galapagos", false);
-  var isArrival = index == 0 && type == "arrival";
-  var days = int.parse(getFormValue(
+  bool galapagos = getFormValue(globalctx.memory, "tour", "galapagos", false);
+  bool isArrival = index == 0 && type == "arrival";
+  int days = int.parse(getFormValue(
       globalctx.memory["destinations"], index, "explorationDay", "0"));
-  var isDeparture =
+  bool isDeparture =
       destination == departure["description"] && type == "departure";
-  var isSelected = getDestinationState(destination, index, type) == "selected";
-  var isPromoted = getDestinationState(destination, index, type) == "promoted";
-  var isArrivalPromoted =
+  bool isSelected = getDestinationState(destination, index, type) == "selected";
+  bool isPromoted = getDestinationState(destination, index, type) == "promoted";
+  bool isArrivalPromoted =
       getDestinationState(arrival["description"], 0, "arrival") == "promoted";
-  var isTour = !isArrival && !isDeparture;
-  var isDepartureConsistent = (destDraggable.value != 0 &&
+  bool isTour = !isArrival && !isDeparture;
+  bool isDepartureConsistent = (destDraggable.value != 0 &&
       globalctx.promotedDestinations.length !=
           globalctx.selectedDestinations.length &&
       globalctx.promotedDestinations.length >=
@@ -376,20 +376,20 @@ RxBool validateDragDestinationOptions(destination, index, type) {
       globalctx.selectedDestinations.length >= 3 &&
       globalctx.promotedDestinations.length >= 2 &&
       type == "departure");
-  var isAccumulated = accumulated.value > 0;
-  var isDayleft = dayleft.value > 0;
-  var arrivalRule = isArrival && isSelected && isDayleft;
-  var cruiseFirstDayDirefferece =
+  bool isAccumulated = accumulated.value > 0;
+  bool isDayleft = dayleft.value > 0;
+  bool arrivalRule = isArrival && isSelected && isDayleft;
+  int cruiseFirstDayDirefferece =
       cruiseStartDate.value.difference(arrivalDate.value).inDays;
-  var preArrival =
+  bool preArrival =
       isArrival && galapagos && isDayleft && cruiseFirstDayDirefferece > 1;
-  var departureRule = isDeparture &&
+  bool departureRule = isDeparture &&
       isDepartureConsistent &&
       isSelected &&
       isArrivalPromoted &&
       isAccumulated &&
       isDayleft;
-  var tourRule = isTour && isArrivalPromoted && isAccumulated && isDayleft;
+  bool tourRule = isTour && isArrivalPromoted && isAccumulated && isDayleft;
   if (galapagos && days > 0) {
     return ((isPromoted || isSelected || isTour)).obs;
   }
@@ -506,7 +506,17 @@ void deleteGraphDragDestinationOption(String destination) {
   }
 }
 
-getDestinationById(destId) {
+/// ## getDestinationById
+/// *__Method to get destination data from id as input__*
+///
+///### Uses:
+/// ```dart
+///  arrival.value = getDestinationById(arrivalPort.value);
+/// ```
+///
+/// @return dynamic
+///
+dynamic getDestinationById(destId) {
   try {
     var dest = destinationsCatalog
         .toList()
@@ -518,11 +528,31 @@ getDestinationById(destId) {
   }
 }
 
-getDestinationIdByName(String destination) {
+/// ## getDestinationIdByName
+/// *__Method to get destination id from name as input__*
+///
+///### Uses:
+/// ```dart
+///  if (arrivalPort.value != getDestinationIdByName(destination) &&
+/// ```
+///
+/// @return dynamic
+///
+dynamic getDestinationIdByName(String destination) {
   var id = getDestinationByName(destination)["code"].toString();
   return id;
 }
 
+/// ## getDestinationValueByName
+/// *__Method to get destination value from name as input__*
+///
+///### Uses:
+/// ```dart
+///  var destData = getDestinationValueByName(destination);
+/// ```
+///
+/// @return dynamic
+///
 getDestinationValueByName(String destination) {
   var result = [];
   try {
@@ -533,7 +563,17 @@ getDestinationValueByName(String destination) {
   return result;
 }
 
-getDestinationByName(String destination) {
+/// ## getDestinationByName
+/// *__Method to get destination from name as input__*
+///
+///### Uses:
+/// ```dart
+///  var destData = getDestinationByName(destination);
+/// ```
+///
+/// @return dynamic
+///
+dynamic getDestinationByName(String destination) {
   var result;
   try {
     List<Map<String, dynamic>> list = destinationsCatalog.toList();
@@ -545,15 +585,17 @@ getDestinationByName(String destination) {
   return result;
 }
 
-cleanDestinations(memory) {
-  for (var dest in memory.entries.toList()) {
-    if (dest.value == null) {
-      memory.remove(dest.key);
-    }
-  }
-}
-
-getDestinationState(destination, index, type) {
+/// ## getDestinationState
+/// *__Method to get destination from name as input__*
+///
+///### Uses:
+/// ```dart
+///  bool isSelected = getDestinationState(destination, index, type) == "selected";
+/// ```
+///
+/// @return String
+///
+String getDestinationState(destination, index, type) {
   var state = "suggested";
   globalctx.states["destinations"][index] ??= {}.obs;
   state = globalctx.states["destinations"][index]["state"] ?? "suggested";
@@ -563,7 +605,17 @@ getDestinationState(destination, index, type) {
   return state;
 }
 
-updateTotalLeftAccumulated() {
+/// ## updateTotalLeftAccumulated
+/// *__Method to update destination accumulated days __*
+///
+///### Uses:
+/// ```dart
+///  updateTotalLeftAccumulated();
+/// ```
+///
+/// @return void
+///
+void updateTotalLeftAccumulated() {
   accumulated.value = 0;
   if (destinations.isNotEmpty) {
     for (var destination in destinations.keys) {
@@ -573,28 +625,17 @@ updateTotalLeftAccumulated() {
   dayleft.value = totalDays.value - accumulated.value;
 }
 
-setDestination(String destination, index) {
-  index = index.toString();
-  destinations[index] ??= {};
-}
 
-setDestinationDay(String destination, index, value) {
-  index = index.toString();
-  setDestination(destination, index);
-  destinations[index]["explorationDay"] ??= value;
-}
-
-getLeftAccumulated(destination, id) {
-  leftAccumulated.value = 0;
-  for (String item in destinations.keys) {
-    bool exists = item != destination;
-    if (exists) {
-      leftAccumulated.value -= getDestinationDay(item) as int;
-    }
-  }
-  return leftAccumulated.value;
-}
-
+/// ## getMaxTrValue
+/// *__Method to update destination accumulated days __*
+///
+///### Uses:
+/// ```dart
+///  updateTotalLeftAccumulated();
+/// ```
+///
+/// @return void
+///
 getMaxTrValue(tr) {
   return trMaxValues[tr];
 }
