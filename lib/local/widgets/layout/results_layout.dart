@@ -25,7 +25,7 @@ class _ResultsLayoutWidgetState extends State<ResultsLayoutWidget> {
         Padding(
           padding: const EdgeInsets.only(top: 0.0),
           child: SvgPicture.asset(
-            "assets/custom/svg/images/GradientPurpleBackground.svg",
+            "assets/images/1/GradientPurpleBackground.svg",
             fit: BoxFit.cover,
           ),
         ),
@@ -35,7 +35,7 @@ class _ResultsLayoutWidgetState extends State<ResultsLayoutWidget> {
             children: [
               TextButton(
                 child: SvgPicture.asset(
-                  "assets/custom/svg/images/LeftArrow.svg",
+                  "assets/images/1/LeftArrow.svg",
                 ),
                 onPressed: () {
                   selectedIndex.value = selectedIndex.value - 1;
@@ -55,7 +55,7 @@ class _ResultsLayoutWidgetState extends State<ResultsLayoutWidget> {
           padding: EdgeInsets.only(
               bottom: kDefaultPadding * 36.5, left: kDefaultPadding * 17),
           child: SvgPicture.asset(
-            "assets/custom/svg/images/HeaderLogo.svg",
+            "assets/images/1/HeaderLogo.svg",
             height: MediaQuery.of(context).size.height,
           ),
         ),

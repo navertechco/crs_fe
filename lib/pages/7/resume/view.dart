@@ -16,7 +16,7 @@ class ResumePage extends GetView<ResumeController> {
 
   Widget _buildView(BuildContext _context) {
     return ContentLayoutWidget(
-        background: "assets/custom/img/resume.png",
+        background: "assets/images/1/resume.png",
         child: Stack(
           children: [
             ResumeWidget(pkeys: keys),

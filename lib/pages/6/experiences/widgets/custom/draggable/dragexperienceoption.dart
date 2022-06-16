@@ -26,14 +26,14 @@ class DragExperienceTarget extends StatelessWidget {
                         onTap: () {
                           promoteExperience(experience, "suggested");
                         },
-                        child: Image.asset("assets/custom/img/redmark.png",
+                        child: Image.asset("assets/images/1/redmark.png",
                             width: Get.width * 0.02),
                       )
                     : GestureDetector(
                         onTap: () {
                           promoteExperience(experience, "suggested");
                         },
-                        child: Image.asset("assets/custom/img/greencheck.png",
+                        child: Image.asset("assets/images/1/greencheck.png",
                             width: Get.width * 0.02),
                       )
               ],

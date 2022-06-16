@@ -17,7 +17,7 @@ class DestinationDetailPage extends GetView<DestinationDetailController> {
   final index;
   Widget _buildView(BuildContext? _context) {
     return ContentLayoutWidget(
-        background: "assets/custom/img/destination.png",
+        background: "assets/images/1/destination.png",
         child: DestinationDetailWidget(
             type: type,
             index: index,

@@ -39,7 +39,7 @@ class CustomFormExperienceRowWidget extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
           Image.asset(
-            "assets/custom/img/1x/Recurso_374mdpi.png",
+            "assets/images/1/Recurso_374mdpi.png",
           ),
           CustomDescriptionWidget(
             text: description,

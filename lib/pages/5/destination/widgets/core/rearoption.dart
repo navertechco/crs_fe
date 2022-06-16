@@ -48,7 +48,7 @@ class TitleWidget extends StatelessWidget {
             5),
       ),
       child: Row(children: [
-        Image.asset("assets/custom/img/1x/Recurso_295mdpi.png",
+        Image.asset("assets/images/1/Recurso_295mdpi.png",
             width: MediaQuery.of(context).size.width * 0.05),
         SizedBox(
           width: title.length * MediaQuery.of(context).size.width * 0.01 +
@@ -57,7 +57,7 @@ class TitleWidget extends StatelessWidget {
                   0.018 /
                   10),
         ),
-        Image.asset("assets/custom/img/1x/Recurso_294mdpi.png",
+        Image.asset("assets/images/1/Recurso_294mdpi.png",
             width: MediaQuery.of(context).size.width * 0.05),
       ]),
     );

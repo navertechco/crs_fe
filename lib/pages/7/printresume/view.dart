@@ -22,7 +22,7 @@ GetBuilder<PrintResumeController> _buildPrintResumeFormPage(
   return GetBuilder<PrintResumeController>(
     id: 'signin_form_page',
     builder: (controller) => ContentLayoutWidget(
-        background: "assets/custom/img/home.png",
+        background: "assets/images/1/home.png",
         child: PrintResumeFormPage(ctrl: controller),
         text: "<  PrintResume"),
   );

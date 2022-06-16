@@ -9,7 +9,7 @@ class ExperiencesPage extends GetView<ExperiencesController> {
 
   Widget _buildView(BuildContext? _context) {
     return ContentLayoutWidget(
-        background: "assets/custom/img/layout.png",
+        background: "assets/images/1/layout.png",
         child: ExperiencesWidget(ctrl: controller),
         text: '');
   }

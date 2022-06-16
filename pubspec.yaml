@@ -6,7 +6,7 @@ version: 2.9.3+020903
 analyzer:
   errors:
     mixin_inherits_from_not_object: ignore
-    
+
 environment:
   flutter: ^2.2.0
   sdk: ">=2.12.0 <3.0.0"
@@ -50,7 +50,7 @@ dependencies:
   convert: ^3.0.1
   camera: ^0.9.4+3
   editable: ^2.0.0
-  pdf: ^3.6.1  
+  pdf: ^3.6.1
   vimeo_player_flutter: ^0.0.3+1
   flutter_html: ^2.1.5
   flutter_signature_pad: ^3.0.0
@@ -81,7 +81,7 @@ dependencies:
   # image_picker_for_web: ^2.1.4
 
 dev_dependencies:
-  flutter_launcher_icons: 
+  flutter_launcher_icons:
   build_runner:
   flutter_gen_runner:
   flutter_test:
@@ -108,13 +108,13 @@ flutter:
     - assets/
     - assets/data/
     - assets/custom/
-    - assets/custom/img/
-    - assets/custom/img/1x/
-    - assets/custom/img/1.5x/
-    - assets/custom/img/0.75x/    
+    - assets/images/1/
+    - assets/images/1/1x/
+    - assets/images/1/1.5x/
+    - assets/images/1/0.75x/
     - assets/custom/svg/
-    - assets/custom/svg/images/
-    
+    - assets/images/1/
+
   generate: true
   uses-material-design: true
   # fonts:
@@ -128,11 +128,10 @@ flutter_localizations:
 flutter_intl:
   enabled: true
 
- 
 flutter_icons:
   android: "icon"
   ios: false
-  image_path_ios: "assets/custom/img/icon.png"
-  image_path_android: "assets/custom/img/icon.png"
-  adaptive_icon_background: "assets/custom/img/icon.png"
-  adaptive_icon_foreground: "assets/custom/img/icon.png"
+  image_path_ios: "assets/images/1/icon.png"
+  image_path_android: "assets/images/1/icon.png"
+  adaptive_icon_background: "assets/images/1/icon.png"
+  adaptive_icon_foreground: "assets/images/1/icon.png"

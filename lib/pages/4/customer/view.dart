@@ -27,7 +27,7 @@ GetBuilder<CustomerController> _buildCustomerFormPage(
     builder: (controller) => Stack(
       children: [
         ContentLayoutWidget(
-            background: "assets/custom/img/customer.png",
+            background: "assets/images/1/customer.png",
             child: CustomerFormPage(ctrl: controller),
             text: "              "),
       ],

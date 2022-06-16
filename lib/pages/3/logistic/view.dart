@@ -27,7 +27,7 @@ GetBuilder<LogisticController> _buildLogisticFormPage(
     builder: (controller) => Stack(
       children: [
         ContentLayoutWidget(
-            background: "assets/custom/img/tourparameters.png",
+            background: "assets/images/1/tourparameters.png",
             child: LogisticFormPage(ctrl: controller),
             text: "              "),
       ],

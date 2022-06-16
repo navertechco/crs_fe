@@ -10,7 +10,7 @@ class GoldBorderWidget extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(7),
           child: Image.asset(
-            "assets/custom/img/1x/Recurso_291mdpi.png",
+            "assets/images/1/Recurso_291mdpi.png",
             width: MediaQuery.of(context).size.width * 0.41,
           ),
         ),
@@ -19,7 +19,7 @@ class GoldBorderWidget extends StatelessWidget {
               left: MediaQuery.of(context).size.width * 0.01,
               top: MediaQuery.of(context).size.height * 0.013),
           child: Image.asset(
-            "assets/custom/img/1x/Recurso_197mdpi.png",
+            "assets/images/1/Recurso_197mdpi.png",
             width: MediaQuery.of(context).size.width * 0.05,
           ),
         ),
@@ -28,7 +28,7 @@ class GoldBorderWidget extends StatelessWidget {
               left: MediaQuery.of(context).size.width * 0.355,
               top: MediaQuery.of(context).size.height * 0.077),
           child: Image.asset(
-            "assets/custom/img/1x/Recurso_198mdpi.png",
+            "assets/images/1/Recurso_198mdpi.png",
             width: MediaQuery.of(context).size.width * 0.05,
           ),
         ),

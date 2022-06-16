@@ -12,7 +12,7 @@ class ProfileLayoutWidget extends StatelessWidget {
         // top: 0,
         // right: 0,
         child: Image.asset(
-          "assets/custom/img/layout.png",
+          "assets/images/1/layout.png",
           fit: BoxFit.fill,
           height: double.infinity,
           width: double.infinity,

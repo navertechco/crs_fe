@@ -23,7 +23,7 @@ GetBuilder<SigninController> _buildSigninFormPage(
   return GetBuilder<SigninController>(
     id: 'signin_form_page',
     builder: (controller) => ContentLayoutWidget(
-        background: "assets/custom/img/home.png",
+        background: "assets/images/1/home.png",
         child: SigninFormPage(ctrl: controller),
         text: "<  Signin"),
   );
