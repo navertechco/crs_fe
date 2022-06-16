@@ -1,7 +1,7 @@
 name: naver_crs
 description: A resource to help developers evaluate and use Flutter.
 repository: https://github.com/flutter/gallery
-version: 2.9.4
+version: 0.0.1+000002
 
 analyzer:
   errors:
