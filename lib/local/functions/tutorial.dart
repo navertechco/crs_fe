@@ -4,8 +4,19 @@ import 'index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
-loadTargets() {
-  var targets = <TargetFocus>[];
+/// ## loadTargets
+/// *__Auxiliary Method to display Tutorial__*
+///
+///
+///### Uses:
+/// ```dart
+///   targets: loadTargets(),
+/// ```
+///
+/// @return List<TargetFocus>
+///
+List<TargetFocus> loadTargets() {
+  List<TargetFocus> targets = <TargetFocus>[];
 
   for (var page in pageList) {
     targets.add(TargetFocus(
@@ -30,7 +41,21 @@ loadTargets() {
   return targets;
 }
 
-showTutorial(context) {
+/// ## showTutorial
+/// *__Method to display Tutorial__*
+///
+/// 
+///
+///### Uses:
+/// ```dart
+///   if (isFirstLaunch) {
+///   showTutorial(context);
+/// }
+/// ```
+///
+/// @return void
+///
+void showTutorial(BuildContext context) {
   TutorialCoachMark(context,
       textStyleSkip: TextStyle(color: Colors.black, fontSize: 50),
       targets: loadTargets(),
