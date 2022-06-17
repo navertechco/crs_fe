@@ -7,11 +7,23 @@ import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
-processQuoteHistoryItinerary(row) {
+/// ## getQuoteHistoryItinerary
+/// *__Method to get Quote History Itinerary in String format__*
+///
+///### Uses:
+/// ```dart
+///       Text(
+///                "${getQuoteHistoryItinerary(row)}",
+/// ```
+/// ### Returns:
+///```dart
+///  String
+///```
+String getQuoteHistoryItinerary(row) {
   var itinerary =
       row["quote_itinerary"].toString().replaceAll("[", '').replaceAll("]", '');
   var itineraryList = itinerary.split(",");
-  var result = '';
+  String result = '';
   var i = 1;
   for (var item in itineraryList) {
     if (item.toString() != '') {
@@ -28,7 +40,18 @@ processQuoteHistoryItinerary(row) {
   return result;
 }
 
-filterQuoteHistory(ctx) {
+/// ## getQuoteHistoryDetail
+/// *__Method to get filtered Quote history__*
+///
+///### Uses:
+/// ```dart
+///       getFilteredQuoteHistory(context);
+/// ```
+/// ### Returns:
+///```dart
+///  dynamic
+///```
+dynamic getFilteredQuoteHistory(ctx) {
   if (globalctx.memory["tours"] != null) {
     List filtered = globalctx.memory["tours"];
     filtered = filtered.where((e) {
@@ -60,54 +83,19 @@ filterQuoteHistory(ctx) {
   }
 }
 
-getQuoteHistoryHeader(context, data, columns) {
-  var header = <DataColumn>[];
-  List cols = [];
-
-  if (data.isNotEmpty) {
-    cols = data[0].keys.toList();
-    if (columns != null) {
-      cols = columns;
-    }
-    for (int i = 0; i < cols.length; i++) {
-      header.add(DataColumn(
-        label: Text(
-          '',
-          textAlign: TextAlign.left,
-          style: KTextSytle(
-            context: context,
-            fontSize: 10,
-            fontWeight: FontWeight.bold,
-            color: Color.fromARGB(255, 204, 164, 61),
-          ).getStyle(),
-        ),
-      ));
-    }
-    header.add(DataColumn(
-      label: Text(
-        '',
-        style: KTextSytle(
-          context: context,
-          fontSize: 10,
-          fontWeight: FontWeight.bold,
-          color: Color.fromARGB(255, 204, 164, 61),
-        ).getStyle(),
-      ),
-    ));
-  }
-
-  return header;
-}
-
-processQuoteHistoryData(context, data) {
-  var columns = ["quote_name", "quote_format"];
-  var header = getQuoteHistoryHeader(context, data, columns);
-  var detail = getQuoteHistoryDetail(context, data, columns);
-  return [header, detail];
-}
-
-getQuoteHistoryDetail(context, data, columns) {
-  var detail = <DataRow>[];
+/// ## getQuoteHistoryDetail
+/// *__Method to get Quote History Detail in a DataRow List format__*
+///
+///### Uses:
+/// ```dart
+///        var detail = getQuoteHistoryDetail(context, data, columns);
+/// ```
+/// ### Returns:
+///```dart
+///  List<DataRow>
+///```
+List<DataRow> getQuoteHistoryDetail(context, data, columns) {
+  List<DataRow> detail = <DataRow>[];
   if (data.length > 0) {
     for (var row in data) {
       var cells = <DataCell>[];
@@ -138,7 +126,20 @@ getQuoteHistoryDetail(context, data, columns) {
   return detail;
 }
 
-getQuoteHistoryDataCell(context, row) {
+/// ## getQuoteHistoryDataCell
+/// *__Method to get Quote History in a Datacell format__*
+///
+///### Uses:
+/// ```dart
+///        cells.add(
+///     getQuoteHistoryDataCell(context, row),
+///   );
+/// ```
+/// ### Returns:
+///```dart
+///  DataCell
+///```
+DataCell getQuoteHistoryDataCell(context, row) {
   var dataCell = DataCell(
     IconButton(
       padding: EdgeInsets.all(0),
@@ -165,7 +166,7 @@ getQuoteHistoryDataCell(context, row) {
                   height: MediaQuery.of(context).size.height * 0.5,
                 ),
                 Text(
-                  "${processQuoteHistoryItinerary(row)}",
+                  "${getQuoteHistoryItinerary(row)}",
                   style: KTextSytle(
                     context: context,
                     fontSize: 10,

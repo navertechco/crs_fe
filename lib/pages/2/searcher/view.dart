@@ -114,7 +114,7 @@ class QuoteHistoryFilter extends StatelessWidget {
                     "date",
                   ),
                   value);
-              filterQuoteHistory(context);
+              getFilteredQuoteHistory(context);
             },
             hintText: "Quote Date",
             data: getMemoryChild(
@@ -135,7 +135,7 @@ class QuoteHistoryFilter extends StatelessWidget {
                   getMemoryChild("tours", '', "name",
                       filter: {"key": "date", "value": quoteDate.value}),
                   value);
-              filterQuoteHistory(context);
+              getFilteredQuoteHistory(context);
             },
             hintText: "Quote Name",
             data: getMemoryChild("tours", '', "name",
@@ -153,7 +153,7 @@ class QuoteHistoryFilter extends StatelessWidget {
                   getMemoryChild("tours", '', "quote",
                       filter: {"key": "date", "value": quoteDate.value}),
                   value);
-              filterQuoteHistory(context);
+              getFilteredQuoteHistory(context);
             },
             hintText: "Quote Id",
             data: getMemoryChild("tours", '', "quote",
@@ -171,7 +171,7 @@ class QuoteHistoryFilter extends StatelessWidget {
                   getMemoryChild("tours", '', "state",
                       filter: {"key": "date", "value": quoteDate.value}),
                   value);
-              filterQuoteHistory(context);
+              getFilteredQuoteHistory(context);
             },
             hintText: "Quote State",
             data: getMemoryChild("tours", '', "state",
