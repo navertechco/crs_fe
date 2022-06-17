@@ -1,7 +1,5 @@
 // ignore_for_file: prefer_function_declarations_over_variables, import_of_legacy_library_into_null_safe
 import 'package:flutter/material.dart';
-import '../index.dart';
-import 'index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 import 'package:sweetalert/sweetalert.dart';
@@ -16,9 +14,9 @@ import 'package:yaml/yaml.dart';
 /// ```
 /// ### Returns:
 ///```dart
-/// void
+/// Future
 ///```
-processTour() async {
+Future processTour() async {
   try {
     var dayIndex = 0;
     var destinations = getCombinedDestinations();
