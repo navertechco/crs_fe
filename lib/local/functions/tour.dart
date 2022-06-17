@@ -95,7 +95,18 @@ processTour() async {
   }
 }
 
-saveTour() async {
+/// ## saveTour
+/// *__Method to save Tour registry to backend__*
+///
+///### Uses:
+/// ```dart
+///  await saveTour();
+/// ```
+/// ### Returns:
+///```dart
+///  Future
+///```
+Future saveTour() async {
   try {
     var payload = globalctx.payload.toString();
     var yaml = loadYaml(payload);
@@ -116,7 +127,18 @@ saveTour() async {
   }
 }
 
-saveTranslatingServices(values) {
+/// ## saveTranslatingServices
+/// *__Method to save Translating Service in memory to backend__*
+///
+///### Uses:
+/// ```dart
+///  saveTranslatingServices(values);
+/// ```
+/// ### Returns:
+///```dart
+///  void
+///```
+void saveTranslatingServices(values) {
   var result = <String>[];
   for (var value in values) {
     var description = translatingCatalog.value
@@ -127,7 +149,27 @@ saveTranslatingServices(values) {
   setFormValue(globalctx.memory, "tour", "translating_service", result);
 }
 
-getTour(ctx, {int tourId = 0, detail = false, cb}) async {
+/// ## getTour
+/// *__Method to query a Tour to backend__*
+///
+///### Uses:
+/// ```dart
+///  onPressed: () {
+///              getTour(context, tourId: row['quote'], detail: true,
+///                cb: (data) {
+///               if (data.length > 0) {
+///                 globalctx.memory["tour"] = data[0];
+///                 showCustomDialog(context, NetRatePage(), "Close",
+///                     buttonColor: Colors.white, width: 1.0);
+///               }
+///             });
+///           },
+/// ```
+/// ### Returns:
+///```dart
+///  Future
+///```
+Future getTour(ctx, {int tourId = 0, detail = false, cb}) async {
   var frame = {
     "data": {"tour_id": tourId, "detail": detail, "limit": 10, "offset": 0}
   };
@@ -149,12 +191,24 @@ getTour(ctx, {int tourId = 0, detail = false, cb}) async {
   }
 }
 
-getTourPurpose() {
-  var purposes = globalctx.memory["tour"]["purposes"];
-  return purposes;
-}
+ 
 
-newTour() async {
+
+/// ## newTour
+/// *__Method to get NewTour Id from backend__*
+///
+///### Uses:
+/// ```dart
+///  onPressed: () async {
+///                         setContext("readonly", false);
+///                      await newTour();
+///                     }),
+/// ```
+/// ### Returns:
+///```dart
+///  Future
+///```
+Future newTour() async {
   var res = await fetchHandler(kDefaultSchema, kDefaultServer,
       kDefaultServerPort, kDefaultNewTourEdit, 'POST', {"id": 1});
   if (res['state'] == true) {
