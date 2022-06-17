@@ -151,7 +151,18 @@ resetServices() {
   updateDragServices();
 }
 
-setServiceState(service, state) {
+/// ## getServiceByName
+/// *__Method to set service state in context__*
+///
+///### Uses:
+/// ```dart
+///    setServiceState(service, "suggested");
+/// ```
+/// ### Returns:
+///```dart
+///  void
+///```
+void setServiceState(service, state) {
   globalctx.states["services"][currentDestination.value] ??= {}.obs;
   globalctx.states["services"][currentDestination.value][service] ??= {}.obs;
   globalctx.states["services"][currentDestination.value][service]["state"] =
@@ -159,16 +170,38 @@ setServiceState(service, state) {
   filterSuggestedServices();
 }
 
-getServiceState(service) {
+/// ## getServiceByName
+/// *__Method to get service state from context__*
+///
+///### Uses:
+/// ```dart
+///    suggested = getServiceState(service) == "suggested";
+/// ```
+/// ### Returns:
+///```dart
+///  String
+///```
+String getServiceState(service) {
   globalctx.states["services"][currentDestination.value] ??= {}.obs;
   globalctx.states["services"][currentDestination.value][service] ??= {}.obs;
-  var state =
+  String state =
       globalctx.states["services"][currentDestination.value][service]["state"];
   state ??= "suggested";
   return state;
 }
 
-getServiceValueByName(String service) {
+/// ## getServiceByName
+/// *__Method to get service Value by Name as input__*
+///
+///### Uses:
+/// ```dart
+///   var srvData = getServiceValueByName(service);
+/// ```
+/// ### Returns:
+///```dart
+///  dynamic
+///```
+dynamic getServiceValueByName(String service) {
   var result;
   try {
     result = getServiceByName(service).value;
@@ -178,7 +211,18 @@ getServiceValueByName(String service) {
   return result;
 }
 
-getServiceByName(String service) {
+/// ## getServiceByName
+/// *__Method to get service data by Name as input__*
+///
+///### Uses:
+/// ```dart
+///  var srvData = getServiceByName(service).value;
+/// ```
+/// ### Returns:
+///```dart
+///  dynamic
+///```
+dynamic getServiceByName(String service) {
   var result;
   try {
     result =
