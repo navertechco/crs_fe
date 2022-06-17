@@ -6,13 +6,35 @@ import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:naver_crs/pages/6/services/widgets/custom/index.dart';
 import 'package:naver_crs/index.dart';
 
-filterSuggestedServices() {
+/// ## filterSuggestedServices
+/// *__Method to filter Service Drag Objects__*
+///
+///### Uses:
+/// ```dart
+///       filterSuggestedServices();
+/// ```
+/// ### Returns:
+///```dart
+///  void
+///```
+void filterSuggestedServices() {
   getFilteredServices().then((value) {
     updateDragServices();
   });
 }
 
-getFilteredServices() async {
+/// ## getFilteredServices
+/// *__Method to update Service Drag Objects__*
+///
+///### Uses:
+/// ```dart
+///       getFilteredServices();
+/// ```
+/// ### Returns:
+///```dart
+///  void
+///```
+Future getFilteredServices() async {
   filtered = await getFilteredServiceData();
   filtered = filtered
       .where((service) =>
@@ -57,7 +79,18 @@ getFilteredServices() async {
 }
 //////////////////////////////////////////////////////////////////////////////////////
 
-updateDragServices() {
+/// ## updateDragServices
+/// *__Method to update Service Drag Objects__*
+///
+///### Uses:
+/// ```dart
+///       updateDragServices();
+/// ```
+/// ### Returns:
+///```dart
+///  void
+///```
+void updateDragServices() {
   resetDrags();
   for (var srv in filtered) {
     var state = getServiceState(srv.description);
@@ -77,7 +110,18 @@ updateDragServices() {
   return;
 }
 
-resetDrags() {
+/// ## resetDrags
+/// *__Method to reset Service Drag Objects__*
+///
+///### Uses:
+/// ```dart
+///       resetDrags();
+/// ```
+/// ### Returns:
+///```dart
+///  void
+///```
+void resetDrags() {
   promotedCatalogs = [];
   promotedServices = [];
   suggestedServices = [];
