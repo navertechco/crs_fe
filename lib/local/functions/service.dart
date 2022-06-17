@@ -13,7 +13,7 @@ filterSuggestedServices() {
 }
 
 getFilteredServices() async {
-  filtered = await getSrvFiltered();
+  filtered = await getFilteredServiceData();
   filtered = filtered
       .where((service) =>
           service.relation["destination"] == globalDestinationName.value ||
@@ -85,7 +85,18 @@ resetDrags() {
   servicePromotedDragData.value = <Widget>[];
 }
 
-getSrvFiltered() async {
+/// ## getFilteredServiceData
+/// *__Method to get filtered services__*
+///
+///### Uses:
+/// ```dart
+///       filtered = await getFilteredServiceData();
+/// ```
+/// ### Returns:
+///```dart
+///  dynamic
+///```
+getFilteredServiceData() async {
   filteredsrv = [];
 
   Iterable srvs = await services;
@@ -101,42 +112,18 @@ getSrvFiltered() async {
   return filteredsrv;
 }
 
-paginateDestination(String direction) async {
-  int sum = direction == "next" ? 1 : -1;
-  if (currentDestination.value + sum >= 0 &&
-      currentDestination.value + sum <
-          globalctx.memory["destinations"].length) {
-    currentDestination.value = currentDestination.value + sum;
-    globalDestinationIndex.value = currentDestination.value.toString();
-    try {
-      globalDestinationName.value = globalctx
-          .memory["destinations"][globalDestinationIndex.value]
-          .value["destination"];
-    } catch (e) {
-      globalDestinationName.value = "quito";
-    }
-
-    globalDestinationType.value = "tour";
-
-    if (currentDestination.value == 0) {
-      globalDestinationType.value = "arrival";
-    }
-    if (currentDestination.value ==
-        globalctx.memory["destinations"].length - 1) {
-      globalDestinationType.value = "departure";
-    }
-
-    log("currentDestination.value: ${currentDestination.value}");
-    filterSuggestedServices();
-  } else if (currentDestination.value + sum >
-      globalctx.memory["destinations"].length - 1) {
-    gotoPage("Resume");
-  } else {
-    gotoPage("Experiences");
-  }
-}
-
-findProp(data, props) {
+/// ## findProp
+/// *__Method to get any property in data__*
+///
+///### Uses:
+/// ```dart
+///       Text("${findProp(srvData, ["servicename", "hotelname"])}",
+/// ```
+/// ### Returns:
+///```dart
+///  dynamic
+///```
+dynamic findProp(data, props) {
   for (var prop in props) {
     if (data.containsKey(prop)) {
       return data[prop];
@@ -144,14 +131,27 @@ findProp(data, props) {
   }
 }
 
-resetServices() {
+/// ## resetServices
+/// *__Method to reset all services in context__*
+///
+///### Uses:
+/// ```dart
+///     onPressed: () {
+///          resetServices();
+///           },
+/// ```
+/// ### Returns:
+///```dart
+///  void
+///```
+void resetServices() {
   for (var service in promotedServices) {
     setServiceState(service, "suggested");
   }
   updateDragServices();
 }
 
-/// ## getServiceByName
+/// ## setServiceState
 /// *__Method to set service state in context__*
 ///
 ///### Uses:
@@ -170,7 +170,7 @@ void setServiceState(service, state) {
   filterSuggestedServices();
 }
 
-/// ## getServiceByName
+/// ## getServiceState
 /// *__Method to get service state from context__*
 ///
 ///### Uses:
@@ -190,7 +190,7 @@ String getServiceState(service) {
   return state;
 }
 
-/// ## getServiceByName
+/// ## getServiceValueByName
 /// *__Method to get service Value by Name as input__*
 ///
 ///### Uses:

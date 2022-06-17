@@ -26,7 +26,53 @@ dragDestination(destination) {
   addDestination(destination);
   filterDestinations();
 }
+/// ## paginateDestination
+/// *__Method to get any property in data__*
+///
+///### Uses:
+/// ```dart
+///          onPressed: () async {
+///            await paginateDestination("prev");
+///           },
+/// ```
+/// ### Returns:
+///```dart
+///  Future
+///```
+Future paginateDestination(String direction) async {
+  int sum = direction == "next" ? 1 : -1;
+  if (currentDestination.value + sum >= 0 &&
+      currentDestination.value + sum <
+          globalctx.memory["destinations"].length) {
+    currentDestination.value = currentDestination.value + sum;
+    globalDestinationIndex.value = currentDestination.value.toString();
+    try {
+      globalDestinationName.value = globalctx
+          .memory["destinations"][globalDestinationIndex.value]
+          .value["destination"];
+    } catch (e) {
+      globalDestinationName.value = "quito";
+    }
 
+    globalDestinationType.value = "tour";
+
+    if (currentDestination.value == 0) {
+      globalDestinationType.value = "arrival";
+    }
+    if (currentDestination.value ==
+        globalctx.memory["destinations"].length - 1) {
+      globalDestinationType.value = "departure";
+    }
+
+    log("currentDestination.value: ${currentDestination.value}");
+    filterSuggestedServices();
+  } else if (currentDestination.value + sum >
+      globalctx.memory["destinations"].length - 1) {
+    gotoPage("Resume");
+  } else {
+    gotoPage("Experiences");
+  }
+}
 /// ## resetAllDestinations
 /// *__Method to reset all destination options__*
 ///
