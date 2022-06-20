@@ -10,7 +10,6 @@ class Header extends StatelessWidget {
   const Header({
     Key? key,
   }) : super(key: key);
- 
 
   @override
   Widget build(BuildContext context) {
@@ -115,7 +114,9 @@ class Header extends StatelessWidget {
               min: 0,
               max: 50,
               step: 1,
-              onValueChanged: (value) {},
+              onValueChanged: (value) {
+                setFormValue(globalctx.memory, "itinerary", "guides", value);
+              },
             ),
           ],
         ),
