@@ -22,6 +22,8 @@ class CustomFormExperienceRowWidget extends StatelessWidget {
     var dayexps = day['experiences'];
     var expList = dayexps.keys.toList();
     var expName = expList[experienceindex];
+    var expData = getExperienceByName(expName);
+    var cost = expData.value["cost"];
     var title = expName.toString();
     return Column(
       children: [
@@ -31,7 +33,7 @@ class CustomFormExperienceRowWidget extends StatelessWidget {
           fontSize: 0.016,
           fontWeight: FontWeight.bold,
         ),
-        Text("Cost: 0"),
+        Text("Cost: $cost"),
       ],
     );
   }
