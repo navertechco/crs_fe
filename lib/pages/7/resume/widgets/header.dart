@@ -9,10 +9,8 @@ import 'customformtitle.dart';
 class Header extends StatelessWidget {
   const Header({
     Key? key,
-    required this.data,
   }) : super(key: key);
-
-  final Map<String, dynamic> data;
+ 
 
   @override
   Widget build(BuildContext context) {

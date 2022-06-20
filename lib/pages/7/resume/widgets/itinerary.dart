@@ -4,10 +4,9 @@ import 'destinations.dart';
 import 'header.dart';
 
 class Itinerary extends StatelessWidget {
-  Itinerary({Key? key, required this.data, required this.pkeys})
+  Itinerary({Key? key,  required this.pkeys})
       : super(key: key);
-
-  final Map<String, dynamic> data;
+ 
   final _controller = ScrollController();
   final pkeys;
   @override
@@ -27,14 +26,14 @@ class Itinerary extends StatelessWidget {
                     controller: _controller,
                     child: Column(children: [
                       RepaintBoundary(
-                          key: pkeys["cover"], child: Cover(data: data)),
+                          key: pkeys["cover"], child: Cover( )),
                       RepaintBoundary(
                         key: pkeys["header"],
                         child: Header(
-                          data: data,
+                       
                         ),
                       ),
-                      Destinations(data: data),
+                      Destinations( ),
                     ]),
                   ),
                 ),

@@ -1,9 +1,7 @@
 // ignore_for_file: prefer_function_declarations_over_variables
 
-import 'package:counter/counter.dart';
 import 'package:flutter/material.dart';
 import 'package:naver_crs/index.dart';
-import 'package:naver_crs/pages/7/resume/widgets/custompadingtitle.dart'; 
 import 'customdescription.dart';
 import 'customformexperiencedetail.dart';
 import 'customformtitle.dart';
@@ -21,6 +19,7 @@ class CustomFormDayWidget extends StatelessWidget {
       var destId = indexes[0];
       var destDay = indexes[1];
       var dayId = getDayId(destId, destDay);
+      indexes[1] = dayId;
       var destinations = getCombinedDestinations();
       var destination = destinations[destId.toString()];
       var destData = getDestinationValueByName(destination["destination"]);
@@ -36,8 +35,6 @@ class CustomFormDayWidget extends StatelessWidget {
                       : dayId == destDays.length - 1
                           ? "Departure"
                           : "Day: $dayId#####"),
-             
-             
               CustomDescriptionWidget(
                   text: daydescription, width: 0.55, fontSize: 0.016),
               CustomFormExperiencesDetailWidget(indexes: indexes),

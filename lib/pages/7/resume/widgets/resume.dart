@@ -11,12 +11,10 @@ class ResumeWidget extends GetView<ResumeController> {
   const ResumeWidget({Key? key, required this.pkeys}) : super(key: key);
   final pkeys;
   @override
-  Widget build(BuildContext context) {
-    Map<String, dynamic> data = memory;
+  Widget build(BuildContext context) { 
 
     return Itinerary(
-      pkeys: pkeys,
-      data: data,
+      pkeys: pkeys, 
     );
   }
 }

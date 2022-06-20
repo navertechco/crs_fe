@@ -6,24 +6,17 @@ import 'customformdestination.dart';
 class Destinations extends StatelessWidget {
   const Destinations({
     Key? key,
-    required this.data,
   }) : super(key: key);
-
-  final data;
 
   @override
   Widget build(BuildContext context) {
     List<Widget> destinations = [];
-    Map<String, dynamic> data = memory;
-    if (data != null && globalctx.promotedDestinations.isNotEmpty) {
-      var i = 0;
-      for (var dest in globalctx.promotedDestinations) {
-        // var destData = getDestinationById(dest);
+    if (globalctx.promotedDestinations.isNotEmpty) {
+      for (var i = 0; i < globalctx.promotedDestinations.length; i++) {
+        var dest = globalctx.promotedDestinations[i];
         var key = GlobalKey();
         globalctx.keys["destination-$i"] = key;
-        destinations.add(
-            CustomFormDestination(data: data, index: i, destination: dest));
-        i++;
+        destinations.add(CustomFormDestination(index: i, destination: dest));
       }
     }
     return Column(
