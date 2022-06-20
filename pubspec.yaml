@@ -110,6 +110,7 @@ flutter:
   assets:
     - assets/
     - assets/data/
+    - assets/images/
     - assets/images/1x/
     - assets/images/0.5x/
     - assets/images/0.75x/
