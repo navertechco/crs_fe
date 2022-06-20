@@ -228,7 +228,7 @@ void setServiceState(service, state) {
 String getServiceState(service) {
   globalctx.states["services"][currentDestination.value] ??= {}.obs;
   globalctx.states["services"][currentDestination.value][service] ??= {}.obs;
-  String state =
+  String? state =
       globalctx.states["services"][currentDestination.value][service]["state"];
   state ??= "suggested";
   return state;

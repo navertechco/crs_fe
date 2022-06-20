@@ -11,7 +11,7 @@ class GoldBorderWidget extends StatelessWidget {
         decoration: BoxDecoration(
           image: DecorationImage(
             image: Image.asset(
-              "assets/images/1/Recurso_211mdpi.png",
+              "assets/images/1x/Recurso_211mdpi.png",
               width: MediaQuery.of(context).size.width * 0.1,
               fit: BoxFit.fill,
             ).image,

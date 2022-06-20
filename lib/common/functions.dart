@@ -496,12 +496,12 @@ void gotoPage(page) {
 /// ```
 /// @return void
 ///
-logOut(
+Future logOut(
   username,
 ) async {
   var res = await fetchHandler(kDefaultSchema, kDefaultServer,
       kDefaultServerPort, kDefaultConnectPath, 'POST', {
-    "state": "logOut",
+    "state": "logout",
     "data": {"username": username}
   });
 

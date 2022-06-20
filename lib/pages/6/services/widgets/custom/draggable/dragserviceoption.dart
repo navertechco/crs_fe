@@ -26,14 +26,14 @@ class DragServiceOptionWidget extends StatelessWidget {
                         onTap: () {
                           setServiceState(service, "suggested");
                         },
-                        child: Image.asset("assets/images/1/redmark.png",
+                        child: Image.asset("assets/images/1x/redmark.png",
                             width: Get.width * 0.02),
                       )
                     : GestureDetector(
                         onTap: () {
                           setServiceState(service, "suggested");
                         },
-                        child: Image.asset("assets/images/1/greencheck.png",
+                        child: Image.asset("assets/images/1x/greencheck.png",
                             width: Get.width * 0.02),
                       )
               ],

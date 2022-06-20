@@ -15,7 +15,7 @@ class SearcherPage extends GetView<SearcherController> {
           return true;
         },
         child: BodyLayoutWidget(
-          background: "assets/images/1/layout.png",
+          background: "assets/images/1x/layout.png",
           child: Stack(
             children: [
               QuoteHistoryTitle(),
