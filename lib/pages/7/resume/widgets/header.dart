@@ -107,7 +107,20 @@ class Header extends StatelessWidget {
             level: 2,
             label:
                 "Itinerary #(Between: ${currentDayFormat.format(arrivalDate.value)} and ${currentDayFormat.format(departureDate.value)})"),
-       
+        Row(
+          children: [
+            CustomPadingTitleWidget(
+                customlabel: "\t\tGuides:\t\t\t\t",
+                fontWeight: FontWeight.bold),
+            Counter(
+              initial: 0,
+              min: 0,
+              max: 50,
+              step: 1,
+              onValueChanged: (value) {},
+            ),
+          ],
+        ),
       ],
     );
   }

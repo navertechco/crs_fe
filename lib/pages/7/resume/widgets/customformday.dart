@@ -3,8 +3,7 @@
 import 'package:counter/counter.dart';
 import 'package:flutter/material.dart';
 import 'package:naver_crs/index.dart';
-import 'package:naver_crs/pages/7/resume/widgets/custompadingtitle.dart';
-import 'package:naver_crs/pages/7/resume/widgets/header.dart';
+import 'package:naver_crs/pages/7/resume/widgets/custompadingtitle.dart'; 
 import 'customdescription.dart';
 import 'customformexperiencedetail.dart';
 import 'customformtitle.dart';
@@ -37,20 +36,7 @@ class CustomFormDayWidget extends StatelessWidget {
                       : dayId == destDays.length - 1
                           ? "Departure"
                           : "Day: $dayId#####"),
-              Row(
-                children: [
-                  CustomPadingTitleWidget(
-                      customlabel: "\t\tGuides:\t\t\t\t",
-                      fontWeight: FontWeight.bold),
-                  Counter(
-                    initial: 0,
-                    min: 0,
-                    max: 50,
-                    step: 1,
-                    onValueChanged: (value) {},
-                  ),
-                ],
-              ),
+             
              
               CustomDescriptionWidget(
                   text: daydescription, width: 0.55, fontSize: 0.016),
