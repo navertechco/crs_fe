@@ -28,7 +28,7 @@ class CustomFormDayWidget extends StatelessWidget {
           (destinationindex != 0 ? destinationindex + 1 : destinationindex) +
               (destinationindex == 0 ? dayindex + 1 : dayindex + 2);
       var actualcost = 0.obs;
-      var cost = getFormValue(globalctx.memory, "netRate", dayindex, 0);
+      var cost = getFormValue(globalctx.memory, "netRate", destinationindex, 0);
       actualcost.value = cost;
       return RepaintBoundary(
           key: globalctx.keys["day-$destinationindex-$dayindex"],

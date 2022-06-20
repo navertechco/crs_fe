@@ -22,7 +22,7 @@ class CustomFormExperiencesDetailWidget extends StatelessWidget {
     var day = days[dayindex].value;
     var dayexps = day['experiences'];
     var expList = dayexps.keys.toList();
-    var actualCost = getFormValue(globalctx.memory, "netRate", dayindex, 0);
+    var actualCost = 0;
     List<Widget> list = [];
 
     for (var i = 0; i < dayexps.length; i++) {
@@ -30,11 +30,10 @@ class CustomFormExperiencesDetailWidget extends StatelessWidget {
       var expData = getExperienceByName(expName);
       int cost = expData.value["cost"];
       actualCost += cost;
-      setFormValue(globalctx.memory, "netRate", dayindex, actualCost);
       list.add(CustomFormExperienceRowWidget(
           indexes: [destinationindex, dayindex, i]));
     }
-
+    setFormValue(globalctx.memory, "netRate", destinationindex, actualCost);
     return Padding(
       padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.05),
       child: Column(
