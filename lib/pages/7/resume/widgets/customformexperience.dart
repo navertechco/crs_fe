@@ -45,7 +45,10 @@ class CustomFormExperienceRowWidget extends StatelessWidget {
           ),
           if (experienceType == "meal")
             OptionField(
-                onChange: (value) {},
+                onChange: (value) {
+                  globalctx.memory["promoted"][destDay][expName]["value"]
+                      ["meal_type"] = value;
+                },
                 label: "\t\tMeal Option (A, B, C, D):\t\t\t\t",
                 data: [0, 1, 2, 3]),
           Image.asset(
