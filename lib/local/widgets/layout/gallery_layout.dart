@@ -11,7 +11,7 @@ class GalleryLayoutWidget extends StatelessWidget {
       Positioned(
         left: 0,
         child: Image.asset(
-          "assets/images/1/layout.png",
+          "assets/images/1x/layout.png",
           fit: BoxFit.fill,
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
@@ -21,7 +21,7 @@ class GalleryLayoutWidget extends StatelessWidget {
       Positioned(
         left: 0,
         child: Image.asset(
-          "assets/images/1/gallery_left.png",
+          "assets/images/1x/gallery_left.png",
           fit: BoxFit.fitHeight,
           height: MediaQuery.of(context).size.height,
         ),
@@ -30,7 +30,7 @@ class GalleryLayoutWidget extends StatelessWidget {
         top: MediaQuery.of(context).size.height * 0.0045,
         left: MediaQuery.of(context).size.width * 0.85,
         child: Image.asset(
-          "assets/images/1/gallery_right.png",
+          "assets/images/1x/gallery_right.png",
           fit: BoxFit.fitHeight,
           height: MediaQuery.of(context).size.height * 0.995,
         ),

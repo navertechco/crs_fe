@@ -61,7 +61,7 @@ class DestinationFrontOptionWidget extends StatelessWidget {
                               color: Colors.white)
                           .getStyle()),
                   SizedBox(width: MediaQuery.of(context).size.width * 0.25),
-                  Image.asset("assets/images/1/arrival.png",
+                  Image.asset("assets/images/1x/arrival.png",
                       color: Colors.yellowAccent,
                       width: MediaQuery.of(context).size.width * 0.05,
                       height: MediaQuery.of(context).size.height * 0.1),
@@ -84,7 +84,7 @@ class DestinationFrontOptionWidget extends StatelessWidget {
                               color: Colors.white)
                           .getStyle()),
                   SizedBox(width: MediaQuery.of(context).size.width * 0.22),
-                  Image.asset("assets/images/1/departure.png",
+                  Image.asset("assets/images/1x/departure.png",
                       color: Colors.redAccent,
                       width: MediaQuery.of(context).size.width * 0.05,
                       height: MediaQuery.of(context).size.height * 0.1),

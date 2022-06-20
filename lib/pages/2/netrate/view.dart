@@ -16,7 +16,7 @@ class NetRatePage extends GetView<NetRateController> {
 
   Widget _buildView(BuildContext _context) {
     return ContentLayoutWidget(
-        background: "assets/images/1/resume.png",
+        background: "assets/images/1x/resume.png",
         child: Stack(
           children: [
             NetRateWidget(pkeys: keys),

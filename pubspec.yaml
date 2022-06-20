@@ -110,9 +110,10 @@ flutter:
   assets:
     - assets/
     - assets/data/
-    - assets/images/1/
-    - assets/images/0.5/
-    - assets/images/0.75/
+    - assets/images/
+    - assets/images/1x/
+    - assets/images/0.5x/
+    - assets/images/0.75x/
 
   generate: true
   uses-material-design: true
@@ -130,7 +131,7 @@ flutter_intl:
 flutter_icons:
   android: "icon"
   ios: false
-  image_path_ios: "assets/images/1/icon.png"
-  image_path_android: "assets/images/1/icon.png"
-  adaptive_icon_background: "assets/images/1/icon.png"
-  adaptive_icon_foreground: "assets/images/1/icon.png"
+  image_path_ios: "assets/images/1x/icon.png"
+  image_path_android: "assets/images/1x/icon.png"
+  adaptive_icon_background: "assets/images/1x/icon.png"
+  adaptive_icon_foreground: "assets/images/1x/icon.png"

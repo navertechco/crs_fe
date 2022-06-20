@@ -9,7 +9,7 @@ class ServicesPage extends GetView<ServicesController> {
 
   Widget _buildView(BuildContext? _context) {
     return ContentLayoutWidget(
-        background: "assets/images/1/layout.png",
+        background: "assets/images/1x/layout.png",
         child: ServicesWidget(ctrl: controller),
         text: '');
   }

@@ -22,7 +22,7 @@ GetBuilder<PrintDocsController> _buildPrintDocsFormPage(
   return GetBuilder<PrintDocsController>(
     id: 'signin_form_page',
     builder: (controller) => ContentLayoutWidget(
-        background: "assets/images/1/home.png",
+        background: "assets/images/1x/home.png",
         child: PrintDocsFormPage(ctrl: controller),
         text: "<  PrintDocs"),
   );

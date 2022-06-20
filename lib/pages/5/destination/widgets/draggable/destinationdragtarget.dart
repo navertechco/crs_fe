@@ -34,7 +34,7 @@ class DestinationDragTargetWidget extends StatelessWidget {
                           children: [
                             Align(
                               alignment: Alignment.topCenter,
-                              child: Image.asset("assets/images/1/dots.png",
+                              child: Image.asset("assets/images/1x/dots.png",
                                   color: Colors.grey,
                                   width:
                                       MediaQuery.of(context).size.width * 0.05),

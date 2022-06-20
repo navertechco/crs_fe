@@ -35,7 +35,7 @@ GetBuilder<TourController> _buildTourFormPage(
     builder: (controller) => Stack(
       children: [
         ContentLayoutWidget(
-            background: "assets/images/1/tourparameters.png",
+            background: "assets/images/1x/tourparameters.png",
             child: TourFormPage(ctrl: controller),
             text: "              "),
       ],
