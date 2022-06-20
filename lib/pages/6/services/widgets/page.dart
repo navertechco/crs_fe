@@ -8,10 +8,9 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 /// hello
 class ServicesWidget extends HookWidget {
-  final ServicesController ctrl;
-  final formKey = GlobalKey<FormState>();
+  final ServicesController ctrl; 
 
-  ServicesWidget({Key? key, required this.ctrl}) : super(key: key);
+  const ServicesWidget({Key? key, required this.ctrl}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +19,9 @@ class ServicesWidget extends HookWidget {
 
     return Stack(children: [
       CustomTopDestinationWidget(
-          ctrl: ctrl, counter: counter, formKey: formKey),
+          ctrl: ctrl, counter: counter),
       CustomBodyDestinationsWidget(
-          ctrl: ctrl, counter: counter, formKey: formKey),
+          ctrl: ctrl, counter: counter),
     ]);
   }
 }

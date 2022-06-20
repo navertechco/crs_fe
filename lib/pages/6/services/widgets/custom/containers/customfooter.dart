@@ -6,12 +6,10 @@ import '../../../controller.dart';
 class CustomFooterWidget extends StatelessWidget {
   final ServicesController ctrl;
   final ValueNotifier<int> counter;
-  GlobalKey<FormState> formKey;
-  CustomFooterWidget({
+  const CustomFooterWidget({
     Key? key,
     required this.ctrl,
     required this.counter,
-    required this.formKey,
   }) : super(key: key);
 
   @override

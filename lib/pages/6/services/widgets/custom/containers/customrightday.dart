@@ -8,16 +8,14 @@ import '../../../controller.dart';
 class CustomTopDestinationWidget extends HookWidget {
   final ServicesController ctrl;
   final ValueNotifier<int> counter;
-  GlobalKey<FormState> formKey;
   CustomTopDestinationWidget({
     Key? key,
     required this.ctrl,
     required this.counter,
-    required this.formKey,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return DayExpFilter(ctrl: ctrl, counter: counter, formKey: formKey);
+    return DayExpFilter(ctrl: ctrl, counter: counter );
   }
 }
