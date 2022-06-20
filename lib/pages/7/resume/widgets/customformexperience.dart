@@ -11,12 +11,16 @@ class CustomFormExperienceRowWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     try {
+      var expList = [];
       var destDay = indexes[1];
       var experienceindex = indexes[2];
-      var promoted = globalctx.memory["promoted"][destDay];
-      for (var exp in promoted) {
-        expList.add(exp.key);
+      var promoted = globalctx.memory["promoted"].entries.toList();
+      var promotedDay = promoted[destDay];
+      var promotedList = promotedDay.value.keys.toList();
+      for (var exp in promotedList) {
+        expList.add(exp);
       }
+      promoted = promotedDay.value;
       var expName = expList[experienceindex];
       var nextIndex = experienceindex + 1 < promoted.length
           ? experienceindex + 1
@@ -25,10 +29,8 @@ class CustomFormExperienceRowWidget extends StatelessWidget {
       var experience = getExperienceByName(expName);
       var nextexperience = promoted[nextExpName];
       var title = expName.toString();
-      var description = experience['description'].toString();
-      var next = experience['next'].toString() != ''
-          ? experience['next'].toString()
-          : nextexperience['previous'].toString();
+      var description = experience.description.toString();
+      var next = nextexperience['description'].toString();
 
       return Column(
         children: [
