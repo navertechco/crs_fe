@@ -9,10 +9,7 @@ import 'customformtitle.dart';
 class Header extends StatelessWidget {
   const Header({
     Key? key,
-    required this.data,
   }) : super(key: key);
-
-  final Map<String, dynamic> data;
 
   @override
   Widget build(BuildContext context) {
@@ -117,12 +114,12 @@ class Header extends StatelessWidget {
               min: 0,
               max: 50,
               step: 1,
-              onValueChanged: (value) {},
+              onValueChanged: (value) {
+                setFormValue(globalctx.memory, "itinerary", "guides", value);
+              },
             ),
           ],
         ),
-        OptionField(
-            label: "\t\tMeal Option (A, B, C, D):\t\t\t\t", data: [0, 1, 2, 3])
       ],
     );
   }
@@ -133,29 +130,33 @@ class OptionField extends StatelessWidget {
     Key? key,
     this.label,
     this.data,
+    required this.onChange,
   }) : super(key: key);
   final label;
   final data;
+  final Function onChange;
   @override
   Widget build(BuildContext context) {
     var groupValue = 0.obs;
     changeField(value) {
       groupValue.value = value;
+      onChange(value);
     }
 
     var dataField = <Widget>[];
     for (var i = 0; i < data.length; i++) {
       dataField.add(
-        Radio(value: i, groupValue: groupValue.value, onChanged: changeField),
+        Obx(() => Radio(
+            value: i, groupValue: groupValue.value, onChanged: changeField)),
       );
     }
-    return Obx(() => Row(
-          children: [
-            CustomPadingTitleWidget(
-                customlabel: label, fontWeight: FontWeight.bold),
-            ...dataField
-          ],
-        ));
+    return Row(
+      children: [
+        CustomPadingTitleWidget(
+            customlabel: label, fontWeight: FontWeight.bold),
+        ...dataField
+      ],
+    );
   }
 }
 

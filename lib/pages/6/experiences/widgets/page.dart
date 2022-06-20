@@ -8,10 +8,9 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 /// hello
 class ExperiencesWidget extends HookWidget {
-  final ExperiencesController ctrl;
-  final formKey = GlobalKey<FormState>();
+  final ExperiencesController ctrl; 
 
-  ExperiencesWidget({Key? key, required this.ctrl}) : super(key: key);
+  const ExperiencesWidget({Key? key, required this.ctrl}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +19,7 @@ class ExperiencesWidget extends HookWidget {
 
     return Stack(children: [
       CustomTopDayWidget(),
-      CustomBodyDaysWidget(ctrl: ctrl, counter: counter, formKey: formKey),
+      CustomBodyDaysWidget(ctrl: ctrl, counter: counter ),
     ]);
   }
 }

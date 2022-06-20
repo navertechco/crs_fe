@@ -7,12 +7,10 @@ import 'customformtitle.dart';
 class CustomFormDestination extends StatelessWidget {
   const CustomFormDestination({
     Key? key,
-    required this.data,
     required this.index,
     required this.destination,
   }) : super(key: key);
 
-  final Map<String, dynamic> data;
   final int index;
   final destination;
   @override

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:naver_crs/index.dart';
+import 'package:naver_crs/pages/7/resume/widgets/header.dart';
 import 'customdescription.dart';
 
 class CustomFormExperienceRowWidget extends StatelessWidget {
@@ -11,24 +12,28 @@ class CustomFormExperienceRowWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     try {
+      var expList = [];
       var destDay = indexes[1];
       var experienceindex = indexes[2];
-      var promoted = globalctx.memory["promoted"][destDay];
-      for (var exp in promoted) {
-        expList.add(exp.key);
+      var promoted = globalctx.memory["promoted"].entries.toList();
+      var promotedDay = promoted[destDay];
+      var promotedList = promotedDay.value.keys.toList();
+      for (var exp in promotedList) {
+        expList.add(exp);
       }
+      promoted = promotedDay.value;
       var expName = expList[experienceindex];
       var nextIndex = experienceindex + 1 < promoted.length
           ? experienceindex + 1
           : experienceindex;
       var nextExpName = expList[nextIndex];
       var experience = getExperienceByName(expName);
+      var experienceType = experience.value["experience_type"];
+      var experienceDescription = experience.value["description"];
       var nextexperience = promoted[nextExpName];
       var title = expName.toString();
-      var description = experience['description'].toString();
-      var next = experience['next'].toString() != ''
-          ? experience['next'].toString()
-          : nextexperience['previous'].toString();
+      var description = experience.description.toString();
+      var next = nextexperience['description'].toString();
 
       return Column(
         children: [
@@ -38,8 +43,22 @@ class CustomFormExperienceRowWidget extends StatelessWidget {
             fontSize: 0.016,
             fontWeight: FontWeight.bold,
           ),
+          if (experienceType == "meal")
+            OptionField(
+                onChange: (value) {
+                  globalctx.memory["promoted"][destDay][expName]["value"]
+                      ["meal_type"] = value;
+                },
+                label: "\t\tMeal Option (A, B, C, D):\t\t\t\t",
+                data: [0, 1, 2, 3]),
           Image.asset(
             "assets/images/1x/Recurso_374mdpi.png",
+          ),
+          CustomDescriptionWidget(
+            text: "$experienceDescription",
+            width: 0.6,
+            fontSize: 0.016,
+            fontWeight: FontWeight.normal,
           ),
           CustomDescriptionWidget(
             text: description,

@@ -7,13 +7,11 @@ import 'package:get/get.dart';
 // ignore: must_be_immutable
 class CustomBodyDaysWidget extends HookWidget {
   final ExperiencesController ctrl;
-  final ValueNotifier<int> counter;
-  GlobalKey<FormState> formKey;
+  final ValueNotifier<int> counter; 
   CustomBodyDaysWidget({
     Key? key,
     required this.ctrl,
-    required this.counter,
-    required this.formKey,
+    required this.counter, 
   }) : super(key: key);
 
   @override
@@ -27,7 +25,7 @@ class CustomBodyDaysWidget extends HookWidget {
               top: MediaQuery.of(context).size.height * 0.815,
               left: MediaQuery.of(context).size.width * 0.68),
           child: CustomFooterWidget(
-              ctrl: ctrl, counter: counter, formKey: formKey),
+              ctrl: ctrl, counter: counter ),
         ),
         Padding(
           padding: EdgeInsets.only(

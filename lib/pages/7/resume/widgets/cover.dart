@@ -3,9 +3,8 @@ import 'package:naver_crs/index.dart';
 import 'customdescription.dart';
 
 class Cover extends StatelessWidget {
-  const Cover({Key? key, required this.data}) : super(key: key);
-
-  final Map<String, dynamic> data;
+  const Cover({Key? key }) : super(key: key);
+ 
 
   @override
   Widget build(BuildContext context) {

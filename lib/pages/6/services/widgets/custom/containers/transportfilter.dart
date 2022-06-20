@@ -7,10 +7,9 @@ import '../../../controller.dart';
 
 // ignore: must_be_immutable
 class DayExpFilter extends HookWidget {
-  DayExpFilter(
-      {Key? key, required this.ctrl, this.counter, required this.formKey})
-      : super(key: key);
-  GlobalKey<FormState> formKey;
+  const DayExpFilter(
+      {Key? key, required this.ctrl, this.counter })
+      : super(key: key); 
   final ServicesController ctrl;
   final counter;
   @override
@@ -20,18 +19,17 @@ class DayExpFilter extends HookWidget {
         top: MediaQuery.of(context).size.height * 0,
         left: MediaQuery.of(context).size.width * 0.6,
       ),
-      child: BodyWidget(ctrl: ctrl, counter: counter, formKey: formKey),
+      child: BodyWidget(ctrl: ctrl, counter: counter,  ),
     );
   }
 }
 
 // ignore: must_be_immutable
 class BodyWidget extends StatelessWidget {
-  BodyWidget({Key? key, this.ctrl, this.counter, required this.formKey})
+  const BodyWidget({Key? key, this.ctrl, this.counter, })
       : super(key: key);
   final ctrl;
-  final counter;
-  GlobalKey<FormState> formKey;
+  final counter; 
   @override
   Widget build(BuildContext context) {
     return Obx(() {

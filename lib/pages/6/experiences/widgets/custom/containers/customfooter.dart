@@ -5,13 +5,11 @@ import 'package:naver_crs/index.dart';
 // ignore: must_be_immutable
 class CustomFooterWidget extends StatelessWidget {
   final ExperiencesController ctrl;
-  final ValueNotifier<int> counter;
-  GlobalKey<FormState> formKey;
-  CustomFooterWidget({
+  final ValueNotifier<int> counter; 
+  const CustomFooterWidget({
     Key? key,
     required this.ctrl,
-    required this.counter,
-    required this.formKey,
+    required this.counter, 
   }) : super(key: key);
 
   @override
