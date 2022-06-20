@@ -149,13 +149,13 @@ class OptionField extends StatelessWidget {
         Radio(value: i, groupValue: groupValue.value, onChanged: changeField),
       );
     }
-    return Obx(() => Row(
-          children: [
-            CustomPadingTitleWidget(
-                customlabel: label, fontWeight: FontWeight.bold),
-            ...dataField
-          ],
-        ));
+    return Row(
+      children: [
+        CustomPadingTitleWidget(
+            customlabel: label, fontWeight: FontWeight.bold),
+        ...dataField
+      ],
+    );
   }
 }
 
