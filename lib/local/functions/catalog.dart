@@ -3,34 +3,6 @@ import 'package:naver_crs/common/com/index.dart';
 
 import 'package:naver_crs/index.dart';
 
-/// ## getCatalog
-/// *__Method to fetch a catalog list from backend__*
-///
-/// @param List<Catalog>
-///
-///### Uses:
-/// ```dart
-///  getCatalog(["catalog1", "catalog2"])
-/// ```
-///
-/// @return void
-///
-void getCatalog(
-  List<String> catalogs,
-) async {
-  var res = await fetchHandler(kDefaultSchema, kDefaultServer,
-      kDefaultServerPort, kDefaultCatalogPath, 'POST', {
-    "data": {"catalogs": catalogs}
-  });
-  // ignore: avoid_print
-  log(res);
-  if (res['state'] == true) {
-    setContext("catalogs", res['data']);
-  }
-}
-
-
-
 /// ## getMemoryCatalogChild
 /// *__Method to get filtered catalog child from memory__*
 ///
@@ -301,8 +273,8 @@ dynamic getCatalogs(catalogs) async {
     "data": {"catalogs": catalogs}
   });
   if (res['state'] == true) {
-    var entries = res['data']["catalogs"].values.toList();
-    return entries;
+    var catalogs = getContext("catalogs") ?? {};
+    setContext("catalogs", {...catalogs, ...res['data']["catalogs"] as Map});
   } else {
     log(res["message"]);
   }

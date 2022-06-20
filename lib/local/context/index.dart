@@ -41,6 +41,7 @@ class LocalContext extends Context {
     "experiences": {},
     "services": {},
     "promoted": {},
+    "netRate": {},
     "days_left": 0
   }.obs;
   int counter = 0;

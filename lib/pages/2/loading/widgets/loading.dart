@@ -42,6 +42,7 @@ class LoadingWidget extends GetView<LoadingController> {
                           height: 0.07,
                           fontSize: 5,
                           onPressed: () {
+                            getCatalogs(["experiences"]);
                             getTour(context, tourId: 0, cb: (data) {
                               if (data.length > 0) {
                                 globalctx.memory["tours"] = data;

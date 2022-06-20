@@ -337,9 +337,10 @@ getExperienceValueByName(String experience) {
 }
 
 getExperienceByName(String experience) {
+  var expCatalog = findCatalog("experiences").toList();
   var result;
   try {
-    result = toCatalog(expList.firstWhere(
+    result = toCatalog(expCatalog.firstWhere(
         (element) => element["description"].toString() == experience));
   } catch (e) {
     log(e);

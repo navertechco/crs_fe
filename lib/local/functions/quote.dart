@@ -146,6 +146,7 @@ DataCell getQuoteHistoryDataCell(context, row) {
       icon: const Icon(Icons.event_note_rounded, size: 20),
       tooltip: 'Show QuoteHistory Itinerary',
       onPressed: () {
+        globalctx.memory["netRate"] = {};
         showCustomDialog(
           context,
           SingleChildScrollView(

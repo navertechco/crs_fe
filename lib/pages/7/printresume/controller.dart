@@ -26,7 +26,7 @@ class PrintResumeController extends GetxController {
         });
 
         if (res['state'] == true) {
-          setContext("catalogs", res['data']["catalogs"]);
+         
           isLoading = !isLoading;
           Get.toNamed('/Loading');
         } else {
