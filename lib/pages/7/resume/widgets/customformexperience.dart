@@ -29,6 +29,7 @@ class CustomFormExperienceRowWidget extends StatelessWidget {
       var nextExpName = expList[nextIndex];
       var experience = getExperienceByName(expName);
       var experienceType = experience.value["experience_type"];
+      var experienceDescription = experience.value["description"];
       var nextexperience = promoted[nextExpName];
       var title = expName.toString();
       var description = experience.description.toString();
@@ -49,6 +50,12 @@ class CustomFormExperienceRowWidget extends StatelessWidget {
                 data: [0, 1, 2, 3]),
           Image.asset(
             "assets/images/1x/Recurso_374mdpi.png",
+          ),
+          CustomDescriptionWidget(
+            text: "$experienceDescription",
+            width: 0.6,
+            fontSize: 0.016,
+            fontWeight: FontWeight.normal,
           ),
           CustomDescriptionWidget(
             text: description,
