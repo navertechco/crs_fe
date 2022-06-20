@@ -131,20 +131,24 @@ class OptionField extends StatelessWidget {
     Key? key,
     this.label,
     this.data,
+    required this.onChange,
   }) : super(key: key);
   final label;
   final data;
+  final Function onChange;
   @override
   Widget build(BuildContext context) {
     var groupValue = 0.obs;
     changeField(value) {
       groupValue.value = value;
+      onChange(value);
     }
 
     var dataField = <Widget>[];
     for (var i = 0; i < data.length; i++) {
       dataField.add(
-        Radio(value: i, groupValue: groupValue.value, onChanged: changeField),
+        Obx(() => Radio(
+            value: i, groupValue: groupValue.value, onChanged: changeField)),
       );
     }
     return Row(
