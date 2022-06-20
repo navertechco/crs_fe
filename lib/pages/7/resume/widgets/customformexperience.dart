@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:naver_crs/index.dart';
+import 'package:naver_crs/pages/7/resume/widgets/header.dart';
 import 'customdescription.dart';
 
 class CustomFormExperienceRowWidget extends StatelessWidget {
@@ -27,6 +28,7 @@ class CustomFormExperienceRowWidget extends StatelessWidget {
           : experienceindex;
       var nextExpName = expList[nextIndex];
       var experience = getExperienceByName(expName);
+      var experienceType = experience.value["experience_type"];
       var nextexperience = promoted[nextExpName];
       var title = expName.toString();
       var description = experience.description.toString();
@@ -40,6 +42,10 @@ class CustomFormExperienceRowWidget extends StatelessWidget {
             fontSize: 0.016,
             fontWeight: FontWeight.bold,
           ),
+          if (experienceType == "meal")
+            OptionField(
+                label: "\t\tMeal Option (A, B, C, D):\t\t\t\t",
+                data: [0, 1, 2, 3]),
           Image.asset(
             "assets/images/1x/Recurso_374mdpi.png",
           ),
