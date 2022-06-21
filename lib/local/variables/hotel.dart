@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import '../../index.dart';
 
@@ -9,3 +10,10 @@ var budgets = {"1": "5 stars", "0": "4 stars"};
 List filteredHotel = [];
 var currentHotelName = Rx(getFormValue(
     globalctx.memory["destinations"], globalDestinationIndex, "hotelName", ''));
+var hotelTable = Rx(
+  DataTable(
+    columns: searcherHeader.value,
+    rows: searcherDetail.value,
+  ),
+);
+var hotelFilterMemory = <String>[].obs;
