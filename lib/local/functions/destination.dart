@@ -928,3 +928,21 @@ List<Map<String, dynamic>> filterTrByAge() {
   }).toList();
  return result;
 }
+
+/// ## clearCurrentDestinationKeyActivities
+/// *__Method to clear Key Activities__*
+///
+///### Uses:
+/// ```dart
+///     clearCurrentDestinationKeyActivities();
+/// ```
+/// ### Returns:
+///```dart
+/// void
+///```
+void clearCurrentDestinationKeyActivities() {
+  clearedKA[currentDay.value] ??= false;
+  if (clearedKA[currentDay.value]) {
+    currentDestinationKeyActivities.value = [];
+  }
+}

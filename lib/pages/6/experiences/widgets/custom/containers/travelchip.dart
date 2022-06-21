@@ -27,7 +27,7 @@ class TravelChips extends HookWidget {
                       onSelected: (bool value) {},
                       onDeleted: () {
                         clearedKA[currentDay.value] = true;
-                        clearKA();
+                        clearCurrentDestinationKeyActivities();
                         filterExperiences();
                       },
                     ),
@@ -39,7 +39,7 @@ class TravelChips extends HookWidget {
                       onSelected: (bool value) {},
                       onDeleted: () {
                         clearedHours[currentDay.value] = true;
-                        clearHours();
+                        clearCurrentDayHours();
                         filterExperiences();
                       },
                     ),

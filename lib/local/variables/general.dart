@@ -262,6 +262,7 @@ var currentDestinationType = "arrival";
 var currentDestinationKeyActivities = [].obs;
 var leftHours = {}.obs;
 var endHours = {}.obs;
+var experiencePromotedDragData = Rx(<Widget>[]);
 var trMaxHourValues = {
   "SOFT": 1,
   "MEDIUM": 1,

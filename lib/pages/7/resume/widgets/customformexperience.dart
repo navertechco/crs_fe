@@ -27,7 +27,7 @@ class CustomFormExperienceRowWidget extends StatelessWidget {
           ? experienceindex + 1
           : experienceindex;
       var nextExpName = expList[nextIndex];
-      var experience = getExperienceByName(expName);
+      var experience = getExperienceDataByName(expName);
       var experienceType = experience.value["experience_type"];
       var experienceDescription = experience.value["description"];
       var nextexperience = promoted[nextExpName];

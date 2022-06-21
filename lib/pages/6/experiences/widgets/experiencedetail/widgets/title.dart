@@ -17,7 +17,7 @@ class TitleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var expData = getExperienceByName(experience).value;
+    var expData = getExperienceDataByName(experience).value;
     Rx<TimeOfDay?> timeStart = Rx(getFormValue(
             globalctx.memory["days"][currentDay.value],
             experience,

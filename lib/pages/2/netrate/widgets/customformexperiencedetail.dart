@@ -27,7 +27,7 @@ class CustomFormExperiencesDetailWidget extends StatelessWidget {
 
     for (var i = 0; i < dayexps.length; i++) {
       var expName = expList[i];
-      var expData = getExperienceByName(expName);
+      var expData = getExperienceDataByName(expName);
       int cost = expData.value["cost"];
       actualCost += cost;
       list.add(CustomFormExperienceRowWidget(

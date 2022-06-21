@@ -31,8 +31,8 @@ import 'package:naver_crs/index.dart';
 void filterSuggestedExperiences() {
   processDays();
   filterExperiences();
-  clearHours();
-  clearKA();
+  clearCurrentDayHours();
+  clearCurrentDestinationKeyActivities();
 }
 
 /// ## filterExperiences
@@ -125,7 +125,7 @@ void processFilteredExperienes() {
     }
     try {
       var compare = currentDestinationType;
-      var tr = getExperienceByName(e.description).value["experience_type"];
+      var tr = getExperienceDataByName(e.description).value["experience_type"];
       var rule = tr == compare;
       return rule;
     } catch (e) {
@@ -143,10 +143,10 @@ void processFilteredExperienes() {
 
     var destKa = getDestinationKa(
         globalDestinationName.value, globalDestinationType.value);
-    String ka1 = getExperienceByName(e.description)
+    String ka1 = getExperienceDataByName(e.description)
         .value["keyActivityType_fk"]
         .toString();
-    String ka2 = getExperienceByName(e.description)
+    String ka2 = getExperienceDataByName(e.description)
         .value["keyActivityType_fk2"]
         .toString();
     var rule1 = destKa.contains(ka1);
@@ -161,8 +161,8 @@ void processFilteredExperienes() {
       return true;
     }
     var purposes = globalctx.memory["tour"]["purposes"];
-    String p1 = getExperienceByName(e.description).value["purpose_fk"];
-    String p2 = getExperienceByName(e.description).value["purpose_fk2"];
+    String p1 = getExperienceDataByName(e.description).value["purpose_fk"];
+    String p2 = getExperienceDataByName(e.description).value["purpose_fk2"];
     var rule1 = purposes.contains(p1);
     var rule2 = purposes.contains(p2);
     return rule1 || rule2;
@@ -176,7 +176,7 @@ void processFilteredExperienes() {
     }
     try {
       var dateName = openDays[DateFormat('E').format(currentDate.value)];
-      var open = getExperienceByName(e.description)
+      var open = getExperienceDataByName(e.description)
           .value["openDays"]
           .toString()
           .split(",");
@@ -218,7 +218,8 @@ void processFilteredExperienes() {
     var total = totalHours[currentDay.value] ?? 0.0.obs;
     var acc = accumulatedHours[currentDay.value] ?? 0.0.obs;
     var currentLeft = (total.value - acc.value) * 60;
-    var expTime = getExperienceByName(e.description).value["exptime"] ?? 600;
+    var expTime =
+        getExperienceDataByName(e.description).value["exptime"] ?? 600;
     var rule = expTime <= currentLeft;
     var rule2 =
         (expTime - currentLeft) <= getTrLimit(currentTravelRhythm.value);
@@ -305,8 +306,8 @@ void initializeHours() {
       accumulatedHours[currentDay.value].value;
   endHours[currentDay.value].value =
       time.addHour(totalHours[currentDay.value].value.round() as int);
-  clearHours();
-  clearKA();
+  clearCurrentDayHours();
+  clearCurrentDestinationKeyActivities();
 }
 
 /// ## promoteMealExperineces
@@ -415,13 +416,35 @@ void saveExperience(experience, state) {
   }
 }
 
-resetDayCounters() {
+/// ## resetDayCounters
+/// *__Method to reset day counters__*
+///
+///### Uses:
+/// ```dart
+///        resetDayCounters();
+/// ```
+/// ### Returns:
+///```dart
+/// void
+///```
+void resetDayCounters() {
   accumulatedHours[currentDay.value].value = 0.0;
   leftHours[currentDay.value].value = totalHours[currentDay.value].value;
   initializeHours();
 }
 
-setExperienceState(experience, state) {
+/// ## setExperienceState
+/// *__Method to set Experience State__*
+///
+///### Uses:
+/// ```dart
+///       setExperienceState(experience, state);
+/// ```
+/// ### Returns:
+///```dart
+/// void
+///```
+void setExperienceState(experience, state) {
   globalctx.states["experiences"][currentDay.value] ??= {}.obs;
   globalctx.states["experiences"][currentDay.value][experience] ??= {}.obs;
   globalctx.states["experiences"][currentDay.value][experience]["state"] =
@@ -430,7 +453,18 @@ setExperienceState(experience, state) {
   filterSuggestedExperiences();
 }
 
-getExperienceState(experience) {
+/// ## getExperienceState
+/// *__Method to get Experience State__*
+///
+///### Uses:
+/// ```dart
+///     suggested = getExperienceState(experience) == "suggested";
+/// ```
+/// ### Returns:
+///```dart
+/// String
+///```
+String getExperienceState(experience) {
   globalctx.states["experiences"][currentDay.value] ??= {}.obs;
   globalctx.states["experiences"][currentDay.value][experience] ??= {}.obs;
   var state =
@@ -439,34 +473,56 @@ getExperienceState(experience) {
   return state;
 }
 
-var experiencePromotedDragData = Rx(<Widget>[]);
-
-calculateExperienceDays(String experience) {
-  var expData = getExperienceByName(experience).value;
-  var exptime = (parseInt(expData['exptime']) * 1.0) as double;
+/// ## calculateExperienceDays
+/// *__Method to calculate Experience Days__*
+///
+///### Uses:
+/// ```dart
+///     var value = calculateExperienceDays(experience);
+/// ```
+/// ### Returns:
+///```dart
+/// double
+///```
+double calculateExperienceDays(String experience) {
+  var expData = getExperienceDataByName(experience).value;
+  double exptime = (parseInt(expData['exptime']) * 1.0) as double;
   return exptime / 60;
 }
 
-getExperienceTravelRhythmByName(String experience) {
-  var expData = getExperienceValueByName(experience);
-  var trData = findCatalog("travel_rhythm").toList();
-  var trObject = trData.firstWhere((e) =>
-      e["description"].toString().toUpperCase() ==
-      expData["travel_rhythm"].toString().toUpperCase());
-  return trObject;
-}
-
+/// ## getExperienceValueByName
+/// *__Method to Experience Value by Name__*
+///
+///### Uses:
+/// ```dart
+///     var expData = getExperienceValueByName(experience);
+/// ```
+/// ### Returns:
+///```dart
+/// double
+///```
 getExperienceValueByName(String experience) {
   var result;
   try {
-    result = getExperienceByName(experience).value;
+    result = getExperienceDataByName(experience).value;
   } catch (e) {
     log(e);
   }
   return result;
 }
 
-getExperienceByName(String experience) {
+/// ## getExperienceDataByName
+/// *__Method to Experience Data by Name__*
+///
+///### Uses:
+/// ```dart
+///     var expData = getExperienceDataByName(experience);
+/// ```
+/// ### Returns:
+///```dart
+/// dynamic
+///```
+dynamic getExperienceDataByName(String experience) {
   var expCatalog = findCatalog("experiences").toList();
   var result;
   try {
@@ -478,25 +534,23 @@ getExperienceByName(String experience) {
   return result;
 }
 
-updateDraggableExperiences() {
-  if (globalctx.promotedExperiences.keys.contains("Leisure Time")) {
-    destDraggable.value = 0;
-  }
-}
-
-clearHours() {
+/// ## clearCurrentDayHours
+/// *__Method to clear Hours__*
+///
+///### Uses:
+/// ```dart
+///     clearCurrentDayHours();
+/// ```
+/// ### Returns:
+///```dart
+/// void
+///```
+void clearCurrentDayHours() {
   clearedHours[currentDay.value] ??= false;
   if (clearedHours[currentDay.value]) {
     currentTravelRhythm.value = "0";
     totalHours[currentDay.value].value = 10.0;
     leftHours[currentDay.value].value = totalHours[currentDay.value].value -
         accumulatedHours[currentDay.value].value;
-  }
-}
-
-clearKA() {
-  clearedKA[currentDay.value] ??= false;
-  if (clearedKA[currentDay.value]) {
-    currentDestinationKeyActivities.value = [];
   }
 }
