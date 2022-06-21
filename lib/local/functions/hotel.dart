@@ -22,28 +22,20 @@ import 'package:get/get.dart';
 // ██║     ╚██████╔╝██║ ╚████║╚██████╗   ██║   ██║╚██████╔╝██║ ╚████║███████║
 // ╚═╝      ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝
 
-processHotelItinerary(row) {
-  var itinerary =
-      row["hotel_itinerary"].toString().replaceAll("[", '').replaceAll("]", '');
-  var itineraryList = itinerary.split(",");
-  var result = '';
-  var i = 1;
-  for (var item in itineraryList) {
-    if (item.toString() != '') {
-      result +=
-          "${getCatalogDescription(findCatalog("week_day"), i)}: ${item.toString()} \n";
-    }
 
-    if (i == 7) {
-      i = 1;
-    } else {
-      i++;
-    }
-  }
-  return result;
-}
-
-filterHotels(ctx) {
+ 
+/// ## filterHotels
+/// *__Method to filter Hotels__*
+///
+///### Uses:
+/// ```dart
+///        filterHotels(context);
+/// ```
+/// ### Returns:
+///```dart
+///   void
+///```
+void filterHotels(ctx) {
   hotelResults.value = [];
   filteredHotel = findCatalog("hotel");
 
@@ -138,7 +130,18 @@ filterHotels(ctx) {
   }
 }
 
-getHotelCapacity(hotelName) {
+/// ## getHotelCapacity
+/// *__Method to Hotel Capacity__*
+///
+///### Uses:
+/// ```dart
+///        var capacity = getHotelCapacity(element["value"]["hotelname"]);
+/// ```
+/// ### Returns:
+///```dart
+///   int
+///```
+int getHotelCapacity(hotelName) {
   var hotels = findCatalog("hotel");
   int capacity = 0;
   hotels = hotels
