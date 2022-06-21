@@ -9,23 +9,19 @@ import 'package:naver_crs/pages/5/destination/widgets/index.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:sweetalert/sweetalert.dart';
 
-
-
 // ██████╗ ███████╗███████╗████████╗██╗███╗   ██╗ █████╗ ████████╗██╗ ██████╗ ███╗   ██╗
 // ██╔══██╗██╔════╝██╔════╝╚══██╔══╝██║████╗  ██║██╔══██╗╚══██╔══╝██║██╔═══██╗████╗  ██║
 // ██║  ██║█████╗  ███████╗   ██║   ██║██╔██╗ ██║███████║   ██║   ██║██║   ██║██╔██╗ ██║
 // ██║  ██║██╔══╝  ╚════██║   ██║   ██║██║╚██╗██║██╔══██║   ██║   ██║██║   ██║██║╚██╗██║
 // ██████╔╝███████╗███████║   ██║   ██║██║ ╚████║██║  ██║   ██║   ██║╚██████╔╝██║ ╚████║
 // ╚═════╝ ╚══════╝╚══════╝   ╚═╝   ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝
-                                                                                     
-// ███████╗██╗   ██╗███╗   ██╗ ██████╗████████╗██╗ ██████╗ ███╗   ██╗███████╗           
-// ██╔════╝██║   ██║████╗  ██║██╔════╝╚══██╔══╝██║██╔═══██╗████╗  ██║██╔════╝           
-// █████╗  ██║   ██║██╔██╗ ██║██║        ██║   ██║██║   ██║██╔██╗ ██║███████╗           
-// ██╔══╝  ██║   ██║██║╚██╗██║██║        ██║   ██║██║   ██║██║╚██╗██║╚════██║           
-// ██║     ╚██████╔╝██║ ╚████║╚██████╗   ██║   ██║╚██████╔╝██║ ╚████║███████║           
-// ╚═╝      ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝           
-                                                                             
 
+// ███████╗██╗   ██╗███╗   ██╗ ██████╗████████╗██╗ ██████╗ ███╗   ██╗███████╗
+// ██╔════╝██║   ██║████╗  ██║██╔════╝╚══██╔══╝██║██╔═══██╗████╗  ██║██╔════╝
+// █████╗  ██║   ██║██╔██╗ ██║██║        ██║   ██║██║   ██║██╔██╗ ██║███████╗
+// ██╔══╝  ██║   ██║██║╚██╗██║██║        ██║   ██║██║   ██║██║╚██╗██║╚════██║
+// ██║     ╚██████╔╝██║ ╚████║╚██████╗   ██║   ██║╚██████╔╝██║ ╚████║███████║
+// ╚═╝      ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝
 
 /// ## dragDestination
 /// *__Method to drag a destinatio option widget to left container and account it__*
@@ -930,7 +926,7 @@ List<Map<String, dynamic>> filterTrByAge() {
     var rule = rule2;
     return rule;
   }).toList();
- return result;
+  return result;
 }
 
 /// ## clearCurrentDestinationKeyActivities
@@ -949,4 +945,98 @@ void clearCurrentDestinationKeyActivities() {
   if (clearedKA[currentDay.value]) {
     currentDestinationKeyActivities.value = [];
   }
+}
+
+/// ## getCurrentDestinationMaximumDays
+/// *__Method to get current Destination Maiximum days__*
+///
+///### Uses:
+/// ```dart
+///       int maxDestDays = getCurrentDestinationMaximumDays();
+/// ```
+/// ### Returns:
+///```dart
+///   int
+///```
+int getCurrentDestinationMaximumDays() {
+  updateDestinationDays();
+  int maxValue = getListMaxValue(destDays);
+  return maxValue;
+}
+
+/// ## getCurrentDestinationAccumulatedDaysOff
+/// *__Method to get destination accumulates daysoff days__*
+///
+///### Uses:
+/// ```dart
+///      int accOff = getCurrentDestinationAccumulatedDaysOff(destId);
+/// ```
+/// ### Returns:
+///```dart
+///   int
+///```
+getCurrentDestinationAccumulatedDaysOff(int destId) {
+  int accOff = 0;
+  for (int i = 0; i < destId; i++) {
+    accOff += daysOff[i] as int;
+  }
+  return accOff;
+}
+
+/// ## getCurrentDestinationDays
+/// *__Method to current destination days__*
+///
+///### Uses:
+/// ```dart
+///      int currenDestDays = getCurrentDestinationDays(destId);
+/// ```
+/// ### Returns:
+///```dart
+///   int
+///```
+int getCurrentDestinationDays(int destId) {
+  updateDestinationDays();
+  int result = destDays[destId];
+  return result;
+}
+
+/// ## updateDestinationDays
+/// *__Method to update Destination days__*
+///
+///### Uses:
+/// ```dart
+///      updateDestinationDays();
+/// ```
+/// ### Returns:
+///```dart
+///   void
+///```
+void updateDestinationDays() {
+  destDays = [];
+  for (var dest in globalctx.memory["destinations"].entries) {
+    var destDay = dest.value;
+    destDays.add(int.parse(destDay["explorationDay"]));
+  }
+}
+
+/// ## getCurrentDestinationDayId
+/// *__Method to get Day Id__*
+///
+///### Uses:
+/// ```dart
+///      var dayId = getCurrentDestinationDayId(destId, destDay);
+/// ```
+/// ### Returns:
+///```dart
+///   int
+///```
+int getCurrentDestinationDayId(int destId, int destDay) {
+  int maxDestDays = getCurrentDestinationMaximumDays();
+  int currenDestDays = getCurrentDestinationDays(destId);
+  int currenDestDaysOff = maxDestDays - currenDestDays;
+  pushList(daysOff, destId, currenDestDaysOff);
+  int accOff = getCurrentDestinationAccumulatedDaysOff(destId);
+  int destMatrixIndex = maxDestDays * destId + destDay;
+  int dayId = destMatrixIndex - accOff;
+  return dayId;
 }

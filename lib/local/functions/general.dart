@@ -142,18 +142,40 @@ void log(e) {
   print(e);
 }
 
-processNetRateData(context, data) {
+/// ## processNetRateData
+/// *__Method to process net rate Data to build DataTable__*
+///
+///### Uses:
+/// ```dart
+///     var processedData = processNetRateData(context, netRateData);
+/// ```
+/// ### Returns:
+///```dart
+/// List
+///```
+List processNetRateData(context, data) {
   var header = getNetRateHeader(context, data);
-  var detail = getNetRateDetail(context, data);
+  var detail = getNetRateDataRows(context, data);
   return [header, detail];
 }
 
-getNetRateHeader(context, data) {
-  var header = <DataColumn>[];
+/// ## getNetRateHeader
+/// *__Method to process net rate Header to build DataTable__*
+///
+///### Uses:
+/// ```dart
+///     var header = getNetRateHeader(context, data);
+/// ```
+/// ### Returns:
+///```dart
+/// List
+///```
+List<DataColumn> getNetRateHeader(context, data) {
+  List<DataColumn> result = <DataColumn>[];
   if (data.length > 0) {
     for (var key in data[0].keys) {
       String title = key ?? '';
-      header.add(DataColumn(
+      result.add(DataColumn(
         label: Text(
           title.capitalize!.replaceAll("_", " "),
           style: KTextSytle(
@@ -167,10 +189,21 @@ getNetRateHeader(context, data) {
     }
   }
 
-  return header;
+  return result;
 }
 
-getDetail(context, data, columns) {
+/// ## getTourDataRows
+/// *__Method to process Tour Detail DataRows to build DataTable__*
+///
+///### Uses:
+/// ```dart
+///     var detail = getTourDataRows(context, filteredData, null);
+/// ```
+/// ### Returns:
+///```dart
+/// List<DataRow>
+///```
+List<DataRow> getTourDataRows(context, data, columns) {
   var states = [
     "Error",
     "New",
@@ -181,7 +214,7 @@ getDetail(context, data, columns) {
     "Pending",
     "Approved",
   ];
-  var detail = <DataRow>[];
+  List<DataRow> detail = <DataRow>[];
   if (data.length > 0) {
     for (var row in data) {
       var cells = <DataCell>[];
@@ -263,8 +296,19 @@ getDetail(context, data, columns) {
   return detail;
 }
 
-getNetRateDetail(context, data) {
-  var detail = <DataRow>[];
+/// ## getNetRateDataRows
+/// *__Method to process net rate Detail DataRows to build DataTable__*
+///
+///### Uses:
+/// ```dart
+///     var detail = getNetRateDataRows(context, filteredData, null);
+/// ```
+/// ### Returns:
+///```dart
+/// List<DataRow>
+///```
+List<DataRow> getNetRateDataRows(context, data) {
+  List<DataRow> detail = <DataRow>[];
   if (data.length > 0) {
     for (var row in data) {
       var cells = <DataCell>[];
@@ -286,17 +330,42 @@ getNetRateDetail(context, data) {
   return detail;
 }
 
-getTrColor(tr) {
-  var color = {
+/// ## getTravelRhythmColor
+/// *__Method to get Ravel Rhythm Color__*
+///
+///### Uses:
+/// ```dart
+///     color: getTravelRhythmColor(getExperienceValueByName(experience)["travel_rhythm"]),
+/// ```
+/// ### Returns:
+///```dart
+/// Color?
+///```
+Color? getTravelRhythmColor(String travelRhythmName) {
+  Map<String, Color> color = {
     "SOFT": Colors.green,
     "MEDIUM": Colors.yellow,
     "HARD": Colors.red
   };
 
-  return color[tr.toString().toUpperCase()];
+  Color? result = color[travelRhythmName.toString().toUpperCase()];
+  return result;
 }
 
-purposeValidate(values) {
+/// ## validatePurposes
+/// *__Method to validate purpose before saving it__*
+///
+///### Uses:
+/// ```dart
+///     onSaved: (values) {
+///          validatePurposes(values);
+///        },
+/// ```
+/// ### Returns:
+///```dart
+/// void
+///```
+void validatePurposes(values) {
   if (values.length > 3) {
     var mem = [values[0], values[1], values[2]];
     absorvedPurpose.value = true;
@@ -306,7 +375,18 @@ purposeValidate(values) {
   }
 }
 
-savePurposes(values) {
+/// ## savePurposes
+/// *__Method to save purposes__*
+///
+///### Uses:
+/// ```dart
+///       savePurposes(values);
+/// ```
+/// ### Returns:
+///```dart
+/// void
+///```
+void savePurposes(values) {
   if (values == null) return;
   if (values.length <= 3) {
     purposeMemory.value = <String>[];
@@ -320,46 +400,19 @@ savePurposes(values) {
   }
 }
 
-getDayId(int destId, int destDay) {
-  var maxDestDays = getMaxDestDays();
-  var currenDestDays = getDestDays(destId);
-  var currenDestDaysOff = maxDestDays - currenDestDays;
-  pushList(daysOff, destId, currenDestDaysOff);
-  var accOff = getAccOff(destId);
-  var destMatrixIndex = maxDestDays * destId + destDay;
-  var dayId = destMatrixIndex - accOff;
-  return dayId;
-}
-
-updateDestDays() {
-  destDays = [];
-  for (var dest in globalctx.memory["destinations"].entries) {
-    var destDay = dest.value;
-    destDays.add(int.parse(destDay["explorationDay"]));
-  }
-}
-
-getDestDays(int destId) {
-  updateDestDays();
-  return destDays[destId];
-}
-
-getAccOff(destId) {
-  var accOff = 0;
-  for (var i = 0; i < destId; i++) {
-    accOff += daysOff[i] as int;
-  }
-  return accOff;
-}
-
-getMaxDestDays() {
-  updateDestDays();
-  var maxValue = getListMaxValue(destDays);
-  return maxValue;
-}
-
-getTrLimit(value) {
-  var trLimits = {
+/// ## getTravekRhythmLimit
+/// *__Method to get travel Rhythm Limit__*
+///
+///### Uses:
+/// ```dart
+///       getTravekRhythmLimit(currentTravelRhythm.value))
+/// ```
+/// ### Returns:
+///```dart
+///   int
+///```
+int getTravekRhythmLimit(String value) {
+  Map trLimits = {
     "soft": 60,
     "medium": 60,
     "hard": 180,
@@ -368,20 +421,45 @@ getTrLimit(value) {
     "2": 60,
     "3": 180
   };
-  var result = trLimits[value.toString().toLowerCase()];
+  int result = trLimits[value.toString().toLowerCase()];
   return result;
 }
 
-saveTravelCode(ctrl, value) {
+/// ## saveCustomerTravelCode
+/// *__Method to save Customer Travel Code__*
+///
+///### Uses:
+/// ```dart
+///       onSaved: (value) {
+///                             saveCustomerTravelCode(ctrl, value);
+///                           },
+/// ```
+/// ### Returns:
+///```dart
+///   void
+///```
+void saveCustomerTravelCode(ctrl, value) {
   leadPassenger.value = value!;
   ctrl!.state.leadPassenger = value;
-  ctrl!.state.travelCode =
-      getTravelCode(getValue(client, "lead_passenger", def: "jose cuevas"));
-  travelCode.value = getTravelCode(value);
+  ctrl!.state.travelCode = getCustomerTravelCode(
+      getValue(client, "lead_passenger", def: "jose cuevas"));
+  travelCode.value = getCustomerTravelCode(value);
 }
 
-getTravelCode(value) {
-  var res = value.toString().replaceAll(" ", "-") +
+/// ## getCustomerTravelCode
+/// *__Method to save Customer Travel Code__*
+///
+///### Uses:
+/// ```dart
+///      ctrl!.state.travelCode =
+/// getCustomerTravelCode(getValue(client, "lead_passenger", def: "jose cuevas"));
+/// ```
+/// ### Returns:
+///```dart
+///   String
+///```
+String getCustomerTravelCode(value) {
+  String res = value.toString().replaceAll(" ", "-") +
       "-" +
       tour["passengers"].toString() +
       "-" +

@@ -278,10 +278,10 @@ class CustomCustomerDataForm extends StatelessWidget {
                                   ctx: context),
                               value: leadPassenger.value,
                               onSaved: (value) {
-                                saveTravelCode(ctrl, value);
+                                saveCustomerTravelCode(ctrl, value);
                               },
                               onChanged: (value) {
-                                saveTravelCode(ctrl, value);
+                                saveCustomerTravelCode(ctrl, value);
                               },
                               keyboardType: TextInputType.name,
                               hintText: "Lead Passenger",

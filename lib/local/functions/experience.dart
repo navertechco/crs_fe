@@ -9,19 +9,17 @@ import 'package:naver_crs/index.dart';
 
 // ███████╗██╗  ██╗██████╗ ███████╗██████╗ ██╗███████╗███╗   ██╗ ██████╗███████╗
 // ██╔════╝╚██╗██╔╝██╔══██╗██╔════╝██╔══██╗██║██╔════╝████╗  ██║██╔════╝██╔════╝
-// █████╗   ╚███╔╝ ██████╔╝█████╗  ██████╔╝██║█████╗  ██╔██╗ ██║██║     █████╗  
-// ██╔══╝   ██╔██╗ ██╔═══╝ ██╔══╝  ██╔══██╗██║██╔══╝  ██║╚██╗██║██║     ██╔══╝  
+// █████╗   ╚███╔╝ ██████╔╝█████╗  ██████╔╝██║█████╗  ██╔██╗ ██║██║     █████╗
+// ██╔══╝   ██╔██╗ ██╔═══╝ ██╔══╝  ██╔══██╗██║██╔══╝  ██║╚██╗██║██║     ██╔══╝
 // ███████╗██╔╝ ██╗██║     ███████╗██║  ██║██║███████╗██║ ╚████║╚██████╗███████╗
 // ╚══════╝╚═╝  ╚═╝╚═╝     ╚══════╝╚═╝  ╚═╝╚═╝╚══════╝╚═╝  ╚═══╝ ╚═════╝╚══════╝
-                                                                             
-// ███████╗██╗   ██╗███╗   ██╗ ██████╗████████╗██╗ ██████╗ ███╗   ██╗███████╗   
-// ██╔════╝██║   ██║████╗  ██║██╔════╝╚══██╔══╝██║██╔═══██╗████╗  ██║██╔════╝   
-// █████╗  ██║   ██║██╔██╗ ██║██║        ██║   ██║██║   ██║██╔██╗ ██║███████╗   
-// ██╔══╝  ██║   ██║██║╚██╗██║██║        ██║   ██║██║   ██║██║╚██╗██║╚════██║   
-// ██║     ╚██████╔╝██║ ╚████║╚██████╗   ██║   ██║╚██████╔╝██║ ╚████║███████║   
-// ╚═╝      ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝   
 
-
+// ███████╗██╗   ██╗███╗   ██╗ ██████╗████████╗██╗ ██████╗ ███╗   ██╗███████╗
+// ██╔════╝██║   ██║████╗  ██║██╔════╝╚══██╔══╝██║██╔═══██╗████╗  ██║██╔════╝
+// █████╗  ██║   ██║██╔██╗ ██║██║        ██║   ██║██║   ██║██╔██╗ ██║███████╗
+// ██╔══╝  ██║   ██║██║╚██╗██║██║        ██║   ██║██║   ██║██║╚██╗██║╚════██║
+// ██║     ╚██████╔╝██║ ╚████║╚██████╗   ██║   ██║╚██████╔╝██║ ╚████║███████║
+// ╚═╝      ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝
 
 /// ## filterSuggestedExperiences
 /// *__Method to filter and reorder suggested experiences__*
@@ -227,8 +225,8 @@ void processFilteredExperienes() {
     var expTime =
         getExperienceDataByName(e.description).value["exptime"] ?? 600;
     var rule = expTime <= currentLeft;
-    var rule2 =
-        (expTime - currentLeft) <= getTrLimit(currentTravelRhythm.value);
+    var rule2 = (expTime - currentLeft) <=
+        getTravekRhythmLimit(currentTravelRhythm.value);
     return rule || rule2;
   }).toList();
 
@@ -239,7 +237,7 @@ void processFilteredExperienes() {
     }
     if (currentDay.value == 0) {
       if (closeTime - parseHour(arrivalHour.value) >
-          getTrLimit(currentTravelRhythm.value)) {
+          getTravekRhythmLimit(currentTravelRhythm.value)) {
         return true;
       }
       return false;
@@ -250,7 +248,7 @@ void processFilteredExperienes() {
       endHours[currentDay.value].value =
           time.addHour(totalHours[currentDay.value].value.round() as int);
       var rule = closeTime - toMinutes(endHours[currentDay.value].value) >
-          getTrLimit(currentTravelRhythm.value);
+          getTravekRhythmLimit(currentTravelRhythm.value);
       return rule;
     }
   }).toList();
@@ -559,6 +557,7 @@ void setCurrentLeisureTime(value) {
       value;
   experiences = findCatalog("experiences");
 }
+
 /// ## clearCurrentDayHours
 /// *__Method to clear Hours__*
 ///

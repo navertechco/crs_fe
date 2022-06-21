@@ -5,20 +5,19 @@ import 'package:get/get.dart';
 import 'package:sweetalert/sweetalert.dart';
 import 'package:yaml/yaml.dart';
 
-// ████████╗ ██████╗ ██╗   ██╗██████╗                                        
-// ╚══██╔══╝██╔═══██╗██║   ██║██╔══██╗                                       
-//    ██║   ██║   ██║██║   ██║██████╔╝                                       
-//    ██║   ██║   ██║██║   ██║██╔══██╗                                       
-//    ██║   ╚██████╔╝╚██████╔╝██║  ██║                                       
-//    ╚═╝    ╚═════╝  ╚═════╝ ╚═╝  ╚═╝                                       
-                                                                          
+// ████████╗ ██████╗ ██╗   ██╗██████╗
+// ╚══██╔══╝██╔═══██╗██║   ██║██╔══██╗
+//    ██║   ██║   ██║██║   ██║██████╔╝
+//    ██║   ██║   ██║██║   ██║██╔══██╗
+//    ██║   ╚██████╔╝╚██████╔╝██║  ██║
+//    ╚═╝    ╚═════╝  ╚═════╝ ╚═╝  ╚═╝
+
 // ███████╗██╗   ██╗███╗   ██╗ ██████╗████████╗██╗ ██████╗ ███╗   ██╗███████╗
 // ██╔════╝██║   ██║████╗  ██║██╔════╝╚══██╔══╝██║██╔═══██╗████╗  ██║██╔════╝
 // █████╗  ██║   ██║██╔██╗ ██║██║        ██║   ██║██║   ██║██╔██╗ ██║███████╗
 // ██╔══╝  ██║   ██║██║╚██╗██║██║        ██║   ██║██║   ██║██║╚██╗██║╚════██║
 // ██║     ╚██████╔╝██║ ╚████║╚██████╗   ██║   ██║╚██████╔╝██║ ╚████║███████║
-// ╚═╝      ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝                                                                                                                                     
-         
+// ╚═╝      ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝
 
 /// ## processTour
 /// *__Method to prepare all memory data to send it to backend__*
@@ -140,7 +139,6 @@ Future saveTour() async {
   }
 }
 
-
 /// ## findTravelRhythmDescription
 /// *__Method to find travel Rhythm Description__*
 ///
@@ -186,12 +184,10 @@ void resetFindTourData(context, controller) {
     controller.clear();
     searchResult!.value = '';
     filteredData.value = data;
-    var detail = getDetail(context, filteredData, null);
+    var detail = getTourDataRows(context, filteredData, null);
     searcherDetail.value = (detail);
   }
 }
-
-
 
 /// ## filterFindTourData
 /// *__Method reset Find Tour Data__*
@@ -217,14 +213,13 @@ void filterFindTourData(context, value) {
               quote["name"].toString().contains(searchResult!.value) ||
               quote["quote"].toString().contains(searchResult!.value))
           .toList();
-      var detail = getDetail(context, filteredData, null);
+      var detail = getTourDataRows(context, filteredData, null);
       searcherDetail.value = (detail);
     }
   } catch (e) {
     log(e);
   }
 }
-
 
 /// ## saveTranslatingServices
 /// *__Method to save Translating Service in memory to backend__*
@@ -289,9 +284,6 @@ Future getTour(ctx, {int tourId = 0, detail = false, cb}) async {
     });
   }
 }
-
- 
-
 
 /// ## newTour
 /// *__Method to get NewTour Id from backend__*

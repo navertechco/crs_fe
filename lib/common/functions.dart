@@ -328,7 +328,7 @@ int parseInt(dynamic value) {
 ///
 List processData(context, data, columns) {
   List<DataColumn> header = getHeader(context, data, columns);
-  List<DataRow> detail = getDetail(context, data, columns);
+  List<DataRow> detail = getTourDataRows(context, data, columns);
   return [header, detail];
 }
 

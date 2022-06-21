@@ -252,10 +252,10 @@ class PurposeField extends StatelessWidget {
           value: purposeMemory.value,
           enabled: purposeMemory.value.length < 4,
           onSaved: (values) {
-            purposeValidate(values);
+            validatePurposes(values);
           },
           onChanged: (values) {
-            purposeValidate(values);
+            validatePurposes(values);
           },
           hintText: " ",
           label: "Purposes                      ",
