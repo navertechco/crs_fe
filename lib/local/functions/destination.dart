@@ -9,6 +9,20 @@ import 'package:naver_crs/pages/5/destination/widgets/index.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:sweetalert/sweetalert.dart';
 
+
+
+
+// oooooooooo.                          .    o8o                            .    o8o                                      oooooooooooo                                       .    o8o                                 
+// `888'   `Y8b                       .o8    `"'                          .o8    `"'                                      `888'     `8                                     .o8    `"'                                 
+//  888      888  .ooooo.   .oooo.o .o888oo oooo  ooo. .oo.    .oooo.   .o888oo oooo   .ooooo.  ooo. .oo.    .oooo.o       888         oooo  oooo  ooo. .oo.    .ooooo.  .o888oo oooo   .ooooo.  ooo. .oo.    .oooo.o 
+//  888      888 d88' `88b d88(  "8   888   `888  `888P"Y88b  `P  )88b    888   `888  d88' `88b `888P"Y88b  d88(  "8       888oooo8    `888  `888  `888P"Y88b  d88' `"Y8   888   `888  d88' `88b `888P"Y88b  d88(  "8 
+//  888      888 888ooo888 `"Y88b.    888    888   888   888   .oP"888    888    888  888   888  888   888  `"Y88b.        888    "     888   888   888   888  888         888    888  888   888  888   888  `"Y88b.  
+//  888     d88' 888    .o o.  )88b   888 .  888   888   888  d8(  888    888 .  888  888   888  888   888  o.  )88b       888          888   888   888   888  888   .o8   888 .  888  888   888  888   888  o.  )88b 
+// o888bood8P'   `Y8bod8P' 8""888P'   "888" o888o o888o o888o `Y888""8o   "888" o888o `Y8bod8P' o888o o888o 8""888P'      o888o         `V88V"V8P' o888o o888o `Y8bod8P'   "888" o888o `Y8bod8P' o888o o888o 8""888P' 
+           
+
+
+
 /// ## dragDestination
 /// *__Method to drag a destinatio option widget to left container and account it__*
 ///

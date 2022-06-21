@@ -7,18 +7,64 @@ import 'package:intl/intl.dart';
 import 'package:naver_crs/pages/6/experiences/widgets/custom/index.dart';
 import 'package:naver_crs/index.dart';
 
-filterSuggestedExperiences() {
+
+// oooooooooooo                                            o8o                                                          oooooooooooo                                       .    o8o                                 
+// `888'     `8                                            `"'                                                          `888'     `8                                     .o8    `"'                                 
+//  888         oooo    ooo oo.ooooo.   .ooooo.  oooo d8b oooo   .ooooo.  ooo. .oo.    .ooooo.   .ooooo.   .oooo.o       888         oooo  oooo  ooo. .oo.    .ooooo.  .o888oo oooo   .ooooo.  ooo. .oo.    .oooo.o 
+//  888oooo8     `88b..8P'   888' `88b d88' `88b `888""8P `888  d88' `88b `888P"Y88b  d88' `"Y8 d88' `88b d88(  "8       888oooo8    `888  `888  `888P"Y88b  d88' `"Y8   888   `888  d88' `88b `888P"Y88b  d88(  "8 
+//  888    "       Y888'     888   888 888ooo888  888      888  888ooo888  888   888  888       888ooo888 `"Y88b.        888    "     888   888   888   888  888         888    888  888   888  888   888  `"Y88b.  
+//  888       o  .o8"'88b    888   888 888    .o  888      888  888    .o  888   888  888   .o8 888    .o o.  )88b       888          888   888   888   888  888   .o8   888 .  888  888   888  888   888  o.  )88b 
+// o888ooooood8 o88'   888o  888bod8P' `Y8bod8P' d888b    o888o `Y8bod8P' o888o o888o `Y8bod8P' `Y8bod8P' 8""888P'      o888o         `V88V"V8P' o888o o888o `Y8bod8P'   "888" o888o `Y8bod8P' o888o o888o 8""888P' 
+//                           888                                                                                                                                                                                    
+//                          o888o                                                                                                                                                                                   
+                                                                                                                                                                                                                 
+         
+
+/// ## filterSuggestedExperiences
+/// *__Method to filter and reorder suggested experiences__*
+///
+///### Uses:
+/// ```dart
+///    filterSuggestedExperiences();
+/// ```
+/// ### Returns:
+///```dart
+/// void
+///```
+void filterSuggestedExperiences() {
   processDays();
   filterExperiences();
   clearHours();
   clearKA();
 }
 
-filterExperiences() {
+/// ## filterExperiences
+/// *__Method to filter experiences__*
+///
+///### Uses:
+/// ```dart
+///    filterExperiences();
+/// ```
+/// ### Returns:
+///```dart
+/// void
+///```
+void filterExperiences() {
   getFilteredExperiences();
   updateSelectedDragExperiences();
 }
 
+/// ## updateSelectedDragExperiences
+/// *__Method to update experience drag objects__*
+///
+///### Uses:
+/// ```dart
+///    updateSelectedDragExperiences();
+/// ```
+/// ### Returns:
+///```dart
+/// void
+///```
 updateSelectedDragExperiences() {
   experienceSelectedDragData.value = <Widget>[];
   for (var experience in filteredExperiences) {

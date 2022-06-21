@@ -6,6 +6,19 @@ import 'package:naver_crs/pages/5/destination/widgets/destinationdetail/widgets/
 import 'package:naver_crs/index.dart';
 import 'general.dart';
 
+
+
+// oooooooooo.                              oooooooooooo                                       .    o8o                                 
+// `888'   `Y8b                             `888'     `8                                     .o8    `"'                                 
+//  888      888  .oooo.   oooo    ooo       888         oooo  oooo  ooo. .oo.    .ooooo.  .o888oo oooo   .ooooo.  ooo. .oo.    .oooo.o 
+//  888      888 `P  )88b   `88.  .8'        888oooo8    `888  `888  `888P"Y88b  d88' `"Y8   888   `888  d88' `88b `888P"Y88b  d88(  "8 
+//  888      888  .oP"888    `88..8'         888    "     888   888   888   888  888         888    888  888   888  888   888  `"Y88b.  
+//  888     d88' d8(  888     `888'          888          888   888   888   888  888   .o8   888 .  888  888   888  888   888  o.  )88b 
+// o888bood8P'   `Y888""8o     .8'          o888o         `V88V"V8P' o888o o888o `Y8bod8P'   "888" o888o `Y8bod8P' o888o o888o 8""888P' 
+//                         .o..P'                                                                                                       
+//                         `Y8P'                                                                                                        
+                                                                                                                                     
+    
 /// ## paginateDay
 /// *__Method to paginate a day__*
 ///
