@@ -2,27 +2,26 @@
 // ignore_for_file: curly_braces_in_flow_control_structures
 import 'package:checkbox_formfield/checkbox_formfield.dart';
 import 'package:flutter/material.dart';
+import 'package:sweetalert/sweetalert.dart';
 import '../index.dart';
 import 'index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/pages/3/logistic/widgets/index.dart';
 
-//  ██████╗██████╗ ██╗   ██╗██╗███████╗███████╗                              
-// ██╔════╝██╔══██╗██║   ██║██║██╔════╝██╔════╝                              
-// ██║     ██████╔╝██║   ██║██║███████╗█████╗                                
-// ██║     ██╔══██╗██║   ██║██║╚════██║██╔══╝                                
-// ╚██████╗██║  ██║╚██████╔╝██║███████║███████╗                              
-//  ╚═════╝╚═╝  ╚═╝ ╚═════╝ ╚═╝╚══════╝╚══════╝                              
-                                                                          
+//  ██████╗██████╗ ██╗   ██╗██╗███████╗███████╗
+// ██╔════╝██╔══██╗██║   ██║██║██╔════╝██╔════╝
+// ██║     ██████╔╝██║   ██║██║███████╗█████╗
+// ██║     ██╔══██╗██║   ██║██║╚════██║██╔══╝
+// ╚██████╗██║  ██║╚██████╔╝██║███████║███████╗
+//  ╚═════╝╚═╝  ╚═╝ ╚═════╝ ╚═╝╚══════╝╚══════╝
+
 // ███████╗██╗   ██╗███╗   ██╗ ██████╗████████╗██╗ ██████╗ ███╗   ██╗███████╗
 // ██╔════╝██║   ██║████╗  ██║██╔════╝╚══██╔══╝██║██╔═══██╗████╗  ██║██╔════╝
 // █████╗  ██║   ██║██╔██╗ ██║██║        ██║   ██║██║   ██║██╔██╗ ██║███████╗
 // ██╔══╝  ██║   ██║██║╚██╗██║██║        ██║   ██║██║   ██║██║╚██╗██║╚════██║
 // ██║     ╚██████╔╝██║ ╚████║╚██████╗   ██║   ██║╚██████╔╝██║ ╚████║███████║
 // ╚═╝      ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝
-                                                                                                                                                                                                                                 
-      
 
 /// ## getCruiseItinerary
 /// *__Method to get the cruise itinerary from a gived extracted cruise registry from memory__*
@@ -409,7 +408,7 @@ DataCell getCruiseDataCell(context, row) {
               icon: const Icon(Icons.event_note_rounded, size: 20),
               tooltip: 'Show Cruise Itinerary',
               onPressed: () {
-                getCruise(context,
+                showCruiseResultDialog(context,
                     cruiseId: 999, cruiseName: row["description"]);
               },
             ),
@@ -475,6 +474,49 @@ DataCell getCruiseDataCell(context, row) {
         )),
   );
   return dataCell;
+}
+
+
+/// ## showCruiseResultDialog
+/// *__Method show Cruise Result dialog__*
+///
+///### Uses:
+/// ```dart
+///      onPressed: () {
+///   showCruiseResultDialog(context,
+///       cruiseId: 999, cruiseName: row["description"]);
+/// },
+/// ```
+/// ### Returns:
+///```dart
+/// void
+///```
+showCruiseResultDialog(ctx,
+    {int cruiseId = 999, String cruiseName = ''}) async {
+  var frame = {
+    "data": {
+      "cruise_id": cruiseId,
+      "cruise_name": cruiseName != '' ? cruiseName.split("-")[0] : ''
+    },
+  };
+  var res = await fetchHandler(kDefaultSchema, kDefaultServer,
+      kDefaultServerPort, kDefaultFindCruise, 'POST', frame);
+  // ignore: avoid_print
+  log(res);
+  if (res['state'] == true) {
+    var data = res['data'];
+    if (data.length > 0) {
+      showCruiseDetailDialog(ctx, data[0]);
+    }
+  } else {
+    SweetAlert.show(ctx,
+        curve: ElasticInCurve(),
+        title: res['message'],
+        style: SweetAlertStyle.error, onPress: (bool isConfirm) {
+      Get.close(1);
+      return false;
+    });
+  }
 }
 
 /// ## showCruiseDetailDialog

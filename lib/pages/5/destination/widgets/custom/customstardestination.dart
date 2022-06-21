@@ -164,7 +164,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                         textColor: Colors.black,
                         onPressed: () async {
-                          getHotel(context, id: 0, index: index);
+                          showHotelResultDialog(context, id: 0, index: index);
                         },
                       ),
                     ],
@@ -329,7 +329,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             textColor: Colors.black,
                             onPressed: () async {
-                              // getHotel(context, cruiseId: 0);
+                              // showHotelResultDialog(context, cruiseId: 0);
                             },
                           ),
                         ],

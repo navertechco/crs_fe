@@ -67,7 +67,7 @@ class CustomLeisureTimeDetailForm extends StatelessWidget {
             buttonColor: Colors.black,
           );
         } else {
-          setLT(lt.value);
+          setCurrentLeisureTime(lt.value);
           setFormValue(
               globalctx.memory["days"], currentDay.value, "$save", value);
 

@@ -2,29 +2,25 @@
 
 import 'package:checkbox_formfield/checkbox_icon_formfield.dart';
 import 'package:flutter/material.dart';
+import 'package:sweetalert/sweetalert.dart';
 import '../index.dart';
 import 'index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 
+// ██╗  ██╗ ██████╗ ████████╗███████╗██╗
+// ██║  ██║██╔═══██╗╚══██╔══╝██╔════╝██║
+// ███████║██║   ██║   ██║   █████╗  ██║
+// ██╔══██║██║   ██║   ██║   ██╔══╝  ██║
+// ██║  ██║╚██████╔╝   ██║   ███████╗███████╗
+// ╚═╝  ╚═╝ ╚═════╝    ╚═╝   ╚══════╝╚══════╝
 
-// ██╗  ██╗ ██████╗ ████████╗███████╗██╗                                     
-// ██║  ██║██╔═══██╗╚══██╔══╝██╔════╝██║                                     
-// ███████║██║   ██║   ██║   █████╗  ██║                                     
-// ██╔══██║██║   ██║   ██║   ██╔══╝  ██║                                     
-// ██║  ██║╚██████╔╝   ██║   ███████╗███████╗                                
-// ╚═╝  ╚═╝ ╚═════╝    ╚═╝   ╚══════╝╚══════╝                                
-                                                                          
 // ███████╗██╗   ██╗███╗   ██╗ ██████╗████████╗██╗ ██████╗ ███╗   ██╗███████╗
 // ██╔════╝██║   ██║████╗  ██║██╔════╝╚══██╔══╝██║██╔═══██╗████╗  ██║██╔════╝
 // █████╗  ██║   ██║██╔██╗ ██║██║        ██║   ██║██║   ██║██╔██╗ ██║███████╗
 // ██╔══╝  ██║   ██║██║╚██╗██║██║        ██║   ██║██║   ██║██║╚██╗██║╚════██║
 // ██║     ╚██████╔╝██║ ╚████║╚██████╗   ██║   ██║╚██████╔╝██║ ╚████║███████║
 // ╚═╝      ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝
-                                                                                                                                                                                                                      
-                                                                                                                                                 
-                                                                                                                                                 
-    
 
 processHotelItinerary(row) {
   var itinerary =
@@ -234,8 +230,66 @@ getHotelDetail(context, data, columns) {
 
   return detail;
 }
-
-
+/// ## showHotelResultDialog
+/// *__Method show Hotel Result dialog__*
+///
+///### Uses:
+/// ```dart
+///      showHotelResultDialog(context, id: 0, index: index);
+/// ```
+/// ### Returns:
+///```dart
+/// void
+///```
+void showHotelResultDialog(ctx, {int id = 0, int index = 0}) async {
+  currentDestinationIndex.value = index;
+  if (globalctx.memory["hotels"] == null) {
+    var frame = {
+      "data": {"id": id}
+    };
+    var res = await fetchHandler(kDefaultSchema, kDefaultServer,
+        kDefaultServerPort, kDefaultFindHotel, 'POST', frame);
+    // ignore: avoid_print
+    log(res);
+    if (res['state'] == true) {
+      var data = res['data'];
+      if (data.length > 0) {
+        globalctx.memory["hotels"] = data;
+        showCustomDialog(
+            ctx,
+            HotelCalendarWidget(
+              ctx: ctx,
+            ),
+            "Close",
+            customChild: HotelKeyPadWidget(),
+            backgroundColor: Colors.white,
+            buttonColor: Colors.black,
+            height: 0.25,
+            width: 0.35);
+      }
+    } else {
+      SweetAlert.show(ctx,
+          curve: ElasticInCurve(),
+          title: res['message'],
+          style: SweetAlertStyle.error, onPress: (bool isConfirm) {
+        Get.close(1);
+        return false;
+      });
+    }
+  } else {
+    showCustomDialog(
+        ctx,
+        HotelCalendarWidget(
+          ctx: ctx,
+        ),
+        "Close",
+        customChild: HotelKeyPadWidget(),
+        backgroundColor: Colors.white,
+        buttonColor: Colors.black,
+        height: 0.25,
+        width: 0.35);
+  }
+}
 
 getHotelDataCell(context, row) {
   var dataCell = DataCell(

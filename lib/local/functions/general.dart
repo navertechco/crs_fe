@@ -12,21 +12,19 @@ export 'day.dart';
 export 'destination.dart';
 export 'experience.dart';
 
-//  ██████╗ ███████╗███╗   ██╗███████╗██████╗  █████╗ ██╗                    
-// ██╔════╝ ██╔════╝████╗  ██║██╔════╝██╔══██╗██╔══██╗██║                    
-// ██║  ███╗█████╗  ██╔██╗ ██║█████╗  ██████╔╝███████║██║                    
-// ██║   ██║██╔══╝  ██║╚██╗██║██╔══╝  ██╔══██╗██╔══██║██║                    
-// ╚██████╔╝███████╗██║ ╚████║███████╗██║  ██║██║  ██║███████╗               
-//  ╚═════╝ ╚══════╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝               
-                                                                          
+//  ██████╗ ███████╗███╗   ██╗███████╗██████╗  █████╗ ██╗
+// ██╔════╝ ██╔════╝████╗  ██║██╔════╝██╔══██╗██╔══██╗██║
+// ██║  ███╗█████╗  ██╔██╗ ██║█████╗  ██████╔╝███████║██║
+// ██║   ██║██╔══╝  ██║╚██╗██║██╔══╝  ██╔══██╗██╔══██║██║
+// ╚██████╔╝███████╗██║ ╚████║███████╗██║  ██║██║  ██║███████╗
+//  ╚═════╝ ╚══════╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝
+
 // ███████╗██╗   ██╗███╗   ██╗ ██████╗████████╗██╗ ██████╗ ███╗   ██╗███████╗
 // ██╔════╝██║   ██║████╗  ██║██╔════╝╚══██╔══╝██║██╔═══██╗████╗  ██║██╔════╝
 // █████╗  ██║   ██║██╔██╗ ██║██║        ██║   ██║██║   ██║██╔██╗ ██║███████╗
 // ██╔══╝  ██║   ██║██║╚██╗██║██║        ██║   ██║██║   ██║██║╚██╗██║╚════██║
 // ██║     ╚██████╔╝██║ ╚████║╚██████╗   ██║   ██║╚██████╔╝██║ ╚████║███████║
-// ╚═╝      ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝                                                                                                                                                               
-                                                                                                                                                                        
-     
+// ╚═╝      ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝
 
 /// ## loadDummyData
 /// *__Method to set data to context__*
@@ -53,14 +51,37 @@ getContext(key) {
   return globalctx.get_context(key);
 }
 
-getCountryNameById(id) {
+/// ## getCountryNameById
+/// *__Method to clear Hours__*
+///
+///### Uses:
+/// ```dart
+///      var countryName = getCountryNameById(destCountry.value);
+/// ```
+/// ### Returns:
+///```dart
+/// String
+///```
+String getCountryNameById(id) {
   var country = destinationCountry
       .firstWhere((element) => element["code"] == int.parse(id));
-  var name = country["description"];
+  String name = country["description"];
   return name;
 }
 
-showCustomDialog(context, Widget child, String button,
+/// ## showCustomDialog
+/// *__Method to show Custom diaglog__*
+///
+///### Uses:
+/// ```dart
+///      showCustomDialog(context, NetRatePage(), "Close",
+///                    buttonColor: Colors.white, width: 1.0);
+/// ```
+/// ### Returns:
+///```dart
+/// void
+///```
+void showCustomDialog(context, Widget child, String button,
     {Widget? customChild,
     Color backgroundColor = Colors.black54,
     Color buttonColor = Colors.black54,
@@ -106,160 +127,19 @@ showCustomDialog(context, Widget child, String button,
   );
 }
 
-findTravelRhythmDescription(int code) {
-  try {
-    if (code == 0) {
-      return "HARD";
-    }
-    var travelData = findCatalog("travel_rhythm").toList();
-    var description = travelData
-        .firstWhere((element) => element["code"] == code)["description"];
-    return description;
-  } catch (e) {
-    log(e);
-  }
-}
-
-multiDropDownKaAgeFilter(trCatalog, travelRhytmAges) {
-  return trCatalog.value.where((value) {
-    var code = value["code"];
-    for (var i = 0; i < travelRhytmAges.keys.length; i++) {
-      var range = [
-        travelRhytmAges.keys.toList()[i],
-        travelRhytmAges.keys
-            .toList()[i >= travelRhytmAges.keys.length - 1 ? i : i + 1]
-      ];
-      if (customerAge.value < 20) {
-        return true;
-      }
-      if (customerAge.value >= range[0] && customerAge.value <= range[1]) {
-        if (travelRhytmAges[range[0]]!.contains(code.toString())) {
-          return true;
-        }
-      }
-    }
-    return false;
-  }).toList() as List<Map<String, dynamic>>;
-}
-
-log(e) {
+/// ## log
+/// *__Method print log messages__*
+///
+///### Uses:
+/// ```dart
+///     log(e);
+/// ```
+/// ### Returns:
+///```dart
+/// void
+///```
+void log(e) {
   print(e);
-}
-
-setLT(value) {
-  int ltindex =
-      expList.indexWhere((element) => element["description"] == "Leisure Time");
-  globalctx.context.value["catalogs"]["experiences"][ltindex]["value"]
-          ["exptime"] ==
-      value;
-  experiences = findCatalog("experiences");
-}
-
-getHotel(ctx, {int id = 0, int index = 0}) async {
-  currentDestinationIndex.value = index;
-  if (globalctx.memory["hotels"] == null) {
-    var frame = {
-      "data": {"id": id}
-    };
-    var res = await fetchHandler(kDefaultSchema, kDefaultServer,
-        kDefaultServerPort, kDefaultFindHotel, 'POST', frame);
-    // ignore: avoid_print
-    log(res);
-    if (res['state'] == true) {
-      var data = res['data'];
-      if (data.length > 0) {
-        globalctx.memory["hotels"] = data;
-        showCustomDialog(
-            ctx,
-            HotelCalendarWidget(
-              ctx: ctx,
-            ),
-            "Close",
-            customChild: HotelKeyPadWidget(),
-            backgroundColor: Colors.white,
-            buttonColor: Colors.black,
-            height: 0.25,
-            width: 0.35);
-      }
-    } else {
-      SweetAlert.show(ctx,
-          curve: ElasticInCurve(),
-          title: res['message'],
-          style: SweetAlertStyle.error, onPress: (bool isConfirm) {
-        Get.close(1);
-        return false;
-      });
-    }
-  } else {
-    showCustomDialog(
-        ctx,
-        HotelCalendarWidget(
-          ctx: ctx,
-        ),
-        "Close",
-        customChild: HotelKeyPadWidget(),
-        backgroundColor: Colors.white,
-        buttonColor: Colors.black,
-        height: 0.25,
-        width: 0.35);
-  }
-}
-
-getCruise(ctx, {int cruiseId = 999, String cruiseName = ''}) async {
-  var frame = {
-    "data": {
-      "cruise_id": cruiseId,
-      "cruise_name": cruiseName != '' ? cruiseName.split("-")[0] : ''
-    },
-  };
-  var res = await fetchHandler(kDefaultSchema, kDefaultServer,
-      kDefaultServerPort, kDefaultFindCruise, 'POST', frame);
-  // ignore: avoid_print
-  log(res);
-  if (res['state'] == true) {
-    var data = res['data'];
-    if (data.length > 0) {
-      showCruiseDetailDialog(ctx, data[0]);
-    }
-  } else {
-    SweetAlert.show(ctx,
-        curve: ElasticInCurve(),
-        title: res['message'],
-        style: SweetAlertStyle.error, onPress: (bool isConfirm) {
-      Get.close(1);
-      return false;
-    });
-  }
-}
-
-resetData(context, controller) {
-  var data = globalctx.memory["tours"];
-  if (searchResult!.isNotEmpty) {
-    controller.clear();
-    searchResult!.value = '';
-    filteredData.value = data;
-    var detail = getDetail(context, filteredData, null);
-    searcherDetail.value = (detail);
-  }
-}
-
-filterData(context, value) {
-  var data = globalctx.memory["tours"];
-  try {
-    searchResult!.value = value.toString();
-    if (searchResult!.isNotEmpty) {
-      filteredData.value = data
-          .where((quote) =>
-              quote["date"].toString().contains(searchResult!.value) ||
-              quote["name"].toString().contains(searchResult!.value) ||
-              quote["quote"].toString().contains(searchResult!.value))
-          .toList();
-      var detail = getDetail(context, filteredData, null);
-      searcherDetail.value = (detail);
-    }
-  } catch (e) {
-    log(e);
-  }
 }
 
 processNetRateData(context, data) {

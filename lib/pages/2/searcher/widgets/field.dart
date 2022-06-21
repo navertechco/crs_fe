@@ -24,18 +24,18 @@ class SearcherField extends StatelessWidget {
               decoration:
                   InputDecoration(hintText: 'Search', border: InputBorder.none),
               onChanged: (value) {
-                filterData(context, value);
+                filterFindTourData(context, value);
               },
               onFieldSubmitted: (value) {
                 formKey.currentState!.save();
               },
               onSaved: (value) {
-                filterData(context, value);
+                filterFindTourData(context, value);
               }),
           trailing: IconButton(
             icon: Icon(Icons.cancel),
             onPressed: () {
-              resetData(context, controller);
+              resetFindTourData(context, controller);
             },
           ),
         ),

@@ -540,6 +540,25 @@ dynamic getExperienceDataByName(String experience) {
   return result;
 }
 
+/// ## setCurrentLeisureTime
+/// *__Method set the current Leisure time of Day__*
+///
+///### Uses:
+/// ```dart
+///     setCurrentLeisureTime(lt.value);
+/// ```
+/// ### Returns:
+///```dart
+/// void
+///```
+void setCurrentLeisureTime(value) {
+  int ltindex =
+      expList.indexWhere((element) => element["description"] == "Leisure Time");
+  globalctx.context.value["catalogs"]["experiences"][ltindex]["value"]
+          ["exptime"] ==
+      value;
+  experiences = findCatalog("experiences");
+}
 /// ## clearCurrentDayHours
 /// *__Method to clear Hours__*
 ///
