@@ -275,7 +275,7 @@ var trMaxHourValues = {
   2: 1,
   3: 3
 };
-var trMaxValues = {
+Map trMaxValues = {
   "SOFT": 6.0,
   "MEDIUM": 8.0,
   "HARD": 10.0,
@@ -288,7 +288,7 @@ var trMaxValues = {
   2: 8.0,
   3: 10.0
 };
-var trAgeMaxValues = {
+Map trAgeMaxValues = {
   "SOFT": [60, 99],
   "MEDIUM": [40, 59],
   "HARD": [0, 39],

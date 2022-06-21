@@ -26,6 +26,7 @@ dragDestination(destination) {
   addDestination(destination);
   filterDestinations();
 }
+
 /// ## paginateDestination
 /// *__Method to get any property in data__*
 ///
@@ -73,6 +74,7 @@ Future paginateDestination(String direction) async {
     gotoPage("Experiences");
   }
 }
+
 /// ## resetAllDestinations
 /// *__Method to reset all destination options__*
 ///
@@ -89,7 +91,7 @@ Future paginateDestination(String direction) async {
 void resetAllDestinations() {
   globalctx.reset.value = true;
   resetLeftDays();
-  resetDestinations();
+  resetMemoryDestinations();
   updateDraggableDestinations();
   filterDestinations();
   if (cruiseDay.isNotEmpty) {
@@ -652,7 +654,7 @@ String getDestinationState(destination, index, type) {
 }
 
 /// ## updateTotalLeftAccumulated
-/// *__Method to update destination accumulated days __*
+/// *__Method to update destination left days __*
 ///
 ///### Uses:
 /// ```dart
@@ -665,36 +667,65 @@ void updateTotalLeftAccumulated() {
   accumulated.value = 0;
   if (destinations.isNotEmpty) {
     for (var destination in destinations.keys) {
-      accumulated.value += getDestinationDay(destination) as int;
+      accumulated.value += getDestinationExplorationDay(destination) as int;
     }
   }
   dayleft.value = totalDays.value - accumulated.value;
 }
 
-
 /// ## getMaxTrValue
-/// *__Method to update destination accumulated days __*
+/// *__Method to get Max Trevel Rhythm __*
 ///
 ///### Uses:
 /// ```dart
 ///  updateTotalLeftAccumulated();
 /// ```
 ///
-/// @return void
+/// @return double
 ///
-getMaxTrValue(tr) {
-  return trMaxValues[tr];
+double getMaxTrValue(tr) {
+  return trMaxValues[tr] as double;
 }
 
-getMaxTrHourValue(tr) {
-  return trMaxHourValues[tr];
+/// ## getMaxTrHourValue
+/// *__Method to get Travel Rhythm weighted in Hours__*
+///
+///### Uses:
+/// ```dart
+///   var max = getMaxTrHourValue(currentTravelRhythm.value);
+/// ```
+///
+/// @return int
+///
+int getMaxTrHourValue(tr) {
+  return trMaxHourValues[tr] as int;
 }
 
-getAgeMaxTrValue(tr) {
-  return trAgeMaxValues[tr];
+/// ## getAgeMaxTrValue
+/// *__Method to get Travel Rhythm Age Range__*
+///
+///### Uses:
+/// ```dart
+///   var range = getAgeMaxTrValue(e["description"].toString().toUpperCase());
+/// ```
+///
+/// @return List
+///
+List<int> getAgeMaxTrValue(tr) {
+  return trAgeMaxValues[tr] as List<int>;
 }
 
-getDestinationIndex(String destination, String type) {
+/// ## getDestinationIndex
+/// *__Method to get current Destination Index__*
+///
+///### Uses:
+/// ```dart
+///   int destIndex = getDestinationIndex(destination, type);
+/// ```
+///
+/// @return int
+///
+int getDestinationIndex(String destination, String type) {
   int destIndex = 0;
   var destinations = globalctx.states["destinations"].entries;
   for (var e in destinations) {
@@ -711,15 +742,16 @@ getDestinationIndex(String destination, String type) {
   return destIndex;
 }
 
-getDestinationDestOption(destination, type) {
-  int destIndex = getDestinationIndex(destination, type);
-  var destData = globalctx.memory["destinations"][destIndex.toString()];
-  var trData = findCatalog("detination_option").toList();
-  var trRange = trData
-      .firstWhere((e) => e["code"] == int.parse(destData["detination_option"]));
-  return trRange;
-}
-
+/// ## getDestinationIndex
+/// *__Method to get current Destination Index__*
+///
+///### Uses:
+/// ```dart
+///   int destIndex = getDestinationIndex(destination, type);
+/// ```
+///
+/// @return int
+///
 getDestinationTravelRhythm(destination, type) {
   int destIndex = getDestinationIndex(destination, type);
   var destData = globalctx.memory["destinations"][destIndex.toString()];
@@ -729,13 +761,34 @@ getDestinationTravelRhythm(destination, type) {
   return trRange;
 }
 
-getDestinationKa(destination, type) {
+/// ## getDestinationIndex
+/// *__Method to get Destination Key Activies from memory__*
+///
+///### Uses:
+/// ```dart
+///   var destKa = getDestinationKa(
+///     globalDestinationName.value, globalDestinationType.value);
+/// ```
+///
+/// @return dynamic
+///
+dynamic getDestinationKa(destination, type) {
   int destIndex = getDestinationIndex(destination, type);
   var destData = globalctx.memory["destinations"][destIndex.toString()];
   return destData["key_activities"];
 }
 
-filterDestinations() {
+/// ## filterDestinations
+/// *__Method to filter Dstinations memory__*
+///
+///### Uses:
+/// ```dart
+///   filterDestinations();
+/// ```
+///
+/// @return void
+///
+void filterDestinations() {
   var arr = getDestinationById(arrivalPort.value);
   var dep = getDestinationById(departurePort.value);
   arrival.value = arr;
@@ -743,17 +796,38 @@ filterDestinations() {
   filterSelectedDestinations();
 }
 
-getDestinationDay(index) {
+/// ## getDestinationExplorationDay
+/// *__Method to get Destination Exploration Day memory__*
+///
+///### Uses:
+/// ```dart
+///    accumulated.value += getDestinationExplorationDay(destination) as int;
+/// ```
+///
+/// @return void
+///
+int getDestinationExplorationDay(index) {
+  int result = 0;
   index = index.toString();
   if (destinations[index] != null) {
     if (destinations[index]["explorationDay"] != null) {
-      return int.parse(destinations[index]["explorationDay"]);
+      result = int.parse(destinations[index]["explorationDay"]);
     }
   }
-  return 0;
+  return result;
 }
 
-updateCurrentDestination() {
+/// ## updateCurrentDestination
+/// *__Method to update current Destination__*
+///
+///### Uses:
+/// ```dart
+///    updateCurrentDestination();
+/// ```
+///
+/// @return void
+///
+void updateCurrentDestination() {
   var type = "tour";
   if (currentDay.value == 0) {
     type = "arrival";
@@ -765,7 +839,17 @@ updateCurrentDestination() {
   globalDestinationType.value = type;
 }
 
-resetDestinations() {
+/// ## resetMemoryDestinations
+/// *__Method to reset all Destinations on memory__*
+///
+///### Uses:
+/// ```dart
+///    resetMemoryDestinations();
+/// ```
+///
+/// @return void
+///
+void resetMemoryDestinations() {
   destDraggable.value = 0;
   allPromotedDestinations.value = [];
   globalctx.promotedDestinations.value = [];
@@ -778,8 +862,19 @@ resetDestinations() {
   departureState.value = "selected";
 }
 
-getSubs(String destination) {
-  var res = <Map<String, dynamic>>[];
+/// ## getDestiinationRoutes
+/// *__Method to get sub Destinations from a Primary Destination__*
+///
+///### Uses:
+/// ```dart
+///     (destination != "galapagos" &&
+///                     (getDestiinationRoutes(destination).length > 0))) {
+/// ```
+///
+/// @return List<Map<String, dynamic>>
+///
+List<Map<String, dynamic>> getDestiinationRoutes(String destination) {
+  List<Map<String, dynamic>> res = <Map<String, dynamic>>[];
   try {
     var destData = getDestinationValueByName(destination);
     var subs = destData[9]["subs"];
@@ -794,12 +889,22 @@ getSubs(String destination) {
   return res;
 }
 
-filterTrByAge() {
+/// ## filterTrByAge
+/// *__Method to filter Travel Rythm by Age__*
+///
+///### Uses:
+/// ```dart
+///    filterTrByAge();
+/// ```
+///
+/// @return List<Map<String, dynamic>>
+///
+List<Map<String, dynamic>> filterTrByAge() {
   var tr = findCatalog("travel_rhythm");
-  var filtered = tr.toList();
+  List<Map<String, dynamic>> result = tr.toList();
   var birthDate = globalctx.memory["customer"]["birth_date"];
   var age = DateTime.now().difference(DateTime.parse(birthDate)).inDays / 365;
-  filtered = tr.toList().where((e) {
+  result = tr.toList().where((e) {
     var range = getAgeMaxTrValue(e["description"].toString().toUpperCase());
     // var min = range[0];
     var max = range[1];
@@ -807,6 +912,5 @@ filterTrByAge() {
     var rule = rule2;
     return rule;
   }).toList();
-  Iterable result = filtered;
-  return result;
+ return result;
 }
