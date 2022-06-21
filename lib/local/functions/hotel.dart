@@ -156,6 +156,17 @@ int getHotelCapacity(hotelName) {
   return capacity;
 }
 
+/// ## filterHotels
+/// *__Method to filter Hotels__*
+///
+///### Uses:
+/// ```dart
+///        filterHotels(context);
+/// ```
+/// ### Returns:
+///```dart
+///   void
+///```
 getHotelHeader(context, data, columns) {
   var header = <DataColumn>[];
   List cols = [];
@@ -195,6 +206,17 @@ getHotelHeader(context, data, columns) {
   return header;
 }
 
+/// ## filterHotels
+/// *__Method to filter Hotels__*
+///
+///### Uses:
+/// ```dart
+///        filterHotels(context);
+/// ```
+/// ### Returns:
+///```dart
+///   void
+///```
 processHotelData(context, data) {
   var columns = ["description"];
   var header = getHotelHeader(context, data, columns);
@@ -202,6 +224,17 @@ processHotelData(context, data) {
   return [header, detail];
 }
 
+/// ## filterHotels
+/// *__Method to filter Hotels__*
+///
+///### Uses:
+/// ```dart
+///        filterHotels(context);
+/// ```
+/// ### Returns:
+///```dart
+///   void
+///```
 getHotelDetail(context, data, columns) {
   var detail = <DataRow>[];
   if (data.length > 0) {
@@ -294,6 +327,17 @@ void showHotelResultDialog(ctx, {int id = 0, int index = 0}) async {
   }
 }
 
+/// ## filterHotels
+/// *__Method to filter Hotels__*
+///
+///### Uses:
+/// ```dart
+///        filterHotels(context);
+/// ```
+/// ### Returns:
+///```dart
+///   void
+///```
 getHotelDataCell(context, row) {
   var dataCell = DataCell(
     Row(
