@@ -7,18 +7,15 @@ import 'package:intl/intl.dart';
 import 'package:naver_crs/pages/6/experiences/widgets/custom/index.dart';
 import 'package:naver_crs/index.dart';
 
-
-// oooooooooooo                                            o8o                                                          oooooooooooo                                       .    o8o                                 
-// `888'     `8                                            `"'                                                          `888'     `8                                     .o8    `"'                                 
-//  888         oooo    ooo oo.ooooo.   .ooooo.  oooo d8b oooo   .ooooo.  ooo. .oo.    .ooooo.   .ooooo.   .oooo.o       888         oooo  oooo  ooo. .oo.    .ooooo.  .o888oo oooo   .ooooo.  ooo. .oo.    .oooo.o 
-//  888oooo8     `88b..8P'   888' `88b d88' `88b `888""8P `888  d88' `88b `888P"Y88b  d88' `"Y8 d88' `88b d88(  "8       888oooo8    `888  `888  `888P"Y88b  d88' `"Y8   888   `888  d88' `88b `888P"Y88b  d88(  "8 
-//  888    "       Y888'     888   888 888ooo888  888      888  888ooo888  888   888  888       888ooo888 `"Y88b.        888    "     888   888   888   888  888         888    888  888   888  888   888  `"Y88b.  
-//  888       o  .o8"'88b    888   888 888    .o  888      888  888    .o  888   888  888   .o8 888    .o o.  )88b       888          888   888   888   888  888   .o8   888 .  888  888   888  888   888  o.  )88b 
-// o888ooooood8 o88'   888o  888bod8P' `Y8bod8P' d888b    o888o `Y8bod8P' o888o o888o `Y8bod8P' `Y8bod8P' 8""888P'      o888o         `V88V"V8P' o888o o888o `Y8bod8P'   "888" o888o `Y8bod8P' o888o o888o 8""888P' 
-//                           888                                                                                                                                                                                    
-//                          o888o                                                                                                                                                                                   
-                                                                                                                                                                                                                 
-         
+// oooooooooooo                                            o8o                                                          oooooooooooo                                       .    o8o
+// `888'     `8                                            `"'                                                          `888'     `8                                     .o8    `"'
+//  888         oooo    ooo oo.ooooo.   .ooooo.  oooo d8b oooo   .ooooo.  ooo. .oo.    .ooooo.   .ooooo.   .oooo.o       888         oooo  oooo  ooo. .oo.    .ooooo.  .o888oo oooo   .ooooo.  ooo. .oo.    .oooo.o
+//  888oooo8     `88b..8P'   888' `88b d88' `88b `888""8P `888  d88' `88b `888P"Y88b  d88' `"Y8 d88' `88b d88(  "8       888oooo8    `888  `888  `888P"Y88b  d88' `"Y8   888   `888  d88' `88b `888P"Y88b  d88(  "8
+//  888    "       Y888'     888   888 888ooo888  888      888  888ooo888  888   888  888       888ooo888 `"Y88b.        888    "     888   888   888   888  888         888    888  888   888  888   888  `"Y88b.
+//  888       o  .o8"'88b    888   888 888    .o  888      888  888    .o  888   888  888   .o8 888    .o o.  )88b       888          888   888   888   888  888   .o8   888 .  888  888   888  888   888  o.  )88b
+// o888ooooood8 o88'   888o  888bod8P' `Y8bod8P' d888b    o888o `Y8bod8P' o888o o888o `Y8bod8P' `Y8bod8P' 8""888P'      o888o         `V88V"V8P' o888o o888o `Y8bod8P'   "888" o888o `Y8bod8P' o888o o888o 8""888P'
+//                           888
+//                          o888o
 
 /// ## filterSuggestedExperiences
 /// *__Method to filter and reorder suggested experiences__*
@@ -50,7 +47,7 @@ void filterSuggestedExperiences() {
 /// void
 ///```
 void filterExperiences() {
-  getFilteredExperiences();
+  processFilteredExperienes();
   updateSelectedDragExperiences();
 }
 
@@ -73,8 +70,19 @@ updateSelectedDragExperiences() {
   }
 }
 
-getFilteredExperiences() {
-  filteredExperiences = getExpFiltered();
+/// ## getFilteredExperiences
+/// *__Method to get filtered experiences__*
+///
+///### Uses:
+/// ```dart
+///    processFilteredExperienes();
+/// ```
+/// ### Returns:
+///```dart
+/// void
+///```
+void processFilteredExperienes() {
+  filteredExperiences = getExpFilteredByDestination();
   var idx = getDestinationIndexByDay();
   var sub = getFormValue(globalctx.memory["destinations"], idx, "sub", null);
   var destination =
@@ -249,8 +257,18 @@ getFilteredExperiences() {
   filteredExperiences.sort((a, b) => a.order.compareTo(b.order));
 }
 
-//////////////////////////////////////////////////////////////////////////////////////
-getExpFiltered() {
+/// ## getExpFilteredByDestination
+/// *__Method to get filtered experiences by destination__*
+///
+///### Uses:
+/// ```dart
+///    getExpFilteredByDestination();
+/// ```
+/// ### Returns:
+///```dart
+/// List
+///```
+List getExpFilteredByDestination() {
   List filtered = [];
   for (Map item in experiences) {
     List itemList = item.values.toList();
@@ -266,7 +284,18 @@ getExpFiltered() {
   return filtered;
 }
 
-initializeHours() {
+/// ## initializeHours
+/// *__Method to initialize hourd__*
+///
+///### Uses:
+/// ```dart
+///    initializeHours();
+/// ```
+/// ### Returns:
+///```dart
+/// void
+///```
+void initializeHours() {
   leftHours[currentDay.value] ??= 0.0.obs;
   accumulatedHours[currentDay.value] ??= 0.0.obs;
   totalHours[currentDay.value] ??= 0.0.obs;
@@ -280,7 +309,18 @@ initializeHours() {
   clearKA();
 }
 
-updateMeals() {
+/// ## promoteMealExperineces
+/// *__Method to update Meals Experiences__*
+///
+///### Uses:
+/// ```dart
+///    promoteMealExperineces();
+/// ```
+/// ### Returns:
+///```dart
+/// void
+///```
+void promoteMealExperineces() {
   for (var exp in globalctx.experiences[currentDay.value] as Iterable) {
     if (exp.value["experience_type"] == "meal") {
       promoteExperience(exp, "promoted");
@@ -288,14 +328,36 @@ updateMeals() {
   }
 }
 
-resetExperiences() {
+/// ## resetExperiences
+/// *__Method to reset Experiences__*
+///
+///### Uses:
+/// ```dart
+///    resetExperiences();
+/// ```
+/// ### Returns:
+///```dart
+/// void
+///```
+void resetExperiences() {
   for (var exp in globalctx.experiences[currentDay.value] as Iterable) {
     promoteExperience(exp, "suggested");
   }
   resetDayCounters();
 }
 
-promoteExperience(String experience, String state) {
+/// ## promoteExperience
+/// *__Method to promote Experiences__*
+///
+///### Uses:
+/// ```dart
+///      promoteExperience("Leisure Time", "promoted");
+/// ```
+/// ### Returns:
+///```dart
+/// void
+///```
+void promoteExperience(String experience, String state) {
   int sign = state == "suggested" ? -1 : 1;
   var value = calculateExperienceDays(experience);
   if (experience == "Leisure Time") {
@@ -307,13 +369,35 @@ promoteExperience(String experience, String state) {
   saveExperience(experience, state);
 }
 
-processHour(value) {
+/// ## processHour
+/// *__Method to discount or add prooted experience hour__*
+///
+///### Uses:
+/// ```dart
+///        processHour(value * sign);
+/// ```
+/// ### Returns:
+///```dart
+/// void
+///```
+void processHour(value) {
   accumulatedHours[currentDay.value].value =
       accumulatedHours[currentDay.value].value + value;
   initializeHours();
 }
 
-saveExperience(experience, state) {
+/// ## saveExperience
+/// *__Method to save experience__*
+///
+///### Uses:
+/// ```dart
+///        saveExperience(experience, state);
+/// ```
+/// ### Returns:
+///```dart
+/// void
+///```
+void saveExperience(experience, state) {
   if (state == "promoted") {
     List<CatalogDto> filtered = [];
     for (Map item in experiences) {
