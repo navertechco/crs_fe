@@ -7,23 +7,20 @@ import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
+//  ██████╗ ██╗   ██╗ ██████╗ ████████╗███████╗
+// ██╔═══██╗██║   ██║██╔═══██╗╚══██╔══╝██╔════╝
+// ██║   ██║██║   ██║██║   ██║   ██║   █████╗
+// ██║▄▄ ██║██║   ██║██║   ██║   ██║   ██╔══╝
+// ╚██████╔╝╚██████╔╝╚██████╔╝   ██║   ███████╗
+//  ╚══▀▀═╝  ╚═════╝  ╚═════╝    ╚═╝   ╚══════╝
 
-//  ██████╗ ██╗   ██╗ ██████╗ ████████╗███████╗                              
-// ██╔═══██╗██║   ██║██╔═══██╗╚══██╔══╝██╔════╝                              
-// ██║   ██║██║   ██║██║   ██║   ██║   █████╗                                
-// ██║▄▄ ██║██║   ██║██║   ██║   ██║   ██╔══╝                                
-// ╚██████╔╝╚██████╔╝╚██████╔╝   ██║   ███████╗                              
-//  ╚══▀▀═╝  ╚═════╝  ╚═════╝    ╚═╝   ╚══════╝                              
-                                                                          
 // ███████╗██╗   ██╗███╗   ██╗ ██████╗████████╗██╗ ██████╗ ███╗   ██╗███████╗
 // ██╔════╝██║   ██║████╗  ██║██╔════╝╚══██╔══╝██║██╔═══██╗████╗  ██║██╔════╝
 // █████╗  ██║   ██║██╔██╗ ██║██║        ██║   ██║██║   ██║██╔██╗ ██║███████╗
 // ██╔══╝  ██║   ██║██║╚██╗██║██║        ██║   ██║██║   ██║██║╚██╗██║╚════██║
 // ██║     ╚██████╔╝██║ ╚████║╚██████╗   ██║   ██║╚██████╔╝██║ ╚████║███████║
-// ╚═╝      ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝                                                                                                                                                   
-                                                                                                                                                         
-                                                                                                                                                         
-       
+// ╚═╝      ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+
 /// ## getQuoteHistoryItinerary
 /// *__Method to get Quote History Itinerary in String format__*
 ///
@@ -62,13 +59,13 @@ String getQuoteHistoryItinerary(row) {
 ///
 ///### Uses:
 /// ```dart
-///       getFilteredQuoteHistory(context);
+///       updateFilteredQuoteHistory(context);
 /// ```
 /// ### Returns:
 ///```dart
 ///  dynamic
 ///```
-dynamic getFilteredQuoteHistory(ctx) {
+dynamic updateFilteredQuoteHistory(ctx) {
   if (globalctx.memory["tours"] != null) {
     List filtered = globalctx.memory["tours"];
     filtered = filtered.where((e) {
