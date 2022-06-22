@@ -56,7 +56,7 @@ class QuoteHistoryTable extends StatelessWidget {
         ));
   }
 }
-
+  
 class QuoteHistoryButton extends StatelessWidget {
   const QuoteHistoryButton({
     Key? key,
