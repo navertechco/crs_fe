@@ -54,31 +54,71 @@ class TourLeftFormWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        top: MediaQuery.of(context).size.height * 0.15,
-        left: MediaQuery.of(context).size.width * 0.55,
-      ),
-      child: SizedBox(
-        width: MediaQuery.of(context).size.width * 0.5,
-        height: MediaQuery.of(context).size.height * 0.65,
-        child: SingleChildScrollView(
-          child: Column(children: [
-            CountryField(readonly: readonly, ctrl: ctrl),
-            BudgetField(
-                tour: tour,
-                readonly: readonly,
-                ctrl: ctrl,
-                accomodationType: accomodationType),
-            PaxField(ctrl: ctrl),
-            GalapagosCheckboxField(),
-            TransportField(),
-            PurposeField(),
-            TranslatingField(),
-          ]),
-        ),
-      ),
-    );
+    return Obx(() => Padding(
+          padding: EdgeInsets.only(
+            top: MediaQuery.of(context).size.height * 0.15,
+            left: MediaQuery.of(context).size.width * 0.55,
+          ),
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width * 0.5,
+            height: MediaQuery.of(context).size.height * 0.65,
+            child: SingleChildScrollView(
+              child: Column(children: [
+                CountryField(readonly: readonly, ctrl: ctrl),
+                BudgetField(
+                    tour: tour,
+                    readonly: readonly,
+                    ctrl: ctrl,
+                    accomodationType: accomodationType),
+                PaxField(ctrl: ctrl),
+                CheckboxField(
+                  fontWeight: FontWeight.bold,
+                  label: "  Would you like to take a Galapagos Cruise?",
+                  color: Colors.black,
+                  trueIconColor: Colors.green,
+                  initialValue: getFormValue(
+                      globalctx.memory, "tour", "galapagos", false),
+                  enabled: true,
+                  iconSize: 32,
+                  onSaved: (value) {
+                    setFormValue(globalctx.memory, "tour", "galapagos", value);
+                    setFormValue(
+                        globalctx.memory, "tour", "galapagos_guide", value);
+                  },
+                  onChanged: (value) {
+                    setFormValue(globalctx.memory, "tour", "galapagos", value);
+                    setFormValue(
+                        globalctx.memory, "tour", "galapagos_guide", value);
+                  },
+                ),
+                TransportField(),
+                PurposeField(),
+                CheckboxField(
+                  fontWeight: FontWeight.bold,
+                  label: "  Would you like to take a Translator?",
+                  color: Colors.black,
+                  trueIconColor: Colors.green,
+                  initialValue: getFormValue(
+                      globalctx.memory, "tour", "translator", false),
+                  enabled: true,
+                  iconSize: 32,
+                  onSaved: (value) {
+                    setFormValue(globalctx.memory, "tour", "translator", value);
+                    setFormValue(
+                        globalctx.memory, "tour", "translator_guide", value);
+                  },
+                  onChanged: (value) {
+                    translator.value = value;
+                    setFormValue(globalctx.memory, "tour", "translator", value);
+                    setFormValue(
+                        globalctx.memory, "tour", "translator_guide", value);
+                  },
+                ),
+                if (translator.value) TranslatingField(),
+              ]),
+            ),
+          ),
+        ));
   }
 }
 
@@ -288,40 +328,6 @@ class TransportField extends StatelessWidget {
       },
       hintText: "",
       data: serviceTypeCatalog.value,
-    );
-  }
-}
-
-class GalapagosCheckboxField extends StatelessWidget {
-  const GalapagosCheckboxField({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        CustomTitleWidget(
-            fontWeight: FontWeight.bold,
-            label: "  Would you like to take a Galapagos Cruise?",
-            color: Colors.black),
-        CheckboxIconFormField(
-          context: context,
-          trueIconColor: Colors.green,
-          initialValue:
-              getFormValue(globalctx.memory, "tour", "galapagos", false),
-          enabled: true,
-          iconSize: 32,
-          onSaved: (value) {
-            setFormValue(globalctx.memory, "tour", "galapagos", value);
-            setFormValue(globalctx.memory, "tour", "galapagos_guide", value);
-          },
-          onChanged: (value) {
-            setFormValue(globalctx.memory, "tour", "galapagos", value);
-            setFormValue(globalctx.memory, "tour", "galapagos_guide", value);
-          },
-        ),
-      ],
     );
   }
 }

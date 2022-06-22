@@ -10,3 +10,4 @@ export './cruisecalendar.dart';
 export './hotelcalendar.dart';
 export './meeting.dart';
 export './scrolltopdownarrow.dart';
+export './checkboxfield.dart';
