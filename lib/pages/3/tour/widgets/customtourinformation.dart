@@ -6,7 +6,7 @@ import '../index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/common/index.dart';
-
+  
 class CustomTourInformationForm extends StatelessWidget {
   CustomTourInformationForm({Key? key, this.profile, this.ctrl})
       : super(key: key);
