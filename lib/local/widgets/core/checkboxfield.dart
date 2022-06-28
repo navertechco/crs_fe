@@ -41,7 +41,7 @@ class CheckboxField extends StatelessWidget {
           trueIconColor: trueIconColor,
           initialValue: initialValue,
           enabled: enabled,
-          iconSize: iconSize,
+          iconSize:  isMobile * iconSize,
           onSaved: onSaved,
           onChanged: onChanged,
         ),
