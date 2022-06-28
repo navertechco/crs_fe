@@ -10,6 +10,7 @@ class CustomFormCheckboxWidget extends StatelessWidget {
       {Key? key,
       this.label = '',
       this.hintText = '',
+      this.fontSize=10,
       this.width = 0.2,
       this.height = 0.05,
       required this.value,
@@ -18,7 +19,7 @@ class CustomFormCheckboxWidget extends StatelessWidget {
       : super(key: key) {
     _onChanged = onChanged;
   }
-
+  final fontSize;
   final String label;
   final String hintText;
   final double width;
@@ -34,8 +35,9 @@ class CustomFormCheckboxWidget extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Row(
         children: [
-          CustomFormLabelWidget(label: label, fontWeight: FontWeight.normal),
+          CustomFormLabelWidget(fontSize:fontSize,label: label, fontWeight: FontWeight.normal),
           RoundedFormCheckbox(
+            fontSize:fontSize,
             onChanged: _onChanged,
             width: width,
             height: height,

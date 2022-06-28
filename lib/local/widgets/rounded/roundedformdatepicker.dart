@@ -10,6 +10,7 @@ class RoundedFormDatepicker extends StatelessWidget {
   final double width;
   final double height;
   final DateFormat format;
+  final fontSize;
   final String hintText;
   void Function(DateTime?)? onChanged;
   void Function(DateTime?)? onSaved;
@@ -20,6 +21,7 @@ class RoundedFormDatepicker extends StatelessWidget {
       {Key? key,
       required this.format,
       this.hintText = '',
+      this.fontSize = 10,
       this.left = 10,
       this.top = 4,
       this.width = 0.2,
@@ -50,7 +52,7 @@ class RoundedFormDatepicker extends StatelessWidget {
         style: KTextSytle(
                 color: disabled ? Colors.black45 : Colors.black,
                 context: context,
-                fontSize: isMobile * 6,
+                fontSize: isMobile * fontSize,
                 fontWeight: FontWeight.bold)
             .getStyle(),
         format: format,
