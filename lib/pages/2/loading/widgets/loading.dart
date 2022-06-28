@@ -22,14 +22,14 @@ class LoadingWidget extends GetView<LoadingController> {
             children: [
               Padding(
                   padding: EdgeInsets.only(
-                      left: MediaQuery.of(context).size.width * 0.4,
+                      left: MediaQuery.of(context).size.width * 0.45,
                       top: MediaQuery.of(context).size.height * 0.7),
                   child: Column(
                     children: [
                       RoundedFormButton(
                           label: "New Tour",
-                          height: 0.1,
-                          fontSize: 5,
+                          height: 0.07,
+                          fontSize: 10,
                           onPressed: () async {
                             setContext("readonly", false);
                             await newTour();
@@ -41,8 +41,8 @@ class LoadingWidget extends GetView<LoadingController> {
                       ),
                       RoundedFormButton(
                           label: "Find Tour",
-                          height: 0.1,
-                          fontSize: 5,
+                          height: 0.07,
+                          fontSize: 10,
                           onPressed: () {
                             getCatalogs(["experiences"]);
                             getTour(context, tourId: 0, cb: (data) {

@@ -16,9 +16,10 @@ class CustomFormDropDownFieldWidget extends StatelessWidget {
       this.value = "0",
       required this.onSaved,
       required this.onChanged,
-      this.validator})
+      this.validator,
+      this.fontSize = 10})
       : super(key: key);
-
+  final fontSize;
   final String label;
   final String? hintText;
   final double width;
@@ -36,9 +37,11 @@ class CustomFormDropDownFieldWidget extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Row(
         children: [
-          CustomFormLabelWidget(label: label, fontWeight: FontWeight.normal),
+          CustomFormLabelWidget(
+              fontSize: fontSize, label: label, fontWeight: FontWeight.normal),
           if (data.isNotEmpty)
             RoundedFormDropdown(
+                fontSize: fontSize * 1.0,
                 onChanged: onChanged,
                 width: width,
                 height: height,

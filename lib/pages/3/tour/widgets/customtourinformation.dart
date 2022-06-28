@@ -56,12 +56,12 @@ class TourLeftFormWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() => Padding(
           padding: EdgeInsets.only(
-            top: MediaQuery.of(context).size.height * isMobile * 0.16,
-            left: MediaQuery.of(context).size.width * isMobile * 0.72,
+            top: MediaQuery.of(context).size.height * isMobile * 0.25,
+            left: MediaQuery.of(context).size.width * isMobile * 0.85,
           ),
           child: SizedBox(
-            width: MediaQuery.of(context).size.width * isMobile * 0.5,
-            height: MediaQuery.of(context).size.height * isMobile * 0.65,
+            width: MediaQuery.of(context).size.width * isMobile * 1,
+            height: MediaQuery.of(context).size.height * isMobile * 1,
             child: SingleChildScrollView(
               child: Column(children: [
                 CountryField(readonly: readonly, ctrl: ctrl),
@@ -72,7 +72,7 @@ class TourLeftFormWidget extends StatelessWidget {
                     accomodationType: accomodationType),
                 PaxField(ctrl: ctrl),
                 CheckboxField(
-                  fontSize: 6,
+                  fontSize: 15,
                   fontWeight: FontWeight.bold,
                   label: "  Would you like to take a Galapagos Cruise?",
                   color: Colors.black,
@@ -80,7 +80,7 @@ class TourLeftFormWidget extends StatelessWidget {
                   initialValue: getFormValue(
                       globalctx.memory, "tour", "galapagos", false),
                   enabled: true,
-                  iconSize: isMobile * 25,
+                  iconSize: 25,
                   onSaved: (value) {
                     setFormValue(globalctx.memory, "tour", "galapagos", value);
                     setFormValue(
@@ -93,7 +93,7 @@ class TourLeftFormWidget extends StatelessWidget {
                   },
                 ),
                 CheckboxField(
-                  fontSize: 6,
+                  fontSize: 15,
                   fontWeight: FontWeight.bold,
                   label: "  Would you like to take a Translator?",
                   color: Colors.black,
@@ -101,7 +101,7 @@ class TourLeftFormWidget extends StatelessWidget {
                   initialValue: getFormValue(
                       globalctx.memory, "tour", "translator", false),
                   enabled: true,
-                  iconSize: isMobile * 25,
+                  iconSize: 25,
                   onSaved: (value) {
                     setFormValue(globalctx.memory, "tour", "translator", value);
                     setFormValue(
@@ -139,11 +139,12 @@ class TourKeyPad extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-        top: MediaQuery.of(context).size.height * isMobile * 1,
-        left: MediaQuery.of(context).size.width * isMobile * 0.75,
+        top: MediaQuery.of(context).size.height * isMobile * 1.24,
+        left: MediaQuery.of(context).size.width * isMobile * 0.85,
       ),
       child: CustomKeypadWidget(
-          width: isMobile * 0.33,
+          fontSize: 20,
+          width: 0.42,
           onPrevious: () {
             if (selectedIndex.value > 0) {
               selectedIndex.value = selectedIndex.value - 1;
@@ -175,6 +176,7 @@ class CountryField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomFormDropDownFieldWidget(
+      fontSize: 15,
       height: 0.07,
       value: destCountry.value,
       disabled: readonly,
@@ -213,6 +215,7 @@ class BudgetField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomFormDropDownFieldWidget(
+      fontSize: 15,
       height: 0.07,
       value: getValue(tour, "accomodation_type", def: "1"),
       disabled: readonly,
@@ -241,6 +244,7 @@ class PaxField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomFormCounterFieldWidget(
+        fontSize: 15,
         height: 0.07,
         initial: getFormValue(globalctx.memory, "tour", "passengers", 1),
         min: 1,
@@ -263,8 +267,8 @@ class TranslatingField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() => CustomFormMultiDropDownFieldWidget(
-          fontSize: 8,
-          height: 0.65,
+          fontSize: 15,
+          height: 0.07,
           label: "Translating Services",
           validator: (value) => CustomMultiDropdownRequiredValidator(value,
               errorText: "Translating Service is required ", context: context),
@@ -292,8 +296,8 @@ class PurposeField extends StatelessWidget {
       return AbsorbPointer(
         absorbing: absorvedPurpose.value,
         child: CustomFormMultiDropDownFieldWidget(
-          fontSize: 8,
-          height: 0.65,
+          fontSize: 15,
+          height: 0.07,
           validator: (value) {
             CustomMultiDropdownRequiredValidator(value,
                 errorText: "Purposes are required ", context: context);
@@ -323,6 +327,7 @@ class TransportField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomFormDropDownFieldWidget(
+      fontSize: 15,
       height: 0.07,
       label: "Transport Options    ",
       validator: (value) => CustomMultiDropdownRequiredValidator(value,

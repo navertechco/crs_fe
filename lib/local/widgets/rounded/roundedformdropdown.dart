@@ -8,7 +8,7 @@ class RoundedFormDropdown extends StatelessWidget {
   final double top;
   final double width;
   final double height;
-  final double fontSize;
+  final fontSize;
   final String? hintText;
   final String? label;
   final String value;
@@ -27,7 +27,7 @@ class RoundedFormDropdown extends StatelessWidget {
       this.top = 4,
       this.width = 0.2,
       this.height = 0.05,
-      this.fontSize = 0.1,
+      this.fontSize = 10,
       required this.onSaved,
       this.password = false,
       this.value = "0",
@@ -46,6 +46,7 @@ class RoundedFormDropdown extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.grey, borderRadius: BorderRadius.circular(50)),
       child: FormCatalogueWidget(
+        fontSize:fontSize,
           validator: validator,
           disabled: disabled,
           value: value,

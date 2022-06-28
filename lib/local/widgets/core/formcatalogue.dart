@@ -14,9 +14,10 @@ class FormCatalogueWidget extends StatelessWidget {
       this.hintText = "Choose a Option",
       required this.onChanged,
       required this.onSaved,
-      this.validator})
+      this.validator,
+      this.fontSize = 10})
       : super(key: key);
-
+  final fontSize;
   List<Map<String, dynamic>> data;
   final String? hintText;
   void Function(String?) onSaved;
@@ -34,7 +35,7 @@ class FormCatalogueWidget extends StatelessWidget {
           child: DropdownButtonFormField(
             style: KTextSytle(
                     context: context,
-                    fontSize: value == null ? isMobile * 10 : isMobile * 8,
+                    fontSize: isMobile * fontSize,
                     fontWeight:
                         value == null ? FontWeight.normal : FontWeight.bold)
                 .getStyle(),
@@ -45,7 +46,7 @@ class FormCatalogueWidget extends StatelessWidget {
               "data",
               style: KTextSytle(
                       context: context,
-                      fontSize: value == null ? isMobile * 10 : isMobile * 8,
+                      fontSize: isMobile * fontSize,
                       fontWeight:
                           value == null ? FontWeight.normal : FontWeight.bold)
                   .getStyle(),
@@ -56,7 +57,7 @@ class FormCatalogueWidget extends StatelessWidget {
               hintText: hintText,
               hintStyle: KTextSytle(
                       context: context,
-                      fontSize: value == null ? isMobile * 10 : isMobile * 8,
+                      fontSize: isMobile * fontSize,
                       fontWeight:
                           value == null ? FontWeight.normal : FontWeight.bold)
                   .getStyle(),

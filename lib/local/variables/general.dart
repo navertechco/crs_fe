@@ -6,8 +6,8 @@ import 'package:intl/intl.dart';
 
 bool isFirstLaunch = true;
 var defaultToken;
-double ratio = Get.width / Get.height;
-double isMobile = ratio * (isMobileDevice() ? 0.55 : 0.8);
+double ratio = Get.height / Get.width;
+double isMobile = ratio * (isMobileDevice() ? 1 : 1.5);
 LocalContext globalctx = LocalContext();
 var session = {};
 ////
