@@ -21,7 +21,7 @@ class RoundedFormDatepicker extends StatelessWidget {
       required this.format,
       this.hintText = '',
       this.left = 10,
-      this.top = 2,
+      this.top = 4,
       this.width = 0.2,
       this.height = 0.04,
       this.onChanged,

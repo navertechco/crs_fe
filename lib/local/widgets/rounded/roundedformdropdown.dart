@@ -24,7 +24,7 @@ class RoundedFormDropdown extends StatelessWidget {
       this.hintText,
       this.label,
       this.left = 15,
-      this.top = 8,
+      this.top = 4,
       this.width = 0.2,
       this.height = 0.05,
       this.fontSize = 0.1,

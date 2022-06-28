@@ -23,7 +23,7 @@ class RoundedFormTextField extends StatelessWidget {
       {Key? key,
       required this.hintText,
       this.left = 35,
-      this.top = 9,
+      this.top = 2,
       this.width = 0.2,
       this.height = 0.05,
       this.fontSize = 0.1,
