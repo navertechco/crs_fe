@@ -23,7 +23,7 @@ class KeyPadWidget extends StatelessWidget {
                 child: Text("Previous",
                     style: KTextSytle(
                             context: context,
-                            fontSize: 10,
+                            fontSize: 15,
                             fontWeight: FontWeight.bold,
                             color: Colors.white)
                         .getStyle()),
@@ -36,7 +36,7 @@ class KeyPadWidget extends StatelessWidget {
                 child: Text("Reset",
                     style: KTextSytle(
                             context: context,
-                            fontSize: 10,
+                            fontSize: 15,
                             fontWeight: FontWeight.bold,
                             color: Colors.white)
                         .getStyle()),
@@ -48,7 +48,7 @@ class KeyPadWidget extends StatelessWidget {
                 child: Text("Next",
                     style: KTextSytle(
                             context: context,
-                            fontSize: 10,
+                            fontSize: 15,
                             fontWeight: FontWeight.bold,
                             color: Colors.white)
                         .getStyle()),

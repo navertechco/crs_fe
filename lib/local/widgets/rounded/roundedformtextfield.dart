@@ -10,7 +10,7 @@ class RoundedFormTextField extends StatelessWidget {
   final double top;
   final double width;
   final double height;
-  final double fontSize;
+  final fontSize;
   final String hintText;
   final void Function(String?)? onSaved;
   final void Function(String?)? onChanged;
@@ -64,7 +64,7 @@ class RoundedFormTextField extends StatelessWidget {
         cursorColor: Colors.black54,
         style: KTextSytle(
                 context: context,
-                fontSize: initialValue == null ? isMobile * 12 : isMobile * 10,
+                fontSize: isMobile * fontSize,
                 fontWeight:
                     initialValue == null ? FontWeight.normal : FontWeight.bold)
             .getStyle(),

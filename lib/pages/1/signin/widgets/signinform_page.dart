@@ -36,7 +36,7 @@ class SigninFormPage extends GetView<StatelessWidget> {
                 SizedBox(
                   width: MediaQuery.of(context).size.width * isMobile * 0.2,
                   child: RoundedFormButton(
-                    fontSize: 10,
+                    fontSize: 15,
                     color: Colors.white,
                     label: "SignIn",
                     height: 0.07,

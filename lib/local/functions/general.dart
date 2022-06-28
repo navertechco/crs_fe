@@ -232,7 +232,7 @@ List<DataRow> getTourDataRows(context, data, columns) {
         cells.add(DataCell(Text('${row[key]}',
             style: KTextSytle(
                     context: context,
-                    fontSize: 10,
+                    fontSize: 15,
                     fontWeight: FontWeight.bold,
                     color: Colors.black)
                 .getStyle())));
@@ -317,7 +317,7 @@ List<DataRow> getNetRateDataRows(context, data) {
         cells.add(DataCell(Text('${row[key]}',
             style: KTextSytle(
                     context: context,
-                    fontSize: 10,
+                    fontSize: 15,
                     fontWeight: FontWeight.bold,
                     color: Colors.black)
                 .getStyle())));

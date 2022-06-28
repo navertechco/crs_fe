@@ -179,7 +179,7 @@ List<DataColumn> getCruiseHeader(context, data, columns) {
           textAlign: TextAlign.left,
           style: KTextSytle(
             context: context,
-            fontSize: 10,
+            fontSize: 15,
             fontWeight: FontWeight.bold,
             color: Color.fromARGB(255, 204, 164, 61),
           ).getStyle(),
@@ -191,7 +191,7 @@ List<DataColumn> getCruiseHeader(context, data, columns) {
         '',
         style: KTextSytle(
           context: context,
-          fontSize: 10,
+          fontSize: 15,
           fontWeight: FontWeight.bold,
           color: Color.fromARGB(255, 204, 164, 61),
         ).getStyle(),

@@ -22,8 +22,6 @@ import 'package:get/get.dart';
 // ██║     ╚██████╔╝██║ ╚████║╚██████╗   ██║   ██║╚██████╔╝██║ ╚████║███████║
 // ╚═╝      ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝
 
-
- 
 /// ## filterHotels
 /// *__Method to filter Hotels__*
 ///
@@ -183,7 +181,7 @@ getHotelHeader(context, data, columns) {
           textAlign: TextAlign.left,
           style: KTextSytle(
             context: context,
-            fontSize: 10,
+            fontSize: 15,
             fontWeight: FontWeight.bold,
             color: Color.fromARGB(255, 204, 164, 61),
           ).getStyle(),
@@ -195,7 +193,7 @@ getHotelHeader(context, data, columns) {
         '',
         style: KTextSytle(
           context: context,
-          fontSize: 10,
+          fontSize: 15,
           fontWeight: FontWeight.bold,
           color: Color.fromARGB(255, 204, 164, 61),
         ).getStyle(),
@@ -266,6 +264,7 @@ getHotelDetail(context, data, columns) {
 
   return detail;
 }
+
 /// ## showHotelResultDialog
 /// *__Method show Hotel Result dialog__*
 ///
@@ -365,7 +364,7 @@ getHotelDataCell(context, row) {
                       "${row["value"]['roomdescription']}",
                       style: KTextSytle(
                         context: context,
-                        fontSize: 10,
+                        fontSize: 15,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ).getStyle(),

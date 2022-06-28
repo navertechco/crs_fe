@@ -56,7 +56,7 @@ class DestinationFrontOptionWidget extends StatelessWidget {
                   Text("Arrival",
                       style: KTextSytle(
                               context: context,
-                              fontSize: 10,
+                              fontSize: 15,
                               fontWeight: FontWeight.bold,
                               color: Colors.white)
                           .getStyle()),
@@ -79,7 +79,7 @@ class DestinationFrontOptionWidget extends StatelessWidget {
                   Text("Departure",
                       style: KTextSytle(
                               context: context,
-                              fontSize: 10,
+                              fontSize: 15,
                               fontWeight: FontWeight.bold,
                               color: Colors.white)
                           .getStyle()),

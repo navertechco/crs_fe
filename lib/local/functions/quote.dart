@@ -184,7 +184,7 @@ DataCell getQuoteHistoryDataCell(context, row) {
                   "${getQuoteHistoryItinerary(row)}",
                   style: KTextSytle(
                     context: context,
-                    fontSize: 10,
+                    fontSize: 15,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                   ).getStyle(),

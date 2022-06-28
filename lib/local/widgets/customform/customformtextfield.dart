@@ -13,6 +13,7 @@ class CustomFormTextFieldWidget extends StatelessWidget {
     this.keyboardType = TextInputType.text,
     this.validator,
     this.width = 0.2,
+    this.fontSize = 10,
     this.height = 0.05,
     this.disabled = false,
     this.value,
@@ -22,7 +23,7 @@ class CustomFormTextFieldWidget extends StatelessWidget {
     this.onChanged,
     this.onBack,
   }) : super(key: key);
-
+  final fontSize;
   final String label;
   final String hintText;
   final double width;
@@ -42,7 +43,8 @@ class CustomFormTextFieldWidget extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Row(
         children: [
-          CustomFormLabelWidget(label: label, fontWeight: FontWeight.normal),
+          CustomFormLabelWidget(
+              fontSize: fontSize, label: label, fontWeight: FontWeight.normal),
           RawKeyboardListener(
             focusNode: FocusNode(),
             onKey: (event) {
@@ -51,6 +53,7 @@ class CustomFormTextFieldWidget extends StatelessWidget {
               }
             },
             child: RoundedFormTextField(
+                fontSize: fontSize * 1.0,
                 initialValue: value.toString(),
                 disabled: disabled,
                 onSaved: onSaved,

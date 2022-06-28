@@ -14,7 +14,7 @@ class TitleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var srvData = getServiceByName(service).value;
- 
+
     return Column(
       children: [
         Text(service.toString().split("-")[0],
@@ -29,14 +29,14 @@ class TitleWidget extends StatelessWidget {
             Text("Service Name: ",
                 style: KTextSytle(
                         context: context,
-                        fontSize: 10,
+                        fontSize: 15,
                         fontWeight: FontWeight.bold,
                         color: Color.fromARGB(255, 204, 164, 61))
                     .getStyle()),
             Text("${findProp(srvData, ["servicename", "hotelname"])}",
                 style: KTextSytle(
                         context: context,
-                        fontSize: 10,
+                        fontSize: 15,
                         fontWeight: FontWeight.bold,
                         color: Colors.grey)
                     .getStyle()),
@@ -47,14 +47,14 @@ class TitleWidget extends StatelessWidget {
             Text("Description: ",
                 style: KTextSytle(
                         context: context,
-                        fontSize: 10,
+                        fontSize: 15,
                         fontWeight: FontWeight.bold,
                         color: Color.fromARGB(255, 204, 164, 61))
                     .getStyle()),
             Text("${findProp(srvData, ["roomcategory", "observations"])}",
                 style: KTextSytle(
                         context: context,
-                        fontSize: 10,
+                        fontSize: 15,
                         fontWeight: FontWeight.bold,
                         color: Colors.grey)
                     .getStyle()),

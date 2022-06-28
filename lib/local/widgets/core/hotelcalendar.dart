@@ -170,7 +170,7 @@ class HotelKeyPadWidget extends StatelessWidget {
                 child: Text('Reset',
                     style: KTextSytle(
                             context: context,
-                            fontSize: 10,
+                            fontSize: 15,
                             fontWeight: FontWeight.bold,
                             color: Colors.black)
                         .getStyle()),
@@ -184,7 +184,7 @@ class HotelKeyPadWidget extends StatelessWidget {
                 child: Text('Process',
                     style: KTextSytle(
                             context: context,
-                            fontSize: 10,
+                            fontSize: 15,
                             fontWeight: FontWeight.bold,
                             color: Colors.black)
                         .getStyle()),
@@ -197,7 +197,7 @@ class HotelKeyPadWidget extends StatelessWidget {
                     !moreFilters.value ? 'More Filters' : 'Less Filters',
                     style: KTextSytle(
                             context: context,
-                            fontSize: 10,
+                            fontSize: 15,
                             fontWeight: FontWeight.bold,
                             color: Colors.black)
                         .getStyle()),

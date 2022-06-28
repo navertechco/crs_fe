@@ -54,6 +54,7 @@ class AddressInformation extends StatelessWidget {
       child: SizedBox(
         child: Wrap(children: [
           const CustomTitleWidget(
+              fontSize: 15,
               width: 0.225,
               fontWeight: FontWeight.bold,
               label: " Address information"),
@@ -61,6 +62,7 @@ class AddressInformation extends StatelessWidget {
             return Row(
               children: [
                 CustomFormDropDownFieldWidget(
+                  fontSize: 15,
                   width: 0.2,
                   height: 0.07,
                   validator: (value) {
@@ -101,6 +103,7 @@ class AddressInformation extends StatelessWidget {
                 ),
                 // if (country.value != '')
                 CustomFormDropDownFieldWidget(
+                  fontSize: 15,
                   validator: CustomCatalogRequiredValidator(
                       errorText: "City is required ",
                       ctx: context,
@@ -124,6 +127,7 @@ class AddressInformation extends StatelessWidget {
             );
           }),
           CustomFormTextFieldWidget(
+            fontSize: 15,
             validator: CustomRequiredValidator(
                 errorText: "Address Line is required ", ctx: context),
             value: getValue(client, "address", def: "casa"),
@@ -136,6 +140,7 @@ class AddressInformation extends StatelessWidget {
             height: 0.07,
           ),
           CustomFormTextFieldWidget(
+            fontSize: 15,
             validator: CustomRequiredValidator(
                 errorText: "Email is required ", ctx: context),
             value: getValue(client, "email", def: "jose@aol.com"),
@@ -168,7 +173,7 @@ class CustomerKeyPad extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-          top: MediaQuery.of(context).size.height * 0.78,
+          top: MediaQuery.of(context).size.height * 0.75,
           left: MediaQuery.of(context).size.width * 0.7),
       child: GestureDetector(
         onTap: () {
@@ -188,6 +193,7 @@ class CustomerKeyPad extends StatelessWidget {
           }
         },
         child: const CustomTitleWidget(
+            fontSize: 15,
             width: 0.1,
             fontWeight: FontWeight.normal,
             label:
@@ -209,12 +215,13 @@ class BasicInformation extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-        top: MediaQuery.of(context).size.height * isMobile * 0.5,
+        top: MediaQuery.of(context).size.height * isMobile * 0.55,
         left: MediaQuery.of(context).size.width * isMobile * 0.08,
       ),
       child: SizedBox(
         child: Wrap(children: [
           const CustomTitleWidget(
+              fontSize: 15,
               width: 0.225,
               fontWeight: FontWeight.bold,
               label: " Basic information"),
@@ -222,6 +229,7 @@ class BasicInformation extends StatelessWidget {
           Row(
             children: [
               CustomFormDropDownFieldWidget(
+                fontSize: 15,
                 validator: CustomRequiredValidator(
                     errorText: "Legal Client Type is required ", ctx: context),
                 value: client["legal_client_type_id"] ?? "2",
@@ -240,6 +248,7 @@ class BasicInformation extends StatelessWidget {
                 data: customerTypeCatalog,
               ),
               CustomFormDateFieldWidget(
+                  fontSize: 15,
                   validator: (date) {
                     CustomDatetimeRequiredValidator(date,
                         context: context, errorText: "Birth date is Required");
@@ -259,6 +268,7 @@ class BasicInformation extends StatelessWidget {
               Obx(() {
                 if (customerType.value == "1") {
                   return CustomFormTextFieldWidget(
+                    fontSize: 15,
                     width: 0.2,
                     height: 0.07,
                     validator: CustomRequiredValidator(
@@ -277,6 +287,7 @@ class BasicInformation extends StatelessWidget {
               Obx(() {
                 if (customerType.value == "1") {
                   return CustomFormTextFieldWidget(
+                    fontSize: 15,
                     width: 0.2,
                     height: 0.07,
                     validator: CustomRequiredValidator(
@@ -295,6 +306,7 @@ class BasicInformation extends StatelessWidget {
               Obx(() {
                 if (customerType.value != "1") {
                   return CustomFormTextFieldWidget(
+                    fontSize: 15,
                     width: 0.2,
                     height: 0.07,
                     validator: CustomRequiredValidator(
@@ -319,6 +331,7 @@ class BasicInformation extends StatelessWidget {
           Row(
             children: [
               CustomFormTextFieldWidget(
+                fontSize: 15,
                 width: 0.2,
                 height: 0.07,
                 validator: CustomRequiredValidator(
@@ -331,6 +344,7 @@ class BasicInformation extends StatelessWidget {
                 hintText: "Names                          ",
               ),
               CustomFormTextFieldWidget(
+                fontSize: 15,
                 width: 0.2,
                 height: 0.07,
                 validator: CustomRequiredValidator(
@@ -372,10 +386,12 @@ class TourInformation extends StatelessWidget {
       child: Row(
         children: [
           const CustomTitleWidget(
+              fontSize: 15,
               width: 0.225,
               fontWeight: FontWeight.bold,
               label: " Tour information"),
           CustomFormTextFieldWidget(
+            fontSize: 15,
             width: 0.2,
             height: 0.07,
             validator: CustomRequiredValidator(
@@ -392,6 +408,7 @@ class TourInformation extends StatelessWidget {
           ),
           Obx(() {
             return CustomTitleWidget(
+                fontSize: 15,
                 width: 0.1,
                 fontWeight: FontWeight.bold,
                 label: "Travel Code: $travelCode");

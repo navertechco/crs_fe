@@ -50,7 +50,7 @@ class RoundedFormCalendar extends StatelessWidget {
               label,
               style: KTextSytle(
                       context: context,
-                      fontSize: 10,
+                      fontSize: 15,
                       fontWeight: FontWeight.bold,
                       color: Colors.black54)
                   .getStyle(),

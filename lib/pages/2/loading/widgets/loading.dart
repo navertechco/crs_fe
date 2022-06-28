@@ -29,7 +29,7 @@ class LoadingWidget extends GetView<LoadingController> {
                       RoundedFormButton(
                           label: "New Tour",
                           height: 0.07,
-                          fontSize: 10,
+                          fontSize: 15,
                           onPressed: () async {
                             setContext("readonly", false);
                             await newTour();
@@ -42,7 +42,7 @@ class LoadingWidget extends GetView<LoadingController> {
                       RoundedFormButton(
                           label: "Find Tour",
                           height: 0.07,
-                          fontSize: 10,
+                          fontSize: 15,
                           onPressed: () {
                             getCatalogs(["experiences"]);
                             getTour(context, tourId: 0, cb: (data) {
