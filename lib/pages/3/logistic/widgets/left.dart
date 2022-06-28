@@ -26,16 +26,16 @@ class LeftWidget extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(
           left: 50,
-          top: MediaQuery.of(context).size.height * 0.055,
+          top: MediaQuery.of(context).size.height * isMobile * 0.09,
           right: 400),
       child: SizedBox(
-        height: MediaQuery.of(context).size.height * 0.8,
-        width: MediaQuery.of(context).size.width * 0.48,
+        height: MediaQuery.of(context).size.height * isMobile * 0.97,
+        width: MediaQuery.of(context).size.width * isMobile * 0.9,
         child: Swiper(
           itemBuilder: (BuildContext context, int index) {
             return Image.asset(images[index],
                 // fit: BoxFit.fill,
-                width: MediaQuery.of(context).size.width * 0.05);
+                width: MediaQuery.of(context).size.width * isMobile * 0.07);
           },
           autoplay: true,
           autoplayDelay: 5000,

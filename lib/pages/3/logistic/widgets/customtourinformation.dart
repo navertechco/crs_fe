@@ -41,9 +41,9 @@ class CustomLogisticInformationForm extends StatelessWidget {
                                   fontWeight: FontWeight.bold,
                                   label: "  Cruise information     "),
                               RoundedFormButton(
+                                height: 0.1,
                                 color: Colors.grey,
                                 label: "View Cruise Calendar",
-                                height: 0.07,
                                 fontSize: 3,
                                 fontWeight: FontWeight.bold,
                                 textColor:
@@ -266,7 +266,8 @@ class CustomLogisticInformationForm extends StatelessWidget {
                                   width: 0.2),
                             if (cruiseDay.isNotEmpty)
                               CustomTitleWidget(
-                                width: 0.3,
+                                fontSize: 8,
+                                width: 0.2,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.red,
                                 label:

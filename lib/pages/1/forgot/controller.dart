@@ -39,7 +39,7 @@ class ForgotController extends GetxController {
         Text("A confirmation email was sent !!!!",
             style: KTextSytle(
                     context: ctx,
-                    fontSize: 15,
+                    fontSize: isMobile * 15,
                     fontWeight: FontWeight.bold,
                     color: Colors.black54)
                 .getStyle()),
@@ -53,7 +53,7 @@ class ForgotController extends GetxController {
         Text("The system had a technical problem, try again later",
             style: KTextSytle(
                     context: ctx,
-                    fontSize: 15,
+                    fontSize: isMobile * 15,
                     fontWeight: FontWeight.bold,
                     color: Colors.black54)
                 .getStyle()),

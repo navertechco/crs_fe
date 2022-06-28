@@ -93,22 +93,22 @@ void showCustomDialog(context, Widget child, String button,
     barrierDismissible: false, // user must tap button!
     builder: (BuildContext context) {
       return AlertDialog(
-        contentPadding: EdgeInsets.fromLTRB(8, 8, 8, 8),
+        // contentPadding: EdgeInsets.fromLTRB(8, 8, 8, 8),
         backgroundColor: backgroundColor,
         content: Container(
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(50)),
-            width: MediaQuery.of(context).size.width * width,
-            height: MediaQuery.of(context).size.height * height,
+            width: MediaQuery.of(context).size.width * isMobile * width,
+            height: MediaQuery.of(context).size.height * isMobile * height,
             child: child),
         actions: <Widget>[
-          Row(
+          Wrap(
             children: [
-              customChild ?? Spacer(),
+              customChild ?? SizedBox(),
               TextButton(
                 child: Text(button,
                     style: KTextSytle(
                             context: context,
-                            fontSize: 10,
+                            fontSize: isMobile * 10,
                             fontWeight: FontWeight.bold,
                             color: buttonColor)
                         .getStyle()),

@@ -35,8 +35,8 @@ class CruiseFiltersWidget extends StatelessWidget {
       child: Obx(() => Column(children: [
             Row(children: [
               CustomFormDropDownFieldWidget(
-                width: 0.1,
-                height: 0.05,
+                width: 0.16,
+                height: 0.07,
                 validator: CustomRequiredValidator(
                     errorText: "Cruise Days is required ", ctx: ctx),
                 value: "0",
@@ -51,8 +51,8 @@ class CruiseFiltersWidget extends StatelessWidget {
               ),
               if (cruiseDay.isNotEmpty)
                 CustomFormDropDownFieldWidget(
-                  width: 0.15,
-                  height: 0.05,
+                  width: 0.16,
+                  height: 0.07,
                   validator: CustomRequiredValidator(
                       errorText: "Itinerary Format is required ", ctx: ctx),
                   value: "0",
@@ -82,8 +82,8 @@ class CruiseFiltersWidget extends StatelessWidget {
                 ),
               if (cruiseItinerary.isNotEmpty)
                 CustomFormDropDownFieldWidget(
-                  width: 0.15,
-                  height: 0.05,
+                  width: 0.16,
+                  height: 0.07,
                   validator: CustomRequiredValidator(
                       errorText: "Cabine Type is required ", ctx: ctx),
                   value: "0",
@@ -111,8 +111,8 @@ class CruiseFiltersWidget extends StatelessWidget {
                 ),
               if (cruiseItinerary.isNotEmpty)
                 CustomFormDropDownFieldWidget(
-                  width: 0.15,
-                  height: 0.05,
+                  width: 0.16,
+                  height: 0.07,
                   validator: CustomRequiredValidator(
                       errorText: "Cabine Type is required ", ctx: ctx),
                   value: "0",
@@ -143,8 +143,8 @@ class CruiseFiltersWidget extends StatelessWidget {
             ]),
             Row(children: [
               CustomFormDropDownFieldWidget(
-                width: 0.1,
-                height: 0.05,
+                width: 0.16,
+                height: 0.07,
                 validator: CustomRequiredValidator(
                     errorText: "Cruise Category is required ", ctx: ctx),
                 value: "0",
@@ -172,7 +172,7 @@ class CruiseFiltersWidget extends StatelessWidget {
                     filterCruises(context);
                   }
                 },
-                hintText: "Category    ",
+                hintText: "Category",
                 data:
                     getMemoryCatalogChild("cruises", "value", "cruise_category",
                         condition: (element) {
@@ -190,8 +190,8 @@ class CruiseFiltersWidget extends StatelessWidget {
               ),
               if (cruiseCategory.isNotEmpty)
                 CustomFormDropDownFieldWidget(
-                  width: 0.15,
-                  height: 0.05,
+                  width: 0.16,
+                  height: 0.07,
                   validator: CustomRequiredValidator(
                       errorText: "Cruise Modality is required ", ctx: ctx),
                   value: "0",
@@ -232,8 +232,8 @@ class CruiseFiltersWidget extends StatelessWidget {
               if (cruiseCategory.isNotEmpty)
                 if (cruiseModality.isNotEmpty)
                   CustomFormDropDownFieldWidget(
-                    width: 0.15,
-                    height: 0.05,
+                    width: 0.16,
+                    height: 0.07,
                     validator: CustomRequiredValidator(
                         errorText: "Cruise Type is required ", ctx: ctx),
                     value: "0",
@@ -277,8 +277,8 @@ class CruiseFiltersWidget extends StatelessWidget {
                 if (cruiseModality.isNotEmpty)
                   if (cruiseType.isNotEmpty)
                     CustomFormDropDownFieldWidget(
-                      width: 0.15,
-                      height: 0.05,
+                      width: 0.16,
+                      height: 0.07,
                       validator: CustomRequiredValidator(
                           errorText: "Cruise Port is required ", ctx: ctx),
                       value: "0",
@@ -348,8 +348,8 @@ class CruiseKeyPadWidget extends StatelessWidget {
     return Obx(() => Padding(
           padding: EdgeInsets.only(
               top: MediaQuery.of(context).size.height * 0,
-              left: MediaQuery.of(context).size.width * 0.5),
-          child: Row(
+              left: MediaQuery.of(context).size.width * 0.4),
+          child: Wrap(
             children: [
               TextButton(
                 onPressed: () {
@@ -358,7 +358,7 @@ class CruiseKeyPadWidget extends StatelessWidget {
                 child: Text('Reset',
                     style: KTextSytle(
                             context: context,
-                            fontSize: 10,
+                            fontSize: isMobile * 10,
                             fontWeight: FontWeight.bold,
                             color: Colors.black)
                         .getStyle()),
@@ -372,7 +372,7 @@ class CruiseKeyPadWidget extends StatelessWidget {
                   child: Text('Process',
                       style: KTextSytle(
                               context: context,
-                              fontSize: 10,
+                              fontSize: isMobile * 10,
                               fontWeight: FontWeight.bold,
                               color: Colors.black)
                           .getStyle()),
@@ -386,7 +386,7 @@ class CruiseKeyPadWidget extends StatelessWidget {
                       !moreFilters.value ? 'More Filters' : 'Less Filters',
                       style: KTextSytle(
                               context: context,
-                              fontSize: 10,
+                              fontSize: isMobile * 10,
                               fontWeight: FontWeight.bold,
                               color: Colors.black)
                           .getStyle()),
@@ -428,7 +428,8 @@ class CruiseResultWidget extends StatelessWidget {
                                 "Cruise Name",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    fontSize: 15, fontWeight: FontWeight.bold),
+                                    fontSize: isMobile * 15,
+                                    fontWeight: FontWeight.bold),
                               ),
                             ),
                             SizedBox(
@@ -436,7 +437,8 @@ class CruiseResultWidget extends StatelessWidget {
                               "Actions",
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.bold),
+                                  fontSize: isMobile * 15,
+                                  fontWeight: FontWeight.bold),
                             )),
                           ],
                         ),
@@ -467,7 +469,7 @@ class CruiseResultWidget extends StatelessWidget {
                                           "No Cruises Found",
                                           style: KTextSytle(
                                             context: context,
-                                            fontSize: 15,
+                                            fontSize: isMobile * 15,
                                             fontWeight: FontWeight.bold,
                                             color: Color.fromARGB(
                                                 255, 204, 164, 61),
