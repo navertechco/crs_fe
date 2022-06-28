@@ -40,9 +40,9 @@ class RoundedFormDropdown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * width,
-      height: MediaQuery.of(context).size.height * height,
-      padding: EdgeInsets.only(left: left, top: top),
+      width: MediaQuery.of(context).size.width * isMobile * width,
+      height: MediaQuery.of(context).size.height * isMobile * height,
+      padding: EdgeInsets.only(left: isMobile * left, top: isMobile * top),
       decoration: BoxDecoration(
           color: Colors.grey, borderRadius: BorderRadius.circular(50)),
       child: FormCatalogueWidget(

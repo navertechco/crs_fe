@@ -29,13 +29,13 @@ class LeftWidget extends StatelessWidget {
           top: MediaQuery.of(context).size.height * 0.055,
           right: 400),
       child: SizedBox(
-        height: MediaQuery.of(context).size.height * 0.8,
-        width: MediaQuery.of(context).size.width * 0.48,
+        height: MediaQuery.of(context).size.height * isMobile,
+        width: MediaQuery.of(context).size.width * isMobile,
         child: Swiper(
           itemBuilder: (BuildContext context, int index) {
             return Image.asset(images[index],
                 // fit: BoxFit.fill,
-                width: MediaQuery.of(context).size.width * 0.05);
+                width: MediaQuery.of(context).size.width * isMobile * 0.05);
           },
           autoplay: true,
           autoplayDelay: 5000,

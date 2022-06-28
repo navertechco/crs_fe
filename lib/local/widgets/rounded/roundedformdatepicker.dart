@@ -20,10 +20,10 @@ class RoundedFormDatepicker extends StatelessWidget {
       {Key? key,
       required this.format,
       this.hintText = '',
-      this.left = 65,
-      this.top = 10,
+      this.left = 10,
+      this.top = 2,
       this.width = 0.2,
-      this.height = 0.05,
+      this.height = 0.04,
       this.onChanged,
       this.onSaved,
       this.validator,
@@ -34,21 +34,23 @@ class RoundedFormDatepicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * width,
-      height: MediaQuery.of(context).size.height * height,
-      padding: EdgeInsets.only(left: left, top: top),
+      width: MediaQuery.of(context).size.width * isMobile * width,
+      height: MediaQuery.of(context).size.height * isMobile * height,
+      padding: EdgeInsets.only(left: isMobile * left, top: isMobile * top),
       decoration: BoxDecoration(
           color: Colors.grey, borderRadius: BorderRadius.circular(50)),
       child: DateTimeField(
         enabled: !disabled,
         validator: validator,
         cursorColor: Colors.grey,
+        cursorWidth: 1,
+        resetIcon: Icon(Icons.cancel, size: isMobile * 1),
         decoration: InputDecoration.collapsed(
             hintText: hintText, enabled: !disabled, fillColor: Colors.red),
         style: KTextSytle(
                 color: disabled ? Colors.black45 : Colors.black,
                 context: context,
-                fontSize: 10,
+                fontSize: isMobile * 6,
                 fontWeight: FontWeight.bold)
             .getStyle(),
         format: format,

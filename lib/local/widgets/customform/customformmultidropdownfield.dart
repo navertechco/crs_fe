@@ -4,17 +4,20 @@ import 'index.dart';
 import 'package:naver_crs/index.dart';
 
 class CustomFormMultiDropDownFieldWidget extends StatelessWidget {
-  const CustomFormMultiDropDownFieldWidget(
-      {Key? key,
-      this.label = '',
-      this.hintText = '',
-      required this.data,
-      required this.value,
-      required this.onSaved,
-      required this.onChanged,
-      this.validator,
-      this.enabled})
-      : super(key: key);
+  const CustomFormMultiDropDownFieldWidget({
+    Key? key,
+    this.label = '',
+    this.hintText = '',
+    this.fontSize = 10,
+    this.height = 1,
+    required this.data,
+    required this.value,
+    required this.onSaved,
+    required this.onChanged,
+    this.validator,
+    this.enabled,
+  }) : super(key: key);
+  final height;
   final String? Function(dynamic)? validator;
   final List<String> value;
   final onSaved;
@@ -23,15 +26,19 @@ class CustomFormMultiDropDownFieldWidget extends StatelessWidget {
   final String? hintText;
   final List<Map<String, dynamic>> data;
   final enabled;
+  final fontSize;
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(10.0),
+      padding: EdgeInsets.all(8),
       child: Row(
         children: [
-          CustomFormLabelWidget(label: label, fontWeight: FontWeight.normal),
+          CustomFormLabelWidget(
+              fontSize: fontSize, label: label, fontWeight: FontWeight.normal),
           // SizedBox(width: MediaQuery.of(context).size.width * 0.003),
           RoundedFormMultiDropdown(
+              height: height,
+              fontSize: fontSize * 1.0,
               validator: validator,
               value: value,
               data: data,

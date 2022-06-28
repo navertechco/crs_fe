@@ -27,7 +27,7 @@ class SigninForm extends StatelessWidget {
               hintText: 'Username',
             ),
           ),
-          SizedBox(height: kDefaultPadding),
+          SizedBox(height: isMobile * kDefaultPadding),
           SizedBox(
             child: RoundedFormTextField(
                 initialValue: "jcuevas123!",

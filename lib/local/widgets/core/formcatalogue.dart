@@ -34,7 +34,7 @@ class FormCatalogueWidget extends StatelessWidget {
           child: DropdownButtonFormField(
             style: KTextSytle(
                     context: context,
-                    fontSize: value == null ? 10 : 8,
+                    fontSize: value == null ? isMobile * 10 : isMobile * 8,
                     fontWeight:
                         value == null ? FontWeight.normal : FontWeight.bold)
                 .getStyle(),
@@ -45,7 +45,7 @@ class FormCatalogueWidget extends StatelessWidget {
               "data",
               style: KTextSytle(
                       context: context,
-                      fontSize: value == null ? 10 : 8,
+                      fontSize: value == null ? isMobile * 10 : isMobile * 8,
                       fontWeight:
                           value == null ? FontWeight.normal : FontWeight.bold)
                   .getStyle(),
@@ -56,7 +56,7 @@ class FormCatalogueWidget extends StatelessWidget {
               hintText: hintText,
               hintStyle: KTextSytle(
                       context: context,
-                      fontSize: value == null ? 10 : 8,
+                      fontSize: value == null ? isMobile * 10 : isMobile * 8,
                       fontWeight:
                           value == null ? FontWeight.normal : FontWeight.bold)
                   .getStyle(),

@@ -30,13 +30,13 @@ class CustomKeypadWidget extends StatelessWidget {
         GestureDetector(
           onTap: onPrevious,
           child: CustomFormLabelWidget(
-              label: prevlabel, fontWeight: prevFontWeight),
+              fontSize: 8, label: prevlabel, fontWeight: prevFontWeight),
         ),
         SizedBox(width: MediaQuery.of(context).size.width * width),
         GestureDetector(
           onTap: onNext,
           child: CustomFormLabelWidget(
-              label: nextlabel, fontWeight: nextFontWeight),
+              fontSize: 8, label: nextlabel, fontWeight: nextFontWeight),
         ),
       ],
     );

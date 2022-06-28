@@ -6,10 +6,10 @@ import 'package:naver_crs/index.dart';
 class RoundedFormMultiDropdown extends StatelessWidget {
   final double left;
   final double top;
-  final double width;
-  final double height;
-  final double fontSize;
-  final String? hintText;
+  final width;
+  final height;
+  final fontSize;
+  final hintText;
   final String? label;
   final onSaved;
   final onChanged;
@@ -69,24 +69,30 @@ class RoundedFormMultiDropdown extends StatelessWidget {
     }
 
     return Container(
-        width: MediaQuery.of(context).size.width * width,
-        padding: EdgeInsets.only(left: left, top: top),
+        width: MediaQuery.of(context).size.width * isMobile * width,
+        height: MediaQuery.of(context).size.height * isMobile * height,
+        padding: EdgeInsets.only(left: isMobile * left, top: isMobile * top),
         child: MultiSelectFormField(
           enabled: enabled ?? true,
           autovalidate: AutovalidateMode.disabled,
           chipBackGroundColor: Colors.grey,
           fillColor: Color.fromARGB(0, 255, 255, 255),
-          chipLabelStyle:
-              TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-          dialogTextStyle:
-              TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+          chipLabelStyle: TextStyle(
+              fontSize: fontSize * isMobile,
+              fontWeight: FontWeight.bold,
+              color: Colors.black),
+          dialogTextStyle: TextStyle(
+              fontSize: fontSize * isMobile,
+              fontWeight: FontWeight.bold,
+              color: Colors.black),
           checkBoxActiveColor: Colors.grey,
           checkBoxCheckColor: Colors.black,
           dialogShapeBorder: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(12.0))),
+              borderRadius: BorderRadius.all(Radius.circular(isMobile * 12.0))),
           title: Text(
             hintText!,
-            style: TextStyle(fontSize: 16, color: Colors.grey),
+            style: TextStyle(
+                fontSize: isMobile * fontSize * 1.0, color: Colors.grey),
           ),
           validator: (value) {
             if (value == null || value.length == 0) {
@@ -102,7 +108,8 @@ class RoundedFormMultiDropdown extends StatelessWidget {
           cancelButtonLabel: 'CANCEL',
           hintWidget: Text(
             "Select a Option",
-            style: TextStyle(fontSize: 16, color: Colors.grey),
+            style: TextStyle(
+                fontSize: isMobile * fontSize * 1.0, color: Colors.grey),
           ),
           initialValue: dataValue,
           onSaved: onSaved,

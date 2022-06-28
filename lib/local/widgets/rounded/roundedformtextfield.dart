@@ -41,11 +41,10 @@ class RoundedFormTextField extends StatelessWidget {
   bool password;
   @override
   Widget build(BuildContext context) {
-    var isMobile = isMobileDevice() ? 1.2 : 1;
     return Container(
-      width: MediaQuery.of(context).size.width * width,
-      height: MediaQuery.of(context).size.height * height,
-      padding: EdgeInsets.only(left: left, top: top),
+      width: MediaQuery.of(context).size.width * isMobile * width,
+      height: MediaQuery.of(context).size.height * isMobile * height,
+      padding: EdgeInsets.only(left: isMobile * left, top: isMobile * top),
       decoration: BoxDecoration(
           color: Colors.grey, borderRadius: BorderRadius.circular(50)),
       foregroundDecoration: BoxDecoration(
@@ -65,7 +64,7 @@ class RoundedFormTextField extends StatelessWidget {
         cursorColor: Colors.black54,
         style: KTextSytle(
                 context: context,
-                fontSize: initialValue == null ? 12 : 10,
+                fontSize: initialValue == null ? isMobile * 12 : isMobile * 10,
                 fontWeight:
                     initialValue == null ? FontWeight.normal : FontWeight.bold)
             .getStyle(),

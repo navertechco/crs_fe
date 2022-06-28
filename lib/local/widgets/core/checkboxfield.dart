@@ -13,6 +13,7 @@ class CheckboxField extends StatelessWidget {
     this.initialValue,
     this.enabled = false,
     this.iconSize = 32,
+    this.fontSize = 10,
     required this.onSaved,
     required this.onChanged,
   }) : super(key: key);
@@ -25,19 +26,20 @@ class CheckboxField extends StatelessWidget {
   final double iconSize;
   final onSaved;
   final onChanged;
+  final fontSize;
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         CustomTitleWidget(
+            fontSize: fontSize,
             fontWeight: fontWeight,
             label: label,
             color: color),
         CheckboxIconFormField(
           context: context,
           trueIconColor: trueIconColor,
-          initialValue:
-              initialValue,
+          initialValue: initialValue,
           enabled: enabled,
           iconSize: iconSize,
           onSaved: onSaved,

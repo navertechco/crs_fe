@@ -25,8 +25,8 @@ class CustomLogisticInformationForm extends StatelessWidget {
             key: _formKey,
             child: Padding(
               padding: EdgeInsets.only(
-                top: MediaQuery.of(context).size.height * 0.16,
-                left: MediaQuery.of(context).size.width * 0.54,
+                top: MediaQuery.of(context).size.height * isMobile * 0.18,
+                left: MediaQuery.of(context).size.width * isMobile * 0.72,
               ),
               child: Column(
                 children: [
@@ -36,14 +36,14 @@ class CustomLogisticInformationForm extends StatelessWidget {
                         if (galapagos.value) {
                           return Row(
                             children: [
-                              const CustomTitleWidget(
-                                  width: 0.225,
+                              CustomTitleWidget(
+                                  width: isMobile * 0.225,
                                   fontWeight: FontWeight.bold,
                                   label: "  Cruise information     "),
                               RoundedFormButton(
                                 color: Colors.grey,
                                 label: "View Cruise Calendar",
-                                height: 0.05,
+                                height: 0.07,
                                 fontSize: 3,
                                 fontWeight: FontWeight.bold,
                                 textColor:
@@ -77,11 +77,12 @@ class CustomLogisticInformationForm extends StatelessWidget {
                           return const SizedBox();
                         }
                       }),
-                      const CustomTitleWidget(
-                          width: 0.225,
+                      CustomTitleWidget(
+                          width: isMobile * 0.225,
                           fontWeight: FontWeight.bold,
                           label: "  Arrival information"),
                       CustomFormDropDownFieldWidget(
+                        height: 0.07,
                         value: arrivalPort.value,
                         disabled: readonly,
                         onSaved: (value) {
@@ -104,6 +105,8 @@ class CustomLogisticInformationForm extends StatelessWidget {
                         return Row(
                           children: [
                             CustomFormDateFieldWidget(
+                              height: 0.06,
+                              width: 0.2,
                               disabled: (readonly || cruiseDay.isNotEmpty) &&
                                   !arrivalEdit.value,
                               initialValue: arrivalDate.value,
@@ -135,11 +138,12 @@ class CustomLogisticInformationForm extends StatelessWidget {
                           ],
                         );
                       }),
-                      const CustomTitleWidget(
-                          width: 0.225,
+                      CustomTitleWidget(
+                          width: isMobile * 0.225,
                           fontWeight: FontWeight.bold,
                           label: "  Departure information"),
                       CustomFormDropDownFieldWidget(
+                        height: 0.07,
                         value: departurePort.value,
                         disabled: readonly,
                         onSaved: (value) {
@@ -203,6 +207,7 @@ class CustomLogisticInformationForm extends StatelessWidget {
                               label: "  Logistic Information",
                             ),
                             CustomFormDropDownFieldWidget(
+                              height: 0.07,
                               validator: CustomRequiredValidator(
                                   errorText: "Destination option is required ",
                                   ctx: context),
@@ -222,6 +227,7 @@ class CustomLogisticInformationForm extends StatelessWidget {
                             Row(
                               children: [
                                 CustomFormCheckboxWidget(
+                                  width: 0.15,
                                   label: "Open Credit                 ",
                                   value: 1,
                                   groupValue: openBoolCredit,
@@ -235,6 +241,8 @@ class CustomLogisticInformationForm extends StatelessWidget {
                             ),
                             if (openBoolCredit.value == 1)
                               CustomFormCounterFieldWidget(
+                                  height: 0.07,
+                                  fontSize: 10,
                                   initial: openCredit.value,
                                   min: 0,
                                   max: 5000,
@@ -267,6 +275,7 @@ class CustomLogisticInformationForm extends StatelessWidget {
                           ],
                         );
                       }),
+                      SizedBox(height: MediaQuery.of(context).size.height * 0.2)
                     ]),
                   ),
                 ],

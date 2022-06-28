@@ -21,21 +21,25 @@ class SigninFormPage extends GetView<StatelessWidget> {
       child: SafeArea(
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(
-              horizontal: MediaQuery.of(context).size.width * 0.05),
+              horizontal: MediaQuery.of(context).size.width * isMobile * 0.05),
           child: SafeArea(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(height: MediaQuery.of(context).size.height * 0.3),
-                SigninForm(formKey: _formKey, state: ctrl!.state),
-                SizedBox(height: MediaQuery.of(context).size.height * 0.05),
                 SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.2,
+                    height:
+                        MediaQuery.of(context).size.height * isMobile * 0.3),
+                SigninForm(formKey: _formKey, state: ctrl!.state),
+                SizedBox(
+                    height:
+                        MediaQuery.of(context).size.height * isMobile * 0.05),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * isMobile * 0.2,
                   child: RoundedFormButton(
                     color: Colors.white,
                     label: "SignIn",
-                    height: 0.07,
-                    fontSize: 5,
+                    height: 0.1,
+                    fontSize: 3,
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
                         _formKey.currentState!.save();

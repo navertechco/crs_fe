@@ -476,7 +476,6 @@ DataCell getCruiseDataCell(context, row) {
   return dataCell;
 }
 
-
 /// ## showCruiseResultDialog
 /// *__Method show Cruise Result dialog__*
 ///

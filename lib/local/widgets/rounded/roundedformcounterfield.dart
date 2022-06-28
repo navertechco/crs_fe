@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:counter/counter.dart';
 
+import '../../index.dart';
+
 class RoundedFormCounterField extends StatelessWidget {
   final bool disabled;
   final double left;
@@ -18,7 +20,7 @@ class RoundedFormCounterField extends StatelessWidget {
   final int step;
   final bool original;
 
-  const RoundedFormCounterField(
+  RoundedFormCounterField(
       {Key? key,
       required this.hintText,
       this.left = 45,
@@ -59,9 +61,9 @@ class RoundedFormCounterField extends StatelessWidget {
     }
 
     return Container(
-      width: MediaQuery.of(context).size.width * width,
-      height: MediaQuery.of(context).size.height * height,
-      padding: EdgeInsets.only(left: left, top: top),
+      width: MediaQuery.of(context).size.width * isMobile * width,
+      height: MediaQuery.of(context).size.height * isMobile * height,
+      padding: EdgeInsets.only(left: isMobile * left, top: isMobile * top),
       decoration: BoxDecoration(
           color: Colors.grey, borderRadius: BorderRadius.circular(50)),
       foregroundDecoration: BoxDecoration(

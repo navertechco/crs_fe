@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+
 bool isFirstLaunch = true;
 var defaultToken;
+double isMobile = isMobileDevice() ? 0.75 : 1;
 LocalContext globalctx = LocalContext();
 var session = {};
 ////

@@ -28,18 +28,20 @@ class LoadingWidget extends GetView<LoadingController> {
                     children: [
                       RoundedFormButton(
                           label: "New Tour",
-                          height: 0.07,
+                          height: 0.1,
                           fontSize: 5,
                           onPressed: () async {
                             setContext("readonly", false);
                             await newTour();
                           }),
                       SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.02,
+                        height: MediaQuery.of(context).size.height *
+                            isMobile *
+                            0.02,
                       ),
                       RoundedFormButton(
                           label: "Find Tour",
-                          height: 0.07,
+                          height: 0.1,
                           fontSize: 5,
                           onPressed: () {
                             getCatalogs(["experiences"]);
