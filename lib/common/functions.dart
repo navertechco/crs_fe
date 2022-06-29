@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:math';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -595,4 +594,32 @@ updateMulitDropdown(data, value, dataSource, dataValue) {
   } catch (e) {
     log(e);
   }
+}
+
+windowCheck() {
+  var isPortrait = Get.width > Get.height;
+  var isLandscape = Get.width < Get.height;
+  var isMobileLayout = Get.width < 600 || Get.height < 600;
+  var isDesktopLayout = Get.width >= 800 || Get.height >= 600;
+  var isMobile = isMobileDevice() & isMobileLayout;
+  var isTablet = isMobileDevice() & !isMobileLayout;
+  var isWebMobile = kIsWeb && isMobileDevice();
+  var isWebMobilePortrait = isWebMobile & isPortrait;
+  var isWebMobileLandscap = isWebMobile & isLandscape;
+  var isWebDesktop = kIsWeb && !isMobileDevice();
+  var isMobilePortrait = isMobile & isPortrait;
+  var isMobileLandscape = isMobile & isLandscape;
+  var isTabletPortrait = isTablet & isPortrait;
+  var isTabletLandscape = isTablet & isLandscape;
+  var isDesktop = !isMobile && isDesktopLayout && !kIsWeb;
+
+  if (isWebMobilePortrait) {
+  } else if (isWebMobileLandscap) {
+  } else if (isWebDesktop) {
+  } else if (isMobilePortrait) {
+  } else if (isMobileLandscape) {
+  } else if (isTabletLandscape) {
+  } else if (isTabletPortrait) {
+  } else if (isDesktop) {
+  } else {}
 }

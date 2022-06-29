@@ -45,27 +45,19 @@ class CustomFormTextFieldWidget extends StatelessWidget {
         children: [
           CustomFormLabelWidget(
               fontSize: fontSize, label: label, fontWeight: FontWeight.normal),
-          RawKeyboardListener(
-            focusNode: FocusNode(),
-            onKey: (event) {
-              if (event.logicalKey == LogicalKeyboardKey.backspace) {
-                onBack!(value);
-              }
-            },
-            child: RoundedFormTextField(
-                fontSize: fontSize * 1.0,
-                initialValue: value.toString(),
-                disabled: disabled,
-                onSaved: onSaved,
-                onChanged: onChanged,
-                onFieldSubmitted: onFieldSubmitted,
-                hintText: hintText,
-                keyboardType: keyboardType,
-                inputFormatters: inputFormatters,
-                validator: validator,
-                width: width,
-                height: height),
-          ),
+          RoundedFormTextField(
+              fontSize: fontSize * 1.0,
+              initialValue: value.toString(),
+              disabled: disabled,
+              onSaved: onSaved,
+              onChanged: onChanged,
+              onFieldSubmitted: onFieldSubmitted,
+              hintText: hintText,
+              keyboardType: keyboardType,
+              inputFormatters: inputFormatters,
+              validator: validator,
+              width: width,
+              height: height),
         ],
       ),
     );

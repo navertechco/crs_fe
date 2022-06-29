@@ -10,7 +10,7 @@ void main() async {
       defaultDocument: 'index.html', serveFilesOutsidePath: true);
   var mainHandler = createStaticHandler(staticPath,
       defaultDocument: 'main.dart.js', serveFilesOutsidePath: true);
-  var assetsHandler = createFileHandler('build\\web\\assets');
+  var assetsHandler = createFileHandler('assets');
   var app = Router();
   app.get('/', staticHandler);
   app.get('/main.dart.js', mainHandler);
