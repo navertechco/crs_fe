@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/common/index.dart';
 // ignore: import_of_legacy_library_into_null_safe
-import 'package:sweetalert/sweetalert.dart';
+import 'package:sweetalertv2/sweetalertv2.dart';
 
 class CustomCustomerDataForm extends StatelessWidget {
   final CustomerController? ctrl;
@@ -70,10 +70,10 @@ class AddressInformation extends StatelessWidget {
                             errorText: "Country is required ", ctx: context)
                         .call(value);
                     if (city.value.isEmpty) {
-                      SweetAlert.show(context,
+                      SweetAlertV2.show(context,
                           curve: ElasticInCurve(),
                           title: "City Field is required",
-                          style: SweetAlertStyle.error,
+                          style: SweetAlertV2Style.error,
                           onPress: (bool isConfirm) {
                         Get.close(1);
                         return false;
@@ -180,10 +180,10 @@ class CustomerKeyPad extends StatelessWidget {
           if (_formKey.currentState!.validate()) {
             _formKey.currentState!.save();
             if (city.value.isEmpty) {
-              SweetAlert.show(context,
+              SweetAlertV2.show(context,
                   curve: ElasticInCurve(),
                   title: "City Field is required",
-                  style: SweetAlertStyle.error, onPress: (bool isConfirm) {
+                  style: SweetAlertV2Style.error, onPress: (bool isConfirm) {
                 Get.close(1);
                 return false;
               });

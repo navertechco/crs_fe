@@ -9,7 +9,7 @@ class FormCatalogueWidget extends StatelessWidget {
       this.disabled = false,
       required this.value,
       required this.data,
-      this.hintText = "Choose a Option",
+      this.hintText ,
       required this.onChanged,
       required this.onSaved,
       this.validator,
@@ -47,7 +47,7 @@ class FormCatalogueWidget extends StatelessWidget {
               ),
               child: DropdownButtonHideUnderline(
                 child: DropdownButton<String>(
-                  hint: Text(hintText!),
+                  hint: Text(hintText??"Choose a Option"),
                   style: KTextSytle(
                           color: Colors.black,
                           context: context,

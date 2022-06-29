@@ -3,7 +3,7 @@ import 'index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 // ignore: import_of_legacy_library_into_null_safe
-import 'package:sweetalert/sweetalert.dart';
+import 'package:sweetalertv2/sweetalertv2.dart';
 
 class PrintDocsController extends GetxController {
   PrintDocsController();
@@ -26,15 +26,14 @@ class PrintDocsController extends GetxController {
         });
 
         if (res['state'] == true) {
-          
           isLoading = !isLoading;
           Get.toNamed('/Loading');
         } else {
           isLoading = !isLoading;
-          SweetAlert.show(ctx,
+          SweetAlertV2.show(ctx,
               curve: ElasticInCurve(),
               title: res['message'],
-              style: SweetAlertStyle.error, onPress: (bool isConfirm) {
+              style: SweetAlertV2Style.error, onPress: (bool isConfirm) {
             Get.close(1);
             return false;
           });

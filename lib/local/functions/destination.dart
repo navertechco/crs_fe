@@ -7,7 +7,7 @@ import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/pages/5/destination/widgets/index.dart';
 // ignore: import_of_legacy_library_into_null_safe
-import 'package:sweetalert/sweetalert.dart';
+import 'package:sweetalertv2/sweetalertv2.dart';
 
 // ██████╗ ███████╗███████╗████████╗██╗███╗   ██╗ █████╗ ████████╗██╗ ██████╗ ███╗   ██╗
 // ██╔══██╗██╔════╝██╔════╝╚══██╔══╝██║████╗  ██║██╔══██╗╚══██╔══╝██║██╔═══██╗████╗  ██║
@@ -357,12 +357,12 @@ Future processDestinations(context) async {
     await nextDay();
   } else {
     if (context != null) {
-      SweetAlert.show(context,
+      SweetAlertV2.show(context,
           curve: ElasticInCurve(),
           title: (dayleft.value > 0)
               ? "You still have $dayleft days to enjoy, do you want to review the other options we have for you?"
               : "Promote any destination is required",
-          style: SweetAlertStyle.error, onPress: (bool isConfirm) {
+          style: SweetAlertV2Style.error, onPress: (bool isConfirm) {
         Get.close(1);
         return false;
       });

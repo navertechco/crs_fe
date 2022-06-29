@@ -2,7 +2,7 @@
 // ignore_for_file: curly_braces_in_flow_control_structures
 import 'package:checkbox_formfield/checkbox_formfield.dart';
 import 'package:flutter/material.dart';
-import 'package:sweetalert/sweetalert.dart';
+import 'package:sweetalertv2/sweetalertv2.dart';
 import '../index.dart';
 import 'index.dart';
 import 'package:naver_crs/index.dart';
@@ -508,10 +508,10 @@ showCruiseResultDialog(ctx,
       showCruiseDetailDialog(ctx, data[0]);
     }
   } else {
-    SweetAlert.show(ctx,
+    SweetAlertV2.show(ctx,
         curve: ElasticInCurve(),
         title: res['message'],
-        style: SweetAlertStyle.error, onPress: (bool isConfirm) {
+        style: SweetAlertV2Style.error, onPress: (bool isConfirm) {
       Get.close(1);
       return false;
     });

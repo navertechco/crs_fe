@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:get/get.dart';
 // ignore: import_of_legacy_library_into_null_safe
-import 'package:sweetalert/sweetalert.dart';
+import 'package:sweetalertv2/sweetalertv2.dart';
 
 final passwordValidator = MultiValidator(
   [
@@ -62,10 +62,10 @@ class CustomRequiredValidator extends TextFieldValidator {
     if (isValid(value)) {
       return null;
     } else {
-      SweetAlert.show(ctx,
+      SweetAlertV2.show(ctx,
           curve: ElasticInCurve(),
           title: errorText,
-          style: SweetAlertStyle.error, onPress: (bool isConfirm) {
+          style: SweetAlertV2Style.error, onPress: (bool isConfirm) {
         Get.close(1);
         return false;
       });
@@ -94,10 +94,10 @@ class CustomCatalogRequiredValidator extends TextFieldValidator {
     if (isValid(value)) {
       return null;
     } else {
-      SweetAlert.show(ctx,
+      SweetAlertV2.show(ctx,
           curve: ElasticInCurve(),
           title: errorText,
-          style: SweetAlertStyle.error, onPress: (bool isConfirm) {
+          style: SweetAlertV2Style.error, onPress: (bool isConfirm) {
         Get.close(1);
         return false;
       });
@@ -111,10 +111,10 @@ final CustomDatetimeRequiredValidator =
   if (date != null) {
     return null;
   } else {
-    SweetAlert.show(context,
+    SweetAlertV2.show(context,
         curve: ElasticInCurve(),
         title: errorText,
-        style: SweetAlertStyle.error, onPress: (bool isConfirm) {
+        style: SweetAlertV2Style.error, onPress: (bool isConfirm) {
       Get.close(1);
       return false;
     });
@@ -145,10 +145,10 @@ class CustomDatetimeGreaterValidator extends FieldValidator<DateTime?> {
     if ((diff > 0) && (newDate >= 0)) {
       return true;
     } else {
-      SweetAlert.show(context,
+      SweetAlertV2.show(context,
           curve: ElasticInCurve(),
           title: _errorText,
-          style: SweetAlertStyle.error, onPress: (bool isConfirm) {
+          style: SweetAlertV2Style.error, onPress: (bool isConfirm) {
         return true;
       });
     }
@@ -165,10 +165,10 @@ class CustomDatetimeGreaterValidator extends FieldValidator<DateTime?> {
 final CustomMultiDropdownRequiredValidator =
     (value, {BuildContext? context, required String errorText}) {
   if (value == null) {
-    SweetAlert.show(context,
+    SweetAlertV2.show(context,
         curve: ElasticInCurve(),
         title: errorText,
-        style: SweetAlertStyle.error, onPress: (bool isConfirm) {
+        style: SweetAlertV2Style.error, onPress: (bool isConfirm) {
       Get.close(1);
       return false;
     });

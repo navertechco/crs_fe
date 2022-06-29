@@ -7,7 +7,7 @@ import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/pages/7/endservices/widgets/index.dart';
 import 'package:naver_crs/pages/index.dart';
-import 'package:sweetalert/sweetalert.dart';
+import 'package:sweetalertv2/sweetalertv2.dart';
 export 'day.dart';
 export 'destination.dart';
 export 'experience.dart';

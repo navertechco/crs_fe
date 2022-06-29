@@ -2,7 +2,7 @@
 
 import 'package:checkbox_formfield/checkbox_icon_formfield.dart';
 import 'package:flutter/material.dart';
-import 'package:sweetalert/sweetalert.dart';
+import 'package:sweetalertv2/sweetalertv2.dart';
 import '../index.dart';
 import 'index.dart';
 import 'package:naver_crs/index.dart';
@@ -303,10 +303,10 @@ void showHotelResultDialog(ctx, {int id = 0, int index = 0}) async {
             width: 0.35);
       }
     } else {
-      SweetAlert.show(ctx,
+      SweetAlertV2.show(ctx,
           curve: ElasticInCurve(),
           title: res['message'],
-          style: SweetAlertStyle.error, onPress: (bool isConfirm) {
+          style: SweetAlertV2Style.error, onPress: (bool isConfirm) {
         Get.close(1);
         return false;
       });

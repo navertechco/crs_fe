@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
-import 'package:sweetalert/sweetalert.dart';
+import 'package:sweetalertv2/sweetalertv2.dart';
 import 'package:yaml/yaml.dart';
 
 // ████████╗ ██████╗ ██╗   ██╗██████╗
@@ -275,10 +275,10 @@ Future getTour(ctx, {int tourId = 0, detail = false, cb}) async {
     var data = res['data'];
     cb(data);
   } else {
-    SweetAlert.show(ctx,
+    SweetAlertV2.show(ctx,
         curve: ElasticInCurve(),
         title: res['message'],
-        style: SweetAlertStyle.error, onPress: (bool isConfirm) {
+        style: SweetAlertV2Style.error, onPress: (bool isConfirm) {
       Get.close(1);
       return false;
     });
