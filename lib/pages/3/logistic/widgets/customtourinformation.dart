@@ -45,7 +45,7 @@ class LogisticForm extends StatelessWidget {
         key: _formKey,
         child: Padding(
           padding: EdgeInsets.only(
-            top: MediaQuery.of(context).size.height * isMobile * 0.15,
+            top: MediaQuery.of(context).size.height * isMobile * 0.165,
             left: MediaQuery.of(context).size.width * isMobile * 0.55,
           ),
           child: Column(
@@ -61,10 +61,10 @@ class LogisticForm extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                               label: "  Cruise information     "),
                           RoundedFormButton(
-                            height: 0.1,
+                            height: 0.06,
                             color: Colors.grey,
                             label: "View Cruise Calendar",
-                            fontSize: 3,
+                            fontSize: 6,
                             fontWeight: FontWeight.bold,
                             textColor:
                                 cruiseDay.value.isEmpty || cruiseEdit.value
