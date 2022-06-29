@@ -45,8 +45,8 @@ class LogisticForm extends StatelessWidget {
         key: _formKey,
         child: Padding(
           padding: EdgeInsets.only(
-            top: MediaQuery.of(context).size.height * isMobile * 0.25,
-            left: MediaQuery.of(context).size.width * isMobile * 0.85,
+            top: MediaQuery.of(context).size.height * isMobile * 0.15,
+            left: MediaQuery.of(context).size.width * isMobile * 0.55,
           ),
           child: Column(
             children: [
@@ -95,13 +95,13 @@ class LogisticForm extends StatelessWidget {
                     }
                   }),
                   CustomTitleWidget(
-                      fontSize: 15,
+                      fontSize: 10,
                       width: isMobile * 0.225,
                       fontWeight: FontWeight.bold,
-                      label: "  Arrival information"),
+                      label: "Arrival information"),
                   CustomFormDropDownFieldWidget(
                     height: 0.05,
-                    fontSize: 15,
+                    fontSize: 10,
                     value: arrivalPort.value,
                     disabled: readonly,
                     onSaved: (value) {
@@ -116,7 +116,7 @@ class LogisticForm extends StatelessWidget {
                     },
                     validator: CustomRequiredValidator(
                         errorText: "Arrival Port is required ", ctx: context),
-                    label: "Arrival Port\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t",
+                    label: "Arrival Port\t\t\t\t\t\t\t\t\t\t",
                     data: airportCatalog.toList(),
                   ),
                   Obx(() {
@@ -125,7 +125,7 @@ class LogisticForm extends StatelessWidget {
                         CustomFormDateFieldWidget(
                           height: 0.06,
                           width: 0.2,
-                          fontSize: 15,
+                          fontSize: 10,
                           disabled: (readonly || cruiseDay.isNotEmpty) &&
                               !arrivalEdit.value,
                           initialValue: arrivalDate.value,
@@ -158,13 +158,13 @@ class LogisticForm extends StatelessWidget {
                     );
                   }),
                   CustomTitleWidget(
-                      fontSize: 15,
+                      fontSize: 10,
                       width: isMobile * 0.225,
                       fontWeight: FontWeight.bold,
                       label: "  Departure information"),
                   CustomFormDropDownFieldWidget(
                     height: 0.05,
-                    fontSize: 15,
+                    fontSize: 10,
                     value: departurePort.value,
                     disabled: readonly,
                     onSaved: (value) {
@@ -187,7 +187,7 @@ class LogisticForm extends StatelessWidget {
                     return Row(
                       children: [
                         CustomFormDateFieldWidget(
-                          fontSize: 15,
+                          fontSize: 10,
                           disabled: (readonly || cruiseDay.isNotEmpty) &&
                               !departureEdit.value,
                           initialValue: departureDate.value,
@@ -223,14 +223,14 @@ class LogisticForm extends StatelessWidget {
                     return Column(
                       children: [
                         const CustomTitleWidget(
-                          fontSize: 15,
+                          fontSize: 10,
                           width: 0.3,
                           fontWeight: FontWeight.bold,
-                          label: "  Logistic Information",
+                          label: "Logistic Information",
                         ),
                         CustomFormDropDownFieldWidget(
                           height: 0.05,
-                          fontSize: 15,
+                          fontSize: 10,
                           validator: CustomRequiredValidator(
                               errorText: "Destination option is required ",
                               ctx: context),
@@ -244,13 +244,13 @@ class LogisticForm extends StatelessWidget {
                                 "tour_option", value);
                             tourOption.value = value!;
                           },
-                          label: "Tour Options\t\t\t\t\t\t\t\t\t\t\t\t\t",
+                          label: "Tour Options\t\t\t\t\t\t\t\t",
                           data: findCatalog("tour_option"),
                         ),
                         Row(
                           children: [
                             CustomFormCheckboxWidget(
-                              fontSize: 15,
+                              fontSize: 10,
                               height: 0.05,
                               label: "Open Credit                 ",
                               value: 1,
@@ -266,7 +266,7 @@ class LogisticForm extends StatelessWidget {
                         if (openBoolCredit.value == 1)
                           CustomFormCounterFieldWidget(
                               height: 0.05,
-                              fontSize: 15,
+                              fontSize: 10,
                               initial: openCredit.value,
                               min: 0,
                               max: 5000,
@@ -327,8 +327,8 @@ class LogisticKeyPad extends StatelessWidget {
         left: MediaQuery.of(context).size.width * 0.56,
       ),
       child: CustomKeypadWidget(
-          fontSize: 20,
-          width: 0.42,
+          fontSize: 10,
+          width: 0.27,
           onPrevious: () {
             gotoPage("Tour");
           },
