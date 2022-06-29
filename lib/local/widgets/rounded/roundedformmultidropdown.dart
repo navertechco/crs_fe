@@ -40,7 +40,7 @@ class RoundedFormMultiDropdown extends StatelessWidget {
     var result = updateMulitDropdown(data, value, dataSource, dataValue);
     dataValue = result[0];
     dataSource = result[1];
-    return Container(
+    return SizedBox(
       width: MediaQuery.of(context).size.width * isMobile * 0.24,
       child: MultiSelectFormField(
         enabled: enabled ?? true,
