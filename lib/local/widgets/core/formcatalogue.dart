@@ -1,8 +1,6 @@
 // ignore_for_file: unused_local_variable, prefer_function_declarations_over_variables, unnecessary_null_comparison
-
 import 'package:flutter/material.dart';
-import 'package:naver_crs/index.dart';
-import 'package:get/get.dart';
+import '../../../index.dart';
 
 // ignore: must_be_immutable
 class FormCatalogueWidget extends StatelessWidget {
@@ -29,49 +27,47 @@ class FormCatalogueWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var items = getItems(data, value, hintText);
 
-    return Obx(() {
-      try {
-        return DropdownButtonHideUnderline(
-          child: DropdownButtonFormField(
-            style: KTextSytle(
-                    context: context,
-                    fontSize: isMobile * fontSize,
-                    fontWeight:
-                        value == null ? FontWeight.normal : FontWeight.bold)
-                .getStyle(),
-            alignment: Alignment.centerLeft,
-            isExpanded: true,
-            value: value,
-            disabledHint: Text(
-              "data",
-              style: KTextSytle(
-                      context: context,
-                      fontSize: isMobile * fontSize,
-                      fontWeight:
-                          value == null ? FontWeight.normal : FontWeight.bold)
-                  .getStyle(),
-            ),
-            validator: validator,
-            decoration: InputDecoration.collapsed(
-              filled: false,
-              hintText: hintText,
-              hintStyle: KTextSytle(
-                      context: context,
-                      fontSize: isMobile * fontSize,
-                      fontWeight:
-                          value == null ? FontWeight.normal : FontWeight.bold)
-                  .getStyle(),
-            ),
-            onSaved: onSaved,
-            onChanged: disabled ? null : onChanged,
-            items: items,
-          ),
-        );
-      } catch (e) {
-        log(e);
-        return Text('');
-      }
-    });
+    return Container(
+        padding: EdgeInsets.symmetric(horizontal: 20),
+        child: FormField<String>(
+          builder: (FormFieldState<String> state) {
+            return InputDecorator(
+              decoration: InputDecoration.collapsed(
+                filled: false,
+                hintText: hintText,
+                hintStyle: KTextSytle(
+                        color: Colors.black,
+                        context: context,
+                        fontSize: value == null
+                            ? fontSize
+                            : fontSize * 0.8 * isMobile,
+                        fontWeight:
+                            value == null ? FontWeight.normal : FontWeight.bold)
+                    .getStyle(),
+              ),
+              child: DropdownButtonHideUnderline(
+                child: DropdownButton<String>(
+                  hint: Text(hintText!),
+                  style: KTextSytle(
+                          color: Colors.black,
+                          context: context,
+                          fontSize: value == null
+                              ? fontSize
+                              : fontSize * 0.8 * isMobile,
+                          fontWeight: value == null
+                              ? FontWeight.normal
+                              : FontWeight.bold)
+                      .getStyle(),
+                  alignment: Alignment.centerLeft,
+                  isExpanded: true,
+                  value: value,
+                  onChanged: disabled ? null : onChanged,
+                  items: items,
+                ),
+              ),
+            );
+          },
+        ));
   }
 }
 
