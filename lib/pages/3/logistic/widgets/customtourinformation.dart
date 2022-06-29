@@ -100,7 +100,7 @@ class LogisticForm extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                       label: "  Arrival information"),
                   CustomFormDropDownFieldWidget(
-                    height: 0.07,
+                    height: 0.05,
                     fontSize: 15,
                     value: arrivalPort.value,
                     disabled: readonly,
@@ -163,7 +163,7 @@ class LogisticForm extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                       label: "  Departure information"),
                   CustomFormDropDownFieldWidget(
-                    height: 0.07,
+                    height: 0.05,
                     fontSize: 15,
                     value: departurePort.value,
                     disabled: readonly,
@@ -229,7 +229,7 @@ class LogisticForm extends StatelessWidget {
                           label: "  Logistic Information",
                         ),
                         CustomFormDropDownFieldWidget(
-                          height: 0.07,
+                          height: 0.05,
                           fontSize: 15,
                           validator: CustomRequiredValidator(
                               errorText: "Destination option is required ",
@@ -251,7 +251,7 @@ class LogisticForm extends StatelessWidget {
                           children: [
                             CustomFormCheckboxWidget(
                               fontSize: 15,
-                              height: 0.07,
+                              height: 0.05,
                               label: "Open Credit                 ",
                               value: 1,
                               groupValue: openBoolCredit,
@@ -265,7 +265,7 @@ class LogisticForm extends StatelessWidget {
                         ),
                         if (openBoolCredit.value == 1)
                           CustomFormCounterFieldWidget(
-                              height: 0.07,
+                              height: 0.05,
                               fontSize: 15,
                               initial: openCredit.value,
                               min: 0,

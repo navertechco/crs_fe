@@ -64,7 +64,7 @@ class AddressInformation extends StatelessWidget {
                 CustomFormDropDownFieldWidget(
                   fontSize: 15,
                   width: 0.2,
-                  height: 0.07,
+                  height: 0.05,
                   validator: (value) {
                     CustomRequiredValidator(
                             errorText: "Country is required ", ctx: context)
@@ -110,7 +110,7 @@ class AddressInformation extends StatelessWidget {
                       catalog: citylist.value),
                   value: city.value,
                   width: 0.2,
-                  height: 0.07,
+                  height: 0.05,
                   hintText: "City",
                   onChanged: (value) {
                     city.value = value!;
@@ -137,7 +137,7 @@ class AddressInformation extends StatelessWidget {
             keyboardType: TextInputType.streetAddress,
             hintText: "Address Line                        ",
             width: 0.4,
-            height: 0.07,
+            height: 0.05,
           ),
           CustomFormTextFieldWidget(
             fontSize: 15,
@@ -150,7 +150,7 @@ class AddressInformation extends StatelessWidget {
             keyboardType: TextInputType.emailAddress,
             hintText: "e-Mail                          ",
             width: 0.4,
-            height: 0.07,
+            height: 0.05,
           ),
         ]),
       ),
@@ -234,7 +234,7 @@ class BasicInformation extends StatelessWidget {
                     errorText: "Legal Client Type is required ", ctx: context),
                 value: client["legal_client_type_id"] ?? "2",
                 width: 0.2,
-                height: 0.07,
+                height: 0.05,
                 hintText: "Customer Type",
                 onChanged: (value) {
                   customerType.value = value!;
@@ -259,7 +259,7 @@ class BasicInformation extends StatelessWidget {
                     ctrl!.state.birthDate = value.toString().split(" ")[0];
                   },
                   width: 0.2,
-                  height: 0.07,
+                  height: 0.05,
                   hintText: "Birth Day               "),
             ],
           ),
@@ -270,7 +270,7 @@ class BasicInformation extends StatelessWidget {
                   return CustomFormTextFieldWidget(
                     fontSize: 15,
                     width: 0.2,
-                    height: 0.07,
+                    height: 0.05,
                     validator: CustomRequiredValidator(
                         errorText: "Tax Id is required ", ctx: context),
                     value: getValue(client, "tax_id", def: "2211223322"),
@@ -289,7 +289,7 @@ class BasicInformation extends StatelessWidget {
                   return CustomFormTextFieldWidget(
                     fontSize: 15,
                     width: 0.2,
-                    height: 0.07,
+                    height: 0.05,
                     validator: CustomRequiredValidator(
                         errorText: "Contact Name is required ", ctx: context),
                     value: getValue(client, "contact_name", def: "Jose"),
@@ -308,7 +308,7 @@ class BasicInformation extends StatelessWidget {
                   return CustomFormTextFieldWidget(
                     fontSize: 15,
                     width: 0.2,
-                    height: 0.07,
+                    height: 0.05,
                     validator: CustomRequiredValidator(
                         errorText: "DNI/Passport is required ", ctx: context),
                     value:
@@ -333,7 +333,7 @@ class BasicInformation extends StatelessWidget {
               CustomFormTextFieldWidget(
                 fontSize: 15,
                 width: 0.2,
-                height: 0.07,
+                height: 0.05,
                 validator: CustomRequiredValidator(
                     errorText: "Names is required ", ctx: context),
                 value: getValue(client, "names", def: "Jose"),
@@ -346,7 +346,7 @@ class BasicInformation extends StatelessWidget {
               CustomFormTextFieldWidget(
                 fontSize: 15,
                 width: 0.2,
-                height: 0.07,
+                height: 0.05,
                 validator: CustomRequiredValidator(
                     errorText: "Last Names is required ", ctx: context),
                 value: getValue(client, "last_names", def: "Cuevas"),
@@ -393,7 +393,7 @@ class TourInformation extends StatelessWidget {
           CustomFormTextFieldWidget(
             fontSize: 15,
             width: 0.2,
-            height: 0.07,
+            height: 0.05,
             validator: CustomRequiredValidator(
                 errorText: "Lead Passenger is required ", ctx: context),
             value: leadPassenger.value,

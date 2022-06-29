@@ -70,7 +70,7 @@ class WebButton extends StatelessWidget {
       child: RoundedFormButton(
         color: color,
         label: label,
-        height: 0.07,
+        height: 0.05,
         fontSize: 5,
         onPressed: () async {
           showCustomDialog(context, WebView(url: url), "Close",
@@ -90,28 +90,28 @@ class WebView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(children: [
       InAppWebView(
-      key: webViewKey,
-      initialOptions: InAppWebViewGroupOptions(
-        android: AndroidInAppWebViewOptions(
-          useShouldInterceptRequest: true,
-          useHybridComposition: true,
-          safeBrowsingEnabled: false,
-        ),
-        crossPlatform: InAppWebViewOptions(
-          useShouldOverrideUrlLoading: true,
-          javaScriptCanOpenWindowsAutomatically: true,
-          javaScriptEnabled: true,
-          mediaPlaybackRequiresUserGesture: false,
-          preferredContentMode: UserPreferredContentMode.MOBILE,
-        ),
-      ),
-      onReceivedServerTrustAuthRequest: (controller, challenge) async {
-        return ServerTrustAuthResponse(
-            action: ServerTrustAuthResponseAction.PROCEED);
-      },
-      initialUrlRequest: URLRequest(
-        url: Uri.parse(url),
-      ))
+          key: webViewKey,
+          initialOptions: InAppWebViewGroupOptions(
+            android: AndroidInAppWebViewOptions(
+              useShouldInterceptRequest: true,
+              useHybridComposition: true,
+              safeBrowsingEnabled: false,
+            ),
+            crossPlatform: InAppWebViewOptions(
+              useShouldOverrideUrlLoading: true,
+              javaScriptCanOpenWindowsAutomatically: true,
+              javaScriptEnabled: true,
+              mediaPlaybackRequiresUserGesture: false,
+              preferredContentMode: UserPreferredContentMode.MOBILE,
+            ),
+          ),
+          onReceivedServerTrustAuthRequest: (controller, challenge) async {
+            return ServerTrustAuthResponse(
+                action: ServerTrustAuthResponseAction.PROCEED);
+          },
+          initialUrlRequest: URLRequest(
+            url: Uri.parse(url),
+          ))
     ]);
   }
 }

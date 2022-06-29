@@ -36,7 +36,7 @@ class CruiseFiltersWidget extends StatelessWidget {
             Row(children: [
               CustomFormDropDownFieldWidget(
                 width: 0.16,
-                height: 0.07,
+                height: 0.05,
                 validator: CustomRequiredValidator(
                     errorText: "Cruise Days is required ", ctx: ctx),
                 value: "0",
@@ -52,7 +52,7 @@ class CruiseFiltersWidget extends StatelessWidget {
               if (cruiseDay.isNotEmpty)
                 CustomFormDropDownFieldWidget(
                   width: 0.16,
-                  height: 0.07,
+                  height: 0.05,
                   validator: CustomRequiredValidator(
                       errorText: "Itinerary Format is required ", ctx: ctx),
                   value: "0",
@@ -83,7 +83,7 @@ class CruiseFiltersWidget extends StatelessWidget {
               if (cruiseItinerary.isNotEmpty)
                 CustomFormDropDownFieldWidget(
                   width: 0.16,
-                  height: 0.07,
+                  height: 0.05,
                   validator: CustomRequiredValidator(
                       errorText: "Cabine Type is required ", ctx: ctx),
                   value: "0",
@@ -112,7 +112,7 @@ class CruiseFiltersWidget extends StatelessWidget {
               if (cruiseItinerary.isNotEmpty)
                 CustomFormDropDownFieldWidget(
                   width: 0.16,
-                  height: 0.07,
+                  height: 0.05,
                   validator: CustomRequiredValidator(
                       errorText: "Cabine Type is required ", ctx: ctx),
                   value: "0",
@@ -144,7 +144,7 @@ class CruiseFiltersWidget extends StatelessWidget {
             Row(children: [
               CustomFormDropDownFieldWidget(
                 width: 0.16,
-                height: 0.07,
+                height: 0.05,
                 validator: CustomRequiredValidator(
                     errorText: "Cruise Category is required ", ctx: ctx),
                 value: "0",
@@ -191,7 +191,7 @@ class CruiseFiltersWidget extends StatelessWidget {
               if (cruiseCategory.isNotEmpty)
                 CustomFormDropDownFieldWidget(
                   width: 0.16,
-                  height: 0.07,
+                  height: 0.05,
                   validator: CustomRequiredValidator(
                       errorText: "Cruise Modality is required ", ctx: ctx),
                   value: "0",
@@ -233,7 +233,7 @@ class CruiseFiltersWidget extends StatelessWidget {
                 if (cruiseModality.isNotEmpty)
                   CustomFormDropDownFieldWidget(
                     width: 0.16,
-                    height: 0.07,
+                    height: 0.05,
                     validator: CustomRequiredValidator(
                         errorText: "Cruise Type is required ", ctx: ctx),
                     value: "0",
@@ -278,7 +278,7 @@ class CruiseFiltersWidget extends StatelessWidget {
                   if (cruiseType.isNotEmpty)
                     CustomFormDropDownFieldWidget(
                       width: 0.16,
-                      height: 0.07,
+                      height: 0.05,
                       validator: CustomRequiredValidator(
                           errorText: "Cruise Port is required ", ctx: ctx),
                       value: "0",

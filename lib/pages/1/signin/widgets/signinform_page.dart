@@ -36,10 +36,10 @@ class SigninFormPage extends GetView<StatelessWidget> {
                 SizedBox(
                   width: MediaQuery.of(context).size.width * isMobile * 0.2,
                   child: RoundedFormButton(
-                    fontSize: 15,
+                    fontSize: 10,
                     color: Colors.white,
                     label: "SignIn",
-                    height: 0.07,
+                    height: 0.05,
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
                         _formKey.currentState!.save();
