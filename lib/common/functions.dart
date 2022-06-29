@@ -562,3 +562,37 @@ dynamic getListMaxValue(List list) {
   }
   return result;
 }
+
+updateMulitDropdown(data, value, dataSource, dataValue) {
+  try {
+    if (data != null) {
+      if (data.isNotEmpty) {
+        dataSource = data.map((e) {
+          return {"display": e["description"], "value": e["code"]};
+        }).toList();
+      } else {
+        dataSource = [
+          {
+            'display': "No data from Service",
+            'value': 0,
+          }
+        ];
+      }
+    }
+
+    if (value != null) {
+      if (value.isNotEmpty) {
+        dataValue = [];
+        for (var item in value) {
+          dataValue.add(data
+              .firstWhere((element) => element["description"] == item)["code"]);
+        }
+      } else {
+        dataValue = [];
+      }
+    }
+    return [dataValue, dataSource];
+  } catch (e) {
+    log(e);
+  }
+}

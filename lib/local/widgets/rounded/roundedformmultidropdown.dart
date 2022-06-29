@@ -37,85 +37,54 @@ class RoundedFormMultiDropdown extends StatelessWidget {
   var dataValue = [];
   @override
   Widget build(BuildContext context) {
-    try {
-      if (data != null) {
-        if (data.isNotEmpty) {
-          dataSource = data.map((e) {
-            return {"display": e["description"], "value": e["code"]};
-          }).toList();
-        } else {
-          dataSource = [
-            {
-              'display': "No data from Service",
-              'value': 0,
-            }
-          ];
-        }
-      }
-
-      if (value != null) {
-        if (value.isNotEmpty) {
-          dataValue = [];
-          for (var item in value) {
-            dataValue.add(data.firstWhere(
-                (element) => element["description"] == item)["code"]);
-          }
-        } else {
-          dataValue = [];
-        }
-      }
-    } catch (e) {
-      log(e);
-    }
-
+    var result = updateMulitDropdown(data, value, dataSource, dataValue);
+    dataValue = result[0];
+    dataSource = result[1];
     return Container(
-        width: MediaQuery.of(context).size.width * isMobile * width,
-        height: MediaQuery.of(context).size.height * isMobile * height,
-        padding: EdgeInsets.only(left: isMobile * left, top: isMobile * top),
-        child: MultiSelectFormField(
-          enabled: enabled ?? true,
-          autovalidate: AutovalidateMode.disabled,
-          chipBackGroundColor: Colors.grey,
-          fillColor: Color.fromARGB(0, 255, 255, 255),
-          chipLabelStyle: TextStyle(
-              fontSize: fontSize * isMobile,
-              fontWeight: FontWeight.bold,
-              color: Colors.black),
-          dialogTextStyle: TextStyle(
-              fontSize: fontSize * isMobile,
-              fontWeight: FontWeight.bold,
-              color: Colors.black),
-          checkBoxActiveColor: Colors.grey,
-          checkBoxCheckColor: Colors.black,
-          dialogShapeBorder: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(isMobile * 12.0))),
-          title: Text(
-            hintText!,
-            style: TextStyle(
-                fontSize: isMobile * fontSize * 1.0, color: Colors.grey),
-          ),
-          validator: (value) {
-            if (value == null || value.length == 0) {
-              return 'Please select one or more options';
-            }
-            validator!(value);
-            return null;
-          },
-          dataSource: dataSource,
-          textField: 'display',
-          valueField: 'value',
-          okButtonLabel: 'OK',
-          cancelButtonLabel: 'CANCEL',
-          hintWidget: Text(
-            "Select a Option",
-            style: TextStyle(
-                fontSize: isMobile * fontSize * 1.0, color: Colors.grey),
-          ),
-          initialValue: dataValue,
-          onSaved: onSaved,
-          change: onChanged,
-          open: onChanged,
-          close: onChanged,
-        ));
+      width: MediaQuery.of(context).size.width * isMobile * 0.24,
+      child: MultiSelectFormField(
+        enabled: enabled ?? true,
+        autovalidate: AutovalidateMode.disabled,
+        chipBackGroundColor: Colors.grey,
+        fillColor: Color.fromARGB(0, 255, 255, 255),
+        chipLabelStyle: TextStyle(
+            fontSize: isMobile * fontSize,
+            fontWeight: FontWeight.bold,
+            color: Colors.black),
+        dialogTextStyle: TextStyle(
+            fontSize: isMobile * fontSize,
+            fontWeight: FontWeight.bold,
+            color: Colors.black),
+        checkBoxActiveColor: Colors.grey,
+        checkBoxCheckColor: Colors.black,
+        dialogShapeBorder: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(12.0))),
+        title: Text(
+          hintText!,
+          style: TextStyle(fontSize: fontSize * 1.0, color: Colors.grey),
+        ),
+        validator: (value) {
+          if (value == null || value.length == 0) {
+            return 'Please select one or more options';
+          }
+          validator!(value);
+          return null;
+        },
+        dataSource: dataSource,
+        textField: 'display',
+        valueField: 'value',
+        okButtonLabel: 'OK',
+        cancelButtonLabel: 'CANCEL',
+        hintWidget: Text(
+          "Select a Option",
+          style: TextStyle(fontSize: fontSize * 1.0, color: Colors.grey),
+        ),
+        initialValue: dataValue,
+        onSaved: onSaved,
+        change: onChanged,
+        open: onChanged,
+        close: onChanged,
+      ),
+    );
   }
 }
