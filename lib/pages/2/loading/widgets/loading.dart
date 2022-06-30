@@ -31,8 +31,11 @@ class LoadingWidget extends GetView<LoadingController> {
                           height: 0.07,
                           fontSize: 10,
                           onPressed: () async {
+                            var res = await getCatalogs(["ALL"]);
+                            if (res) {
+                              await newTour();
+                            }
                             setContext("readonly", false);
-                            await newTour();
                           }),
                       SizedBox(
                         height: MediaQuery.of(context).size.height *

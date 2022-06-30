@@ -1,9 +1,12 @@
 // ignore_for_file: prefer_function_declarations_over_variables, import_of_legacy_library_into_null_safe
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 import 'package:sweetalertv2/sweetalertv2.dart';
 import 'package:yaml/yaml.dart';
+import 'package:http/http.dart' as http;
 
 // ████████╗ ██████╗ ██╗   ██╗██████╗
 // ╚══██╔══╝██╔═══██╗██║   ██║██╔══██╗
@@ -300,14 +303,43 @@ Future getTour(ctx, {int tourId = 0, detail = false, cb}) async {
 ///  Future
 ///```
 Future newTour() async {
-  var res = await fetchHandler(kDefaultSchema, kDefaultServer,
-      kDefaultServerPort, kDefaultNewTourEdit, 'POST', {"id": 1});
-  if (res['state'] == true) {
-    globalctx.memory["tour"]["code"] = res['data']["id"];
-    setContext("catalogs", res['data']["catalogs"]);
-    selectedIndex.value = 0;
-    Get.toNamed("/Tour");
-  } else {
-    log(res["message"]);
+  try {
+    var res = await fetchHandler(kDefaultSchema, kDefaultServer,
+        kDefaultServerPort, kDefaultNewTourEdit, 'POST', {"id": "1"});
+
+    if (res['state'] == true) {
+      globalctx.memory["tour"]["code"] = res['data']["id"];
+      // setContext("catalogs", res['data']["catalogs"]);
+      selectedIndex.value = 0;
+      Get.toNamed("/Tour");
+    } else {
+      log(res);
+    }
+  } catch (e) {
+    log(e);
+  }
+}
+
+Future fetchCatalogs() async {
+  try {
+    var client = http.Client();
+    var headers = {
+      "Keep-Alive": "timeout=50000, max=0",
+      "Accept": "application/json",
+      "Connection": "keep-alive, Keep-Alive"
+    };
+    //  var res = await http.get(Uri.parse('http://naverdeveloper.tk:9999/System/FindCatalog'));
+    var res = await client.get(
+        Uri.parse('http://naverdeveloper.tk:9999/System/FindCatalog'),
+        headers: headers);
+    if (res.statusCode == 200) {
+      var data = json.decode(json.decode(res.body));
+      return true;
+    } else {
+      return false;
+    }
+  } catch (e) {
+    log(e);
+    return false;
   }
 }
