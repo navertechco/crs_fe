@@ -156,9 +156,8 @@ class CustomStarDestinationForm extends StatelessWidget {
                           label: "  Hotel Information  "),
                       RoundedFormButton(
                         color: Colors.grey,
-                        label: currentHotelName.value.isEmpty
-                            ? "Select"
-                            : currentHotelName.value,
+                        label: getFormValue(globalctx.memory["destinations"],
+                            globalDestinationIndex, "hotelName", 'Select'),
                         height: 0.05,
                         fontSize: 8,
                         fontWeight: FontWeight.bold,

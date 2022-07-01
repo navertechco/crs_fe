@@ -403,6 +403,13 @@ getHotelDataCell(context, row) {
                     globalDestinationIndex,
                     "hotelName.${row["description"]}",
                     value);
+                currentHotelName.value +=
+                    currentHotelName.value + row["description"];
+                setFormValue(
+                    globalctx.memory["destinations"],
+                    globalDestinationIndex,
+                    "hotelName",
+                    currentHotelName.value);
               },
             )),
       ],

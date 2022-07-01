@@ -49,7 +49,7 @@ class DestinationFrontOptionWidget extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(
                 top: MediaQuery.of(context).size.height * 0.000,
-                left: MediaQuery.of(context).size.width * 0.05,
+                left: MediaQuery.of(context).size.width * 0.03,
               ),
               child: Row(
                 children: [
@@ -72,7 +72,7 @@ class DestinationFrontOptionWidget extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(
                 top: MediaQuery.of(context).size.height * 0.0,
-                left: MediaQuery.of(context).size.width * 0.05,
+                left: MediaQuery.of(context).size.width * 0.03,
               ),
               child: Row(
                 children: [
