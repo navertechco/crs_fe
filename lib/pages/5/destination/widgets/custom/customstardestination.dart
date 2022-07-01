@@ -5,7 +5,6 @@ import '../index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:naver_crs/common/index.dart';
 
 // ignore: must_be_immutable
 class CustomStarDestinationForm extends StatelessWidget {
@@ -83,6 +82,17 @@ class CustomStarDestinationForm extends StatelessWidget {
       key: formKey,
       child: Column(
         children: [
+          Obx(() => Text("Destination Index: $globalDestinationIndex",
+              style: GoogleFonts.poppins(
+                  textStyle: TextStyle(
+                color: (dayleft.value) < 1
+                    ? Colors.yellow
+                    : Color.fromARGB(255, 0, 255, 0),
+                fontSize: MediaQuery.of(context).size.width /
+                    MediaQuery.of(context).size.height *
+                    15,
+                fontWeight: FontWeight.bold,
+              )))),
           Obx(() {
             return Wrap(
               children: [

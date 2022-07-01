@@ -46,6 +46,7 @@ class SwitcherWidget extends StatelessWidget {
         _changeRotationAxis();
       } else {
         globalDestinationName.value = destination;
+        globalDestinationIndex.value = index.toString();
         showDialog(
             context: context,
             builder: (context) {
