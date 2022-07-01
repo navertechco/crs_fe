@@ -58,7 +58,7 @@ class HotelFiltersWidget extends StatelessWidget {
                         hotelCategory.value);
                     filterHotels(context);
                   },
-                  hintText: "Category     ",
+                  hintText: "Budget     ",
                   data: getMemoryCatalogChild("hotel", "value", "budget_fk")),
               CustomFormMultiDropDownFieldWidget(
                   value: [],
@@ -78,6 +78,10 @@ class HotelFiltersWidget extends StatelessWidget {
                           rule = rule &&
                               hotelCategory.value ==
                                   element["value"]["budget_fk"];
+                          var filter = hotelResults.value
+                              .map((e) => e["description"])
+                              .toList();
+                          rule = filter.contains(element["description"]);
                           return rule;
                         }),
                         value);
@@ -101,43 +105,74 @@ class HotelFiltersWidget extends StatelessWidget {
                     rule = rt * mc >= pax;
                     rule = rule &&
                         hotelCategory.value == element["value"]["budget_fk"];
+                    var filter = hotelResults.value
+                        .map((e) => e["description"])
+                        .toList();
+                    rule = filter.contains(element["description"]);
                     return rule;
                   })),
-              if (moreFilters.value)
-                CustomFormMultiDropDownFieldWidget(
-                  validator: (value) {
-                    CustomMultiDropdownRequiredValidator(value,
-                        errorText: "Hotel More filters are required ",
-                        context: context);
-                  },
-                  value: hotelFilterMemory.value,
-                  enabled: hotelFilterMemory.value.length < 4,
-                  onSaved: (values) {
-                    if (values == null) return;
+              CustomFormMultiDropDownFieldWidget(
+                validator: (value) {
+                  CustomMultiDropdownRequiredValidator(value,
+                      errorText: "Hotel More filters are required ",
+                      context: context);
+                },
+                value: hotelFilterMemory.value,
+                enabled: hotelFilterMemory.value.length < 4,
+                onSaved: (values) {
+                  if (values == null) return;
 
-                    if (values.length <= 3) {
-                      hotelFilterMemory.value = [];
-                      var length = values.length;
+                  if (values.length <= 3) {
+                    hotelFilterMemory.value = [];
+                    var length = values.length;
 
-                      for (var i = 0; i < length; i++) {
-                        hotelFilterMemory.value.add(findCatalog("key_activity")
-                            .toList()
-                            .where((e) => e["code"] == values[i])
-                            .toList()[0]["description"]);
-                      }
-                      setFormValue(
-                          globalctx.memory["destinations"],
-                          globalDestinationIndex,
-                          "hotelFilterMemory",
-                          hotelFilterMemory.value);
+                    for (var i = 0; i < length; i++) {
+                      hotelFilterMemory.value.add(findCatalog("key_activity")
+                          .toList()
+                          .where((e) => e["code"] == values[i])
+                          .toList()[0]["description"]);
                     }
-                    filterHotels(context);
-                  },
-                  onChanged: (values) {},
-                  hintText: '',
-                  label: '',
-                  data: findCatalog("more_hotel_filters"),
-                ),
+                    setFormValue(
+                        globalctx.memory["destinations"],
+                        globalDestinationIndex,
+                        "hotelFilterMemory",
+                        hotelFilterMemory.value);
+                  }
+                  filterHotels(context);
+                },
+                onChanged: (values) {
+                  if (values == null) return;
+
+                  if (values.length <= 3) {
+                    hotelFilterMemory.value = [];
+                    var length = values.length;
+
+                    for (var i = 0; i < length; i++) {
+                      hotelFilterMemory.value.add(findCatalog("key_activity")
+                          .toList()
+                          .where((e) => e["code"] == values[i])
+                          .toList()[0]["description"]);
+                    }
+                    setFormValue(
+                        globalctx.memory["destinations"],
+                        globalDestinationIndex,
+                        "hotelFilterMemory",
+                        hotelFilterMemory.value);
+                  }
+                  filterHotels(context);
+                },
+                hintText: "More Filters     ",
+                label: '',
+                data: findCatalog("more_hotel_filters").where((e) {
+                  var rule = true;
+                  var filter = hotelResults.value
+                      .map((f) => f["value"][e["value"]["key"]] == "Yes")
+                      .toSet()
+                      .toList()[0];
+                  rule = filter;
+                  return rule;
+                }).toList(),
+              ),
             ],
           ),
         ],
