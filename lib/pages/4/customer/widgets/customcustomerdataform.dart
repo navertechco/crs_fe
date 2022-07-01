@@ -112,7 +112,7 @@ class AddressInformation extends StatelessWidget {
                       ctx: context,
                       catalog: citylist.value),
                   value: city.value,
-                  width: 0.2,
+                  width: 0.185,
                   height: 0.05,
                   hintText: "City",
                   onChanged: (value) {

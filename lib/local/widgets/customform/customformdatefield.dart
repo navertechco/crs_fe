@@ -35,10 +35,10 @@ class CustomFormDateFieldWidget extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Row(
         children: [
-          CustomFormLabelWidget(fontSize:fontSize, label: label, fontWeight: FontWeight.normal),
-          SizedBox(width: MediaQuery.of(context).size.width * 0.01),
+          CustomFormLabelWidget(
+              fontSize: fontSize, label: label, fontWeight: FontWeight.normal),
           RoundedFormDatepicker(
-            fontSize:fontSize,
+              fontSize: fontSize,
               disabled: disabled,
               validator: validator,
               onChanged: onChanged,

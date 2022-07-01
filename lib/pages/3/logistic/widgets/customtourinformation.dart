@@ -134,7 +134,7 @@ class LogisticForm extends StatelessWidget {
                               compare: departureDate.value,
                               errorText:
                                   "There is a problem with the Departure Date"),
-                          label: "Arrival Date               ",
+                          label: "Arrival Date                  ",
                           onSaved: (value) {
                             ctrl!.state.arrivalDate = value!;
                             arrivalDate.value = value;
@@ -197,7 +197,7 @@ class LogisticForm extends StatelessWidget {
                               errorText:
                                   "There is a problem with the Arrival Date",
                               invert: true),
-                          label: "Departure Date       ",
+                          label: "Departure Date           ",
                           onSaved: (value) {
                             ctrl!.state.departureDate = value!;
                             departureDate.value = value;
