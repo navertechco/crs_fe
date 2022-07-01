@@ -25,13 +25,13 @@ class HotelCalendarWidget extends StatelessWidget {
 }
 
 class HotelFiltersWidget extends StatelessWidget {
-  const HotelFiltersWidget({
+  HotelFiltersWidget({
     Key? key,
     required this.ctx,
   }) : super(key: key);
 
   final ctx;
-
+  var hotel = "0".obs;
   @override
   Widget build(BuildContext context) {
     return Obx(
@@ -44,10 +44,11 @@ class HotelFiltersWidget extends StatelessWidget {
                   width: 0.11,
                   height: 0.05,
                   validator: CustomRequiredValidator(
-                      errorText: "Hotel Category is required ", ctx: ctx),
-                  value: "0",
+                      errorText: "Budget is required ", ctx: ctx),
+                  value: hotel.value,
                   onSaved: (value) {},
                   onChanged: (value) {
+                    hotel.value = value!;
                     hotelCategory.value = getCatalogDescription(
                         getMemoryCatalogChild("hotel", "value", "budget_fk"),
                         value);
@@ -120,56 +121,40 @@ class HotelFiltersWidget extends StatelessWidget {
                 value: hotelFilterMemory.value,
                 enabled: hotelFilterMemory.value.length < 4,
                 onSaved: (values) {
-                  if (values == null) return;
+                  if (values == null || values.isEmpty) return;
 
-                  if (values.length <= 3) {
-                    hotelFilterMemory.value = [];
-                    var length = values.length;
-
-                    for (var i = 0; i < length; i++) {
-                      hotelFilterMemory.value.add(findCatalog("key_activity")
-                          .toList()
-                          .where((e) => e["code"] == values[i])
-                          .toList()[0]["description"]);
-                    }
-                    setFormValue(
-                        globalctx.memory["destinations"],
-                        globalDestinationIndex,
-                        "hotelFilterMemory",
-                        hotelFilterMemory.value);
+                  for (var i = 0; i < values.length; i++) {
+                    hotelRoomCategory.value.add(
+                        findCatalog("more_hotel_filters")
+                            .toList()
+                            .where((e) => e["code"] == values[i])
+                            .toList()[0]["description"]);
                   }
+                  setFormValue(
+                      globalctx.memory["destinations"],
+                      globalDestinationIndex,
+                      "hotelRoomCategory",
+                      hotelRoomCategory.value);
                   filterHotels(context);
                 },
                 onChanged: (values) {
                   if (values == null) return;
+                  hotelFilterMemory.value = values!;
 
-                  if (values.length <= 3) {
-                    hotelFilterMemory.value = [];
-                    var length = values.length;
-
-                    for (var i = 0; i < length; i++) {
-                      hotelFilterMemory.value.add(findCatalog("key_activity")
-                          .toList()
-                          .where((e) => e["code"] == values[i])
-                          .toList()[0]["description"]);
-                    }
-                    setFormValue(
-                        globalctx.memory["destinations"],
-                        globalDestinationIndex,
-                        "hotelFilterMemory",
-                        hotelFilterMemory.value);
-                  }
                   filterHotels(context);
                 },
                 hintText: "More Filters     ",
                 label: '',
                 data: findCatalog("more_hotel_filters").where((e) {
                   var rule = true;
-                  var filter = hotelResults.value
-                      .map((f) => f["value"][e["value"]["key"]] == "Yes")
-                      .toSet()
-                      .toList()[0];
-                  rule = filter;
+                  if (hotelResults.value.isNotEmpty) {
+                    var filter = hotelResults.value
+                        .map((f) => f["value"][e["value"]["key"]] == "Yes")
+                        .toSet()
+                        .toList()[0];
+                    rule = filter;
+                  }
+
                   return rule;
                 }).toList(),
               ),
