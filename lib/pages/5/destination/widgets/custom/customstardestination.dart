@@ -141,7 +141,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                                   "0")),
                               value as int);
                         },
-                        label: "\t\tExploration Days    ",
+                        label: "  Exploration Days     ",
                         width: 0.20);
                   }
                   return Text('');
@@ -160,7 +160,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                             ? "Select"
                             : currentHotelName.value,
                         height: 0.05,
-                        fontSize: 3,
+                        fontSize: 8,
                         fontWeight: FontWeight.bold,
                         textColor: Colors.black,
                         onPressed: () async {

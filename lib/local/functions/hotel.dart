@@ -69,12 +69,9 @@ void filterHotels(ctx) {
     filteredHotel = filteredHotel.where((element) {
       var rule = true;
       if (keyActivity.isNotEmpty) {
-        var k1 =
-            element["value"]["keyActivityType_fk"].toString().toUpperCase();
-        var k2 =
-            element["value"]["keyActivityType_fk.1"].toString().toUpperCase();
-        var k3 =
-            element["value"]["keyActivityType_fk.2"].toString().toUpperCase();
+        var k1 = element["value"]["keyActivityType_fk"];
+        var k2 = element["value"]["keyActivityType_fk.1"];
+        var k3 = element["value"]["keyActivityType_fk.2"];
 
         rule = keyActivity.contains(k1) |
             keyActivity.contains(k2) |
@@ -300,7 +297,7 @@ void showHotelResultDialog(ctx, {int id = 0, int index = 0}) async {
             backgroundColor: Colors.white,
             buttonColor: Colors.black,
             height: 0.25,
-            width: 0.35);
+            width: 0.3);
       }
     } else {
       SweetAlertV2.show(ctx,
@@ -322,7 +319,7 @@ void showHotelResultDialog(ctx, {int id = 0, int index = 0}) async {
         backgroundColor: Colors.white,
         buttonColor: Colors.black,
         height: 0.25,
-        width: 0.35);
+        width: 0.3);
   }
 }
 

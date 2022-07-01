@@ -156,7 +156,7 @@ class HotelKeyPadWidget extends StatelessWidget {
     return Obx(() => Padding(
           padding: EdgeInsets.only(
               top: MediaQuery.of(context).size.height * 0,
-              left: MediaQuery.of(context).size.width * 0.5),
+              left: MediaQuery.of(context).size.width * 0.4),
           child: Row(
             children: [
               TextButton(
@@ -170,7 +170,7 @@ class HotelKeyPadWidget extends StatelessWidget {
                 child: Text('Reset',
                     style: KTextSytle(
                             context: context,
-                            fontSize: 15,
+                            fontSize: isMobile * 10,
                             fontWeight: FontWeight.bold,
                             color: Colors.black)
                         .getStyle()),
@@ -184,7 +184,7 @@ class HotelKeyPadWidget extends StatelessWidget {
                 child: Text('Process',
                     style: KTextSytle(
                             context: context,
-                            fontSize: 15,
+                            fontSize: isMobile * 10,
                             fontWeight: FontWeight.bold,
                             color: Colors.black)
                         .getStyle()),
@@ -197,7 +197,7 @@ class HotelKeyPadWidget extends StatelessWidget {
                     !moreFilters.value ? 'More Filters' : 'Less Filters',
                     style: KTextSytle(
                             context: context,
-                            fontSize: 15,
+                            fontSize: isMobile * 10,
                             fontWeight: FontWeight.bold,
                             color: Colors.black)
                         .getStyle()),
@@ -268,23 +268,24 @@ class HotelResultWidget extends StatelessWidget {
                         ),
                         child: Align(
                           alignment: Alignment.topCenter,
-                          child: Column(
-                            children: [
-                              if (hotelResults.value.isNotEmpty &&
-                                  searcherHeader.value.isNotEmpty)
-                                hotelTable.value
-                              else
-                                Text(
-                                  "No Hotels Found",
-                                  style: KTextSytle(
-                                    context: context,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color.fromARGB(255, 204, 164, 61),
-                                  ).getStyle(),
-                                )
-                            ],
-                          ),
+                          child: Obx(() => Column(
+                                children: [
+                                  if (hotelResults.value.isNotEmpty &&
+                                      searcherHeader.value.isNotEmpty)
+                                    hotelTable.value
+                                  else
+                                    Text(
+                                      "No Hotels Found",
+                                      style: KTextSytle(
+                                        context: context,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                        color:
+                                            Color.fromARGB(255, 204, 164, 61),
+                                      ).getStyle(),
+                                    )
+                                ],
+                              )),
                         ),
                       ),
                     ),
