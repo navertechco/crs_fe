@@ -83,9 +83,9 @@ class AddressInformation extends StatelessWidget {
                   value: country.value,
                   hintText: "Country",
                   onChanged: (value) {
+                    ctrl!.state.country = value!;
                     country.value = value!;
-                    currentCountry.value =
-                        countries[countrylist[int.parse(value)]["description"]];
+                    city.value = "0";
                     procCityData(
                         citylist,
                         countries[countrylist[int.parse(value)]
@@ -95,6 +95,7 @@ class AddressInformation extends StatelessWidget {
                   onSaved: (value) {
                     ctrl!.state.country = value!;
                     country.value = value;
+                    city.value = "0";
                     procCityData(
                         citylist,
                         countries[countrylist[int.parse(value)]
