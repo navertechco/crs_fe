@@ -78,7 +78,7 @@ class LogisticForm extends StatelessWidget {
                                     backgroundColor: Colors.white,
                                     buttonColor: Colors.black,
                                     height: 0.25,
-                                    width: 0.2);
+                                    width: 0.8);
                               }
                             },
                           ),
@@ -283,16 +283,20 @@ class LogisticForm extends StatelessWidget {
                                   log(e);
                                 }
                               },
-                              label: '\t\tOpen Credit Amount',
+                              label: "  Open Credit Amount",
                               width: 0.2),
                         if (cruiseDay.isNotEmpty)
-                          CustomTitleWidget(
-                            fontSize: 8,
-                            width: 0.2,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.red,
-                            label:
-                                "  Remember you have selected  ${cruiseDay.value} days of Galapagos Cruise !!!!",
+                          Row(
+                            children: [
+                              CustomTitleWidget(
+                                fontSize: 8,
+                                width: 0.1,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.red,
+                                label:
+                                    "Remember you have selected  ${cruiseDay.value} days of Galapagos Cruise",
+                              ),
+                            ],
                           ),
                       ],
                     );

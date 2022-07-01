@@ -8,6 +8,7 @@ class RoundedFormCalendar extends StatelessWidget {
   final double width;
   final double height;
   final Color color;
+  final fontSize;
   final initialStartDate;
   final initialEndDate;
   final minimumDate;
@@ -26,6 +27,7 @@ class RoundedFormCalendar extends StatelessWidget {
       this.color = Colors.grey,
       this.initialStartDate,
       this.initialEndDate,
+      this.fontSize = 10,
       this.minimumDate,
       this.maximumDate,
       this.startEndDateChange,
@@ -50,7 +52,7 @@ class RoundedFormCalendar extends StatelessWidget {
               label,
               style: KTextSytle(
                       context: context,
-                      fontSize: 15,
+                      fontSize: fontSize,
                       fontWeight: FontWeight.bold,
                       color: Colors.black54)
                   .getStyle(),

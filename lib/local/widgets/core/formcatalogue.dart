@@ -33,7 +33,7 @@ class _FormCatalogueWidgetState extends State<FormCatalogueWidget> {
   @override
   Widget build(BuildContext context) {
     var items = getItems(widget.data, widget.value, widget.hintText);
-    var initialValue = Rx(widget.value);
+    var initialValue = Rx(widget.value == "" ? "0" : widget.value);
     return Obx(() {
       var t = initialValue.value;
       return Container(
@@ -56,27 +56,33 @@ class _FormCatalogueWidgetState extends State<FormCatalogueWidget> {
                       .getStyle(),
                 ),
                 child: DropdownButtonHideUnderline(
-                    child: DropdownButton<String>(
-                  hint: Text(widget.hintText ?? "Choose a Option"),
-                  style: KTextSytle(
-                          color: Colors.black,
-                          context: context,
-                          fontSize: widget.value == null
-                              ? widget.fontSize
-                              : widget.fontSize * 0.8 * isMobile,
-                          fontWeight: widget.value == null
-                              ? FontWeight.normal
-                              : FontWeight.bold)
-                      .getStyle(),
-                  alignment: Alignment.centerLeft,
-                  isExpanded: true,
-                  value: initialValue.value,
-                  onChanged: (value) {
-                    initialValue.value = value!;
-                    widget.disabled ? null : widget.onChanged(value);
-                  },
-                  items: items,
-                )),
+                    child: Builder(builder: (context) {
+                  if (items != null) {
+                    return DropdownButton<String>(
+                      hint: Text(widget.hintText ?? "Choose a Option"),
+                      style: KTextSytle(
+                              color: Colors.black,
+                              context: context,
+                              fontSize: widget.value == null
+                                  ? widget.fontSize
+                                  : widget.fontSize * 0.8 * isMobile,
+                              fontWeight: widget.value == null
+                                  ? FontWeight.normal
+                                  : FontWeight.bold)
+                          .getStyle(),
+                      alignment: Alignment.centerLeft,
+                      isExpanded: true,
+                      value: initialValue.value,
+                      onChanged: (value) {
+                        initialValue.value = value!;
+                        widget.disabled ? null : widget.onChanged(value);
+                      },
+                      items: items ?? <DropdownMenuItem<String>>[],
+                    );
+                  } else {
+                    return Text("");
+                  }
+                })),
               );
             },
           ));

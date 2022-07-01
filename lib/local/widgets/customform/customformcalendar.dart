@@ -71,6 +71,7 @@ class CustomFormCalendarFieldWidget extends StatelessWidget {
             maximumDate: maximumDate,
             startEndDateChange: startEndDateChange,
             onSaved: onSaved,
+            fontSize: fontSize,
           ),
         ],
       ),

@@ -262,6 +262,7 @@ RxString country = getValue(client, "origin_id", def: "1").toString().obs;
 RxString city = getValue(client, "city_id", def: "0").toString().obs;
 List<Map<String, dynamic>> countrylist = [];
 Map<dynamic, dynamic> countries = getContext("countries");
+var currentCountry = "Ecuador".obs;
 Rx<List<Map<String, dynamic>>> countrydata = Rx((() {
   log("Countries: $countries\n\n");
   countrylist = [];

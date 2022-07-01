@@ -413,6 +413,7 @@ DataCell getCruiseDataCell(context, row) {
               },
             ),
             CustomFormCalendarFieldWidget(
+              fontSize: 8,
                 width: 0.01,
                 label: '',
                 initialStartDate: getNextCruiseDate(),
