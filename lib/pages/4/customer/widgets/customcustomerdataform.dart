@@ -257,7 +257,7 @@ class BasicInformation extends StatelessWidget {
                         context: context, errorText: "Birth date is Required");
                   },
                   initialValue: getDateValue(client, "birth_date",
-                      def: DateTime(1981, 02, 12)),
+                      def: DateTime(1950, 01, 01)),
                   onSaved: (value) {
                     ctrl!.state.birthDate = value.toString().split(" ")[0];
                   },
@@ -314,8 +314,7 @@ class BasicInformation extends StatelessWidget {
                     height: 0.05,
                     validator: CustomRequiredValidator(
                         errorText: "DNI/Passport is required ", ctx: context),
-                    value:
-                        getValue(client, "client_dni", def: ""),
+                    value: getValue(client, "client_dni", def: ""),
                     onSaved: (value) {
                       ctrl!.state.dni = value!;
                     },

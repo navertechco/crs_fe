@@ -123,9 +123,9 @@ RxString travelCode = (() {
     return (leadPassenger.value.toString()).obs;
   }
 })();
-RxString leadPassenger = "pp".obs;
-RxString arrivalPort = "6".obs;
-RxString departurePort = "6".obs;
+RxString leadPassenger = "".obs;
+RxString arrivalPort = "0".obs;
+RxString departurePort = "0".obs;
 var arrival = {}.obs;
 var departure = {}.obs;
 var airportCatalog = findCatalog("airport");
