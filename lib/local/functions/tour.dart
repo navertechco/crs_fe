@@ -320,26 +320,4 @@ Future newTour() async {
   }
 }
 
-Future fetchCatalogs() async {
-  try {
-    var client = http.Client();
-    var headers = {
-      "Keep-Alive": "timeout=50000, max=0",
-      "Accept": "application/json",
-      "Connection": "keep-alive, Keep-Alive"
-    };
-    //  var res = await http.get(Uri.parse('http://naverdeveloper.tk:9999/System/FindCatalog'));
-    var res = await client.get(
-        Uri.parse('http://naverdeveloper.tk:9999/System/FindCatalog'),
-        headers: headers);
-    if (res.statusCode == 200) {
-      var data = json.decode(json.decode(res.body));
-      return true;
-    } else {
-      return false;
-    }
-  } catch (e) {
-    log(e);
-    return false;
-  }
-}
+ 

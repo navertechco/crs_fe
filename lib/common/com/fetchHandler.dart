@@ -38,6 +38,7 @@ Future fetchHandler(scheme, host, port, path, method, body) async {
       throw Exception('Failed to connect');
     }
   } catch (e) {
+    
     return {
       'state': false,
       'data': null,
@@ -106,10 +107,10 @@ Future goFetch(rule, method, uri, body) async {
         'token': defaultToken ??
             'gAAAAABhjtSOlFafpsgJ70Sx11gM7Iv_6RuTpnOs1UWf4ELEnYC1gsvx7E2OZjRAUkkflPMXqR7ua7MtC7Y3LCWoB8uo5lmBV-Sns1lIpIy0YPuPXhdPx96We9xqbRcEylp8Fz91PAQf',
         'Content-Type': 'application/json; charset=UTF-8',
-        // "Connection": "Keep-Alive",
-        // "Keep-Alive": "timeout=5, max=1000",
-        // 'Access-Control-Allow-Origin': '*',
-        // 'Accept': 'application/json',
+        "Connection": "Keep-Alive",
+        "Keep-Alive": "timeout=5, max=1000",
+        'Access-Control-Allow-Origin': '*',
+        'Accept': 'application/json',
       };
       if (method == 'GET') {
         res = await _client.get(uri, headers: headers);
@@ -117,8 +118,7 @@ Future goFetch(rule, method, uri, body) async {
       }
       res = await _client.post(uri,
           headers: headers,
-          body: json.encode(body),
-          encoding: Encoding.getByName("UTF-8"));
+          body: json.encode(body));
       return res;
     }
   } catch (e) {
