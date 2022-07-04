@@ -102,17 +102,19 @@ class LogisticForm extends StatelessWidget {
                   CustomFormDropDownFieldWidget(
                     height: 0.05,
                     fontSize: 10,
-                    value: arrivalPort.value,
+                    value: getFormValue(
+                        globalctx.memory, "logistic", "arrival_port", "0"),
                     disabled: readonly,
                     onSaved: (value) {
                       ctrl!.state.arrival_port = value!;
                       setFormValue(
                           globalctx.memory, "logistic", "arrival_port", value);
-                      arrivalPort.value = value;
                       resetAllDestinations();
                     },
                     onChanged: (value) {
                       ctrl!.state.arrival_port = value!;
+                      setFormValue(
+                          globalctx.memory, "logistic", "arrival_port", value);
                     },
                     validator: CustomRequiredValidator(
                         errorText: "Arrival Port is required ", ctx: context),
@@ -165,18 +167,19 @@ class LogisticForm extends StatelessWidget {
                   CustomFormDropDownFieldWidget(
                     height: 0.05,
                     fontSize: 10,
-                    value: departurePort.value,
+                    value: getFormValue(
+                        globalctx.memory, "logistic", "departure_port", "0"),
                     disabled: readonly,
                     onSaved: (value) {
                       ctrl!.state.departure_port = value!;
                       setFormValue(globalctx.memory, "logistic",
                           "departure_port", value);
-                      departurePort.value = value;
+                      resetAllDestinations();
                     },
                     onChanged: (value) {
                       ctrl!.state.departure_port = value!;
-                      departurePort.value = value;
-                      resetAllDestinations();
+                      setFormValue(globalctx.memory, "logistic",
+                          "departure_port", value);
                     },
                     validator: CustomRequiredValidator(
                         errorText: "Departure Port is required ", ctx: context),

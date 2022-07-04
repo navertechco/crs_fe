@@ -74,8 +74,12 @@ class _FormCatalogueWidgetState extends State<FormCatalogueWidget> {
                       isExpanded: true,
                       value: initialValue.value,
                       onChanged: (value) {
-                        initialValue.value = value!;
-                        widget.disabled ? null : widget.onChanged(value);
+                        try {
+                          initialValue.value = value!;
+                          widget.disabled ? null : widget.onChanged(value);
+                        } catch (e) {
+                          log(e);
+                        }
                       },
                       items: items ?? <DropdownMenuItem<String>>[],
                     );

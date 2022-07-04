@@ -23,7 +23,7 @@ class SigninForm extends StatelessWidget {
           SizedBox(
             child: RoundedFormTextField(
               fontSize: 15,
-              initialValue: "",
+              initialValue: "jcuevas2",
               onSaved: (value) => state.username = value!,
               hintText: 'Username',
             ),
@@ -32,7 +32,7 @@ class SigninForm extends StatelessWidget {
           SizedBox(
             child: RoundedFormTextField(
                 fontSize: 15,
-                initialValue: "",
+                initialValue: "jcuevas123!",
                 onSaved: (value) => state.password = value!,
                 hintText: 'Password',
                 password: true),
