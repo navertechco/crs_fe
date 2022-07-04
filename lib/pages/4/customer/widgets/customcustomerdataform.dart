@@ -87,7 +87,6 @@ class AddressInformation extends StatelessWidget {
                     country.value = value!;
                     city.value = "0";
                     procCityData(
-                        citylist,
                         countries[countrylist[int.parse(value)]
                             ["description"]]);
                     log("CHANGED: ");
@@ -97,7 +96,6 @@ class AddressInformation extends StatelessWidget {
                     country.value = value;
                     city.value = "0";
                     procCityData(
-                        citylist,
                         countries[countrylist[int.parse(value)]
                             ["description"]]);
                     log("SAVED: ");

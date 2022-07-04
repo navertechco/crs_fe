@@ -107,12 +107,14 @@ class LogisticForm extends StatelessWidget {
                     disabled: readonly,
                     onSaved: (value) {
                       ctrl!.state.arrival_port = value!;
+                      arrivalPort.value = value;
                       setFormValue(
                           globalctx.memory, "logistic", "arrival_port", value);
                       resetAllDestinations();
                     },
                     onChanged: (value) {
                       ctrl!.state.arrival_port = value!;
+                      arrivalPort.value = value;
                       setFormValue(
                           globalctx.memory, "logistic", "arrival_port", value);
                     },
@@ -172,12 +174,14 @@ class LogisticForm extends StatelessWidget {
                     disabled: readonly,
                     onSaved: (value) {
                       ctrl!.state.departure_port = value!;
+                      departurePort.value = value;
                       setFormValue(globalctx.memory, "logistic",
                           "departure_port", value);
                       resetAllDestinations();
                     },
                     onChanged: (value) {
                       ctrl!.state.departure_port = value!;
+                      departurePort.value = value;
                       setFormValue(globalctx.memory, "logistic",
                           "departure_port", value);
                     },

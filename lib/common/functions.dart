@@ -123,7 +123,6 @@ dynamic getParam(String key) {
 ///  onChanged: (value) {
 ///                               country.value = value!;
 ///                                procCityData(
-///                                    citylist,
 ///                                    countries[countrylist[int.parse(value)]
 ///                                        ["description"]]);
 ///                                log("CHANGED: ");
@@ -132,7 +131,7 @@ dynamic getParam(String key) {
 ///
 ///
 ///
-void procCityData(Rx<List<Map<String, dynamic>>> citylist, cities) {
+void procCityData(cities) {
   var index = 1;
   citylist.value = [];
   for (var city in cities) {
@@ -142,6 +141,7 @@ void procCityData(Rx<List<Map<String, dynamic>>> citylist, cities) {
     });
     index++;
   }
+  citylist.value = citylist.value.toSet().toList();
 }
 
 /// ## toMinutes
