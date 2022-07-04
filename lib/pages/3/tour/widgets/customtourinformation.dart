@@ -227,9 +227,11 @@ class BudgetField extends StatelessWidget {
       disabled: readonly,
       onSaved: (value) {
         ctrl!.state.accomodation_type = value!;
+        setValue(tour, "accomodation_type", value);
       },
       onChanged: (value) {
         ctrl!.state.accomodation_type = value!;
+        setValue(tour, "accomodation_type", value);
       },
       validator: CustomRequiredValidator(
           errorText: "Accomodation type is required ", ctx: context),
