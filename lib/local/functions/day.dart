@@ -348,7 +348,7 @@ updateCurrentKeyActivities() {
 updateCurrentDestinationOption() {
   var index = getDestinationIndexByDay();
   var destinationOption = getFormValue(
-      globalctx.memory["destinations"], index, "destination_option", "1");
+      globalctx.memory["destinations"], index, "destination_option", "0");
   currentDestinationOption.value = destinationOption;
 }
 
@@ -366,7 +366,7 @@ updateCurrentDestinationOption() {
 updateCurrentDestinationTravelRhythm() {
   var index = getDestinationIndexByDay();
   var travelRhythm = getFormValue(
-      globalctx.memory["destinations"], index, "travel_rhythm", "1");
+      globalctx.memory["destinations"], index, "travel_rhythm", "0");
   currentTravelRhythm.value = travelRhythm;
 }
 

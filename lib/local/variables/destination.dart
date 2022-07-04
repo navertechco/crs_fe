@@ -15,7 +15,7 @@ List<dynamic> customDestinationData = [
   ...destinationList,
 ];
 var promotedDestinations = globalctx.promotedDestinations;
-RxString destCountry = "1".obs;
+RxString destCountry = "0".obs;
 var selectedDestinations = globalctx.destinations;
 var destinationsCatalog = findCatalog("destinations");
 var destinationCountry = findCatalog("destination_country");

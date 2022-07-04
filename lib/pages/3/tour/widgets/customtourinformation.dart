@@ -223,7 +223,7 @@ class BudgetField extends StatelessWidget {
     return CustomFormDropDownFieldWidget(
       fontSize: 10,
       height: 0.05,
-      value: getValue(tour, "accomodation_type", def: "1"),
+      value: getValue(tour, "accomodation_type", def: "0"),
       disabled: readonly,
       onSaved: (value) {
         ctrl!.state.accomodation_type = value!;

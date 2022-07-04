@@ -442,7 +442,7 @@ void saveCustomerTravelCode(ctrl, value) {
   leadPassenger.value = value!;
   ctrl!.state.leadPassenger = value;
   ctrl!.state.travelCode = getCustomerTravelCode(
-      getValue(client, "lead_passenger", def: "jose cuevas"));
+      getValue(client, "lead_passenger", def: ""));
   travelCode.value = getCustomerTravelCode(value);
 }
 
@@ -452,7 +452,7 @@ void saveCustomerTravelCode(ctrl, value) {
 ///### Uses:
 /// ```dart
 ///      ctrl!.state.travelCode =
-/// getCustomerTravelCode(getValue(client, "lead_passenger", def: "jose cuevas"));
+/// getCustomerTravelCode(getValue(client, "lead_passenger", def: ""));
 /// ```
 /// ### Returns:
 ///```dart

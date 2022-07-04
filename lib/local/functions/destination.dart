@@ -109,9 +109,9 @@ void resetAllDestinations() {
   updateDraggableDestinations();
   filterDestinations();
   if (cruiseDay.isNotEmpty) {
-    autoFillDestination(arrival["description"], 0, "arrival", "1");
+    autoFillDestination(arrival["description"], 0, "arrival", "0");
     autoFillDestination("galapagos", 1, "arrival", cruiseDay.value);
-    autoFillDestination(departure["description"], 2, "departure", "1");
+    autoFillDestination(departure["description"], 2, "departure", "0");
   }
 }
 
@@ -137,7 +137,7 @@ void resetLeftDays() {
 ///
 ///### Uses:
 /// ```dart
-///autoFillDestination(arrival["description"], 0, "arrival", "1");
+///autoFillDestination(arrival["description"], 0, "arrival", "0");
 ///
 /// ```
 /// ### Returns:

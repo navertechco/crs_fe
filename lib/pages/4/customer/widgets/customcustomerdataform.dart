@@ -133,7 +133,7 @@ class AddressInformation extends StatelessWidget {
             fontSize: 10,
             validator: CustomRequiredValidator(
                 errorText: "Address Line is required ", ctx: context),
-            value: getValue(client, "address", def: "casa"),
+            value: getValue(client, "address", def: ""),
             onSaved: (value) {
               ctrl!.state.addressLine = value!;
             },
@@ -146,7 +146,7 @@ class AddressInformation extends StatelessWidget {
             fontSize: 10,
             validator: CustomRequiredValidator(
                 errorText: "Email is required ", ctx: context),
-            value: getValue(client, "email", def: "jose@aol.com"),
+            value: getValue(client, "email", def: ""),
             onSaved: (value) {
               ctrl!.state.email = value!;
             },
@@ -276,7 +276,7 @@ class BasicInformation extends StatelessWidget {
                     height: 0.05,
                     validator: CustomRequiredValidator(
                         errorText: "Tax Id is required ", ctx: context),
-                    value: getValue(client, "tax_id", def: "2211223322"),
+                    value: getValue(client, "tax_id", def: ""),
                     onSaved: (value) {
                       ctrl!.state.taxId = value!;
                     },
@@ -295,7 +295,7 @@ class BasicInformation extends StatelessWidget {
                     height: 0.05,
                     validator: CustomRequiredValidator(
                         errorText: "Contact Name is required ", ctx: context),
-                    value: getValue(client, "contact_name", def: "Jose"),
+                    value: getValue(client, "contact_name", def: ""),
                     onSaved: (value) {
                       ctrl!.state.contactName = value!;
                     },
@@ -315,7 +315,7 @@ class BasicInformation extends StatelessWidget {
                     validator: CustomRequiredValidator(
                         errorText: "DNI/Passport is required ", ctx: context),
                     value:
-                        getValue(client, "client_dni", def: "11223344556677"),
+                        getValue(client, "client_dni", def: ""),
                     onSaved: (value) {
                       ctrl!.state.dni = value!;
                     },
@@ -339,7 +339,7 @@ class BasicInformation extends StatelessWidget {
                 height: 0.05,
                 validator: CustomRequiredValidator(
                     errorText: "Names is required ", ctx: context),
-                value: getValue(client, "names", def: "Jose"),
+                value: getValue(client, "names", def: ""),
                 onSaved: (value) {
                   ctrl!.state.names = value!;
                 },
@@ -352,7 +352,7 @@ class BasicInformation extends StatelessWidget {
                 height: 0.05,
                 validator: CustomRequiredValidator(
                     errorText: "Last Names is required ", ctx: context),
-                value: getValue(client, "last_names", def: "Cuevas"),
+                value: getValue(client, "last_names", def: ""),
                 onSaved: (value) {
                   ctrl!.state.lastNames = value!;
                 },
