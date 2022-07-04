@@ -61,7 +61,7 @@ class TourLeftFormWidget extends StatelessWidget {
               left: MediaQuery.of(context).size.width * isMobile * 0.55,
             ),
             child: SizedBox(
-              height: MediaQuery.of(context).size.height * isMobile * 1,
+              height: MediaQuery.of(context).size.height * isMobile * 0.65,
               width: MediaQuery.of(context).size.width * isMobile * 0.5,
               child: SingleChildScrollView(
                 child: Column(children: [
