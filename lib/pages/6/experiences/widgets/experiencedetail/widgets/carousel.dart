@@ -43,7 +43,7 @@ class CarouselWidget extends StatelessWidget {
                   ),
                   "Close");
             },
-            child: Image.asset(images[index],
+            child: Image.asset("assets/images/" + images[index],
                 // fit: BoxFit.fill,
                 width: MediaQuery.of(context).size.width * 0.05),
           );

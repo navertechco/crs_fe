@@ -24,7 +24,7 @@ class GalleryItem extends StatelessWidget {
           GestureDetector(
             onTap: onTap,
             child: Image.asset(
-              image,
+              "assets/images/"+image,
               fit: BoxFit.cover,
               height: MediaQuery.of(context).size.height * 0.3,
             ),

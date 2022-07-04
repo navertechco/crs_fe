@@ -31,7 +31,7 @@ class BodyLayoutWidget extends GetView<StatelessWidget> {
                   ),
                 if (type != "svg")
                   Image.asset(
-                    background!,
+                     background!,
                     fit: BoxFit.fill,
                     height: size.height,
                   ),

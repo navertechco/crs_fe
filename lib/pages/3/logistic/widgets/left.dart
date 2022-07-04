@@ -35,7 +35,7 @@ class LeftWidget extends StatelessWidget {
           containerHeight: 100,
           containerWidth: 100,
           itemBuilder: (BuildContext context, int index) {
-            return Image.asset(images[index]);
+            return Image.asset("assets/images/" + images[index]);
           },
           autoplay: true,
           autoplayDelay: 5000,
