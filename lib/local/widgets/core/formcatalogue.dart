@@ -39,6 +39,7 @@ class _FormCatalogueWidgetState extends State<FormCatalogueWidget> {
       return Container(
           padding: EdgeInsets.symmetric(horizontal: 20),
           child: FormField<String>(
+            validator: (value) => widget.validator!(initialValue.value),
             builder: (FormFieldState<String> state) {
               return InputDecorator(
                 decoration: InputDecoration.collapsed(
@@ -55,38 +56,40 @@ class _FormCatalogueWidgetState extends State<FormCatalogueWidget> {
                               : FontWeight.bold)
                       .getStyle(),
                 ),
-                child: DropdownButtonHideUnderline(
-                    child: Builder(builder: (context) {
-                  if (items != null) {
-                    return DropdownButton<String>(
-                      hint: Text(widget.hintText ?? "Choose a Option"),
-                      style: KTextSytle(
-                              color: Colors.black,
-                              context: context,
-                              fontSize: widget.value == null
-                                  ? widget.fontSize
-                                  : widget.fontSize * 0.8 * isMobile,
-                              fontWeight: widget.value == null
-                                  ? FontWeight.normal
-                                  : FontWeight.bold)
-                          .getStyle(),
-                      alignment: Alignment.centerLeft,
-                      isExpanded: true,
-                      value: initialValue.value,
-                      onChanged: (value) {
-                        try {
-                          initialValue.value = value!;
-                          widget.disabled ? null : widget.onChanged(value);
-                        } catch (e) {
-                          log(e);
-                        }
-                      },
-                      items: items ?? <DropdownMenuItem<String>>[],
-                    );
-                  } else {
-                    return Text("");
-                  }
-                })),
+                child: FormField(builder: (context) {
+                  return DropdownButtonHideUnderline(
+                      child: Builder(builder: (context) {
+                    if (items != null) {
+                      return DropdownButton<String>(
+                        hint: Text(widget.hintText ?? "Choose a Option"),
+                        style: KTextSytle(
+                                color: Colors.black,
+                                context: context,
+                                fontSize: widget.value == null
+                                    ? widget.fontSize
+                                    : widget.fontSize * 0.8 * isMobile,
+                                fontWeight: widget.value == null
+                                    ? FontWeight.normal
+                                    : FontWeight.bold)
+                            .getStyle(),
+                        alignment: Alignment.centerLeft,
+                        isExpanded: true,
+                        value: initialValue.value,
+                        onChanged: (value) {
+                          try {
+                            initialValue.value = value!;
+                            widget.disabled ? null : widget.onChanged(value);
+                          } catch (e) {
+                            log(e);
+                          }
+                        },
+                        items: items ?? <DropdownMenuItem<String>>[],
+                      );
+                    } else {
+                      return Text("");
+                    }
+                  }));
+                }),
               );
             },
           ));

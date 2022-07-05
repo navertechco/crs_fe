@@ -187,7 +187,7 @@ class CountryField extends StatelessWidget {
       value: destCountry.value,
       disabled: readonly,
       validator: CustomRequiredValidator(
-          errorText: "country is required ", ctx: context),
+          errorText: "Destination Country is required ", ctx: context),
       onSaved: (value) {
         ctrl!.state.country = value!;
         destCountry.value = value;
@@ -339,7 +339,7 @@ class TransportField extends StatelessWidget {
       height: 0.05,
       label: "Transport Options    ",
       validator: (value) => CustomMultiDropdownRequiredValidator(value,
-          errorText: "Day Transport Options are required ", context: context),
+          errorText: "Transport Options are required ", context: context),
       value: getFormValue(globalctx.memory, "tour", "transport", "0"),
       onSaved: (value) {
         transportService.value = value!;
