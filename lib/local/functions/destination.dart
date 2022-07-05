@@ -518,7 +518,7 @@ void filterSelectedDestinations() {
 ///
 void moveGraphDragDestinationOption(
     String destination, int index, String type) {
-  var state = "selected";
+  var state = getDestinationState(destination, index, type);
   setDestinationState(destination, index, state, type);
   globalctx.selectedDestinations.add(destination);
   globalctx.destinationDragData.value.add(DragDestinationWidget(
