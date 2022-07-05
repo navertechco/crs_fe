@@ -80,24 +80,23 @@ class AddressInformation extends StatelessWidget {
                       });
                     }
                   },
-                  value: country.value,
+                  value: getValue(client, "origin_id", def: "146").toString(),
                   hintText: "Country",
                   onChanged: (value) {
                     ctrl!.state.country = value!;
+                    setValue(client, "country", value);
                     country.value = value!;
                     city.value = "0";
-                    procCityData(
-                        countries[countrylist[int.parse(value)]
-                            ["description"]]);
+                    procCityData(countries[countrylist[int.parse(value)]
+                        ["description"]]);
                     log("CHANGED: ");
                   },
                   onSaved: (value) {
                     ctrl!.state.country = value!;
                     country.value = value;
                     city.value = "0";
-                    procCityData(
-                        countries[countrylist[int.parse(value)]
-                            ["description"]]);
+                    procCityData(countries[countrylist[int.parse(value)]
+                        ["description"]]);
                     log("SAVED: ");
                   },
                   data: countrydata.value,
@@ -109,12 +108,13 @@ class AddressInformation extends StatelessWidget {
                       errorText: "City is required ",
                       ctx: context,
                       catalog: citylist.value),
-                  value: city.value,
+                  value: getValue(client, "city_id", def: "0").toString(),
                   width: 0.185,
                   height: 0.05,
                   hintText: "City",
                   onChanged: (value) {
                     city.value = value!;
+                    setValue(client, "city_id", value);
                     log(value);
                   },
                   onSaved: (value) {
@@ -134,6 +134,11 @@ class AddressInformation extends StatelessWidget {
             value: getValue(client, "address", def: ""),
             onSaved: (value) {
               ctrl!.state.addressLine = value!;
+              setValue(client, "address", value);
+            },
+            onFieldSubmitted: (value) {
+              ctrl!.state.addressLine = value!;
+              setValue(client, "address", value);
             },
             keyboardType: TextInputType.streetAddress,
             hintText: "Address Line                        ",
@@ -147,6 +152,11 @@ class AddressInformation extends StatelessWidget {
             value: getValue(client, "email", def: ""),
             onSaved: (value) {
               ctrl!.state.email = value!;
+              setValue(client, "email", value);
+            },
+            onFieldSubmitted: (value) {
+              ctrl!.state.email = value!;
+              setValue(client, "email", value);
             },
             keyboardType: TextInputType.emailAddress,
             hintText: "e-Mail                          ",
@@ -233,18 +243,18 @@ class BasicInformation extends StatelessWidget {
                 fontSize: 10,
                 validator: CustomRequiredValidator(
                     errorText: "Legal Client Type is required ", ctx: context),
-                value: client["legal_client_type_id"] ?? "2",
+                value: getValue(client, "legal_client_type_id", def: "2"),
                 width: 0.2,
                 height: 0.05,
                 hintText: "Customer Type",
                 onChanged: (value) {
                   customerType.value = value!;
-                  log(value);
+                  setValue(client, "legal_client_type_id", value);
                 },
                 onSaved: (value) {
                   customerType.value = value!;
                   ctrl!.state.customerType = value;
-                  log(value);
+                  setValue(client, "legal_client_type_id", value);
                 },
                 data: customerTypeCatalog,
               ),
@@ -258,6 +268,11 @@ class BasicInformation extends StatelessWidget {
                       def: DateTime(1950, 01, 01)),
                   onSaved: (value) {
                     ctrl!.state.birthDate = value.toString().split(" ")[0];
+                    setValue(client, "birth_date", value);
+                  },
+                  onChanged: (value) {
+                    ctrl!.state.birthDate = value.toString().split(" ")[0];
+                    setValue(client, "birth_date", value);
                   },
                   width: 0.2,
                   height: 0.05,
@@ -277,6 +292,11 @@ class BasicInformation extends StatelessWidget {
                     value: getValue(client, "tax_id", def: ""),
                     onSaved: (value) {
                       ctrl!.state.taxId = value!;
+                      setValue(client, "tax_id", value);
+                    },
+                    onChanged: (value) {
+                      ctrl!.state.taxId = value!;
+                      setValue(client, "tax_id", value);
                     },
                     keyboardType: TextInputType.number,
                     hintText: "Tax Id                            ",
@@ -296,6 +316,11 @@ class BasicInformation extends StatelessWidget {
                     value: getValue(client, "contact_name", def: ""),
                     onSaved: (value) {
                       ctrl!.state.contactName = value!;
+                      setValue(client, "contact_name", value);
+                    },
+                    onFieldSubmitted: (value) {
+                      ctrl!.state.contactName = value!;
+                      setValue(client, "contact_name", value);
                     },
                     keyboardType: TextInputType.name,
                     hintText: "Legal Contact  Name  ",
@@ -315,6 +340,11 @@ class BasicInformation extends StatelessWidget {
                     value: getValue(client, "client_dni", def: ""),
                     onSaved: (value) {
                       ctrl!.state.dni = value!;
+                      setValue(client, "client_dni", value);
+                    },
+                    onFieldSubmitted: (value) {
+                      ctrl!.state.dni = value!;
+                      setValue(client, "client_dni", value);
                     },
                     inputFormatters: <TextInputFormatter>[
                       FilteringTextInputFormatter.digitsOnly
@@ -339,6 +369,11 @@ class BasicInformation extends StatelessWidget {
                 value: getValue(client, "names", def: ""),
                 onSaved: (value) {
                   ctrl!.state.names = value!;
+                  setValue(client, "names", value);
+                },
+                onFieldSubmitted: (value) {
+                  ctrl!.state.names = value!;
+                  setValue(client, "names", value);
                 },
                 keyboardType: TextInputType.name,
                 hintText: "Names                          ",
@@ -352,6 +387,11 @@ class BasicInformation extends StatelessWidget {
                 value: getValue(client, "last_names", def: ""),
                 onSaved: (value) {
                   ctrl!.state.lastNames = value!;
+                  setValue(client, "last_names", value);
+                },
+                onFieldSubmitted: (value) {
+                  ctrl!.state.lastNames = value!;
+                  setValue(client, "last_names", value);
                 },
                 keyboardType: TextInputType.name,
                 hintText: "Surnames                          ",
@@ -396,11 +436,10 @@ class TourInformation extends StatelessWidget {
             height: 0.05,
             validator: CustomRequiredValidator(
                 errorText: "Lead Passenger is required ", ctx: context),
-            value: leadPassenger.value,
-            onSaved: (value) {
-              saveCustomerTravelCode(ctrl, value);
-            },
-            onChanged: (value) {
+            value: getFormValue(
+                globalctx.memory, "tour", "travel_code", "$travelCode"),
+            onSaved: (value) {},
+            onFieldSubmitted: (value) {
               saveCustomerTravelCode(ctrl, value);
             },
             keyboardType: TextInputType.name,
@@ -411,7 +450,8 @@ class TourInformation extends StatelessWidget {
                 fontSize: 10,
                 width: 0.1,
                 fontWeight: FontWeight.bold,
-                label: "Travel Code: $travelCode");
+                label:
+                    "Travel Code: ${getFormValue(globalctx.memory, "tour", "travel_code", "$travelCode")}");
           })
         ],
       ),

@@ -12,8 +12,8 @@ class CustomerController extends GetxController {
     saveCustomer = () {
       Map mem = {...globalctx.memory["customer"], ...state.toMap()};
       globalctx.memory["customer"] = mem;
-      // filterDestinations();
-      // resetAllDestinations();
+      resetAllDestinations();
+      filterDestinations();
       gotoPage("Destination");
     };
   }

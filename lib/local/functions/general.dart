@@ -439,11 +439,8 @@ int getTravekRhythmLimit(String value) {
 ///   void
 ///```
 void saveCustomerTravelCode(ctrl, value) {
-  leadPassenger.value = value!;
-  ctrl!.state.leadPassenger = value;
-  ctrl!.state.travelCode = getCustomerTravelCode(
-      getValue(client, "lead_passenger", def: ""));
   travelCode.value = getCustomerTravelCode(value);
+  setFormValue(globalctx.memory, "tour", "travel_code", travelCode.value);
 }
 
 /// ## getCustomerTravelCode

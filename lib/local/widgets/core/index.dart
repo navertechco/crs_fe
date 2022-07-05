@@ -1,5 +1,6 @@
 export './menu.dart';
 export './formcatalogue.dart';
+export './formcataloguesearch.dart';
 export './youtube.dart';
 export './formcheckbox.dart';
 export './customprogressindicator.dart';

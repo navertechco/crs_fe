@@ -2,9 +2,7 @@
 import 'dart:io';
 import 'common/behavior.dart' as common_behavior;
 import 'package:flutter/material.dart';
-import '../index.dart';
-import 'index.dart';
-import 'package:naver_crs/index.dart';
+import '../index.dart'; 
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
