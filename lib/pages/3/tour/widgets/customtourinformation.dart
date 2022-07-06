@@ -142,17 +142,16 @@ class TourKeyPad extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-        top: MediaQuery.of(context).size.height * isMobile * 0.825,
-        left: MediaQuery.of(context).size.width * isMobile * 0.57,
+        top: MediaQuery.of(context).size.height * isMobile * 0.81,
+        left: MediaQuery.of(context).size.width * isMobile * 0.56,
       ),
       child: CustomKeypadWidget(
           fontSize: 10,
-          width: 0.27,
+          width: 0.25,
           onPrevious: () {
             if (selectedIndex.value > 0) {
               selectedIndex.value = selectedIndex.value - 1;
             }
-
             Get.back();
           },
           onNext: () {
@@ -193,6 +192,7 @@ class CountryField extends StatelessWidget {
       onChanged: (value) {
         ctrl!.state.country = value!;
         destCountry.value = value;
+        setFormValue(globalctx.memory, "logistic", "arrival_port", "0");
         updateDestinationsCatalogFilteredByCountry();
       },
       label: "Destination Country ",

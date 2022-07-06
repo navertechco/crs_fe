@@ -332,12 +332,12 @@ class LogisticKeyPad extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-        top: MediaQuery.of(context).size.height * 0.815,
-        left: MediaQuery.of(context).size.width * 0.56,
+        top: MediaQuery.of(context).size.height * 0.802,
+        left: MediaQuery.of(context).size.width * 0.555,
       ),
       child: CustomKeypadWidget(
           fontSize: 10,
-          width: 0.27,
+          width: 0.25,
           onPrevious: () {
             gotoPage("Tour");
           },
