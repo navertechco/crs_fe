@@ -1,5 +1,6 @@
 // Experience functions
 // ignore_for_file: prefer_function_declarations_over_variables
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
@@ -68,9 +69,23 @@ void filterExperiences() {
 ///```
 updateSelectedDragExperiences() {
   experienceSelectedDragData.value = <Widget>[];
+  var expGroups = {};
+
   for (var experience in filteredExperiences) {
-    experienceSelectedDragData.value
+    if (!expGroups.keys.contains(experience.value["experience_type"])) {
+      expGroups[experience.value["experience_type"]] = <Widget>[];
+      expGroups[experience.value["experience_type"]].add(CustomTitleWidget(
+          fontWeight: FontWeight.bold,
+          label:
+              experience.value["experience_type"].toString().capitalizeFirst!,
+          color: Colors.white));
+    }
+    expGroups[experience.value["experience_type"]]
         .add(DragableExperience(experience: experience, suggested: true));
+  }
+
+  for (List<Widget> group in expGroups.values) {
+    experienceSelectedDragData.value.addAll(group);
   }
 }
 
