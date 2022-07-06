@@ -17,10 +17,6 @@ class TravelChips extends HookWidget {
                 label: "Filtered Experiences by:",
                 color: Colors.white),
             Obx(() {
-              currentDestinationKeyActivities.value = getFormValue(
-                  globalctx.memory["destinations"],
-                  currentDestinationIndex.value,
-                  "key_activities", <String>[]);
               return Column(
                 children: [
                   if (currentDestinationKeyActivities.isNotEmpty)

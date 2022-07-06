@@ -93,7 +93,10 @@ class RoundedFormMultiDropdown extends StatelessWidget {
               if (value == null || value.length == 0) {
                 return 'Please select one or more options';
               }
-              validator!(value);
+              if (validator != null) {
+                validator!(value);
+              }
+
               return null;
             },
             dataSource: dataSource,

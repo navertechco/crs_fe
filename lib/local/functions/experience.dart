@@ -489,6 +489,10 @@ String getExperienceState(experience) {
   var state =
       globalctx.states["experiences"][currentDay.value][experience]["state"];
   state ??= "suggested";
+  var expData = getExperienceValueByName(experience);
+  if (expData["experience_type"] == "meal") {
+    return "promoted";
+  }
   return state;
 }
 
