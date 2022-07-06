@@ -462,9 +462,9 @@ RxBool validateDragDestinationOptions(destination, index, type) {
       isDayleft;
   bool tourRule =
       isTour && isArrivalPromoted && isAccumulated && isDayleft && !isPromoted;
-  if (galapagos && days > 0) {
-    return ((isPromoted || isSelected || isTour)).obs;
-  }
+  // if (galapagos && days > 0) {
+  //   return ((isPromoted || isSelected || isTour)).obs;
+  // }
   return ((preArrival || arrivalRule || departureRule || tourRule)).obs;
 }
 

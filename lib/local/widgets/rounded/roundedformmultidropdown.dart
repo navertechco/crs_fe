@@ -71,44 +71,46 @@ class RoundedFormMultiDropdown extends StatelessWidget {
     return Container(
         width: MediaQuery.of(context).size.width * width,
         padding: EdgeInsets.only(left: left, top: top),
-        child: MultiSelectFormField(
-          enabled: enabled ?? true,
-          autovalidate: AutovalidateMode.disabled,
-          chipBackGroundColor: Colors.grey,
-          fillColor: Color.fromARGB(0, 255, 255, 255),
-          chipLabelStyle:
-              TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-          dialogTextStyle:
-              TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-          checkBoxActiveColor: Colors.grey,
-          checkBoxCheckColor: Colors.black,
-          dialogShapeBorder: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(12.0))),
-          title: Text(
-            hintText!,
-            style: TextStyle(fontSize: 16, color: Colors.grey),
+        child: DropdownButtonHideUnderline(
+          child: MultiSelectFormField(
+            enabled: enabled ?? true,
+            autovalidate: AutovalidateMode.disabled,
+            chipBackGroundColor: Colors.grey,
+            fillColor: Color.fromARGB(0, 255, 255, 255),
+            chipLabelStyle:
+                TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+            dialogTextStyle:
+                TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+            checkBoxActiveColor: Colors.grey,
+            checkBoxCheckColor: Colors.black,
+            dialogShapeBorder: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(12.0))),
+            title: Text(
+              hintText!,
+              style: TextStyle(fontSize: 16, color: Colors.grey),
+            ),
+            validator: (value) {
+              if (value == null || value.length == 0) {
+                return 'Please select one or more options';
+              }
+              validator!(value);
+              return null;
+            },
+            dataSource: dataSource,
+            textField: 'display',
+            valueField: 'value',
+            okButtonLabel: 'OK',
+            cancelButtonLabel: 'CANCEL',
+            hintWidget: Text(
+              "Select a Option",
+              style: TextStyle(fontSize: 16, color: Colors.grey),
+            ),
+            initialValue: dataValue,
+            onSaved: onSaved,
+            change: onChanged,
+            open: onChanged,
+            close: onChanged,
           ),
-          validator: (value) {
-            if (value == null || value.length == 0) {
-              return 'Please select one or more options';
-            }
-            validator!(value);
-            return null;
-          },
-          dataSource: dataSource,
-          textField: 'display',
-          valueField: 'value',
-          okButtonLabel: 'OK',
-          cancelButtonLabel: 'CANCEL',
-          hintWidget: Text(
-            "Select a Option",
-            style: TextStyle(fontSize: 16, color: Colors.grey),
-          ),
-          initialValue: dataValue,
-          onSaved: onSaved,
-          change: onChanged,
-          open: onChanged,
-          close: onChanged,
         ));
   }
 }
