@@ -17,6 +17,10 @@ class TravelChips extends HookWidget {
                 label: "Filtered Experiences by:",
                 color: Colors.white),
             Obx(() {
+              currentDestinationKeyActivities.value = getFormValue(
+                  globalctx.memory["destinations"],
+                  currentDestinationIndex.value,
+                  "key_activities", <String>[]);
               return Column(
                 children: [
                   if (currentDestinationKeyActivities.isNotEmpty)
@@ -30,6 +34,39 @@ class TravelChips extends HookWidget {
                         clearCurrentDestinationKeyActivities();
                         filterExperiences();
                       },
+                    ),
+                  if (currentDestinationKeyActivities.isEmpty)
+                    CustomFormMultiDropDownFieldWidget(
+                      value: getFormValue(
+                          globalctx.memory["destinations"],
+                          currentDestinationIndex.value,
+                          "key_activities", <String>[]),
+                      onSaved: (values) {},
+                      onChanged: (values) {
+                        if (values == null) return;
+
+                        if (values.length <= 3) {
+                          kaMemory.value = [];
+                          var length = values.length;
+
+                          for (var i = 0; i < length; i++) {
+                            kaMemory.add(findCatalog("key_activity")
+                                .toList()
+                                .where((e) => e["code"] == values[i])
+                                .toList()[0]["description"]);
+                          }
+                          setFormValue(
+                              globalctx.memory["destinations"],
+                              currentDestinationIndex.value,
+                              "key_activities",
+                              kaMemory.value);
+                          currentDestinationKeyActivities.value =
+                              kaMemory.value;
+                        }
+                        filterExperiences();
+                      },
+                      hintText: "Key Activities",
+                      data: findCatalog("key_activity"),
                     ),
                   if (currentTravelRhythm.value != "0")
                     InputChip(

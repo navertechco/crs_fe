@@ -25,7 +25,7 @@ var currentDestinationTrRange = currentDestinationTr["value"];
 var currentDestinationTrMinRange = Rx(currentDestinationTrRange["min"]);
 var currentDestinationTrMaxRange = Rx(currentDestinationTrRange["max"]);
 var currentDestinationType = "arrival";
-var currentDestinationKeyActivities = [].obs;
+var currentDestinationKeyActivities = <String>[].obs;
 var currentDestinationOption = "0".obs;
 RxString arrivalState =
     getDestinationState(arrival["description"], 0, "arrival").toString().obs;

@@ -78,7 +78,7 @@ class AddressInformation extends StatelessWidget {
                       });
                     }
                   },
-                  value: getValue(client, "origin_id", def: "146").toString(),
+                  value: country.value,
                   hintText: "Country",
                   onChanged: (value) {
                     ctrl!.state.country = value!;

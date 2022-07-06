@@ -449,17 +449,19 @@ RxBool validateDragDestinationOptions(destination, index, type) {
       type == "departure");
   bool isAccumulated = accumulated.value > 0;
   bool isDayleft = dayleft.value > 0;
+  bool isDayOneLeft = dayleft.value == 1;
   bool arrivalRule = isArrival && isSelected && isDayleft;
   int cruiseFirstDayDirefferece =
       cruiseStartDate.value.difference(arrivalDate.value).inDays;
   bool preArrival =
       isArrival && galapagos && isDayleft && cruiseFirstDayDirefferece > 1;
-  bool departureRule = isDeparture &&
-      isDepartureConsistent &&
-      isSelected &&
-      isArrivalPromoted &&
-      isAccumulated &&
-      isDayleft;
+  bool departureRule = (isDeparture &&
+          isDepartureConsistent &&
+          isSelected &&
+          isArrivalPromoted &&
+          isAccumulated &&
+          isDayleft) ||
+      isDayOneLeft && (isDeparture && isSelected && isArrivalPromoted);
   bool tourRule =
       isTour && isArrivalPromoted && isAccumulated && isDayleft && !isPromoted;
   // if (galapagos && days > 0) {
@@ -959,7 +961,9 @@ List<Map<String, dynamic>> filterTrByAge() {
 void clearCurrentDestinationKeyActivities() {
   clearedKA[currentDay.value] ??= false;
   if (clearedKA[currentDay.value]) {
-    currentDestinationKeyActivities.value = [];
+    currentDestinationKeyActivities.value = <String>[];
+    setFormValue(globalctx.memory["destinations"],
+        currentDestinationIndex.value, "key_activities", <String>[]);
   }
 }
 

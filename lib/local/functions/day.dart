@@ -332,7 +332,7 @@ processDays() {
 updateCurrentKeyActivities() {
   var index = getDestinationIndexByDay();
   var ka = getFormValue(
-      globalctx.memory["destinations"], index, "key_activities", []);
+      globalctx.memory["destinations"], index, "key_activities", <String>[]);
   currentDestinationKeyActivities.value = ka;
 }
 
