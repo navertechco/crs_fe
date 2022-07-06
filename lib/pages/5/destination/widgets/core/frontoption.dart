@@ -39,7 +39,7 @@ class DestinationFrontOptionWidget extends StatelessWidget {
         child: Align(
           alignment: Alignment.centerLeft,
           child: Image.asset("assets/images/" + dest[3],
-              width: MediaQuery.of(context).size.width * 0.39,
+              width: MediaQuery.of(context).size.width * 0.37,
               height: MediaQuery.of(context).size.height * 0.13),
         ),
       ),
@@ -99,8 +99,8 @@ class DestinationFrontOptionWidget extends StatelessWidget {
             !validateDragDestinationOptions(destination, index, type).value) {
           return Padding(
             padding: EdgeInsets.only(
-              top: MediaQuery.of(context).size.height * 0.015,
-              left: MediaQuery.of(context).size.width * 0.013,
+              top: MediaQuery.of(context).size.height * 0.009,
+              left: MediaQuery.of(context).size.width * 0.005,
             ),
             child: Image.asset("assets/images/" + dest[2],
                 color: Color.fromARGB(100, 10, 10, 10),
