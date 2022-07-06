@@ -674,6 +674,9 @@ String getDestinationState(destination, index, type) {
   if (globalctx.states["destinations"][index]["type"] != type) {
     state = "suggested";
   }
+  if (destination == departure["description"] && type == "departure") {
+    return departureState.value;
+  }
   return state;
 }
 
