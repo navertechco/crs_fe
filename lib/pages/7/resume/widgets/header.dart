@@ -106,7 +106,7 @@ class Header extends StatelessWidget {
         Row(
           children: [
             CustomPadingTitleWidget(
-                customlabel: "\t\tGuides:\t\t\t\t",
+                customlabel: "    Guides:        ",
                 fontWeight: FontWeight.bold),
             Counter(
               initial: 0,

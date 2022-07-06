@@ -118,7 +118,7 @@ class LogisticForm extends StatelessWidget {
                     },
                     validator: CustomRequiredValidator(
                         errorText: "Arrival Port is required ", ctx: context),
-                    label: "Arrival Port\t\t\t\t\t\t\t\t\t\t",
+                    label: "Arrival Port                    ",
                     data: airportCatalog.toList(),
                   ),
                   Obx(() {
@@ -249,7 +249,7 @@ class LogisticForm extends StatelessWidget {
                                 "tour_option", value);
                             tourOption.value = value!;
                           },
-                          label: "Tour Options\t\t\t\t\t\t\t\t",
+                          label: "Tour Options                ",
                           data: findCatalog("tour_option"),
                         ),
                         Row(

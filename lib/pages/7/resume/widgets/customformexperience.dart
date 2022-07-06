@@ -49,7 +49,7 @@ class CustomFormExperienceRowWidget extends StatelessWidget {
                   globalctx.memory["promoted"][destDay][expName]["value"]
                       ["meal_type"] = value;
                 },
-                label: "\t\tMeal Option (A, B, C, D):\t\t\t\t",
+                label: "    Meal Option (A, B, C, D):        ",
                 data: [0, 1, 2, 3]),
           Image.asset(
             "assets/images/1x/Recurso_374mdpi.png",

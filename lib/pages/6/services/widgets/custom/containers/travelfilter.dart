@@ -95,7 +95,7 @@ class TravelFilter extends HookWidget {
                               "key_activities", value);
                         },
                         hintText:
-                            "\t\t\t\t\t\t\t\t\t\t\t\tKey Activities            \n",
+                            "                        Key Activities            \n",
                         data: kaDataCatalog.value,
                       )
                     ],
