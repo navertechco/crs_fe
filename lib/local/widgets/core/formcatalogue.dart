@@ -77,7 +77,7 @@ class FormCatalogueWidget extends StatelessWidget {
                     onChanged: (value) {
                       try {
                         initialValue.value = value!;
-                        disabled ? null : onChanged(value);
+                        onChanged(value);
                       } catch (e) {
                         log(e);
                       }

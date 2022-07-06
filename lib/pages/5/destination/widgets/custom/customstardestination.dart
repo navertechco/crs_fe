@@ -210,6 +210,12 @@ class CustomStarDestinationForm extends StatelessWidget {
                 }),
                 Obx(() {
                   var expMode = explorationMode.value;
+                  setFormValue(
+                      globalctx.memory["destinations"], index, "type", type);
+                  setFormValue(
+                      globalctx.memory["destinations"], index, "index", index);
+                  setFormValue(globalctx.memory["destinations"], index,
+                      "destination", destination);
                   if (explorationMode.value != "2") {
                     return CustomFormDropDownFieldWidget(
                         disabled: type == "arrival" ||
@@ -230,12 +236,6 @@ class CustomStarDestinationForm extends StatelessWidget {
                               index,
                               "travel_rhythm",
                               destination == "galapagos" ? "3" : value);
-                          setFormValue(globalctx.memory["destinations"], index,
-                              "type", type);
-                          setFormValue(globalctx.memory["destinations"], index,
-                              "index", index);
-                          setFormValue(globalctx.memory["destinations"], index,
-                              "destination", destination);
                         },
                         onChanged: (value) {
                           setFormValue(

@@ -369,7 +369,7 @@ updateCurrentDestinationOption() {
 updateCurrentDestinationTravelRhythm() {
   var index = getDestinationIndexByDay();
   var travelRhythm = getFormValue(
-      globalctx.memory["destinations"], index, "travel_rhythm", "0");
+      globalctx.memory["destinations"], index.toString(), "travel_rhythm", "0");
   currentTravelRhythm.value = travelRhythm;
 }
 
