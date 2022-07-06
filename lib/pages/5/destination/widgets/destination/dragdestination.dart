@@ -28,7 +28,8 @@ class DragDestinationWidget extends StatelessWidget {
               children: [
                 DestinationOptionWidget(
                     destination: destination, type: type, index: index),
-                NewWidget(destination: destination, type: type, index: index),
+                DestinationIndicator(
+                    destination: destination, type: type, index: index),
               ],
             )
           : Text('');
@@ -36,8 +37,8 @@ class DragDestinationWidget extends StatelessWidget {
   }
 }
 
-class NewWidget extends StatelessWidget {
-  const NewWidget({
+class DestinationIndicator extends StatelessWidget {
+  const DestinationIndicator({
     Key? key,
     required this.destination,
     required this.index,
@@ -48,48 +49,30 @@ class NewWidget extends StatelessWidget {
   final type;
   @override
   Widget build(BuildContext context) {
-    var explorationDay = getFormValue(
-        globalctx.memory["destinations"], index, "explorationDay", "0");
-    return Builder(builder: (context) {
-      if (!globalctx.promotedDestinations.contains(index)) {
-        return Column(
-          children: [
-            Text(explorationDay.toString(),
-                style: KTextSytle(
-                        context: context,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(255, 204, 164, 61))
-                    .getStyle()),
-            TextButton(
-              onPressed: () {
-                deleteGraphDragDestinationOption(destination);
-              },
-              child: Image.asset("assets/images/1x/redmark.png",
-                  width: MediaQuery.of(context).size.width * 0.02),
-            ),
-          ],
-        );
-      } else {
-        return Column(
-          children: [
-            Text(explorationDay,
-                style: KTextSytle(
-                        context: context,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(255, 204, 164, 61))
-                    .getStyle()),
-            TextButton(
-              onPressed: () {
-                deleteGraphDragDestinationOption(destination);
-              },
-              child: Image.asset("assets/images/1x/greencheck.png",
-                  width: Get.width * 0.02),
-            ),
-          ],
-        );
-      }
+    return Obx(() {
+      var explorationDay = getFormValue(
+          globalctx.memory["destinations"], index, "explorationDay", "0");
+      return Column(
+        children: [
+          Text(explorationDay.toString(),
+              style: KTextSytle(
+                      context: context,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 204, 164, 61))
+                  .getStyle()),
+          TextButton(
+            onPressed: () {
+              deleteGraphDragDestinationOption(destination);
+            },
+            child: Image.asset(
+                !globalctx.promotedDestinations.contains(index)
+                    ? "assets/images/1x/redmark.png"
+                    : "assets/images/1x/greencheck.png",
+                width: MediaQuery.of(context).size.width * 0.02),
+          ),
+        ],
+      );
     });
   }
 }

@@ -21,21 +21,16 @@ class DragExperienceTarget extends StatelessWidget {
                     height: Get.height * 0.075,
                     width: Get.width * 0.2,
                     experience: experience),
-                state.value != "promoted"
-                    ? TextButton(
-                        onPressed: () {
-                          promoteExperience(experience, "suggested");
-                        },
-                        child: Image.asset("assets/images/1x/redmark.png",
-                            width: Get.width * 0.02),
-                      )
-                    : TextButton(
-                        onPressed: () {
-                          promoteExperience(experience, "suggested");
-                        },
-                        child: Image.asset("assets/images/1x/greencheck.png",
-                            width: Get.width * 0.02),
-                      )
+                TextButton(
+                  onPressed: () {
+                    promoteExperience(experience, "suggested");
+                  },
+                  child: Image.asset(
+                      state.value != "promoted"
+                          ? "assets/images/1x/redmark.png"
+                          : "assets/images/1x/greencheck.png",
+                      width: Get.width * 0.02),
+                )
               ],
             )
           : Text('');

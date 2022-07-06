@@ -46,47 +46,49 @@ class FormCatalogueWidget extends StatelessWidget {
                           value == null ? FontWeight.normal : FontWeight.bold)
                   .getStyle(),
             ),
-            child: FormField(
-                validator: (value) => validator!(initialValue.value),
-                builder: (context) {
-                  return DropdownButtonHideUnderline(
-                      child: Builder(builder: (context) {
-                    if ((items != null ||
-                        items.isNotEmpty ||
-                        items.where((item) {
-                              return item.value == initialValue.value;
-                            }).length ==
-                            1)) {
-                      return DropdownButton<String>(
-                        hint: Text(hintText ?? "Choose a Option"),
-                        style: KTextSytle(
-                                color: Colors.black,
-                                context: context,
-                                fontSize: value == null
-                                    ? fontSize
-                                    : fontSize * 0.8 * isMobile,
-                                fontWeight: value == null
-                                    ? FontWeight.normal
-                                    : FontWeight.bold)
-                            .getStyle(),
-                        alignment: Alignment.centerLeft,
-                        isExpanded: true,
-                        value: initialValue.value,
-                        onChanged: (value) {
-                          try {
-                            initialValue.value = value!;
-                            disabled ? null : onChanged(value);
-                          } catch (e) {
-                            log(e);
-                          }
-                        },
-                        items: items,
-                      );
-                    } else {
-                      return Text("");
-                    }
-                  }));
-                }),
+            child: FormField(validator: (value) {
+              if (validator != null) {
+                return validator!(initialValue.value);
+              }
+            }, builder: (context) {
+              return DropdownButtonHideUnderline(
+                  child: Builder(builder: (context) {
+                if ((items != null ||
+                    items.isNotEmpty ||
+                    items.where((item) {
+                          return item.value == initialValue.value;
+                        }).length ==
+                        1)) {
+                  return DropdownButton<String>(
+                    hint: Text(hintText ?? "Choose a Option"),
+                    style: KTextSytle(
+                            color: Colors.black,
+                            context: context,
+                            fontSize: value == null
+                                ? fontSize
+                                : fontSize * 0.8 * isMobile,
+                            fontWeight: value == null
+                                ? FontWeight.normal
+                                : FontWeight.bold)
+                        .getStyle(),
+                    alignment: Alignment.centerLeft,
+                    isExpanded: true,
+                    value: initialValue.value,
+                    onChanged: (value) {
+                      try {
+                        initialValue.value = value!;
+                        disabled ? null : onChanged(value);
+                      } catch (e) {
+                        log(e);
+                      }
+                    },
+                    items: items,
+                  );
+                } else {
+                  return Text("");
+                }
+              }));
+            }),
           ));
     });
   }
