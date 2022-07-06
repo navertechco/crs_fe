@@ -40,8 +40,8 @@ class DragDestinationWidget extends StatelessWidget {
                                       fontWeight: FontWeight.bold,
                                       color: Color.fromARGB(255, 204, 164, 61))
                                   .getStyle()),
-                          GestureDetector(
-                            onTap: () {
+                          TextButton(
+                            onPressed: () {
                               deleteGraphDragDestinationOption(destination);
                             },
                             child: Image.asset("assets/images/1x/redmark.png",
@@ -59,8 +59,8 @@ class DragDestinationWidget extends StatelessWidget {
                                       fontWeight: FontWeight.bold,
                                       color: Color.fromARGB(255, 204, 164, 61))
                                   .getStyle()),
-                          GestureDetector(
-                            onTap: () {
+                          TextButton(
+                            onPressed: () {
                               deleteGraphDragDestinationOption(destination);
                             },
                             child: Image.asset(

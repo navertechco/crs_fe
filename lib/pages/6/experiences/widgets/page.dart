@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import '../index.dart';
 import 'index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -15,8 +14,6 @@ class ExperiencesWidget extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final counter = useState(0);
-    useEffect(() {}, [stream, counter.value]);
-
     return Stack(children: [
       CustomTopDayWidget(),
       CustomBodyDaysWidget(ctrl: ctrl, counter: counter ),

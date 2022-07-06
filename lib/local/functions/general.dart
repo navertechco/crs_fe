@@ -1,13 +1,8 @@
 // ignore_for_file: prefer_function_declarations_over_variables, import_of_legacy_library_into_null_safe
 import 'package:flutter/material.dart';
-import 'package:naver_crs/common/functions.dart';
-import '../index.dart';
-import 'index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/pages/7/endservices/widgets/index.dart';
-import 'package:naver_crs/pages/index.dart';
-import 'package:sweetalertv2/sweetalertv2.dart';
 export 'day.dart';
 export 'destination.dart';
 export 'experience.dart';
@@ -439,8 +434,16 @@ int getTravekRhythmLimit(String value) {
 ///   void
 ///```
 void saveCustomerTravelCode(ctrl, value) {
-  travelCode.value = getCustomerTravelCode(value);
-  setFormValue(globalctx.memory, "tour", "travel_code", travelCode.value);
+  var res = getCustomerTravelCode(value);
+  setFormValue(globalctx.memory, "tour", "travel_code", res);
+}
+
+saveCustomer(state) {
+  Map mem = {...globalctx.memory["customer"], ...state.toMap()};
+  globalctx.memory["customer"] = mem;
+  resetAllDestinations();
+  filterDestinations();
+  gotoPage("Destination");
 }
 
 /// ## getCustomerTravelCode

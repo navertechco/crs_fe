@@ -4,7 +4,6 @@
 import 'package:get/get.dart';
 import 'package:naver_crs/pages/5/destination/widgets/destinationdetail/widgets/index.dart';
 import 'package:naver_crs/index.dart';
-import 'general.dart';
 
 // ██████╗  █████╗ ██╗   ██╗                                                 
 // ██╔══██╗██╔══██╗╚██╗ ██╔╝                                                 

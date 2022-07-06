@@ -1,8 +1,6 @@
 // ignore_for_file: prefer_function_declarations_over_variables
 
 import 'package:flutter/material.dart';
-import '../index.dart';
-import 'index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
@@ -181,7 +179,7 @@ DataCell getQuoteHistoryDataCell(context, row) {
                   height: MediaQuery.of(context).size.height * 0.5,
                 ),
                 Text(
-                  "${getQuoteHistoryItinerary(row)}",
+                  getQuoteHistoryItinerary(row),
                   style: KTextSytle(
                     context: context,
                     fontSize: 15,

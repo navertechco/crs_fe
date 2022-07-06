@@ -7,7 +7,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 class CustomBodyDestinationsWidget extends HookWidget {
   final ServicesController ctrl;
   final ValueNotifier<int> counter;
-  CustomBodyDestinationsWidget({
+  const CustomBodyDestinationsWidget({
     Key? key,
     required this.ctrl,
     required this.counter,

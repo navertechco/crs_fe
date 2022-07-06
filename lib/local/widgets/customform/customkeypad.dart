@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import '../index.dart';
-import 'index.dart';
 import 'package:naver_crs/index.dart';
 
-import 'customformlabel.dart';
 
 class CustomKeypadWidget extends StatelessWidget {
   const CustomKeypadWidget({
@@ -29,16 +26,16 @@ class CustomKeypadWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        GestureDetector(
-          onTap: onPrevious,
+        TextButton(
+          onPressed: onPrevious,
           child: CustomFormLabelWidget(
               fontSize: isMobile * fontSize,
               label: prevlabel,
               fontWeight: prevFontWeight),
         ),
         SizedBox(width: MediaQuery.of(context).size.width * isMobile * width),
-        GestureDetector(
-          onTap: onNext,
+        TextButton(
+          onPressed: onNext,
           child: CustomFormLabelWidget(
               fontSize: isMobile * fontSize,
               label: nextlabel,

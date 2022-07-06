@@ -20,7 +20,7 @@ class RoundedFormCounterField extends StatelessWidget {
   final int step;
   final bool original;
 
-  RoundedFormCounterField(
+  const RoundedFormCounterField(
       {Key? key,
       required this.hintText,
       this.left = 45,

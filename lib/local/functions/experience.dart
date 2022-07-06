@@ -490,7 +490,7 @@ String getExperienceState(experience) {
 ///```
 double calculateExperienceDays(String experience) {
   var expData = getExperienceDataByName(experience).value;
-  double exptime = (parseInt(expData['exptime']) * 1.0) as double;
+  double exptime = (parseInt(expData['exptime']) * 1.0);
   return exptime / 60;
 }
 

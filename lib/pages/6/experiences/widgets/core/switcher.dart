@@ -1,11 +1,10 @@
 import 'dart:math';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/pages/6/experiences/widgets/experiencedetail/widgets/index.dart';
 import 'package:naver_crs/pages/6/experiences/widgets/leisuretimedetail/widgets/index.dart';
-
 
 // ignore: must_be_immutable
 class SwitcherWidget extends StatelessWidget {
@@ -83,8 +82,8 @@ class SwitcherWidget extends StatelessWidget {
     }
 
     Widget _buildFlipAnimation() {
-      return GestureDetector(
-        onTap: _switchCard,
+      return TextButton(
+        onPressed: _switchCard,
         child: AnimatedSwitcher(
           duration: const Duration(milliseconds: 800),
           transitionBuilder: _transitionBuilder,

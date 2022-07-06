@@ -27,8 +27,8 @@ class CarouselWidget extends StatelessWidget {
       width: MediaQuery.of(context).size.width * 0.3,
       child: Swiper(
         itemBuilder: (BuildContext context, int index) {
-          return GestureDetector(
-            onTap: () {
+          return TextButton(
+            onPressed: () {
               showCustomDialog(
                   context,
                   Stack(

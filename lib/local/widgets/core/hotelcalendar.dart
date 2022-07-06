@@ -22,6 +22,7 @@ class HotelCalendarWidget extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class HotelFiltersWidget extends StatelessWidget {
   HotelFiltersWidget({
     Key? key,

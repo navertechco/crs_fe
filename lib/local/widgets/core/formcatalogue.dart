@@ -59,7 +59,12 @@ class _FormCatalogueWidgetState extends State<FormCatalogueWidget> {
                 child: FormField(builder: (context) {
                   return DropdownButtonHideUnderline(
                       child: Builder(builder: (context) {
-                    if (items != null) {
+                    if ((items != null ||
+                        items.isNotEmpty ||
+                        items.where((item) {
+                              return item.value == initialValue.value;
+                            }).length ==
+                            1)) {
                       return DropdownButton<String>(
                         hint: Text(widget.hintText ?? "Choose a Option"),
                         style: KTextSytle(
@@ -83,7 +88,7 @@ class _FormCatalogueWidgetState extends State<FormCatalogueWidget> {
                             log(e);
                           }
                         },
-                        items: items ?? <DropdownMenuItem<String>>[],
+                        items: items ,
                       );
                     } else {
                       return Text("");

@@ -49,17 +49,19 @@ loadDummyData(key) async {
 /// @return DateTime?
 ///
 DateTime? getDateValue(data, key, {DateTime? def}) {
+  var res = def;
   try {
     if (data ?? true) {
       if (data[key] ?? true) {
-        return DateTime.parse(data[key]);
+        res = DateTime.parse(data[key]);
       }
     } else {
-      return def!;
+      res = def!;
     }
   } catch (e) {
-    return def!;
+    res = def!;
   }
+  return res;
 }
 
 /// ## getValue

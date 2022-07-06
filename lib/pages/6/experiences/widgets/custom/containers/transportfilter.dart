@@ -25,7 +25,7 @@ class DayExpFilter extends HookWidget {
 
 // ignore: must_be_immutable
 class BodyWidget extends StatelessWidget {
-  BodyWidget({Key? key}) : super(key: key);
+  const BodyWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

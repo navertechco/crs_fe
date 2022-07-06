@@ -8,7 +8,7 @@ import '../../../controller.dart';
 class CustomTopDestinationWidget extends HookWidget {
   final ServicesController ctrl;
   final ValueNotifier<int> counter;
-  CustomTopDestinationWidget({
+  const CustomTopDestinationWidget({
     Key? key,
     required this.ctrl,
     required this.counter,

@@ -96,12 +96,13 @@ class _FormCatalogueSearchWidgetState extends State<FormCatalogueSearchWidget> {
                       onChanged: print,
                       selectedItem: "Tunisia",
                       validator: (String? item) {
-                        if (item == null)
+                        if (item == null) {
                           return "Required field";
-                        else if (item == "Brazil")
+                        } else if (item == "Brazil") {
                           return "Invalid item";
-                        else
+                        } else {
                           return null;
+                        }
                       },
                     );
                   } else {

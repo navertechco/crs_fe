@@ -322,7 +322,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                           (explorationMode.value == "3" ||
                               explorationMode.value == "1")) ||
                       (destination != "galapagos" &&
-                          (getDestiinationRoutes(destination).length > 0))) {
+                          (getDestiinationRoutes(destination).isNotEmpty))) {
                     {
                       return Row(
                         children: [

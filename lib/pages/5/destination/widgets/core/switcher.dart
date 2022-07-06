@@ -1,5 +1,5 @@
 import 'dart:math';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import '../index.dart';
 import 'package:naver_crs/index.dart';
@@ -81,8 +81,8 @@ class SwitcherWidget extends StatelessWidget {
     }
 
     Widget _buildFlipAnimation() {
-      return GestureDetector(
-        onTap: _switchCard,
+      return TextButton(
+        onPressed: _switchCard,
         child: AnimatedSwitcher(
           duration: const Duration(milliseconds: 800),
           transitionBuilder: _transitionBuilder,

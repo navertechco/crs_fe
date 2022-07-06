@@ -4,17 +4,6 @@ import 'package:naver_crs/index.dart';
 
 class CustomerController extends GetxController {
   final state = CustomerState();
-  // ignore: prefer_function_declarations_over_variables
-  Function saveCustomer = () {};
-
-  CustomerController() {
-// ignore: prefer_function_declarations_over_variables
-    saveCustomer = () {
-      Map mem = {...globalctx.memory["customer"], ...state.toMap()};
-      globalctx.memory["customer"] = mem;
-      resetAllDestinations();
-      filterDestinations();
-      gotoPage("Destination");
-    };
-  }
+ 
+ 
 }

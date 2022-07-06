@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import '../index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:naver_crs/common/index.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:sweetalertv2/sweetalertv2.dart';
 
@@ -84,8 +82,9 @@ class AddressInformation extends StatelessWidget {
                   hintText: "Country",
                   onChanged: (value) {
                     ctrl!.state.country = value!;
+                    setValue(client, "city_id", "0");
                     setValue(client, "country", value);
-                    country.value = value!;
+                    country.value = value;
                     city.value = "0";
                     procCityData(countries[countrylist[int.parse(value)]
                         ["description"]]);
@@ -186,8 +185,8 @@ class CustomerKeyPad extends StatelessWidget {
       padding: EdgeInsets.only(
           top: MediaQuery.of(context).size.height * 0.75,
           left: MediaQuery.of(context).size.width * 0.7),
-      child: GestureDetector(
-        onTap: () {
+      child: TextButton(
+        onPressed: () {
           if (_formKey.currentState!.validate()) {
             _formKey.currentState!.save();
             if (city.value.isEmpty) {
@@ -199,7 +198,7 @@ class CustomerKeyPad extends StatelessWidget {
                 return false;
               });
             } else {
-              ctrl!.saveCustomer();
+              saveCustomer(ctrl!.state);
             }
           }
         },
@@ -436,10 +435,13 @@ class TourInformation extends StatelessWidget {
             height: 0.05,
             validator: CustomRequiredValidator(
                 errorText: "Lead Passenger is required ", ctx: context),
-            value: getFormValue(
-                globalctx.memory, "tour", "travel_code", "$travelCode"),
-            onSaved: (value) {},
+            value: travelCode.value,
+            onSaved: (value) {
+              travelCode.value = value!;
+              saveCustomerTravelCode(ctrl, value);
+            },
             onFieldSubmitted: (value) {
+              travelCode.value = value!;
               saveCustomerTravelCode(ctrl, value);
             },
             keyboardType: TextInputType.name,

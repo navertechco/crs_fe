@@ -1,12 +1,9 @@
 // ignore_for_file: prefer_function_declarations_over_variables, import_of_legacy_library_into_null_safe
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 import 'package:sweetalertv2/sweetalertv2.dart';
 import 'package:yaml/yaml.dart';
-import 'package:http/http.dart' as http;
 
 // ████████╗ ██████╗ ██╗   ██╗██████╗
 // ╚══██╔══╝██╔═══██╗██║   ██║██╔══██╗
@@ -166,6 +163,7 @@ String? findTravelRhythmDescription(int code) {
   } catch (e) {
     log(e);
   }
+  return null;
 }
 
 /// ## resetFindTourData

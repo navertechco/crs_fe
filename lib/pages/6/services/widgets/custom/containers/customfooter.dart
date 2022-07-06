@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:naver_crs/index.dart';
-import '../../../controller.dart';
 
 // ignore: must_be_immutable
 class CustomFooterWidget extends StatelessWidget {

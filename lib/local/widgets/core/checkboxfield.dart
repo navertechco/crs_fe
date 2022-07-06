@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../index.dart';
 
+// ignore: must_be_immutable
 class CheckboxField extends StatelessWidget {
   CheckboxField({
     Key? key,

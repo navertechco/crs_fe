@@ -1,7 +1,5 @@
 // Other s
 import 'dart:convert';
-
-import 'package:naver_crs/common/com/index.dart';
 import 'package:naver_crs/index.dart';
 
 //  ██████╗ █████╗ ██╗      █████╗ ████████╗ ██████╗  ██████╗

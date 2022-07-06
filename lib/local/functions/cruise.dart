@@ -1,10 +1,8 @@
-// ignore_for_file: prefer_function_declarations_over_variables
+// ignore_for_file: prefer_function_declarations_over_variables, import_of_legacy_library_into_null_safe
 // ignore_for_file: curly_braces_in_flow_control_structures
 import 'package:checkbox_formfield/checkbox_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:sweetalertv2/sweetalertv2.dart';
-import '../index.dart';
-import 'index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/pages/3/logistic/widgets/index.dart';

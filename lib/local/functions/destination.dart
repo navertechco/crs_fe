@@ -1,8 +1,6 @@
 // ignore_for_file: prefer_function_declarations_over_variables
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:flutter/material.dart';
-import '../index.dart';
-import 'index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/pages/5/destination/widgets/index.dart';
@@ -702,7 +700,7 @@ void updateTotalLeftAccumulated() {
   accumulated.value = 0;
   if (destinations.isNotEmpty) {
     for (var destination in destinations.keys) {
-      accumulated.value += getDestinationExplorationDay(destination) as int;
+      accumulated.value += getDestinationExplorationDay(destination);
     }
   }
   dayleft.value = totalDays.value - accumulated.value;
@@ -893,8 +891,6 @@ void resetMemoryDestinations() {
   globalctx.destinationDragData.value = [];
   globalctx.memory["destinations"] = {};
   globalctx.states["destinations"] = {};
-  arrivalState.value = "selected";
-  departureState.value = "selected";
 }
 
 /// ## getDestiinationRoutes

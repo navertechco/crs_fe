@@ -267,14 +267,12 @@ Rx<List<Map<String, dynamic>>> countrydata = Rx((() {
   log("Countries: $countries\n\n");
   countrylist = [];
   var index = 0;
-  if (countries != null) {
-    for (var country in countries.keys) {
-      countrylist.add({
-        "code": "$index",
-        "description": country,
-      });
-      index++;
-    }
+  for (var country in countries.keys) {
+    countrylist.add({
+      "code": "$index",
+      "description": country,
+    });
+    index++;
   }
   log("CountryList: $countrylist");
   return countrylist;

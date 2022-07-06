@@ -11,16 +11,15 @@ class CarouselWidget extends StatelessWidget {
   final service;
   @override
   Widget build(BuildContext context) {
- 
-    var images = []; 
+    var images = [];
 
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.3,
       width: MediaQuery.of(context).size.width * 0.3,
       child: Swiper(
         itemBuilder: (BuildContext context, int index) {
-          return GestureDetector(
-            onTap: () {
+          return TextButton(
+            onPressed: () {
               showCustomDialog(
                   context,
                   Stack(
