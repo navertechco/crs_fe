@@ -74,8 +74,7 @@ Future nextDay() async {
 Future jumpDay(direction) async {
   decideBypass(direction);
   expDraggable.value = 1;
-  currentDate.value =
-      arrivalDate.value.add(Duration(days: currentDay.value - 1));
+  currentDate.value = arrivalDate.value.add(Duration(days: currentDay.value));
   updateCurrentDestination();
   // promoteMealExperineces();
   filterSuggestedExperiences();

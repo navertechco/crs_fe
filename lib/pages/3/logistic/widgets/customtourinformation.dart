@@ -206,12 +206,18 @@ class LogisticForm extends StatelessWidget {
                           onSaved: (value) {
                             ctrl!.state.departureDate = value!;
                             departureDate.value = value;
+                            totalDays.value = departureDate.value
+                                .difference(arrivalDate.value)
+                                .inDays;
                             filterCruises(context);
                           },
                           onChanged: (value) {
                             value ??= DateTime.now();
                             ctrl!.state.departureDate = value;
                             departureDate.value = value;
+                            totalDays.value = departureDate.value
+                                .difference(arrivalDate.value)
+                                .inDays;
                             filterCruises(context);
                           },
                         ),
