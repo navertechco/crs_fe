@@ -23,7 +23,7 @@ class CustomCustomerDataForm extends StatelessWidget {
           child: Stack(
             children: [
               BasicInformation(ctrl: ctrl),
-              TourInformation(ctrl: ctrl),
+              // TourInformation(ctrl: ctrl),
               AddressInformation(ctrl: ctrl),
             ],
           ),
@@ -56,76 +56,76 @@ class AddressInformation extends StatelessWidget {
               width: 0.22,
               fontWeight: FontWeight.bold,
               label: " Address information"),
-          Obx(() {
-            return Row(
-              children: [
-                CustomFormDropDownFieldWidget(
-                  fontSize: 10,
-                  width: 0.2,
-                  height: 0.05,
-                  validator: (value) {
-                    CustomRequiredValidator(
-                            errorText: "Country is required ", ctx: context)
-                        .call(value);
-                    if (city.value.isEmpty) {
-                      SweetAlertV2.show(context,
-                          curve: ElasticInCurve(),
-                          title: "City Field is required",
-                          style: SweetAlertV2Style.error,
-                          onPress: (bool isConfirm) {
-                        Get.close(1);
-                        return false;
-                      });
-                    }
-                  },
-                  value: getValue(client, "origin_id", def: "146").toString(),
-                  hintText: "Country",
-                  onChanged: (value) {
-                    ctrl!.state.country = value!;
-                    setValue(client, "city_id", "0");
-                    setValue(client, "country", value);
-                    country.value = value;
-                    city.value = "0";
-                    procCityData(countries[countrylist[int.parse(value)]
-                        ["description"]]);
-                    log("CHANGED: ");
-                  },
-                  onSaved: (value) {
-                    ctrl!.state.country = value!;
-                    country.value = value;
-                    city.value = "0";
-                    procCityData(countries[countrylist[int.parse(value)]
-                        ["description"]]);
-                    log("SAVED: ");
-                  },
-                  data: countrydata.value,
-                ),
-                // if (country.value != '')
-                CustomFormDropDownFieldWidget(
-                  fontSize: 10,
-                  validator: CustomCatalogRequiredValidator(
-                      errorText: "City is required ",
-                      ctx: context,
-                      catalog: citylist.value),
-                  value: getValue(client, "city_id", def: "0").toString(),
-                  width: 0.185,
-                  height: 0.05,
-                  hintText: "City",
-                  onChanged: (value) {
-                    city.value = value!;
-                    setValue(client, "city_id", value);
-                    log(value);
-                  },
-                  onSaved: (value) {
-                    city.value = value!;
-                    ctrl!.state.city = value;
-                    log(value);
-                  },
-                  data: citylist.value,
-                ),
-              ],
-            );
-          }),
+          // Obx(() {
+          //   return Row(
+          //     children: [
+          //       CustomFormDropDownFieldWidget(
+          //         fontSize: 10,
+          //         width: 0.2,
+          //         height: 0.05,
+          //         validator: (value) {
+          //           CustomRequiredValidator(
+          //                   errorText: "Country is required ", ctx: context)
+          //               .call(value);
+          //           if (city.value.isEmpty) {
+          //             SweetAlertV2.show(context,
+          //                 curve: ElasticInCurve(),
+          //                 title: "City Field is required",
+          //                 style: SweetAlertV2Style.error,
+          //                 onPress: (bool isConfirm) {
+          //               Get.close(1);
+          //               return false;
+          //             });
+          //           }
+          //         },
+          //         value: getValue(client, "origin_id", def: "146").toString(),
+          //         hintText: "Country",
+          //         onChanged: (value) {
+          //           ctrl!.state.country = value!;
+          //           setValue(client, "city_id", "0");
+          //           setValue(client, "country", value);
+          //           country.value = value;
+          //           city.value = "0";
+          //           procCityData(countries[countrylist[int.parse(value)]
+          //               ["description"]]);
+          //           log("CHANGED: ");
+          //         },
+          //         onSaved: (value) {
+          //           ctrl!.state.country = value!;
+          //           country.value = value;
+          //           city.value = "0";
+          //           procCityData(countries[countrylist[int.parse(value)]
+          //               ["description"]]);
+          //           log("SAVED: ");
+          //         },
+          //         data: countrydata.value,
+          //       ),
+          //       // if (country.value != '')
+          //       CustomFormDropDownFieldWidget(
+          //         fontSize: 10,
+          //         validator: CustomCatalogRequiredValidator(
+          //             errorText: "City is required ",
+          //             ctx: context,
+          //             catalog: citylist.value),
+          //         value: getValue(client, "city_id", def: "0").toString(),
+          //         width: 0.185,
+          //         height: 0.05,
+          //         hintText: "City",
+          //         onChanged: (value) {
+          //           city.value = value!;
+          //           setValue(client, "city_id", value);
+          //           log(value);
+          //         },
+          //         onSaved: (value) {
+          //           city.value = value!;
+          //           ctrl!.state.city = value;
+          //           log(value);
+          //         },
+          //         data: citylist.value,
+          //       ),
+          //     ],
+          //   );
+          // }),
           CustomFormTextFieldWidget(
             fontSize: 10,
             validator: CustomRequiredValidator(
@@ -437,12 +437,10 @@ class TourInformation extends StatelessWidget {
                 errorText: "Lead Passenger is required ", ctx: context),
             value: travelCode.value,
             onSaved: (value) {
-              travelCode.value = value!;
-              saveCustomerTravelCode(ctrl, value);
+              // saveCustomerTravelCode(value);
             },
             onFieldSubmitted: (value) {
-              travelCode.value = value!;
-              saveCustomerTravelCode(ctrl, value);
+              // saveCustomerTravelCode(value);
             },
             keyboardType: TextInputType.name,
             hintText: "Lead Passenger",

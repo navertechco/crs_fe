@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import '../../../index.dart';
 
 // ignore: must_be_immutable
-class FormCatalogueWidget extends StatefulWidget {
+class FormCatalogueWidget extends StatelessWidget {
   FormCatalogueWidget(
       {Key? key,
       this.disabled = false,
@@ -26,37 +26,29 @@ class FormCatalogueWidget extends StatefulWidget {
   final String? Function(String?)? validator;
 
   @override
-  State<FormCatalogueWidget> createState() => _FormCatalogueWidgetState();
-}
-
-class _FormCatalogueWidgetState extends State<FormCatalogueWidget> {
-  @override
   Widget build(BuildContext context) {
-    var items = getItems(widget.data, widget.value, widget.hintText);
-    var initialValue = Rx(widget.value == "" ? "0" : widget.value);
+    var items = getItems(data, value, hintText);
+    var initialValue = Rx(value == "" ? "0" : value);
     return Obx(() {
       var t = initialValue.value;
       return Container(
           padding: EdgeInsets.symmetric(horizontal: 20),
-          child: FormField<String>(
-            validator: (value) => widget.validator!(initialValue.value),
-            builder: (FormFieldState<String> state) {
-              return InputDecorator(
-                decoration: InputDecoration.collapsed(
-                  filled: false,
-                  hintText: widget.hintText,
-                  hintStyle: KTextSytle(
-                          color: Colors.black,
-                          context: context,
-                          fontSize: widget.value == null
-                              ? widget.fontSize
-                              : widget.fontSize * 0.8 * isMobile,
-                          fontWeight: widget.value == null
-                              ? FontWeight.normal
-                              : FontWeight.bold)
-                      .getStyle(),
-                ),
-                child: FormField(builder: (context) {
+          child: InputDecorator(
+            decoration: InputDecoration.collapsed(
+              filled: false,
+              hintText: hintText,
+              hintStyle: KTextSytle(
+                      color: Colors.black,
+                      context: context,
+                      fontSize:
+                          value == null ? fontSize : fontSize * 0.8 * isMobile,
+                      fontWeight:
+                          value == null ? FontWeight.normal : FontWeight.bold)
+                  .getStyle(),
+            ),
+            child: FormField(
+                validator: (value) => validator!(initialValue.value),
+                builder: (context) {
                   return DropdownButtonHideUnderline(
                       child: Builder(builder: (context) {
                     if ((items != null ||
@@ -66,14 +58,14 @@ class _FormCatalogueWidgetState extends State<FormCatalogueWidget> {
                             }).length ==
                             1)) {
                       return DropdownButton<String>(
-                        hint: Text(widget.hintText ?? "Choose a Option"),
+                        hint: Text(hintText ?? "Choose a Option"),
                         style: KTextSytle(
                                 color: Colors.black,
                                 context: context,
-                                fontSize: widget.value == null
-                                    ? widget.fontSize
-                                    : widget.fontSize * 0.8 * isMobile,
-                                fontWeight: widget.value == null
+                                fontSize: value == null
+                                    ? fontSize
+                                    : fontSize * 0.8 * isMobile,
+                                fontWeight: value == null
                                     ? FontWeight.normal
                                     : FontWeight.bold)
                             .getStyle(),
@@ -83,20 +75,18 @@ class _FormCatalogueWidgetState extends State<FormCatalogueWidget> {
                         onChanged: (value) {
                           try {
                             initialValue.value = value!;
-                            widget.disabled ? null : widget.onChanged(value);
+                            disabled ? null : onChanged(value);
                           } catch (e) {
                             log(e);
                           }
                         },
-                        items: items ,
+                        items: items,
                       );
                     } else {
                       return Text("");
                     }
                   }));
                 }),
-              );
-            },
           ));
     });
   }

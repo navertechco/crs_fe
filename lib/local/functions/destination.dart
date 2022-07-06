@@ -104,12 +104,15 @@ void resetAllDestinations() {
   globalctx.reset.value = true;
   resetLeftDays();
   resetMemoryDestinations();
-  updateDraggableDestinations();
+  // updateDraggableDestinations();
   filterDestinations();
   if (cruiseDay.isNotEmpty) {
     autoFillDestination(arrival["description"], 0, "arrival", "0");
     autoFillDestination("galapagos", 1, "arrival", cruiseDay.value);
     autoFillDestination(departure["description"], 2, "departure", "0");
+  } else {
+    setDestinationState(arrival["description"], 0, "arrival", "selected");
+    setDestinationState(departure["description"], 1, "departure", "selected");
   }
 }
 
@@ -156,6 +159,7 @@ void autoFillDestination(destination, index, type, days) {
       destination == "galapagos" ? "1" : "0");
   addDestination(destination);
   processDestinationPromotion(destination, index, type);
+  setDestinationState(destination, index, type, "selected");
 }
 
 /// ## getDestinationList
@@ -226,7 +230,7 @@ void orderDestination(List destinations) {
 ///
 void processDestinationPromotion(destination, index, type) {
   updatePromotedDestination(destination, index);
-  setDestinationState(destination, index, "promoted", type);
+  setDestinationState(destination, index, type, "promoted");
   updateDraggableDestinations();
   updateTotalLeftAccumulated();
 }
@@ -384,7 +388,7 @@ void addDestination(String destination) {
     globalctx.destinations.insert(newIndex, destination);
   }
 
-  setDestinationState(destination, newIndex, "selected", "tour");
+  setDestinationState(destination, newIndex, "tour", "selected");
 }
 
 /// ## setDestinationState
@@ -392,24 +396,21 @@ void addDestination(String destination) {
 ///
 ///### Uses:
 /// ```dart
-///  setDestinationState(destination, index, "promoted", type);
+///  setDestinationState(destination, index, type, "promoted");
 /// ```
 ///
 /// @return void
 ///
-void setDestinationState(dest, index, state, type) {
+void setDestinationState(dest, index, type, state) {
   globalctx.states["destinations"][index] ??= {}.obs;
   globalctx.states["destinations"][index]["destination"] = dest;
   globalctx.states["destinations"][index]["index"] = index;
   globalctx.states["destinations"][index]["state"] = state;
   globalctx.states["destinations"][index]["type"] = type;
-  var length = globalctx.states["destinations"].length;
-  if (dest == arrival["description"] && index == 0 && type == "arrival") {
+  if (dest == arrival["description"] && type == "arrival") {
     arrivalState.value = state;
   }
-  if (dest == departure["description"] &&
-      index == length - 2 &&
-      type == "departure") {
+  if (dest == departure["description"] && type == "departure") {
     departureState.value = state;
   }
 }
@@ -527,7 +528,7 @@ void filterSelectedDestinations() {
 void moveGraphDragDestinationOption(
     String destination, int index, String type) {
   var state = getDestinationState(destination, index, type);
-  setDestinationState(destination, index, state, type);
+  setDestinationState(destination, index, type, state);
   globalctx.selectedDestinations.add(destination);
   globalctx.destinationDragData.value.add(DragDestinationWidget(
       destination: destination, index: index, type: type, out: false));
@@ -553,7 +554,7 @@ void deleteGraphDragDestinationOption(String destination) {
     var index =
         globalctx.destinations.indexWhere((element) => element == destination);
     var type = "tour";
-    setDestinationState(destination, index, "suggested", type);
+    setDestinationState(destination, index, type, "suggested");
     globalctx.destinations.removeAt(index);
     globalctx.selectedDestinations.removeAt(index);
     globalctx.destinationDragData.value.removeAt(index);
@@ -672,16 +673,6 @@ String getDestinationState(destination, index, type) {
   var length = globalctx.states["destinations"].length;
   if (globalctx.states["destinations"][index]["type"] != type) {
     state = "suggested";
-  }
-  if (destination == arrival["description"] &&
-      index == 0 &&
-      type == "arrival") {
-    state = arrivalState.value;
-  }
-  if (destination == departure["description"] &&
-      index == length - 1 &&
-      type == "departure") {
-    state = departureState.value;
   }
   return state;
 }

@@ -433,16 +433,14 @@ int getTravekRhythmLimit(String value) {
 ///```dart
 ///   void
 ///```
-void saveCustomerTravelCode(ctrl, value) {
+void saveCustomerTravelCode(value) {
+  travelCode.value = value!;
   var res = getCustomerTravelCode(value);
   setFormValue(globalctx.memory, "tour", "travel_code", res);
 }
 
 saveCustomer(state) {
-  Map mem = {...globalctx.memory["customer"], ...state.toMap()};
-  globalctx.memory["customer"] = mem;
   resetAllDestinations();
-  filterDestinations();
   gotoPage("Destination");
 }
 
