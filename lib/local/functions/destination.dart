@@ -405,6 +405,15 @@ void setDestinationState(dest, index, state, type) {
   globalctx.states["destinations"][index]["index"] = index;
   globalctx.states["destinations"][index]["state"] = state;
   globalctx.states["destinations"][index]["type"] = type;
+  var length = globalctx.states["destinations"].length;
+  if (dest == arrival["description"] && index == 0 && type == "arrival") {
+    arrivalState.value = state;
+  }
+  if (dest == departure["description"] &&
+      index == length - 2 &&
+      type == "departure") {
+    departureState.value = state;
+  }
 }
 
 /// ## validateDragDestinationOptions
@@ -662,8 +671,19 @@ String getDestinationState(destination, index, type) {
   var state = "suggested";
   globalctx.states["destinations"][index] ??= {}.obs;
   state = globalctx.states["destinations"][index]["state"] ?? "suggested";
+  var length = globalctx.states["destinations"].length;
   if (globalctx.states["destinations"][index]["type"] != type) {
     state = "suggested";
+  }
+  if (destination == arrival["description"] &&
+      index == 0 &&
+      type == "arrival") {
+    state = arrivalState.value;
+  }
+  if (destination == departure["description"] &&
+      index == length - 1 &&
+      type == "departure") {
+    state = departureState.value;
   }
   return state;
 }
