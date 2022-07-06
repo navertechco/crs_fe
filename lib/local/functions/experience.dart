@@ -329,20 +329,21 @@ void initializeHours() {
   clearCurrentDestinationKeyActivities();
 }
 
-/// ## promoteMealExperineces
+/// ## promoteMealExperiences
 /// *__Method to update Meals Experiences__*
 ///
 ///### Uses:
 /// ```dart
-///    promoteMealExperineces();
+///    promoteMealExperiences();
 /// ```
 /// ### Returns:
 ///```dart
 /// void
 ///```
-void promoteMealExperineces() {
+void promoteMealExperiences() {
   for (var exp in globalctx.experiences[currentDay.value] as Iterable) {
-    if (exp.value["experience_type"] == "meal") {
+    var expData = getExperienceValueByName(exp);
+    if (expData["experience_type"] == "meal") {
       promoteExperience(exp, "promoted");
     }
   }
