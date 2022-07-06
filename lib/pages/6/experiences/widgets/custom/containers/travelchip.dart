@@ -33,10 +33,10 @@ class TravelChips extends HookWidget {
                     ),
                   if (currentDestinationKeyActivities.isEmpty)
                     CustomFormMultiDropDownFieldWidget(
-                      value: getFormValue(
-                          globalctx.memory["destinations"],
-                          currentDestinationIndex.value,
-                          "key_activities", <String>[]),
+                      validator: (value) {
+                        return null;
+                      },
+                      value: currentDestinationKeyActivities.value,
                       onSaved: (values) {},
                       onChanged: (values) {
                         if (values == null) return;
