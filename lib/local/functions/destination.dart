@@ -335,6 +335,7 @@ Map getCombinedDestinations() {
 Future processDestinations(context) async {
   // ignore: unrelated_type_equality_checks
   if (globalctx.promotedDestinations.isNotEmpty & (dayleft == 0)) {
+    formKey = GlobalKey<FormState>();
     var destinationDay = [];
     experiencePromotedDragData.value = <Widget>[];
 
@@ -675,7 +676,11 @@ String getDestinationState(destination, index, type) {
     state = "suggested";
   }
   if (destination == departure["description"] && type == "departure") {
-    return departureState.value;
+    if (selectedIndex.value == 3) {
+      return departureState.value;
+    } else {
+      return "selected";
+    }
   }
   return state;
 }

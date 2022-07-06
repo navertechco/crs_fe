@@ -5,13 +5,13 @@ import 'package:get/get.dart';
 import 'package:naver_crs/pages/5/destination/widgets/destinationdetail/widgets/index.dart';
 import 'package:naver_crs/index.dart';
 
-// ██████╗  █████╗ ██╗   ██╗                                                 
-// ██╔══██╗██╔══██╗╚██╗ ██╔╝                                                 
-// ██║  ██║███████║ ╚████╔╝                                                  
-// ██║  ██║██╔══██║  ╚██╔╝                                                   
-// ██████╔╝██║  ██║   ██║                                                    
-// ╚═════╝ ╚═╝  ╚═╝   ╚═╝                                                    
-                                                                          
+// ██████╗  █████╗ ██╗   ██╗
+// ██╔══██╗██╔══██╗╚██╗ ██╔╝
+// ██║  ██║███████║ ╚████╔╝
+// ██║  ██║██╔══██║  ╚██╔╝
+// ██████╔╝██║  ██║   ██║
+// ╚═════╝ ╚═╝  ╚═╝   ╚═╝
+
 // ███████╗██╗   ██╗███╗   ██╗ ██████╗████████╗██╗ ██████╗ ███╗   ██╗███████╗
 // ██╔════╝██║   ██║████╗  ██║██╔════╝╚══██╔══╝██║██╔═══██╗████╗  ██║██╔════╝
 // █████╗  ██║   ██║██╔██╗ ██║██║        ██║   ██║██║   ██║██╔██╗ ██║███████╗
@@ -296,9 +296,13 @@ previousDay() {
 processDays() {
   result = [];
 
-  for (String dest in destinations.keys.toList()) {
-    for (int i = 1; i <= int.parse(destinations[dest]["explorationDay"]); i++) {
-      result.add({"day": i, "destination": destinations[dest]["destination"]});
+  for (String index in destinations.keys) {
+    var destData = destinations[index];
+    var explorationDay = int.parse(destData["explorationDay"]);
+    var destination =
+        globalctx.states["destinations"][int.parse(index)]["destination"];
+    for (int i = 1; i <= explorationDay; i++) {
+      result.add({"day": i, "destination": destination});
     }
   }
 

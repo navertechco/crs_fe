@@ -12,8 +12,8 @@ class KeyPadWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-        top: MediaQuery.of(context).size.height * 0.0,
-        left: MediaQuery.of(context).size.width * 0.75,
+        top: MediaQuery.of(context).size.height * 0.01,
+        left: MediaQuery.of(context).size.width * 0.72,
       ),
       child: Obx(() {
         if (!globalctx.destinationlist.isNotEmpty) {

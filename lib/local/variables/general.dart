@@ -105,7 +105,7 @@ var travelRhytmAges = {
 Rx<List<String>> refresh = Rx(<String>[]);
 Rx<int> trigger = Rx(0);
 Stream? stream;
-final formKey = GlobalKey<FormState>();
+var formKey = GlobalKey<FormState>();
 var memory = globalctx.memory;
 RxInt selectedIndex = 0.obs;
 RxString travelCode = (() {
