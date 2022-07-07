@@ -53,12 +53,14 @@ class FormCatalogueWidget extends StatelessWidget {
             }, builder: (context) {
               return DropdownButtonHideUnderline(
                   child: Builder(builder: (context) {
-                if ((items != null ||
-                    items.isNotEmpty ||
-                    items.where((item) {
-                          return item.value == initialValue.value;
-                        }).length ==
-                        1)) {
+                var rule1 = initialValue.value != null;
+                var rule2 = items != null;
+                var rule3 = items.isNotEmpty;
+                var rule4 = items.where((item) {
+                      return item.value == initialValue.value;
+                    }).length ==
+                    1;
+                if (rule1 && rule2 && rule3 && rule4) {
                   return DropdownButton<String>(
                     hint: Text(hintText ?? "Choose a Option"),
                     style: KTextSytle(

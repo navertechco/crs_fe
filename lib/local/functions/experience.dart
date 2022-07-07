@@ -341,11 +341,18 @@ void initializeHours() {
 /// void
 ///```
 void promoteMealExperiences() {
-  for (var exp in globalctx.experiences[currentDay.value] as Iterable) {
-    var expData = getExperienceValueByName(exp);
-    if (expData["experience_type"] == "meal") {
-      promoteExperience(exp, "promoted");
+  try {
+    if (globalctx.experiences.isNotEmpty &&
+        globalctx.experiences[currentDay.value] != null) {
+      for (var exp in globalctx.experiences[currentDay.value] as Iterable) {
+        var expData = getExperienceValueByName(exp);
+        if (expData["experience_type"] == "meal") {
+          promoteExperience(exp, "promoted");
+        }
+      }
     }
+  } catch (e) {
+    log(e);
   }
 }
 
