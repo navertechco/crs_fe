@@ -428,10 +428,7 @@ void setDestinationState(dest, index, type, state) {
 /// @return RxBool
 ///
 RxBool validateDragDestinationOptions(destination, index, type) {
-  bool galapagos = getFormValue(globalctx.memory, "tour", "galapagos", false);
   bool isArrival = index == 0 && type == "arrival";
-  int days = int.parse(getFormValue(
-      globalctx.memory["destinations"], index, "explorationDay", "0"));
   bool isDeparture =
       destination == departure["description"] && type == "departure";
   bool isSelected = getDestinationState(destination, index, type) == "selected";
@@ -439,35 +436,14 @@ RxBool validateDragDestinationOptions(destination, index, type) {
   bool isArrivalPromoted =
       getDestinationState(arrival["description"], 0, "arrival") == "promoted";
   bool isTour = !isArrival && !isDeparture;
-  bool isDepartureConsistent = (destDraggable.value != 0 &&
-      globalctx.promotedDestinations.length !=
-          globalctx.selectedDestinations.length &&
-      globalctx.promotedDestinations.length >=
-          globalctx.selectedDestinations.length - 1 &&
-      globalctx.selectedDestinations.length >= 3 &&
-      globalctx.promotedDestinations.length >= 2 &&
-      type == "departure");
-  bool isAccumulated = accumulated.value > 0;
   bool isDayleft = dayleft.value > 0;
-  bool isDayOneLeft = dayleft.value == 1;
-  bool arrivalRule = isArrival && isSelected && isDayleft;
-  int cruiseFirstDayDirefferece =
-      cruiseStartDate.value.difference(arrivalDate.value).inDays;
-  bool preArrival =
-      isArrival && galapagos && isDayleft && cruiseFirstDayDirefferece > 1;
-  bool departureRule = (isDeparture &&
-          isDepartureConsistent &&
-          isSelected &&
-          isArrivalPromoted &&
-          isAccumulated &&
-          isDayleft) ||
-      isDayOneLeft && (isDeparture && isSelected && isArrivalPromoted);
-  bool tourRule =
-      isTour && isArrivalPromoted && isAccumulated && isDayleft && !isPromoted;
-  // if (galapagos && days > 0) {
-  //   return ((isPromoted || isSelected || isTour)).obs;
-  // }
-  return ((preArrival || arrivalRule || departureRule || tourRule)).obs;
+  bool basicRule = isSelected && !isPromoted;
+  bool arrivalRule = isArrival && basicRule;
+  bool tourRule = isTour && basicRule && isArrivalPromoted;
+  bool departureRule =
+      isDayleft && (isDeparture && basicRule && isArrivalPromoted);
+
+  return ((arrivalRule || tourRule || departureRule)).obs;
 }
 
 /// ## filterSelectedDestinations
@@ -673,9 +649,8 @@ String getDestinationState(destination, index, type) {
   var state = "suggested";
   globalctx.states["destinations"][index] ??= {}.obs;
   state = globalctx.states["destinations"][index]["state"] ?? "suggested";
-  var length = globalctx.states["destinations"].length;
   if (globalctx.states["destinations"][index]["type"] != type) {
-    state = "suggested";
+    return state;
   }
   if (destination == departure["description"] && type == "departure") {
     if (selectedIndex.value == 3) {
