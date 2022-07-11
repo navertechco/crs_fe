@@ -29,7 +29,7 @@ class PrintDocsFormPage extends GetView<StatelessWidget> {
                     label: "PDF Resume",
                     color: Color.fromARGB(255, 204, 164, 61),
                     url:
-                        "$kDefaultSchema://$kDefaultServer:$kDefaultServerPort/docx.html?doc=${globalctx.memory['customer']['travel_code']}"),
+                        "$kDefaultSchema://$kDefaultServer:$kDefaultServerPort/docx.html?doc=${globalctx.memory['tour']['travel_code']}"),
                 SizedBox(height: kDefaultPadding),
                 WebButton(
                     label: "Video Gallery",
