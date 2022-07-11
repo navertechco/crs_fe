@@ -5,7 +5,6 @@ import 'index.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/index.dart';
 
-
 class TourFormPage extends GetView<StatelessWidget> {
   const TourFormPage({
     Key? key,
@@ -15,13 +14,11 @@ class TourFormPage extends GetView<StatelessWidget> {
   final TourController? ctrl;
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Stack(
-        children: [
-          LeftWidget(),
-          RightWidget(ctrl: ctrl, profile: false),
-        ],
-      ),
+    return Stack(
+      children: [
+        LeftWidget(),
+        RightWidget(ctrl: ctrl, profile: false),
+      ],
     );
   }
 }

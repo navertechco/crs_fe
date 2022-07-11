@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:naver_crs/index.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get/get.dart';
-import 'package:naver_crs/common/index.dart';
 
 class TravelFilter extends HookWidget {
   const TravelFilter({
@@ -96,7 +95,7 @@ class TravelFilter extends HookWidget {
                               "key_activities", value);
                         },
                         hintText:
-                            "\t\t\t\t\t\t\t\t\t\t\t\tKey Activities            \n",
+                            "                        Key Activities            \n",
                         data: kaDataCatalog.value,
                       )
                     ],

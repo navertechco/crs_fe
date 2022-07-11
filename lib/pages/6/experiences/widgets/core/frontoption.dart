@@ -25,8 +25,8 @@ class ExperienceFrontOptionWidget extends StatelessWidget {
         experience.toString().split("-")[0],
         style: GoogleFonts.poppins(
             textStyle: TextStyle(
-          color:
-              getTrColor(getExperienceValueByName(experience)["travel_rhythm"]),
+          color: getTravelRhythmColor(
+              getExperienceValueByName(experience)["travel_rhythm"]),
           fontSize: MediaQuery.of(context).size.width * 0.010,
           fontWeight: FontWeight.bold,
         )),

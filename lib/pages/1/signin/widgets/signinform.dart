@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../index.dart';
 import 'package:naver_crs/index.dart';
 
 // ignore: must_be_immutable
@@ -22,14 +21,16 @@ class SigninForm extends StatelessWidget {
         children: [
           SizedBox(
             child: RoundedFormTextField(
+              fontSize: 15,
               initialValue: "jcuevas2",
               onSaved: (value) => state.username = value!,
               hintText: 'Username',
             ),
           ),
-          SizedBox(height: kDefaultPadding),
+          SizedBox(height: isMobile * kDefaultPadding),
           SizedBox(
             child: RoundedFormTextField(
+                fontSize: 15,
                 initialValue: "jcuevas123!",
                 onSaved: (value) => state.password = value!,
                 hintText: 'Password',

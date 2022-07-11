@@ -22,56 +22,57 @@ class DragDestinationWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      var explorationDay = getFormValue(
-          globalctx.memory["destinations"], index, "explorationDay", "0");
       return globalctx.destinations.contains(destination) &&
               ((!out && type == "tour") || (out && type != "tour"))
           ? Row(
               children: [
                 DestinationOptionWidget(
                     destination: destination, type: type, index: index),
-                !globalctx.promotedDestinations.contains(index)
-                    ? Column(
-                        children: [
-                          Text(explorationDay.toString(),
-                              style: KTextSytle(
-                                      context: context,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                      color: Color.fromARGB(255, 204, 164, 61))
-                                  .getStyle()),
-                          GestureDetector(
-                            onTap: () {
-                              deleteGraphDragDestinationOption(destination);
-                            },
-                            child: Image.asset("assets/images/1x/redmark.png",
-                                width:
-                                    MediaQuery.of(context).size.width * 0.02),
-                          ),
-                        ],
-                      )
-                    : Column(
-                        children: [
-                          Text(explorationDay,
-                              style: KTextSytle(
-                                      context: context,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                      color: Color.fromARGB(255, 204, 164, 61))
-                                  .getStyle()),
-                          GestureDetector(
-                            onTap: () {
-                              deleteGraphDragDestinationOption(destination);
-                            },
-                            child: Image.asset(
-                                "assets/images/1x/greencheck.png",
-                                width: Get.width * 0.02),
-                          ),
-                        ],
-                      ),
+                DestinationIndicator(
+                    destination: destination, type: type, index: index),
               ],
             )
           : Text('');
+    });
+  }
+}
+
+class DestinationIndicator extends StatelessWidget {
+  const DestinationIndicator({
+    Key? key,
+    required this.destination,
+    required this.index,
+    required this.type,
+  }) : super(key: key);
+  final destination;
+  final index;
+  final type;
+  @override
+  Widget build(BuildContext context) {
+    return Obx(() {
+      var explorationDay = getFormValue(
+          globalctx.memory["destinations"], index, "explorationDay", "0");
+      return Column(
+        children: [
+          Text(explorationDay.toString(),
+              style: KTextSytle(
+                      context: context,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 204, 164, 61))
+                  .getStyle()),
+          TextButton(
+            onPressed: () {
+              deleteGraphDragDestinationOption(destination);
+            },
+            child: Image.asset(
+                !globalctx.promotedDestinations.contains(index)
+                    ? "assets/images/1x/redmark.png"
+                    : "assets/images/1x/greencheck.png",
+                width: MediaQuery.of(context).size.width * 0.02),
+          ),
+        ],
+      );
     });
   }
 }

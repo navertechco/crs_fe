@@ -94,8 +94,8 @@ class DescriptionWidget extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 )),
               ),
-              GestureDetector(
-                onTap: () {
+              TextButton(
+                onPressed: () {
                   showCustomDialog(
                     context,
                     LeftWidget(destination: "quito", index: 0),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:naver_crs/index.dart';
 import 'customdescription.dart';
 import 'customformexperiencedetail.dart';
@@ -26,7 +27,9 @@ class CustomFormDayWidget extends StatelessWidget {
       var dayLabel =
           (destinationindex != 0 ? destinationindex + 1 : destinationindex) +
               (destinationindex == 0 ? dayindex + 1 : dayindex + 2);
-
+      var actualcost = 0.obs;
+      var cost = getFormValue(globalctx.memory, "netRate", destinationindex, 0);
+      actualcost.value = cost;
       return RepaintBoundary(
           key: globalctx.keys["day-$destinationindex-$dayindex"],
           child: Column(
@@ -36,7 +39,9 @@ class CustomFormDayWidget extends StatelessWidget {
                   text: daydescription, width: 0.55, fontSize: 0.016),
               CustomFormExperiencesDetailWidget(indexes: indexes),
               CustomDescriptionWidget(
-                  text: "Day Net Rate: 0", width: 0.55, fontSize: 0.016),
+                  text: "Day Net Rate: $actualcost",
+                  width: 0.55,
+                  fontSize: 0.016),
               SizedBox(height: MediaQuery.of(context).size.height * 0.01),
             ],
           ));

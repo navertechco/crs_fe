@@ -1,16 +1,25 @@
 // ignore_for_file: prefer_function_declarations_over_variables, import_of_legacy_library_into_null_safe
 import 'package:flutter/material.dart';
-import 'package:naver_crs/common/functions.dart';
-import '../index.dart';
-import 'index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/pages/7/endservices/widgets/index.dart';
-import 'package:naver_crs/pages/index.dart';
-import 'package:sweetalert/sweetalert.dart';
 export 'day.dart';
 export 'destination.dart';
 export 'experience.dart';
+
+//  ██████╗ ███████╗███╗   ██╗███████╗██████╗  █████╗ ██╗
+// ██╔════╝ ██╔════╝████╗  ██║██╔════╝██╔══██╗██╔══██╗██║
+// ██║  ███╗█████╗  ██╔██╗ ██║█████╗  ██████╔╝███████║██║
+// ██║   ██║██╔══╝  ██║╚██╗██║██╔══╝  ██╔══██╗██╔══██║██║
+// ╚██████╔╝███████╗██║ ╚████║███████╗██║  ██║██║  ██║███████╗
+//  ╚═════╝ ╚══════╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝
+
+// ███████╗██╗   ██╗███╗   ██╗ ██████╗████████╗██╗ ██████╗ ███╗   ██╗███████╗
+// ██╔════╝██║   ██║████╗  ██║██╔════╝╚══██╔══╝██║██╔═══██╗████╗  ██║██╔════╝
+// █████╗  ██║   ██║██╔██╗ ██║██║        ██║   ██║██║   ██║██╔██╗ ██║███████╗
+// ██╔══╝  ██║   ██║██║╚██╗██║██║        ██║   ██║██║   ██║██║╚██╗██║╚════██║
+// ██║     ╚██████╔╝██║ ╚████║╚██████╗   ██║   ██║╚██████╔╝██║ ╚████║███████║
+// ╚═╝      ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝
 
 /// ## loadDummyData
 /// *__Method to set data to context__*
@@ -37,14 +46,37 @@ getContext(key) {
   return globalctx.get_context(key);
 }
 
-getCountryNameById(id) {
+/// ## getCountryNameById
+/// *__Method to clear Hours__*
+///
+///### Uses:
+/// ```dart
+///      var countryName = getCountryNameById(destCountry.value);
+/// ```
+/// ### Returns:
+///```dart
+/// String
+///```
+String getCountryNameById(id) {
   var country = destinationCountry
       .firstWhere((element) => element["code"] == int.parse(id));
-  var name = country["description"];
+  String name = country["description"];
   return name;
 }
 
-showCustomDialog(context, Widget child, String button,
+/// ## showCustomDialog
+/// *__Method to show Custom diaglog__*
+///
+///### Uses:
+/// ```dart
+///      showCustomDialog(context, NetRatePage(), "Close",
+///                    buttonColor: Colors.white, width: 1.0);
+/// ```
+/// ### Returns:
+///```dart
+/// void
+///```
+void showCustomDialog(context, Widget child, String button,
     {Widget? customChild,
     Color backgroundColor = Colors.black54,
     Color buttonColor = Colors.black54,
@@ -56,22 +88,22 @@ showCustomDialog(context, Widget child, String button,
     barrierDismissible: false, // user must tap button!
     builder: (BuildContext context) {
       return AlertDialog(
-        contentPadding: EdgeInsets.fromLTRB(8, 8, 8, 8),
+        // contentPadding: EdgeInsets.fromLTRB(8, 8, 8, 8),
         backgroundColor: backgroundColor,
         content: Container(
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(50)),
-            width: MediaQuery.of(context).size.width * width,
-            height: MediaQuery.of(context).size.height * height,
+            width: MediaQuery.of(context).size.width * isMobile * width,
+            height: MediaQuery.of(context).size.height * isMobile * height,
             child: child),
         actions: <Widget>[
-          Row(
+          Wrap(
             children: [
-              customChild ?? Spacer(),
+              customChild ?? SizedBox(),
               TextButton(
                 child: Text(button,
                     style: KTextSytle(
                             context: context,
-                            fontSize: 10,
+                            fontSize: isMobile * 10,
                             fontWeight: FontWeight.bold,
                             color: buttonColor)
                         .getStyle()),
@@ -90,174 +122,55 @@ showCustomDialog(context, Widget child, String button,
   );
 }
 
-findTravelRhythmDescription(int code) {
-  try {
-    if (code == 0) {
-      return "HARD";
-    }
-    var travelData = findCatalog("travel_rhythm").toList();
-    var description = travelData
-        .firstWhere((element) => element["code"] == code)["description"];
-    return description;
-  } catch (e) {
-    log(e);
-  }
-}
-
-multiDropDownKaAgeFilter(trCatalog, travelRhytmAges) {
-  return trCatalog.value.where((value) {
-    var code = value["code"];
-    for (var i = 0; i < travelRhytmAges.keys.length; i++) {
-      var range = [
-        travelRhytmAges.keys.toList()[i],
-        travelRhytmAges.keys
-            .toList()[i >= travelRhytmAges.keys.length - 1 ? i : i + 1]
-      ];
-      if (customerAge.value < 20) {
-        return true;
-      }
-      if (customerAge.value >= range[0] && customerAge.value <= range[1]) {
-        if (travelRhytmAges[range[0]]!.contains(code.toString())) {
-          return true;
-        }
-      }
-    }
-    return false;
-  }).toList() as List<Map<String, dynamic>>;
-}
-
-log(e) {
+/// ## log
+/// *__Method print log messages__*
+///
+///### Uses:
+/// ```dart
+///     log(e);
+/// ```
+/// ### Returns:
+///```dart
+/// void
+///```
+void log(e) {
   print(e);
 }
 
-setLT(value) {
-  int ltindex =
-      expList.indexWhere((element) => element["description"] == "Leisure Time");
-  globalctx.context.value["catalogs"]["experiences"][ltindex]["value"]
-          ["exptime"] ==
-      value;
-  experiences = findCatalog("experiences");
-}
-
-getHotel(ctx, {int id = 0, int index = 0}) async {
-  currentDestinationIndex.value = index;
-  if (globalctx.memory["hotels"] == null) {
-    var frame = {
-      "data": {"id": id}
-    };
-    var res = await fetchHandler(kDefaultSchema, kDefaultServer,
-        kDefaultServerPort, kDefaultFindHotel, 'POST', frame);
-    // ignore: avoid_print
-    log(res);
-    if (res['state'] == true) {
-      var data = res['data'];
-      if (data.length > 0) {
-        globalctx.memory["hotels"] = data;
-        showCustomDialog(
-            ctx,
-            HotelCalendarWidget(
-              ctx: ctx,
-            ),
-            "Close",
-            customChild: HotelKeyPadWidget(),
-            backgroundColor: Colors.white,
-            buttonColor: Colors.black,
-            height: 0.25,
-            width: 0.35);
-      }
-    } else {
-      SweetAlert.show(ctx,
-          curve: ElasticInCurve(),
-          title: res['message'],
-          style: SweetAlertStyle.error, onPress: (bool isConfirm) {
-        Get.close(1);
-        return false;
-      });
-    }
-  } else {
-    showCustomDialog(
-        ctx,
-        HotelCalendarWidget(
-          ctx: ctx,
-        ),
-        "Close",
-        customChild: HotelKeyPadWidget(),
-        backgroundColor: Colors.white,
-        buttonColor: Colors.black,
-        height: 0.25,
-        width: 0.35);
-  }
-}
-
-getCruise(ctx, {int cruiseId = 999, String cruiseName = ''}) async {
-  var frame = {
-    "data": {
-      "cruise_id": cruiseId,
-      "cruise_name": cruiseName != '' ? cruiseName.split("-")[0] : ''
-    },
-  };
-  var res = await fetchHandler(kDefaultSchema, kDefaultServer,
-      kDefaultServerPort, kDefaultFindCruise, 'POST', frame);
-  // ignore: avoid_print
-  log(res);
-  if (res['state'] == true) {
-    var data = res['data'];
-    if (data.length > 0) {
-      showCruiseDetailDialog(ctx, data[0]);
-    }
-  } else {
-    SweetAlert.show(ctx,
-        curve: ElasticInCurve(),
-        title: res['message'],
-        style: SweetAlertStyle.error, onPress: (bool isConfirm) {
-      Get.close(1);
-      return false;
-    });
-  }
-}
-
-resetData(context, controller) {
-  var data = globalctx.memory["tours"];
-  if (searchResult!.isNotEmpty) {
-    controller.clear();
-    searchResult!.value = '';
-    filteredData.value = data;
-    var detail = getDetail(context, filteredData, null);
-    searcherDetail.value = (detail);
-  }
-}
-
-filterData(context, value) {
-  var data = globalctx.memory["tours"];
-  try {
-    searchResult!.value = value.toString();
-    if (searchResult!.isNotEmpty) {
-      filteredData.value = data
-          .where((quote) =>
-              quote["date"].toString().contains(searchResult!.value) ||
-              quote["name"].toString().contains(searchResult!.value) ||
-              quote["quote"].toString().contains(searchResult!.value))
-          .toList();
-      var detail = getDetail(context, filteredData, null);
-      searcherDetail.value = (detail);
-    }
-  } catch (e) {
-    log(e);
-  }
-}
-
-processNetRateData(context, data) {
+/// ## processNetRateData
+/// *__Method to process net rate Data to build DataTable__*
+///
+///### Uses:
+/// ```dart
+///     var processedData = processNetRateData(context, netRateData);
+/// ```
+/// ### Returns:
+///```dart
+/// List
+///```
+List processNetRateData(context, data) {
   var header = getNetRateHeader(context, data);
-  var detail = getNetRateDetail(context, data);
+  var detail = getNetRateDataRows(context, data);
   return [header, detail];
 }
 
-getNetRateHeader(context, data) {
-  var header = <DataColumn>[];
+/// ## getNetRateHeader
+/// *__Method to process net rate Header to build DataTable__*
+///
+///### Uses:
+/// ```dart
+///     var header = getNetRateHeader(context, data);
+/// ```
+/// ### Returns:
+///```dart
+/// List
+///```
+List<DataColumn> getNetRateHeader(context, data) {
+  List<DataColumn> result = <DataColumn>[];
   if (data.length > 0) {
     for (var key in data[0].keys) {
       String title = key ?? '';
-      header.add(DataColumn(
+      result.add(DataColumn(
         label: Text(
           title.capitalize!.replaceAll("_", " "),
           style: KTextSytle(
@@ -271,10 +184,21 @@ getNetRateHeader(context, data) {
     }
   }
 
-  return header;
+  return result;
 }
 
-getDetail(context, data, columns) {
+/// ## getTourDataRows
+/// *__Method to process Tour Detail DataRows to build DataTable__*
+///
+///### Uses:
+/// ```dart
+///     var detail = getTourDataRows(context, filteredData, null);
+/// ```
+/// ### Returns:
+///```dart
+/// List<DataRow>
+///```
+List<DataRow> getTourDataRows(context, data, columns) {
   var states = [
     "Error",
     "New",
@@ -285,7 +209,7 @@ getDetail(context, data, columns) {
     "Pending",
     "Approved",
   ];
-  var detail = <DataRow>[];
+  List<DataRow> detail = <DataRow>[];
   if (data.length > 0) {
     for (var row in data) {
       var cells = <DataCell>[];
@@ -303,7 +227,7 @@ getDetail(context, data, columns) {
         cells.add(DataCell(Text('${row[key]}',
             style: KTextSytle(
                     context: context,
-                    fontSize: 10,
+                    fontSize: 15,
                     fontWeight: FontWeight.bold,
                     color: Colors.black)
                 .getStyle())));
@@ -367,8 +291,19 @@ getDetail(context, data, columns) {
   return detail;
 }
 
-getNetRateDetail(context, data) {
-  var detail = <DataRow>[];
+/// ## getNetRateDataRows
+/// *__Method to process net rate Detail DataRows to build DataTable__*
+///
+///### Uses:
+/// ```dart
+///     var detail = getNetRateDataRows(context, filteredData, null);
+/// ```
+/// ### Returns:
+///```dart
+/// List<DataRow>
+///```
+List<DataRow> getNetRateDataRows(context, data) {
+  List<DataRow> detail = <DataRow>[];
   if (data.length > 0) {
     for (var row in data) {
       var cells = <DataCell>[];
@@ -377,7 +312,7 @@ getNetRateDetail(context, data) {
         cells.add(DataCell(Text('${row[key]}',
             style: KTextSytle(
                     context: context,
-                    fontSize: 10,
+                    fontSize: 15,
                     fontWeight: FontWeight.bold,
                     color: Colors.black)
                 .getStyle())));
@@ -390,17 +325,42 @@ getNetRateDetail(context, data) {
   return detail;
 }
 
-getTrColor(tr) {
-  var color = {
+/// ## getTravelRhythmColor
+/// *__Method to get Ravel Rhythm Color__*
+///
+///### Uses:
+/// ```dart
+///     color: getTravelRhythmColor(getExperienceValueByName(experience)["travel_rhythm"]),
+/// ```
+/// ### Returns:
+///```dart
+/// Color?
+///```
+Color? getTravelRhythmColor(String travelRhythmName) {
+  Map<String, Color> color = {
     "SOFT": Colors.green,
     "MEDIUM": Colors.yellow,
     "HARD": Colors.red
   };
 
-  return color[tr.toString().toUpperCase()];
+  Color? result = color[travelRhythmName.toString().toUpperCase()];
+  return result;
 }
 
-purposeValidate(values) {
+/// ## validatePurposes
+/// *__Method to validate purpose before saving it__*
+///
+///### Uses:
+/// ```dart
+///     onSaved: (values) {
+///          validatePurposes(values);
+///        },
+/// ```
+/// ### Returns:
+///```dart
+/// void
+///```
+void validatePurposes(values) {
   if (values.length > 3) {
     var mem = [values[0], values[1], values[2]];
     absorvedPurpose.value = true;
@@ -410,7 +370,18 @@ purposeValidate(values) {
   }
 }
 
-savePurposes(values) {
+/// ## savePurposes
+/// *__Method to save purposes__*
+///
+///### Uses:
+/// ```dart
+///       savePurposes(values);
+/// ```
+/// ### Returns:
+///```dart
+/// void
+///```
+void savePurposes(values) {
   if (values == null) return;
   if (values.length <= 3) {
     purposeMemory.value = <String>[];
@@ -424,46 +395,19 @@ savePurposes(values) {
   }
 }
 
-getDayId(int destId, int destDay) {
-  var maxDestDays = getMaxDestDays();
-  var currenDestDays = getDestDays(destId);
-  var currenDestDaysOff = maxDestDays - currenDestDays;
-  pushList(daysOff, destId, currenDestDaysOff);
-  var accOff = getAccOff(destId);
-  var destMatrixIndex = maxDestDays * destId + destDay;
-  var dayId = destMatrixIndex - accOff;
-  return dayId;
-}
-
-updateDestDays() {
-  destDays = [];
-  for (var dest in globalctx.memory["destinations"].entries) {
-    var destDay = dest.value;
-    destDays.add(int.parse(destDay["explorationDay"]));
-  }
-}
-
-getDestDays(int destId) {
-  updateDestDays();
-  return destDays[destId];
-}
-
-getAccOff(destId) {
-  var accOff = 0;
-  for (var i = 0; i < destId; i++) {
-    accOff += daysOff[i] as int;
-  }
-  return accOff;
-}
-
-getMaxDestDays() {
-  updateDestDays();
-  var maxValue = getListMaxValue(destDays);
-  return maxValue;
-}
-
-getTrLimit(value) {
-  var trLimits = {
+/// ## getTravekRhythmLimit
+/// *__Method to get travel Rhythm Limit__*
+///
+///### Uses:
+/// ```dart
+///       getTravekRhythmLimit(currentTravelRhythm.value))
+/// ```
+/// ### Returns:
+///```dart
+///   int
+///```
+int getTravekRhythmLimit(String value) {
+  Map trLimits = {
     "soft": 60,
     "medium": 60,
     "hard": 180,
@@ -472,20 +416,48 @@ getTrLimit(value) {
     "2": 60,
     "3": 180
   };
-  var result = trLimits[value.toString().toLowerCase()];
+  int result = trLimits[value.toString().toLowerCase()];
   return result;
 }
 
-saveTravelCode(ctrl, value) {
-  leadPassenger.value = value!;
-  ctrl!.state.leadPassenger = value;
-  ctrl!.state.travelCode =
-      getTravelCode(getValue(client, "lead_passenger", def: "jose cuevas"));
-  travelCode.value = getTravelCode(value);
+/// ## saveCustomerTravelCode
+/// *__Method to save Customer Travel Code__*
+///
+///### Uses:
+/// ```dart
+///       onSaved: (value) {
+///                             saveCustomerTravelCode(ctrl, value);
+///                           },
+/// ```
+/// ### Returns:
+///```dart
+///   void
+///```
+void saveCustomerTravelCode(value) {
+  travelCode.value = value!;
+  var res = getCustomerTravelCode(value);
+  setFormValue(globalctx.memory, "tour", "travel_code", res);
 }
 
-getTravelCode(value) {
-  var res = value.toString().replaceAll(" ", "-") +
+saveCustomer(state) {
+  resetAllDestinations();
+  gotoPage("Destination");
+}
+
+/// ## getCustomerTravelCode
+/// *__Method to save Customer Travel Code__*
+///
+///### Uses:
+/// ```dart
+///      ctrl!.state.travelCode =
+/// getCustomerTravelCode(getValue(client, "lead_passenger", def: ""));
+/// ```
+/// ### Returns:
+///```dart
+///   String
+///```
+String getCustomerTravelCode(value) {
+  String res = value.toString().replaceAll(" ", "-") +
       "-" +
       tour["passengers"].toString() +
       "-" +

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../index.dart';
-import 'index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:intl/intl.dart';
 
@@ -15,9 +14,11 @@ class CustomFormDateFieldWidget extends StatelessWidget {
       this.onChanged,
       this.onSaved,
       this.validator,
+      this.fontSize = 10,
       this.initialValue,
       this.disabled = false})
       : super(key: key);
+  final fontSize;
   final String label;
   final String hintText;
   final double width;
@@ -33,9 +34,10 @@ class CustomFormDateFieldWidget extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Row(
         children: [
-          CustomFormLabelWidget(label: label, fontWeight: FontWeight.normal),
-          SizedBox(width: MediaQuery.of(context).size.width * 0.01),
+          CustomFormLabelWidget(
+              fontSize: fontSize, label: label, fontWeight: FontWeight.normal),
           RoundedFormDatepicker(
+              fontSize: fontSize,
               disabled: disabled,
               validator: validator,
               onChanged: onChanged,

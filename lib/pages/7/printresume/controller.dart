@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 // ignore: import_of_legacy_library_into_null_safe
-import 'package:sweetalert/sweetalert.dart';
+import 'package:sweetalertv2/sweetalertv2.dart';
 
 class PrintResumeController extends GetxController {
   PrintResumeController();
@@ -26,15 +25,14 @@ class PrintResumeController extends GetxController {
         });
 
         if (res['state'] == true) {
-          setContext("catalogs", res['data']["catalogs"]);
           isLoading = !isLoading;
           Get.toNamed('/Loading');
         } else {
           isLoading = !isLoading;
-          SweetAlert.show(ctx,
+          SweetAlertV2.show(ctx,
               curve: ElasticInCurve(),
               title: res['message'],
-              style: SweetAlertStyle.error, onPress: (bool isConfirm) {
+              style: SweetAlertV2Style.error, onPress: (bool isConfirm) {
             Get.close(1);
             return false;
           });

@@ -1,13 +1,25 @@
 // ignore_for_file: prefer_function_declarations_over_variables
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:flutter/material.dart';
-import '../index.dart';
-import 'index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/pages/5/destination/widgets/index.dart';
 // ignore: import_of_legacy_library_into_null_safe
-import 'package:sweetalert/sweetalert.dart';
+import 'package:sweetalertv2/sweetalertv2.dart';
+
+// ██████╗ ███████╗███████╗████████╗██╗███╗   ██╗ █████╗ ████████╗██╗ ██████╗ ███╗   ██╗
+// ██╔══██╗██╔════╝██╔════╝╚══██╔══╝██║████╗  ██║██╔══██╗╚══██╔══╝██║██╔═══██╗████╗  ██║
+// ██║  ██║█████╗  ███████╗   ██║   ██║██╔██╗ ██║███████║   ██║   ██║██║   ██║██╔██╗ ██║
+// ██║  ██║██╔══╝  ╚════██║   ██║   ██║██║╚██╗██║██╔══██║   ██║   ██║██║   ██║██║╚██╗██║
+// ██████╔╝███████╗███████║   ██║   ██║██║ ╚████║██║  ██║   ██║   ██║╚██████╔╝██║ ╚████║
+// ╚═════╝ ╚══════╝╚══════╝   ╚═╝   ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝
+
+// ███████╗██╗   ██╗███╗   ██╗ ██████╗████████╗██╗ ██████╗ ███╗   ██╗███████╗
+// ██╔════╝██║   ██║████╗  ██║██╔════╝╚══██╔══╝██║██╔═══██╗████╗  ██║██╔════╝
+// █████╗  ██║   ██║██╔██╗ ██║██║        ██║   ██║██║   ██║██╔██╗ ██║███████╗
+// ██╔══╝  ██║   ██║██║╚██╗██║██║        ██║   ██║██║   ██║██║╚██╗██║╚════██║
+// ██║     ╚██████╔╝██║ ╚████║╚██████╗   ██║   ██║╚██████╔╝██║ ╚████║███████║
+// ╚═╝      ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝
 
 /// ## dragDestination
 /// *__Method to drag a destinatio option widget to left container and account it__*
@@ -26,6 +38,7 @@ dragDestination(destination) {
   addDestination(destination);
   filterDestinations();
 }
+
 /// ## paginateDestination
 /// *__Method to get any property in data__*
 ///
@@ -73,6 +86,7 @@ Future paginateDestination(String direction) async {
     gotoPage("Experiences");
   }
 }
+
 /// ## resetAllDestinations
 /// *__Method to reset all destination options__*
 ///
@@ -89,13 +103,16 @@ Future paginateDestination(String direction) async {
 void resetAllDestinations() {
   globalctx.reset.value = true;
   resetLeftDays();
-  resetDestinations();
-  updateDraggableDestinations();
+  resetMemoryDestinations();
+  // updateDraggableDestinations();
   filterDestinations();
   if (cruiseDay.isNotEmpty) {
-    autoFillDestination(arrival["description"], 0, "arrival", "1");
+    autoFillDestination(arrival["description"], 0, "arrival", "0");
     autoFillDestination("galapagos", 1, "arrival", cruiseDay.value);
-    autoFillDestination(departure["description"], 2, "departure", "1");
+    autoFillDestination(departure["description"], 2, "departure", "0");
+  } else {
+    setDestinationState(arrival["description"], 0, "arrival", "selected");
+    setDestinationState(departure["description"], 1, "departure", "selected");
   }
 }
 
@@ -121,7 +138,7 @@ void resetLeftDays() {
 ///
 ///### Uses:
 /// ```dart
-///autoFillDestination(arrival["description"], 0, "arrival", "1");
+///autoFillDestination(arrival["description"], 0, "arrival", "0");
 ///
 /// ```
 /// ### Returns:
@@ -142,6 +159,7 @@ void autoFillDestination(destination, index, type, days) {
       destination == "galapagos" ? "1" : "0");
   addDestination(destination);
   processDestinationPromotion(destination, index, type);
+  setDestinationState(destination, index, type, "selected");
 }
 
 /// ## getDestinationList
@@ -212,7 +230,7 @@ void orderDestination(List destinations) {
 ///
 void processDestinationPromotion(destination, index, type) {
   updatePromotedDestination(destination, index);
-  setDestinationState(destination, index, "promoted", type);
+  setDestinationState(destination, index, type, "promoted");
   updateDraggableDestinations();
   updateTotalLeftAccumulated();
 }
@@ -317,6 +335,7 @@ Map getCombinedDestinations() {
 Future processDestinations(context) async {
   // ignore: unrelated_type_equality_checks
   if (globalctx.promotedDestinations.isNotEmpty & (dayleft == 0)) {
+    formKey = GlobalKey<FormState>();
     var destinationDay = [];
     experiencePromotedDragData.value = <Widget>[];
 
@@ -341,12 +360,12 @@ Future processDestinations(context) async {
     await nextDay();
   } else {
     if (context != null) {
-      SweetAlert.show(context,
+      SweetAlertV2.show(context,
           curve: ElasticInCurve(),
           title: (dayleft.value > 0)
               ? "You still have $dayleft days to enjoy, do you want to review the other options we have for you?"
               : "Promote any destination is required",
-          style: SweetAlertStyle.error, onPress: (bool isConfirm) {
+          style: SweetAlertV2Style.error, onPress: (bool isConfirm) {
         Get.close(1);
         return false;
       });
@@ -370,7 +389,7 @@ void addDestination(String destination) {
     globalctx.destinations.insert(newIndex, destination);
   }
 
-  setDestinationState(destination, newIndex, "selected", "tour");
+  setDestinationState(destination, newIndex, "tour", "selected");
 }
 
 /// ## setDestinationState
@@ -378,17 +397,23 @@ void addDestination(String destination) {
 ///
 ///### Uses:
 /// ```dart
-///  setDestinationState(destination, index, "promoted", type);
+///  setDestinationState(destination, index, type, "promoted");
 /// ```
 ///
 /// @return void
 ///
-void setDestinationState(dest, index, state, type) {
+void setDestinationState(dest, index, type, state) {
   globalctx.states["destinations"][index] ??= {}.obs;
   globalctx.states["destinations"][index]["destination"] = dest;
   globalctx.states["destinations"][index]["index"] = index;
   globalctx.states["destinations"][index]["state"] = state;
   globalctx.states["destinations"][index]["type"] = type;
+  if (dest == arrival["description"] && type == "arrival") {
+    arrivalState.value = state;
+  }
+  if (dest == departure["description"] && type == "departure") {
+    departureState.value = state;
+  }
 }
 
 /// ## validateDragDestinationOptions
@@ -403,10 +428,7 @@ void setDestinationState(dest, index, state, type) {
 /// @return RxBool
 ///
 RxBool validateDragDestinationOptions(destination, index, type) {
-  bool galapagos = getFormValue(globalctx.memory, "tour", "galapagos", false);
   bool isArrival = index == 0 && type == "arrival";
-  int days = int.parse(getFormValue(
-      globalctx.memory["destinations"], index, "explorationDay", "0"));
   bool isDeparture =
       destination == departure["description"] && type == "departure";
   bool isSelected = getDestinationState(destination, index, type) == "selected";
@@ -414,32 +436,14 @@ RxBool validateDragDestinationOptions(destination, index, type) {
   bool isArrivalPromoted =
       getDestinationState(arrival["description"], 0, "arrival") == "promoted";
   bool isTour = !isArrival && !isDeparture;
-  bool isDepartureConsistent = (destDraggable.value != 0 &&
-      globalctx.promotedDestinations.length !=
-          globalctx.selectedDestinations.length &&
-      globalctx.promotedDestinations.length >=
-          globalctx.selectedDestinations.length - 1 &&
-      globalctx.selectedDestinations.length >= 3 &&
-      globalctx.promotedDestinations.length >= 2 &&
-      type == "departure");
-  bool isAccumulated = accumulated.value > 0;
   bool isDayleft = dayleft.value > 0;
-  bool arrivalRule = isArrival && isSelected && isDayleft;
-  int cruiseFirstDayDirefferece =
-      cruiseStartDate.value.difference(arrivalDate.value).inDays;
-  bool preArrival =
-      isArrival && galapagos && isDayleft && cruiseFirstDayDirefferece > 1;
-  bool departureRule = isDeparture &&
-      isDepartureConsistent &&
-      isSelected &&
-      isArrivalPromoted &&
-      isAccumulated &&
-      isDayleft;
-  bool tourRule = isTour && isArrivalPromoted && isAccumulated && isDayleft;
-  if (galapagos && days > 0) {
-    return ((isPromoted || isSelected || isTour)).obs;
-  }
-  return ((preArrival || arrivalRule || departureRule || tourRule)).obs;
+  bool basicRule = isSelected && !isPromoted;
+  bool arrivalRule = isArrival && basicRule;
+  bool tourRule = isTour && basicRule && isArrivalPromoted;
+  bool departureRule =
+      isDayleft && (isDeparture && basicRule && isArrivalPromoted);
+
+  return ((arrivalRule || tourRule || departureRule)).obs;
 }
 
 /// ## filterSelectedDestinations
@@ -502,8 +506,8 @@ void filterSelectedDestinations() {
 ///
 void moveGraphDragDestinationOption(
     String destination, int index, String type) {
-  var state = "selected";
-  setDestinationState(destination, index, state, type);
+  var state = getDestinationState(destination, index, type);
+  setDestinationState(destination, index, type, state);
   globalctx.selectedDestinations.add(destination);
   globalctx.destinationDragData.value.add(DragDestinationWidget(
       destination: destination, index: index, type: type, out: false));
@@ -529,7 +533,7 @@ void deleteGraphDragDestinationOption(String destination) {
     var index =
         globalctx.destinations.indexWhere((element) => element == destination);
     var type = "tour";
-    setDestinationState(destination, index, "suggested", type);
+    setDestinationState(destination, index, type, "suggested");
     globalctx.destinations.removeAt(index);
     globalctx.selectedDestinations.removeAt(index);
     globalctx.destinationDragData.value.removeAt(index);
@@ -646,13 +650,20 @@ String getDestinationState(destination, index, type) {
   globalctx.states["destinations"][index] ??= {}.obs;
   state = globalctx.states["destinations"][index]["state"] ?? "suggested";
   if (globalctx.states["destinations"][index]["type"] != type) {
-    state = "suggested";
+    return state;
+  }
+  if (destination == departure["description"] && type == "departure") {
+    if (selectedIndex.value == 3) {
+      return departureState.value;
+    } else {
+      return "selected";
+    }
   }
   return state;
 }
 
 /// ## updateTotalLeftAccumulated
-/// *__Method to update destination accumulated days __*
+/// *__Method to update destination left days __*
 ///
 ///### Uses:
 /// ```dart
@@ -665,36 +676,65 @@ void updateTotalLeftAccumulated() {
   accumulated.value = 0;
   if (destinations.isNotEmpty) {
     for (var destination in destinations.keys) {
-      accumulated.value += getDestinationDay(destination) as int;
+      accumulated.value += getDestinationExplorationDay(destination);
     }
   }
   dayleft.value = totalDays.value - accumulated.value;
 }
 
-
 /// ## getMaxTrValue
-/// *__Method to update destination accumulated days __*
+/// *__Method to get Max Trevel Rhythm __*
 ///
 ///### Uses:
 /// ```dart
 ///  updateTotalLeftAccumulated();
 /// ```
 ///
-/// @return void
+/// @return double
 ///
-getMaxTrValue(tr) {
-  return trMaxValues[tr];
+double getMaxTrValue(tr) {
+  return trMaxValues[tr] as double;
 }
 
-getMaxTrHourValue(tr) {
-  return trMaxHourValues[tr];
+/// ## getMaxTrHourValue
+/// *__Method to get Travel Rhythm weighted in Hours__*
+///
+///### Uses:
+/// ```dart
+///   var max = getMaxTrHourValue(currentTravelRhythm.value);
+/// ```
+///
+/// @return int
+///
+int getMaxTrHourValue(tr) {
+  return trMaxHourValues[tr] as int;
 }
 
-getAgeMaxTrValue(tr) {
-  return trAgeMaxValues[tr];
+/// ## getAgeMaxTrValue
+/// *__Method to get Travel Rhythm Age Range__*
+///
+///### Uses:
+/// ```dart
+///   var range = getAgeMaxTrValue(e["description"].toString().toUpperCase());
+/// ```
+///
+/// @return List
+///
+List<int> getAgeMaxTrValue(tr) {
+  return trAgeMaxValues[tr] as List<int>;
 }
 
-getDestinationIndex(String destination, String type) {
+/// ## getDestinationIndex
+/// *__Method to get current Destination Index__*
+///
+///### Uses:
+/// ```dart
+///   int destIndex = getDestinationIndex(destination, type);
+/// ```
+///
+/// @return int
+///
+int getDestinationIndex(String destination, String type) {
   int destIndex = 0;
   var destinations = globalctx.states["destinations"].entries;
   for (var e in destinations) {
@@ -711,15 +751,16 @@ getDestinationIndex(String destination, String type) {
   return destIndex;
 }
 
-getDestinationDestOption(destination, type) {
-  int destIndex = getDestinationIndex(destination, type);
-  var destData = globalctx.memory["destinations"][destIndex.toString()];
-  var trData = findCatalog("detination_option").toList();
-  var trRange = trData
-      .firstWhere((e) => e["code"] == int.parse(destData["detination_option"]));
-  return trRange;
-}
-
+/// ## getDestinationIndex
+/// *__Method to get current Destination Index__*
+///
+///### Uses:
+/// ```dart
+///   int destIndex = getDestinationIndex(destination, type);
+/// ```
+///
+/// @return int
+///
 getDestinationTravelRhythm(destination, type) {
   int destIndex = getDestinationIndex(destination, type);
   var destData = globalctx.memory["destinations"][destIndex.toString()];
@@ -729,13 +770,34 @@ getDestinationTravelRhythm(destination, type) {
   return trRange;
 }
 
-getDestinationKa(destination, type) {
+/// ## getDestinationIndex
+/// *__Method to get Destination Key Activies from memory__*
+///
+///### Uses:
+/// ```dart
+///   var destKa = getDestinationKa(
+///     globalDestinationName.value, globalDestinationType.value);
+/// ```
+///
+/// @return dynamic
+///
+dynamic getDestinationKa(destination, type) {
   int destIndex = getDestinationIndex(destination, type);
   var destData = globalctx.memory["destinations"][destIndex.toString()];
   return destData["key_activities"];
 }
 
-filterDestinations() {
+/// ## filterDestinations
+/// *__Method to filter Dstinations memory__*
+///
+///### Uses:
+/// ```dart
+///   filterDestinations();
+/// ```
+///
+/// @return void
+///
+void filterDestinations() {
   var arr = getDestinationById(arrivalPort.value);
   var dep = getDestinationById(departurePort.value);
   arrival.value = arr;
@@ -743,17 +805,38 @@ filterDestinations() {
   filterSelectedDestinations();
 }
 
-getDestinationDay(index) {
+/// ## getDestinationExplorationDay
+/// *__Method to get Destination Exploration Day memory__*
+///
+///### Uses:
+/// ```dart
+///    accumulated.value += getDestinationExplorationDay(destination) as int;
+/// ```
+///
+/// @return void
+///
+int getDestinationExplorationDay(index) {
+  int result = 0;
   index = index.toString();
   if (destinations[index] != null) {
     if (destinations[index]["explorationDay"] != null) {
-      return int.parse(destinations[index]["explorationDay"]);
+      result = int.parse(destinations[index]["explorationDay"]);
     }
   }
-  return 0;
+  return result;
 }
 
-updateCurrentDestination() {
+/// ## updateCurrentDestination
+/// *__Method to update current Destination__*
+///
+///### Uses:
+/// ```dart
+///    updateCurrentDestination();
+/// ```
+///
+/// @return void
+///
+void updateCurrentDestination() {
   var type = "tour";
   if (currentDay.value == 0) {
     type = "arrival";
@@ -765,7 +848,17 @@ updateCurrentDestination() {
   globalDestinationType.value = type;
 }
 
-resetDestinations() {
+/// ## resetMemoryDestinations
+/// *__Method to reset all Destinations on memory__*
+///
+///### Uses:
+/// ```dart
+///    resetMemoryDestinations();
+/// ```
+///
+/// @return void
+///
+void resetMemoryDestinations() {
   destDraggable.value = 0;
   allPromotedDestinations.value = [];
   globalctx.promotedDestinations.value = [];
@@ -774,12 +867,21 @@ resetDestinations() {
   globalctx.destinationDragData.value = [];
   globalctx.memory["destinations"] = {};
   globalctx.states["destinations"] = {};
-  arrivalState.value = "selected";
-  departureState.value = "selected";
 }
 
-getSubs(String destination) {
-  var res = <Map<String, dynamic>>[];
+/// ## getDestiinationRoutes
+/// *__Method to get sub Destinations from a Primary Destination__*
+///
+///### Uses:
+/// ```dart
+///     (destination != "galapagos" &&
+///                     (getDestiinationRoutes(destination).length > 0))) {
+/// ```
+///
+/// @return List<Map<String, dynamic>>
+///
+List<Map<String, dynamic>> getDestiinationRoutes(String destination) {
+  List<Map<String, dynamic>> res = <Map<String, dynamic>>[];
   try {
     var destData = getDestinationValueByName(destination);
     var subs = destData[9]["subs"];
@@ -794,12 +896,22 @@ getSubs(String destination) {
   return res;
 }
 
-filterTrByAge() {
+/// ## filterTrByAge
+/// *__Method to filter Travel Rythm by Age__*
+///
+///### Uses:
+/// ```dart
+///    filterTrByAge();
+/// ```
+///
+/// @return List<Map<String, dynamic>>
+///
+List<Map<String, dynamic>> filterTrByAge() {
   var tr = findCatalog("travel_rhythm");
-  var filtered = tr.toList();
+  List<Map<String, dynamic>> result = tr.toList();
   var birthDate = globalctx.memory["customer"]["birth_date"];
   var age = DateTime.now().difference(DateTime.parse(birthDate)).inDays / 365;
-  filtered = tr.toList().where((e) {
+  result = tr.toList().where((e) {
     var range = getAgeMaxTrValue(e["description"].toString().toUpperCase());
     // var min = range[0];
     var max = range[1];
@@ -807,6 +919,119 @@ filterTrByAge() {
     var rule = rule2;
     return rule;
   }).toList();
-  Iterable result = filtered;
   return result;
+}
+
+/// ## clearCurrentDestinationKeyActivities
+/// *__Method to clear Key Activities__*
+///
+///### Uses:
+/// ```dart
+///     clearCurrentDestinationKeyActivities();
+/// ```
+/// ### Returns:
+///```dart
+/// void
+///```
+void clearCurrentDestinationKeyActivities() {
+  clearedKA[currentDay.value] ??= false;
+  if (clearedKA[currentDay.value]) {
+    currentDestinationKeyActivities.value = <String>[];
+    setFormValue(globalctx.memory["destinations"],
+        currentDestinationIndex.value, "key_activities", <String>[]);
+  }
+}
+
+/// ## getCurrentDestinationMaximumDays
+/// *__Method to get current Destination Maiximum days__*
+///
+///### Uses:
+/// ```dart
+///       int maxDestDays = getCurrentDestinationMaximumDays();
+/// ```
+/// ### Returns:
+///```dart
+///   int
+///```
+int getCurrentDestinationMaximumDays() {
+  updateDestinationDays();
+  int maxValue = getListMaxValue(destDays);
+  return maxValue;
+}
+
+/// ## getCurrentDestinationAccumulatedDaysOff
+/// *__Method to get destination accumulates daysoff days__*
+///
+///### Uses:
+/// ```dart
+///      int accOff = getCurrentDestinationAccumulatedDaysOff(destId);
+/// ```
+/// ### Returns:
+///```dart
+///   int
+///```
+getCurrentDestinationAccumulatedDaysOff(int destId) {
+  int accOff = 0;
+  for (int i = 0; i < destId; i++) {
+    accOff += daysOff[i] as int;
+  }
+  return accOff;
+}
+
+/// ## getCurrentDestinationDays
+/// *__Method to current destination days__*
+///
+///### Uses:
+/// ```dart
+///      int currenDestDays = getCurrentDestinationDays(destId);
+/// ```
+/// ### Returns:
+///```dart
+///   int
+///```
+int getCurrentDestinationDays(int destId) {
+  updateDestinationDays();
+  int result = destDays[destId];
+  return result;
+}
+
+/// ## updateDestinationDays
+/// *__Method to update Destination days__*
+///
+///### Uses:
+/// ```dart
+///      updateDestinationDays();
+/// ```
+/// ### Returns:
+///```dart
+///   void
+///```
+void updateDestinationDays() {
+  destDays = [];
+  for (var dest in globalctx.memory["destinations"].entries) {
+    var destDay = dest.value;
+    destDays.add(int.parse(destDay["explorationDay"]));
+  }
+}
+
+/// ## getCurrentDestinationDayId
+/// *__Method to get Day Id__*
+///
+///### Uses:
+/// ```dart
+///      var dayId = getCurrentDestinationDayId(destId, destDay);
+/// ```
+/// ### Returns:
+///```dart
+///   int
+///```
+int getCurrentDestinationDayId(int destId, int destDay) {
+  int maxDestDays = getCurrentDestinationMaximumDays();
+  int currenDestDays = getCurrentDestinationDays(destId);
+  int currenDestDaysOff = maxDestDays - currenDestDays;
+  pushList(daysOff, destId, currenDestDaysOff);
+  int accOff = getCurrentDestinationAccumulatedDaysOff(destId);
+  int destMatrixIndex = maxDestDays * destId + destDay;
+  int dayId = destMatrixIndex - accOff;
+  return dayId;
 }

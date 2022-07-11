@@ -6,7 +6,7 @@ import 'index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 import 'package:pdf/widgets.dart' as pw;
-import 'package:sweetalert/sweetalert.dart';
+import 'package:sweetalertv2/sweetalertv2.dart';
 
 class DGalleryController extends GetxController {
   final state = DGalleryState();
@@ -28,11 +28,11 @@ class DGalleryController extends GetxController {
   }
 
   void onEnd(ctx, msg) {
-    return SweetAlert.show(ctx,
+    return SweetAlertV2.show(ctx,
         curve: ElasticInCurve(),
         title: msg,
         subtitle: 'Nos vemos en el siguiente torneo',
-        style: SweetAlertStyle.success, onPress: (bool isConfirm) {
+        style: SweetAlertV2Style.success, onPress: (bool isConfirm) {
       Get.toNamed("/DGallery");
       return false;
     });

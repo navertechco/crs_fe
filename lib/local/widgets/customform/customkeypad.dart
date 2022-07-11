@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import '../index.dart';
-import 'index.dart';
 import 'package:naver_crs/index.dart';
 
-import 'customformlabel.dart';
 
 class CustomKeypadWidget extends StatelessWidget {
   const CustomKeypadWidget({
     Key? key,
     required this.width,
+    this.fontSize = 10,
     this.onNext,
     this.onPrevious,
     this.prevlabel = "Previous",
@@ -16,6 +14,7 @@ class CustomKeypadWidget extends StatelessWidget {
     this.nextFontWeight = FontWeight.normal,
     this.prevFontWeight = FontWeight.normal,
   }) : super(key: key);
+  final fontSize;
   final double width;
   final String nextlabel;
   final String prevlabel;
@@ -27,16 +26,20 @@ class CustomKeypadWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        GestureDetector(
-          onTap: onPrevious,
+        TextButton(
+          onPressed: onPrevious,
           child: CustomFormLabelWidget(
-              label: prevlabel, fontWeight: prevFontWeight),
+              fontSize: isMobile * fontSize,
+              label: prevlabel,
+              fontWeight: prevFontWeight),
         ),
-        SizedBox(width: MediaQuery.of(context).size.width * width),
-        GestureDetector(
-          onTap: onNext,
+        SizedBox(width: MediaQuery.of(context).size.width * isMobile * width),
+        TextButton(
+          onPressed: onNext,
           child: CustomFormLabelWidget(
-              label: nextlabel, fontWeight: nextFontWeight),
+              fontSize: isMobile * fontSize,
+              label: nextlabel,
+              fontWeight: nextFontWeight),
         ),
       ],
     );

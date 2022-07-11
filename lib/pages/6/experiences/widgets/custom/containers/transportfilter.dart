@@ -26,9 +26,10 @@ class DayExpFilter extends HookWidget {
 // ignore: must_be_immutable
 class BodyWidget extends StatelessWidget {
   BodyWidget({Key? key}) : super(key: key);
-
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    formKey = _formKey;
     return Obx(() {
       var index = getDestinationIndex(
           globalDestinationName.value, globalDestinationType.value);
@@ -36,7 +37,7 @@ class BodyWidget extends StatelessWidget {
           globalctx.memory["destinations"], index, "customGuide", false));
 
       return Form(
-        key: formKey,
+        key: _formKey,
         child: Padding(
           padding: EdgeInsets.only(
             top: MediaQuery.of(context).size.height * 0.05,

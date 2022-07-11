@@ -1,8 +1,21 @@
 import 'package:flutter/material.dart';
 import '../index.dart';
-import 'index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
+
+// ████████╗██╗   ██╗████████╗ ██████╗ ██████╗ ██╗ █████╗ ██╗
+// ╚══██╔══╝██║   ██║╚══██╔══╝██╔═══██╗██╔══██╗██║██╔══██╗██║
+//    ██║   ██║   ██║   ██║   ██║   ██║██████╔╝██║███████║██║
+//    ██║   ██║   ██║   ██║   ██║   ██║██╔══██╗██║██╔══██║██║
+//    ██║   ╚██████╔╝   ██║   ╚██████╔╝██║  ██║██║██║  ██║███████╗
+//    ╚═╝    ╚═════╝    ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚═╝╚═╝  ╚═╝╚══════╝
+
+// ███████╗██╗   ██╗███╗   ██╗ ██████╗████████╗██╗ ██████╗ ███╗   ██╗███████╗
+// ██╔════╝██║   ██║████╗  ██║██╔════╝╚══██╔══╝██║██╔═══██╗████╗  ██║██╔════╝
+// █████╗  ██║   ██║██╔██╗ ██║██║        ██║   ██║██║   ██║██╔██╗ ██║███████╗
+// ██╔══╝  ██║   ██║██║╚██╗██║██║        ██║   ██║██║   ██║██║╚██╗██║╚════██║
+// ██║     ╚██████╔╝██║ ╚████║╚██████╗   ██║   ██║╚██████╔╝██║ ╚████║███████║
+// ╚═╝      ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝
 
 /// ## loadTargets
 /// *__Auxiliary Method to display Tutorial__*
@@ -44,7 +57,7 @@ List<TargetFocus> loadTargets() {
 /// ## showTutorial
 /// *__Method to display Tutorial__*
 ///
-/// 
+///
 ///
 ///### Uses:
 /// ```dart
@@ -57,7 +70,7 @@ List<TargetFocus> loadTargets() {
 ///
 void showTutorial(BuildContext context) {
   TutorialCoachMark(context,
-      textStyleSkip: TextStyle(color: Colors.black, fontSize: 50),
+      textStyleSkip: TextStyle(color: Colors.black, fontSize: isMobile * 40),
       targets: loadTargets(),
       colorShadow: Colors.grey.shade200, onFinish: () {
     isFirstLaunch = false;

@@ -29,13 +29,12 @@ class RoundedFormButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var isMobile = isMobileDevice() ? 2 : 1;
     return Container(
-      width: MediaQuery.of(context).size.width * width,
-      height: MediaQuery.of(context).size.height * height,
+      width: MediaQuery.of(context).size.width * isMobile * width,
+      height: MediaQuery.of(context).size.height * isMobile * height,
       padding: EdgeInsets.only(
-        left: left,
-        top: top,
+        left: isMobile * left,
+        top: isMobile * top,
       ),
       decoration:
           BoxDecoration(color: color, borderRadius: BorderRadius.circular(50)),
@@ -48,15 +47,15 @@ class RoundedFormButton extends StatelessWidget {
           child: Text(
             label,
             strutStyle: StrutStyle(
-              fontSize: MediaQuery.of(context).size.width /
-                  MediaQuery.of(context).size.height *
+              fontSize: (MediaQuery.of(context).size.width /
+                      MediaQuery.of(context).size.height) *
                   isMobile *
                   fontSize,
             ),
             style: KTextSytle(
                     context: context,
-                    fontSize: MediaQuery.of(context).size.width /
-                        MediaQuery.of(context).size.height *
+                    fontSize: (MediaQuery.of(context).size.width /
+                            MediaQuery.of(context).size.height) *
                         isMobile *
                         fontSize,
                     fontWeight: fontWeight,

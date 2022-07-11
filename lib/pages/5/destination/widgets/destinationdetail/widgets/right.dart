@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../index.dart';
-import '../index.dart';
 
 // ignore: must_be_immutable
 class RightWidget extends StatelessWidget {

@@ -32,7 +32,7 @@ class CruiseDetailWidget extends StatelessWidget {
             getCruiseItinerary(row),
             style: KTextSytle(
               context: context,
-              fontSize: 10,
+              fontSize: 15,
               fontWeight: FontWeight.bold,
               color: Colors.white,
             ).getStyle(),

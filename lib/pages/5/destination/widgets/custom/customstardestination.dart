@@ -5,7 +5,6 @@ import '../index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:naver_crs/common/index.dart';
 
 // ignore: must_be_immutable
 class CustomStarDestinationForm extends StatelessWidget {
@@ -83,6 +82,17 @@ class CustomStarDestinationForm extends StatelessWidget {
       key: formKey,
       child: Column(
         children: [
+          Obx(() => Text("Destination Index: $globalDestinationIndex",
+              style: GoogleFonts.poppins(
+                  textStyle: TextStyle(
+                color: (dayleft.value) < 1
+                    ? Colors.yellow
+                    : Color.fromARGB(255, 0, 255, 0),
+                fontSize: MediaQuery.of(context).size.width /
+                    MediaQuery.of(context).size.height *
+                    15,
+                fontWeight: FontWeight.bold,
+              )))),
           Obx(() {
             return Wrap(
               children: [
@@ -141,7 +151,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                                   "0")),
                               value as int);
                         },
-                        label: "\t\tExploration Days    ",
+                        label: "  Exploration Days     ",
                         width: 0.20);
                   }
                   return Text('');
@@ -156,15 +166,14 @@ class CustomStarDestinationForm extends StatelessWidget {
                           label: "  Hotel Information  "),
                       RoundedFormButton(
                         color: Colors.grey,
-                        label: currentHotelName.value.isEmpty
-                            ? "Select"
-                            : currentHotelName.value,
+                        label: getFormValue(globalctx.memory["destinations"],
+                            globalDestinationIndex, "hotelName", 'Select'),
                         height: 0.05,
-                        fontSize: 3,
+                        fontSize: 8,
                         fontWeight: FontWeight.bold,
                         textColor: Colors.black,
                         onPressed: () async {
-                          getHotel(context, id: 0, index: index);
+                          showHotelResultDialog(context, id: 0, index: index);
                         },
                       ),
                     ],
@@ -201,6 +210,12 @@ class CustomStarDestinationForm extends StatelessWidget {
                 }),
                 Obx(() {
                   var expMode = explorationMode.value;
+                  setFormValue(
+                      globalctx.memory["destinations"], index, "type", type);
+                  setFormValue(
+                      globalctx.memory["destinations"], index, "index", index);
+                  setFormValue(globalctx.memory["destinations"], index,
+                      "destination", destination);
                   if (explorationMode.value != "2") {
                     return CustomFormDropDownFieldWidget(
                         disabled: type == "arrival" ||
@@ -221,12 +236,6 @@ class CustomStarDestinationForm extends StatelessWidget {
                               index,
                               "travel_rhythm",
                               destination == "galapagos" ? "3" : value);
-                          setFormValue(globalctx.memory["destinations"], index,
-                              "type", type);
-                          setFormValue(globalctx.memory["destinations"], index,
-                              "index", index);
-                          setFormValue(globalctx.memory["destinations"], index,
-                              "destination", destination);
                         },
                         onChanged: (value) {
                           setFormValue(
@@ -313,7 +322,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                           (explorationMode.value == "3" ||
                               explorationMode.value == "1")) ||
                       (destination != "galapagos" &&
-                          (getSubs(destination).length > 0))) {
+                          (getDestiinationRoutes(destination).isNotEmpty))) {
                     {
                       return Row(
                         children: [
@@ -329,7 +338,7 @@ class CustomStarDestinationForm extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             textColor: Colors.black,
                             onPressed: () async {
-                              // getHotel(context, cruiseId: 0);
+                              // showHotelResultDialog(context, cruiseId: 0);
                             },
                           ),
                         ],

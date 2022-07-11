@@ -19,7 +19,7 @@ class CustomTitleWidget extends StatelessWidget {
   final fontSize;
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Wrap(
       children: [
         CustomFormLabelWidget(
             label: label,

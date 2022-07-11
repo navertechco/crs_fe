@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../index.dart';
-import 'index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:flutter/services.dart';
 
@@ -71,6 +70,7 @@ class CustomFormCalendarFieldWidget extends StatelessWidget {
             maximumDate: maximumDate,
             startEndDateChange: startEndDateChange,
             onSaved: onSaved,
+            fontSize: fontSize,
           ),
         ],
       ),

@@ -1,10 +1,8 @@
 // ignore_for_file: invalid_use_of_protected_member
 
 import 'package:flutter/material.dart';
-import '../index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
-import '../../validators.dart';
 
 class HotelCalendarWidget extends StatelessWidget {
   HotelCalendarWidget({
@@ -24,14 +22,15 @@ class HotelCalendarWidget extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class HotelFiltersWidget extends StatelessWidget {
-  const HotelFiltersWidget({
+  HotelFiltersWidget({
     Key? key,
     required this.ctx,
   }) : super(key: key);
 
   final ctx;
-
+  var hotel = "0".obs;
   @override
   Widget build(BuildContext context) {
     return Obx(
@@ -44,10 +43,11 @@ class HotelFiltersWidget extends StatelessWidget {
                   width: 0.11,
                   height: 0.05,
                   validator: CustomRequiredValidator(
-                      errorText: "Hotel Category is required ", ctx: ctx),
-                  value: "0",
+                      errorText: "Budget is required ", ctx: ctx),
+                  value: hotel.value,
                   onSaved: (value) {},
                   onChanged: (value) {
+                    hotel.value = value!;
                     hotelCategory.value = getCatalogDescription(
                         getMemoryCatalogChild("hotel", "value", "budget_fk"),
                         value);
@@ -58,7 +58,7 @@ class HotelFiltersWidget extends StatelessWidget {
                         hotelCategory.value);
                     filterHotels(context);
                   },
-                  hintText: "Category     ",
+                  hintText: "Budget     ",
                   data: getMemoryCatalogChild("hotel", "value", "budget_fk")),
               CustomFormMultiDropDownFieldWidget(
                   value: [],
@@ -78,6 +78,10 @@ class HotelFiltersWidget extends StatelessWidget {
                           rule = rule &&
                               hotelCategory.value ==
                                   element["value"]["budget_fk"];
+                          var filter = hotelResults.value
+                              .map((e) => e["description"])
+                              .toList();
+                          rule = filter.contains(element["description"]);
                           return rule;
                         }),
                         value);
@@ -101,43 +105,58 @@ class HotelFiltersWidget extends StatelessWidget {
                     rule = rt * mc >= pax;
                     rule = rule &&
                         hotelCategory.value == element["value"]["budget_fk"];
+                    var filter = hotelResults.value
+                        .map((e) => e["description"])
+                        .toList();
+                    rule = filter.contains(element["description"]);
                     return rule;
                   })),
-              if (moreFilters.value)
-                CustomFormMultiDropDownFieldWidget(
-                  validator: (value) {
-                    CustomMultiDropdownRequiredValidator(value,
-                        errorText: "Hotel More filters are required ",
-                        context: context);
-                  },
-                  value: hotelFilterMemory.value,
-                  enabled: hotelFilterMemory.value.length < 4,
-                  onSaved: (values) {
-                    if (values == null) return;
+              CustomFormMultiDropDownFieldWidget(
+                validator: (value) {
+                  CustomMultiDropdownRequiredValidator(value,
+                      errorText: "Hotel More filters are required ",
+                      context: context);
+                },
+                value: hotelFilterMemory.value,
+                enabled: hotelFilterMemory.value.length < 4,
+                onSaved: (values) {
+                  if (values == null || values.isEmpty) return;
 
-                    if (values.length <= 3) {
-                      hotelFilterMemory.value = [];
-                      var length = values.length;
-
-                      for (var i = 0; i < length; i++) {
-                        hotelFilterMemory.value.add(findCatalog("key_activity")
+                  for (var i = 0; i < values.length; i++) {
+                    hotelRoomCategory.value.add(
+                        findCatalog("more_hotel_filters")
                             .toList()
                             .where((e) => e["code"] == values[i])
                             .toList()[0]["description"]);
-                      }
-                      setFormValue(
-                          globalctx.memory["destinations"],
-                          globalDestinationIndex,
-                          "hotelFilterMemory",
-                          hotelFilterMemory.value);
-                    }
-                    filterHotels(context);
-                  },
-                  onChanged: (values) {},
-                  hintText: '',
-                  label: '',
-                  data: findCatalog("more_hotel_filters"),
-                ),
+                  }
+                  setFormValue(
+                      globalctx.memory["destinations"],
+                      globalDestinationIndex,
+                      "hotelRoomCategory",
+                      hotelRoomCategory.value);
+                  filterHotels(context);
+                },
+                onChanged: (values) {
+                  if (values == null) return;
+                  hotelFilterMemory.value = values!;
+
+                  filterHotels(context);
+                },
+                hintText: "More Filters     ",
+                label: '',
+                data: findCatalog("more_hotel_filters").where((e) {
+                  var rule = true;
+                  if (hotelResults.value.isNotEmpty) {
+                    var filter = hotelResults.value
+                        .map((f) => f["value"][e["value"]["key"]] == "Yes")
+                        .toSet()
+                        .toList()[0];
+                    rule = filter;
+                  }
+
+                  return rule;
+                }).toList(),
+              ),
             ],
           ),
         ],
@@ -156,7 +175,7 @@ class HotelKeyPadWidget extends StatelessWidget {
     return Obx(() => Padding(
           padding: EdgeInsets.only(
               top: MediaQuery.of(context).size.height * 0,
-              left: MediaQuery.of(context).size.width * 0.5),
+              left: MediaQuery.of(context).size.width * 0.4),
           child: Row(
             children: [
               TextButton(
@@ -170,7 +189,7 @@ class HotelKeyPadWidget extends StatelessWidget {
                 child: Text('Reset',
                     style: KTextSytle(
                             context: context,
-                            fontSize: 10,
+                            fontSize: isMobile * 10,
                             fontWeight: FontWeight.bold,
                             color: Colors.black)
                         .getStyle()),
@@ -184,7 +203,7 @@ class HotelKeyPadWidget extends StatelessWidget {
                 child: Text('Process',
                     style: KTextSytle(
                             context: context,
-                            fontSize: 10,
+                            fontSize: isMobile * 10,
                             fontWeight: FontWeight.bold,
                             color: Colors.black)
                         .getStyle()),
@@ -197,7 +216,7 @@ class HotelKeyPadWidget extends StatelessWidget {
                     !moreFilters.value ? 'More Filters' : 'Less Filters',
                     style: KTextSytle(
                             context: context,
-                            fontSize: 10,
+                            fontSize: isMobile * 10,
                             fontWeight: FontWeight.bold,
                             color: Colors.black)
                         .getStyle()),
@@ -268,23 +287,24 @@ class HotelResultWidget extends StatelessWidget {
                         ),
                         child: Align(
                           alignment: Alignment.topCenter,
-                          child: Column(
-                            children: [
-                              if (hotelResults.value.isNotEmpty &&
-                                  searcherHeader.value.isNotEmpty)
-                                hotelTable.value
-                              else
-                                Text(
-                                  "No Hotels Found",
-                                  style: KTextSytle(
-                                    context: context,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color.fromARGB(255, 204, 164, 61),
-                                  ).getStyle(),
-                                )
-                            ],
-                          ),
+                          child: Obx(() => Column(
+                                children: [
+                                  if (hotelResults.value.isNotEmpty &&
+                                      searcherHeader.value.isNotEmpty)
+                                    hotelTable.value
+                                  else
+                                    Text(
+                                      "No Hotels Found",
+                                      style: KTextSytle(
+                                        context: context,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                        color:
+                                            Color.fromARGB(255, 204, 164, 61),
+                                      ).getStyle(),
+                                    )
+                                ],
+                              )),
                         ),
                       ),
                     ),

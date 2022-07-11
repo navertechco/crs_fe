@@ -19,7 +19,7 @@ class CustomFormLabelWidget extends StatelessWidget {
       label,
       style: KTextSytle(
               context: context,
-              fontSize: fontSize,
+              fontSize: isMobile * fontSize,
               fontWeight: fontWeight,
               color: color)
           .getStyle(),

@@ -1,34 +1,37 @@
-// ignore_for_file: prefer_function_declarations_over_variables, curly_braces_in_flow_control_structures
+// ignore_for_file: prefer_function_declarations_over_variables, curly_braces_in_flow_control_structures, import_of_legacy_library_into_null_safe
 
 import 'package:checkbox_formfield/checkbox_icon_formfield.dart';
 import 'package:flutter/material.dart';
-import '../index.dart';
-import 'index.dart';
+import 'package:sweetalertv2/sweetalertv2.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 
-processHotelItinerary(row) {
-  var itinerary =
-      row["hotel_itinerary"].toString().replaceAll("[", '').replaceAll("]", '');
-  var itineraryList = itinerary.split(",");
-  var result = '';
-  var i = 1;
-  for (var item in itineraryList) {
-    if (item.toString() != '') {
-      result +=
-          "${getCatalogDescription(findCatalog("week_day"), i)}: ${item.toString()} \n";
-    }
+// ██╗  ██╗ ██████╗ ████████╗███████╗██╗
+// ██║  ██║██╔═══██╗╚══██╔══╝██╔════╝██║
+// ███████║██║   ██║   ██║   █████╗  ██║
+// ██╔══██║██║   ██║   ██║   ██╔══╝  ██║
+// ██║  ██║╚██████╔╝   ██║   ███████╗███████╗
+// ╚═╝  ╚═╝ ╚═════╝    ╚═╝   ╚══════╝╚══════╝
 
-    if (i == 7) {
-      i = 1;
-    } else {
-      i++;
-    }
-  }
-  return result;
-}
+// ███████╗██╗   ██╗███╗   ██╗ ██████╗████████╗██╗ ██████╗ ███╗   ██╗███████╗
+// ██╔════╝██║   ██║████╗  ██║██╔════╝╚══██╔══╝██║██╔═══██╗████╗  ██║██╔════╝
+// █████╗  ██║   ██║██╔██╗ ██║██║        ██║   ██║██║   ██║██╔██╗ ██║███████╗
+// ██╔══╝  ██║   ██║██║╚██╗██║██║        ██║   ██║██║   ██║██║╚██╗██║╚════██║
+// ██║     ╚██████╔╝██║ ╚████║╚██████╗   ██║   ██║╚██████╔╝██║ ╚████║███████║
+// ╚═╝      ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝
 
-filterHotels(ctx) {
+/// ## filterHotels
+/// *__Method to filter Hotels__*
+///
+///### Uses:
+/// ```dart
+///        filterHotels(context);
+/// ```
+/// ### Returns:
+///```dart
+///   void
+///```
+void filterHotels(ctx) {
   hotelResults.value = [];
   filteredHotel = findCatalog("hotel");
 
@@ -64,12 +67,9 @@ filterHotels(ctx) {
     filteredHotel = filteredHotel.where((element) {
       var rule = true;
       if (keyActivity.isNotEmpty) {
-        var k1 =
-            element["value"]["keyActivityType_fk"].toString().toUpperCase();
-        var k2 =
-            element["value"]["keyActivityType_fk.1"].toString().toUpperCase();
-        var k3 =
-            element["value"]["keyActivityType_fk.2"].toString().toUpperCase();
+        var k1 = element["value"]["keyActivityType_fk"];
+        var k2 = element["value"]["keyActivityType_fk.1"];
+        var k3 = element["value"]["keyActivityType_fk.2"];
 
         rule = keyActivity.contains(k1) |
             keyActivity.contains(k2) |
@@ -123,7 +123,18 @@ filterHotels(ctx) {
   }
 }
 
-getHotelCapacity(hotelName) {
+/// ## getHotelCapacity
+/// *__Method to Hotel Capacity__*
+///
+///### Uses:
+/// ```dart
+///        var capacity = getHotelCapacity(element["value"]["hotelname"]);
+/// ```
+/// ### Returns:
+///```dart
+///   int
+///```
+int getHotelCapacity(hotelName) {
   var hotels = findCatalog("hotel");
   int capacity = 0;
   hotels = hotels
@@ -138,6 +149,17 @@ getHotelCapacity(hotelName) {
   return capacity;
 }
 
+/// ## filterHotels
+/// *__Method to filter Hotels__*
+///
+///### Uses:
+/// ```dart
+///        filterHotels(context);
+/// ```
+/// ### Returns:
+///```dart
+///   void
+///```
 getHotelHeader(context, data, columns) {
   var header = <DataColumn>[];
   List cols = [];
@@ -154,7 +176,7 @@ getHotelHeader(context, data, columns) {
           textAlign: TextAlign.left,
           style: KTextSytle(
             context: context,
-            fontSize: 10,
+            fontSize: 15,
             fontWeight: FontWeight.bold,
             color: Color.fromARGB(255, 204, 164, 61),
           ).getStyle(),
@@ -166,7 +188,7 @@ getHotelHeader(context, data, columns) {
         '',
         style: KTextSytle(
           context: context,
-          fontSize: 10,
+          fontSize: 15,
           fontWeight: FontWeight.bold,
           color: Color.fromARGB(255, 204, 164, 61),
         ).getStyle(),
@@ -177,6 +199,17 @@ getHotelHeader(context, data, columns) {
   return header;
 }
 
+/// ## filterHotels
+/// *__Method to filter Hotels__*
+///
+///### Uses:
+/// ```dart
+///        filterHotels(context);
+/// ```
+/// ### Returns:
+///```dart
+///   void
+///```
 processHotelData(context, data) {
   var columns = ["description"];
   var header = getHotelHeader(context, data, columns);
@@ -184,6 +217,17 @@ processHotelData(context, data) {
   return [header, detail];
 }
 
+/// ## filterHotels
+/// *__Method to filter Hotels__*
+///
+///### Uses:
+/// ```dart
+///        filterHotels(context);
+/// ```
+/// ### Returns:
+///```dart
+///   void
+///```
 getHotelDetail(context, data, columns) {
   var detail = <DataRow>[];
   if (data.length > 0) {
@@ -216,8 +260,78 @@ getHotelDetail(context, data, columns) {
   return detail;
 }
 
+/// ## showHotelResultDialog
+/// *__Method show Hotel Result dialog__*
+///
+///### Uses:
+/// ```dart
+///      showHotelResultDialog(context, id: 0, index: index);
+/// ```
+/// ### Returns:
+///```dart
+/// void
+///```
+void showHotelResultDialog(ctx, {int id = 0, int index = 0}) async {
+  currentDestinationIndex.value = index;
+  if (globalctx.memory["hotels"] == null) {
+    var frame = {
+      "data": {"id": id}
+    };
+    var res = await fetchHandler(kDefaultSchema, kDefaultServer,
+        kDefaultServerPort, kDefaultFindHotel, 'POST', frame);
+    // ignore: avoid_print
+    log(res);
+    if (res['state'] == true) {
+      var data = res['data'];
+      if (data.length > 0) {
+        globalctx.memory["hotels"] = data;
+        showCustomDialog(
+            ctx,
+            HotelCalendarWidget(
+              ctx: ctx,
+            ),
+            "Close",
+            customChild: HotelKeyPadWidget(),
+            backgroundColor: Colors.white,
+            buttonColor: Colors.black,
+            height: 0.25,
+            width: 0.3);
+      }
+    } else {
+      SweetAlertV2.show(ctx,
+          curve: ElasticInCurve(),
+          title: res['message'],
+          style: SweetAlertV2Style.error, onPress: (bool isConfirm) {
+        Get.close(1);
+        return false;
+      });
+    }
+  } else {
+    showCustomDialog(
+        ctx,
+        HotelCalendarWidget(
+          ctx: ctx,
+        ),
+        "Close",
+        customChild: HotelKeyPadWidget(),
+        backgroundColor: Colors.white,
+        buttonColor: Colors.black,
+        height: 0.25,
+        width: 0.3);
+  }
+}
 
-
+/// ## filterHotels
+/// *__Method to filter Hotels__*
+///
+///### Uses:
+/// ```dart
+///        filterHotels(context);
+/// ```
+/// ### Returns:
+///```dart
+///   void
+///```
 getHotelDataCell(context, row) {
   var dataCell = DataCell(
     Row(
@@ -245,7 +359,7 @@ getHotelDataCell(context, row) {
                       "${row["value"]['roomdescription']}",
                       style: KTextSytle(
                         context: context,
-                        fontSize: 10,
+                        fontSize: 15,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ).getStyle(),
@@ -287,6 +401,13 @@ getHotelDataCell(context, row) {
                     globalDestinationIndex,
                     "hotelName.${row["description"]}",
                     value);
+                currentHotelName.value +=
+                    currentHotelName.value + row["description"];
+                setFormValue(
+                    globalctx.memory["destinations"],
+                    globalDestinationIndex,
+                    "hotelName",
+                    currentHotelName.value);
               },
             )),
       ],

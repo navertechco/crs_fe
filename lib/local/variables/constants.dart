@@ -3,15 +3,13 @@
 import 'package:flutter/material.dart';
 import '../index.dart';
 import 'package:naver_crs/index.dart';
-import 'package:flutter_html/shims/dart_ui_real.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 //SERVER DATA
-const kDefaultSchema = "https";
+const kDefaultSchema = "http";
 const kDefaultServer = "192.168.101.4"; //"uiodesign.fortiddns.com";
 const kDefaultServerPort = 9999;
-const kDefaultLogoutPath = "/User/Logout";
-const kDefaultCatalogPath = "/System/FindCatalog";
+const kDefaultLogoutPath = "/User/Logout"; 
 const kDefaultQueryPath = "/Agent/Query";
 const kDefaultDestinationPath = "/Agent/GetDestination";
 const kDefaultExperiencePath = "/Agent/GetExperience";

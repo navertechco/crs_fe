@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:interval_time_picker/interval_time_picker.dart'
     as interval_time_picker;
 
@@ -67,7 +66,7 @@ class CustomLeisureTimeDetailForm extends StatelessWidget {
             buttonColor: Colors.black,
           );
         } else {
-          setLT(lt.value);
+          setCurrentLeisureTime(lt.value);
           setFormValue(
               globalctx.memory["days"], currentDay.value, "$save", value);
 

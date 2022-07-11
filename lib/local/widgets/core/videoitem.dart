@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import '../index.dart';
-import 'index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
-
 
 class VideoItem extends StatelessWidget {
   const VideoItem({
@@ -15,8 +13,8 @@ class VideoItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
+    return TextButton(
+      onPressed: () {
         Get.close(1);
       },
       child: SizedBox(

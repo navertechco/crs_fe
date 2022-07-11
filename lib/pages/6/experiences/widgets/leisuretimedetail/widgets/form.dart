@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import '../index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart'; 
-import 'package:naver_crs/common/index.dart';
 
 // ignore: must_be_immutable
 class CustomLeisureTimeDetailForm extends StatelessWidget {

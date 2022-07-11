@@ -8,11 +8,10 @@ import 'package:get/get.dart';
 class LeftHeader extends HookWidget {
   LeftHeader({
     Key? key,
-    
     required this.fontSize,
   }) : super(key: key);
   final int fontSize;
-   
+
   final type = (() {
     if (currentDay.value == 0) {
       return "Arrival";
@@ -26,7 +25,7 @@ class LeftHeader extends HookWidget {
   Widget build(BuildContext context) {
     return Obx(() {
       return Align(
-        alignment: Alignment.centerLeft,
+        alignment: Alignment.center,
         child: Text(
             "Day  ${currentDay.value + 1}:  ${globalDestinationName.value.toString().capitalize} $type ",
             style: KTextSytle(
@@ -34,7 +33,8 @@ class LeftHeader extends HookWidget {
                     fontSize: fontSize,
                     fontWeight: FontWeight.bold,
                     color: Colors.white)
-                .getStyle()),
+                .getStyle(),
+            textAlign: TextAlign.center),
       );
     });
   }

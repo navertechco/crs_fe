@@ -1,12 +1,25 @@
-// ignore_for_file: prefer_function_declarations_over_variables
+// ignore_for_file: prefer_function_declarations_over_variables, import_of_legacy_library_into_null_safe
 // ignore_for_file: curly_braces_in_flow_control_structures
 import 'package:checkbox_formfield/checkbox_formfield.dart';
 import 'package:flutter/material.dart';
-import '../index.dart';
-import 'index.dart';
+import 'package:sweetalertv2/sweetalertv2.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/pages/3/logistic/widgets/index.dart';
+
+//  ██████╗██████╗ ██╗   ██╗██╗███████╗███████╗
+// ██╔════╝██╔══██╗██║   ██║██║██╔════╝██╔════╝
+// ██║     ██████╔╝██║   ██║██║███████╗█████╗
+// ██║     ██╔══██╗██║   ██║██║╚════██║██╔══╝
+// ╚██████╗██║  ██║╚██████╔╝██║███████║███████╗
+//  ╚═════╝╚═╝  ╚═╝ ╚═════╝ ╚═╝╚══════╝╚══════╝
+
+// ███████╗██╗   ██╗███╗   ██╗ ██████╗████████╗██╗ ██████╗ ███╗   ██╗███████╗
+// ██╔════╝██║   ██║████╗  ██║██╔════╝╚══██╔══╝██║██╔═══██╗████╗  ██║██╔════╝
+// █████╗  ██║   ██║██╔██╗ ██║██║        ██║   ██║██║   ██║██╔██╗ ██║███████╗
+// ██╔══╝  ██║   ██║██║╚██╗██║██║        ██║   ██║██║   ██║██║╚██╗██║╚════██║
+// ██║     ╚██████╔╝██║ ╚████║╚██████╗   ██║   ██║╚██████╔╝██║ ╚████║███████║
+// ╚═╝      ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝
 
 /// ## getCruiseItinerary
 /// *__Method to get the cruise itinerary from a gived extracted cruise registry from memory__*
@@ -164,7 +177,7 @@ List<DataColumn> getCruiseHeader(context, data, columns) {
           textAlign: TextAlign.left,
           style: KTextSytle(
             context: context,
-            fontSize: 10,
+            fontSize: 15,
             fontWeight: FontWeight.bold,
             color: Color.fromARGB(255, 204, 164, 61),
           ).getStyle(),
@@ -176,7 +189,7 @@ List<DataColumn> getCruiseHeader(context, data, columns) {
         '',
         style: KTextSytle(
           context: context,
-          fontSize: 10,
+          fontSize: 15,
           fontWeight: FontWeight.bold,
           color: Color.fromARGB(255, 204, 164, 61),
         ).getStyle(),
@@ -393,11 +406,12 @@ DataCell getCruiseDataCell(context, row) {
               icon: const Icon(Icons.event_note_rounded, size: 20),
               tooltip: 'Show Cruise Itinerary',
               onPressed: () {
-                getCruise(context,
+                showCruiseResultDialog(context,
                     cruiseId: 999, cruiseName: row["description"]);
               },
             ),
             CustomFormCalendarFieldWidget(
+              fontSize: 8,
                 width: 0.01,
                 label: '',
                 initialStartDate: getNextCruiseDate(),
@@ -459,6 +473,48 @@ DataCell getCruiseDataCell(context, row) {
         )),
   );
   return dataCell;
+}
+
+/// ## showCruiseResultDialog
+/// *__Method show Cruise Result dialog__*
+///
+///### Uses:
+/// ```dart
+///      onPressed: () {
+///   showCruiseResultDialog(context,
+///       cruiseId: 999, cruiseName: row["description"]);
+/// },
+/// ```
+/// ### Returns:
+///```dart
+/// void
+///```
+showCruiseResultDialog(ctx,
+    {int cruiseId = 999, String cruiseName = ''}) async {
+  var frame = {
+    "data": {
+      "cruise_id": cruiseId,
+      "cruise_name": cruiseName != '' ? cruiseName.split("-")[0] : ''
+    },
+  };
+  var res = await fetchHandler(kDefaultSchema, kDefaultServer,
+      kDefaultServerPort, kDefaultFindCruise, 'POST', frame);
+  // ignore: avoid_print
+  log(res);
+  if (res['state'] == true) {
+    var data = res['data'];
+    if (data.length > 0) {
+      showCruiseDetailDialog(ctx, data[0]);
+    }
+  } else {
+    SweetAlertV2.show(ctx,
+        curve: ElasticInCurve(),
+        title: res['message'],
+        style: SweetAlertV2Style.error, onPress: (bool isConfirm) {
+      Get.close(1);
+      return false;
+    });
+  }
 }
 
 /// ## showCruiseDetailDialog

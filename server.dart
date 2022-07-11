@@ -1,8 +1,6 @@
-import 'package:shelf/shelf.dart';
 import 'package:shelf/shelf_io.dart' as io;
 import 'package:shelf_static/shelf_static.dart';
 import 'package:shelf_router/shelf_router.dart';
-import 'package:path/path.dart' as p;
 
 void main() async {
   var staticPath = 'build/web';
@@ -10,7 +8,7 @@ void main() async {
       defaultDocument: 'index.html', serveFilesOutsidePath: true);
   var mainHandler = createStaticHandler(staticPath,
       defaultDocument: 'main.dart.js', serveFilesOutsidePath: true);
-  var assetsHandler = createFileHandler('build\\web\\assets');
+  var assetsHandler = createFileHandler('assets');
   var app = Router();
   app.get('/', staticHandler);
   app.get('/main.dart.js', mainHandler);

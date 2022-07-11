@@ -1,11 +1,23 @@
 // ignore_for_file: prefer_function_declarations_over_variables
 
 import 'package:flutter/material.dart';
-import '../index.dart';
-import 'index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
+
+//  ██████╗ ██╗   ██╗ ██████╗ ████████╗███████╗
+// ██╔═══██╗██║   ██║██╔═══██╗╚══██╔══╝██╔════╝
+// ██║   ██║██║   ██║██║   ██║   ██║   █████╗
+// ██║▄▄ ██║██║   ██║██║   ██║   ██║   ██╔══╝
+// ╚██████╔╝╚██████╔╝╚██████╔╝   ██║   ███████╗
+//  ╚══▀▀═╝  ╚═════╝  ╚═════╝    ╚═╝   ╚══════╝
+
+// ███████╗██╗   ██╗███╗   ██╗ ██████╗████████╗██╗ ██████╗ ███╗   ██╗███████╗
+// ██╔════╝██║   ██║████╗  ██║██╔════╝╚══██╔══╝██║██╔═══██╗████╗  ██║██╔════╝
+// █████╗  ██║   ██║██╔██╗ ██║██║        ██║   ██║██║   ██║██╔██╗ ██║███████╗
+// ██╔══╝  ██║   ██║██║╚██╗██║██║        ██║   ██║██║   ██║██║╚██╗██║╚════██║
+// ██║     ╚██████╔╝██║ ╚████║╚██████╗   ██║   ██║╚██████╔╝██║ ╚████║███████║
+// ╚═╝      ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝
 
 /// ## getQuoteHistoryItinerary
 /// *__Method to get Quote History Itinerary in String format__*
@@ -45,13 +57,13 @@ String getQuoteHistoryItinerary(row) {
 ///
 ///### Uses:
 /// ```dart
-///       getFilteredQuoteHistory(context);
+///       updateFilteredQuoteHistory(context);
 /// ```
 /// ### Returns:
 ///```dart
 ///  dynamic
 ///```
-dynamic getFilteredQuoteHistory(ctx) {
+dynamic updateFilteredQuoteHistory(ctx) {
   if (globalctx.memory["tours"] != null) {
     List filtered = globalctx.memory["tours"];
     filtered = filtered.where((e) {
@@ -146,6 +158,7 @@ DataCell getQuoteHistoryDataCell(context, row) {
       icon: const Icon(Icons.event_note_rounded, size: 20),
       tooltip: 'Show QuoteHistory Itinerary',
       onPressed: () {
+        globalctx.memory["netRate"] = {};
         showCustomDialog(
           context,
           SingleChildScrollView(
@@ -166,10 +179,10 @@ DataCell getQuoteHistoryDataCell(context, row) {
                   height: MediaQuery.of(context).size.height * 0.5,
                 ),
                 Text(
-                  "${getQuoteHistoryItinerary(row)}",
+                  getQuoteHistoryItinerary(row),
                   style: KTextSytle(
                     context: context,
-                    fontSize: 10,
+                    fontSize: 15,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                   ).getStyle(),

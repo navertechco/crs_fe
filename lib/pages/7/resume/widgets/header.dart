@@ -1,7 +1,6 @@
 import 'package:counter/counter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:naver_crs/index.dart';
 import 'package:naver_crs/pages/2/netrate/widgets/custompadingtitle.dart';
 import 'customformtitle.dart';
@@ -107,7 +106,7 @@ class Header extends StatelessWidget {
         Row(
           children: [
             CustomPadingTitleWidget(
-                customlabel: "\t\tGuides:\t\t\t\t",
+                customlabel: "    Guides:        ",
                 fontWeight: FontWeight.bold),
             Counter(
               initial: 0,

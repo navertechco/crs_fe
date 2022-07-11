@@ -21,8 +21,8 @@ class ExperienceRearOptionWidget extends StatelessWidget {
             fontWeight: FontWeight.bold,
           )),
         ),
-        GestureDetector(
-          onTap: () {
+        TextButton(
+          onPressed: () {
             showCustomDialog(context,
                 ExperienceDetailWidget(experience: experience), "Close",
                 buttonColor: Colors.white);

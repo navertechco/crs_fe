@@ -13,7 +13,7 @@ class DestinationDragTargetWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        width: MediaQuery.of(context).size.width * 0.46,
+        width: MediaQuery.of(context).size.width * 0.48,
         child: DragTarget<String>(
           builder: (
             BuildContext context,

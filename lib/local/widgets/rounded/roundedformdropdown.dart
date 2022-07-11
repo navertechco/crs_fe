@@ -1,6 +1,5 @@
 // ignore_for_file: must_be_immutable
 import 'package:flutter/material.dart';
-import '../index.dart';
 import 'package:naver_crs/index.dart';
 
 class RoundedFormDropdown extends StatelessWidget {
@@ -8,7 +7,7 @@ class RoundedFormDropdown extends StatelessWidget {
   final double top;
   final double width;
   final double height;
-  final double fontSize;
+  final fontSize;
   final String? hintText;
   final String? label;
   final String value;
@@ -24,10 +23,10 @@ class RoundedFormDropdown extends StatelessWidget {
       this.hintText,
       this.label,
       this.left = 15,
-      this.top = 8,
+      this.top = 4,
       this.width = 0.2,
       this.height = 0.05,
-      this.fontSize = 0.1,
+      this.fontSize = 10,
       required this.onSaved,
       this.password = false,
       this.value = "0",
@@ -40,12 +39,13 @@ class RoundedFormDropdown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * width,
-      height: MediaQuery.of(context).size.height * height,
-      padding: EdgeInsets.only(left: left, top: top),
+      width: MediaQuery.of(context).size.width * isMobile * width,
+      height: MediaQuery.of(context).size.height * isMobile * height,
+      padding: EdgeInsets.only(left: isMobile * left, top: isMobile * top),
       decoration: BoxDecoration(
           color: Colors.grey, borderRadius: BorderRadius.circular(50)),
       child: FormCatalogueWidget(
+        fontSize:fontSize,
           validator: validator,
           disabled: disabled,
           value: value,

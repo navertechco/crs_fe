@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:naver_crs/index.dart';
 
@@ -28,3 +29,9 @@ List cruises = findCatalog("cruises");
 List cabine = findCatalog("cabine");
 List itinerary = findCatalog("itinerary");
 List animals = findCatalog("animals");
+var cruiseTable = Rx(
+  DataTable(
+    columns: searcherHeader.value,
+    rows: searcherDetail.value,
+  ),
+);

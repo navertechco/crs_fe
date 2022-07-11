@@ -1,12 +1,25 @@
 import 'dart:convert';
 import 'dart:math';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../index.dart';
+
+//  ██████╗ ██████╗ ███╗   ███╗███╗   ███╗ ██████╗ ███╗   ██╗
+// ██╔════╝██╔═══██╗████╗ ████║████╗ ████║██╔═══██╗████╗  ██║
+// ██║     ██║   ██║██╔████╔██║██╔████╔██║██║   ██║██╔██╗ ██║
+// ██║     ██║   ██║██║╚██╔╝██║██║╚██╔╝██║██║   ██║██║╚██╗██║
+// ╚██████╗╚██████╔╝██║ ╚═╝ ██║██║ ╚═╝ ██║╚██████╔╝██║ ╚████║
+//  ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝     ╚═╝ ╚═════╝ ╚═╝  ╚═══╝
+
+// ███████╗██╗   ██╗███╗   ██╗ ██████╗████████╗██╗ ██████╗ ███╗   ██╗███████╗
+// ██╔════╝██║   ██║████╗  ██║██╔════╝╚══██╔══╝██║██╔═══██╗████╗  ██║██╔════╝
+// █████╗  ██║   ██║██╔██╗ ██║██║        ██║   ██║██║   ██║██╔██╗ ██║███████╗
+// ██╔══╝  ██║   ██║██║╚██╗██║██║        ██║   ██║██║   ██║██║╚██╗██║╚════██║
+// ██║     ╚██████╔╝██║ ╚████║╚██████╗   ██║   ██║╚██████╔╝██║ ╚████║███████║
+// ╚═╝      ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝
 
 /// ## loadDummyData
 /// *__Method load local json file as dummy data__*
@@ -30,23 +43,25 @@ loadDummyData(key) async {
 ///### Uses:
 /// ```dart
 ///  initialValue: getDateValue(client, "birth_date",
-///                                  def: DateTime(1981, 02, 12)),
+///                                  def: DateTime(1950, 01, 01)),
 /// ```
 ///
 /// @return DateTime?
 ///
 DateTime? getDateValue(data, key, {DateTime? def}) {
+  var res = def;
   try {
     if (data ?? true) {
       if (data[key] ?? true) {
-        return DateTime.parse(data[key]);
+        res = DateTime.parse(data[key]);
       }
     } else {
-      return def!;
+      res = def!;
     }
   } catch (e) {
-    return def!;
+    res = def!;
   }
+  return res;
 }
 
 /// ## getValue
@@ -110,7 +125,6 @@ dynamic getParam(String key) {
 ///  onChanged: (value) {
 ///                               country.value = value!;
 ///                                procCityData(
-///                                    citylist,
 ///                                    countries[countrylist[int.parse(value)]
 ///                                        ["description"]]);
 ///                                log("CHANGED: ");
@@ -119,7 +133,7 @@ dynamic getParam(String key) {
 ///
 ///
 ///
-void procCityData(Rx<List<Map<String, dynamic>>> citylist, cities) {
+void procCityData(cities) {
   var index = 1;
   citylist.value = [];
   for (var city in cities) {
@@ -129,6 +143,7 @@ void procCityData(Rx<List<Map<String, dynamic>>> citylist, cities) {
     });
     index++;
   }
+  citylist.value = citylist.value.toSet().toList();
 }
 
 /// ## toMinutes
@@ -328,7 +343,7 @@ int parseInt(dynamic value) {
 ///
 List processData(context, data, columns) {
   List<DataColumn> header = getHeader(context, data, columns);
-  List<DataRow> detail = getDetail(context, data, columns);
+  List<DataRow> detail = getTourDataRows(context, data, columns);
   return [header, detail];
 }
 
@@ -358,7 +373,7 @@ List<DataColumn> getHeader(context, data, columns) {
           textAlign: TextAlign.left,
           style: KTextSytle(
             context: context,
-            fontSize: 10,
+            fontSize: 15,
             fontWeight: FontWeight.bold,
             color: Color.fromARGB(255, 204, 164, 61),
           ).getStyle(),
@@ -370,7 +385,7 @@ List<DataColumn> getHeader(context, data, columns) {
         'Actions',
         style: KTextSytle(
           context: context,
-          fontSize: 10,
+          fontSize: 15,
           fontWeight: FontWeight.bold,
           color: Color.fromARGB(255, 204, 164, 61),
         ).getStyle(),
@@ -547,4 +562,66 @@ dynamic getListMaxValue(List list) {
     }
   }
   return result;
+}
+
+updateMulitDropdown(data, value, dataSource, dataValue) {
+  try {
+    if (data != null) {
+      if (data.isNotEmpty) {
+        dataSource = data.map((e) {
+          return {"display": e["description"], "value": e["code"]};
+        }).toList();
+      } else {
+        dataSource = [
+          {
+            'display': "No data from Service",
+            'value': 0,
+          }
+        ];
+      }
+    }
+
+    if (value != null) {
+      if (value.isNotEmpty) {
+        dataValue = [];
+        for (var item in value) {
+          dataValue.add(data
+              .firstWhere((element) => element["description"] == item)["code"]);
+        }
+      } else {
+        dataValue = [];
+      }
+    }
+    return [dataValue, dataSource];
+  } catch (e) {
+    log(e);
+  }
+}
+
+windowCheck() {
+  var isPortrait = Get.width > Get.height;
+  var isLandscape = Get.width < Get.height;
+  var isMobileLayout = Get.width < 600 || Get.height < 600;
+  var isDesktopLayout = Get.width >= 800 || Get.height >= 600;
+  var isMobile = isMobileDevice() & isMobileLayout;
+  var isTablet = isMobileDevice() & !isMobileLayout;
+  var isWebMobile = kIsWeb && isMobileDevice();
+  var isWebMobilePortrait = isWebMobile & isPortrait;
+  var isWebMobileLandscap = isWebMobile & isLandscape;
+  var isWebDesktop = kIsWeb && !isMobileDevice();
+  var isMobilePortrait = isMobile & isPortrait;
+  var isMobileLandscape = isMobile & isLandscape;
+  var isTabletPortrait = isTablet & isPortrait;
+  var isTabletLandscape = isTablet & isLandscape;
+  var isDesktop = !isMobile && isDesktopLayout && !kIsWeb;
+
+  if (isWebMobilePortrait) {
+  } else if (isWebMobileLandscap) {
+  } else if (isWebDesktop) {
+  } else if (isMobilePortrait) {
+  } else if (isMobileLandscape) {
+  } else if (isTabletLandscape) {
+  } else if (isTabletPortrait) {
+  } else if (isDesktop) {
+  } else {}
 }

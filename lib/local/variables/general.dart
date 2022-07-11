@@ -5,8 +5,12 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 bool isFirstLaunch = true;
-var currentDestinationIndex = 0.obs;
 var defaultToken;
+double ratio = Get.height / Get.width;
+bool isMobileLayout = Get.width < 600 || Get.height < 600;
+bool mob = isMobileDevice() & isMobileLayout;
+
+double isMobile = ratio * (mob ? 1 : 1.5);
 LocalContext globalctx = LocalContext();
 var session = {};
 ////
@@ -15,23 +19,9 @@ var airports = {"1": "quito", "2": "guayaquil"};
 var currentDay = 0.obs;
 Rx<int> currentDestination = 0.obs;
 var result = [];
-var allPromotedDestinations = globalctx.promotedDestinations;
-var globalDestinationName = Rx("quito");
-var globalDestinationType = Rx("arrival");
-var globalDestinationIndex = Rx("0");
-var serviceSuggestedDragData = Rx(<Widget>[]);
-var servicePromotedDragData = Rx(<Widget>[]);
 var promotedCatalogs = [];
-var promotedServices = [];
-var suggestedServices = [];
 var daysOff = [];
 int accDays = 0;
-var destDays = [];
-List destList = getParam("DESTINATION_DATA").values.toList();
-CatalogDto destinationData = CatalogDto(destList);
-Map<dynamic, dynamic> destinations = globalctx.memory["destinations"] ?? {};
-Rx<DateTime> birthDate =
-    Rx(DateTime.parse(globalctx.memory["customer"]["birth_date"]));
 Rx<DateTime> arrivalDate = Rx(DateTime(2022, 12, 10));
 RxString arrivalDateName =
     DateFormat('EEEE').format(arrivalDate.value).toString().obs;
@@ -64,7 +54,6 @@ Rx<DateTime> iHStartDate = Rx(firstDayDate.value);
 Rx<DateTime> iHEndDate = Rx(penultimateDayDate.value);
 Rx<DateTime> cruiseStartDate = Rx(firstDayDate.value);
 Rx<DateTime> cruiseEndDate = Rx(penultimateDayDate.value);
-
 Rx<DateTime> sinceDate = Rx(DateTime.now());
 Rx<DateTime> untilDate = Rx(DateTime.now());
 RxList<String> ocDays = <String>[].obs;
@@ -80,18 +69,6 @@ Rx<int> memoryDayLeft = Rx(globalctx.memory["days_left"]);
 final currentDayFormat = DateFormat('EEEE MMMM d yyyy');
 final dayFormat = DateFormat('d-MM-yyyy');
 List filteredsrv = [];
-var services =
-    getCatalogs(["hotel", "transport_service", "cruises", "food_services"])
-        .then((value) => value);
-var experiences = findCatalog("experiences");
-List expList = findCatalog("experiences").toList();
-var experienceSelectedDragData = Rx(<Widget>[]);
-RxList<Widget> destlist = <Widget>[].obs;
-Map<String, dynamic> states = {
-  "selected": globalctx.selectedExperiences,
-  "suggested": globalctx.suggestedExperiences,
-  "promoted": globalctx.promotedExperiences
-};
 Map dayDto = {
   "date": '',
   "observation": '',
@@ -104,16 +81,6 @@ Map dayDto = {
   "meals": "B/L/D/O",
   "experiences": {},
   "destination": ''
-};
-Map experienceDto = {
-  "destination": '',
-  "day": '',
-  "title": '',
-  "description": '',
-  "next": '',
-  "previous": '',
-  "experience_id": '',
-  "photo": ''
 };
 var days = [
   {"dayId": 1, "spa": "Lunes", "eng": "Monday"},
@@ -138,17 +105,8 @@ var travelRhytmAges = {
 Rx<List<String>> refresh = Rx(<String>[]);
 Rx<int> trigger = Rx(0);
 Stream? stream;
-final formKey = GlobalKey<FormState>();
+var formKey = GlobalKey<FormState>();
 var memory = globalctx.memory;
-var detsdata = getValue(memory, "destinations", def: []);
-var allDestinations = memory["destinations"];
-var destinationList = allDestinations.entries
-    .map((e) => {"destination": e.key.toString(), ...e.value})
-    .toList();
-List<dynamic> customDestinationData = [
-  ...destinationList,
-];
-var promotedDestinations = globalctx.promotedDestinations;
 RxInt selectedIndex = 0.obs;
 RxString travelCode = (() {
   try {
@@ -165,23 +123,14 @@ RxString travelCode = (() {
     return (leadPassenger.value.toString()).obs;
   }
 })();
-
-RxString leadPassenger = "pp".obs;
-RxString arrivalPort = "6".obs;
-RxString departurePort = "6".obs;
-RxString destCountry = "1".obs;
-var selectedDestinations = globalctx.destinations;
-var destinationsCatalog = findCatalog("destinations");
-var destinationCountry = findCatalog("destination_country");
+RxString leadPassenger = "".obs;
+RxString arrivalPort = "0".obs;
+RxString departurePort = "0".obs;
 var arrival = {}.obs;
 var departure = {}.obs;
-
 var airportCatalog = findCatalog("airport");
-
-RxInt destDraggable = 0.obs;
 RxInt expDraggable = 1.obs;
 RxInt srvDraggable = 1.obs;
-
 List pageList = [
   {
     "label": "Tour",
@@ -226,19 +175,9 @@ List pageList = [
     "key": GlobalKey()
   },
 ];
-
-RxString arrivalState =
-    getDestinationState(arrival["description"], 0, "arrival").toString().obs;
-RxString departureState = getDestinationState(
-        departure["description"], destinations.length - 1, "departure")
-    .toString()
-    .obs;
-
 var transportService = "0".obs;
 Rx<List<String>> translatingService = Rx(
     getFormValue(globalctx.memory, "tour", "translating_service", <String>[]));
-Rx<int> guide = Rx(getFormValue(globalctx.memory["destinations"],
-    globalDestinationIndex.value, "guide_type", 1));
 Rx<int> openBoolCredit =
     Rx(getFormValue(globalctx.memory, "logistic", "open_credit", 0));
 Rx<int> arrivalDinner =
@@ -247,19 +186,8 @@ Rx<int> openCredit =
     Rx(getFormValue(globalctx.memory, "logistic", "open_credit_value", 100));
 RxBool openGuide = false.obs;
 RxBool openTranslate = false.obs;
-Rx<String> arrivalHour = Rx(getFormValue(
-    globalctx.memory["destinations"], 0, "arrival_value", "00:00"));
-
 var serviceTypeCatalog = Rx(findCatalog("service_type"));
 var translatingCatalog = Rx(findCatalog("translating_service"));
-
-var currentDestinationTr =
-    getDestinationTravelRhythm(globalDestinationName.value, "arrival");
-var currentDestinationTrRange = currentDestinationTr["value"];
-var currentDestinationTrMinRange = Rx(currentDestinationTrRange["min"]);
-var currentDestinationTrMaxRange = Rx(currentDestinationTrRange["max"]);
-var currentDestinationType = "arrival";
-var currentDestinationKeyActivities = [].obs;
 var leftHours = {}.obs;
 var endHours = {}.obs;
 var trMaxHourValues = {
@@ -275,7 +203,7 @@ var trMaxHourValues = {
   2: 1,
   3: 3
 };
-var trMaxValues = {
+Map trMaxValues = {
   "SOFT": 6.0,
   "MEDIUM": 8.0,
   "HARD": 10.0,
@@ -288,7 +216,7 @@ var trMaxValues = {
   2: 8.0,
   3: 10.0
 };
-var trAgeMaxValues = {
+Map trAgeMaxValues = {
   "SOFT": [60, 99],
   "MEDIUM": [40, 59],
   "HARD": [0, 39],
@@ -306,11 +234,9 @@ var clearedHours = {}.obs;
 var clearedKA = {}.obs;
 var totalHours = {}.obs;
 var currentTravelRhythm = "1".obs;
-var currentDestinationOption = "0".obs;
 final TimeOfDay time = TimeOfDay(hour: 7, minute: 15);
 Rx<TimeOfDay?> startTime = Rx(time);
 Rx<TimeOfDay?> endTime = Rx(time);
-
 var searcherHeader = Rx(<DataColumn>[]);
 var searcherDetail = Rx(<DataRow>[]);
 var netRateHeader = Rx(<DataColumn>[]);
@@ -324,53 +250,31 @@ RxString? searchResult = ''.obs;
 List filtered = [];
 int idx = 0;
 String type = '';
-List filteredExperiences = [];
 var filteredData = [].obs;
 var absorvedPurpose = false.obs;
 var purposeMemory = <String>[].obs;
-var hotelFilterMemory = <String>[].obs;
 var kaMemory = <String>[].obs;
 var generated = false;
-var customerTypeCatalog = findCatalog("legal_client_type");
-var client = globalctx.memory["customer"];
 var tour = globalctx.memory["tour"];
 Rx<List<Map<String, dynamic>>> citylist = Rx([]);
 RxString customerType = client["client_type_id"].toString().obs;
-RxString country = getValue(client, "origin_id", def: "1").toString().obs;
+RxString country = getValue(client, "origin_id", def: "146").toString().obs;
 RxString city = getValue(client, "city_id", def: "0").toString().obs;
-
 List<Map<String, dynamic>> countrylist = [];
 Map<dynamic, dynamic> countries = getContext("countries");
+var currentCountry = "Ecuador".obs;
 Rx<List<Map<String, dynamic>>> countrydata = Rx((() {
   log("Countries: $countries\n\n");
   countrylist = [];
   var index = 0;
-  if (countries != null) {
-    for (var country in countries.keys) {
-      countrylist.add({
-        "code": "$index",
-        "description": country,
-      });
-      index++;
-    }
+  for (var country in countries.keys) {
+    countrylist.add({
+      "code": "$index",
+      "description": country,
+    });
+    index++;
   }
-
   log("CountryList: $countrylist");
   return countrylist;
 })());
-
-var cruiseTable = Rx(
-  DataTable(
-    columns: searcherHeader.value,
-    rows: searcherDetail.value,
-  ),
-);
-
-var hotelTable = Rx(
-  DataTable(
-    columns: searcherHeader.value,
-    rows: searcherDetail.value,
-  ),
-);
-
 var moreFilters = false.obs;

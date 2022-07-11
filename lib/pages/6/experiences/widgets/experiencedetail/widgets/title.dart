@@ -17,7 +17,7 @@ class TitleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var expData = getExperienceByName(experience).value;
+    var expData = getExperienceDataByName(experience).value;
     Rx<TimeOfDay?> timeStart = Rx(getFormValue(
             globalctx.memory["days"][currentDay.value],
             experience,
@@ -39,14 +39,14 @@ class TitleWidget extends StatelessWidget {
             Text("Open Days: ",
                 style: KTextSytle(
                         context: context,
-                        fontSize: 10,
+                        fontSize: 15,
                         fontWeight: FontWeight.bold,
                         color: Color.fromARGB(255, 204, 164, 61))
                     .getStyle()),
             Text("${expData["openDays"]}",
                 style: KTextSytle(
                         context: context,
-                        fontSize: 10,
+                        fontSize: 15,
                         fontWeight: FontWeight.bold,
                         color: Colors.grey)
                     .getStyle()),
@@ -57,14 +57,14 @@ class TitleWidget extends StatelessWidget {
             Text("Open Time: ",
                 style: KTextSytle(
                         context: context,
-                        fontSize: 10,
+                        fontSize: 15,
                         fontWeight: FontWeight.bold,
                         color: Color.fromARGB(255, 204, 164, 61))
                     .getStyle()),
             Text("${expData["openTime"]}",
                 style: KTextSytle(
                         context: context,
-                        fontSize: 10,
+                        fontSize: 15,
                         fontWeight: FontWeight.bold,
                         color: Colors.grey)
                     .getStyle()),
@@ -75,14 +75,14 @@ class TitleWidget extends StatelessWidget {
             Text("Close Time: ",
                 style: KTextSytle(
                         context: context,
-                        fontSize: 10,
+                        fontSize: 15,
                         fontWeight: FontWeight.bold,
                         color: Color.fromARGB(255, 204, 164, 61))
                     .getStyle()),
             Text("${expData["closeTime"]}",
                 style: KTextSytle(
                         context: context,
-                        fontSize: 10,
+                        fontSize: 15,
                         fontWeight: FontWeight.bold,
                         color: Colors.grey)
                     .getStyle()),
@@ -93,14 +93,14 @@ class TitleWidget extends StatelessWidget {
             Text("Duration: ",
                 style: KTextSytle(
                         context: context,
-                        fontSize: 10,
+                        fontSize: 15,
                         fontWeight: FontWeight.bold,
                         color: Color.fromARGB(255, 204, 164, 61))
                     .getStyle()),
             Text("${expData["exptime"]} min",
                 style: KTextSytle(
                         context: context,
-                        fontSize: 10,
+                        fontSize: 15,
                         fontWeight: FontWeight.bold,
                         color: Colors.grey)
                     .getStyle()),

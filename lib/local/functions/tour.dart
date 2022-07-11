@@ -2,8 +2,22 @@
 import 'package:flutter/material.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
-import 'package:sweetalert/sweetalert.dart';
+import 'package:sweetalertv2/sweetalertv2.dart';
 import 'package:yaml/yaml.dart';
+
+// ████████╗ ██████╗ ██╗   ██╗██████╗
+// ╚══██╔══╝██╔═══██╗██║   ██║██╔══██╗
+//    ██║   ██║   ██║██║   ██║██████╔╝
+//    ██║   ██║   ██║██║   ██║██╔══██╗
+//    ██║   ╚██████╔╝╚██████╔╝██║  ██║
+//    ╚═╝    ╚═════╝  ╚═════╝ ╚═╝  ╚═╝
+
+// ███████╗██╗   ██╗███╗   ██╗ ██████╗████████╗██╗ ██████╗ ███╗   ██╗███████╗
+// ██╔════╝██║   ██║████╗  ██║██╔════╝╚══██╔══╝██║██╔═══██╗████╗  ██║██╔════╝
+// █████╗  ██║   ██║██╔██╗ ██║██║        ██║   ██║██║   ██║██╔██╗ ██║███████╗
+// ██╔══╝  ██║   ██║██║╚██╗██║██║        ██║   ██║██║   ██║██║╚██╗██║╚════██║
+// ██║     ╚██████╔╝██║ ╚████║╚██████╗   ██║   ██║╚██████╔╝██║ ╚████║███████║
+// ╚═╝      ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝
 
 /// ## processTour
 /// *__Method to prepare all memory data to send it to backend__*
@@ -125,6 +139,89 @@ Future saveTour() async {
   }
 }
 
+/// ## findTravelRhythmDescription
+/// *__Method to find travel Rhythm Description__*
+///
+///### Uses:
+/// ```dart
+///        label:
+///      "Travel Rhythm: ${findTravelRhythmDescription(parseInt(currentTravelRhythm.value))}",
+/// ```
+/// ### Returns:
+///```dart
+/// String?
+///```
+String? findTravelRhythmDescription(int code) {
+  try {
+    if (code == 0) {
+      return "HARD";
+    }
+    var travelData = findCatalog("travel_rhythm").toList();
+    String description = travelData
+        .firstWhere((element) => element["code"] == code)["description"];
+    return description;
+  } catch (e) {
+    log(e);
+  }
+  return null;
+}
+
+/// ## resetFindTourData
+/// *__Method reset Find Tour Data__*
+///
+///### Uses:
+/// ```dart
+///      onPressed: () {
+///   resetFindTourData(context, controller);
+/// },
+/// ```
+/// ### Returns:
+///```dart
+/// void
+///```
+void resetFindTourData(context, controller) {
+  var data = globalctx.memory["tours"];
+  if (searchResult!.isNotEmpty) {
+    controller.clear();
+    searchResult!.value = '';
+    filteredData.value = data;
+    var detail = getTourDataRows(context, filteredData, null);
+    searcherDetail.value = (detail);
+  }
+}
+
+/// ## filterFindTourData
+/// *__Method reset Find Tour Data__*
+///
+///### Uses:
+/// ```dart
+///       onChanged: (value) {
+///             filterFindTourData(context, value);
+///            },
+/// ```
+/// ### Returns:
+///```dart
+/// void
+///```
+void filterFindTourData(context, value) {
+  var data = globalctx.memory["tours"];
+  try {
+    searchResult!.value = value.toString();
+    if (searchResult!.isNotEmpty) {
+      filteredData.value = data
+          .where((quote) =>
+              quote["date"].toString().contains(searchResult!.value) ||
+              quote["name"].toString().contains(searchResult!.value) ||
+              quote["quote"].toString().contains(searchResult!.value))
+          .toList();
+      var detail = getTourDataRows(context, filteredData, null);
+      searcherDetail.value = (detail);
+    }
+  } catch (e) {
+    log(e);
+  }
+}
+
 /// ## saveTranslatingServices
 /// *__Method to save Translating Service in memory to backend__*
 ///
@@ -179,18 +276,15 @@ Future getTour(ctx, {int tourId = 0, detail = false, cb}) async {
     var data = res['data'];
     cb(data);
   } else {
-    SweetAlert.show(ctx,
+    SweetAlertV2.show(ctx,
         curve: ElasticInCurve(),
         title: res['message'],
-        style: SweetAlertStyle.error, onPress: (bool isConfirm) {
+        style: SweetAlertV2Style.error, onPress: (bool isConfirm) {
       Get.close(1);
       return false;
     });
   }
 }
-
- 
-
 
 /// ## newTour
 /// *__Method to get NewTour Id from backend__*
@@ -207,14 +301,21 @@ Future getTour(ctx, {int tourId = 0, detail = false, cb}) async {
 ///  Future
 ///```
 Future newTour() async {
-  var res = await fetchHandler(kDefaultSchema, kDefaultServer,
-      kDefaultServerPort, kDefaultNewTourEdit, 'POST', {"id": 1});
-  if (res['state'] == true) {
-    globalctx.memory["tour"]["code"] = res['data']["id"];
-    setContext("catalogs", res['data']["catalogs"]);
-    selectedIndex.value = 0;
-    Get.toNamed("/Tour");
-  } else {
-    log(res["message"]);
+  try {
+    var res = await fetchHandler(kDefaultSchema, kDefaultServer,
+        kDefaultServerPort, kDefaultNewTourEdit, 'POST', {"id": "1"});
+
+    if (res['state'] == true) {
+      globalctx.memory["tour"]["code"] = res['data']["id"];
+      // setContext("catalogs", res['data']["catalogs"]);
+      selectedIndex.value = 0;
+      Get.toNamed("/Tour");
+    } else {
+      log(res);
+    }
+  } catch (e) {
+    log(e);
   }
 }
+
+ 

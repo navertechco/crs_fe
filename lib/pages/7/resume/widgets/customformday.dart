@@ -18,7 +18,7 @@ class CustomFormDayWidget extends StatelessWidget {
     try {
       var destId = indexes[0];
       var destDay = indexes[1];
-      var dayId = getDayId(destId, destDay);
+      var dayId = getCurrentDestinationDayId(destId, destDay);
       indexes[1] = dayId;
       var destinations = getCombinedDestinations();
       var destination = destinations[destId.toString()];

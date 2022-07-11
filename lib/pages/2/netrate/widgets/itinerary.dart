@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:naver_crs/pages/2/netrate/widgets/customdescription.dart';
+import '../../../../index.dart';
 import 'cover.dart';
 import 'destinations.dart';
 import 'header.dart';
@@ -11,6 +13,12 @@ class Itinerary extends StatelessWidget {
   final pkeys;
   @override
   Widget build(BuildContext context) {
+    var totalNetRate = 0.obs;
+    var netRate = globalctx.memory["netRate"];
+    for (var item in netRate.entries) {
+      totalNetRate.value += item.value as int;
+    }
+
     return Padding(
       padding: EdgeInsets.only(
           top: MediaQuery.of(context).size.height * 0.4,
@@ -35,7 +43,7 @@ class Itinerary extends StatelessWidget {
                       Destinations(),
                       CustomDescriptionWidget(
                           fontWeight: FontWeight.bold,
-                          text: "Total Net Rate: 0",
+                          text: "Total Net Rate: $totalNetRate",
                           width: 0.55,
                           fontSize: 0.016),
                     ]),

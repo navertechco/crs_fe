@@ -24,10 +24,10 @@ class DestinationFrontOptionWidget extends StatelessWidget {
     return Stack(children: [
       Padding(
         padding: EdgeInsets.only(
-          top: MediaQuery.of(context).size.height * 0.017,
-          left: MediaQuery.of(context).size.width * 0.013,
+          top: MediaQuery.of(context).size.height * 0.0074,
+          left: MediaQuery.of(context).size.width * 0.005,
         ),
-        child: Image.asset(dest[2],
+        child: Image.asset("assets/images/" + dest[2],
             width: MediaQuery.of(context).size.width * 0.39,
             height: MediaQuery.of(context).size.height * 0.13),
       ),
@@ -38,8 +38,8 @@ class DestinationFrontOptionWidget extends StatelessWidget {
         ),
         child: Align(
           alignment: Alignment.centerLeft,
-          child: Image.asset(dest[3],
-              width: MediaQuery.of(context).size.width * 0.39,
+          child: Image.asset("assets/images/" + dest[3],
+              width: MediaQuery.of(context).size.width * 0.37,
               height: MediaQuery.of(context).size.height * 0.13),
         ),
       ),
@@ -49,14 +49,14 @@ class DestinationFrontOptionWidget extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(
                 top: MediaQuery.of(context).size.height * 0.000,
-                left: MediaQuery.of(context).size.width * 0.05,
+                left: MediaQuery.of(context).size.width * 0.03,
               ),
               child: Row(
                 children: [
                   Text("Arrival",
                       style: KTextSytle(
                               context: context,
-                              fontSize: 10,
+                              fontSize: 15,
                               fontWeight: FontWeight.bold,
                               color: Colors.white)
                           .getStyle()),
@@ -72,14 +72,14 @@ class DestinationFrontOptionWidget extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(
                 top: MediaQuery.of(context).size.height * 0.0,
-                left: MediaQuery.of(context).size.width * 0.05,
+                left: MediaQuery.of(context).size.width * 0.03,
               ),
               child: Row(
                 children: [
                   Text("Departure",
                       style: KTextSytle(
                               context: context,
-                              fontSize: 10,
+                              fontSize: 15,
                               fontWeight: FontWeight.bold,
                               color: Colors.white)
                           .getStyle()),
@@ -99,10 +99,10 @@ class DestinationFrontOptionWidget extends StatelessWidget {
             !validateDragDestinationOptions(destination, index, type).value) {
           return Padding(
             padding: EdgeInsets.only(
-              top: MediaQuery.of(context).size.height * 0.017,
-              left: MediaQuery.of(context).size.width * 0.013,
+              top: MediaQuery.of(context).size.height * 0.009,
+              left: MediaQuery.of(context).size.width * 0.005,
             ),
-            child: Image.asset(dest[2],
+            child: Image.asset("assets/images/" + dest[2],
                 color: Color.fromARGB(100, 10, 10, 10),
                 width: MediaQuery.of(context).size.width * 0.39,
                 height: MediaQuery.of(context).size.height * 0.13),

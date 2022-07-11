@@ -1,23 +1,22 @@
 // ignore_for_file: import_of_legacy_library_into_null_safe
 
 import 'package:flutter/material.dart';
-import 'index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
-import 'package:sweetalert/sweetalert.dart';
+import 'package:sweetalertv2/sweetalertv2.dart';
 
 class ForgotController extends GetxController {
   ForgotController();
 
   final state = ForgotState();
   void getConfirmation(ctx, msg, success) {
-    return SweetAlert.show(ctx,
+    return SweetAlertV2.show(ctx,
         curve: ElasticInCurve(),
         title: msg,
         subtitle: success
             ? 'Se envió un formulario de recuperación a tu correo'
             : 'Intenta con otro email',
-        style: success ? SweetAlertStyle.success : SweetAlertStyle.error,
+        style: success ? SweetAlertV2Style.success : SweetAlertV2Style.error,
         onPress: (bool isConfirm) {
       Get.toNamed("/Signin");
       return false;
@@ -39,7 +38,7 @@ class ForgotController extends GetxController {
         Text("A confirmation email was sent !!!!",
             style: KTextSytle(
                     context: ctx,
-                    fontSize: 15,
+                    fontSize: isMobile * 15,
                     fontWeight: FontWeight.bold,
                     color: Colors.black54)
                 .getStyle()),
@@ -53,7 +52,7 @@ class ForgotController extends GetxController {
         Text("The system had a technical problem, try again later",
             style: KTextSytle(
                     context: ctx,
-                    fontSize: 15,
+                    fontSize: isMobile * 15,
                     fontWeight: FontWeight.bold,
                     color: Colors.black54)
                 .getStyle()),

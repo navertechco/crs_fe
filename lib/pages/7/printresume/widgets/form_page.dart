@@ -1,11 +1,9 @@
 // ignore_for_file: unused_field
 
 import 'package:flutter/material.dart';
-import '../index.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/index.dart';
-import '../controller.dart';
 
 class PrintResumeFormPage extends GetView<StatelessWidget> {
   PrintResumeFormPage({
@@ -70,7 +68,7 @@ class WebButton extends StatelessWidget {
       child: RoundedFormButton(
         color: color,
         label: label,
-        height: 0.07,
+        height: 0.05,
         fontSize: 5,
         onPressed: () async {
           showCustomDialog(context, WebView(url: url), "Close",
@@ -90,28 +88,28 @@ class WebView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(children: [
       InAppWebView(
-      key: webViewKey,
-      initialOptions: InAppWebViewGroupOptions(
-        android: AndroidInAppWebViewOptions(
-          useShouldInterceptRequest: true,
-          useHybridComposition: true,
-          safeBrowsingEnabled: false,
-        ),
-        crossPlatform: InAppWebViewOptions(
-          useShouldOverrideUrlLoading: true,
-          javaScriptCanOpenWindowsAutomatically: true,
-          javaScriptEnabled: true,
-          mediaPlaybackRequiresUserGesture: false,
-          preferredContentMode: UserPreferredContentMode.MOBILE,
-        ),
-      ),
-      onReceivedServerTrustAuthRequest: (controller, challenge) async {
-        return ServerTrustAuthResponse(
-            action: ServerTrustAuthResponseAction.PROCEED);
-      },
-      initialUrlRequest: URLRequest(
-        url: Uri.parse(url),
-      ))
+          key: webViewKey,
+          initialOptions: InAppWebViewGroupOptions(
+            android: AndroidInAppWebViewOptions(
+              useShouldInterceptRequest: true,
+              useHybridComposition: true,
+              safeBrowsingEnabled: false,
+            ),
+            crossPlatform: InAppWebViewOptions(
+              useShouldOverrideUrlLoading: true,
+              javaScriptCanOpenWindowsAutomatically: true,
+              javaScriptEnabled: true,
+              mediaPlaybackRequiresUserGesture: false,
+              preferredContentMode: UserPreferredContentMode.MOBILE,
+            ),
+          ),
+          onReceivedServerTrustAuthRequest: (controller, challenge) async {
+            return ServerTrustAuthResponse(
+                action: ServerTrustAuthResponseAction.PROCEED);
+          },
+          initialUrlRequest: URLRequest(
+            url: Uri.parse(url),
+          ))
     ]);
   }
 }

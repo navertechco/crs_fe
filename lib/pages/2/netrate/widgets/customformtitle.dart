@@ -18,7 +18,7 @@ class CustomFormTitleWidget extends StatelessWidget {
       var titlearray = label.split("#");
       if (titlearray.length > 1) {
         for (var i = 0; i < titlearray.length; i++) {
-          title += titlearray[i] + ("\t" * 7);
+          title += titlearray[i] + ("  " * 7);
         }
         return title;
       }
@@ -30,7 +30,7 @@ class CustomFormTitleWidget extends StatelessWidget {
       var ident = '';
       if (level > 1) {
         for (var i = 1; i <= level; i++) {
-          ident += "\t";
+          ident += "  ";
         }
       }
       return ident;

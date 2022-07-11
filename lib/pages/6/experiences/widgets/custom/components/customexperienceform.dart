@@ -175,15 +175,15 @@ class ActivityItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
+    return TextButton(
+      onPressed: () {
         showDialog(
             context: context,
             builder: (context) {
               return VideoItem(item: item);
             });
       },
-      child: Image.asset(item["image"],
+      child: Image.asset("assets/images/" + item["image"],
           width: MediaQuery.of(context).size.width * 0.25),
     );
   }
@@ -202,7 +202,7 @@ class ItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Image.asset(icon),
+        Image.asset("assets/images/" + icon),
         SizedBox(width: MediaQuery.of(context).size.width * 0.01),
         Text(
           text,

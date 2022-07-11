@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 class CustomBodyDaysWidget extends HookWidget {
   final ExperiencesController ctrl;
   final ValueNotifier<int> counter; 
-  CustomBodyDaysWidget({
+  const CustomBodyDaysWidget({
     Key? key,
     required this.ctrl,
     required this.counter, 

@@ -1,35 +1,20 @@
 // Other s
-import 'package:naver_crs/common/com/index.dart';
-
+import 'dart:convert';
 import 'package:naver_crs/index.dart';
 
-/// ## getCatalog
-/// *__Method to fetch a catalog list from backend__*
-///
-/// @param List<Catalog>
-///
-///### Uses:
-/// ```dart
-///  getCatalog(["catalog1", "catalog2"])
-/// ```
-///
-/// @return void
-///
-void getCatalog(
-  List<String> catalogs,
-) async {
-  var res = await fetchHandler(kDefaultSchema, kDefaultServer,
-      kDefaultServerPort, kDefaultCatalogPath, 'POST', {
-    "data": {"catalogs": catalogs}
-  });
-  // ignore: avoid_print
-  log(res);
-  if (res['state'] == true) {
-    setContext("catalogs", res['data']);
-  }
-}
+//  ██████╗ █████╗ ██╗      █████╗ ████████╗ ██████╗  ██████╗
+// ██╔════╝██╔══██╗██║     ██╔══██╗╚══██╔══╝██╔═══██╗██╔════╝
+// ██║     ███████║██║     ███████║   ██║   ██║   ██║██║  ███╗
+// ██║     ██╔══██║██║     ██╔══██║   ██║   ██║   ██║██║   ██║
+// ╚██████╗██║  ██║███████╗██║  ██║   ██║   ╚██████╔╝╚██████╔╝
+//  ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝   ╚═╝    ╚═════╝  ╚═════╝
 
-
+// ███████╗██╗   ██╗███╗   ██╗ ██████╗████████╗██╗ ██████╗ ███╗   ██╗███████╗
+// ██╔════╝██║   ██║████╗  ██║██╔════╝╚══██╔══╝██║██╔═══██╗████╗  ██║██╔════╝
+// █████╗  ██║   ██║██╔██╗ ██║██║        ██║   ██║██║   ██║██╔██╗ ██║███████╗
+// ██╔══╝  ██║   ██║██║╚██╗██║██║        ██║   ██║██║   ██║██║╚██╗██║╚════██║
+// ██║     ╚██████╔╝██║ ╚████║╚██████╗   ██║   ██║╚██████╔╝██║ ╚████║███████║
+// ╚═╝      ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝
 
 /// ## getMemoryCatalogChild
 /// *__Method to get filtered catalog child from memory__*
@@ -295,16 +280,28 @@ CatalogDto toCatalog(item) {
 ///
 /// @return catalogs (List<Catalog>)
 ///
-dynamic getCatalogs(catalogs) async {
-  Map res = await fetchHandler(kDefaultSchema, kDefaultServer,
-      kDefaultServerPort, kDefaultFindCatalog, 'POST', {
-    "data": {"catalogs": catalogs}
-  });
-  if (res['state'] == true) {
-    var entries = res['data']["catalogs"].values.toList();
-    return entries;
-  } else {
-    log(res["message"]);
+Future getCatalogs(catalogs) async {
+  try {
+    var res = await fetchHandler(kDefaultSchema, kDefaultServer,
+        kDefaultServerPort, kDefaultFindCatalog, 'POST', {
+      "data": {"catalogs": catalogs}
+    });
+    if (res != null) {
+      if (res is String) {
+        res = jsonDecode(res);
+      }
+    }
+    if (res['state'] == true) {
+      var catalogs = getContext("catalogs") ?? {};
+      setContext("catalogs", {...catalogs, ...res['data']["catalogs"] as Map});
+      return true;
+    } else {
+      log(res["message"]);
+      return false;
+    }
+  } catch (e) {
+    log(e);
+    return false;
   }
 }
 

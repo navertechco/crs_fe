@@ -28,7 +28,7 @@ class PrintDocs extends StatelessWidget {
             fontWeight: FontWeight.bold));
       }
     }
-    if (data != null && notIncluded != null) {
+    if (notIncluded != null) {
       for (var i = 0; i < notIncluded.length; i++) {
         notIncludedlist.add(CustomDescriptionWidget(
             text: "\u2022 ${notIncluded[i]}",
@@ -38,7 +38,7 @@ class PrintDocs extends StatelessWidget {
       }
     }
 
-    if (data != null && netrates != null) {
+    if (netrates != null) {
       for (var i = 0; i < netrates.length; i++) {
         var row = netrates[i];
         var roomtype = row["room_type"];

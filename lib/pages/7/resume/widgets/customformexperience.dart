@@ -27,7 +27,7 @@ class CustomFormExperienceRowWidget extends StatelessWidget {
           ? experienceindex + 1
           : experienceindex;
       var nextExpName = expList[nextIndex];
-      var experience = getExperienceByName(expName);
+      var experience = getExperienceDataByName(expName);
       var experienceType = experience.value["experience_type"];
       var experienceDescription = experience.value["description"];
       var nextexperience = promoted[nextExpName];
@@ -49,7 +49,7 @@ class CustomFormExperienceRowWidget extends StatelessWidget {
                   globalctx.memory["promoted"][destDay][expName]["value"]
                       ["meal_type"] = value;
                 },
-                label: "\t\tMeal Option (A, B, C, D):\t\t\t\t",
+                label: "    Meal Option (A, B, C, D):        ",
                 data: [0, 1, 2, 3]),
           Image.asset(
             "assets/images/1x/Recurso_374mdpi.png",

@@ -1,6 +1,5 @@
 // ignore_for_file: must_be_immutable
 import 'package:flutter/material.dart';
-import '../index.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/index.dart';
 
@@ -9,7 +8,7 @@ class RoundedFormCheckbox extends StatelessWidget {
   final double top;
   final double width;
   final double height;
-  final double fontSize;
+  final fontSize;
   final String? hintText;
   final String? label;
   final int? value;
@@ -26,7 +25,7 @@ class RoundedFormCheckbox extends StatelessWidget {
       this.top = 0.1,
       this.width = 0.2,
       this.height = 0.01,
-      this.fontSize = 0.1,
+      this.fontSize = 10,
       this.password = false,
       this.value = 0,
       required this.groupValue,
@@ -37,11 +36,11 @@ class RoundedFormCheckbox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        width: MediaQuery.of(context).size.width * width,
-        height: MediaQuery.of(context).size.height * height,
+        width: MediaQuery.of(context).size.width * isMobile * width,
+        height: MediaQuery.of(context).size.height * isMobile * height,
         padding: EdgeInsets.only(
-          left: left,
-          top: top,
+          left: isMobile * left,
+          top: isMobile * top,
         ),
         decoration: BoxDecoration(
             color: Colors.grey, borderRadius: BorderRadius.circular(50)),
@@ -54,6 +53,7 @@ class RoundedFormCheckbox extends StatelessWidget {
                   onChanged: onChanged);
             }),
             CustomFormLabelWidget(
+                fontSize: fontSize,
                 label: hintText!,
                 fontWeight: value == groupValue.value
                     ? FontWeight.bold

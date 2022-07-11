@@ -4,7 +4,20 @@
 import 'package:get/get.dart';
 import 'package:naver_crs/pages/5/destination/widgets/destinationdetail/widgets/index.dart';
 import 'package:naver_crs/index.dart';
-import 'general.dart';
+
+// ██████╗  █████╗ ██╗   ██╗
+// ██╔══██╗██╔══██╗╚██╗ ██╔╝
+// ██║  ██║███████║ ╚████╔╝
+// ██║  ██║██╔══██║  ╚██╔╝
+// ██████╔╝██║  ██║   ██║
+// ╚═════╝ ╚═╝  ╚═╝   ╚═╝
+
+// ███████╗██╗   ██╗███╗   ██╗ ██████╗████████╗██╗ ██████╗ ███╗   ██╗███████╗
+// ██╔════╝██║   ██║████╗  ██║██╔════╝╚══██╔══╝██║██╔═══██╗████╗  ██║██╔════╝
+// █████╗  ██║   ██║██╔██╗ ██║██║        ██║   ██║██║   ██║██╔██╗ ██║███████╗
+// ██╔══╝  ██║   ██║██║╚██╗██║██║        ██║   ██║██║   ██║██║╚██╗██║╚════██║
+// ██║     ╚██████╔╝██║ ╚████║╚██████╗   ██║   ██║╚██████╔╝██║ ╚████║███████║
+// ╚═╝      ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝
 
 /// ## paginateDay
 /// *__Method to paginate a day__*
@@ -61,10 +74,9 @@ Future nextDay() async {
 Future jumpDay(direction) async {
   decideBypass(direction);
   expDraggable.value = 1;
-  currentDate.value =
-      arrivalDate.value.add(Duration(days: currentDay.value - 1));
+  currentDate.value = arrivalDate.value.add(Duration(days: currentDay.value));
   updateCurrentDestination();
-  // updateMeals();
+  promoteMealExperiences();
   filterSuggestedExperiences();
   initializeHours();
   gotoPage("Experiences");
@@ -283,9 +295,13 @@ previousDay() {
 processDays() {
   result = [];
 
-  for (String dest in destinations.keys.toList()) {
-    for (int i = 1; i <= int.parse(destinations[dest]["explorationDay"]); i++) {
-      result.add({"day": i, "destination": destinations[dest]["destination"]});
+  for (String index in destinations.keys) {
+    var destData = destinations[index];
+    var explorationDay = int.parse(destData["explorationDay"]);
+    var destination =
+        globalctx.states["destinations"][int.parse(index)]["destination"];
+    for (int i = 1; i <= explorationDay; i++) {
+      result.add({"day": i, "destination": destination});
     }
   }
 
@@ -316,7 +332,7 @@ processDays() {
 updateCurrentKeyActivities() {
   var index = getDestinationIndexByDay();
   var ka = getFormValue(
-      globalctx.memory["destinations"], index, "key_activities", []);
+      globalctx.memory["destinations"], index, "key_activities", <String>[]);
   currentDestinationKeyActivities.value = ka;
 }
 
@@ -334,7 +350,7 @@ updateCurrentKeyActivities() {
 updateCurrentDestinationOption() {
   var index = getDestinationIndexByDay();
   var destinationOption = getFormValue(
-      globalctx.memory["destinations"], index, "destination_option", "1");
+      globalctx.memory["destinations"], index, "destination_option", "0");
   currentDestinationOption.value = destinationOption;
 }
 
@@ -352,7 +368,7 @@ updateCurrentDestinationOption() {
 updateCurrentDestinationTravelRhythm() {
   var index = getDestinationIndexByDay();
   var travelRhythm = getFormValue(
-      globalctx.memory["destinations"], index, "travel_rhythm", "1");
+      globalctx.memory["destinations"], index.toString(), "travel_rhythm", "0");
   currentTravelRhythm.value = travelRhythm;
 }
 

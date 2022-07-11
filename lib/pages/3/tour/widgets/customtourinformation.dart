@@ -1,11 +1,8 @@
 // ignore_for_file: invalid_use_of_protected_member
 
-import 'package:checkbox_formfield/checkbox_icon_formfield.dart';
 import 'package:flutter/material.dart';
-import '../index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
-import 'package:naver_crs/common/index.dart';
 
 class CustomTourInformationForm extends StatelessWidget {
   CustomTourInformationForm({Key? key, this.profile, this.ctrl})
@@ -54,30 +51,78 @@ class TourLeftFormWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        top: MediaQuery.of(context).size.height * 0.15,
-        left: MediaQuery.of(context).size.width * 0.55,
-      ),
-      child: SizedBox(
-        width: MediaQuery.of(context).size.width * 0.5,
-        height: MediaQuery.of(context).size.height * 0.65,
-        child: SingleChildScrollView(
-          child: Column(children: [
-            CountryField(readonly: readonly, ctrl: ctrl),
-            BudgetField(
-                tour: tour,
-                readonly: readonly,
-                ctrl: ctrl,
-                accomodationType: accomodationType),
-            PaxField(ctrl: ctrl),
-            GalapagosCheckboxField(),
-            TransportField(),
-            PurposeField(),
-            TranslatingField(),
-          ]),
-        ),
-      ),
+    return SingleChildScrollView(
+      child: Obx(() => Padding(
+            padding: EdgeInsets.only(
+              top: MediaQuery.of(context).size.height * isMobile * 0.15,
+              left: MediaQuery.of(context).size.width * isMobile * 0.55,
+            ),
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height * isMobile * 0.65,
+              width: MediaQuery.of(context).size.width * isMobile * 0.5,
+              child: SingleChildScrollView(
+                child: Column(children: [
+                  CountryField(readonly: readonly, ctrl: ctrl),
+                  BudgetField(
+                      tour: tour,
+                      readonly: readonly,
+                      ctrl: ctrl,
+                      accomodationType: accomodationType),
+                  PaxField(ctrl: ctrl),
+                  CheckboxField(
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold,
+                    label: "  Would you like to take a Galapagos Cruise?",
+                    color: Colors.black,
+                    trueIconColor: Colors.green,
+                    initialValue: getFormValue(
+                        globalctx.memory, "tour", "galapagos", false),
+                    enabled: true,
+                    iconSize: 25,
+                    onSaved: (value) {
+                      setFormValue(
+                          globalctx.memory, "tour", "galapagos", value);
+                      setFormValue(
+                          globalctx.memory, "tour", "galapagos_guide", value);
+                    },
+                    onChanged: (value) {
+                      setFormValue(
+                          globalctx.memory, "tour", "galapagos", value);
+                      setFormValue(
+                          globalctx.memory, "tour", "galapagos_guide", value);
+                    },
+                  ),
+                  CheckboxField(
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold,
+                    label: "  Would you like to take a Translator?",
+                    color: Colors.black,
+                    trueIconColor: Colors.green,
+                    initialValue: getFormValue(
+                        globalctx.memory, "tour", "translator", false),
+                    enabled: true,
+                    iconSize: 25,
+                    onSaved: (value) {
+                      setFormValue(
+                          globalctx.memory, "tour", "translator", value);
+                      setFormValue(
+                          globalctx.memory, "tour", "translator_guide", value);
+                    },
+                    onChanged: (value) {
+                      translator.value = value;
+                      setFormValue(
+                          globalctx.memory, "tour", "translator", value);
+                      setFormValue(
+                          globalctx.memory, "tour", "translator_guide", value);
+                    },
+                  ),
+                  TransportField(),
+                  PurposeField(),
+                  if (translator.value) TranslatingField(),
+                ]),
+              ),
+            ),
+          )),
     );
   }
 }
@@ -97,16 +142,16 @@ class TourKeyPad extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-        top: MediaQuery.of(context).size.height * 0.82,
-        left: MediaQuery.of(context).size.width * 0.56,
+        top: MediaQuery.of(context).size.height * isMobile * 0.81,
+        left: MediaQuery.of(context).size.width * isMobile * 0.56,
       ),
       child: CustomKeypadWidget(
-          width: 0.265,
+          fontSize: 10,
+          width: 0.25,
           onPrevious: () {
             if (selectedIndex.value > 0) {
               selectedIndex.value = selectedIndex.value - 1;
             }
-
             Get.back();
           },
           onNext: () {
@@ -133,10 +178,12 @@ class CountryField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomFormDropDownFieldWidget(
+      fontSize: 10,
+      height: 0.05,
       value: destCountry.value,
       disabled: readonly,
       validator: CustomRequiredValidator(
-          errorText: "country is required ", ctx: context),
+          errorText: "Destination Country is required ", ctx: context),
       onSaved: (value) {
         ctrl!.state.country = value!;
         destCountry.value = value;
@@ -145,6 +192,7 @@ class CountryField extends StatelessWidget {
       onChanged: (value) {
         ctrl!.state.country = value!;
         destCountry.value = value;
+        setFormValue(globalctx.memory, "logistic", "arrival_port", "0");
         updateDestinationsCatalogFilteredByCountry();
       },
       label: "Destination Country ",
@@ -170,13 +218,17 @@ class BudgetField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomFormDropDownFieldWidget(
-      value: getValue(tour, "accomodation_type", def: "1"),
+      fontSize: 10,
+      height: 0.05,
+      value: getValue(tour, "accomodation_type", def: "0"),
       disabled: readonly,
       onSaved: (value) {
         ctrl!.state.accomodation_type = value!;
+        setValue(tour, "accomodation_type", value);
       },
       onChanged: (value) {
         ctrl!.state.accomodation_type = value!;
+        setValue(tour, "accomodation_type", value);
       },
       validator: CustomRequiredValidator(
           errorText: "Accomodation type is required ", ctx: context),
@@ -197,6 +249,8 @@ class PaxField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomFormCounterFieldWidget(
+        fontSize: 10,
+        height: 0.05,
         initial: getFormValue(globalctx.memory, "tour", "passengers", 1),
         min: 1,
         max: 50,
@@ -205,7 +259,7 @@ class PaxField extends StatelessWidget {
           ctrl!.state.passengers = value! as int;
           setFormValue(globalctx.memory, "tour", "passengers", value as int);
         },
-        label: "  Passengers\t\t\t\t\t\t\t\t\t\t\t\t\t\t",
+        label: "  Passengers                  ",
         width: 0.20);
   }
 }
@@ -218,6 +272,8 @@ class TranslatingField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() => CustomFormMultiDropDownFieldWidget(
+          fontSize: 10,
+          height: 0.05,
           label: "Translating Services",
           validator: (value) => CustomMultiDropdownRequiredValidator(value,
               errorText: "Translating Service is required ", context: context),
@@ -245,6 +301,8 @@ class PurposeField extends StatelessWidget {
       return AbsorbPointer(
         absorbing: absorvedPurpose.value,
         child: CustomFormMultiDropDownFieldWidget(
+          fontSize: 10,
+          height: 0.05,
           validator: (value) {
             CustomMultiDropdownRequiredValidator(value,
                 errorText: "Purposes are required ", context: context);
@@ -252,10 +310,10 @@ class PurposeField extends StatelessWidget {
           value: purposeMemory.value,
           enabled: purposeMemory.value.length < 4,
           onSaved: (values) {
-            purposeValidate(values);
+            validatePurposes(values);
           },
           onChanged: (values) {
-            purposeValidate(values);
+            validatePurposes(values);
           },
           hintText: " ",
           label: "Purposes                      ",
@@ -274,9 +332,11 @@ class TransportField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomFormDropDownFieldWidget(
+      fontSize: 10,
+      height: 0.05,
       label: "Transport Options    ",
       validator: (value) => CustomMultiDropdownRequiredValidator(value,
-          errorText: "Day Transport Options are required ", context: context),
+          errorText: "Transport Options are required ", context: context),
       value: getFormValue(globalctx.memory, "tour", "transport", "0"),
       onSaved: (value) {
         transportService.value = value!;
@@ -288,40 +348,6 @@ class TransportField extends StatelessWidget {
       },
       hintText: "",
       data: serviceTypeCatalog.value,
-    );
-  }
-}
-
-class GalapagosCheckboxField extends StatelessWidget {
-  const GalapagosCheckboxField({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        CustomTitleWidget(
-            fontWeight: FontWeight.bold,
-            label: "  Would you like to take a Galapagos Cruise?",
-            color: Colors.black),
-        CheckboxIconFormField(
-          context: context,
-          trueIconColor: Colors.green,
-          initialValue:
-              getFormValue(globalctx.memory, "tour", "galapagos", false),
-          enabled: true,
-          iconSize: 32,
-          onSaved: (value) {
-            setFormValue(globalctx.memory, "tour", "galapagos", value);
-            setFormValue(globalctx.memory, "tour", "galapagos_guide", value);
-          },
-          onChanged: (value) {
-            setFormValue(globalctx.memory, "tour", "galapagos", value);
-            setFormValue(globalctx.memory, "tour", "galapagos_guide", value);
-          },
-        ),
-      ],
     );
   }
 }
