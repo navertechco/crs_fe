@@ -335,9 +335,9 @@ class TransportField extends StatelessWidget {
     return CustomFormDropDownFieldWidget(
       fontSize: 10,
       height: 0.05,
-      label: "Transport Options    ",
+      label: "Transportation    ",
       validator: (value) => CustomMultiDropdownRequiredValidator(value,
-          errorText: "Transport Options are required ", context: context),
+          errorText: "Transportation are required ", context: context),
       value: getFormValue(globalctx.memory, "tour", "transport", "0"),
       onSaved: (value) {
         transportService.value = value!;

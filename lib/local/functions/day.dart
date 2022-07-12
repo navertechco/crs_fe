@@ -430,13 +430,19 @@ void saveExplorationDay(int index, int val0, int val1, {String? key}) {
 /// int
 ///```
 int parseHour(str) {
-  if (str.contains("h")) {
-    var parts = str.split("h");
-    return int.parse(parts[0]) * 60 + int.parse(parts[1]);
-  } else if (str.contains(":")) {
-    var parts = str.split(":");
-    return int.parse(parts[0]) * 60 + int.parse(parts[1]);
-  } else {
-    return int.parse(str);
+  try {
+    str = str.toString();
+    if (str.toString().contains("h")) {
+      var parts = str.split("h");
+      return int.parse(parts[0]) * 60 + int.parse(parts[1]);
+    } else if (str.contains(":")) {
+      var parts = str.split(":");
+      return int.parse(parts[0]) * 60 + int.parse(parts[1]);
+    } else {
+      return int.parse(str.toString());
+    }
+  } catch (e) {
+    log(e);
   }
+  return 0;
 }

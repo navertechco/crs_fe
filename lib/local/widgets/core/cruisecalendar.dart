@@ -421,7 +421,7 @@ class CruiseResultWidget extends StatelessWidget {
                               "Actions",
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                  fontSize: isMobile * 15,
+                                  fontSize: isMobile * 10,
                                   fontWeight: FontWeight.bold),
                             )),
                           ],

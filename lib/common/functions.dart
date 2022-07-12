@@ -373,7 +373,7 @@ List<DataColumn> getHeader(context, data, columns) {
           textAlign: TextAlign.left,
           style: KTextSytle(
             context: context,
-            fontSize: 15,
+            fontSize: 10,
             fontWeight: FontWeight.bold,
             color: Color.fromARGB(255, 204, 164, 61),
           ).getStyle(),
@@ -385,7 +385,7 @@ List<DataColumn> getHeader(context, data, columns) {
         'Actions',
         style: KTextSytle(
           context: context,
-          fontSize: 15,
+          fontSize: 10,
           fontWeight: FontWeight.bold,
           color: Color.fromARGB(255, 204, 164, 61),
         ).getStyle(),

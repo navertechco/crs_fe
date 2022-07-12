@@ -86,14 +86,14 @@ void showCustomDialog(context, Widget child, String button,
   return showDialog<void>(
     context: context,
     barrierDismissible: false, // user must tap button!
-    builder: (BuildContext context) {
+    builder: (BuildContext _) {
       return AlertDialog(
         // contentPadding: EdgeInsets.fromLTRB(8, 8, 8, 8),
         backgroundColor: backgroundColor,
         content: Container(
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(50)),
-            width: MediaQuery.of(context).size.width * isMobile * width,
-            height: MediaQuery.of(context).size.height * isMobile * height,
+            width: MediaQuery.of(_).size.width * isMobile * width,
+            height: MediaQuery.of(_).size.height * isMobile * height,
             child: child),
         actions: <Widget>[
           Wrap(
@@ -227,7 +227,7 @@ List<DataRow> getTourDataRows(context, data, columns) {
         cells.add(DataCell(Text('${row[key]}',
             style: KTextSytle(
                     context: context,
-                    fontSize: 15,
+                    fontSize: 10,
                     fontWeight: FontWeight.bold,
                     color: Colors.black)
                 .getStyle())));
