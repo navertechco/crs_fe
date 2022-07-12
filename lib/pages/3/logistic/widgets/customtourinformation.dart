@@ -71,7 +71,7 @@ class LogisticForm extends StatelessWidget {
                             onPressed: () async {
                               if (cruiseDay.value.isEmpty || cruiseEdit.value) {
                                 showCustomDialog(context,
-                                    CruiseCalendarWidget(ctx: context), "Close",
+                                    CruiseCalendarWidget(ctx: context), "",
                                     customChild: CruiseKeyPadWidget(),
                                     backgroundColor: Colors.white,
                                     buttonColor: Colors.black,
@@ -150,12 +150,12 @@ class LogisticForm extends StatelessWidget {
                             filterCruises(context);
                           },
                         ),
-                        CheckboxIconFormField(
-                            padding: 0,
-                            initialValue: arrivalEdit.value,
-                            onChanged: (value) {
-                              arrivalEdit.value = !arrivalEdit.value;
-                            })
+                        // CheckboxIconFormField(
+                        //     padding: 0,
+                        //     initialValue: arrivalEdit.value,
+                        //     onChanged: (value) {
+                        //       arrivalEdit.value = !arrivalEdit.value;
+                        //     })
                       ],
                     );
                   }),
@@ -221,12 +221,12 @@ class LogisticForm extends StatelessWidget {
                             filterCruises(context);
                           },
                         ),
-                        CheckboxIconFormField(
-                            padding: 0,
-                            initialValue: departureEdit.value,
-                            onChanged: (value) {
-                              departureEdit.value = !departureEdit.value;
-                            })
+                        // CheckboxIconFormField(
+                        //     padding: 0,
+                        //     initialValue: departureEdit.value,
+                        //     onChanged: (value) {
+                        //       departureEdit.value = !departureEdit.value;
+                        //     })
                       ],
                     );
                   }),
@@ -260,42 +260,30 @@ class LogisticForm extends StatelessWidget {
                         ),
                         Row(
                           children: [
-                            CustomFormCheckboxWidget(
-                              fontSize: 10,
-                              height: 0.05,
-                              label: "Open Credit                 ",
-                              value: 1,
-                              groupValue: openBoolCredit,
+                            CheckboxIconFormField(
+                              padding: 0,
+                              initialValue: openBoolCredit.value,
                               onChanged: (value) {
-                                openBoolCredit.value = value;
+                                openBoolCredit.value = !openBoolCredit.value;
                                 setFormValue(globalctx.memory, "logistic",
                                     "open_credit", value);
                               },
                             ),
+                            if (openBoolCredit.value)
+                              CustomFormTextFieldWidget(
+                                height: 0.05,
+                                fontSize: 10,
+                                value: openCredit.value,
+                                onChanged: (value) {
+                                  setFormValue(globalctx.memory, "logistic",
+                                      "open_credit_value", value);
+                                },
+                                label: "  Open Credit Amount",
+                                width: 0.2,
+                                onSaved: (value) {},
+                              ),
                           ],
                         ),
-                        if (openBoolCredit.value == 1)
-                          CustomFormCounterFieldWidget(
-                              height: 0.05,
-                              fontSize: 10,
-                              initial: openCredit.value,
-                              min: 0,
-                              max: 5000,
-                              step: 100,
-                              original: true,
-                              onValueChanged: (value) {
-                                try {
-                                  if (value! > 0) {
-                                    openCredit.value = value as int;
-                                    setFormValue(globalctx.memory, "logistic",
-                                        "open_credit_value", value);
-                                  }
-                                } catch (e) {
-                                  log(e);
-                                }
-                              },
-                              label: "  Open Credit Amount",
-                              width: 0.2),
                         if (cruiseDay.isNotEmpty)
                           Row(
                             children: [

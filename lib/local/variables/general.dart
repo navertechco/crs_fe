@@ -178,7 +178,7 @@ List pageList = [
 var transportService = "0".obs;
 Rx<List<String>> translatingService = Rx(
     getFormValue(globalctx.memory, "tour", "translating_service", <String>[]));
-Rx<int> openBoolCredit =
+Rx<bool> openBoolCredit =
     Rx(getFormValue(globalctx.memory, "logistic", "open_credit", 0));
 Rx<int> arrivalDinner =
     Rx(getFormValue(globalctx.memory, "logistic", "dinner", 0));

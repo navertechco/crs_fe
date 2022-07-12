@@ -39,7 +39,7 @@ class CustomFormDayWidget extends StatelessWidget {
                   text: daydescription, width: 0.55, fontSize: 0.016),
               CustomFormExperiencesDetailWidget(indexes: indexes),
               CustomDescriptionWidget(
-                  text: "Day Net Rate: $actualcost",
+                  text: "Day Net Rate: \$ $actualcost",
                   width: 0.55,
                   fontSize: 0.016),
               SizedBox(height: MediaQuery.of(context).size.height * 0.01),

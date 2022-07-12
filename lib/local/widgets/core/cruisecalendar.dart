@@ -361,6 +361,18 @@ class CruiseKeyPadWidget extends StatelessWidget {
                               color: Colors.black)
                           .getStyle()),
                 ),
+              TextButton(
+                onPressed: () {
+                  Get.close(1);
+                },
+                child: Text('Promote',
+                    style: KTextSytle(
+                            context: context,
+                            fontSize: isMobile * 10,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black)
+                        .getStyle()),
+              ),
               if (cruiseCabine.isNotEmpty)
                 TextButton(
                   onPressed: () {
