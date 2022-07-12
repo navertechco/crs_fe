@@ -37,7 +37,7 @@ class LogisticForm extends StatelessWidget {
   Widget build(BuildContext context) {
     var readonly = getContext("readonly") ?? false;
     var galapagos =
-        Rx(getFormValue(globalctx.memory, "tour", "galapagos", false));
+        Rx(getFormValue(globalctx.memory, "tour", "galapagos_cruise", false));
     return SingleChildScrollView(
       child: Form(
         key: _formKey,

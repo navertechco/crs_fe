@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import '../index.dart';
 import 'package:naver_crs/index.dart';
-import 'package:get/get.dart'; 
+import 'package:get/get.dart';
 
 // ignore: must_be_immutable
 class CustomStarDestinationForm extends StatelessWidget {
@@ -64,7 +64,7 @@ class CustomStarDestinationForm extends StatelessWidget {
     };
 
     Function validateGalapagosTR = () {
-      if (destination == "galapagos") {
+      if (destination == "galapagos_cruise") {
         setFormValue(
             globalctx.memory["destinations"], index, "travel_rhythm", "3");
       }

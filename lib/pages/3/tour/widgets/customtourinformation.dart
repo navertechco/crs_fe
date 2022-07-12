@@ -76,18 +76,18 @@ class TourLeftFormWidget extends StatelessWidget {
                     color: Colors.black,
                     trueIconColor: Colors.green,
                     initialValue: getFormValue(
-                        globalctx.memory, "tour", "galapagos", false),
+                        globalctx.memory, "tour", "galapagos_cruise", false),
                     enabled: true,
                     iconSize: 25,
                     onSaved: (value) {
                       setFormValue(
-                          globalctx.memory, "tour", "galapagos", value);
+                          globalctx.memory, "tour", "galapagos_cruise", value);
                       setFormValue(
                           globalctx.memory, "tour", "galapagos_guide", value);
                     },
                     onChanged: (value) {
                       setFormValue(
-                          globalctx.memory, "tour", "galapagos", value);
+                          globalctx.memory, "tour", "galapagos_cruise", value);
                       setFormValue(
                           globalctx.memory, "tour", "galapagos_guide", value);
                     },

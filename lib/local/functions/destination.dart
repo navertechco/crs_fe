@@ -108,7 +108,7 @@ void resetAllDestinations() {
   filterDestinations();
   if (cruiseDay.isNotEmpty) {
     autoFillDestination(arrival["description"], 0, "arrival", "0");
-    autoFillDestination("galapagos", 1, "arrival", cruiseDay.value);
+    autoFillDestination("galapagos_cruise", 1, "arrival", cruiseDay.value);
     autoFillDestination(departure["description"], 2, "departure", "0");
   } else {
     setDestinationState(arrival["description"], 0, "arrival", "selected");
@@ -154,9 +154,9 @@ void autoFillDestination(destination, index, type, days) {
   setFormValue(
       globalctx.memory["destinations"], index, "key_activities", ["SURPRISE"]);
   setFormValue(globalctx.memory["destinations"], index, "travel_rhythm",
-      destination == "galapagos" ? "3" : "1");
+      destination == "galapagos_cruise" ? "3" : "1");
   setFormValue(globalctx.memory["destinations"], index, "explorationMode",
-      destination == "galapagos" ? "1" : "0");
+      destination == "galapagos_cruise" ? "1" : "0");
   addDestination(destination);
   processDestinationPromotion(destination, index, type);
   setDestinationState(destination, index, type, "selected");
@@ -457,7 +457,8 @@ RxBool validateDragDestinationOptions(destination, index, type) {
 /// @return void
 ///
 void filterSelectedDestinations() {
-  var galapagos = getFormValue(globalctx.memory, "tour", "galapagos", false);
+  var galapagos =
+      getFormValue(globalctx.memory, "tour", "galapagos_cruise", false);
   if (dayleft.value > 1 &&
       globalctx.promotedDestinations.length >=
           globalctx.selectedDestinations.length - 1) {
@@ -465,15 +466,15 @@ void filterSelectedDestinations() {
       selectedDestinations.remove(arrival["description"]);
     }
 
-    if (selectedDestinations.contains("galapagos") || galapagos) {
-      selectedDestinations.remove("galapagos");
+    if (selectedDestinations.contains("galapagos_cruise") || galapagos) {
+      selectedDestinations.remove("galapagos_cruise");
     }
     if (selectedDestinations.contains(departure["description"])) {
       selectedDestinations.remove(departure["description"]);
     }
     selectedDestinations.insert(0, arrival["description"]);
     if (galapagos) {
-      selectedDestinations.insert(1, "galapagos");
+      selectedDestinations.insert(1, "galapagos_cruise");
     }
     selectedDestinations.add(departure["description"]);
     globalctx.selectedDestinations.value = [];
@@ -547,7 +548,7 @@ void deleteGraphDragDestinationOption(String destination) {
       dayleft += destDay;
     }
 
-    if (destination == "galapagos") {
+    if (destination == "galapagos_cruise") {
       iHStartDate = Rx(firstDayDate.value);
       iHEndDate = Rx(penultimateDayDate.value);
       cruiseStartDate = Rx(firstDayDate.value);
@@ -874,7 +875,7 @@ void resetMemoryDestinations() {
 ///
 ///### Uses:
 /// ```dart
-///     (destination != "galapagos" &&
+///     (destination != "galapagos_cruise" &&
 ///                     (getDestiinationRoutes(destination).length > 0))) {
 /// ```
 ///

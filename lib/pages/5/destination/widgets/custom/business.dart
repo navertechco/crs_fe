@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -25,7 +24,7 @@ class BusinessExpDayWidget extends StatelessWidget {
     return Obx(() {
       var expDay = explorationDay.value;
 
-      if (destination != "galapagos") {
+      if (destination != "galapagos_cruise") {
         return ExpDaysCounterWidget(index: index, type: type);
       }
       return Text('');
@@ -154,7 +153,7 @@ class BuisnessExpmodeWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       child: (() {
-        if (destination == "galapagos" || destination == "amazon") {
+        if (destination == "galapagos_cruise" || destination == "amazon") {
           return Obx(() {
             var expDay = explorationDay.value;
             return ExpModeWidget(
@@ -184,9 +183,9 @@ class BusinessRouteWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() {
       var expDay = explorationDay.value;
-      if ((destination == "galapagos" &&
+      if ((destination == "galapagos_cruise" &&
               (explorationMode.value == "3" || explorationMode.value == "1")) ||
-          (destination != "galapagos" &&
+          (destination != "galapagos_cruise" &&
               (getDestiinationRoutes(destination).isNotEmpty))) {
         {
           return RouteWidget();
@@ -214,7 +213,7 @@ class BusinessIHWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(child: Obx(() {
       var expMode = explorationMode.value;
-      if (destination == "galapagos" &&
+      if (destination == "galapagos_cruise" &&
           (explorationMode.value == "3" || explorationMode.value == "1")) {
         return Column(
           children: [

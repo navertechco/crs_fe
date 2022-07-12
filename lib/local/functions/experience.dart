@@ -213,7 +213,7 @@ void processFilteredExperienes() {
   }).toList();
   filteredExperiences = filteredExperiences.where((e) {
     if (globalDestinationName.value.toString().toUpperCase() !=
-            "galapagos".toString().toUpperCase() &&
+            "galapagos_cruise".toString().toUpperCase() &&
         globalDestinationName.value.toString().toUpperCase() !=
             "amazon".toString().toUpperCase()) {
       return true;
