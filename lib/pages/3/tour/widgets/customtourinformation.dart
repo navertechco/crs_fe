@@ -260,7 +260,7 @@ class PaxField extends StatelessWidget {
           ctrl!.state.passengers = value! as int;
           setFormValue(globalctx.memory, "tour", "passengers", value as int);
         },
-        label: "  Passengers               ",
+        label: "  Passengers                  ",
         width: 0.20);
   }
 }
