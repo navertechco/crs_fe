@@ -436,6 +436,9 @@ class TourInformation extends StatelessWidget {
             validator: CustomRequiredValidator(
                 errorText: "Lead Passenger is required ", ctx: context),
             value: travelCode.value,
+            onChanged: (value) {
+              saveCustomerTravelCode(value);
+            },
             onSaved: (value) {
               saveCustomerTravelCode(value);
             },

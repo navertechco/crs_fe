@@ -66,7 +66,7 @@ class CustomFormExperienceRowWidget extends StatelessWidget {
             fontSize: 0.016,
             fontWeight: FontWeight.normal,
           ),
-          if (next != "null")
+          if (next != "null" && experienceType != "meal")
             CustomDescriptionWidget(
               text: "Next: $next",
               width: 0.6,
