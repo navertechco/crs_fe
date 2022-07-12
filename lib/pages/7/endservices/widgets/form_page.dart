@@ -35,7 +35,7 @@ class PrintDocsFormPage extends GetView<StatelessWidget> {
                     label: "Video Gallery",
                     color: Color.fromARGB(255, 204, 164, 61),
                     url:
-                        "$kDefaultSchema://$kDefaultServer:$kDefaultServerPort/Client/PlayTour/${globalctx.memory["tour"]["playlist_slug"]}"),
+                        "$kDefaultSchema://$kDefaultServer:$kDefaultServerPort/Tour/PlayTour/${globalctx.memory["tour"]["travel_code"]}"),
                 SizedBox(height: kDefaultPadding),
                 WebButton(
                     label: "Photo Gallery",

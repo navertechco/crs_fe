@@ -57,53 +57,29 @@ Future processTour() async {
         dayIndex++;
       }
     }
-    globalctx.memory["resume"] = destinations;
+    preparePayloadToSend();
 
-    try {
-      for (var dest in globalctx.memory["resume"].keys) {
-        if (globalctx.memory["resume"][dest] != null) {
-          globalctx.memory["resume"][dest] =
-              globalctx.memory["resume"][dest].value;
-        }
-      }
-    } catch (e) {
-      log(e);
-    }
-
-    globalctx.payload["tour"] = globalctx.memory["tour"];
-    globalctx.payload["logistic"] = globalctx.memory["logistic"];
-    globalctx.payload["customer"] = globalctx.memory["customer"];
-    globalctx.payload["destinations"] = globalctx.memory["resume"];
-    globalctx.payload["days"] = globalctx.memory["days"];
-    globalctx.payload["totalDays"] = globalctx.memory["totalDays"];
-    globalctx.payload["promoted"] = globalctx.memory["promoted"];
-
-    if (translatingService.value.isNotEmpty) {
-      globalctx.payload["tour"]["passengers"] =
-          (int.parse(globalctx.payload["tour"]["passengers"]) + 1).toString();
-    }
-
-    try {
-      for (var day in globalctx.payload["days"].keys) {
-        globalctx.payload["days"][day] = globalctx.payload["days"][day].value;
-      }
-    } catch (e) {
-      log(e);
-    }
-
-    globalctx.payload["logistic"]["arrival_date"] =
-        globalctx.payload["logistic"]["arrival_date"].toString();
-    globalctx.payload["logistic"]["since_date"] =
-        globalctx.payload["logistic"]["since_date"].toString();
-    globalctx.payload["logistic"]["departure_date"] =
-        globalctx.payload["logistic"]["departure_date"].toString();
-    globalctx.payload["logistic"]["until_date"] =
-        globalctx.payload["logistic"]["until_date"].toString();
     await saveTour();
   } catch (e) {
     log(e);
   } finally {
     gotoPage("PrintDocs");
+  }
+}
+
+preparePayloadToSend() {
+  globalctx.memory["resume"] = destinations;
+  globalctx.payload["tour"] = globalctx.memory["tour"];
+  globalctx.payload["logistic"] = globalctx.memory["logistic"];
+  globalctx.payload["customer"] = globalctx.memory["customer"];
+  globalctx.payload["destinations"] = globalctx.memory["resume"];
+  globalctx.payload["days"] = globalctx.memory["days"];
+  globalctx.payload["totalDays"] = globalctx.memory["totalDays"];
+  globalctx.payload["promoted"] = globalctx.memory["promoted"];
+  if (translatingService.value.isNotEmpty) {
+    var passengers = globalctx.payload["tour"]["passengers"] ?? "1";
+    globalctx.payload["tour"]["passengers"] =
+        (parseInt(passengers) + 1).toString();
   }
 }
 
@@ -123,13 +99,14 @@ Future saveTour() async {
     var payload = globalctx.payload.toString();
     var yaml = loadYaml(payload);
     var data = (yaml.toString());
+    var tourId = globalctx.memory["tour"]["code"];
     var res = await fetchHandler(
         kDefaultSchema,
         kDefaultServer,
         kDefaultServerPort,
         kDefaultTourEdit,
         'POST',
-        {"state": "new", "id": globalctx.memory["tour"]["code"], "data": data});
+        {"state": "new", "id": tourId, "data": data});
     if (res.statusCode == 200 && res["state"]) {
       globalctx.memory["tour"]["playlist_slug"] = res["data"]["playlist_slug"];
       generated = true;
@@ -317,5 +294,3 @@ Future newTour() async {
     log(e);
   }
 }
-
- 

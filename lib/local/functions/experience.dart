@@ -390,7 +390,8 @@ void promoteExperience(String experience, String state) {
   var value = calculateExperienceDays(experience);
   if (experience == "Leisure Time") {
     value = getFormValue(
-        globalctx.memory["days"], currentDay.value, "leisureTime", 0);
+            globalctx.memory["days"], currentDay.value, "leisureTime", 0) *
+        1.0;
   }
   processHour(value * sign);
   setExperienceState(experience, state);

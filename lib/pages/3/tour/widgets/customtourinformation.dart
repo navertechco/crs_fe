@@ -251,7 +251,8 @@ class PaxField extends StatelessWidget {
     return CustomFormCounterFieldWidget(
         fontSize: 10,
         height: 0.05,
-        initial: getFormValue(globalctx.memory, "tour", "passengers", 1),
+        initial:
+            parseInt(getFormValue(globalctx.memory, "tour", "passengers", 1)),
         min: 1,
         max: 50,
         bound: 0,
@@ -259,7 +260,7 @@ class PaxField extends StatelessWidget {
           ctrl!.state.passengers = value! as int;
           setFormValue(globalctx.memory, "tour", "passengers", value as int);
         },
-        label: "  Passengers                  ",
+        label: "  Passengers               ",
         width: 0.20);
   }
 }
