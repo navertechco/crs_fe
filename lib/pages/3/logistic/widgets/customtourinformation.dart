@@ -193,8 +193,7 @@ class LogisticForm extends StatelessWidget {
                       children: [
                         CustomFormDateFieldWidget(
                           fontSize: 10,
-                          disabled: (readonly || cruiseDay.isNotEmpty) &&
-                              !departureEdit.value,
+                          disabled: false,
                           initialValue: departureDate.value,
                           validator: CustomDatetimeGreaterValidator(
                               context: context,
