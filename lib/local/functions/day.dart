@@ -54,6 +54,7 @@ Future paginateDay(context) async {
 ///```
 Future nextDay() async {
   if (currentDay.value < totalDays.value - 1) {
+    currentDay.value++;
     jumpDay("forward");
   } else {
     gotoPage("Resume");
@@ -97,12 +98,10 @@ decideBypass(direction) {
   int index = getDestinationIndexByDay();
   int explorationMode = int.parse(getFormValue(
       globalctx.memory["destinations"], index, "explorationMode", "0"));
-  var explorationDay = getCurrentExplorationDay();
-  var keyActivities = getCurrentKA();
+  var explorationDay = int.parse(getFormValue(
+      globalctx.memory["destinations"], index, "explorationDay", "0"));
   if (explorationMode > 0) {
-    bypassCruise(direction);
-  } else if (keyActivities.contains("hh")) {
-    bypassDay(direction, explorationDay);
+    bypassDay(direction, explorationDay + 1);
   } else {
     updateCurrentDay(direction);
   }
@@ -130,11 +129,10 @@ getDestinationIndexByDay() {
   for (var i = 0; i < lenght; i++) {
     var _dest = _destinations[i.toString()];
     var _explorationDay = int.parse(_dest["explorationDay"]);
-    _accumulated += _explorationDay;
-    if (currentDay.value < _accumulated ||
-        _accumulated - currentDay.value == 0) {
+    if (currentDay.value <= _accumulated) {
       return i;
     }
+    _accumulated += _explorationDay;
   }
 }
 
@@ -204,40 +202,29 @@ bypassDay(direction, int explorationDay) {
 ///```dart
 /// void
 ///```
-bypassCruise(String direction) {
+bypassCruise(String direction, index) {
   try {
-    int index = getDestinationIndex(globalDestinationName.value, "tour");
-    int explorationMode = int.parse(getFormValue(
-        globalctx.memory["destinations"], index, "explorationMode", "0"));
-    int explorationDay = 0;
-    int cruiseExpDays = int.parse(getFormValue(
-        globalctx.memory["destinations"], index, "cruiseExpDays", "0"));
-    if (cruiseExpDays > 0) {
-      if (explorationMode > 1) {
-        DateTime cruiseStartDate = getFormValue(
-            globalctx.memory["destinations"],
-            index,
-            "cruiseStartDate",
-            DateTime(5555, 02, 02));
-        DateTime cruiseEndDate = getFormValue(globalctx.memory["destinations"],
-            index, "cruiseEndDate", DateTime(5555, 02, 02));
+    int explorationDay = int.parse(getFormValue(
+        globalctx.memory["destinations"], index, "explorationDay", "0"));
+    int arrivalExplorationDay = int.parse(getFormValue(
+        globalctx.memory["destinations"], 0, "explorationDay", "0"));
 
-        if (direction == "forward") {
-          if (currentDate.value ==
-              cruiseStartDate.subtract(Duration(days: 1))) {
-            explorationDay = cruiseExpDays;
-            currentDay.value += explorationDay;
-          }
-        } else {
-          if (currentDate.value == cruiseEndDate.add(Duration(days: 1))) {
-            explorationDay = cruiseExpDays;
-            currentDay.value -= explorationDay;
-          }
-        }
+    DateTime cruiseStartDate =
+        arrivalDate.value.add(Duration(days: arrivalExplorationDay));
+    DateTime cruiseEndDate =
+        cruiseStartDate.add(Duration(days: explorationDay));
+
+    if (direction == "forward") {
+      if (currentDate.value == cruiseStartDate.subtract(Duration(days: 1))) {
+        currentDay.value += explorationDay;
       }
     } else {
-      updateCurrentDay(direction);
+      if (currentDate.value == cruiseEndDate.add(Duration(days: 1))) {
+        currentDay.value -= explorationDay;
+      }
     }
+
+    updateCurrentDay(direction);
   } catch (e) {
     log(e);
   }

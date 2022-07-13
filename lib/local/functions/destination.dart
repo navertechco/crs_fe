@@ -100,11 +100,9 @@ Future paginateDestination(String direction) async {
 ///```dart
 /// void
 ///```
-void resetAllDestinations() {
-  globalctx.reset.value = true;
+void resetAllDestinations() { 
   resetLeftDays();
-  resetMemoryDestinations();
-  // updateDraggableDestinations();
+  resetMemoryDestinations(); 
   filterDestinations();
   if (cruiseDay.isNotEmpty) {
     autoFillDestination(arrival["description"], 0, "arrival", "0");

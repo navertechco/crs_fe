@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
-import '../../../../../index.dart';
-import '../../../../index.dart';
+import 'package:get/get.dart'; 
+import '../../../../../index.dart'; 
 import '../index.dart';
 
 class BusinessExpDayWidget extends StatelessWidget {
@@ -56,14 +54,12 @@ class BusinessArrivalWidget extends StatelessWidget {
     required this.type,
     required this.destination,
     required this.index,
-    required this.arrivalHourCatalog,
   }) : super(key: key);
 
   final RxString explorationMode;
   final type;
   final String destination;
   final index;
-  final List<Map<String, dynamic>> arrivalHourCatalog;
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +67,7 @@ class BusinessArrivalWidget extends StatelessWidget {
       var expMode = explorationMode.value;
       if (type == "arrival" && destination == arrival["description"]) {
         return ArrivalWidget(
-            index: index, arrivalHourCatalog: arrivalHourCatalog);
+            index: index,  );
       }
       return Text('');
     });

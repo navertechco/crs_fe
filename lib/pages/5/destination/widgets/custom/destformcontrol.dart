@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -39,11 +38,11 @@ class DestFormmControlsWidget extends StatelessWidget {
               type: type),
           BusinessHotelWidget(index: index),
           BusinessArrivalWidget(
-              explorationMode: explorationMode,
-              type: type,
-              destination: destination,
-              index: index,
-              arrivalHourCatalog: findCatalog("arrival_hour")),
+            explorationMode: explorationMode,
+            type: type,
+            destination: destination,
+            index: index,
+          ),
           BusinessTrWidget(
               explorationMode: explorationMode,
               index: index,
@@ -71,7 +70,3 @@ class DestFormmControlsWidget extends StatelessWidget {
     );
   }
 }
-
-
-
-

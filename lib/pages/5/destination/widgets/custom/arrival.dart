@@ -5,12 +5,10 @@ import '../../../../../index.dart';
 class ArrivalWidget extends StatelessWidget {
   const ArrivalWidget({
     Key? key,
-    required this.index,
-    required this.arrivalHourCatalog,
+    required this.index, 
   }) : super(key: key);
 
-  final index;
-  final List<Map<String, dynamic>> arrivalHourCatalog;
+  final index; 
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +32,6 @@ class ArrivalWidget extends StatelessWidget {
                   ["description"];
         },
         label: "Arrival Hour              ",
-        data: arrivalHourCatalog);
+        data: findCatalog("arrival_hour"));
   }
 }
