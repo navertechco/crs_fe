@@ -33,8 +33,8 @@ class DestinationFrontOptionWidget extends StatelessWidget {
       ),
       Padding(
         padding: EdgeInsets.only(
-          top: MediaQuery.of(context).size.height * 0.04,
-          left: MediaQuery.of(context).size.width * 0.01,
+          top: MediaQuery.of(context).size.height * 0.025,
+          left: MediaQuery.of(context).size.width * 0.02,
         ),
         child: Align(
           alignment: Alignment.centerLeft,
