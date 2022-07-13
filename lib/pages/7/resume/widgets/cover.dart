@@ -3,13 +3,14 @@ import 'package:naver_crs/index.dart';
 import 'customdescription.dart';
 
 class Cover extends StatelessWidget {
-  const Cover({Key? key }) : super(key: key);
- 
+  const Cover({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Map tour = globalctx.memory["tour"];
     Map customer = globalctx.memory["customer"];
+    var leader =
+        customer["names"].toString() + " " + customer["last_names"].toString();
     var title = tour["title"] ?? "Enchanting Ecuador";
     var passengers = tour["passengers"] ?? "1";
     var days = totalDays.value;
@@ -26,7 +27,7 @@ class Cover extends StatelessWidget {
             fontSize: 0.020,
             fontWeight: FontWeight.bold),
         CustomDescriptionWidget(
-            text: "${customer["lead_passenger"]} x $passengers",
+            text: "$leader x $passengers",
             width: 0.18,
             fontSize: 0.018,
             fontWeight: FontWeight.bold),
