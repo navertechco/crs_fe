@@ -101,7 +101,7 @@ decideBypass(direction) {
   var explorationDay = int.parse(getFormValue(
       globalctx.memory["destinations"], index, "explorationDay", "0"));
   if (explorationMode > 0) {
-    bypassDay(direction, explorationDay + 1);
+    bypassDay(direction, explorationDay);
   } else {
     updateCurrentDay(direction);
   }
