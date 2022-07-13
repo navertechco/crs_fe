@@ -353,7 +353,21 @@ class CruiseKeyPadWidget extends StatelessWidget {
                     showCustomDialog(context, CruiseResultWidget(), "Close",
                         backgroundColor: Colors.white);
                   },
-                  child: Text('Process',
+                  child: Text('Show Results',
+                      style: KTextSytle(
+                              context: context,
+                              fontSize: isMobile * 10,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black)
+                          .getStyle()),
+                ),
+              if (cruiseCabine.isNotEmpty)
+                TextButton(
+                  onPressed: () {
+                    moreFilters.value = !moreFilters.value;
+                  },
+                  child: Text(
+                      !moreFilters.value ? 'More Filters' : 'Less Filters',
                       style: KTextSytle(
                               context: context,
                               fontSize: isMobile * 10,
@@ -373,20 +387,6 @@ class CruiseKeyPadWidget extends StatelessWidget {
                             color: Colors.black)
                         .getStyle()),
               ),
-              if (cruiseCabine.isNotEmpty)
-                TextButton(
-                  onPressed: () {
-                    moreFilters.value = !moreFilters.value;
-                  },
-                  child: Text(
-                      !moreFilters.value ? 'More Filters' : 'Less Filters',
-                      style: KTextSytle(
-                              context: context,
-                              fontSize: isMobile * 10,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black)
-                          .getStyle()),
-                ),
             ],
           ),
         ));
