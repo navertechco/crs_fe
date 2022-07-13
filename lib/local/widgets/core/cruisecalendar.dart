@@ -48,12 +48,11 @@ class CruiseFiltersWidget extends StatelessWidget {
                 hintText: "Days    ",
                 data: getMemoryCatalogChild("cabine", "value", "days"),
               ),
-              CustomFormDropDownFieldWidget(
-                width: 0.16,
+              CustomFormMultiDropDownFieldWidget(
                 height: 0.05,
-                validator: CustomRequiredValidator(
-                    errorText: "Itinerary Format is required ", ctx: ctx),
-                value: "0",
+                // validator: CustomRequiredValidator(
+                //     errorText: "Itinerary Format is required ", ctx: ctx),
+                value: [],
                 onSaved: (value) {},
                 onChanged: (value) {
                   cruiseItinerary.value = getCatalogDescription(
