@@ -36,7 +36,7 @@ class LogisticForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var readonly = getContext("readonly") ?? false;
-    var galapagos =
+    var galapagosCruise =
         Rx(getFormValue(globalctx.memory, "tour", "galapagos_cruise", false));
     return SingleChildScrollView(
       child: Form(
@@ -51,7 +51,7 @@ class LogisticForm extends StatelessWidget {
               SingleChildScrollView(
                 child: Column(children: [
                   Obx(() {
-                    if (galapagos.value) {
+                    if (galapagosCruise.value) {
                       return Row(
                         children: [
                           CustomTitleWidget(
@@ -260,6 +260,12 @@ class LogisticForm extends StatelessWidget {
                         ),
                         Row(
                           children: [
+                            const CustomTitleWidget(
+                              fontSize: 10,
+                              width: 0.3,
+                              fontWeight: FontWeight.bold,
+                              label: "   Open Credit  ",
+                            ),
                             CheckboxIconFormField(
                               padding: 0,
                               initialValue: openBoolCredit.value,
@@ -278,7 +284,7 @@ class LogisticForm extends StatelessWidget {
                                   setFormValue(globalctx.memory, "logistic",
                                       "open_credit_value", value);
                                 },
-                                label: "  Open Credit Amount",
+                                label: "",
                                 width: 0.2,
                                 onSaved: (value) {},
                               ),

@@ -348,7 +348,7 @@ class TransportField extends StatelessWidget {
         setFormValue(globalctx.memory, "tour", "transport", value);
       },
       hintText: "",
-      data: serviceTypeCatalog.value,
+      data: findCatalog("service_type"),
     );
   }
 }
