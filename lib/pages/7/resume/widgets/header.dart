@@ -46,12 +46,12 @@ class Header extends StatelessWidget {
                     getFormValue(globalctx.memory, "customer", "address", '')),
             CustomDetailWidget(
                 label: "City: ",
-                value:
-                    getFormValue(globalctx.memory, "customer", "city_id", '')),
+                value:  parseInt(
+                    getFormValue(globalctx.memory, "customer", "city_id", 1))),
             CustomDetailWidget(
                 label: "Country: ",
                 value:
-                    getFormValue(globalctx.memory, "customer", "country", '')),
+                    getFormValue(globalctx.memory, "customer", "country", 1)),
           ],
         ),
         const CustomFormTitleWidget(level: 1, label: "Tour Information"),
