@@ -423,6 +423,9 @@ DataCell getCruiseDataCell(context, row) {
                 selectedCruise.value = row["description"];
                 setFormValue(globalctx.memory, "logistic", "cruiseName",
                     selectedCruise.value);
+                var start = cruiseStartDate.value;
+                var end = cruiseEndDate.value;
+                saveCruiseCalendar(start, end);
               },
             ),
           ],
