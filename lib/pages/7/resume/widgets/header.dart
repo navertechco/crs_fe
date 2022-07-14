@@ -1,6 +1,7 @@
 import 'package:counter/counter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:naver_crs/index.dart';
 import 'package:naver_crs/pages/2/netrate/widgets/custompadingtitle.dart';
 import 'customformtitle.dart';
@@ -91,12 +92,12 @@ class Header extends StatelessWidget {
           children: [
             CustomDetailWidget(
                 label: "Arrival Date: ",
-                value: getFormValue(
-                    globalctx.memory, "logistic", "arrival_date", '')),
+                value: DateFormat('EEEE MMMM d yyyy').format(getFormValue(
+                    globalctx.memory, "logistic", "arrival_date", ''))),
             CustomDetailWidget(
                 label: "Departure Date: ",
-                value: getFormValue(
-                    globalctx.memory, "logistic", "departure_date", '')),
+                value: DateFormat('EEEE MMMM d yyyy').format(getFormValue(
+                    globalctx.memory, "logistic", "departure_date", ''))),
           ],
         ),
         CustomFormTitleWidget(
