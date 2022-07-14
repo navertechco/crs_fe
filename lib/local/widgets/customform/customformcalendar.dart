@@ -35,7 +35,7 @@ class CustomFormCalendarFieldWidget extends StatelessWidget {
   final minimumDate;
   final maximumDate;
   final startEndDateChange;
-  final void Function() onSaved;
+  final onSaved;
   final label;
   final bool disabled;
   final double left;

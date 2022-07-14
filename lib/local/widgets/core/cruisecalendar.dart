@@ -394,9 +394,10 @@ class CruiseKeyPadWidget extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () {
+                  
                   Get.close(1);
                 },
-                child: Text('Promote',
+                child: Text("Promote",
                     style: KTextSytle(
                             context: context,
                             fontSize: isMobile * 10,

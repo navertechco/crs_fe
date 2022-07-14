@@ -316,20 +316,31 @@ void setFormValue(data, formKey, key, value) {
   }
 }
 
-saveMultiDropDown(setters, catalog, values, limit){
-  if (values.length <= limit) {
-          var mem = <String>[];
-          var length = values.length;
+saveCruiseCalendar(start, end) {
+  cruiseStartDate.value = start;
+  cruiseEndDate.value = end;
+  arrivalDate.value = start.add(Duration(days: -2));
+  departureDate.value = end.add(Duration(days: 1));
+  setFormValue(globalctx.memory["destinations"], 1, "cruiseStartDate", start);
+  setFormValue(globalctx.memory["destinations"], 1, "cruiseEndDate", end);
+  var val1 = end.difference(start).inDays + 1;
+  var val0 = int.parse(
+      getFormValue(globalctx.memory["destinations"], 1, "cruiseExpDays", "0"));
 
-          for (var i = 0; i < length; i++) {
-            mem.add(catalog
-                .toList()
-                .where((e) => e["code"] == values[i])
-                .toList()[0]["description"]);
-          }
-          setFormValue(setters[0], setters[1],
-              setters[2], mem);
-        }
+  saveExplorationDay(1, val0, val1, key: "cruiseExpDays");
+}
+
+saveMultiDropDown(setters, catalog, values, limit) {
+  if (values.length <= limit) {
+    var mem = <String>[];
+    var length = values.length;
+
+    for (var i = 0; i < length; i++) {
+      mem.add(catalog.toList().where((e) => e["code"] == values[i]).toList()[0]
+          ["description"]);
+    }
+    setFormValue(setters[0], setters[1], setters[2], mem);
+  }
 }
 
 /// ## setFormValue

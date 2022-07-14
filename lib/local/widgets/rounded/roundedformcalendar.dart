@@ -13,7 +13,7 @@ class RoundedFormCalendar extends StatelessWidget {
   final minimumDate;
   final maximumDate;
   final startEndDateChange;
-  final void Function() onSaved;
+  final onSaved;
   final label;
 
   const RoundedFormCalendar(
