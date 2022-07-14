@@ -319,7 +319,7 @@ void setFormValue(data, formKey, key, value) {
 saveCruiseCalendar(start, end) {
   cruiseStartDate.value = start;
   cruiseEndDate.value = end;
-  arrivalDate.value = start.add(Duration(days: -2));
+  arrivalDate.value = start.add(Duration(days: -1));
   departureDate.value = end.add(Duration(days: 1));
   setFormValue(globalctx.memory["destinations"], 1, "cruiseStartDate", start);
   setFormValue(globalctx.memory["destinations"], 1, "cruiseEndDate", end);
@@ -327,6 +327,8 @@ saveCruiseCalendar(start, end) {
   var val0 = int.parse(
       getFormValue(globalctx.memory["destinations"], 1, "cruiseExpDays", "0"));
 
+  totalDays.value =
+      departureDate.value.difference(arrivalDate.value).inDays + 1;
   saveExplorationDay(1, val0, val1, key: "cruiseExpDays");
 }
 

@@ -150,12 +150,12 @@ class LogisticForm extends StatelessWidget {
                             filterCruises(context);
                           },
                         ),
-                        // CheckboxIconFormField(
-                        //     padding: 0,
-                        //     initialValue: arrivalEdit.value,
-                        //     onChanged: (value) {
-                        //       arrivalEdit.value = !arrivalEdit.value;
-                        //     })
+                        CheckboxIconFormField(
+                            padding: 0,
+                            initialValue: arrivalEdit.value,
+                            onChanged: (value) {
+                              arrivalEdit.value = !arrivalEdit.value;
+                            })
                       ],
                     );
                   }),
