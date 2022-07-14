@@ -111,7 +111,7 @@ void showCustomDialog(context, Widget child, String button,
                   if (onSaved != null) {
                     onSaved();
                   }
-                  Navigator.of(context).pop();
+                  Get.close(1);
                 },
               ),
             ],

@@ -102,13 +102,13 @@ class HotelFiltersWidget extends StatelessWidget {
                     var mc = element["value"]["maxCapacity"];
                     var pax = globalctx.memory["tour"]["passengers"];
 
-                    rule = rt * mc >= pax;
+                    rule = rule && (rt * mc >= pax);
                     rule = rule &&
                         hotelCategory.value == element["value"]["budget_fk"];
                     var filter = hotelResults.value
                         .map((e) => e["description"])
                         .toList();
-                    rule = filter.contains(element["description"]);
+                    rule = rule && filter.contains(element["description"]);
                     return rule;
                   })),
               CustomFormMultiDropDownFieldWidget(

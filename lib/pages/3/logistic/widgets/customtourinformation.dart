@@ -61,7 +61,8 @@ class LogisticForm extends StatelessWidget {
                           RoundedFormButton(
                             height: 0.06,
                             color: Colors.grey,
-                            label: "View Cruise Calendar",
+                            label: getFormValue(globalctx.memory, "logistic",
+                                "cruiseName", "View Cruise Calendar"),
                             fontSize: 6,
                             fontWeight: FontWeight.bold,
                             textColor:
@@ -92,6 +93,18 @@ class LogisticForm extends StatelessWidget {
                       return const SizedBox();
                     }
                   }),
+                  Row(
+                    children: [
+                      CustomTitleWidget(
+                        fontSize: 8,
+                        width: 0.1,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.red,
+                        label:
+                            "Sails: ${currentDayFormat.format(cruiseStartDate.value)} -> Lands: ${currentDayFormat.format(cruiseEndDate.value)}",
+                      ),
+                    ],
+                  ),
                   CustomTitleWidget(
                       fontSize: 10,
                       width: isMobile * 0.225,
