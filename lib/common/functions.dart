@@ -316,6 +316,22 @@ void setFormValue(data, formKey, key, value) {
   }
 }
 
+saveMultiDropDown(setters, catalog, values, limit){
+  if (values.length <= limit) {
+          var mem = <String>[];
+          var length = values.length;
+
+          for (var i = 0; i < length; i++) {
+            mem.add(catalog
+                .toList()
+                .where((e) => e["code"] == values[i])
+                .toList()[0]["description"]);
+          }
+          setFormValue(setters[0], setters[1],
+              setters[2], mem);
+        }
+}
+
 /// ## setFormValue
 /// *__Method to parse a value to int__*
 ///

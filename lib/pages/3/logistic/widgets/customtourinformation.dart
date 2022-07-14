@@ -71,7 +71,7 @@ class LogisticForm extends StatelessWidget {
                             onPressed: () async {
                               if (cruiseDay.value.isEmpty || cruiseEdit.value) {
                                 showCustomDialog(context,
-                                    CruiseCalendarWidget(ctx: context), "",
+                                    CruiseCalendarWidget(ctx: context), "Close",
                                     customChild: CruiseKeyPadWidget(),
                                     backgroundColor: Colors.white,
                                     buttonColor: Colors.black,

@@ -20,20 +20,8 @@ class KAWidget extends StatelessWidget {
       value: keyActivities,
       onSaved: (values) {
         if (values == null) return;
-
-        if (values.length <= 3) {
-          kaMemory.value = [];
-          var length = values.length;
-
-          for (var i = 0; i < length; i++) {
-            kaMemory.add(findCatalog("key_activity")
-                .toList()
-                .where((e) => e["code"] == values[i])
-                .toList()[0]["description"]);
-          }
-          setFormValue(globalctx.memory["destinations"], index,
-              "key_activities", kaMemory.value);
-        }
+        saveMultiDropDown([globalctx.memory["destinations"], index,
+              "key_activities",],findCatalog("key_activity"),values, 3);
       },
       onChanged: (value) {
         setFormValue(

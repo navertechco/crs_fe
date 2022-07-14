@@ -131,7 +131,7 @@ void filterCruises(ctx) {
             (cruiseDay.value.toString().toUpperCase()))
         .toList();
   //CRUISE ITINERARY FORMAT
-  if (cruiseItinerary.isNotEmpty)
+  if (cruiseItinerary.value.isNotEmpty)
     itinerary = itinerary
         .where((element) =>
             element["value"]["itinerary_format"].toString().toUpperCase() ==
@@ -224,7 +224,7 @@ void cruiseReset() {
   cruiseStarts.value = '';
   cruiseEnds.value = '';
   cruiseIslet.value = '';
-  cruiseItinerary.value = '';
+  cruiseItinerary.value = <String>[];
   cruisePort.value = '';
   cruiseAnimal.value = '';
   arrivalEdit.value = false;
@@ -378,10 +378,15 @@ DateTime getNextOnCurrentDate(dayName) {
 /// Map<String, Object>
 ///```
 Map<String, Object> getDay(day) {
-  var res = days.firstWhere((element) =>
-      element["spa"].toString().toUpperCase() == day.toUpperCase() ||
-      element["eng"].toString().toUpperCase() == day.toUpperCase());
-  return res;
+  day = day.replaceAll("[", "");
+  day = day.replaceAll("]", "");
+  if (day.isNotEmpty) {
+    var res = days.firstWhere((element) =>
+        element["spa"].toString().toUpperCase() == day.toUpperCase() ||
+        element["eng"].toString().toUpperCase() == day.toUpperCase());
+    return res;
+  }
+  return {};
 }
 
 /// ## getCruiseDataCell
