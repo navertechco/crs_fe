@@ -132,11 +132,15 @@ void filterCruises(ctx) {
         .toList();
   //CRUISE ITINERARY FORMAT
   if (cruiseItinerary.value.isNotEmpty)
-    itinerary = itinerary
-        .where((element) =>
+    itinerary = itinerary.where((element) {
+      var rule = true;
+      cruiseItinerary.value.forEach((item) {
+        rule = rule ||
             element["value"]["itinerary_format"].toString().toUpperCase() ==
-            (cruiseItinerary.value.toString().toUpperCase()))
-        .toList();
+                item.toString().toUpperCase();
+      });
+      return rule;
+    }).toList();
 
   cruiseResults.value = cruises.toList();
 
@@ -209,28 +213,7 @@ List<DataColumn> getCruiseHeader(context, data, columns) {
 /// ```
 ///
 ///
-void cruiseReset() {
-  cruiseFormat.value = '';
-  cruiseDay.value = '';
-  cruiseShip.value = '';
-  cruiseRange.value = '';
-  cruiseCategory.value = '';
-  cruiseKey.value = '';
-  cruiseType.value = '';
-  cruiseCabine.value = [];
-  cruiseModality.value = '';
-  cruisePax.value = '';
-  cruiseTriple.value = '';
-  cruiseStarts.value = '';
-  cruiseEnds.value = '';
-  cruiseIslet.value = '';
-  cruiseItinerary.value = <String>[];
-  cruisePort.value = '';
-  cruiseAnimal.value = '';
-  arrivalEdit.value = false;
-  departureEdit.value = false;
-  moreFilters.value = false;
-}
+void cruiseReset() {}
 
 /// ## clearCruiseFilter
 /// *__Method to reset cruise variables__*
@@ -386,7 +369,7 @@ Map<String, Object> getDay(day) {
         element["eng"].toString().toUpperCase() == day.toUpperCase());
     return res;
   }
-  return {};
+  return {"dayId": 1};
 }
 
 /// ## getCruiseDataCell

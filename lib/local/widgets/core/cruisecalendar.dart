@@ -173,7 +173,16 @@ class CruiseFiltersWidget extends StatelessWidget {
                                 "cabine", "value", "cabine_type",
                                 condition: (element) {
                               var rule = true;
+                              rule = rule &&
+                                  cruiseResults.value.where((cruise) {
+                                    return element["value"]["cruise_id"]
+                                            .toString() ==
+                                        cruise["value"]["cruise_id"].toString();
+                                  }).isNotEmpty;
 
+                              rule = rule &&
+                                  element["value"]["days"].toString() ==
+                                      cruiseDay.value.toString();
                               return rule;
                             }),
                             value);
@@ -269,11 +278,11 @@ class CruiseFiltersWidget extends StatelessWidget {
                           "cruises", "value", "cruise_type",
                           condition: (element) {
                         var rule = true;
-                        rule = rule &&
-                            cruiseResults.value.where((cruise) {
-                              return element["value"]["cruise_id"].toString() ==
-                                  cruise["value"]["cruise_id"].toString();
-                            }).isNotEmpty;
+                        // rule = rule &&
+                        //     cruiseResults.value.where((cruise) {
+                        //       return element["value"]["cruise_id"].toString() ==
+                        //           cruise["value"]["cruise_id"].toString();
+                        //     }).isNotEmpty;
 
                         return rule;
                       }),
@@ -427,6 +436,7 @@ class CruiseResultWidget extends StatelessWidget {
                 decoration: BoxDecoration(color: Colors.grey),
                 child: Row(
                   children: [
+                    Spacer(),
                     SizedBox(
                       child: Text(
                         "Cruise Name",
@@ -436,13 +446,15 @@ class CruiseResultWidget extends StatelessWidget {
                             fontWeight: FontWeight.bold),
                       ),
                     ),
+                    Spacer(),
                     SizedBox(
                         child: Text(
                       "Actions",
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          fontSize: isMobile * 10, fontWeight: FontWeight.bold),
+                          fontSize: isMobile * 15, fontWeight: FontWeight.bold),
                     )),
+                    Spacer(),
                   ],
                 ),
               ),
