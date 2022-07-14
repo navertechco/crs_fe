@@ -437,6 +437,7 @@ void saveCustomerTravelCode(value) {
   travelCode.value = value!;
   var res = getCustomerTravelCode(value);
   setFormValue(globalctx.memory, "tour", "travel_code", res);
+  setFormValue(globalctx.memory, "tour", "lead_passenger", value);
 }
 
 saveCustomer(state) {

@@ -6,7 +6,7 @@ class CustomPadingTitleWidget extends StatelessWidget {
       {Key? key,
       required this.customlabel,
       this.fontWeight = FontWeight.bold,
-      this.width = 0.1})
+      this.width = 0.01})
       : super(key: key);
 
   final String customlabel;

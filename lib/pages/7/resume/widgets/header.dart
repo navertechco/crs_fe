@@ -15,7 +15,7 @@ class Header extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const CustomFormTitleWidget(level: 1, label: "Client Information"),
+        const CustomFormTitleWidget(level: 1, label: "Customer Information"),
         Row(
           children: [
             CustomDetailWidget(
@@ -30,7 +30,8 @@ class Header extends StatelessWidget {
                 value: getFormValue(globalctx.memory, "customer", "email", '')),
             CustomDetailWidget(
                 label: "dni: ",
-                value: getFormValue(globalctx.memory, "customer", "dni", '')),
+                value: getFormValue(
+                    globalctx.memory, "customer", "client_dni", '')),
           ],
         ),
         Row(
@@ -38,14 +39,15 @@ class Header extends StatelessWidget {
             CustomDetailWidget(
                 label: "Lead Passenger: ",
                 value: getFormValue(
-                    globalctx.memory, "customer", "lead_passenger", '')),
+                    globalctx.memory, "tour", "lead_passenger", '')),
             CustomDetailWidget(
                 label: "Address Line: ",
-                value: getFormValue(
-                    globalctx.memory, "customer", "address_line", '')),
+                value:
+                    getFormValue(globalctx.memory, "customer", "address", '')),
             CustomDetailWidget(
                 label: "City: ",
-                value: getFormValue(globalctx.memory, "customer", "city", '')),
+                value:
+                    getFormValue(globalctx.memory, "customer", "city_id", '')),
             CustomDetailWidget(
                 label: "Country: ",
                 value:
@@ -75,29 +77,20 @@ class Header extends StatelessWidget {
         Row(
           children: [
             CustomDetailWidget(
-                label: "Arrival Port: ",
-                value: getFormValue(
-                    globalctx.memory, "logistic", "arrival_port", '')),
+                label: "Arrival Port: ", value: arrivalPort.value),
             CustomDetailWidget(
-                label: "Departure Port: ",
-                value: getFormValue(
-                    globalctx.memory, "logistic", "departure_port", '')),
-            CustomDetailWidget(
-                label: "Tour option: ",
-                value: getFormValue(
-                    globalctx.memory, "logistic", "tour_option", '')),
+                label: "Departure Port: ", value: departurePort.value),
+            CustomDetailWidget(label: "Tour option: ", value: tourOption.value),
           ],
         ),
         Row(
           children: [
             CustomDetailWidget(
                 label: "Arrival Date: ",
-                value: DateFormat('EEEE MMMM d yyyy').format(getFormValue(
-                    globalctx.memory, "logistic", "arrival_date", ''))),
+                value: currentDayFormat.format(arrivalDate.value)),
             CustomDetailWidget(
                 label: "Departure Date: ",
-                value: DateFormat('EEEE MMMM d yyyy').format(getFormValue(
-                    globalctx.memory, "logistic", "departure_date", ''))),
+                value: currentDayFormat.format(departureDate.value)),
           ],
         ),
         CustomFormTitleWidget(

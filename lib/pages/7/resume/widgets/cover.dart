@@ -15,7 +15,7 @@ class Cover extends StatelessWidget {
     var passengers = tour["passengers"] ?? "1";
     var days = totalDays.value;
     var nights = days - 1;
-    var valid = getValue(tour, "valid_until", def: "");
+    var valid = departureDate.value.year.toString() + "-31-12";
     var description = tour["description"] ??
         "We present below this proposal document of our excellent travel experience services, unique in Ecuador";
 
