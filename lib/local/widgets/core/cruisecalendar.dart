@@ -149,161 +149,180 @@ class CruiseFiltersWidget extends StatelessWidget {
                     }),
               ),
             ]),
-            CustomFormLabelWidget(
-                label: "More Filters",
-                fontWeight: FontWeight.bold,
-                fontSize: 12),
-            Row(children: [
-              CustomFormDropDownFieldWidget(
-                width: 0.16,
-                height: 0.05,
-                validator: CustomRequiredValidator(
-                    errorText: "Cabine Type is required ", ctx: ctx),
-                value: getFormValue(
-                    globalctx.memory, "logistic", "cruise_cabine_type", "0"),
-                onSaved: (value) {},
-                onChanged: (value) {
-                  cruiseCabine.value = getCatalogDescription(
-                      getMemoryCatalogChild("cabine", "value", "cabine_type",
+            if (moreFilters.value)
+              Column(
+                children: [
+                  CustomFormLabelWidget(
+                      label: "More Filters",
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12),
+                  Row(children: [
+                    CustomFormDropDownFieldWidget(
+                      width: 0.16,
+                      height: 0.05,
+                      validator: CustomRequiredValidator(
+                          errorText: "Cabine Type is required ", ctx: ctx),
+                      value: getFormValue(globalctx.memory, "logistic",
+                          "cruise_cabine_type", "0"),
+                      onSaved: (value) {},
+                      onChanged: (value) {
+                        setFormValue(globalctx.memory, "logistic",
+                            "cruise_cabine_type", value);
+                        cruiseCabine.value = getCatalogDescription(
+                            getMemoryCatalogChild(
+                                "cabine", "value", "cabine_type",
+                                condition: (element) {
+                              var rule = true;
+
+                              return rule;
+                            }),
+                            value);
+                        filterCruises(context);
+                      },
+                      hintText: "Cabine Type    ",
+                      data: getMemoryCatalogChild(
+                          "cabine", "value", "cabine_type",
                           condition: (element) {
                         var rule = true;
+                        rule = rule &&
+                            cruiseResults.value.where((cruise) {
+                              return element["value"]["cruise_id"].toString() ==
+                                  cruise["value"]["cruise_id"].toString();
+                            }).isNotEmpty;
+
+                        rule = rule &&
+                            element["value"]["days"].toString() ==
+                                cruiseDay.value.toString();
+                        return rule;
+                      }),
+                    ),
+                    CustomFormDropDownFieldWidget(
+                      width: 0.16,
+                      height: 0.05,
+                      validator: CustomRequiredValidator(
+                          errorText: "Cabine Location is required ", ctx: ctx),
+                      value: getFormValue(globalctx.memory, "logistic",
+                          "cruise_cabine_location", "0"),
+                      onSaved: (value) {},
+                      onChanged: (value) {
+                        cruiseCabineLocation.value = getCatalogDescription(
+                            getMemoryCatalogChild(
+                                "cabine", "value", "cabine_location",
+                                filter: {
+                                  "catalog": "itinerary",
+                                  "key": "itinerary_format",
+                                  "value": cruiseItinerary.value,
+                                  "relation": ["cruise_id", "days"]
+                                }),
+                            value);
+                        setFormValue(globalctx.memory, "logistic",
+                            "cruise_cabine_location", value);
+                        filterCruises(context);
+                      },
+                      hintText: "Cabine Location    ",
+                      data: getMemoryCatalogChild(
+                          "cabine", "value", "cabine_location",
+                          condition: (element) {
+                        var rule = true;
+                        rule = rule &&
+                            cruiseResults.value.where((cruise) {
+                              return element["value"]["cruise_id"].toString() ==
+                                  cruise["value"]["cruise_id"].toString();
+                            }).isNotEmpty;
+
+                        rule = rule &&
+                            element["value"]["days"].toString() ==
+                                cruiseDay.value.toString();
+                        return rule;
+                      }),
+                    ),
+                    CustomFormDropDownFieldWidget(
+                      width: 0.16,
+                      height: 0.05,
+                      validator: CustomRequiredValidator(
+                          errorText: "Cruise Type is required ", ctx: ctx),
+                      value: getFormValue(
+                          globalctx.memory, "logistic", "cruise_type", "0"),
+                      onSaved: (value) {},
+                      onChanged: (value) {
+                        cruiseType.value = getCatalogDescription(
+                            getMemoryCatalogChild(
+                                "cruises", "value", "cruise_type",
+                                condition: (element) {
+                              var rule = true;
+                              rule = rule &&
+                                  cruiseResults.value.where((cruise) {
+                                    return element["value"]["cruise_id"]
+                                            .toString() ==
+                                        cruise["value"]["cruise_id"].toString();
+                                  }).isNotEmpty;
+
+                              return rule;
+                            }),
+                            value);
+                        setFormValue(
+                            globalctx.memory, "logistic", "cruise_type", value);
+                        filterCruises(context);
+                      },
+                      hintText: "Cruise Type    ",
+                      data: getMemoryCatalogChild(
+                          "cruises", "value", "cruise_type",
+                          condition: (element) {
+                        var rule = true;
+                        rule = rule &&
+                            cruiseResults.value.where((cruise) {
+                              return element["value"]["cruise_id"].toString() ==
+                                  cruise["value"]["cruise_id"].toString();
+                            }).isNotEmpty;
 
                         return rule;
                       }),
-                      value);
-                  setFormValue(globalctx.memory, "logistic",
-                      "cruise_cabine_type", value);
-                  filterCruises(context);
-                },
-                hintText: "Cabine Type    ",
-                data: getMemoryCatalogChild("cabine", "value", "cabine_type",
-                    condition: (element) {
-                  var rule = true;
-                  var rule2 = element["value"]["days"].toString() ==
-                      cruiseDay.value.toString();
-                  return rule && rule2;
-                }),
-              ),
-              CustomFormDropDownFieldWidget(
-                width: 0.16,
-                height: 0.05,
-                validator: CustomRequiredValidator(
-                    errorText: "Cabine Location is required ", ctx: ctx),
-                value: getFormValue(globalctx.memory, "logistic",
-                    "cruise_cabine_location", "0"),
-                onSaved: (value) {},
-                onChanged: (value) {
-                  cruiseCabineLocation.value = getCatalogDescription(
-                      getMemoryCatalogChild(
-                          "cabine", "value", "cabine_location",
-                          filter: {
-                            "catalog": "itinerary",
-                            "key": "itinerary_format",
-                            "value": cruiseItinerary.value,
-                            "relation": ["cruise_id", "days"]
-                          }),
-                      value);
-                  setFormValue(globalctx.memory, "logistic",
-                      "cruise_cabine_location", value);
-                  filterCruises(context);
-                },
-                hintText: "Cabine Location    ",
-                data: getMemoryCatalogChild(
-                    "cabine", "value", "cabine_location",
-                    filter: {
-                      "catalog": "itinerary",
-                      "key": "itinerary_format",
-                      "value": cruiseItinerary.value,
-                      "relation": ["cruise_id", "days"]
-                    }),
-              ),
-              CustomFormDropDownFieldWidget(
-                width: 0.16,
-                height: 0.05,
-                validator: CustomRequiredValidator(
-                    errorText: "Cruise Type is required ", ctx: ctx),
-                value: getFormValue(
-                    globalctx.memory, "logistic", "cruise_type", "0"),
-                onSaved: (value) {},
-                onChanged: (value) {
-                  cruiseType.value = getCatalogDescription(
-                      getMemoryCatalogChild("cruises", "value", "cruise_type",
+                    ),
+                    CustomFormDropDownFieldWidget(
+                      width: 0.16,
+                      height: 0.05,
+                      validator: CustomRequiredValidator(
+                          errorText: "Cruise Port is required ", ctx: ctx),
+                      value: getFormValue(
+                          globalctx.memory, "logistic", "cruise_port", "0"),
+                      onSaved: (value) {},
+                      onChanged: (value) {
+                        cruisePort.value = getCatalogDescription(
+                            getMemoryCatalogChild(
+                                "cruises", "value", "cruise_port",
+                                condition: (element) {
+                              var rule = true;
+                              rule = rule &&
+                                  cruiseResults.value.where((cruise) {
+                                    return element["value"]["cruise_id"]
+                                            .toString() ==
+                                        cruise["value"]["cruise_id"].toString();
+                                  }).isNotEmpty;
+
+                              return rule;
+                            }),
+                            value);
+                        setFormValue(
+                            globalctx.memory, "logistic", "cruise_port", value);
+                        filterCruises(context);
+                      },
+                      hintText: "Cruise Port    ",
+                      data: getMemoryCatalogChild(
+                          "cruises", "value", "cruise_port",
                           condition: (element) {
                         var rule = true;
-                        var rule2 = cabine.where((cab) {
-                          return cab["value"]["cruise_id"] ==
-                              element["value"]["cruise_id"];
-                        }).isNotEmpty;
-                        var rule3 = itinerary.where((iti) {
-                          return iti["value"]["cruise_id"] ==
-                              element["value"]["cruise_id"];
-                        }).isNotEmpty;
-                        return rule && rule2 && rule3;
+                        rule = rule &&
+                            cruiseResults.value.where((cruise) {
+                              return element["value"]["cruise_id"].toString() ==
+                                  cruise["value"]["cruise_id"].toString();
+                            }).isNotEmpty;
+
+                        return rule;
                       }),
-                      value);
-                  setFormValue(
-                      globalctx.memory, "logistic", "cruise_type", value);
-                  filterCruises(context);
-                },
-                hintText: "Cruise Type    ",
-                data: getMemoryCatalogChild("cruises", "value", "cruise_type",
-                    condition: (element) {
-                  var rule = true;
-                  var rule2 = cabine.where((cab) {
-                    return cab["value"]["cruise_id"] ==
-                        element["value"]["cruise_id"];
-                  }).isNotEmpty;
-                  var rule3 = itinerary.where((iti) {
-                    return iti["value"]["cruise_id"] ==
-                        element["value"]["cruise_id"];
-                  }).isNotEmpty;
-                  return rule && rule2 && rule3;
-                }),
+                    ),
+                  ]),
+                ],
               ),
-              CustomFormDropDownFieldWidget(
-                width: 0.16,
-                height: 0.05,
-                validator: CustomRequiredValidator(
-                    errorText: "Cruise Port is required ", ctx: ctx),
-                value: getFormValue(
-                    globalctx.memory, "logistic", "cruise_port", "0"),
-                onSaved: (value) {},
-                onChanged: (value) {
-                  cruisePort.value = getCatalogDescription(
-                      getMemoryCatalogChild("cruises", "value", "cruise_port",
-                          condition: (element) {
-                        var rule = true;
-                        var rule2 = cabine.where((cab) {
-                          return cab["value"]["cruise_id"] ==
-                              element["value"]["cruise_id"];
-                        }).isNotEmpty;
-                        var rule3 = itinerary.where((iti) {
-                          return iti["value"]["cruise_id"] ==
-                              element["value"]["cruise_id"];
-                        }).isNotEmpty;
-                        return rule && rule2 && rule3;
-                      }),
-                      value);
-                  setFormValue(
-                      globalctx.memory, "logistic", "cruise_port", value);
-                  filterCruises(context);
-                },
-                hintText: "Cruise Port    ",
-                data: getMemoryCatalogChild("cruises", "value", "cruise_port",
-                    condition: (element) {
-                  var rule = true;
-                  var rule2 = cabine.where((cab) {
-                    return cab["value"]["cruise_id"] ==
-                        element["value"]["cruise_id"];
-                  }).isNotEmpty;
-                  var rule3 = itinerary.where((iti) {
-                    return iti["value"]["cruise_id"] ==
-                        element["value"]["cruise_id"];
-                  }).isNotEmpty;
-                  return rule && rule2 && rule3;
-                }),
-              ),
-            ]),
           ])),
     );
     //
@@ -336,6 +355,7 @@ class CruiseKeyPadWidget extends StatelessWidget {
                         .getStyle()),
               ),
               // if (cruiseCabine.isNotEmpty)
+
               TextButton(
                 onPressed: () {
                   showCustomDialog(context, CruiseResultWidget(), "Close",
@@ -349,20 +369,20 @@ class CruiseKeyPadWidget extends StatelessWidget {
                             color: Colors.black)
                         .getStyle()),
               ),
-              if (cruiseCabine.isNotEmpty)
-                TextButton(
-                  onPressed: () {
-                    moreFilters.value = !moreFilters.value;
-                  },
-                  child: Text(
-                      !moreFilters.value ? 'More Filters' : 'Less Filters',
-                      style: KTextSytle(
-                              context: context,
-                              fontSize: isMobile * 10,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black)
-                          .getStyle()),
-                ),
+
+              TextButton(
+                onPressed: () {
+                  moreFilters.value = !moreFilters.value;
+                },
+                child: Text(
+                    !moreFilters.value ? 'More Filters' : 'Less Filters',
+                    style: KTextSytle(
+                            context: context,
+                            fontSize: isMobile * 10,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black)
+                        .getStyle()),
+              ),
               TextButton(
                 onPressed: () {
                   Get.close(1);
