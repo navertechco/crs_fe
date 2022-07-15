@@ -267,8 +267,9 @@ List<DataRow> getTourDataRows(context, data, columns) {
             IconButton(
               icon: const Icon(Icons.copy),
               tooltip: 'Copy',
-              onPressed: () {
-                getTour(context, tourId: row["quote"], detail: true,
+              onPressed: () async {
+                await getCatalogs(["ALL"]);
+                await getTour(context, tourId: row["quote"], detail: true,
                     cb: (data) {
                   if (data.length > 0) {
                     globalctx.memory["tour"] = data[0];

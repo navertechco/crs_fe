@@ -105,7 +105,7 @@ void resetAllDestinations() {
   resetMemoryDestinations(); 
   filterDestinations();
   if (cruiseDay.isNotEmpty) {
-    autoFillDestination(arrival["description"], 0, "arrival", "0");
+    autoFillDestination(arrival["description"], 0, "arrival", "1");
     autoFillDestination("galapagos_cruise", 1, "arrival", cruiseDay.value);
     autoFillDestination(departure["description"], 2, "departure", "0");
   } else {
