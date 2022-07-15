@@ -137,32 +137,40 @@ class LogisticForm extends StatelessWidget {
                   Obx(() {
                     return Row(
                       children: [
-                        CustomFormDateFieldWidget(
-                          height: 0.06,
-                          width: 0.2,
-                          fontSize: 10,
-                          disabled: (readonly || cruiseDay.isNotEmpty) &&
-                              !arrivalEdit.value,
-                          initialValue: arrivalDate.value,
-                          validator: CustomDatetimeGreaterValidator(
-                              context: context,
-                              compare: departureDate.value,
-                              errorText:
-                                  "There is a problem with the Departure Date"),
-                          label: "Arrival Date                  ",
-                          onSaved: (value) {
-                            ctrl!.state.arrivalDate = value!;
-                            arrivalDate.value = value;
-                            // clearCruiseFilter();
-                            filterCruises(context);
-                          },
-                          onChanged: (value) {
-                            value ??= DateTime.now();
-                            ctrl!.state.arrivalDate = value;
-                            arrivalDate.value = value;
-                            filterCruises(context);
-                          },
-                        ),
+                        if (arrivalEdit.value)
+                          CustomFormDateFieldWidget(
+                            height: 0.06,
+                            width: 0.2,
+                            fontSize: 10,
+                            disabled: (readonly || cruiseDay.isNotEmpty) &&
+                                !arrivalEdit.value,
+                            initialValue: arrivalDate.value,
+                            validator: CustomDatetimeGreaterValidator(
+                                context: context,
+                                compare: departureDate.value,
+                                errorText:
+                                    "There is a problem with the Departure Date"),
+                            label: "Arrival Date                  ",
+                            onSaved: (value) {
+                              ctrl!.state.arrivalDate = value!;
+                              arrivalDate.value = value;
+                              // clearCruiseFilter();
+                              filterCruises(context);
+                            },
+                            onChanged: (value) {
+                              value ??= DateTime.now();
+                              ctrl!.state.arrivalDate = value;
+                              arrivalDate.value = value;
+                              filterCruises(context);
+                            },
+                          ),
+                        if (!arrivalEdit.value)
+                          CustomTitleWidget(
+                              fontSize: 10,
+                              width: isMobile * 0.225,
+                              fontWeight: FontWeight.bold,
+                              label:
+                                  currentDayFormat.format(arrivalDate.value)),
                         CheckboxIconFormField(
                             padding: 0,
                             initialValue: arrivalEdit.value,
