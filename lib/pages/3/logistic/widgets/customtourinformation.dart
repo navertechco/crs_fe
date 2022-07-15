@@ -132,7 +132,9 @@ class LogisticForm extends StatelessWidget {
                     validator: CustomRequiredValidator(
                         errorText: "Arrival Port is required ", ctx: context),
                     label: "Arrival Port                    ",
-                    data: airportCatalog.toList(),
+                    data: airportCatalog
+                        .where((element) => element["value"]["type"] != "out")
+                        .toList(),
                   ),
                   Obx(() {
                     return Row(
@@ -207,7 +209,14 @@ class LogisticForm extends StatelessWidget {
                     validator: CustomRequiredValidator(
                         errorText: "Departure Port is required ", ctx: context),
                     label: "Departure Port            ",
-                    data: airportCatalog.toList(),
+                    data: airportCatalog.where((element) {
+                      var rule = true;
+                      rule = rule && element["value"]["type"] != "in";
+                      if (element["description"] == "GALAPAGOS") {
+                        rule = galapagosCruise.value;
+                      }
+                      return rule;
+                    }).toList(),
                   ),
                   Obx(() {
                     return Row(
