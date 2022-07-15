@@ -187,6 +187,16 @@ List<DataColumn> getNetRateHeader(context, data) {
   return result;
 }
 
+checkMaxDaysValue(type) {
+  var res = dayleft.value + (type == "departure" ? 1 : 0);
+
+  if (type == "arrival" && cruiseDay.value.isNotEmpty) {
+    res = 1;
+  }
+
+  return res;
+}
+
 /// ## getTourDataRows
 /// *__Method to process Tour Detail DataRows to build DataTable__*
 ///

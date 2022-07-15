@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../../../../../index.dart';
@@ -15,11 +14,12 @@ class ExpDaysCounterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return CustomFormCounterFieldWidget(
         initial: int.parse(getFormValue(
             globalctx.memory["destinations"], index, "explorationDay", "0")),
         min: 0,
-        max: dayleft.value + (type == "departure" ? 1 : 0),
+        max: checkMaxDaysValue(type),
         bound: 0,
         onValueChanged: (value) {
           saveExplorationDay(
