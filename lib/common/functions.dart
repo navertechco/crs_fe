@@ -186,10 +186,14 @@ double getGPSDistance(String latA, String longA, String latB, String longB) {
 /// @return void
 ///
 void updateDatatable(context, data) {
-  var processedData = processData(context, data, null);
-  searcherHeader.value = processedData[0];
-  if (searchResult!.value.isEmpty) {
-    searcherDetail.value = processedData[1];
+  try {
+    var processedData = processData(context, data, null);
+    searcherHeader.value = processedData[0];
+    if (searchResult!.value.isEmpty) {
+      searcherDetail.value = processedData[1];
+    }
+  } catch (e) {
+    log(e);
   }
 }
 
