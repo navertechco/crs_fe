@@ -13,7 +13,7 @@ class DaysControlWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() => Wrap(
           children: [
-            Text("Remaining Days: ",
+            Text("Remaining Days: $dayleft",
                 style: GoogleFonts.poppins(
                     textStyle: TextStyle(
                   color: (dayleft.value) < 1
@@ -24,7 +24,7 @@ class DaysControlWidget extends StatelessWidget {
                       15,
                   fontWeight: FontWeight.bold,
                 ))),
-            Text("    Selected Days: ",
+            Text("    Selected Days: $accumulated",
                 style: GoogleFonts.poppins(
                     textStyle: TextStyle(
                   color: (accumulated.value) == 0
