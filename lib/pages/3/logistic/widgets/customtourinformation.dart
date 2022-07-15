@@ -173,12 +173,12 @@ class LogisticForm extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                               label:
                                   currentDayFormat.format(arrivalDate.value)),
-                        CheckboxIconFormField(
-                            padding: 0,
-                            initialValue: arrivalEdit.value,
-                            onChanged: (value) {
-                              arrivalEdit.value = !arrivalEdit.value;
-                            })
+                        // CheckboxIconFormField(
+                        //     padding: 0,
+                        //     initialValue: arrivalEdit.value,
+                        //     onChanged: (value) {
+                        //       arrivalEdit.value = !arrivalEdit.value;
+                        //     })
                       ],
                     );
                   }),
