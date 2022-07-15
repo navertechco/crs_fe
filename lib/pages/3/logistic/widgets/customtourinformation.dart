@@ -95,14 +95,15 @@ class LogisticForm extends StatelessWidget {
                   }),
                   Row(
                     children: [
-                      CustomTitleWidget(
-                        fontSize: 8,
-                        width: 0.1,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.red,
-                        label:
-                            "Sails: ${currentDayFormat.format(cruiseStartDate.value)} -> Lands: ${currentDayFormat.format(cruiseEndDate.value)}",
-                      ),
+                      if (cruiseDay.isNotEmpty)
+                        CustomTitleWidget(
+                          fontSize: 8,
+                          width: 0.1,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.red,
+                          label:
+                              "Sails: ${currentDayFormat.format(cruiseStartDate.value)} -> Lands: ${currentDayFormat.format(cruiseEndDate.value)}",
+                        ),
                     ],
                   ),
                   CustomTitleWidget(
@@ -139,7 +140,7 @@ class LogisticForm extends StatelessWidget {
                   Obx(() {
                     return Row(
                       children: [
-                        if (arrivalEdit.value)
+                        if (!cruiseDay.isNotEmpty)
                           CustomFormDateFieldWidget(
                             height: 0.06,
                             width: 0.2,
@@ -166,7 +167,7 @@ class LogisticForm extends StatelessWidget {
                               filterCruises(context);
                             },
                           ),
-                        if (!arrivalEdit.value)
+                        if (cruiseDay.isNotEmpty)
                           CustomTitleWidget(
                               fontSize: 10,
                               width: isMobile * 0.225,

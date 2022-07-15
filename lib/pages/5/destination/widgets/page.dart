@@ -1,3 +1,4 @@
+import 'package:counter/counter.dart';
 import 'package:flutter/material.dart';
 import 'index.dart';
 import 'package:naver_crs/index.dart';
@@ -18,7 +19,7 @@ class DestinationWidget extends GetView<DestinationController> {
           child: Obx(() {
             return Row(
               children: [
-                Text("Remaining Days: $dayleft",
+                Text("Remaining Days: ",
                     style: GoogleFonts.poppins(
                         textStyle: TextStyle(
                       color: (dayleft.value) < 1
@@ -29,6 +30,16 @@ class DestinationWidget extends GetView<DestinationController> {
                           15,
                       fontWeight: FontWeight.bold,
                     ))),
+                Counter(
+                  initial: dayleft.value,
+                  min: 0,
+                  max: 10,
+                  bound: 0,
+                  step: 1,
+                  onValueChanged: (value) {
+                    updateDayleft(value);
+                  },
+                ),
                 Text("    Selected Days: $accumulated",
                     style: GoogleFonts.poppins(
                         textStyle: TextStyle(
