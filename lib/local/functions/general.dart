@@ -519,7 +519,6 @@ getSubs(item) {
 
 filterDestinationKeyActivities() {
   var keyActivitiesCatalog = findCatalog("key_activity");
-
   var experiences = findCatalog("experiences");
   var ka = [];
   experiences = experiences.where((exp) {
@@ -532,10 +531,9 @@ filterDestinationKeyActivities() {
     ka.add(exp["value"]["keyActivityType_fk2"]);
   }
   ka.toSet();
-  keyActivitiesCatalog = keyActivitiesCatalog.where((exp) {
-    var rule = false;
-    rule = rule || ka.contains(exp["value"]["keyActivityType_fk"]);
-    rule = rule || ka.contains(exp["value"]["keyActivityType_fk2"]);
+  keyActivitiesCatalog = keyActivitiesCatalog.where((e) {
+    var rule = true;
+    rule = rule && ka.contains(e["description"]);
     return rule;
   }).toList();
   return keyActivitiesCatalog;
