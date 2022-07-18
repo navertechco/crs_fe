@@ -33,7 +33,7 @@ class DestinationWidget extends GetView<DestinationController> {
                 Counter(
                   initial: dayleft.value,
                   min: 0,
-                  max: 10,
+                  max: departure["description"] == "galapagos_cruise" ? 1 : 10,
                   bound: 0,
                   step: 1,
                   onValueChanged: (value) {

@@ -51,6 +51,8 @@ class LogisticForm extends StatelessWidget {
               SingleChildScrollView(
                 child: Column(children: [
                   Obx(() {
+                    var label = Rx(getFormValue(globalctx.memory, "logistic",
+                        "cruiseName", "View Cruise Calendar"));
                     if (galapagosCruise.value) {
                       return Row(
                         children: [
@@ -61,8 +63,7 @@ class LogisticForm extends StatelessWidget {
                           RoundedFormButton(
                             height: 0.06,
                             color: Colors.grey,
-                            label: getFormValue(globalctx.memory, "logistic",
-                                "cruiseName", "View Cruise Calendar"),
+                            label: label.value,
                             fontSize: 6,
                             fontWeight: FontWeight.bold,
                             textColor:
@@ -309,7 +310,8 @@ class LogisticForm extends StatelessWidget {
                               CustomFormTextFieldWidget(
                                 height: 0.05,
                                 fontSize: 10,
-                                value: openCredit.value,
+                                value: getFormValue(globalctx.memory,
+                                    "logistic", "open_credit_value", "100"),
                                 onChanged: (value) {
                                   setFormValue(globalctx.memory, "logistic",
                                       "open_credit_value", value);
