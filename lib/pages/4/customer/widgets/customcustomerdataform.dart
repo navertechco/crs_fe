@@ -57,7 +57,7 @@ class AddressInformation extends StatelessWidget {
                 fontSize: 10,
                 width: 0.22,
                 fontWeight: FontWeight.bold,
-                label: visible.value ? "Address information" : "open"),
+                label: "Address information"),
             Row(
               children: [
                 CustomFormDropDownFieldWidget(
@@ -341,7 +341,13 @@ class BasicInformation extends StatelessWidget {
                         ctrl!.state.contactName = value!;
                         setValue(client, "contact_name", value);
                       },
+                      onChanged: (value) {
+                        visible.value = keyboardIsVisible(context);
+                        ctrl!.state.contactName = value!;
+                        setValue(client, "contact_name", value);
+                      },
                       onFieldSubmitted: (value) {
+                        visible.value = !keyboardIsVisible(context);
                         ctrl!.state.contactName = value!;
                         setValue(client, "contact_name", value);
                       },
@@ -400,7 +406,13 @@ class BasicInformation extends StatelessWidget {
                     ctrl!.state.names = value!;
                     setValue(client, "names", value);
                   },
+                  onChanged: (value) {
+                    visible.value = keyboardIsVisible(context);
+                    ctrl!.state.names = value!;
+                    setValue(client, "names", value);
+                  },
                   onFieldSubmitted: (value) {
+                    visible.value = !keyboardIsVisible(context);
                     ctrl!.state.names = value!;
                     setValue(client, "names", value);
                   },
@@ -418,7 +430,13 @@ class BasicInformation extends StatelessWidget {
                     ctrl!.state.lastNames = value!;
                     setValue(client, "last_names", value);
                   },
+                  onChanged: (value) {
+                    visible.value = keyboardIsVisible(context);
+                    ctrl!.state.lastNames = value!;
+                    setValue(client, "last_names", value);
+                  },
                   onFieldSubmitted: (value) {
+                    visible.value = !keyboardIsVisible(context);
                     ctrl!.state.lastNames = value!;
                     setValue(client, "last_names", value);
                   },
