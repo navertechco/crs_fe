@@ -516,3 +516,27 @@ getSubs(item) {
   }
   return subs;
 }
+
+filterDestinationKeyActivities() {
+  var keyActivitiesCatalog = findCatalog("key_activity");
+
+  var experiences = findCatalog("experiences");
+  var ka = [];
+  experiences = experiences.where((exp) {
+    var rule = true;
+    rule = rule && exp["value"]["destination"] == globalDestinationName.value;
+    return rule;
+  }).toList();
+  for (var exp in experiences) {
+    ka.add(exp["value"]["keyActivityType_fk"]);
+    ka.add(exp["value"]["keyActivityType_fk2"]);
+  }
+  ka.toSet();
+  keyActivitiesCatalog = keyActivitiesCatalog.where((exp) {
+    var rule = false;
+    rule = rule || ka.contains(exp["value"]["keyActivityType_fk"]);
+    rule = rule || ka.contains(exp["value"]["keyActivityType_fk2"]);
+    return rule;
+  }).toList();
+  return keyActivitiesCatalog;
+}

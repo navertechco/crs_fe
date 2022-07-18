@@ -14,14 +14,19 @@ class KAWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var keyActivitiesCatalog = filterDestinationKeyActivities();
+
     return CustomFormMultiDropDownFieldWidget(
       validator: (value) => CustomMultiDropdownRequiredValidator(value,
           errorText: "Key Activities are required ", context: context),
       value: keyActivities,
       onSaved: (values) {
         if (values == null) return;
-        saveMultiDropDown([globalctx.memory["destinations"], index,
-              "key_activities",],findCatalog("key_activity"),values, 3);
+        saveMultiDropDown([
+          globalctx.memory["destinations"],
+          index,
+          "key_activities",
+        ], findCatalog("key_activity"), values, 3);
       },
       onChanged: (value) {
         setFormValue(
@@ -29,8 +34,7 @@ class KAWidget extends StatelessWidget {
       },
       hintText: " ",
       label: "Key Activities            ",
-      data: findCatalog("key_activity"),
+      data: keyActivitiesCatalog,
     );
   }
 }
-
