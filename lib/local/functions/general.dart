@@ -188,10 +188,14 @@ List<DataColumn> getNetRateHeader(context, data) {
 }
 
 updateDayleft(value) {
-  departureDate.value =
-      arrivalDate.value.add(Duration(days: accumulated.value + value as int));
-  totalDays.value = departureDate.value.difference(arrivalDate.value).inDays;
-  dayleft.value = totalDays.value - accumulated.value;
+  try {
+    departureDate.value =
+        arrivalDate.value.add(Duration(days: accumulated.value + value as int));
+    totalDays.value = departureDate.value.difference(arrivalDate.value).inDays;
+    dayleft.value = totalDays.value - accumulated.value;
+  } catch (e) {
+    log(e);
+  }
 }
 
 checkMaxDaysValue(type) {

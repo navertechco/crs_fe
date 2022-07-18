@@ -273,51 +273,63 @@ getHotelDetail(context, data, columns) {
 ///```
 void showHotelResultDialog(ctx, {int id = 0, int index = 0}) async {
   currentDestinationIndex.value = index;
-  if (globalctx.memory["hotels"] == null) {
-    var frame = {
-      "data": {"id": id}
-    };
-    var res = await fetchHandler(kDefaultSchema, kDefaultServer,
-        kDefaultServerPort, kDefaultFindHotel, 'POST', frame);
-    // ignore: avoid_print
-    log(res);
-    if (res['state'] == true) {
-      var data = res['data'];
-      if (data.length > 0) {
-        globalctx.memory["hotels"] = data;
-        showCustomDialog(
-            ctx,
-            HotelCalendarWidget(
-              ctx: ctx,
-            ),
-            "Close",
-            customChild: HotelKeyPadWidget(),
-            backgroundColor: Colors.white,
-            buttonColor: Colors.black,
-            height: 0.25,
-            width: 0.3);
+  var ka = getFormValue(
+      globalctx.memory["destinations"], index.toString(), "key_activities", []);
+  if (ka.isNotEmpty) {
+    if (globalctx.memory["hotels"] == null) {
+      var frame = {
+        "data": {"id": id}
+      };
+      var res = await fetchHandler(kDefaultSchema, kDefaultServer,
+          kDefaultServerPort, kDefaultFindHotel, 'POST', frame);
+      // ignore: avoid_print
+      log(res);
+      if (res['state'] == true) {
+        var data = res['data'];
+        if (data.length > 0) {
+          globalctx.memory["hotels"] = data;
+          showCustomDialog(
+              ctx,
+              HotelCalendarWidget(
+                ctx: ctx,
+              ),
+              "Close",
+              customChild: HotelKeyPadWidget(),
+              backgroundColor: Colors.white,
+              buttonColor: Colors.black,
+              height: 0.25,
+              width: 0.2);
+        }
+      } else {
+        SweetAlertV2.show(ctx,
+            curve: ElasticInCurve(),
+            title: res['message'],
+            style: SweetAlertV2Style.error, onPress: (bool isConfirm) {
+          Get.close(1);
+          return false;
+        });
       }
     } else {
-      SweetAlertV2.show(ctx,
-          curve: ElasticInCurve(),
-          title: res['message'],
-          style: SweetAlertV2Style.error, onPress: (bool isConfirm) {
-        Get.close(1);
-        return false;
-      });
+      showCustomDialog(
+          ctx,
+          HotelCalendarWidget(
+            ctx: ctx,
+          ),
+          "Close",
+          customChild: HotelKeyPadWidget(),
+          backgroundColor: Colors.white,
+          buttonColor: Colors.black,
+          height: 0.25,
+          width: 0.2);
     }
   } else {
-    showCustomDialog(
-        ctx,
-        HotelCalendarWidget(
-          ctx: ctx,
-        ),
-        "Close",
-        customChild: HotelKeyPadWidget(),
-        backgroundColor: Colors.white,
-        buttonColor: Colors.black,
-        height: 0.25,
-        width: 0.3);
+    SweetAlertV2.show(ctx,
+        curve: ElasticInCurve(),
+        title: "You must select Key Activities First",
+        style: SweetAlertV2Style.error, onPress: (bool isConfirm) {
+      Get.close(1);
+      return false;
+    });
   }
 }
 

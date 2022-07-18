@@ -37,6 +37,7 @@ class DestinationWidget extends GetView<DestinationController> {
                   bound: 0,
                   step: 1,
                   onValueChanged: (value) {
+                     
                     updateDayleft(value);
                   },
                 ),

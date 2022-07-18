@@ -62,22 +62,21 @@ class HotelFiltersWidget extends StatelessWidget {
                   data: getMemoryCatalogChild("hotel", "value", "budget_fk")),
               CustomFormMultiDropDownFieldWidget(
                   value: [],
-                  onChanged: (value) {},
-                  onSaved: (value) {
+                  onChanged: (value) {
                     hotelRoomCategory.value = getCatalogDescription(
                         getMemoryCatalogChild("hotel", "value", "roomcategory",
                             condition: (element) {
                           var rule = true;
-                          var rt = element["value"]["#roomtypes"] == ''
-                              ? 1
-                              : element["value"]["#roomtypes"];
-                          var mc = element["value"]["maxCapacity"];
-                          var pax = globalctx.memory["tour"]["passengers"];
+                          // var rt = element["value"]["#roomtypes"] == ''
+                          //     ? 1
+                          //     : element["value"]["#roomtypes"];
+                          // var mc = element["value"]["maxCapacity"];
+                          // var pax = globalctx.memory["tour"]["passengers"];
 
-                          rule = rt * mc >= pax;
-                          rule = rule &&
-                              hotelCategory.value ==
-                                  element["value"]["budget_fk"];
+                          // rule = rt * mc >= pax;
+                          // rule = rule &&
+                          //     hotelCategory.value ==
+                          //         element["value"]["budget_fk"];
                           var filter = hotelResults.value
                               .map((e) => e["description"])
                               .toList();
@@ -92,19 +91,20 @@ class HotelFiltersWidget extends StatelessWidget {
                         hotelRoomCategory.value);
                     filterHotels(context);
                   },
+                  onSaved: (value) {},
                   hintText: "Room Category     ",
                   data: getMemoryCatalogChild("hotel", "value", "roomcategory",
                       condition: (element) {
                     var rule = true;
-                    var rt = element["value"]["#roomtypes"] == ''
-                        ? 1
-                        : element["value"]["#roomtypes"];
-                    var mc = element["value"]["maxCapacity"];
-                    var pax = globalctx.memory["tour"]["passengers"];
+                    // var rt = element["value"]["#roomtypes"] == ''
+                    //     ? 1
+                    //     : element["value"]["#roomtypes"];
+                    // var mc = element["value"]["maxCapacity"];
+                    // var pax = globalctx.memory["tour"]["passengers"];
 
-                    rule = rule && (rt * mc >= pax);
-                    rule = rule &&
-                        hotelCategory.value == element["value"]["budget_fk"];
+                    // rule = rule && (rt * mc >= pax);
+                    // rule = rule &&
+                    //     hotelCategory.value == element["value"]["budget_fk"];
                     var filter = hotelResults.value
                         .map((e) => e["description"])
                         .toList();
@@ -176,7 +176,7 @@ class HotelKeyPadWidget extends StatelessWidget {
           padding: EdgeInsets.only(
               top: MediaQuery.of(context).size.height * 0,
               left: MediaQuery.of(context).size.width * 0.4),
-          child: Row(
+          child: Wrap(
             children: [
               TextButton(
                 onPressed: () {
@@ -214,6 +214,18 @@ class HotelKeyPadWidget extends StatelessWidget {
                 },
                 child: Text(
                     !moreFilters.value ? 'More Filters' : 'Less Filters',
+                    style: KTextSytle(
+                            context: context,
+                            fontSize: isMobile * 10,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black)
+                        .getStyle()),
+              ),
+              TextButton(
+                onPressed: () {
+                  Get.close(1);
+                },
+                child: Text('Promote',
                     style: KTextSytle(
                             context: context,
                             fontSize: isMobile * 10,

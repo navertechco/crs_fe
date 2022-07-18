@@ -47,6 +47,10 @@ class SwitcherWidget extends StatelessWidget {
       } else {
         globalDestinationName.value = destination;
         globalDestinationIndex.value = index.toString();
+        if (type == "departure" && destination == arrival["description"]) {
+          globalctx.memory["destinations"][index.toString()] =
+              globalctx.memory["destinations"]["0"];
+        }
         showDialog(
             context: context,
             builder: (context) {
