@@ -54,7 +54,11 @@ Future paginateDay(context) async {
 ///```
 Future nextDay() async {
   if (currentDay.value < totalDays.value - 1) {
-    currentDay.value++;
+    if (currentDay.value < 0) {
+      currentDay.value = 0;
+    } else {
+      currentDay.value++;
+    }
     jumpDay("forward");
   } else {
     gotoPage("Resume");
@@ -102,8 +106,6 @@ decideBypass(direction) {
       globalctx.memory["destinations"], index, "explorationDay", "0"));
   if (explorationMode > 0) {
     bypassDay(direction, explorationDay);
-  } else {
-    updateCurrentDay(direction);
   }
 }
 

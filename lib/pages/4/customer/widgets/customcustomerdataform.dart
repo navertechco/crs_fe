@@ -288,14 +288,14 @@ class BasicInformation extends StatelessWidget {
                     height: 0.05,
                     validator: CustomRequiredValidator(
                         errorText: "Tax Id is required ", ctx: context),
-                    value: getValue(client, "tax_id", def: ""),
+                    value: getValue(client, "client_dni", def: ""),
                     onSaved: (value) {
                       ctrl!.state.taxId = value!;
-                      setValue(client, "tax_id", value);
+                      setValue(client, "client_dni", value);
                     },
                     onChanged: (value) {
                       ctrl!.state.taxId = value!;
-                      setValue(client, "tax_id", value);
+                      setValue(client, "client_dni", value);
                     },
                     keyboardType: TextInputType.number,
                     hintText: "Tax Id                            ",

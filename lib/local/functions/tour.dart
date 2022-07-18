@@ -46,12 +46,14 @@ Future processTour() async {
         Map myExpDto = experienceDto;
         // Prepare Frame to send to Resume Page
         var exps = globalctx.memory["promoted"][dayIndex];
-        for (String exp in exps.keys) {
-          Map newExp = {};
-          Map newEntry = exps[exp];
-          newExp = {...myExpDto, ...newEntry};
-          myDayDto["experiences"] ??= {};
-          myDayDto["experiences"][exp] = newExp;
+        if (exps != null) {
+          for (String exp in exps.keys) {
+            Map newExp = {};
+            Map newEntry = exps[exp];
+            newExp = {...myExpDto, ...newEntry};
+            myDayDto["experiences"] ??= {};
+            myDayDto["experiences"][exp] = newExp;
+          }
         }
         destinations[dest]["daysData"][dayIndex] = myDayDto;
         dayIndex++;
