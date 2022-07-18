@@ -81,6 +81,7 @@ dependencies:
   shelf_static: ^1.1.0
   shelf_router: ^1.1.2
   dropdown_search: ^5.0.2
+  flutter_keyboard_visibility: ^5.3.0
   # image_picker: ^0.8.4+4
   # image_picker_for_web: ^2.1.4
 

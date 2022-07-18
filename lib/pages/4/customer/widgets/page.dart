@@ -11,8 +11,11 @@ class CustomerFormPage extends GetView<CustomerController> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: CustomCustomerDataForm(ctrl: ctrl),
+    return Padding(
+      padding: EdgeInsets.only(top: MediaQuery.of(context).size.width * 0.02),
+      child: Center(
+        child: CustomCustomerDataForm(ctrl: ctrl),
+      ),
     );
   }
 }

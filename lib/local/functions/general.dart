@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_function_declarations_over_variables, import_of_legacy_library_into_null_safe
 import 'package:flutter/material.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/pages/7/endservices/widgets/index.dart';
@@ -487,5 +488,12 @@ String getCustomerTravelCode(value) {
       dayFormat.format(arrivalDate.value).replaceAll(" ", "-") +
       "-" +
       globalctx.memory["tour"]["code"].toString();
+  return res;
+}
+
+RxBool visible = false.obs;
+bool keyboardIsVisible(context) {
+  log("AQUI");
+  bool res = !KeyboardVisibilityProvider.isKeyboardVisible(context);
   return res;
 }
