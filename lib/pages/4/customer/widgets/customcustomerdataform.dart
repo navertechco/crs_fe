@@ -477,12 +477,14 @@ class TourInformation extends StatelessWidget {
                       errorText: "Lead Passenger is required ", ctx: context),
                   value: travelCode.value,
                   onChanged: (value) {
+                    visible.value = keyboardIsVisible(context);
                     saveCustomerTravelCode(value);
                   },
                   onSaved: (value) {
                     saveCustomerTravelCode(value);
                   },
                   onFieldSubmitted: (value) {
+                    visible.value = !keyboardIsVisible(context);
                     saveCustomerTravelCode(value);
                   },
                   keyboardType: TextInputType.name,

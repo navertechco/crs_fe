@@ -81,9 +81,9 @@ Future jumpDay(direction) async {
   expDraggable.value = 1;
   currentDate.value = arrivalDate.value.add(Duration(days: currentDay.value));
   updateCurrentDestination();
-  promoteMealExperiences();
   filterSuggestedExperiences();
   initializeHours();
+  promoteMealExperiences();
   gotoPage("Experiences");
 }
 
