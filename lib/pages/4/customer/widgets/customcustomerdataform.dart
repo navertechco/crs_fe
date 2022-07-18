@@ -263,15 +263,15 @@ class BasicInformation extends StatelessWidget {
                     CustomDatetimeRequiredValidator(date,
                         context: context, errorText: "Birth date is Required");
                   },
-                  initialValue: getDateValue(client, "birth_date",
-                      def: DateTime(1950, 01, 01)),
+                  initialValue: getFormValue(globalctx.memory, "customer",
+                      "birth_date", DateTime(1950, 01, 01)),
                   onSaved: (value) {
-                    ctrl!.state.birthDate = value.toString().split(" ")[0];
-                    setValue(client, "birth_date", value);
+                    setFormValue(
+                        globalctx.memory, "customer", "birth_date", value);
                   },
                   onChanged: (value) {
-                    ctrl!.state.birthDate = value.toString().split(" ")[0];
-                    setValue(client, "birth_date", value);
+                    setFormValue(
+                        globalctx.memory, "customer", "birth_date", value);
                   },
                   width: 0.2,
                   height: 0.05,
