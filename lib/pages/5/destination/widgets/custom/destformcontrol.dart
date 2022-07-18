@@ -36,6 +36,10 @@ class DestFormmControlsWidget extends StatelessWidget {
               destination: destination,
               index: index,
               type: type),
+          BusinessKAWidget(
+              explorationMode: explorationMode,
+              keyActivities: keyActivities,
+              index: index),
           BusinessHotelWidget(index: index),
           BusinessArrivalWidget(
             explorationMode: explorationMode,
@@ -48,10 +52,6 @@ class DestFormmControlsWidget extends StatelessWidget {
               index: index,
               type: type,
               destination: destination),
-          BusinessKAWidget(
-              explorationMode: explorationMode,
-              keyActivities: keyActivities,
-              index: index),
           BuisnessExpmodeWidget(
               destination: destination,
               explorationDay: explorationDay,
