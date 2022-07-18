@@ -168,13 +168,13 @@ class BusinessRouteWidget extends StatelessWidget {
     Key? key,
     required this.explorationDay,
     required this.destination,
-    required this.explorationMode,
+    required this.explorationMode, required this.index,
   }) : super(key: key);
 
   final Rx<int> explorationDay;
   final String destination;
   final RxString explorationMode;
-
+  final index;
   @override
   Widget build(BuildContext context) {
     return Obx(() {
@@ -184,7 +184,7 @@ class BusinessRouteWidget extends StatelessWidget {
           (destination != "galapagos_cruise" &&
               (getDestiinationRoutes(destination).isNotEmpty))) {
         {
-          return RouteWidget();
+          return RouteWidget(index:index);
         }
       } else {
         return Text('');

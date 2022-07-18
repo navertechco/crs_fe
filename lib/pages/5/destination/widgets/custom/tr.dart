@@ -23,18 +23,18 @@ class TRWidget extends StatelessWidget {
         disabled: type == "arrival" ||
             type == "departure" ||
             explorationMode.value != "0" ||
-            destination == "galapagos_cruise",
+            destination.contains("galapagos"),
         validator: CustomRequiredValidator(
             errorText: "Travel Rhythm is required ", ctx: context),
         value: getFormValue(globalctx.memory["destinations"], index,
-            "travel_rhythm", destination == "galapagos_cruise" ? "3" : "1"),
+            "travel_rhythm", destination.contains("galapagos") ? "3" : "1"),
         onSaved: (value) {
           setFormValue(globalctx.memory["destinations"], index, "travel_rhythm",
-              destination == "galapagos_cruise" ? "3" : value);
+              destination.contains("galapagos") ? "3" : value);
         },
         onChanged: (value) {
           setFormValue(globalctx.memory["destinations"], index, "travel_rhythm",
-              destination == "galapagos_cruise" ? "3" : value);
+              destination.contains("galapagos") ? "3" : value);
         },
         label: "Travel Rhythm         ",
         data: findCatalog("travel_rhythm"));

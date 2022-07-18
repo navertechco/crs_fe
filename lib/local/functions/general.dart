@@ -497,3 +497,22 @@ bool keyboardIsVisible(context) {
   bool res = !KeyboardVisibilityProvider.isKeyboardVisible(context);
   return res;
 }
+
+getSubs(item) {
+  List<Map<String, dynamic>> subs = [];
+  Map<String, dynamic> mp = {};
+  var res = findCatalog("destinations")
+      .firstWhere(
+          (element) =>
+              element["description"] == globalDestinationName.value)["value"][9]
+          [item]
+      .toList();
+
+  for (var w in res) {
+    mp = {};
+    mp["code"] = w["code"];
+    mp["description"] = w["description"];
+    subs.add(mp);
+  }
+  return subs;
+}
