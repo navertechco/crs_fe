@@ -110,16 +110,19 @@ void filterHotels(ctx) {
 
   //FINAL RESULT
   hotelResults.value = filteredHotel.toList();
-
-  //BUILD TABLE
-  var processedData = processHotelData(ctx, hotelResults.value);
-  searcherHeader.value = processedData[0];
-  searcherDetail.value = processedData[1];
-  if (searcherHeader.value.isNotEmpty) {
-    hotelTable.value = (DataTable(
-      columns: searcherHeader.value,
-      rows: searcherDetail.value,
-    ));
+  try {
+    //BUILD TABLE
+    var processedData = processHotelData(ctx, hotelResults.value);
+    searcherHeader.value = processedData[0];
+    searcherDetail.value = processedData[1];
+    if (searcherHeader.value.isNotEmpty) {
+      hotelTable.value = (DataTable(
+        columns: searcherHeader.value,
+        rows: searcherDetail.value,
+      ));
+    }
+  } catch (e) {
+    log(e);
   }
 }
 
@@ -275,7 +278,8 @@ void showHotelResultDialog(ctx, {int id = 0, int index = 0}) async {
   currentDestinationIndex.value = index;
   var ka = getFormValue(
       globalctx.memory["destinations"], index.toString(), "key_activities", []);
-  if (ka.isNotEmpty) {
+ 
+  if (ka.isNotEmpty || hotelName.isEmpty) {
     if (globalctx.memory["hotels"] == null) {
       var frame = {
         "data": {"id": id}

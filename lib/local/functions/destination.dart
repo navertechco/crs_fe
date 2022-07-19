@@ -105,12 +105,16 @@ void resetAllDestinations() {
   resetLeftDays();
   resetMemoryDestinations();
   filterDestinations();
+  cruiseAutoFill();
+}
+
+cruiseAutoFill() {
   if (cruiseDay.value != "0") {
     autoFillDestination(arrival["description"], 0, "arrival", "1");
     autoFillDestination("galapagos_cruise", 1, "arrival", cruiseDay.value);
     autoFillDestination(departure["description"], 2, "departure", "0");
   } else {
-    setDestinationState(arrival["description"], 0, "arrival", "selected");
+    autoFillDestination(arrival["description"], 0, "arrival", "1");
     setDestinationState(departure["description"], 1, "departure", "selected");
   }
 }
@@ -571,7 +575,8 @@ dynamic getDestinationById(destId) {
   try {
     var dest = findCatalog("destinations");
 
-    dest = dest.toList()
+    dest = dest
+        .toList()
         .where((element) => element["code"].toString() == destId.toString())
         .toList();
     var res = dest.first;
@@ -806,6 +811,10 @@ void filterDestinations() {
 }
 
 updatePorts() {
+  arrivalPort.value =
+      getFormValue(globalctx.memory, "logistic", "arrival_port", "0");
+  departurePort.value =
+      getFormValue(globalctx.memory, "logistic", "departure_port", "0");
   var arr = getDestinationById(arrivalPort.value);
   var dep = getDestinationById(departurePort.value);
   arrival.value = arr;
