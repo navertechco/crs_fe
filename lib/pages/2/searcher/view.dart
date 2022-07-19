@@ -55,7 +55,7 @@ class QuoteHistoryTable extends StatelessWidget {
         ));
   }
 }
-  
+
 class QuoteHistoryButton extends StatelessWidget {
   const QuoteHistoryButton({
     Key? key,
@@ -122,30 +122,30 @@ class QuoteHistoryFilter extends StatelessWidget {
               "date",
             ),
           ),
-          CustomFormDropDownFieldWidget(
-            width: 0.1,
-            height: 0.05,
-            validator: CustomRequiredValidator(
-                errorText: "Quote Name is required ", ctx: context),
-            value: "0",
-            onSaved: (value) {},
-            onChanged: (value) {
-              quoteName.value = getCatalogDescription(
-                  getMemoryChild(
-                    "tours",
-                    '',
-                    "name",
-                  ),
-                  value);
-              updateFilteredQuoteHistory(context);
-            },
-            hintText: "Quote Name",
-            data: getMemoryChild(
-              "tours",
-              '',
-              "name",
-            ),
-          ),
+          // CustomFormDropDownFieldWidget(
+          //   width: 0.1,
+          //   height: 0.05,
+          //   validator: CustomRequiredValidator(
+          //       errorText: "Quote Name is required ", ctx: context),
+          //   value: "0",
+          //   onSaved: (value) {},
+          //   onChanged: (value) {
+          //     quoteName.value = getCatalogDescription(
+          //         getMemoryChild(
+          //           "tours",
+          //           '',
+          //           "name",
+          //         ),
+          //         value);
+          //     updateFilteredQuoteHistory(context);
+          //   },
+          //   hintText: "Quote Name",
+          //   data: getMemoryChild(
+          //     "tours",
+          //     '',
+          //     "name",
+          //   ),
+          // ),
           CustomFormDropDownFieldWidget(
             width: 0.1,
             height: 0.05,
@@ -162,21 +162,25 @@ class QuoteHistoryFilter extends StatelessWidget {
             data: getMemoryChild("tours", '', "quote"),
           ),
           CustomFormDropDownFieldWidget(
-            width: 0.1,
-            height: 0.05,
-            validator: CustomRequiredValidator(
-                errorText: "Quote State is required ", ctx: context),
-            value: "0",
-            onSaved: (value) {},
-            onChanged: (value) {
-              quoteState.value = getCatalogDescription(
-                  getMemoryChild("tours", '', "state"), value);
-              updateFilteredQuoteHistory(context);
-            },
-            hintText: "Quote State",
-            data: getMemoryChild("tours", '', "state",)
-                // catalog: findCatalog("quote_state")),
-          ),
+              width: 0.1,
+              height: 0.05,
+              validator: CustomRequiredValidator(
+                  errorText: "Quote State is required ", ctx: context),
+              value: "0",
+              onSaved: (value) {},
+              onChanged: (value) {
+                quoteState.value = getCatalogDescription(
+                    getMemoryChild("tours", '', "state"), value);
+                updateFilteredQuoteHistory(context);
+              },
+              hintText: "Quote State",
+              data: getMemoryChild(
+                "tours",
+                '',
+                "state",
+              )
+              // catalog: findCatalog("quote_state")),
+              ),
         ],
       ),
     );
