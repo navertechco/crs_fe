@@ -66,12 +66,15 @@ class LogisticForm extends StatelessWidget {
                             label: label.value,
                             fontSize: 6,
                             fontWeight: FontWeight.bold,
-                            textColor:
-                                cruiseDay.value.isEmpty || cruiseEdit.value
-                                    ? Colors.black
-                                    : Colors.black54,
+                            textColor: cruiseDay.value.isEmpty ||
+                                    cruiseDay.value == "0" ||
+                                    cruiseEdit.value
+                                ? Colors.black
+                                : Colors.black54,
                             onPressed: () async {
-                              if (cruiseDay.value.isEmpty || cruiseEdit.value) {
+                              if (cruiseDay.value.isEmpty ||
+                                  cruiseDay.value == "0" ||
+                                  cruiseEdit.value) {
                                 showCustomDialog(context,
                                     CruiseCalendarWidget(ctx: context), "Close",
                                     customChild: CruiseKeyPadWidget(),
@@ -96,7 +99,7 @@ class LogisticForm extends StatelessWidget {
                   }),
                   Row(
                     children: [
-                      if (cruiseDay.isNotEmpty)
+                      if (cruiseDay.value != "0")
                         CustomTitleWidget(
                           fontSize: 8,
                           width: 0.1,
@@ -141,12 +144,12 @@ class LogisticForm extends StatelessWidget {
                   Obx(() {
                     return Row(
                       children: [
-                        if (!cruiseDay.isNotEmpty)
+                        if (cruiseDay.value == "0")
                           CustomFormDateFieldWidget(
                             height: 0.06,
                             width: 0.2,
                             fontSize: 10,
-                            disabled: (readonly || cruiseDay.isNotEmpty) &&
+                            disabled: (readonly || cruiseDay.value != "0") &&
                                 !arrivalEdit.value,
                             initialValue: arrivalDate.value,
                             validator: CustomDatetimeGreaterValidator(
@@ -168,7 +171,7 @@ class LogisticForm extends StatelessWidget {
                               filterCruises(context);
                             },
                           ),
-                        if (cruiseDay.isNotEmpty)
+                        if (cruiseDay.value != "0")
                           CustomTitleWidget(
                               fontSize: 10,
                               width: isMobile * 0.225,
@@ -322,7 +325,7 @@ class LogisticForm extends StatelessWidget {
                               ),
                           ],
                         ),
-                        if (cruiseDay.isNotEmpty)
+                        if (cruiseDay.value != "0")
                           Row(
                             children: [
                               CustomTitleWidget(

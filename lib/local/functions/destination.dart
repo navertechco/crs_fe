@@ -100,11 +100,11 @@ Future paginateDestination(String direction) async {
 ///```dart
 /// void
 ///```
-void resetAllDestinations() { 
+void resetAllDestinations() {
   resetLeftDays();
-  resetMemoryDestinations(); 
+  resetMemoryDestinations();
   filterDestinations();
-  if (cruiseDay.isNotEmpty) {
+  if (cruiseDay.value != "0") {
     autoFillDestination(arrival["description"], 0, "arrival", "1");
     autoFillDestination("galapagos_cruise", 1, "arrival", cruiseDay.value);
     autoFillDestination(departure["description"], 2, "departure", "0");

@@ -103,7 +103,7 @@ void filterCruises(ctx) {
             .contains(cruisePort.value.toString().toUpperCase()))
         .toList();
   //CRUISE DURATION
-  if (cruiseDay.isNotEmpty)
+  if (cruiseDay.value != "0")
     cabine = cabine
         .where((element) =>
             element["value"]["days"].toString().toUpperCase() ==
@@ -124,7 +124,7 @@ void filterCruises(ctx) {
             (cruiseAnimal.value.toString().toUpperCase()))
         .toList();
   //CRUISE ITINERARY
-  if (cruiseDay.isNotEmpty)
+  if (cruiseDay.value != "0")
     itinerary = itinerary
         .where((element) =>
             element["value"]["days"].toString().toUpperCase() ==

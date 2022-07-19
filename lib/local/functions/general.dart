@@ -290,18 +290,7 @@ List<DataRow> getTourDataRows(context, data, columns) {
               icon: const Icon(Icons.copy),
               tooltip: 'Copy',
               onPressed: () async {
-                await getCatalogs(["ALL"]);
-                await getTour(context, tourId: row["quote"], detail: true,
-                    cb: (data) {
-                  if (data.length > 0) {
-                    globalctx.memory["tour"] = data[0];
-                    if (row["quote"] == 0) {
-                      Get.toNamed("/Searcher");
-                    } else {
-                      Get.toNamed("/Tour");
-                    }
-                  }
-                });
+                await copyTour(context, row);
               },
             ),
           ],
@@ -537,4 +526,50 @@ filterDestinationKeyActivities() {
     return rule;
   }).toList();
   return keyActivitiesCatalog;
+}
+
+copyTour(context, row) async {
+  await getCatalogs(["ALL"]);
+  await getTour(context, tourId: row["quote"], detail: true, cb: (data) {
+    if (data.length > 0) {
+      var memory = data[0];
+      var purposes = <String>[];
+      for (String purpose in memory["detail"]["purposes"]) {
+        purposes.add(purpose.toString());
+      }
+      var tour = {
+        "accomodation_type": memory["accomodation_type_id"].toString(),
+        "country": memory["destination_country_id"].toString(),
+        "passengers": memory["passengers"].toString(),
+        "galapagos_cruise":
+            memory["destinations"][1]["destination"] == "galapagos_cruise",
+        "purposes": purposes,
+      };
+      var logistic = {
+        "arrival_date": DateTime.parse(memory["arrival_date"]),
+        "departure_date": DateTime.parse(memory["departure_date"]),
+        "arrival_port": filterCatalog("destinations", "description",
+                memory["destinations"][0]["destination"].toString())[0]["code"]
+            .toString(),
+        "departure_port": filterCatalog(
+                "destinations",
+                "description",
+                memory["destinations"][memory["destinations"].length - 1]
+                        ["destination"]
+                    .toString())[0]["code"]
+            .toString(),
+      };
+
+      var destinations = memory["destinations"];
+      globalctx.memory["tour"] = tour;
+      globalctx.memory["logistic"] = logistic;
+      globalctx.memory["destinations"] = destinations;
+
+      if (row["quote"] == 0) {
+        Get.toNamed("/Searcher");
+      } else {
+        Get.toNamed("/Tour");
+      }
+    }
+  });
 }

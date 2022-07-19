@@ -82,20 +82,7 @@ dynamic getValue(data, key, {def}) {
   }
 }
 
-/// ## setValue
-/// *__Method to set a value to memory__*
-///
-///### Uses:
-/// ```dart
-///  var detsdata = setValue(memory, "destinations", def: []);
-/// ```
-///
-///
-///
-void setValue(data, key, value) {
-  data[key] = value;
-}
-
+ 
 /// ## getParam
 /// *__Method to get a parameter from parameters catalog__*
 ///
@@ -360,6 +347,7 @@ saveMultiDropDown(setters, catalog, values, limit) {
 ///
 int parseInt(dynamic value) {
   if (value is String) {
+    value = value == "null" ? "0" : value;
     return int.parse(value);
   }
   return value;

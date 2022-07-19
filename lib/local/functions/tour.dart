@@ -71,6 +71,7 @@ Future processTour() async {
 
 preparePayloadToSend() {
   globalctx.memory["resume"] = destinations;
+  globalctx.payload["resume"] = globalctx.memory["resume"];
   globalctx.payload["tour"] = globalctx.memory["tour"];
   globalctx.payload["logistic"] = globalctx.memory["logistic"];
   globalctx.payload["customer"] = globalctx.memory["customer"];

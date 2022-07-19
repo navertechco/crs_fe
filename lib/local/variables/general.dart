@@ -22,10 +22,12 @@ var result = [];
 var promotedCatalogs = [];
 var daysOff = [];
 int accDays = 0;
-Rx<DateTime> arrivalDate = Rx(DateTime(2022, 12, 10));
+Rx<DateTime> arrivalDate = Rx(getFormValue(
+    globalctx.memory, "logistic", "arrival_date", DateTime(2024, 12, 10)));
 RxString arrivalDateName =
     DateFormat('EEEE').format(arrivalDate.value).toString().obs;
-Rx<DateTime> departureDate = Rx(DateTime(2022, 12, 12));
+Rx<DateTime> departureDate = Rx(getFormValue(
+    globalctx.memory, "logistic", "departure_date", DateTime(2024, 12, 10)));
 RxString departureDateName =
     DateFormat('EEEE').format(departureDate.value).toString().obs;
 Rx<DateTime> currentDate =
@@ -258,8 +260,12 @@ var generated = false;
 var tour = globalctx.memory["tour"];
 Rx<List<Map<String, dynamic>>> citylist = Rx([]);
 RxString customerType = client["client_type_id"].toString().obs;
-RxString country = getValue(client, "origin_id", def: "146").toString().obs;
-RxString city = getValue(client, "city_id", def: "0").toString().obs;
+RxString country =
+    getFormValue(globalctx.memory, "customer", "origin_id", "146")
+        .toString()
+        .obs;
+RxString city =
+    getFormValue(globalctx.memory, "customer", "city_id", "0").toString().obs;
 List<Map<String, dynamic>> countrylist = [];
 Map<dynamic, dynamic> countries = getContext("countries");
 var currentCountry = "Ecuador".obs;

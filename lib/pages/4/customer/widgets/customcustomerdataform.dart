@@ -83,8 +83,9 @@ class AddressInformation extends StatelessWidget {
                   hintText: "Country",
                   onChanged: (value) {
                     ctrl!.state.country = value!;
-                    setValue(client, "city_id", "0");
-                    setValue(client, "country", value);
+                    setFormValue(globalctx.memory, "customer", "city_id", "0");
+                    setFormValue(
+                        globalctx.memory, "customer", "country", value);
                     country.value = value;
                     city.value = "0";
                     procCityData(countries[countrylist[int.parse(value)]
@@ -108,13 +109,16 @@ class AddressInformation extends StatelessWidget {
                       errorText: "City is required ",
                       ctx: context,
                       catalog: citylist.value),
-                  value: getValue(client, "city_id", def: "0").toString(),
+                  value:
+                      getFormValue(globalctx.memory, "customer", "city_id", "0")
+                          .toString(),
                   width: 0.185,
                   height: 0.05,
                   hintText: "City",
                   onChanged: (value) {
                     city.value = value!;
-                    setValue(client, "city_id", value);
+                    setFormValue(
+                        globalctx.memory, "customer", "city_id", value);
                     log(value);
                   },
                   onSaved: (value) {
@@ -130,20 +134,20 @@ class AddressInformation extends StatelessWidget {
               fontSize: 10,
               validator: CustomRequiredValidator(
                   errorText: "Address Line is required ", ctx: context),
-              value: getValue(client, "address", def: ""),
+              value: getFormValue(globalctx.memory, "customer", "address", ""),
               onSaved: (value) {
                 ctrl!.state.addressLine = value!;
-                setValue(client, "address", value);
+                setFormValue(globalctx.memory, "customer", "address", value);
               },
               onChanged: (value) {
                 visible.value = keyboardIsVisible(context);
                 ctrl!.state.addressLine = value!;
-                setValue(client, "address", value);
+                setFormValue(globalctx.memory, "customer", "address", value);
               },
               onFieldSubmitted: (value) {
                 visible.value = !keyboardIsVisible(context);
                 ctrl!.state.addressLine = value!;
-                setValue(client, "address", value);
+                setFormValue(globalctx.memory, "customer", "address", value);
               },
               keyboardType: TextInputType.streetAddress,
               hintText: "Address Line                        ",
@@ -154,20 +158,20 @@ class AddressInformation extends StatelessWidget {
               fontSize: 10,
               validator: CustomRequiredValidator(
                   errorText: "Email is required ", ctx: context),
-              value: getValue(client, "email", def: ""),
+              value: getFormValue(globalctx.memory, "customer", "email", ""),
               onSaved: (value) {
                 ctrl!.state.email = value!;
-                setValue(client, "email", value);
+                setFormValue(globalctx.memory, "customer", "email", value);
               },
               onChanged: (value) {
                 visible.value = keyboardIsVisible(context);
                 ctrl!.state.email = value!;
-                setValue(client, "email", value);
+                setFormValue(globalctx.memory, "customer", "email", value);
               },
               onFieldSubmitted: (value) {
                 visible.value = !keyboardIsVisible(context);
                 ctrl!.state.email = value!;
-                setValue(client, "email", value);
+                setFormValue(globalctx.memory, "customer", "email", value);
               },
               keyboardType: TextInputType.emailAddress,
               hintText: "e-Mail                          ",
@@ -259,18 +263,21 @@ class BasicInformation extends StatelessWidget {
                   validator: CustomRequiredValidator(
                       errorText: "Legal Client Type is required ",
                       ctx: context),
-                  value: getValue(client, "legal_client_type_id", def: "2"),
+                  value: getFormValue(globalctx.memory, "customer",
+                      "legal_client_type_id", "2"),
                   width: 0.2,
                   height: 0.05,
                   hintText: "Customer Type",
                   onChanged: (value) {
                     customerType.value = value!;
-                    setValue(client, "legal_client_type_id", value);
+                    setFormValue(globalctx.memory, "customer",
+                        "legal_client_type_id", value);
                   },
                   onSaved: (value) {
                     customerType.value = value!;
                     ctrl!.state.customerType = value;
-                    setValue(client, "legal_client_type_id", value);
+                    setFormValue(globalctx.memory, "customer",
+                        "legal_client_type_id", value);
                   },
                   data: customerTypeCatalog,
                 ),
@@ -306,20 +313,24 @@ class BasicInformation extends StatelessWidget {
                       height: 0.05,
                       validator: CustomRequiredValidator(
                           errorText: "Tax Id is required ", ctx: context),
-                      value: getValue(client, "client_dni", def: ""),
+                      value: getFormValue(
+                          globalctx.memory, "customer", "client_dni", ""),
                       onSaved: (value) {
                         ctrl!.state.taxId = value!;
-                        setValue(client, "client_dni", value);
+                        setFormValue(
+                            globalctx.memory, "customer", "client_dni", value);
                       },
                       onChanged: (value) {
                         visible.value = keyboardIsVisible(context);
                         ctrl!.state.taxId = value!;
-                        setValue(client, "client_dni", value);
+                        setFormValue(
+                            globalctx.memory, "customer", "client_dni", value);
                       },
                       onFieldSubmitted: (value) {
                         visible.value = !keyboardIsVisible(context);
                         ctrl!.state.taxId = value!;
-                        setValue(client, "client_dni", value);
+                        setFormValue(
+                            globalctx.memory, "customer", "client_dni", value);
                       },
                       keyboardType: TextInputType.number,
                       hintText: "Tax Id                            ",
@@ -336,20 +347,24 @@ class BasicInformation extends StatelessWidget {
                       height: 0.05,
                       validator: CustomRequiredValidator(
                           errorText: "Contact Name is required ", ctx: context),
-                      value: getValue(client, "contact_name", def: ""),
+                      value: getFormValue(
+                          globalctx.memory, "customer", "contact_name", ""),
                       onSaved: (value) {
                         ctrl!.state.contactName = value!;
-                        setValue(client, "contact_name", value);
+                        setFormValue(globalctx.memory, "customer",
+                            "contact_name", value);
                       },
                       onChanged: (value) {
                         visible.value = keyboardIsVisible(context);
                         ctrl!.state.contactName = value!;
-                        setValue(client, "contact_name", value);
+                        setFormValue(globalctx.memory, "customer",
+                            "contact_name", value);
                       },
                       onFieldSubmitted: (value) {
                         visible.value = !keyboardIsVisible(context);
                         ctrl!.state.contactName = value!;
-                        setValue(client, "contact_name", value);
+                        setFormValue(globalctx.memory, "customer",
+                            "contact_name", value);
                       },
                       keyboardType: TextInputType.name,
                       hintText: "Legal Contact  Name  ",
@@ -366,20 +381,24 @@ class BasicInformation extends StatelessWidget {
                       height: 0.05,
                       validator: CustomRequiredValidator(
                           errorText: "DNI/Passport is required ", ctx: context),
-                      value: getValue(client, "client_dni", def: ""),
+                      value: getFormValue(
+                          globalctx.memory, "customer", "client_dni", ""),
                       onSaved: (value) {
                         ctrl!.state.dni = value!;
-                        setValue(client, "client_dni", value);
+                        setFormValue(
+                            globalctx.memory, "customer", "client_dni", value);
                       },
                       onChanged: (value) {
                         visible.value = keyboardIsVisible(context);
                         ctrl!.state.dni = value!;
-                        setValue(client, "client_dni", value);
+                        setFormValue(
+                            globalctx.memory, "customer", "client_dni", value);
                       },
                       onFieldSubmitted: (value) {
                         visible.value = !keyboardIsVisible(context);
                         ctrl!.state.dni = value!;
-                        setValue(client, "client_dni", value);
+                        setFormValue(
+                            globalctx.memory, "customer", "client_dni", value);
                       },
                       inputFormatters: <TextInputFormatter>[
                         FilteringTextInputFormatter.digitsOnly
@@ -401,20 +420,21 @@ class BasicInformation extends StatelessWidget {
                   height: 0.05,
                   validator: CustomRequiredValidator(
                       errorText: "Names is required ", ctx: context),
-                  value: getValue(client, "names", def: ""),
+                  value:
+                      getFormValue(globalctx.memory, "customer", "names", ""),
                   onSaved: (value) {
                     ctrl!.state.names = value!;
-                    setValue(client, "names", value);
+                    setFormValue(globalctx.memory, "customer", "names", value);
                   },
                   onChanged: (value) {
                     visible.value = keyboardIsVisible(context);
                     ctrl!.state.names = value!;
-                    setValue(client, "names", value);
+                    setFormValue(globalctx.memory, "customer", "names", value);
                   },
                   onFieldSubmitted: (value) {
                     visible.value = !keyboardIsVisible(context);
                     ctrl!.state.names = value!;
-                    setValue(client, "names", value);
+                    setFormValue(globalctx.memory, "customer", "names", value);
                   },
                   keyboardType: TextInputType.name,
                   hintText: "Names                          ",
@@ -425,20 +445,24 @@ class BasicInformation extends StatelessWidget {
                   height: 0.05,
                   validator: CustomRequiredValidator(
                       errorText: "Last Names is required ", ctx: context),
-                  value: getValue(client, "last_names", def: ""),
+                  value: getFormValue(
+                      globalctx.memory, "customer", "last_names", ""),
                   onSaved: (value) {
                     ctrl!.state.lastNames = value!;
-                    setValue(client, "last_names", value);
+                    setFormValue(
+                        globalctx.memory, "customer", "last_names", value);
                   },
                   onChanged: (value) {
                     visible.value = keyboardIsVisible(context);
                     ctrl!.state.lastNames = value!;
-                    setValue(client, "last_names", value);
+                    setFormValue(
+                        globalctx.memory, "customer", "last_names", value);
                   },
                   onFieldSubmitted: (value) {
                     visible.value = !keyboardIsVisible(context);
                     ctrl!.state.lastNames = value!;
-                    setValue(client, "last_names", value);
+                    setFormValue(
+                        globalctx.memory, "customer", "last_names", value);
                   },
                   keyboardType: TextInputType.name,
                   hintText: "Surnames                          ",

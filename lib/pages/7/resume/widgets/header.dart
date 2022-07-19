@@ -59,18 +59,18 @@ class Header extends StatelessWidget {
           children: [
             CustomDetailWidget(
                 label: "Tour Code: ",
-                value: getFormValue(globalctx.memory, "tour", "code", '')),
+                value: getFormValue(globalctx.memory, "tour", "code", '0')),
             CustomDetailWidget(
                 label: "Passengers: ",
                 value:
-                    getFormValue(globalctx.memory, "tour", "passengers", '')),
+                    getFormValue(globalctx.memory, "tour", "passengers", '0')),
             CustomDetailWidget(
                 label: "Budget: ",
                 value: getFormValue(
-                    globalctx.memory, "tour", "accomodation_type", '')),
+                    globalctx.memory, "tour", "accomodation_type", '0')),
             CustomDetailWidget(
                 label: "Country: ",
-                value: getFormValue(globalctx.memory, "tour", "country", '')),
+                value: getFormValue(globalctx.memory, "tour", "country", '0')),
           ],
         ),
         const CustomFormTitleWidget(level: 1, label: "Logistic Information"),

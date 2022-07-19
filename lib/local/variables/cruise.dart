@@ -3,7 +3,7 @@ import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:naver_crs/index.dart';
 
 var cruiseFormat = ''.obs;
-var cruiseDay = ''.obs;
+var cruiseDay = '0'.obs;
 var cruiseShip = ''.obs;
 var cruiseRange = ''.obs;
 var cruiseCategory = ''.obs;

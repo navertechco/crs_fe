@@ -180,17 +180,17 @@ class CountryField extends StatelessWidget {
     return CustomFormDropDownFieldWidget(
       fontSize: 10,
       height: 0.05,
-      value: destCountry.value,
+      value: getFormValue(globalctx.memory, "tour", "country", "0"),
       disabled: readonly,
       validator: CustomRequiredValidator(
           errorText: "Destination Country is required ", ctx: context),
       onSaved: (value) {
-        ctrl!.state.country = value!;
+        setFormValue(globalctx.memory, "tour", "country", value!);
         destCountry.value = value;
         updateDestinationsCatalogFilteredByCountry();
       },
       onChanged: (value) {
-        ctrl!.state.country = value!;
+        setFormValue(globalctx.memory, "tour", "country", value!);
         destCountry.value = value;
         setFormValue(globalctx.memory, "logistic", "arrival_port", "0");
         updateDestinationsCatalogFilteredByCountry();
@@ -220,15 +220,15 @@ class BudgetField extends StatelessWidget {
     return CustomFormDropDownFieldWidget(
       fontSize: 10,
       height: 0.05,
-      value: getValue(tour, "accomodation_type", def: "0"),
+      value: getFormValue(globalctx.memory, "tour", "accomodation_type", "0"),
       disabled: readonly,
       onSaved: (value) {
         ctrl!.state.accomodation_type = value!;
-        setValue(tour, "accomodation_type", value);
+        setFormValue(globalctx.memory, "tour", "accomodation_type", value);
       },
       onChanged: (value) {
         ctrl!.state.accomodation_type = value!;
-        setValue(tour, "accomodation_type", value);
+        setFormValue(globalctx.memory, "tour", "accomodation_type", value);
       },
       validator: CustomRequiredValidator(
           errorText: "Accomodation type is required ", ctx: context),
@@ -308,7 +308,7 @@ class PurposeField extends StatelessWidget {
             CustomMultiDropdownRequiredValidator(value,
                 errorText: "Purposes are required ", context: context);
           },
-          value: purposeMemory.value,
+          value: getFormValue(globalctx.memory, "tour", "purposes", <String>[]),
           enabled: purposeMemory.value.length < 4,
           onSaved: (values) {
             validatePurposes(values);
