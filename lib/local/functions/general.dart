@@ -4,6 +4,7 @@ import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/pages/7/endservices/widgets/index.dart';
+import 'package:sweetalertv2/sweetalertv2.dart';
 export 'day.dart';
 export 'destination.dart';
 export 'experience.dart';
@@ -572,4 +573,23 @@ copyTour(context, row) async {
       }
     }
   });
+}
+
+saveLogistic(context, ctrl, _formKey) {
+  var cruise =
+      getFormValue(globalctx.memory, "tour", "galapagos_cruise", false);
+  if (_formKey.currentState!.validate()) {
+    if (cruiseDay.value == "0" && cruise) {
+      SweetAlertV2.show(context,
+          curve: ElasticInCurve(),
+          title: "Cruise information is Required",
+          style: SweetAlertV2Style.error, onPress: (bool isConfirm) {
+        Get.close(1);
+        return false;
+      });
+    } else {
+      _formKey.currentState!.save();
+      ctrl!.saveLogistic();
+    }
+  }
 }

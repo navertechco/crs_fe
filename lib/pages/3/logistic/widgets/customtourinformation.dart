@@ -402,22 +402,7 @@ class LogisticKeyPad extends StatelessWidget {
             gotoPage("Tour");
           },
           onNext: () {
-            var cruise = getFormValue(
-                globalctx.memory, "tour", "galapagos_cruise", false);
-            if (_formKey.currentState!.validate()) {
-              if (cruiseDay.value == "0" && cruise) {
-                SweetAlertV2.show(context,
-                    curve: ElasticInCurve(),
-                    title: "Cruise information is Required",
-                    style: SweetAlertV2Style.error, onPress: (bool isConfirm) {
-                  Get.close(1);
-                  return false;
-                });
-              } else {
-                _formKey.currentState!.save();
-                ctrl!.saveLogistic();
-              }
-            }
+            saveLogistic(context, ctrl, _formKey);
           }),
     );
   }
