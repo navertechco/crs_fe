@@ -2,6 +2,7 @@ import 'package:checkbox_formfield/checkbox_icon_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/index.dart';
+import 'package:sweetalertv2/sweetalertv2.dart';
 
 class CustomLogisticInformationForm extends StatelessWidget {
   CustomLogisticInformationForm({Key? key, this.profile, this.ctrl})
@@ -66,15 +67,12 @@ class LogisticForm extends StatelessWidget {
                             label: label.value,
                             fontSize: 6,
                             fontWeight: FontWeight.bold,
-                            textColor: cruiseDay.value.isEmpty ||
-                                    cruiseDay.value == "0" ||
-                                    cruiseEdit.value
-                                ? Colors.black
-                                : Colors.black54,
+                            textColor:
+                                cruiseDay.value == "0" || cruiseEdit.value
+                                    ? Colors.black
+                                    : Colors.black54,
                             onPressed: () async {
-                              if (cruiseDay.value.isEmpty ||
-                                  cruiseDay.value == "0" ||
-                                  cruiseEdit.value) {
+                              if (cruiseDay.value == "0" || cruiseEdit.value) {
                                 showCustomDialog(context,
                                     CruiseCalendarWidget(ctx: context), "Close",
                                     customChild: CruiseKeyPadWidget(),
@@ -404,9 +402,21 @@ class LogisticKeyPad extends StatelessWidget {
             gotoPage("Tour");
           },
           onNext: () {
+            var cruise = getFormValue(
+                globalctx.memory, "tour", "galapagos_cruise", false);
             if (_formKey.currentState!.validate()) {
-              _formKey.currentState!.save();
-              ctrl!.saveLogistic();
+              if (cruiseDay.value == "0" && cruise) {
+                SweetAlertV2.show(context,
+                    curve: ElasticInCurve(),
+                    title: "Cruise information is Required",
+                    style: SweetAlertV2Style.error, onPress: (bool isConfirm) {
+                  Get.close(1);
+                  return false;
+                });
+              } else {
+                _formKey.currentState!.save();
+                ctrl!.saveLogistic();
+              }
             }
           }),
     );
