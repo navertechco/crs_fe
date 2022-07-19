@@ -593,3 +593,54 @@ saveLogistic(context, ctrl, _formKey) {
     }
   }
 }
+
+getCountries() {
+  List<Map<String, dynamic>> countries = [];
+  for (Map<String, dynamic> cdata in getContext("global")) {
+    countries.add(cdata);
+  }
+
+  return countries;
+}
+
+var customerStates = Rx(<Map<String, dynamic>>[]);
+var customerCities = Rx(<Map<String, dynamic>>[]);
+
+getStates(ctrl) {
+  try {
+    var result = <Map<String, dynamic>>[];
+    setFormValue(globalctx.memory, "customer", "state", "0");
+    setFormValue(globalctx.memory, "customer", "city", "0");
+    var countries = getCountries();
+    String compare = ctrl!.state.country.toString();
+    var filtered = countries
+        .toList()
+        .firstWhere((element) => element["code"].toString() == compare);
+    var states = filtered["states"];
+    for (var state in states) {
+      result.add(state);
+    }
+    customerStates.value = result;
+  } catch (e) {
+    customerStates.value = <Map<String, dynamic>>[];
+  }
+}
+
+getCities(ctrl) {
+  try {
+    getStates(ctrl);
+    var result = <Map<String, dynamic>>[];
+    setFormValue(globalctx.memory, "customer", "city", "0");
+    String compare = ctrl!.state.state.toString();
+    var filtered = customerStates.value
+        .toList()
+        .firstWhere((element) => element["code"].toString() == compare);
+    var cities = filtered["cities"];
+    for (var city in cities) {
+      result.add(city);
+    }
+    customerCities.value = result;
+  } catch (e) {
+    customerCities.value = <Map<String, dynamic>>[];
+  }
+}

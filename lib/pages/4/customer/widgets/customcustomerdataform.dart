@@ -62,72 +62,77 @@ class AddressInformation extends StatelessWidget {
               children: [
                 CustomFormDropDownFieldWidget(
                   fontSize: 10,
-                  width: 0.2,
+                  width: 0.13,
                   height: 0.05,
                   validator: (value) {
                     CustomRequiredValidator(
-                            errorText: "Country is required ", ctx: context)
-                        .call(value);
-                    if (city.value.isEmpty) {
-                      SweetAlertV2.show(context,
-                          curve: ElasticInCurve(),
-                          title: "City Field is required",
-                          style: SweetAlertV2Style.error,
-                          onPress: (bool isConfirm) {
-                        Get.close(1);
-                        return false;
-                      });
-                    }
+                        errorText: "Country is required ", ctx: context);
                   },
-                  value: country.value,
+                  value: getFormValue(
+                      globalctx.memory, "customer", "country", "1"),
                   hintText: "Country",
                   onChanged: (value) {
                     ctrl!.state.country = value!;
-                    setFormValue(globalctx.memory, "customer", "city_id", "0");
+                    getStates(ctrl);
                     setFormValue(
                         globalctx.memory, "customer", "country", value);
-                    country.value = value;
-                    city.value = "0";
-                    procCityData(countries[countrylist[int.parse(value)]
-                        ["description"]]);
-                    log("CHANGED: ");
                   },
                   onSaved: (value) {
                     ctrl!.state.country = value!;
-                    country.value = value;
-                    city.value = "0";
-                    procCityData(countries[countrylist[int.parse(value)]
-                        ["description"]]);
-                    log("SAVED: ");
+                    getStates(ctrl);
+                    setFormValue(
+                        globalctx.memory, "customer", "country", value);
                   },
                   data: getCountries(),
                 ),
-                // if (country.value != '')
-                CustomFormDropDownFieldWidget(
-                  fontSize: 10,
-                  validator: CustomCatalogRequiredValidator(
-                      errorText: "City is required ",
-                      ctx: context,
-                      catalog: citylist.value),
-                  value:
-                      getFormValue(globalctx.memory, "customer", "city_id", "0")
-                          .toString(),
-                  width: 0.185,
-                  height: 0.05,
-                  hintText: "City",
-                  onChanged: (value) {
-                    city.value = value!;
-                    setFormValue(
-                        globalctx.memory, "customer", "city_id", value);
-                    log(value);
-                  },
-                  onSaved: (value) {
-                    city.value = value!;
-                    ctrl!.state.city = value;
-                    log(value);
-                  },
-                  data: citylist.value,
-                ),
+                if (customerStates.value.isNotEmpty)
+                  CustomFormDropDownFieldWidget(
+                    fontSize: 10,
+                    width: 0.13,
+                    height: 0.05,
+                    validator: (value) {
+                      CustomRequiredValidator(
+                          errorText: "State is required ", ctx: context);
+                    },
+                    value: getFormValue(
+                        globalctx.memory, "customer", "state", "0"),
+                    hintText: "State",
+                    onChanged: (value) {
+                      ctrl!.state.state = value!;
+                      getCities(ctrl);
+                      setFormValue(
+                          globalctx.memory, "customer", "state", value);
+                    },
+                    onSaved: (value) {
+                      ctrl!.state.state = value!;
+                      getCities(ctrl);
+                      setFormValue(
+                          globalctx.memory, "customer", "state", value);
+                    },
+                    data: customerStates.value,
+                  ),
+                if (customerCities.value.isNotEmpty)
+                  CustomFormDropDownFieldWidget(
+                    fontSize: 10,
+                    width: 0.13,
+                    height: 0.05,
+                    validator: (value) {
+                      CustomRequiredValidator(
+                          errorText: "City is required ", ctx: context);
+                    },
+                    value:
+                        getFormValue(globalctx.memory, "customer", "city", "0"),
+                    hintText: "City",
+                    onChanged: (value) {
+                      ctrl!.state.city = value!;
+                      setFormValue(globalctx.memory, "customer", "city", value);
+                    },
+                    onSaved: (value) {
+                      ctrl!.state.city = value!;
+                      setFormValue(globalctx.memory, "customer", "city", value);
+                    },
+                    data: customerCities.value,
+                  ),
               ],
             ),
             CustomFormTextFieldWidget(

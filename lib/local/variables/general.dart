@@ -273,11 +273,3 @@ var currentCountry = "Ecuador".obs;
 Rx<List<Map<String, dynamic>>> countrydata = Rx(getCountries());
 var moreFilters = false.obs;
 
-getCountries() {
-  List<Map<String, dynamic>> countries = [];
-  for (Map<String, dynamic> cdata in getContext("global")) {
-    countries.add(cdata);
-  }
-
-  return countries;
-}

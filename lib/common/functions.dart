@@ -82,7 +82,6 @@ dynamic getValue(data, key, {def}) {
   }
 }
 
- 
 /// ## getParam
 /// *__Method to get a parameter from parameters catalog__*
 ///
@@ -270,7 +269,7 @@ dynamic getRXValue(data, key, def) {
 /// @return dynamic
 ///
 dynamic getFormValue(data, formKey, key, def) {
-  formKey = formKey.toString();
+  // formKey = formKey.toString();
   if (data != null) {
     if (data[formKey] != null) {
       if (data[formKey][key] != null) {

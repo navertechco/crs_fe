@@ -27,6 +27,7 @@ class CustomerState extends GetXState {
   Function toMap = () {};
   String contactName = '';
   String city = '';
+  String state = '';
   String addressLine = '';
   String leadPassenger = '';
   String travelCode = '';
