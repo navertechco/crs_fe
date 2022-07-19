@@ -530,7 +530,7 @@ filterDestinationKeyActivities() {
 
 copyTour(context, row) async {
   await getCatalogs(["ALL"]);
-  await getTour(context, tourId: row["quote"], detail: true, cb: (data) {
+  await getTour(context, tourId: row["quote"], detail: true, cb: (data) async {
     if (data.length > 0) {
       var memory = data[0];
       var purposes = <String>[];
@@ -568,7 +568,7 @@ copyTour(context, row) async {
       if (row["quote"] == 0) {
         Get.toNamed("/Searcher");
       } else {
-        Get.toNamed("/Tour");
+        await newTour();
       }
     }
   });

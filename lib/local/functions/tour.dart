@@ -254,7 +254,7 @@ Future getTour(ctx, {int tourId = 0, detail = false, cb}) async {
   log(res);
   if (res['state'] == true) {
     var data = res['data'];
-    cb(data);
+    await cb(data);
   } else {
     SweetAlertV2.show(ctx,
         curve: ElasticInCurve(),
