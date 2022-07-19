@@ -267,20 +267,17 @@ RxString country =
 RxString city =
     getFormValue(globalctx.memory, "customer", "city_id", "0").toString().obs;
 List<Map<String, dynamic>> countrylist = [];
-Map<dynamic, dynamic> countries = getContext("countries");
+List<Map<String, dynamic>> countries = [];
+
 var currentCountry = "Ecuador".obs;
-Rx<List<Map<String, dynamic>>> countrydata = Rx((() {
-  log("Countries: $countries\n\n");
-  countrylist = [];
-  var index = 0;
-  for (var country in countries.keys) {
-    countrylist.add({
-      "code": "$index",
-      "description": country,
-    });
-    index++;
-  }
-  log("CountryList: $countrylist");
-  return countrylist;
-})());
+Rx<List<Map<String, dynamic>>> countrydata = Rx(getCountries());
 var moreFilters = false.obs;
+
+getCountries() {
+  List<Map<String, dynamic>> countries = [];
+  for (Map<String, dynamic> cdata in getContext("global")) {
+    countries.add(cdata);
+  }
+
+  return countries;
+}

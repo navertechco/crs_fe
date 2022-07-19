@@ -100,7 +100,7 @@ class AddressInformation extends StatelessWidget {
                         ["description"]]);
                     log("SAVED: ");
                   },
-                  data: countrydata.value,
+                  data: getCountries(),
                 ),
                 // if (country.value != '')
                 CustomFormDropDownFieldWidget(
