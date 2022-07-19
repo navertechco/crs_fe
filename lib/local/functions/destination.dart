@@ -101,6 +101,7 @@ Future paginateDestination(String direction) async {
 /// void
 ///```
 void resetAllDestinations() {
+  updatePorts();
   resetLeftDays();
   resetMemoryDestinations();
   filterDestinations();
@@ -568,11 +569,13 @@ void deleteGraphDragDestinationOption(String destination) {
 ///
 dynamic getDestinationById(destId) {
   try {
-    var dest = destinationsCatalog
-        .toList()
-        .where((element) => element["code"] == int.parse(destId))
-        .first;
-    return dest;
+    var dest = findCatalog("destinations");
+
+    dest = dest.toList()
+        .where((element) => element["code"].toString() == destId.toString())
+        .toList();
+    var res = dest.first;
+    return res;
   } catch (e) {
     log(e);
   }
@@ -798,11 +801,15 @@ dynamic getDestinationKa(destination, type) {
 /// @return void
 ///
 void filterDestinations() {
+  updatePorts();
+  filterSelectedDestinations();
+}
+
+updatePorts() {
   var arr = getDestinationById(arrivalPort.value);
   var dep = getDestinationById(departurePort.value);
   arrival.value = arr;
   departure.value = dep;
-  filterSelectedDestinations();
 }
 
 /// ## getDestinationExplorationDay

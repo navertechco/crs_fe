@@ -14,7 +14,11 @@ class LogisticController extends GetxController {
       // Map formData = state.toMap();
       // Map mem = {...logistic, ...formData};
       // globalctx.memory["logistic"] = mem;
-      // filterDestinations();
+      arrivalPort.value =
+          getFormValue(globalctx.memory, "logistic", "arrival_port", "0");
+      departurePort.value =
+          getFormValue(globalctx.memory, "logistic", "departure_port", "0");
+      filterDestinations();
       gotoPage("Customer");
     };
   }
