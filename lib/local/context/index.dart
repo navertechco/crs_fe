@@ -6,6 +6,7 @@ import '../../index.dart';
 class LocalContext extends Context {
   LocalContext() {
     loadDummyData("countries");
+    loadDummyData("global");
   }
   
   Rx<List<Widget>> destinationDragData = Rx(<Widget>[]);
