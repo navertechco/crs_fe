@@ -143,15 +143,18 @@ void filterCruises(ctx) {
     }).toList();
 
   cruiseResults.value = cruises.toList();
-
-  var processedData = buildCruiseDataTable(ctx, cruiseResults.value);
-  searcherHeader.value = processedData[0];
-  searcherDetail.value = processedData[1];
-  if (searcherHeader.value.isNotEmpty) {
-    cruiseTable.value = (DataTable(
-      columns: searcherHeader.value,
-      rows: searcherDetail.value,
-    ));
+  try {
+    var processedData = buildCruiseDataTable(ctx, cruiseResults.value);
+    searcherHeader.value = processedData[0];
+    searcherDetail.value = processedData[1];
+    if (searcherHeader.value.isNotEmpty) {
+      cruiseTable.value = (DataTable(
+        columns: searcherHeader.value,
+        rows: searcherDetail.value,
+      ));
+    }
+  } catch (e) {
+    log(e);
   }
 }
 

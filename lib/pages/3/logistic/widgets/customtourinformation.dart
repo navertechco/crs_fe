@@ -172,12 +172,22 @@ class LogisticForm extends StatelessWidget {
                             },
                           ),
                         if (cruiseDay.value != "0")
-                          CustomTitleWidget(
-                              fontSize: 10,
-                              width: isMobile * 0.225,
-                              fontWeight: FontWeight.bold,
-                              label:
-                                  currentDayFormat.format(arrivalDate.value)),
+                          Row(
+                            children: [
+                              CustomTitleWidget(
+                                  fontSize: 10,
+                                  width: isMobile * 0.225,
+                                  fontWeight: FontWeight.bold,
+                                  label:
+                                      "  Arrival Date                            "),
+                              CustomTitleWidget(
+                                  fontSize: 10,
+                                  width: isMobile * 0.225,
+                                  fontWeight: FontWeight.bold,
+                                  label: currentDayFormat
+                                      .format(arrivalDate.value)),
+                            ],
+                          ),
                         // CheckboxIconFormField(
                         //     padding: 0,
                         //     initialValue: arrivalEdit.value,
@@ -226,35 +236,52 @@ class LogisticForm extends StatelessWidget {
                   Obx(() {
                     return Row(
                       children: [
-                        CustomFormDateFieldWidget(
-                          fontSize: 10,
-                          disabled: false,
-                          initialValue: departureDate.value,
-                          validator: CustomDatetimeGreaterValidator(
-                              context: context,
-                              compare: arrivalDate.value,
-                              errorText:
-                                  "There is a problem with the Arrival Date",
-                              invert: true),
-                          label: "Departure Date           ",
-                          onSaved: (value) {
-                            ctrl!.state.departureDate = value!;
-                            departureDate.value = value;
-                            totalDays.value = departureDate.value
-                                .difference(arrivalDate.value)
-                                .inDays;
-                            filterCruises(context);
-                          },
-                          onChanged: (value) {
-                            value ??= DateTime.now();
-                            ctrl!.state.departureDate = value;
-                            departureDate.value = value;
-                            totalDays.value = departureDate.value
-                                .difference(arrivalDate.value)
-                                .inDays;
-                            filterCruises(context);
-                          },
-                        ),
+                        if (cruiseDay.value == "0")
+                          CustomFormDateFieldWidget(
+                            fontSize: 10,
+                            disabled: false,
+                            initialValue: departureDate.value,
+                            validator: CustomDatetimeGreaterValidator(
+                                context: context,
+                                compare: arrivalDate.value,
+                                errorText:
+                                    "There is a problem with the Arrival Date",
+                                invert: true),
+                            label: "Departure Date           ",
+                            onSaved: (value) {
+                              ctrl!.state.departureDate = value!;
+                              departureDate.value = value;
+                              totalDays.value = departureDate.value
+                                  .difference(arrivalDate.value)
+                                  .inDays;
+                              filterCruises(context);
+                            },
+                            onChanged: (value) {
+                              value ??= DateTime.now();
+                              ctrl!.state.departureDate = value;
+                              departureDate.value = value;
+                              totalDays.value = departureDate.value
+                                  .difference(arrivalDate.value)
+                                  .inDays;
+                              filterCruises(context);
+                            },
+                          ),
+                        if (cruiseDay.value != "0")
+                          Row(
+                            children: [
+                              CustomTitleWidget(
+                                  fontSize: 10,
+                                  width: isMobile * 0.225,
+                                  fontWeight: FontWeight.bold,
+                                  label: "  Departure Date                   "),
+                              CustomTitleWidget(
+                                  fontSize: 10,
+                                  width: isMobile * 0.225,
+                                  fontWeight: FontWeight.bold,
+                                  label: currentDayFormat
+                                      .format(departureDate.value)),
+                            ],
+                          ),
                         // CheckboxIconFormField(
                         //     padding: 0,
                         //     initialValue: departureEdit.value,
