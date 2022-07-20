@@ -1,4 +1,6 @@
 // ignore_for_file: prefer_function_declarations_over_variables, import_of_legacy_library_into_null_safe
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:naver_crs/index.dart';
@@ -624,6 +626,17 @@ getStates(ctrl) {
   } catch (e) {
     customerStates.value = <Map<String, dynamic>>[];
   }
+}
+
+getDistance(coorA, coorB) {
+  var latA = coorA[0];
+  var longA = coorA[1];
+  var latB = coorB[0];
+  var longB = coorB[1];
+  var catetO = longB - longA;
+  var catetA = latA - latB;
+  var hipo = sqrt(pow(catetO, 2) + pow(catetA, 2));
+  return hipo;
 }
 
 getCities(ctrl) {
