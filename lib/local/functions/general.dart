@@ -628,7 +628,7 @@ getStates(ctrl) {
   }
 }
 
-getDistance(coorA, coorB) {
+getDistanceKm(coorA, coorB) {
   var latA = coorA[0];
   var longA = coorA[1];
   var latB = coorB[0];
@@ -636,7 +636,8 @@ getDistance(coorA, coorB) {
   var catetO = longB - longA;
   var catetA = latA - latB;
   var hipo = sqrt(pow(catetO, 2) + pow(catetA, 2));
-  return hipo;
+  var km = hipo * 111;
+  return km;
 }
 
 getCities(ctrl) {
