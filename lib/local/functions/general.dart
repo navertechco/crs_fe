@@ -193,10 +193,16 @@ List<DataColumn> getNetRateHeader(context, data) {
 
 updateDayleft(value) {
   try {
+    if (value < 0) {
+      value = 0;
+    }
     departureDate.value =
         arrivalDate.value.add(Duration(days: accumulated.value + value as int));
     totalDays.value = departureDate.value.difference(arrivalDate.value).inDays;
     dayleft.value = totalDays.value - accumulated.value;
+    if (dayleft.value < 0) {
+      dayleft.value = 0;
+    }
   } catch (e) {
     log(e);
   }
@@ -566,7 +572,11 @@ copyTour(context, row) async {
       var destinations = memory["destinations"];
       globalctx.memory["tour"] = tour;
       globalctx.memory["logistic"] = logistic;
-      globalctx.memory["destinations"] = destinations;
+
+      for (var i = 0; i < destinations.length; i++) {
+        var destination = destinations[i];
+        globalctx.memory["destinations"][i.toString()] = destination;
+      }
 
       if (row["quote"] == 0) {
         Get.toNamed("/Searcher");
