@@ -101,7 +101,6 @@ Future paginateDestination(String direction) async {
 /// void
 ///```
 void resetAllDestinations() {
-  updatePorts();
   resetLeftDays();
   resetMemoryDestinations();
   filterDestinations();
@@ -111,7 +110,7 @@ void resetAllDestinations() {
 cruiseAutoFill() {
   if (cruiseDay.value != "0") {
     autoFillDestination(arrival["description"], 0, "arrival", "1");
-    autoFillDestination("galapagos_cruise", 1, "arrival", cruiseDay.value);
+    autoFillDestination("galapagos_cruise", 1, "tour", cruiseDay.value);
     autoFillDestination(departure["description"], 2, "departure", "0");
   } else {
     autoFillDestination(arrival["description"], 0, "arrival", "1");
