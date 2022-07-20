@@ -200,7 +200,7 @@ class HotelKeyPadWidget extends StatelessWidget {
                   showCustomDialog(context, HotelResultWidget(), "Close",
                       backgroundColor: Colors.white);
                 },
-                child: Text('Process',
+                child: Text('Show Results',
                     style: KTextSytle(
                             context: context,
                             fontSize: isMobile * 10,

@@ -390,6 +390,9 @@ void saveExplorationDay(int index, int val0, int val1, {String? key}) {
       int dl1 = td - acc1;
 
       dayleft.value = dl1;
+      if (dayleft.value < 0) {
+        dayleft.value = 0;
+      }
       accumulated.value = acc1;
       if (key != null) {
         setFormValue(

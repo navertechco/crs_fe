@@ -111,7 +111,7 @@ cruiseAutoFill() {
   if (cruiseDay.value != "0") {
     autoFillDestination(arrival["description"], 0, "arrival", "1");
     autoFillDestination("galapagos_cruise", 1, "tour", cruiseDay.value);
-    autoFillDestination(departure["description"], 2, "departure", "0");
+    autoFillDestination(departure["description"], 2, "departure", "1");
   } else {
     autoFillDestination(arrival["description"], 0, "arrival", "1");
     setDestinationState(departure["description"], 1, "departure", "selected");
