@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sweetalertv2/sweetalertv2.dart';
 import '../index.dart';
 import 'index.dart';
 import 'package:naver_crs/index.dart';
@@ -44,7 +45,21 @@ class DestinationDetailWidget extends GetView<DestinationDetailController> {
                 nextlabel: "Next >",
                 prevlabel: " < Previous",
                 onNext: () {
-                  promoteDestination(ctrl, _formKey, destination, index, type);
+                  var hotelName = getFormValue(globalctx.memory["destinations"],
+                      index.toString(), "hotelName", null);
+                  if (hotelName == null) {
+                    SweetAlertV2.show(context,
+                        curve: ElasticInCurve(),
+                        title: "Hotel Information is Required",
+                        style: SweetAlertV2Style.error,
+                        onPress: (bool isConfirm) {
+                      Get.close(1);
+                      return false;
+                    });
+                  } else {
+                    promoteDestination(
+                        ctrl, _formKey, destination, index, type);
+                  }
                 },
                 onPrevious: () {
                   Get.close(1);

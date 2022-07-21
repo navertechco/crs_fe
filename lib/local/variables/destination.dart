@@ -35,9 +35,7 @@ RxString departureState = getDestinationState(
     .obs;
 var detsdata = getValue(memory, "destinations", def: []);
 RxInt destDraggable = 0.obs;
-var destDays = [];
-List destList = getParam("DESTINATION_DATA").values.toList();
-CatalogDto destinationData = CatalogDto(destList);
+var destDays = []; 
 Map<dynamic, dynamic> destinations = globalctx.memory["destinations"] ?? {};
 RxList<Widget> destlist = <Widget>[].obs;
 Rx<String> arrivalHour = Rx(getFormValue(

@@ -12,6 +12,7 @@ class SigninController extends GetxController {
 
   Future<void> onSignin(ctx, String username, String password) async {
     await loadDummyData("countries");
+    await loadDummyData("golbal");
     session["username"] = username;
     state.error = null;
     state.username = username;

@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names, prefer_function_declarations_over_variables, import_of_legacy_library_into_null_safe
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../index.dart';
 import 'package:naver_crs/index.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,7 +10,7 @@ import 'package:google_fonts/google_fonts.dart';
 const kDefaultSchema = "http";
 const kDefaultServer = "192.168.101.4"; //"uiodesign.fortiddns.com";
 const kDefaultServerPort = 9999;
-const kDefaultLogoutPath = "/User/Logout"; 
+const kDefaultLogoutPath = "/User/Logout";
 const kDefaultQueryPath = "/Agent/Query";
 const kDefaultDestinationPath = "/Agent/GetDestination";
 const kDefaultExperiencePath = "/Agent/GetExperience";
@@ -24,6 +25,7 @@ const kDefaultTourEdit = "/Tour/Edit";
 const kDefaultNewTourEdit = "/Tour/NewId";
 const kDefaultFindCatalog = "/System/FindCatalog";
 const kDefaultCreateCatalog = "/Admin/CreateCatalog";
+
 class KTextSytle {
   var getStyle;
   KTextSytle(
@@ -36,14 +38,13 @@ class KTextSytle {
       return GoogleFonts.poppins(
           textStyle: TextStyle(
         color: color,
-        fontSize: MediaQuery.of(context).size.width /
-            MediaQuery.of(context).size.height *
-            fontSize,
+        fontSize: Get.width / Get.height * fontSize,
         fontWeight: fontWeight ?? FontWeight.normal,
       ));
     };
   }
 }
+
 //DIMENSSIONS
 var kDefaultPadding = 20.0;
 const kDefaultRadius = BorderRadius.all(Radius.circular(8.0));

@@ -110,16 +110,19 @@ void filterHotels(ctx) {
 
   //FINAL RESULT
   hotelResults.value = filteredHotel.toList();
-
-  //BUILD TABLE
-  var processedData = processHotelData(ctx, hotelResults.value);
-  searcherHeader.value = processedData[0];
-  searcherDetail.value = processedData[1];
-  if (searcherHeader.value.isNotEmpty) {
-    hotelTable.value = (DataTable(
-      columns: searcherHeader.value,
-      rows: searcherDetail.value,
-    ));
+  try {
+    //BUILD TABLE
+    var processedData = processHotelData(ctx, hotelResults.value);
+    searcherHeader.value = processedData[0];
+    searcherDetail.value = processedData[1];
+    if (searcherHeader.value.isNotEmpty) {
+      hotelTable.value = (DataTable(
+        columns: searcherHeader.value,
+        rows: searcherDetail.value,
+      ));
+    }
+  } catch (e) {
+    log(e);
   }
 }
 
@@ -273,51 +276,64 @@ getHotelDetail(context, data, columns) {
 ///```
 void showHotelResultDialog(ctx, {int id = 0, int index = 0}) async {
   currentDestinationIndex.value = index;
-  if (globalctx.memory["hotels"] == null) {
-    var frame = {
-      "data": {"id": id}
-    };
-    var res = await fetchHandler(kDefaultSchema, kDefaultServer,
-        kDefaultServerPort, kDefaultFindHotel, 'POST', frame);
-    // ignore: avoid_print
-    log(res);
-    if (res['state'] == true) {
-      var data = res['data'];
-      if (data.length > 0) {
-        globalctx.memory["hotels"] = data;
-        showCustomDialog(
-            ctx,
-            HotelCalendarWidget(
-              ctx: ctx,
-            ),
-            "Close",
-            customChild: HotelKeyPadWidget(),
-            backgroundColor: Colors.white,
-            buttonColor: Colors.black,
-            height: 0.25,
-            width: 0.3);
+  var ka = getFormValue(
+      globalctx.memory["destinations"], index.toString(), "key_activities", []);
+ 
+  if (ka.isNotEmpty || hotelName.isEmpty) {
+    if (globalctx.memory["hotels"] == null) {
+      var frame = {
+        "data": {"id": id}
+      };
+      var res = await fetchHandler(kDefaultSchema, kDefaultServer,
+          kDefaultServerPort, kDefaultFindHotel, 'POST', frame);
+      // ignore: avoid_print
+      log(res);
+      if (res['state'] == true) {
+        var data = res['data'];
+        if (data.length > 0) {
+          globalctx.memory["hotels"] = data;
+          showCustomDialog(
+              ctx,
+              HotelCalendarWidget(
+                ctx: ctx,
+              ),
+              "Close",
+              customChild: HotelKeyPadWidget(),
+              backgroundColor: Colors.white,
+              buttonColor: Colors.black,
+              height: 0.25,
+              width: 0.2);
+        }
+      } else {
+        SweetAlertV2.show(ctx,
+            curve: ElasticInCurve(),
+            title: res['message'],
+            style: SweetAlertV2Style.error, onPress: (bool isConfirm) {
+          Get.close(1);
+          return false;
+        });
       }
     } else {
-      SweetAlertV2.show(ctx,
-          curve: ElasticInCurve(),
-          title: res['message'],
-          style: SweetAlertV2Style.error, onPress: (bool isConfirm) {
-        Get.close(1);
-        return false;
-      });
+      showCustomDialog(
+          ctx,
+          HotelCalendarWidget(
+            ctx: ctx,
+          ),
+          "Close",
+          customChild: HotelKeyPadWidget(),
+          backgroundColor: Colors.white,
+          buttonColor: Colors.black,
+          height: 0.25,
+          width: 0.2);
     }
   } else {
-    showCustomDialog(
-        ctx,
-        HotelCalendarWidget(
-          ctx: ctx,
-        ),
-        "Close",
-        customChild: HotelKeyPadWidget(),
-        backgroundColor: Colors.white,
-        buttonColor: Colors.black,
-        height: 0.25,
-        width: 0.3);
+    SweetAlertV2.show(ctx,
+        curve: ElasticInCurve(),
+        title: "You must select Key Activities First",
+        style: SweetAlertV2Style.error, onPress: (bool isConfirm) {
+      Get.close(1);
+      return false;
+    });
   }
 }
 

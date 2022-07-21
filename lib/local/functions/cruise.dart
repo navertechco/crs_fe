@@ -103,7 +103,7 @@ void filterCruises(ctx) {
             .contains(cruisePort.value.toString().toUpperCase()))
         .toList();
   //CRUISE DURATION
-  if (cruiseDay.isNotEmpty)
+  if (cruiseDay.value != "0")
     cabine = cabine
         .where((element) =>
             element["value"]["days"].toString().toUpperCase() ==
@@ -124,30 +124,37 @@ void filterCruises(ctx) {
             (cruiseAnimal.value.toString().toUpperCase()))
         .toList();
   //CRUISE ITINERARY
-  if (cruiseDay.isNotEmpty)
+  if (cruiseDay.value != "0")
     itinerary = itinerary
         .where((element) =>
             element["value"]["days"].toString().toUpperCase() ==
             (cruiseDay.value.toString().toUpperCase()))
         .toList();
   //CRUISE ITINERARY FORMAT
-  if (cruiseItinerary.isNotEmpty)
-    itinerary = itinerary
-        .where((element) =>
+  if (cruiseItinerary.value.isNotEmpty)
+    itinerary = itinerary.where((element) {
+      var rule = true;
+      cruiseItinerary.value.forEach((item) {
+        rule = rule ||
             element["value"]["itinerary_format"].toString().toUpperCase() ==
-            (cruiseItinerary.value.toString().toUpperCase()))
-        .toList();
+                item.toString().toUpperCase();
+      });
+      return rule;
+    }).toList();
 
   cruiseResults.value = cruises.toList();
-
-  var processedData = buildCruiseDataTable(ctx, cruiseResults.value);
-  searcherHeader.value = processedData[0];
-  searcherDetail.value = processedData[1];
-  if (searcherHeader.value.isNotEmpty) {
-    cruiseTable.value = (DataTable(
-      columns: searcherHeader.value,
-      rows: searcherDetail.value,
-    ));
+  try {
+    var processedData = buildCruiseDataTable(ctx, cruiseResults.value);
+    searcherHeader.value = processedData[0];
+    searcherDetail.value = processedData[1];
+    if (searcherHeader.value.isNotEmpty) {
+      cruiseTable.value = (DataTable(
+        columns: searcherHeader.value,
+        rows: searcherDetail.value,
+      ));
+    }
+  } catch (e) {
+    log(e);
   }
 }
 
@@ -209,28 +216,7 @@ List<DataColumn> getCruiseHeader(context, data, columns) {
 /// ```
 ///
 ///
-void cruiseReset() {
-  cruiseFormat.value = '';
-  cruiseDay.value = '';
-  cruiseShip.value = '';
-  cruiseRange.value = '';
-  cruiseCategory.value = '';
-  cruiseKey.value = '';
-  cruiseType.value = '';
-  cruiseCabine.value = '';
-  cruiseModality.value = '';
-  cruisePax.value = '';
-  cruiseTriple.value = '';
-  cruiseStarts.value = '';
-  cruiseEnds.value = '';
-  cruiseIslet.value = '';
-  cruiseItinerary.value = '';
-  cruisePort.value = '';
-  cruiseAnimal.value = '';
-  arrivalEdit.value = false;
-  departureEdit.value = false;
-  moreFilters.value = false;
-}
+void cruiseReset() {}
 
 /// ## clearCruiseFilter
 /// *__Method to reset cruise variables__*
@@ -250,7 +236,7 @@ void clearCruiseFilter() {
   cruiseCategory.value = '';
   cruiseKey.value = '';
   cruiseType.value = '';
-  cruiseCabine.value = '';
+  cruiseCabine.value = [];
   cruiseModality.value = '';
   cruisePax.value = '';
   cruiseTriple.value = '';
@@ -378,10 +364,15 @@ DateTime getNextOnCurrentDate(dayName) {
 /// Map<String, Object>
 ///```
 Map<String, Object> getDay(day) {
-  var res = days.firstWhere((element) =>
-      element["spa"].toString().toUpperCase() == day.toUpperCase() ||
-      element["eng"].toString().toUpperCase() == day.toUpperCase());
-  return res;
+  day = day.replaceAll("[", "");
+  day = day.replaceAll("]", "");
+  if (day.isNotEmpty) {
+    var res = days.firstWhere((element) =>
+        element["spa"].toString().toUpperCase() == day.toUpperCase() ||
+        element["eng"].toString().toUpperCase() == day.toUpperCase());
+    return res;
+  }
+  return {"dayId": 1};
 }
 
 /// ## getCruiseDataCell
@@ -411,7 +402,7 @@ DataCell getCruiseDataCell(context, row) {
               },
             ),
             CustomFormCalendarFieldWidget(
-              fontSize: 8,
+                fontSize: 8,
                 width: 0.01,
                 label: '',
                 initialStartDate: getNextCruiseDate(),
@@ -421,44 +412,12 @@ DataCell getCruiseDataCell(context, row) {
                 maximumDate: getNextCruiseDate()
                     .add(Duration(days: int.parse(cruiseDay.value))),
                 startEndDateChange: (start, end) {
-                  cruiseStartDate.value = start;
-                  cruiseEndDate.value = end;
-                  if (cruiseStartDate.value
-                          .difference(arrivalDate.value)
-                          .inDays <=
-                      0) {
-                    arrivalDate.value =
-                        cruiseStartDate.value.add(Duration(days: -1));
-                  }
-                  departureDate.value = end.add(Duration(days: 1));
+                  saveCruiseCalendar(start, end);
                 },
                 onSaved: () {
                   var start = cruiseStartDate.value;
                   var end = cruiseEndDate.value;
-                  if (cruiseStartDate.value
-                          .difference(arrivalDate.value)
-                          .inDays <=
-                      0) {
-                    arrivalDate.value =
-                        cruiseStartDate.value.add(Duration(days: -1));
-                  }
-                  departureDate.value = end.add(Duration(days: 1));
-                  setFormValue(globalctx.memory["destinations"], 1,
-                      "cruiseStartDate", start);
-                  setFormValue(globalctx.memory["destinations"], 1,
-                      "cruiseEndDate", end);
-
-                  var val1 = cruiseEndDate.value
-                          .difference(cruiseStartDate.value)
-                          .inDays +
-                      1;
-                  var val0 = int.parse(getFormValue(
-                      globalctx.memory["destinations"],
-                      1,
-                      "cruiseExpDays",
-                      "0"));
-
-                  saveExplorationDay(1, val0, val1, key: "cruiseExpDays");
+                  saveCruiseCalendar(start, end);
                 }),
             CheckboxIconFormField(
               padding: 0,
@@ -467,6 +426,9 @@ DataCell getCruiseDataCell(context, row) {
                 selectedCruise.value = row["description"];
                 setFormValue(globalctx.memory, "logistic", "cruiseName",
                     selectedCruise.value);
+                var start = cruiseStartDate.value;
+                var end = cruiseEndDate.value;
+                saveCruiseCalendar(start, end);
               },
             ),
           ],

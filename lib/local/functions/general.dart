@@ -1,8 +1,12 @@
 // ignore_for_file: prefer_function_declarations_over_variables, import_of_legacy_library_into_null_safe
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:naver_crs/index.dart';
 import 'package:get/get.dart';
 import 'package:naver_crs/pages/7/endservices/widgets/index.dart';
+import 'package:sweetalertv2/sweetalertv2.dart';
 export 'day.dart';
 export 'destination.dart';
 export 'experience.dart';
@@ -86,14 +90,14 @@ void showCustomDialog(context, Widget child, String button,
   return showDialog<void>(
     context: context,
     barrierDismissible: false, // user must tap button!
-    builder: (BuildContext context) {
+    builder: (BuildContext _) {
       return AlertDialog(
         // contentPadding: EdgeInsets.fromLTRB(8, 8, 8, 8),
         backgroundColor: backgroundColor,
         content: Container(
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(50)),
-            width: MediaQuery.of(context).size.width * isMobile * width,
-            height: MediaQuery.of(context).size.height * isMobile * height,
+            width: MediaQuery.of(_).size.width * isMobile * width,
+            height: MediaQuery.of(_).size.height * isMobile * height,
             child: child),
         actions: <Widget>[
           Wrap(
@@ -111,7 +115,7 @@ void showCustomDialog(context, Widget child, String button,
                   if (onSaved != null) {
                     onSaved();
                   }
-                  Navigator.of(context).pop();
+                  Get.close(1);
                 },
               ),
             ],
@@ -187,6 +191,33 @@ List<DataColumn> getNetRateHeader(context, data) {
   return result;
 }
 
+updateDayleft(value) {
+  try {
+    if (value < 0) {
+      value = 0;
+    }
+    departureDate.value =
+        arrivalDate.value.add(Duration(days: accumulated.value + value as int));
+    totalDays.value = departureDate.value.difference(arrivalDate.value).inDays;
+    dayleft.value = totalDays.value - accumulated.value;
+    if (dayleft.value < 0) {
+      dayleft.value = 0;
+    }
+  } catch (e) {
+    log(e);
+  }
+}
+
+checkMaxDaysValue(type) {
+  var res = dayleft.value + (type == "departure" ? 1 : 0);
+
+  if (type == "arrival" && cruiseDay.value.isNotEmpty) {
+    res = 1;
+  }
+
+  return res;
+}
+
 /// ## getTourDataRows
 /// *__Method to process Tour Detail DataRows to build DataTable__*
 ///
@@ -227,7 +258,7 @@ List<DataRow> getTourDataRows(context, data, columns) {
         cells.add(DataCell(Text('${row[key]}',
             style: KTextSytle(
                     context: context,
-                    fontSize: 15,
+                    fontSize: 10,
                     fontWeight: FontWeight.bold,
                     color: Colors.black)
                 .getStyle())));
@@ -267,18 +298,8 @@ List<DataRow> getTourDataRows(context, data, columns) {
             IconButton(
               icon: const Icon(Icons.copy),
               tooltip: 'Copy',
-              onPressed: () {
-                getTour(context, tourId: row["quote"], detail: true,
-                    cb: (data) {
-                  if (data.length > 0) {
-                    globalctx.memory["tour"] = data[0];
-                    if (row["quote"] == 0) {
-                      Get.toNamed("/Searcher");
-                    } else {
-                      Get.toNamed("/Tour");
-                    }
-                  }
-                });
+              onPressed: () async {
+                await copyTour(context, row);
               },
             ),
           ],
@@ -437,6 +458,7 @@ void saveCustomerTravelCode(value) {
   travelCode.value = value!;
   var res = getCustomerTravelCode(value);
   setFormValue(globalctx.memory, "tour", "travel_code", res);
+  setFormValue(globalctx.memory, "tour", "lead_passenger", value);
 }
 
 saveCustomer(state) {
@@ -465,4 +487,184 @@ String getCustomerTravelCode(value) {
       "-" +
       globalctx.memory["tour"]["code"].toString();
   return res;
+}
+
+RxBool visible = false.obs;
+bool keyboardIsVisible(context) {
+  log("AQUI");
+  bool res = !KeyboardVisibilityProvider.isKeyboardVisible(context);
+  return res;
+}
+
+getSubs(item) {
+  List<Map<String, dynamic>> subs = [];
+  Map<String, dynamic> mp = {};
+  var res = findCatalog("destinations")
+      .firstWhere(
+          (element) =>
+              element["description"] == globalDestinationName.value)["value"][9]
+          [item]
+      .toList();
+
+  for (var w in res) {
+    mp = {};
+    mp["code"] = w["code"];
+    mp["description"] = w["description"];
+    subs.add(mp);
+  }
+  return subs;
+}
+
+filterDestinationKeyActivities() {
+  var keyActivitiesCatalog = findCatalog("key_activity");
+  var experiences = findCatalog("experiences");
+  var ka = [];
+  experiences = experiences.where((exp) {
+    var rule = true;
+    rule = rule && exp["value"]["destination"] == globalDestinationName.value;
+    return rule;
+  }).toList();
+  for (var exp in experiences) {
+    ka.add(exp["value"]["keyActivityType_fk"]);
+    ka.add(exp["value"]["keyActivityType_fk2"]);
+  }
+  ka.toSet();
+  keyActivitiesCatalog = keyActivitiesCatalog.where((e) {
+    var rule = true;
+    rule = rule && ka.contains(e["description"]);
+    return rule;
+  }).toList();
+  return keyActivitiesCatalog;
+}
+
+copyTour(context, row) async {
+  await getCatalogs(["ALL"]);
+  await getTour(context, tourId: row["quote"], detail: true, cb: (data) async {
+    if (data.length > 0) {
+      var memory = data[0];
+      var purposes = <String>[];
+      for (String purpose in memory["detail"]["purposes"]) {
+        purposes.add(purpose.toString());
+      }
+      var tour = {
+        "accomodation_type": memory["accomodation_type_id"].toString(),
+        "country": memory["destination_country_id"].toString(),
+        "passengers": memory["passengers"].toString(),
+        "galapagos_cruise":
+            memory["destinations"][1]["destination"] == "galapagos_cruise",
+        "purposes": purposes,
+      };
+      var logistic = {
+        "arrival_date": DateTime.parse(memory["arrival_date"]),
+        "departure_date": DateTime.parse(memory["departure_date"]),
+        "arrival_port": filterCatalog("destinations", "description",
+                memory["destinations"][0]["destination"].toString())[0]["code"]
+            .toString(),
+        "departure_port": filterCatalog(
+                "destinations",
+                "description",
+                memory["destinations"][memory["destinations"].length - 1]
+                        ["destination"]
+                    .toString())[0]["code"]
+            .toString(),
+      };
+
+      var destinations = memory["destinations"];
+      globalctx.memory["tour"] = tour;
+      globalctx.memory["logistic"] = logistic;
+
+      for (var i = 0; i < destinations.length; i++) {
+        var destination = destinations[i];
+        globalctx.memory["destinations"][i.toString()] = destination;
+      }
+
+      if (row["quote"] == 0) {
+        Get.toNamed("/Searcher");
+      } else {
+        await newTour();
+      }
+    }
+  });
+}
+
+saveLogistic(context, ctrl, _formKey) {
+  var cruise =
+      getFormValue(globalctx.memory, "tour", "galapagos_cruise", false);
+  if (_formKey.currentState!.validate()) {
+    if (cruiseDay.value == "0" && cruise) {
+      SweetAlertV2.show(context,
+          curve: ElasticInCurve(),
+          title: "Cruise information is Required",
+          style: SweetAlertV2Style.error, onPress: (bool isConfirm) {
+        Get.close(1);
+        return false;
+      });
+    } else {
+      _formKey.currentState!.save();
+      ctrl!.saveLogistic();
+    }
+  }
+}
+
+getCountries() {
+  List<Map<String, dynamic>> countries = [];
+  for (Map<String, dynamic> cdata in getContext("global")) {
+    countries.add(cdata);
+  }
+
+  return countries;
+}
+
+var customerStates = Rx(<Map<String, dynamic>>[]);
+var customerCities = Rx(<Map<String, dynamic>>[]);
+
+getStates(ctrl) {
+  try {
+    var result = <Map<String, dynamic>>[];
+    setFormValue(globalctx.memory, "customer", "state", "0");
+    setFormValue(globalctx.memory, "customer", "city", "0");
+    var countries = getCountries();
+    String compare = ctrl!.state.country.toString();
+    var filtered = countries
+        .toList()
+        .firstWhere((element) => element["code"].toString() == compare);
+    var states = filtered["states"];
+    for (var state in states) {
+      result.add(state);
+    }
+    customerStates.value = result;
+  } catch (e) {
+    customerStates.value = <Map<String, dynamic>>[];
+  }
+}
+
+getDistanceKm(coorA, coorB) {
+  var latA = coorA[0];
+  var longA = coorA[1];
+  var latB = coorB[0];
+  var longB = coorB[1];
+  var catetO = longB - longA;
+  var catetA = latA - latB;
+  var hipo = sqrt(pow(catetO, 2) + pow(catetA, 2));
+  var km = hipo * 111;
+  return km;
+}
+
+getCities(ctrl) {
+  try {
+    getStates(ctrl);
+    var result = <Map<String, dynamic>>[];
+    setFormValue(globalctx.memory, "customer", "city", "0");
+    String compare = ctrl!.state.state.toString();
+    var filtered = customerStates.value
+        .toList()
+        .firstWhere((element) => element["code"].toString() == compare);
+    var cities = filtered["cities"];
+    for (var city in cities) {
+      result.add(city);
+    }
+    customerCities.value = result;
+  } catch (e) {
+    customerCities.value = <Map<String, dynamic>>[];
+  }
 }

@@ -33,7 +33,7 @@ class CustomFormExperienceRowWidget extends StatelessWidget {
           fontSize: 0.016,
           fontWeight: FontWeight.bold,
         ),
-        Text("Cost: $cost"),
+        Text("\$ $cost"),
       ],
     );
   }

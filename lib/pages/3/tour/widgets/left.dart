@@ -10,18 +10,16 @@ class LeftWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var destinationData;
-    try {
-      destinationData = getParam("DESTINATION_DATA")["value"];
-    } catch (e) {
-      destinationData = {};
-    }
-    var images = [];
+     
+    var images = [
+      "1x/Recurso_448mdpi.png",
+      "1x/Recurso_444mdpi.png",
+      "1x/Recurso_440mdpi.png",
+      "1x/Recurso_478mdpi.png",
+      "1x/Recurso_457mdpi.png"
+    ];
 
-    for (var destination in destinationData.keys) {
-      var image = destinationData[destination][4];
-      images.add(image);
-    }
+  
 
     return Padding(
       padding: EdgeInsets.only(

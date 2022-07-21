@@ -82,20 +82,6 @@ dynamic getValue(data, key, {def}) {
   }
 }
 
-/// ## setValue
-/// *__Method to set a value to memory__*
-///
-///### Uses:
-/// ```dart
-///  var detsdata = setValue(memory, "destinations", def: []);
-/// ```
-///
-///
-///
-void setValue(data, key, value) {
-  data[key] = value;
-}
-
 /// ## getParam
 /// *__Method to get a parameter from parameters catalog__*
 ///
@@ -186,10 +172,14 @@ double getGPSDistance(String latA, String longA, String latB, String longB) {
 /// @return void
 ///
 void updateDatatable(context, data) {
-  var processedData = processData(context, data, null);
-  searcherHeader.value = processedData[0];
-  if (searchResult!.value.isEmpty) {
-    searcherDetail.value = processedData[1];
+  try {
+    var processedData = processData(context, data, null);
+    searcherHeader.value = processedData[0];
+    if (searchResult!.value.isEmpty) {
+      searcherDetail.value = processedData[1];
+    }
+  } catch (e) {
+    log(e);
   }
 }
 
@@ -316,6 +306,35 @@ void setFormValue(data, formKey, key, value) {
   }
 }
 
+saveCruiseCalendar(start, end) {
+  cruiseStartDate.value = start;
+  cruiseEndDate.value = end;
+  arrivalDate.value = start.add(Duration(days: -1));
+  departureDate.value = end.add(Duration(days: 1));
+  setFormValue(globalctx.memory["destinations"], 1, "cruiseStartDate", start);
+  setFormValue(globalctx.memory["destinations"], 1, "cruiseEndDate", end);
+  var val1 = end.difference(start).inDays + 1;
+  var val0 = int.parse(
+      getFormValue(globalctx.memory["destinations"], 1, "cruiseExpDays", "0"));
+
+  totalDays.value =
+      departureDate.value.difference(arrivalDate.value).inDays + 1;
+  saveExplorationDay(1, val0, val1, key: "cruiseExpDays");
+}
+
+saveMultiDropDown(setters, catalog, values, limit) {
+  if (values.length <= limit) {
+    var mem = <String>[];
+    var length = values.length;
+
+    for (var i = 0; i < length; i++) {
+      mem.add(catalog.toList().where((e) => e["code"] == values[i]).toList()[0]
+          ["description"]);
+    }
+    setFormValue(setters[0], setters[1], setters[2], mem);
+  }
+}
+
 /// ## setFormValue
 /// *__Method to parse a value to int__*
 ///
@@ -327,6 +346,7 @@ void setFormValue(data, formKey, key, value) {
 ///
 int parseInt(dynamic value) {
   if (value is String) {
+    value = value == "null" ? "0" : value;
     return int.parse(value);
   }
   return value;
@@ -373,7 +393,7 @@ List<DataColumn> getHeader(context, data, columns) {
           textAlign: TextAlign.left,
           style: KTextSytle(
             context: context,
-            fontSize: 15,
+            fontSize: 10,
             fontWeight: FontWeight.bold,
             color: Color.fromARGB(255, 204, 164, 61),
           ).getStyle(),
@@ -385,7 +405,7 @@ List<DataColumn> getHeader(context, data, columns) {
         'Actions',
         style: KTextSytle(
           context: context,
-          fontSize: 15,
+          fontSize: 10,
           fontWeight: FontWeight.bold,
           color: Color.fromARGB(255, 204, 164, 61),
         ).getStyle(),

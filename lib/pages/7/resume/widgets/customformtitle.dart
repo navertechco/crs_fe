@@ -45,9 +45,6 @@ class CustomFormTitleWidget extends StatelessWidget {
             child: const Divider(color: Color.fromARGB(255, 0, 0, 0))),
         CustomPadingTitleWidget(
             customlabel: customlabel, fontWeight: FontWeight.bold),
-        // SizedBox(
-        //     width: MediaQuery.of(context).size.width * 0.7,
-        //     child: const Divider(color: Color.fromARGB(255, 0, 0, 0))),
       ],
     );
   }

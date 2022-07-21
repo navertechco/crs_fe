@@ -23,8 +23,8 @@ class CustomCustomerDataForm extends StatelessWidget {
           child: Stack(
             children: [
               BasicInformation(ctrl: ctrl),
-              TourInformation(ctrl: ctrl),
               AddressInformation(ctrl: ctrl),
+              TourInformation(ctrl: ctrl),
             ],
           ),
         ),
@@ -44,127 +44,149 @@ class AddressInformation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        top: MediaQuery.of(context).size.height * 0.39,
-        left: MediaQuery.of(context).size.width * 0.52,
-      ),
-      child: SizedBox(
-        child: Wrap(children: [
-          const CustomTitleWidget(
-              fontSize: 10,
-              width: 0.22,
-              fontWeight: FontWeight.bold,
-              label: " Address information"),
-          Obx(() {
-            return Row(
+    return Obx(() {
+      return Padding(
+        padding: EdgeInsets.only(
+          top:
+              MediaQuery.of(context).size.height * (visible.value ? 0.2 : 0.39),
+          left: MediaQuery.of(context).size.width * 0.52,
+        ),
+        child: SizedBox(
+          child: Wrap(children: [
+            CustomTitleWidget(
+                fontSize: 10,
+                width: 0.22,
+                fontWeight: FontWeight.bold,
+                label: "Address information"),
+            Row(
               children: [
                 CustomFormDropDownFieldWidget(
                   fontSize: 10,
-                  width: 0.2,
+                  width: 0.13,
                   height: 0.05,
                   validator: (value) {
                     CustomRequiredValidator(
-                            errorText: "Country is required ", ctx: context)
-                        .call(value);
-                    if (city.value.isEmpty) {
-                      SweetAlertV2.show(context,
-                          curve: ElasticInCurve(),
-                          title: "City Field is required",
-                          style: SweetAlertV2Style.error,
-                          onPress: (bool isConfirm) {
-                        Get.close(1);
-                        return false;
-                      });
-                    }
+                        errorText: "Country is required ", ctx: context);
                   },
-                  value: country.value,
+                  value: getFormValue(
+                      globalctx.memory, "customer", "country", "1"),
                   hintText: "Country",
                   onChanged: (value) {
                     ctrl!.state.country = value!;
-                    setValue(client, "city_id", "0");
-                    setValue(client, "country", value);
-                    country.value = value;
-                    city.value = "0";
-                    procCityData(countries[countrylist[int.parse(value)]
-                        ["description"]]);
-                    log("CHANGED: ");
+                    getStates(ctrl);
+                    setFormValue(
+                        globalctx.memory, "customer", "country", value);
                   },
                   onSaved: (value) {
                     ctrl!.state.country = value!;
-                    country.value = value;
-                    city.value = "0";
-                    procCityData(countries[countrylist[int.parse(value)]
-                        ["description"]]);
-                    log("SAVED: ");
+                    getStates(ctrl);
+                    setFormValue(
+                        globalctx.memory, "customer", "country", value);
                   },
-                  data: countrydata.value,
+                  data: getCountries(),
                 ),
-                // if (country.value != '')
-                CustomFormDropDownFieldWidget(
-                  fontSize: 10,
-                  validator: CustomCatalogRequiredValidator(
-                      errorText: "City is required ",
-                      ctx: context,
-                      catalog: citylist.value),
-                  value: getValue(client, "city_id", def: "0").toString(),
-                  width: 0.185,
-                  height: 0.05,
-                  hintText: "City",
-                  onChanged: (value) {
-                    city.value = value!;
-                    setValue(client, "city_id", value);
-                    log(value);
-                  },
-                  onSaved: (value) {
-                    city.value = value!;
-                    ctrl!.state.city = value;
-                    log(value);
-                  },
-                  data: citylist.value,
-                ),
+                if (customerStates.value.isNotEmpty)
+                  CustomFormDropDownFieldWidget(
+                    fontSize: 10,
+                    width: 0.13,
+                    height: 0.05,
+                    validator: (value) {
+                      CustomRequiredValidator(
+                          errorText: "State is required ", ctx: context);
+                    },
+                    value: getFormValue(
+                        globalctx.memory, "customer", "state", "0"),
+                    hintText: "State",
+                    onChanged: (value) {
+                      ctrl!.state.state = value!;
+                      getCities(ctrl);
+                      setFormValue(
+                          globalctx.memory, "customer", "state", value);
+                    },
+                    onSaved: (value) {
+                      ctrl!.state.state = value!;
+                      getCities(ctrl);
+                      setFormValue(
+                          globalctx.memory, "customer", "state", value);
+                    },
+                    data: customerStates.value,
+                  ),
+                if (customerCities.value.isNotEmpty)
+                  CustomFormDropDownFieldWidget(
+                    fontSize: 10,
+                    width: 0.13,
+                    height: 0.05,
+                    validator: (value) {
+                      CustomRequiredValidator(
+                          errorText: "City is required ", ctx: context);
+                    },
+                    value:
+                        getFormValue(globalctx.memory, "customer", "city", "0"),
+                    hintText: "City",
+                    onChanged: (value) {
+                      ctrl!.state.city = value!;
+                      setFormValue(globalctx.memory, "customer", "city", value);
+                    },
+                    onSaved: (value) {
+                      ctrl!.state.city = value!;
+                      setFormValue(globalctx.memory, "customer", "city", value);
+                    },
+                    data: customerCities.value,
+                  ),
               ],
-            );
-          }),
-          CustomFormTextFieldWidget(
-            fontSize: 10,
-            validator: CustomRequiredValidator(
-                errorText: "Address Line is required ", ctx: context),
-            value: getValue(client, "address", def: ""),
-            onSaved: (value) {
-              ctrl!.state.addressLine = value!;
-              setValue(client, "address", value);
-            },
-            onFieldSubmitted: (value) {
-              ctrl!.state.addressLine = value!;
-              setValue(client, "address", value);
-            },
-            keyboardType: TextInputType.streetAddress,
-            hintText: "Address Line                        ",
-            width: 0.4,
-            height: 0.05,
-          ),
-          CustomFormTextFieldWidget(
-            fontSize: 10,
-            validator: CustomRequiredValidator(
-                errorText: "Email is required ", ctx: context),
-            value: getValue(client, "email", def: ""),
-            onSaved: (value) {
-              ctrl!.state.email = value!;
-              setValue(client, "email", value);
-            },
-            onFieldSubmitted: (value) {
-              ctrl!.state.email = value!;
-              setValue(client, "email", value);
-            },
-            keyboardType: TextInputType.emailAddress,
-            hintText: "e-Mail                          ",
-            width: 0.4,
-            height: 0.05,
-          ),
-        ]),
-      ),
-    );
+            ),
+            CustomFormTextFieldWidget(
+              fontSize: 10,
+              validator: CustomRequiredValidator(
+                  errorText: "Address Line is required ", ctx: context),
+              value: getFormValue(globalctx.memory, "customer", "address", ""),
+              onSaved: (value) {
+                ctrl!.state.addressLine = value!;
+                setFormValue(globalctx.memory, "customer", "address", value);
+              },
+              onChanged: (value) {
+                visible.value = keyboardIsVisible(context);
+                ctrl!.state.addressLine = value!;
+                setFormValue(globalctx.memory, "customer", "address", value);
+              },
+              onFieldSubmitted: (value) {
+                visible.value = !keyboardIsVisible(context);
+                ctrl!.state.addressLine = value!;
+                setFormValue(globalctx.memory, "customer", "address", value);
+              },
+              keyboardType: TextInputType.streetAddress,
+              hintText: "Address Line                        ",
+              width: 0.4,
+              height: 0.05,
+            ),
+            CustomFormTextFieldWidget(
+              fontSize: 10,
+              validator: CustomRequiredValidator(
+                  errorText: "Email is required ", ctx: context),
+              value: getFormValue(globalctx.memory, "customer", "email", ""),
+              onSaved: (value) {
+                ctrl!.state.email = value!;
+                setFormValue(globalctx.memory, "customer", "email", value);
+              },
+              onChanged: (value) {
+                visible.value = keyboardIsVisible(context);
+                ctrl!.state.email = value!;
+                setFormValue(globalctx.memory, "customer", "email", value);
+              },
+              onFieldSubmitted: (value) {
+                visible.value = !keyboardIsVisible(context);
+                ctrl!.state.email = value!;
+                setFormValue(globalctx.memory, "customer", "email", value);
+              },
+              keyboardType: TextInputType.emailAddress,
+              hintText: "e-Mail                          ",
+              width: 0.4,
+              height: 0.05,
+            ),
+          ]),
+        ),
+      );
+    });
   }
 }
 
@@ -223,187 +245,243 @@ class BasicInformation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        top: MediaQuery.of(context).size.height * isMobile * 0.4,
-        left: MediaQuery.of(context).size.width * isMobile * 0.08,
-      ),
-      child: SizedBox(
-        child: Wrap(children: [
-          const CustomTitleWidget(
-              fontSize: 10,
-              width: 0.22,
-              fontWeight: FontWeight.bold,
-              label: " Basic information"),
-
-          Row(
-            children: [
-              CustomFormDropDownFieldWidget(
+    return Obx(() {
+      return Padding(
+        padding: EdgeInsets.only(
+          top: MediaQuery.of(context).size.height *
+              isMobile *
+              (!visible.value ? 0.4 : 0.2),
+          left: MediaQuery.of(context).size.width * isMobile * 0.08,
+        ),
+        child: SizedBox(
+          child: Wrap(children: [
+            const CustomTitleWidget(
                 fontSize: 10,
-                validator: CustomRequiredValidator(
-                    errorText: "Legal Client Type is required ", ctx: context),
-                value: getValue(client, "legal_client_type_id", def: "2"),
-                width: 0.2,
-                height: 0.05,
-                hintText: "Customer Type",
-                onChanged: (value) {
-                  customerType.value = value!;
-                  setValue(client, "legal_client_type_id", value);
-                },
-                onSaved: (value) {
-                  customerType.value = value!;
-                  ctrl!.state.customerType = value;
-                  setValue(client, "legal_client_type_id", value);
-                },
-                data: customerTypeCatalog,
-              ),
-              CustomFormDateFieldWidget(
+                width: 0.22,
+                fontWeight: FontWeight.bold,
+                label: " Basic information"),
+
+            Row(
+              children: [
+                CustomFormDropDownFieldWidget(
                   fontSize: 10,
-                  validator: (date) {
-                    CustomDatetimeRequiredValidator(date,
-                        context: context, errorText: "Birth date is Required");
-                  },
-                  initialValue: getDateValue(client, "birth_date",
-                      def: DateTime(1950, 01, 01)),
-                  onSaved: (value) {
-                    ctrl!.state.birthDate = value.toString().split(" ")[0];
-                    setValue(client, "birth_date", value);
-                  },
-                  onChanged: (value) {
-                    ctrl!.state.birthDate = value.toString().split(" ")[0];
-                    setValue(client, "birth_date", value);
-                  },
+                  validator: CustomRequiredValidator(
+                      errorText: "Legal Client Type is required ",
+                      ctx: context),
+                  value: getFormValue(globalctx.memory, "customer",
+                      "legal_client_type_id", "2"),
                   width: 0.2,
                   height: 0.05,
-                  hintText: "Birth Day               "),
-            ],
-          ),
-          Row(
-            children: [
-              Obx(() {
-                if (customerType.value == "1") {
-                  return CustomFormTextFieldWidget(
+                  hintText: "Customer Type",
+                  onChanged: (value) {
+                    customerType.value = value!;
+                    setFormValue(globalctx.memory, "customer",
+                        "legal_client_type_id", value);
+                  },
+                  onSaved: (value) {
+                    customerType.value = value!;
+                    ctrl!.state.customerType = value;
+                    setFormValue(globalctx.memory, "customer",
+                        "legal_client_type_id", value);
+                  },
+                  data: customerTypeCatalog,
+                ),
+                CustomFormDateFieldWidget(
                     fontSize: 10,
-                    width: 0.2,
-                    height: 0.05,
-                    validator: CustomRequiredValidator(
-                        errorText: "Tax Id is required ", ctx: context),
-                    value: getValue(client, "tax_id", def: ""),
+                    validator: (date) {
+                      CustomDatetimeRequiredValidator(date,
+                          context: context,
+                          errorText: "Birth date is Required");
+                    },
+                    initialValue: getFormValue(globalctx.memory, "customer",
+                        "birth_date", DateTime(1950, 01, 01)),
                     onSaved: (value) {
-                      ctrl!.state.taxId = value!;
-                      setValue(client, "tax_id", value);
+                      setFormValue(
+                          globalctx.memory, "customer", "birth_date", value);
                     },
                     onChanged: (value) {
-                      ctrl!.state.taxId = value!;
-                      setValue(client, "tax_id", value);
+                      setFormValue(
+                          globalctx.memory, "customer", "birth_date", value);
                     },
-                    keyboardType: TextInputType.number,
-                    hintText: "Tax Id                            ",
-                  );
-                } else {
-                  return Text('');
-                }
-              }),
-              Obx(() {
-                if (customerType.value == "1") {
-                  return CustomFormTextFieldWidget(
-                    fontSize: 10,
                     width: 0.2,
                     height: 0.05,
-                    validator: CustomRequiredValidator(
-                        errorText: "Contact Name is required ", ctx: context),
-                    value: getValue(client, "contact_name", def: ""),
-                    onSaved: (value) {
-                      ctrl!.state.contactName = value!;
-                      setValue(client, "contact_name", value);
-                    },
-                    onFieldSubmitted: (value) {
-                      ctrl!.state.contactName = value!;
-                      setValue(client, "contact_name", value);
-                    },
-                    keyboardType: TextInputType.name,
-                    hintText: "Legal Contact  Name  ",
-                  );
-                } else {
-                  return Text('');
-                }
-              }),
-              Obx(() {
-                if (customerType.value != "1") {
-                  return CustomFormTextFieldWidget(
-                    fontSize: 10,
-                    width: 0.2,
-                    height: 0.05,
-                    validator: CustomRequiredValidator(
-                        errorText: "DNI/Passport is required ", ctx: context),
-                    value: getValue(client, "client_dni", def: ""),
-                    onSaved: (value) {
-                      ctrl!.state.dni = value!;
-                      setValue(client, "client_dni", value);
-                    },
-                    onFieldSubmitted: (value) {
-                      ctrl!.state.dni = value!;
-                      setValue(client, "client_dni", value);
-                    },
-                    inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter.digitsOnly
-                    ],
-                    keyboardType: TextInputType.number,
-                    hintText: "DNI/PASSPORT         ",
-                  );
-                } else {
-                  return Text('');
-                }
-              }),
-            ],
-          ),
-          Row(
-            children: [
-              CustomFormTextFieldWidget(
-                fontSize: 10,
-                width: 0.2,
-                height: 0.05,
-                validator: CustomRequiredValidator(
-                    errorText: "Names is required ", ctx: context),
-                value: getValue(client, "names", def: ""),
-                onSaved: (value) {
-                  ctrl!.state.names = value!;
-                  setValue(client, "names", value);
-                },
-                onFieldSubmitted: (value) {
-                  ctrl!.state.names = value!;
-                  setValue(client, "names", value);
-                },
-                keyboardType: TextInputType.name,
-                hintText: "Names                          ",
-              ),
-              CustomFormTextFieldWidget(
-                fontSize: 10,
-                width: 0.2,
-                height: 0.05,
-                validator: CustomRequiredValidator(
-                    errorText: "Last Names is required ", ctx: context),
-                value: getValue(client, "last_names", def: ""),
-                onSaved: (value) {
-                  ctrl!.state.lastNames = value!;
-                  setValue(client, "last_names", value);
-                },
-                onFieldSubmitted: (value) {
-                  ctrl!.state.lastNames = value!;
-                  setValue(client, "last_names", value);
-                },
-                keyboardType: TextInputType.name,
-                hintText: "Surnames                          ",
-              ),
-            ],
-          ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.15,
-          ),
-          // CustomKeypadWidget(),
-        ]),
-      ),
-    );
+                    hintText: "Birth Day               "),
+              ],
+            ),
+            Row(
+              children: [
+                Obx(() {
+                  if (customerType.value == "1") {
+                    return CustomFormTextFieldWidget(
+                      fontSize: 10,
+                      width: 0.2,
+                      height: 0.05,
+                      validator: CustomRequiredValidator(
+                          errorText: "Tax Id is required ", ctx: context),
+                      value: getFormValue(
+                          globalctx.memory, "customer", "client_dni", ""),
+                      onSaved: (value) {
+                        ctrl!.state.taxId = value!;
+                        setFormValue(
+                            globalctx.memory, "customer", "client_dni", value);
+                      },
+                      onChanged: (value) {
+                        visible.value = keyboardIsVisible(context);
+                        ctrl!.state.taxId = value!;
+                        setFormValue(
+                            globalctx.memory, "customer", "client_dni", value);
+                      },
+                      onFieldSubmitted: (value) {
+                        visible.value = !keyboardIsVisible(context);
+                        ctrl!.state.taxId = value!;
+                        setFormValue(
+                            globalctx.memory, "customer", "client_dni", value);
+                      },
+                      keyboardType: TextInputType.number,
+                      hintText: "Tax Id                            ",
+                    );
+                  } else {
+                    return Text('');
+                  }
+                }),
+                Obx(() {
+                  if (customerType.value == "1") {
+                    return CustomFormTextFieldWidget(
+                      fontSize: 10,
+                      width: 0.2,
+                      height: 0.05,
+                      validator: CustomRequiredValidator(
+                          errorText: "Contact Name is required ", ctx: context),
+                      value: getFormValue(
+                          globalctx.memory, "customer", "contact_name", ""),
+                      onSaved: (value) {
+                        ctrl!.state.contactName = value!;
+                        setFormValue(globalctx.memory, "customer",
+                            "contact_name", value);
+                      },
+                      onChanged: (value) {
+                        visible.value = keyboardIsVisible(context);
+                        ctrl!.state.contactName = value!;
+                        setFormValue(globalctx.memory, "customer",
+                            "contact_name", value);
+                      },
+                      onFieldSubmitted: (value) {
+                        visible.value = !keyboardIsVisible(context);
+                        ctrl!.state.contactName = value!;
+                        setFormValue(globalctx.memory, "customer",
+                            "contact_name", value);
+                      },
+                      keyboardType: TextInputType.name,
+                      hintText: "Legal Contact  Name  ",
+                    );
+                  } else {
+                    return Text('');
+                  }
+                }),
+                Obx(() {
+                  if (customerType.value != "1") {
+                    return CustomFormTextFieldWidget(
+                      fontSize: 10,
+                      width: 0.2,
+                      height: 0.05,
+                      validator: CustomRequiredValidator(
+                          errorText: "DNI/Passport is required ", ctx: context),
+                      value: getFormValue(
+                          globalctx.memory, "customer", "client_dni", ""),
+                      onSaved: (value) {
+                        ctrl!.state.dni = value!;
+                        setFormValue(
+                            globalctx.memory, "customer", "client_dni", value);
+                      },
+                      onChanged: (value) {
+                        visible.value = keyboardIsVisible(context);
+                        ctrl!.state.dni = value!;
+                        setFormValue(
+                            globalctx.memory, "customer", "client_dni", value);
+                      },
+                      onFieldSubmitted: (value) {
+                        visible.value = !keyboardIsVisible(context);
+                        ctrl!.state.dni = value!;
+                        setFormValue(
+                            globalctx.memory, "customer", "client_dni", value);
+                      },
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter.digitsOnly
+                      ],
+                      keyboardType: TextInputType.number,
+                      hintText: "DNI/PASSPORT         ",
+                    );
+                  } else {
+                    return Text('');
+                  }
+                }),
+              ],
+            ),
+            Row(
+              children: [
+                CustomFormTextFieldWidget(
+                  fontSize: 10,
+                  width: 0.2,
+                  height: 0.05,
+                  validator: CustomRequiredValidator(
+                      errorText: "Names is required ", ctx: context),
+                  value:
+                      getFormValue(globalctx.memory, "customer", "names", ""),
+                  onSaved: (value) {
+                    ctrl!.state.names = value!;
+                    setFormValue(globalctx.memory, "customer", "names", value);
+                  },
+                  onChanged: (value) {
+                    visible.value = keyboardIsVisible(context);
+                    ctrl!.state.names = value!;
+                    setFormValue(globalctx.memory, "customer", "names", value);
+                  },
+                  onFieldSubmitted: (value) {
+                    visible.value = !keyboardIsVisible(context);
+                    ctrl!.state.names = value!;
+                    setFormValue(globalctx.memory, "customer", "names", value);
+                  },
+                  keyboardType: TextInputType.name,
+                  hintText: "Names                          ",
+                ),
+                CustomFormTextFieldWidget(
+                  fontSize: 10,
+                  width: 0.2,
+                  height: 0.05,
+                  validator: CustomRequiredValidator(
+                      errorText: "Last Names is required ", ctx: context),
+                  value: getFormValue(
+                      globalctx.memory, "customer", "last_names", ""),
+                  onSaved: (value) {
+                    ctrl!.state.lastNames = value!;
+                    setFormValue(
+                        globalctx.memory, "customer", "last_names", value);
+                  },
+                  onChanged: (value) {
+                    visible.value = keyboardIsVisible(context);
+                    ctrl!.state.lastNames = value!;
+                    setFormValue(
+                        globalctx.memory, "customer", "last_names", value);
+                  },
+                  onFieldSubmitted: (value) {
+                    visible.value = !keyboardIsVisible(context);
+                    ctrl!.state.lastNames = value!;
+                    setFormValue(
+                        globalctx.memory, "customer", "last_names", value);
+                  },
+                  keyboardType: TextInputType.name,
+                  hintText: "Surnames                          ",
+                ),
+              ],
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.15,
+            ),
+            // CustomKeypadWidget(),
+          ]),
+        ),
+      );
+    });
   }
 }
 
@@ -417,44 +495,61 @@ class TourInformation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        top: MediaQuery.of(context).size.height * isMobile * 0.7,
-        left: MediaQuery.of(context).size.width * isMobile * 0.085,
-      ),
-      child: Row(
-        children: [
-          const CustomTitleWidget(
-              fontSize: 10,
-              width: 0.22,
-              fontWeight: FontWeight.bold,
-              label: " Tour information"),
-          CustomFormTextFieldWidget(
-            fontSize: 10,
-            width: 0.2,
-            height: 0.05,
-            validator: CustomRequiredValidator(
-                errorText: "Lead Passenger is required ", ctx: context),
-            value: travelCode.value,
-            onSaved: (value) {
-              saveCustomerTravelCode(value);
-            },
-            onFieldSubmitted: (value) {
-              saveCustomerTravelCode(value);
-            },
-            keyboardType: TextInputType.name,
-            hintText: "Lead Passenger",
-          ),
-          Obx(() {
-            return CustomTitleWidget(
-                fontSize: 10,
-                width: 0.1,
-                fontWeight: FontWeight.bold,
-                label:
-                    "Travel Code: ${getFormValue(globalctx.memory, "tour", "travel_code", "$travelCode")}");
-          })
-        ],
-      ),
-    );
+    return Obx(() {
+      return Padding(
+        padding: EdgeInsets.only(
+          top: MediaQuery.of(context).size.height *
+              isMobile *
+              (!visible.value ? 0.65 : 0.43),
+          left: MediaQuery.of(context).size.width * isMobile * 0.085,
+        ),
+        child: Wrap(
+          children: [
+            Wrap(
+              children: [
+                const CustomTitleWidget(
+                    fontSize: 10,
+                    width: 0.22,
+                    fontWeight: FontWeight.bold,
+                    label: " Tour information"),
+              ],
+            ),
+            Row(
+              children: [
+                CustomFormTextFieldWidget(
+                  fontSize: 10,
+                  width: 0.2,
+                  height: 0.05,
+                  validator: CustomRequiredValidator(
+                      errorText: "Lead Passenger is required ", ctx: context),
+                  value: travelCode.value,
+                  onChanged: (value) {
+                    visible.value = keyboardIsVisible(context);
+                    saveCustomerTravelCode(value);
+                  },
+                  onSaved: (value) {
+                    saveCustomerTravelCode(value);
+                  },
+                  onFieldSubmitted: (value) {
+                    visible.value = !keyboardIsVisible(context);
+                    saveCustomerTravelCode(value);
+                  },
+                  keyboardType: TextInputType.name,
+                  hintText: "Lead Passenger",
+                ),
+                Obx(() {
+                  return CustomTitleWidget(
+                      fontSize: 10,
+                      width: 0.1,
+                      fontWeight: FontWeight.bold,
+                      label:
+                          "Travel Code: ${getFormValue(globalctx.memory, "tour", "travel_code", "$travelCode")}");
+                })
+              ],
+            ),
+          ],
+        ),
+      );
+    });
   }
 }
