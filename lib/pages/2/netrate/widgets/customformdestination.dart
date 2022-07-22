@@ -20,7 +20,13 @@ class CustomFormDestination extends StatelessWidget {
     var destinations = tour["destinations"];
     var promotedDestinationDay = destinations;
     var destindex = index;
-    var destination = promotedDestinationDay[destindex.toString()];
+    var destination;
+    try {
+      destination = promotedDestinationDay[destindex.toString()];
+    } catch (e) {
+      destination = promotedDestinationDay[destindex];
+    }
+ 
     var explorationDay = (destination["explorationDay"]);
     var title = destination["destination"].toString().capitalize;
     for (var day = 0; day < explorationDay; day++) {

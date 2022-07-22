@@ -13,7 +13,7 @@ class Destinations extends StatelessWidget {
     var destinations = tour["destinations"];
     if (destinations.isNotEmpty) {
       var i = 0;
-      for (var dest in destinations.entries) {
+      for (var dest in destinations) {
         // var destData = getDestinationById(dest);
         var key = GlobalKey();
         globalctx.keys["destination-$i"] = key;

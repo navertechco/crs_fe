@@ -15,23 +15,27 @@ class CustomFormDayWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     try {
-      var destinationindex = indexes[0];
+      var destindex = indexes[0];
       var dayindex = indexes[1];
       var tour = globalctx.memory["tour"];
       var destinations = tour["destinations"];
-      var destination = destinations[destinationindex.toString()];
+      var destination;
+      try {
+        destination = destinations[destindex.toString()];
+      } catch (e) {
+        destination = destinations[destindex];
+      }
       var daysData = destination["daysData"] ?? {};
       var days = daysData.entries.toList();
       var day = days[dayindex];
       var daydescription = day.value['day_description'] ?? '';
-      var dayLabel =
-          (destinationindex != 0 ? destinationindex + 1 : destinationindex) +
-              (destinationindex == 0 ? dayindex + 1 : dayindex + 2);
+      var dayLabel = (destindex != 0 ? destindex + 1 : destindex) +
+          (destindex == 0 ? dayindex + 1 : dayindex + 2);
       var actualcost = 0.obs;
-      var cost = getFormValue(globalctx.memory, "netRate", destinationindex, 0);
+      var cost = getFormValue(globalctx.memory, "netRate", destindex, 0);
       actualcost.value = cost;
       return RepaintBoundary(
-          key: globalctx.keys["day-$destinationindex-$dayindex"],
+          key: globalctx.keys["day-$destindex-$dayindex"],
           child: Column(
             children: [
               CustomFormTitleWidget(level: 4, label: "Day: $dayLabel#####"),
